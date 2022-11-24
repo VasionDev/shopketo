@@ -1,0 +1,625 @@
+.better-trips-hero {
+  background-color: #00a1d9;
+  padding: 83px 0 0;
+  border: none;
+}
+
+.better-trips-hero .better-img {
+  max-width: 300px;
+}
+
+.better-trips-hero .better-title {
+  margin-top: 40px;
+}
+
+.better-trips-hero .description {
+  max-width: 772px;
+  margin: 30px auto 40px;
+}
+
+.better-trips-hero .qualify-button {
+  background: #f2d03b;
+  color: #131313;
+  font-size: 24px;
+  line-height: 23px;
+  margin-bottom: 40px;
+}
+
+.better-trips-hero .qualify-button:hover {
+  background: #ebc313;
+}
+
+.better-trips-hero .qualify-button.next-trip,
+.better-trips-packed .qualify-button.next-trip {
+  max-width: 372px;
+  padding: 20px 10px;
+  text-decoration: none;
+}
+
+.better-trips-hero .leaderboard-link,
+.better-trips-packed .leaderboard-link {
+  text-decoration: underline;
+}
+
+.better-trips-hero .link-hover:hover {
+  color: #131313;
+}
+
+.better-trips-hero .trip-video {
+  position: relative;
+  margin-top: 90px;
+  margin-bottom: -310px;
+}
+
+.better-trips-hero .trip-video img {
+  width: 100%;
+  height: 660px;
+  border-radius: 10px;
+}
+
+.better-trips-hero .trip-video .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 86px;
+  height: 110px;
+  width: 110px;
+  line-height: 106px;
+  margin-right: 0;
+  background-color: #2152ff;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.better-trips-hero .trip-video .play-icon:hover,
+.better-trips-hero .trip-video .play-icon:focus {
+  background-color: #204ceb;
+}
+
+.better-trips-bahamas {
+  background: #f2d03b;
+  border: none;
+  padding: 310px 0 140px;
+}
+
+.better-trips-bahamas .feb-border {
+  background: transparent;
+  border: 1px solid #131313;
+  border-radius: 24px;
+  max-width: fit-content;
+  text-align: center;
+  margin: 96px auto 26px;
+  padding: 6px 24px 7px;
+}
+
+.better-trips-bahamas h1 {
+  font-size: 120px;
+  line-height: 120px;
+}
+
+.better-trips-bahamas .atlantis-logo {
+  max-width: 290px;
+  margin: 45px auto 90px;
+}
+
+.better-trips-bahamas .who-despt {
+  max-width: 785px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.better-trips-bahamas .who-despt span {
+  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+.better-trips-slider {
+  background: #f2d03b;
+}
+
+.better-trips-slider .container-fluid {
+  padding: 0;
+}
+
+.better-trips-photo-slider .slider-item {
+  position: relative;
+}
+
+.better-trips-photo-slider .slider-item:hover .photo-bg {
+  transform: scale(1.06);
+}
+
+.better-trips-photo-slider .slider-item .item-inner {
+  margin: 0 15px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.better-trips-photo-slider .slider-item .item-inner .photo-bg {
+  width: 370px;
+  height: 370px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.better-trips-you-yes {
+  background: #f2d03b;
+  padding-top: 100px;
+  padding-bottom: 140px;
+}
+
+.better-trips-you-yes h2 {
+  margin-bottom: 50px;
+}
+
+.better-trips-you-yes .need-card {
+  display: block;
+  background: #ffffff;
+  min-height: 270px;
+  padding: 30px 32px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.better-trips-you-yes .need-card .need-img {
+  max-width: 75px;
+  min-height: 80px;
+  margin: 10px auto 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.better-trips-last {
+  background: #f2f2f7;
+}
+
+.better-trips-last .last-border {
+  background: transparent;
+  border: 1px solid #131313;
+  border-radius: 24px;
+  max-width: 220px;
+  text-align: center;
+  margin: 140px auto 15px;
+  padding: 6px 12px 7px;
+}
+
+.better-trips-last h1 {
+  font-size: 120px;
+  line-height: 120px;
+}
+
+.better-trips-last .trip-video {
+  position: relative;
+  margin-bottom: 80px;
+  margin-top: 75px;
+}
+
+.better-trips-last .trip-video img {
+  width: 100%;
+  height: 661px;
+  border-radius: 10px;
+}
+
+.better-trips-last .trip-video .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 86px;
+  height: 110px;
+  width: 110px;
+  line-height: 106px;
+  margin-right: 0;
+  background-color: #2152ff;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.better-trips-last .trip-video .play-icon:hover,
+.better-trips-last .trip-video .play-icon:focus {
+  background-color: #204ceb;
+}
+
+.better-trips-last .hotel-logo {
+  max-width: 230px;
+  margin: 0 auto 83px;
+}
+
+.better-trips-experienced {
+  background: #f2f2f7;
+  padding: 0 20px;
+}
+
+.better-trips-experienced .experienced-community-slider {
+  max-width: 770px;
+  width: 100%;
+  background: #ffffff;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.better-trips-experienced .experienced-community-slider .testimonial-items {
+  width: 100%;
+  min-height: 270px;
+  padding: 48px 48px 30px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.better-trips-experienced
+  .experienced-community-slider
+  .testimonial-items::before {
+  content: "\f10d";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  left: 20px;
+  top: 6px;
+  color: #f2f2f7;
+  font-size: 40px;
+}
+
+.better-trips-experienced
+  .experienced-community-slider
+  .testimonial-items
+  .description {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto 10px;
+  line-height: 30px;
+  font-style: italic;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-prev,
+.better-trips-experienced .experienced-community-slider .slick-next {
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  top: 50%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  z-index: 10;
+  transition: all 0.2s ease-in-out;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-prev:hover,
+.better-trips-experienced .experienced-community-slider .slick-next:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.better-trips-experienced
+  .experienced-community-slider
+  .slick-prev.slick-disabled,
+.better-trips-experienced
+  .experienced-community-slider
+  .slick-next.slick-disabled {
+  display: none !important;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-prev::before,
+.better-trips-experienced .experienced-community-slider .slick-next::before {
+  font-family: "Font Awesome 6 Pro";
+  color: #00a1d9;
+  opacity: 1;
+  font-size: 22px;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-next {
+  right: -24px;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-next:before {
+  content: "\f054";
+  margin-left: 3px;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-prev {
+  left: -24px;
+}
+
+.better-trips-experienced .experienced-community-slider .slick-prev:before {
+  content: "\f053";
+  margin-right: 3px;
+}
+
+.better-trips-experience-slider {
+  background: #f2f2f7;
+  padding-top: 150px;
+  padding-bottom: 32px;
+}
+
+.better-trips-experience-slider .container-fluid {
+  padding: 0;
+}
+
+.better-trips-packed {
+  background: #00a1d9;
+  padding: 180px 0 220px;
+}
+
+.better-trips-packed .title {
+  max-width: 700px;
+  margin: 0 auto 75px;
+}
+
+.better-trips-packed .title span {
+  display: block;
+}
+
+.better-trips-packed .qualify-button {
+  background: #f2d03b;
+  color: #131313;
+  font-size: 24px;
+  line-height: 23px;
+  text-decoration: none;
+  margin-bottom: 35px;
+}
+
+.better-trips-packed .qualify-button:hover {
+  background: #ebc313;
+}
+
+.better-trips-packed .link-hover:hover {
+  color: #131313;
+}
+
+/*---- End of better-trips css ----*/
+
+@media (max-width: 767px) {
+  .better-trips-hero {
+    padding: 50px 0;
+  }
+
+  .better-trips-hero .better-img {
+    max-width: 160px;
+  }
+
+  .better-trips-hero .better-title {
+    margin-top: 20px;
+  }
+
+  .better-trips-hero .description {
+    max-width: 340px;
+    width: 100%;
+    margin: 20px auto;
+  }
+
+  .better-trips-hero .qualify-button {
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 16px;
+  }
+
+  .better-trips-hero .qualify-button.next-trip,
+  .better-trips-packed .qualify-button.next-trip {
+    padding: 15px 10px;
+    height: auto;
+  }
+
+  .better-trips-hero .trip-video {
+    margin-bottom: -150px;
+    margin-top: 50px;
+  }
+
+  .better-trips-hero .trip-video img {
+    height: auto;
+  }
+
+  .better-trips-hero .trip-video .play-icon {
+    height: 82px;
+    width: 82px;
+    line-height: 78px;
+  }
+
+  .better-trips-bahamas {
+    padding: 150px 0 60px;
+  }
+
+  .better-trips-bahamas .feb-border {
+    margin: 5px auto 20px;
+  }
+
+  .better-trips-bahamas h1 {
+    font-size: 60px;
+    line-height: 60px;
+  }
+
+  .better-trips-bahamas .atlantis-logo {
+    max-width: 160px;
+    margin: 30px auto;
+  }
+
+  .better-trips-bahamas .who-despt {
+    line-height: 28px;
+  }
+
+  .better-trips-photo-slider .slider-item .item-inner {
+    margin: 0 8px;
+  }
+
+  .better-trips-photo-slider .slider-item .item-inner .photo-bg {
+    width: 190px;
+    height: 190px;
+  }
+
+  .better-trips-you-yes {
+    padding-top: 50px;
+    padding-bottom: 60px;
+  }
+
+  .better-trips-you-yes .you-yes-row {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .better-trips-you-yes .you-yes-row .col-sm-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .better-trips-you-yes h2 {
+    margin-bottom: 30px;
+  }
+
+  .better-trips-you-yes .need-card {
+    min-height: 180px;
+    padding: 20px 15px 15px;
+  }
+
+  .better-trips-you-yes .need-card .need-img {
+    min-height: 70px;
+    margin: 0 auto 20px;
+  }
+
+  .better-trips-last .last-border {
+    max-width: 120px;
+    margin: 60px auto 20px;
+  }
+
+  .better-trips-last h1 {
+    font-size: 52px;
+    line-height: 52px;
+  }
+
+  .better-trips-last .trip-video {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .better-trips-last .trip-video img {
+    height: auto;
+  }
+
+  .better-trips-last .trip-video .play-icon {
+    height: 82px;
+    width: 82px;
+    line-height: 78px;
+  }
+
+  .better-trips-last .hotel-logo {
+    max-width: 160px;
+    margin: 0 auto 40px;
+  }
+
+  .better-trips-experienced .experienced-community-slider .testimonial-items {
+    min-height: 260px;
+    padding: 24px;
+  }
+
+  .better-trips-experienced
+    .experienced-community-slider
+    .testimonial-items::before {
+    font-size: 26px;
+    left: 12px;
+  }
+
+  .better-trips-experienced
+    .experienced-community-slider
+    .testimonial-items
+    .description {
+    line-height: 22px;
+  }
+
+  .better-trips-experienced .experienced-community-slider .slick-prev,
+  .better-trips-experienced .experienced-community-slider .slick-next {
+    height: 34px;
+    width: 34px;
+  }
+
+  .better-trips-experienced .experienced-community-slider .slick-prev::before,
+  .better-trips-experienced .experienced-community-slider .slick-next::before {
+    font-size: 12px;
+  }
+
+  .better-trips-experienced .experienced-community-slider .slick-next {
+    right: -12px;
+  }
+
+  .better-trips-experienced .experienced-community-slider .slick-prev {
+    left: -12px;
+  }
+
+  .better-trips-experience-slider {
+    padding-top: 60px;
+    padding-bottom: 20px;
+  }
+
+  .better-trips-packed {
+    padding: 50px 0;
+  }
+
+  .better-trips-packed .title {
+    margin: 0 auto 30px;
+  }
+
+  .better-trips-packed .qualify-button {
+    font-size: 14px;
+    margin-bottom: 20px;
+    max-width: 230px;
+  }
+}
+
+/*---- End of @media (max-width: 767px) ----*/
+
+.dark-theme .better-trips-bahamas .feb-border,
+.dark-theme .better-trips-bahamas h1,
+.dark-theme .better-trips-bahamas .who-despt,
+.dark-theme .better-trips-you-yes h2,
+.dark-theme .better-trips-packed .title span {
+  color: #131313;
+}
+
+.dark-theme .better-trips-you-yes .need-card,
+.dark-theme .better-trips-last,
+.dark-theme .better-trips-experienced,
+.dark-theme .better-trips-experience-slider {
+  background: #1c1c1e;
+}
+
+.dark-theme .better-trips-last .last-border {
+  border-color: #fff;
+}
+
+.dark-theme .better-trips-experienced .experienced-community-slider {
+  background: #131313;
+}
+
+.dark-theme
+  .better-trips-experienced
+  .experienced-community-slider
+  .testimonial-items::before {
+  opacity: 0.1;
+}
+
+.dark-theme .better-trips-experienced .experienced-community-slider .slick-prev,
+.dark-theme
+  .better-trips-experienced
+  .experienced-community-slider
+  .slick-next {
+  background-color: #47474a;
+}
+
+.dark-theme
+  .better-trips-experienced
+  .experienced-community-slider
+  .slick-prev:hover,
+.dark-theme
+  .better-trips-experienced
+  .experienced-community-slider
+  .slick-next:hover {
+  background-color: #fff;
+}
+
+/*---- End of Darktheme CSS ----*/

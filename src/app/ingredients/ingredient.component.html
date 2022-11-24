@@ -1,0 +1,220 @@
+<main [style.margin-top.px]="discountHeight" *ngIf="isLoaded; else loader">
+  <section class="supplement-facts-wraper">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 product-breadcrumbs">
+          <ul class="p-small">
+            <li>
+              <a class="color-gray" (click)="onClickHome()"
+                ><i class="fas fa-home-lg-alt" style="font-size: 12px"></i
+              ></a>
+            </li>
+            <span class="breadcrumb-greater-than">&#8250;</span>
+            <li>
+              <a class="color-gray">{{ "ingredients" | translate }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row ingredients-filter-wrap">
+        <div class="col-12">
+          <div class="row">
+            <div class="form-group">
+              <label>{{ "category" | translate }}</label>
+              <div class="select">
+                <select
+                  class="form-control"
+                  (change)="onSelectIngredientCategory($event)"
+                  [(ngModel)]="selectedCategorySlug"
+                >
+                  <option value="">{{ "please-select" | translate }}</option>
+                  <option
+                    *ngFor="let category of ingredientCategories"
+                    [value]="category.slug"
+                    [innerHTML]="category.name"
+                  ></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ "product" | translate }}</label>
+              <div
+                class="select disable"
+                [class.disable]="ingredientProducts.length === 0"
+              >
+                <select
+                  class="form-control"
+                  (change)="onSelectIngredientProduct($event)"
+                  [(ngModel)]="selectedProductSlug"
+                  [disabled]="ingredientProducts.length === 0"
+                >
+                  <option value="">{{ "please-select" | translate }}</option>
+                  <option
+                    *ngFor="let product of ingredientProducts"
+                    [value]="product.post_name"
+                    [innerHTML]="product.post_title"
+                  ></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="ingredientServings.length > 1">
+              <label>{{ "variation" | translate }}</label>
+              <div
+                class="select disable"
+                [class.disable]="ingredientServings.length === 0"
+              >
+                <select
+                  class="form-control"
+                  (change)="onSelectChargedState($event)"
+                  [(ngModel)]="ingredientChargedState"
+                  [disabled]="ingredientServings.length === 0"
+                >
+                  <option value="">{{ "please-select" | translate }}</option>
+                  <option
+                    *ngFor="let flavor of ingredientServings"
+                    [value]="flavor.key"
+                  >
+                    {{ flavor.value }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="row ingredients-filter-body"
+        *ngIf="ingredientChargedState !== ''"
+      >
+        <div class="col-12">
+          <h2 class="title" [innerHTML]="ingredientProduct?.post_title"></h2>
+
+          <figure
+            id="sk-product__info-details"
+            class="sk-product__info-details"
+          >
+            <div class="container-fluid">
+              <div
+                data-page="s-facts"
+                class="sk-product__item-info sk-product__inside"
+                style="display: block"
+              >
+                <div id="keto-max-id-1" class="sk-sf">
+                  <figure class="sk-sf__table-box color-white-bg margin-bottom">
+                    <figcaption
+                      class="sk-sf__select d-flex justify-content-between"
+                    >
+                      <div>
+                        <h3 class="color-black">
+                          {{ "supplement-facts" | translate }}
+                        </h3>
+                        <p class="sk-sf__serving-size">
+                          {{ servingSize }}
+                        </p>
+                      </div>
+                    </figcaption>
+
+                    <table class="sk-sf__table table color-black">
+                      <tbody>
+                        <tr>
+                          <th class="sk-sf__border-large">
+                            {{ "amount-per-serving" | translate }}
+                          </th>
+                          <th class="sk-sf__border-large">
+                            <span class="float-right">{{
+                              "per-100mg" | translate
+                            }}</span>
+                          </th>
+                          <th class="sk-sf__border-large">
+                            <span class="float-right">{{
+                              "daily-value" | translate
+                            }}</span>
+                          </th>
+                        </tr>
+
+                        <tr *ngFor="let ingredient of ingredients">
+                          <td
+                            [class.sk-sf__table-custom-pad]="
+                              ingredient.indent === '1'
+                            "
+                          >
+                            {{ ingredient.label }}
+                          </td>
+                          <td><span class="float-right"> </span></td>
+                          <td>
+                            <span class="float-right"
+                              >{{ ingredient.amount }}
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="sk-sf__border-large"></td>
+                          <td class="sk-sf__border-large"></td>
+                          <td class="sk-sf__border-large"></td>
+                        </tr>
+
+                        <tr *ngFor="let supplement of supplements">
+                          <td
+                            [class.sk-sf__table-custom-pad]="
+                              supplement.indent === '1'
+                            "
+                          >
+                            {{ supplement.label }}
+                          </td>
+                          <td><span class="float-right"> </span></td>
+                          <td>
+                            <span class="float-right"
+                              >{{ supplement.amount }}
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p class="sk-sf__details">
+                      * {{ "percent-daily" | translate }}
+                    </p>
+                  </figure>
+
+                  <div
+                    class="color-black"
+                    *ngFor="let disclaimer of disclaimers"
+                  >
+                    <p
+                      class="sk-sf__details margin-bottom-s text-uppercase"
+                      [innerHTML]="
+                        getDisclaimerIngredients(disclaimer.ingredient)
+                      "
+                    ></p>
+
+                    <p
+                      class="sk-sf__details margin-bottom-s text-uppercase"
+                      [innerHTML]="
+                        getDisclaimerManufactures(disclaimer.manufacture)
+                      "
+                    ></p>
+
+                    <p
+                      class="sk-sf__details margin-bottom-s"
+                      [innerHTML]="getDisclaimerStorage(disclaimer.storage)"
+                    ></p>
+
+                    <p
+                      class="sk-sf__details margin-bottom-s"
+                      [innerHTML]="getDisclaimerInfo(disclaimer.disclaimer)"
+                    ></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

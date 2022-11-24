@@ -1,0 +1,80 @@
+<section class="confirm-location-wrap" *ngIf="isRedirectedCountry">
+  <article class="container">
+    <figure class="row">
+      <div class="col-12 col-sm-6">
+        <p class="color-white p-small">
+          {{ "confirm-your-location" | translate }}
+        </p>
+        <p class="color-white disclaimer-reg">
+          {{ "confirm-your-location" | translate }}
+          {{ "to-see-relevant-content" | translate }}.
+          {{ "we-will-make-sure" | translate }}
+          {{ "so-you'll-always-be" | translate }}.
+        </p>
+      </div>
+      <div class="col-12 col-sm-6 location-right-col">
+        <div class="form-inline justify-content-end">
+          <div class="form-group mx-3 confirm-location-dropdown">
+            <a
+              class="form-control color-gray pointer"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+              ><img
+                *ngIf="redirectedCountryFlag !== ''"
+                alt="Country"
+                class="img-fluid sk-country__logo"
+                src="assets/images/{{ redirectedCountryFlag }}.svg"
+              />
+              <strong *ngIf="redirectedCountryName !== ''">{{
+                redirectedCountryName
+              }}</strong>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a
+                  class="dropdown-item"
+                  (click)="onChangeCountry(country.country_code)"
+                  *ngFor="let country of americas"
+                  ><img
+                    alt="Country"
+                    class="img-fluid sk-country__logo"
+                    src="assets/images/{{ country.country_code }}.svg"
+                  />{{ country.country }}</a
+                >
+                <a
+                  class="dropdown-item"
+                  (click)="onChangeCountry(country.country_code)"
+                  *ngFor="let country of asiaPacifics"
+                  ><img
+                    alt="Country"
+                    class="img-fluid sk-country__logo"
+                    src="assets/images/{{ country.country_code }}.svg"
+                  />{{ country.country }}</a
+                >
+                <a
+                  class="dropdown-item"
+                  (click)="onChangeCountry(country.country_code)"
+                  *ngFor="let country of europes"
+                  ><img
+                    alt="Country"
+                    class="img-fluid sk-country__logo"
+                    src="assets/images/{{ country.country_code }}.svg"
+                  />{{ country.country }}</a
+                >
+              </div>
+            </a>
+          </div>
+          <button
+            (click)="onClickContinueLocation()"
+            class="button button-primary continue-btn"
+          >
+            {{ "continue" | translate }}
+          </button>
+        </div>
+      </div>
+    </figure>
+  </article>
+
+  <button type="button" class="close" (click)="onClickCloseLocation()">
+    <i class="fas fa-times-circle"></i>
+  </button>
+</section>

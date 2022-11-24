@@ -1,0 +1,239 @@
+<div class="refer__friend__component dashboard--component">
+    <div>
+        <div *ngIf="isLoaded; else loader">
+            <h3 class="d-flex color-black mb-2 refer-title">Refer a friend <a (click)="false" href="#"
+                    class="ml-auto info-icon"><i class="fas fa-info-circle" aria-hidden="true"></i>
+                </a></h3>
+            <p class="p-small color-gray-dark mb-4">Earn Prüvit Bucks to spend on products by sharing discount offers
+                with
+                friends
+            </p>
+            <div *ngIf="hideWidget">
+                <div class="refer-card mb-4 disabled--card" [class]="cardClasses[0]">
+                    <p class="d-flex justify-content-end align-items-center redeemed-btn-grp">
+                        <span class="btn"><i class="fal fa-check"></i> 0 Friends</span>
+                        <span class="btn">0 CREDITS to use </span>
+                    </p>
+                    <h4 class="color-white mb-1">Not available yet</h4>
+                    <p class="color-white p-small mb-3">Please check back later</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="dropdown">
+                            <a href="#" class="color-black p-small font-bold share-btn" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i
+                                    class="fal fa-external-link font-weight-normal"></i> Share</a>
+
+                        </div>
+                        <a href="#" (click)="false" class="color-white p-small font-bold manage-btn" data-toggle="modal"
+                            data-target="#manageModal">Manage <i
+                                class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!hideWidget">
+                <ng-container *ngFor="let n of bonuses; let i = index">
+                    <div class="refer-card mb-4" [class]="cardClasses[i%cardClasses.length]">
+                        <p *ngIf="n.info" class="d-flex justify-content-end align-items-center redeemed-btn-grp">
+                            <span class="btn"><i class="fal fa-check"></i> {{n.info.redeemedDiscounts}} Friends</span>
+                            <span class="btn">{{ n.info.availableCredits }} CREDITS to use </span>
+                        </p>
+                        <h4 class="color-white mb-1">{{ n.title }}</h4>
+                        <p class="color-white p-small mb-3">{{ n.description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div *ngIf="n.info" class="dropdown">
+                                <a href="#" class="color-black p-small font-bold share-btn" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i
+                                        class="fal fa-external-link font-weight-normal"></i> Share</a>
+                                <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item disclaimer-reg" href="#" (click)="copy(n.info.link); false">
+                                        <i class="far fa-clone mr-2"></i>Copy link
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out!{{n.info.link}}">
+                                        <i class="far fa-envelope mr-2"></i>Email
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="sms:?&body={{n.info.link}}">
+                                        <i class="far fa-comment mr-2"></i>SMS
+                                    </a>
+                                    <a (click)="redirectFacebook(n.info.link); false"
+                                        class="dropdown-item disclaimer-reg" href="#" data-toggle="modal"
+                                        data-target="#shareModal">
+                                        <i class="fab fa-facebook-square mr-2" style="color:#1777F2;"></i>Facebook
+                                    </a>
+                                    <a (click)="redirectTwitter(n.info.link); false"
+                                        class="dropdown-item disclaimer-reg" href="#" data-toggle="modal"
+                                        data-target="#shareModal">
+                                        <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;"></i>Twitter
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="#" (click)="manage(n); false" class="color-white p-small font-bold manage-btn"
+                                data-toggle="modal" data-target="#manageModal">Manage <i
+                                    class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <ng-template #loader>
+            <app-loader class="payment--loader"></app-loader>
+        </ng-template>
+    </div>
+</div>
+<!-- modal -->
+
+<div class="modal fade animate manage-modal" id="manageModal" aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close desktop__modal--close"><i
+                            class="far fa-times"></i></a>
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mobile__modal--close"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Dashboard </a>
+                    <a href="#" class="p-small font-bold how-it"><i class="far fa-play-circle"></i> How it works</a>
+                </p>
+                <h3 class="title color-black">{{activeBonus.title}}</h3>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row referral-row mb-4">
+                    <div class="col share-col">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="color-gray disclaimer-reg">Your unique referral link</p>
+                                <p class="color-black p-small font-bold overflow--p">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM17.3128 11.0767C17.3611 11.4617 17.6886 11.7429 18.0668 11.7429C18.0982 11.7429 18.1303 11.7409 18.1625 11.7369C18.5793 11.6846 18.8746 11.3044 18.8223 10.8876C18.4442 7.86684 16.1851 5.42506 13.2011 4.8119C12.0283 4.57131 10.8072 4.63045 9.66987 4.9833C9.26835 5.10802 9.04425 5.53409 9.16897 5.93563C9.29329 6.33675 9.71895 6.56166 10.1209 6.43653C11.0136 6.15973 11.9728 6.11306 12.8949 6.30256C15.24 6.78455 17.0155 8.70289 17.3128 11.0767ZM5.70678 14.3994C5.3817 14.3994 5.08116 14.1898 4.98018 13.8631C4.62976 12.7285 4.57182 11.5111 4.81201 10.3415C5.02283 9.31553 5.44446 8.37125 6.06525 7.536C6.3159 7.19844 6.79265 7.12844 7.1298 7.37909C7.46695 7.62975 7.53695 8.10651 7.2863 8.44367C6.79949 9.09908 6.46838 9.84058 6.30262 10.6481C6.11353 11.5674 6.15899 12.5238 6.43378 13.4141C6.55809 13.8153 6.33279 14.2413 5.93127 14.3652C5.85684 14.3882 5.78121 14.3994 5.70678 14.3994ZM12.2381 18.1461C12.3089 18.5094 12.6275 18.7613 12.984 18.7613C13.0323 18.7613 13.0814 18.7564 13.1305 18.7468C15.2068 18.3416 16.9807 17.0473 17.9982 15.1962C18.2005 14.828 18.0662 14.3653 17.6976 14.163C17.3295 13.961 16.8672 14.0954 16.6649 14.4635C15.8651 15.9179 14.471 16.9351 12.8392 17.2537C12.4268 17.3342 12.1576 17.7337 12.2381 18.1461ZM11.9183 10.8699C12.4047 10.9697 12.7177 11.4452 12.6179 11.9313C12.5181 12.4177 12.0426 12.7307 11.5566 12.6309C11.0702 12.5307 10.7567 12.056 10.8569 11.5696C10.9567 11.0831 11.4318 10.7701 11.9183 10.8699ZM8.39937 21.2643C7.85542 21.2643 7.41488 20.8233 7.41488 20.2797V12.1839C7.39235 11.7188 7.42212 11.2968 7.5046 10.8945C7.73875 9.75464 8.40259 8.77455 9.3742 8.13403C10.3458 7.49392 11.5085 7.27062 12.6483 7.50438C13.7881 7.73814 14.7686 8.40239 15.4087 9.37403C16.0492 10.3457 16.2729 11.5084 16.0387 12.6482C15.5555 15.0011 13.2474 16.5219 10.895 16.0387C10.3623 15.9293 10.0195 15.4087 10.1286 14.876C10.238 14.3433 10.7586 14.0009 11.2913 14.1099C12.5807 14.3755 13.8452 13.541 14.11 12.2519C14.2383 11.6271 14.1156 10.9898 13.7648 10.4575C13.4139 9.92523 12.8768 9.56152 12.252 9.43318C11.6272 9.30483 10.9903 9.42754 10.4581 9.77838C9.92538 10.1292 9.56168 10.6663 9.43334 11.2908C9.38345 11.5346 9.36655 11.8021 9.38265 12.1083L9.38385 12.1594V20.2797C9.38385 20.8233 8.94331 21.2643 8.39937 21.2643Z"
+                                            fill="#2752FF" />
+                                    </svg>
+                                    {{activeBonus.info.link.replace('https://','')}}
+                                </p>
+                            </div>
+                            <div class="dropdown">
+                                <a href="#" class="color-black p-small font-bold btn share-btn" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i
+                                        class="fal fa-external-link font-weight-normal" aria-hidden="true"></i>
+                                    Share</a>
+                                <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
+                                    <a (click)="copy(activeBonus.info.link); false" class="dropdown-item disclaimer-reg"
+                                        href="#">
+                                        <i class="far fa-clone mr-2" aria-hidden="true"></i>Copy link
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out! {{activeBonus.info.link}}">
+                                        <i class="far fa-envelope mr-2" aria-hidden="true"></i>Email
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="sms:?&body={{activeBonus.info.link}}">
+                                        <i class="far fa-comment mr-2" aria-hidden="true"></i>SMS
+                                    </a>
+                                    <a (click)="redirectFacebook(activeBonus.info.link); false"
+                                        class="dropdown-item disclaimer-reg" href="#">
+                                        <i class="fab fa-facebook-square mr-2" style="color:#1777F2;"
+                                            aria-hidden="true"></i>Facebook
+                                    </a>
+                                    <a (click)="redirectTwitter(activeBonus.info.link); false"
+                                        class="dropdown-item disclaimer-reg" href="#">
+                                        <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;"
+                                            aria-hidden="true"></i>Twitter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p class="color-gray disclaimer-reg">Available to use</p>
+                        <p class="color-black p-small font-bold">{{activeBonus.info.availableCredits}} credits</p>
+                    </div>
+                    <div class="col">
+                        <p class="color-gray disclaimer-reg">Total rewards</p>
+                        <p class="color-black p-small font-bold">{{activeBonus.info.totalMoneyAwarded}}</p>
+                    </div>
+                </div>
+                <ng-template #loaderFriends>
+                    <app-loader class="payment--loader"></app-loader>
+                </ng-template>
+                <div class="row friends-row" *ngIf="isLoadedFriend; else loaderFriends">
+                    <div class="col-12">
+                        <h3 class="color-black mb-2 d-flex align-items-center">Friends <span
+                                class="count-taq">{{friendInfo.friendsInvited}}</span>
+                        </h3>
+                        <p class="p-small color-gray-dark mb-4">After a friend completes their purchase, your $10
+                            kickback
+                            will be activated in approximately 48 hours</p>
+                        <ng-container *ngFor="let x of friendInfo.friends; let i = index">
+                            <div class="friends-expander mb-4">
+                                <div class="d-flex align-items-center justify-content-between collapse-head collapsed"
+                                    data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false"
+                                    [attr.aria-controls]="'collapse' + i">
+                                    <div class="profile-cont d-flex align-items-center">
+                                        <span *ngIf="!x.profile.avatar" class="prof-name mr-3"
+                                            [class]="cardClasses[i%cardClasses.length]">{{x.profile.abrv[0] + x.profile.abrv[1]}}</span>
+                                        <span *ngIf="x.profile.avatar" class="prof-name mr-3"><img
+                                                src="{{x.profile.avatar}}" alt="img"></span>
+                                        <span class="name">{{x.profile.name}}</span>
+                                    </div>
+                                    <div class="right-cont">
+                                        <span class="btn" *ngIf="x.currentStep.status == 'kickbackAvailable'"
+                                            [class]="x.currentStep.class"><i class="fal fa-alarm-clock mr-1"></i>
+                                            {{ x.currentStep.availableTo | timer | async}}</span>
+                                        <span *ngIf="x.currentStep.status == 'kickbackExpired'" class="btn"
+                                            style="background-color:#EB4747;"><i class="fal fa-alarm-clock mr-1"></i>
+                                            Expired</span>
+                                        <i *ngIf="x.currentStep.status == 'kickbackRefunded'"
+                                            class="fas fa-times-circle font-24" style="color:#EB4747;"></i>
+
+                                        <i *ngIf="x.currentStep.status == 'orderPlaced'" class="fas fa-clock font-24"
+                                            style="color:#FF9000;"></i>
+                                        <i *ngIf="x.currentStep.status == 'kickbackRedeemed'"
+                                            class="fas fa-check-circle font-24" style="color:#41BF4E;"></i>
+                                    </div>
+                                </div>
+                                <div id="collapse{{i}}" class="collapse collapse-body">
+                                    <ul class="order-progress-step">
+                                        <ng-container *ngFor="let s of x.steps; let i = index">
+                                            <li
+                                                [ngClass]="{'complete': x.currentStep.stepOrder  >= s.stepOrder,'active': x.currentStep.stepOrder  == s.stepOrder, 'red': x.currentStep.status == 'kickbackExpired' || x.currentStep.status == 'kickbackRefunded' || x.currentStep.class == 'red', 'orange': x.currentStep.status == 'orderPlaced' || x.currentStep.class == 'orange', 'green': x.currentStep.status == 'kickbackRedeemed' || x.currentStep.class == 'green'}">
+                                                <p class="font-bold title">{{s.displayName}}</p>
+                                                <p *ngIf="s.status == 'orderPlaced'" class="p-small">
+                                                    {{s.availableFrom | date: 'MMM d, h:mm a'}}</p>
+                                                <p *ngIf="x.currentStep.status == 'kickbackRedeemed'" class="p-small">
+                                                    {{s.redeemDate | date: 'MMM d, h:mm a'}}</p>
+                                                <p [hidden]="x.currentStep.status !== 'kickbackAvailable'"
+                                                    class="p-small">
+                                                    <span
+                                                        *ngIf="x.currentStep.status == 'kickbackAvailable' && s.status == 'kickbackAvailable'">Expires
+                                                        in</span>
+                                                    {{s.availableTo | timer | async}}
+                                                </p>
+
+                                                <p [hidden]="x.currentStep.status !== 'orderPlaced' && s.status !== 'kickbackAvailable'"
+                                                    class="p-small">
+
+                                                    {{s.availableFrom| timer | async}}
+                                                </p>
+                                                <p *ngIf="x.currentStep.status == 'kickbackRefunded' && x.currentStep.stepOrder  ==  s.stepOrder"
+                                                    class="p-small">The
+                                                    order was refunded</p>
+                                                <p *ngIf="x.currentStep.status == 'orderPlaced' && s.status == 'kickbackRedeemed'"
+                                                    class="p-small">
+                                                    Use the bonus within 4 days after it’s unlocked
+                                                </p>
+                                            </li>
+                                        </ng-container>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </ng-container>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

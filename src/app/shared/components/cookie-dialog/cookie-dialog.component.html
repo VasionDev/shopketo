@@ -1,0 +1,24 @@
+<section
+  class="cookie-preferences-tost"
+  [ngStyle]="{ 'top.px': show ? 0 : -100 }"
+>
+  <article class="container">
+    <figure class="row">
+      <div class="col-12 col-sm-7">
+        <p class="p-small color-white">
+          🍪 {{ "cookie-preferences-saved" | translate }}
+        </p>
+      </div>
+      <div class="col-12 col-sm-5 text-right">
+        <p class="p-small color-white">
+          <a (click)="onEditPreference()" class="underline pointer">{{
+            "edit-preferences" | translate
+          }}</a>
+          <a (click)="onDismiss()" class="btn btn-primary">{{
+            "dismiss" | translate
+          }}</a>
+        </p>
+      </div>
+    </figure>
+  </article>
+</section>

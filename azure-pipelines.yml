@@ -1,0 +1,47 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+trigger:
+  branches:
+    include:
+    - master
+pr: none 
+
+pool:
+  vmImage: 'ubuntu-latest'
+  container: node:12.20.0
+
+steps:
+  - checkout: self
+    clean: true
+    persistCredentials: true
+
+  - task: PowerShell@2
+    name: Check_Version
+    inputs:
+      filePath: 'VersionBuilder.ps1'
+      arguments: '-OriginalBuildNumber $(Build.BuildNumber)'
+
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.20.0'
+
+  - task: Bash@3
+    name: Determine_release
+    env:
+      STAGING_PATH: $(Build.ArtifactStagingDirectory)
+      LOCAL_PATH: $(Build.Repository.LocalPath)
+      DOCKER_HUB_PASSWORD: $(DOCKER_HUB_PASSWORD)
+      RELEASE_VERSION: $(ReleaseVersion)
+    inputs:
+      targetType: 'inline'
+      script: |
+        set -e
+        echo $RELEASE_VERSION
+        latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+        latestTag="${latestTag:1}"
+        echo $latestTag
+        function version_gt() { test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"; }
+        if version_gt $RELEASE_VERSION $latestTag; then echo "Releasing new version"; bash release.sh; else echo "No new version in release notes!"; fi

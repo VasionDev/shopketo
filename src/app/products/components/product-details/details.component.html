@@ -1,0 +1,52 @@
+<main class="sk-product" [style.margin-top.px]="discountHeight$ | async">
+  <ng-container
+    *ngIf="
+      (product | json) !== '{}' && isUserCanAccess && !isRedirectionStarted;
+      else checkUser
+    "
+  >
+    <app-form [newProduct]="product">
+      <app-vi-offer></app-vi-offer>
+    </app-form>
+    <app-info [productSlug]="product.name"></app-info>
+  </ng-container>
+
+  <ng-template #checkUser>
+    <app-loader
+      *ngIf="
+        (product | json) !== '{}' && !isUserCanAccess && isRedirectionStarted;
+        else isRestricted
+      "
+    ></app-loader>
+  </ng-template>
+
+  <ng-template #isRestricted>
+    <app-access-restricted
+      [accessLevelTitle]="accessLevelTitle"
+      *ngIf="
+        (product | json) !== '{}' &&
+          !isUserCanAccess &&
+          !isRedirectionStarted &&
+          isLoggedIn;
+        else noUser
+      "
+    ></app-access-restricted>
+  </ng-template>
+
+  <ng-template #noUser>
+    <app-special-login
+      [accessLevelTitle]="accessLevelTitle"
+      *ngIf="
+        (product | json) !== '{}' &&
+          !isUserCanAccess &&
+          !isRedirectionStarted &&
+          !isLoggedIn;
+        else notFound
+      "
+    ></app-special-login>
+  </ng-template>
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

@@ -1,0 +1,442 @@
+<main [style.margin-top.px]="discountHeight">
+  <section class="foodLand-banner">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h1 class="title color-white text-center">
+            {{ "better-meals-and-snacks" | translate }}.
+            <span> {{ "now-delivered" | translate }}.</span>
+          </h1>
+          <p class="healthy-text text-center">
+            {{ "healthy-delicious" | translate }},
+            {{ "pruvit-approved-meals" | translate }},
+            {{ "ready-in-5-minutes" | translate }}.
+          </p>
+
+          <div class="explore-the-menu-wrap">
+            <a
+              [routerLink]="['/food/select']"
+              [queryParams]="language !== 'en' ? { lang: language } : {}"
+              class="button button-primary button-large"
+            >
+              {{ "explore-the-menu" | translate }}
+            </a>
+            <p class="text-center">
+              <a (click)="checkZipCode()" class="pointer"
+                ><i aria-hidden="true" class="fas fa-map-marker-alt"></i
+                >{{ "check-your-zip-code" | translate }}</a
+              >
+            </p>
+          </div>
+          <div class="banner-video-wrap">
+            <img
+              src="https://embed-ssl.wistia.com/deliveries/d3823d2a96e8ae1769a8b2fcbfcbd53e.jpg?image_crop_resized=960x540"
+              alt="video"
+              class="img-fluid"
+            />
+            <div class="play-icon">
+              <span
+                class="wistia_embed wistia_async_vioz2ax6ty popover=true popoverContent=link"
+                style="display: inline"
+              >
+                <svg
+                  width="86"
+                  height="86"
+                  viewBox="0 0 86 86"
+                  fill="#0B6AFF"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                  />
+                  <path
+                    d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of foodLand-banner -->
+
+  <section class="foodLand-how-it">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h2 class="title color-white text-center">
+            {{ "how-it-works" | translate }}
+          </h2>
+
+          <div class="row how-it-row">
+            <div class="col">
+              <div class="card text-center">
+                <div id="shopingIcon" class="animated-icon" appLottiePlayer>
+                  <lottie-player
+                    src="/assets/animation/shop_icon2.json"
+                    background="transparent"
+                    speed="1"
+                    count="1"
+                    autoplay
+                  >
+                  </lottie-player>
+                </div>
+                <p class="color-black">
+                  {{ "choose-your-meals-and-snacks" | translate }}
+                </p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card text-center">
+                <div id="shopingIcon" class="animated-icon" appLottiePlayer>
+                  <lottie-player
+                    src="/assets/animation/delivery.json"
+                    background="transparent"
+                    speed="1"
+                    count="1"
+                    autoplay
+                  >
+                  </lottie-player>
+                </div>
+                <p class="color-black">
+                  {{ "we-deliver-fresh-each-week" | translate }}
+                </p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card text-center">
+                <div id="shopingIcon" class="animated-icon" appLottiePlayer>
+                  <lottie-player
+                    src="/assets/animation/Microwave3.json"
+                    background="transparent"
+                    speed="1"
+                    count="1"
+                    autoplay
+                  >
+                  </lottie-player>
+                </div>
+                <p class="color-black">
+                  {{ "meals-ready-in-5-minutes" | translate }}
+                </p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card text-center">
+                <div id="shopingIcon" class="animated-icon" appLottiePlayer>
+                  <lottie-player
+                    src="/assets/animation/pause.json"
+                    background="transparent"
+                    speed="1"
+                    count="1"
+                    autoplay
+                  >
+                  </lottie-player>
+                </div>
+                <p class="color-black">
+                  {{ "skip" | translate }} {{ "or" | translate }}
+                  {{ "cancel-anytime" | translate }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of foodLand-how-it -->
+
+  <section class="foodLand-testimonial">
+    <article class="container">
+      <figure class="row foodLand-testimonial-slider">
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              Our family gets the nutrition they need, delivered straight to our
+              door, in a delicious way, even with a picky teenager and an
+              extremely busy life.
+            </p>
+            <p class="name">Janice, ID</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              I haven’t had this much fun eating since… well - EVER!
+            </p>
+            <p class="name">Nick, MN</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              My daughter and I race to the fridge after our noon CrossFit class
+              to see who can get their Pruvit meal warmed up first!
+            </p>
+            <p class="name">Stephanie, MN</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              New mom life just got a whole lot easier! The convenience of these
+              Prüvit meals has been a game-changer for me being able to make a
+              quick & healthy meal while navigating life with a 5-month-old!
+            </p>
+            <p class="name">Alexis, CO</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              Two words: clean & macros. Both important to me and the fact it’s
+              convenient and delicious? Perfect combo.
+            </p>
+            <p class="name">Chrissy, CA</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              When I’m on the go it’s the Chicken and Feta Snack Pack for me.
+              It’s the healthiest, tastiest meal ready in 30 seconds.
+            </p>
+            <p class="name">Sarah, Idaho</p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="testimonial text-center">
+            <p class="description">
+              When my entire family fights over who gets the Cheesy Chicken you
+              know it’s a winner.
+            </p>
+            <p class="name">Natalie, Missouri</p>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- end of foodLand-testimonial -->
+
+  <section class="foodLand-ultimate">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12 text-center">
+          <div class="ultimate-title m-auto">
+            <h1>{{ "ultimate-time-hack" | translate }}</h1>
+            <h3 class="color-gray">
+              {{ "average-person-spends-1140-hours" | translate }}
+            </h3>
+            <h3 class="color-black">
+              {{ "how-will-you-spend-the-time" | translate }}
+            </h3>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of foodLand-ultimate- -->
+
+  <section class="foodLand-ultimate-slider">
+    <article class="container-fluid">
+      <figure class="ultimate-marquee-slide">
+        <div class="slider-item">
+          <div
+            class="inner"
+            style="background-image: url(assets/images/ultimate-slider.png)"
+          ></div>
+        </div>
+
+        <div class="slider-item">
+          <div
+            class="inner"
+            style="background-image: url(assets/images/ultimate-slider1.png)"
+          ></div>
+        </div>
+
+        <div class="slider-item">
+          <div
+            class="inner"
+            style="background-image: url(assets/images/ultimate-slider2.png)"
+          ></div>
+        </div>
+
+        <div class="slider-item">
+          <div
+            class="inner"
+            style="background-image: url(assets/images/ultimate-slider3.png)"
+          ></div>
+        </div>
+
+        <div class="slider-item">
+          <div
+            class="inner"
+            style="background-image: url(assets/images/ultimate-slider4.png)"
+          ></div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END pf foodLand-ultimate-slider -->
+
+  <section class="foodLand-info">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <div class="info-card box-shadow">
+            <h2 class="title">
+              <span> {{ "healthy-simple-and-tasty" | translate }}.</span>
+              {{ "thats-the-kind-of-problem" | translate }}.
+            </h2>
+            <div class="founder">
+              <h4>{{ "brian-underwood" | translate }}</h4>
+              <p class="color-gray">
+                {{ "pruvit" | translate }} {{ "cofounder-and-ceo" | translate }}
+              </p>
+              <img
+                src="assets/images/brain.png"
+                alt="img"
+                class="img-fluid founder-img"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="info-card bg-green">
+            <ul class="info-list">
+              <li class="info-item">{{ "tastes-amazing" | translate }}</li>
+              <li class="info-item">
+                {{ "clean-high-quality-ingredients" | translate }}
+              </li>
+              <li class="info-item">
+                {{ "zero-preparation-time" | translate }}
+              </li>
+              <li class="info-item">
+                {{ "pruvit-community-approved" | translate }}
+              </li>
+            </ul>
+            <div class="invite">
+              <h2>{{ "we-invite-you-to-experience" | translate }}.</h2>
+              <div class="link">
+                <a
+                  [routerLink]="['/food/select']"
+                  [queryParams]="language !== 'en' ? { lang: language } : {}"
+                  class="pointer"
+                >
+                  {{ "browse-food" | translate }}
+                  <i class="far fa-long-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="approved">
+            <div class="approved-inner">
+              <div class="approved-card">
+                <div class="icon">⚡️</div>
+                <div class="info text-right">
+                  <p>{{ "calories-uppercase" | translate }}</p>
+                  <h3>350-550</h3>
+                </div>
+              </div>
+              <div class="approved-card">
+                <div class="icon">⚖️</div>
+                <div class="info text-right">
+                  <p>{{ "net-carbs-uppercase" | translate }}</p>
+                  <h3>&lt;15g</h3>
+                </div>
+              </div>
+              <div class="approved-card">
+                <div class="icon">💪</div>
+                <div class="info text-right">
+                  <p>{{ "protein-uppercase" | translate }}</p>
+                  <h3>20g+</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="approved-info">
+              <h2>{{ "pruvit-approved-macros" | translate }}.</h2>
+              <p class="color-gray">
+                {{ "take-the-guess-work-out" | translate }}.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 best-in-class">
+          <div class="best-slide">
+            <p>{{ "another-pruvit-first" | translate }}</p>
+
+            <h1>
+              {{ "best-in-class" | translate }}
+              <br />
+              <div id="typeWrite"></div>
+            </h1>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of foodLand-info -->
+
+  <section class="foodLand-hungry">
+    <div class="foodLand-collection food-experience">
+      <div class="food-exp-body-wraper ultimate-marquee-slide">
+        <div class="food-exp-item" *ngFor="let food of foods">
+          <app-food-card [food]="food" [isStartPlanning]="true"></app-food-card>
+        </div>
+      </div>
+    </div>
+    <!-- END of foodLand-collection -->
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-5 m-auto text-center">
+          <div class="hungry-inner">
+            <h1>{{ "hungry-yet" | translate }}?</h1>
+            <p>{{ "find-out-if-we-can-deliver" | translate }}.</p>
+
+            <div class="explore-the-menu-wrap">
+              <a
+                [routerLink]="['/food/select']"
+                [queryParams]="language !== 'en' ? { lang: language } : {}"
+                class="button button-primary button-large"
+              >
+                {{ "explore-the-menu" | translate }}
+              </a>
+              <p class="text-center">
+                <a (click)="checkZipCode()" class="pointer"
+                  ><i aria-hidden="true" class="fas fa-map-marker-alt"></i
+                  >{{ "check-your-zip-code" | translate }}</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center">
+          <div class="source">
+            <h5 class="disclaimer-bold">{{ "sources" | translate }}:</h5>
+            <p class="disclaimer-bold">
+              {{ "a-year-in-food" | translate }}.
+              <span class="disclaimer-reg">
+                {{ "by-mary-ellen-shoup" | translate }} <br />
+                <a
+                  href="https://www.foodnavigator-usa.com/article/2019/08/28/a-year-in-food-survey-reveals-millennials-eating-and-spending-habits"
+                >
+                  https://www.foodnavigator-usa.com/article/2019/08/28/a-year-in-food-survey-reveals-millennials-eating-and-spending-habits
+                </a>
+              </span>
+            </p>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of foodLand-hungry -->
+</main>
+<!-- END of main -->

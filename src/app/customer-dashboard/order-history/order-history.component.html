@@ -1,0 +1,116 @@
+<h2>Orders</h2>
+
+
+<div class="dashboard__wrapper pending--wrapper" *ngIf="pendingPaymentOrders && pendingPaymentOrders.length > 0">
+  <div *ngFor="let order of pendingPaymentOrders; let i = index" class="order__history__item not-paid">
+    <div class="order__information">
+      <div>
+        <span class="order__name">Not paid</span>
+
+
+      </div>
+      <span class="order__date">
+        ${{ order.total  }}
+      </span>
+      <span class="order__date">
+        {{ order.dateCreated | date: "MMM d" }}
+      </span>
+      <span class="order__date"> #{{ order.cartId }}<i *ngIf="order.orderName == 'smartOrder'"
+          class="fal fa-repeat"></i></span>
+    </div>
+    <div class="order__options">
+      <span class="order__track pay--now" (click)="pay(order.cartId)"> Pay
+        now <i class="fal fa-chevron-right" style="margin-left: 10px;"></i></span>
+
+      <span *ngFor="
+                        let product of order.products?.slice(0, 3);
+                        let i = index
+                      " class="order__history__item__product">
+        <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
+          title="{{ product.quantity }} x {{ product.title }}" />
+        <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
+          title="{{ product.quantity }} x {{ product.title }}" />
+        <span class="order__history__item__product__quantity">{{ product.quantity }}</span>
+      </span>
+      <span *ngIf="order.products?.length > 3"
+        class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+
+    </div>
+  </div>
+  <div class="order__history__item">
+
+  </div>
+</div>
+<div class="dashboard__wrapper" *ngIf="orderHistory.length == 0 && !loader">
+  <h3>No order history can be found</h3>
+</div>
+
+<div class="dashboard__wrapper">
+  <app-loader *ngIf="loader" class="payment--loader"></app-loader>
+  <div *ngIf="orderHistory.length > 1">
+    <ng-container *ngFor="let order of orderHistory; let i = index">
+      <div
+        [ngClass]="{'fulfilment': order.shipStatus == 2, 'shipped' : order.shipStatus == 10, 'canceled' : order.shipStatus == 27,
+                'shipment' : order.shipStatus == 19, 'delivered' : order.shipStatus == 23, 'not-paid': order.shipStatus == 12 || order.shipStatus == 22 }"
+        class="order__history__item shipped">
+        <div class="order__information">
+          <div>
+            <span *ngIf="order.shipStatus == 2" class="order__name">Fulfilment</span>
+            <span *ngIf="order.shipStatus == 12" class="order__name">Returned Initial</span>
+            <span *ngIf="order.shipStatus == 23" class="order__name">Delivered</span>
+            <span *ngIf="order.shipStatus == 19" class="order__name">Automate hold</span>
+            <span *ngIf="order.shipStatus == 10" class="order__name">Shipped</span>
+            <span *ngIf="order.shipStatus == 22" class="order__name">Returned before shippment</span>
+
+          </div>
+          <span class="order__date">
+            ${{ order.amount  }}
+          </span>
+          <span class="order__date">
+            {{ order.dateCreated | date: "MMM d" }}
+          </span>
+          <span class="order__date"> #{{ order.orderId }}<i *ngIf="order.orderName == 'smartOrder'"
+              class="fal fa-repeat"></i></span>
+        </div>
+        <div class="order__options">
+          <div>
+            <span *ngFor="
+                        let product of order.orderItems.slice(0, 3);
+                        let i = index
+                      " class="order__history__item__product">
+              <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
+                title="{{ product.quantity }} x {{ product.name }}" />
+              <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
+                title="{{ product.quantity }} x {{ product.name }}" />
+              <span class="order__history__item__product__quantity">{{ product.quantity }}</span>
+            </span>
+            <span *ngIf="order.orderItems.length > 3"
+              class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+
+
+          </div>
+          <div class="order__options__menus">
+            <span *ngIf="order.trackingNumberUrl" (click)="goToTracking(order.trackingNumberUrl)"
+              class="order__track"><i class="fal fa-location-circle"></i> Track</span>
+
+
+            <button mat-icon-button [matMenuTriggerFor]="menuOrders" aria-label="Example icon-button with a menu"
+              class="button orders--button">
+              <span class="desktop__actions">Actions <i class="fas fa-angle-down"></i></span>
+            </button>
+            <mat-menu #menuOrders="matMenu" xPosition="before">
+
+              <button class="mat-menu-item--custom" mat-menu-item (click)="printReceipt(order.invoiceId)">
+                <i class="far fa-print"></i><span>Print receipt</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <button *ngIf="orderHistory" class="button button-primary older-olders" (click)="loadMore()"
+      [disabled]="loadMoreLoading">
+      {{ loadMoreButton }}
+    </button>
+  </div>
+</div>

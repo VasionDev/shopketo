@@ -1,0 +1,519 @@
+<main
+  class="sk-main"
+  *ngIf="isCountryAvailable; else notFound"
+  [style.margin-top.px]="discountHeight"
+>
+  <section class="research-hero shopketo101-hero">
+    <article class="container">
+      <figure class="sk-main__title text-center" data-aos="fade-up">
+        <h4
+          *ngIf="referrer.hasOwnProperty('code')"
+          class="color-black sk-main__title-b"
+        >
+          <img
+            class="referr-img"
+            [src]="
+              referrer?.imageUrl
+                ? referrer?.imageUrl
+                : 'assets/images/avatar2.png'
+            "
+          />
+          {{ "invited-by" | translate }}
+          <span
+            class="color-brand link-hover"
+            (click)="onClickReferrerName()"
+            >{{ referrer?.name }}</span
+          >
+        </h4>
+        <h1 class="color-black">{{ "your-superpower-along" | translate }}</h1>
+      </figure>
+
+      <figure class="row research-slider" data-aos="fade-up">
+        <div class="col-md-4" *ngFor="let video of videos">
+          <div class="slider">
+            <div class="slider-img">
+              <img
+                src="{{ video.thumbnailUrl }}"
+                alt="video"
+                class="img-fluid"
+              />
+              <div class="play-icon">
+                <span
+                  *ngIf="video.source === 'wistia'"
+                  class="wistia_embed wistia_async_{{
+                    video.videoID
+                  }} popover=true popoverContent=link"
+                  style="display: inline"
+                >
+                  <svg
+                    width="86"
+                    height="86"
+                    viewBox="0 0 86 86"
+                    fill="#0B6AFF"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                    />
+                    <path
+                      d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+                <a
+                  *ngIf="video.source === 'pruvit_tv'"
+                  (click)="onClickPruvitTv(video.videoID)"
+                >
+                  <svg
+                    width="86"
+                    height="86"
+                    viewBox="0 0 86 86"
+                    fill="#0B6AFF"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                    />
+                    <path
+                      d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+                <a
+                  *ngIf="video.source === 'youtube'"
+                  (click)="onClickYoutube(video.videoID)"
+                >
+                  <svg
+                    width="86"
+                    height="86"
+                    viewBox="0 0 86 86"
+                    fill="#0B6AFF"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                    />
+                    <path
+                      d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="inner text-center color-black">
+              <h3>{{ video.title | translate }}</h3>
+              <p class="color-gray-dark">
+                {{ video.description | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- END of research-slider -->
+    </article>
+  </section>
+  <!-- END of research-hero shopketo101-hero -->
+
+  <section class="choose-starter-pack">
+    <article class="container">
+      <figure class="row title-wrap" data-aos="fade-up">
+        <div class="col-sm-12">
+          <h1 class="color-black text-center">
+            {{ "choose-a-starter-pack" | translate }}
+          </h1>
+          <p class="color-black text-center">
+            {{ "join-hundreds-of-thousands" | translate }}
+          </p>
+        </div>
+      </figure>
+      <figure
+        *ngIf="tags.length"
+        class="row choose-starter-pack-slider"
+        data-aos="fade-up"
+      >
+        <div
+          class="col-sm-4 sk-category__custom-padd {{
+            product.isMostPopular ? 'most-populer' : ''
+          }}"
+          *ngFor="let product of tags[0].products"
+        >
+          <app-product-card
+            [isLearnPage]="true"
+            [product]="product"
+            #child
+          ></app-product-card>
+        </div>
+      </figure>
+
+      <p
+        *ngIf="challengeProduct"
+        class="text-center variety-pack-btn"
+        data-aos="fade-up"
+      >
+        <a
+          href="#"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          (click)="onClickBuyNow(challengeProduct?.post_name)"
+          >{{ "or-buy-single-variety-pack" | translate }}
+          <i class="fal fa-long-arrow-right"></i
+        ></a>
+      </p>
+    </article>
+  </section>
+  <!-- end of choose-starter-pack -->
+
+  <section class="favorite-community-wraper">
+    <article class="container">
+      <figure class="row" data-aos="fade-up">
+        <div class="col-12">
+          <h1 class="color-black title text-center">
+            {{ "your-new-favorite-community" | translate }}
+          </h1>
+          <p class="color-black text-center">
+            {{ "our-ketone-technology-is-world-class" | translate }}
+          </p>
+        </div>
+      </figure>
+      <figure
+        class="favorite-community-slider sk-category__products"
+        data-aos="fade-up"
+      >
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            {{ "i-am-a-better-father" | translate }}
+          </p>
+          <p>
+            <img
+              src="assets/images/woman2.png"
+              alt="img"
+              class="img-fluid rounded-circle hide"
+            />
+          </p>
+          <p style="padding-top: 20px" class="name color-black disclaimer-bold">
+            {{ "josh-rapkin" | translate }}
+          </p>
+          <p class="color-black disclaimer-reg">
+            {{ "independent-pruver" | translate }}
+          </p>
+        </div>
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            {{ "i-took-a-leap-of-faith" | translate }}
+          </p>
+          <p>
+            <img
+              src="assets/images/woman1.png"
+              alt="img"
+              class="img-fluid rounded-circle hide"
+            />
+          </p>
+          <p style="padding-top: 20px" class="name color-black disclaimer-bold">
+            {{ "brandy-wiseman" | translate }}
+          </p>
+          <p class="color-black disclaimer-reg">
+            {{ "independent-pruver" | translate }}
+          </p>
+        </div>
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            {{ "this-is-the-most-amazing" | translate }}
+          </p>
+          <p>
+            <img
+              src="assets/images/woman.png"
+              alt="img"
+              class="img-fluid rounded-circle hide"
+            />
+          </p>
+          <p style="padding-top: 20px" class="name color-black disclaimer-bold">
+            {{ "jamie-golablowski" | translate }}
+          </p>
+          <p class="color-black disclaimer-reg">
+            {{ "independent-pruver" | translate }}
+          </p>
+        </div>
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            {{ "i-had-them-to-lean" | translate }}
+          </p>
+          <p>
+            <img
+              src="assets/images/woman.png"
+              alt="img"
+              class="img-fluid rounded-circle hide"
+            />
+          </p>
+          <p style="padding-top: 20px" class="name color-black disclaimer-bold">
+            {{ "cayti-stetchulte" | translate }}
+          </p>
+          <p class="color-black disclaimer-reg">
+            {{ "independent-pruver" | translate }}
+          </p>
+        </div>
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            {{ "i-was-tired-i-was-crabby" | translate }}
+          </p>
+          <p>
+            <img
+              src="assets/images/woman.png"
+              alt="img"
+              class="img-fluid rounded-circle hide"
+            />
+          </p>
+          <p style="padding-top: 20px" class="name color-black disclaimer-bold">
+            {{ "shawn-golablowski" | translate }}
+          </p>
+          <p class="color-black disclaimer-reg">
+            {{ "independent-pruver" | translate }}
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- end of favorite-community-wraper -->
+
+  <section class="before-better-slider">
+    <article class="container-fluid">
+      <figure class="before-better-marquee-slide" data-aos="fade-up">
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-74.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "before" | translate }}</h4>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-75.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "better" | translate }}</h4>
+        </div>
+
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-76.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "before" | translate }}</h4>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-77.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "better" | translate }}</h4>
+        </div>
+
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-78.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "before" | translate }}</h4>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/image-79.png)"
+            ></div>
+          </div>
+          <h4 class="color-black before-tag">{{ "better" | translate }}</h4>
+        </div>
+      </figure>
+      <p class="color-gray disclaimer-reg before-better-disclaimer">
+        {{ "results-represented-in-these-images-are-specific" | translate }}
+      </p>
+    </article>
+  </section>
+  <!-- END pf before-better-slider -->
+
+  <section class="pruver-mission-wraper">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-col pruvit-ceo-info box-shadow">
+              <h4 class="mission-btn">{{ "pruvits-mission" | translate }}</h4>
+              <h2 class="title">
+                {{ "inspire-people-to-become-a-better" | translate }}
+              </h2>
+              <div class="founder">
+                <h4>{{ "brian-underwood" | translate }}</h4>
+                <p class="color-gray">
+                  {{ "pruvit" | translate }}
+                  {{ "cofounder-and-ceo" | translate }}
+                </p>
+                <img
+                  src="assets/images/brain.png"
+                  alt="img"
+                  class="img-fluid founder-img"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="referrer.hasOwnProperty('code')"
+            class="card flex-sm-row mb-0"
+          >
+            <div class="card-col independent-pruver-card">
+              <div class="inner-cont">
+                <img
+                  [src]="
+                    referrer?.imageUrl
+                      ? referrer?.imageUrl
+                      : 'assets/images/avatar2.png'
+                  "
+                  alt="img"
+                  class="img-fluid rounded-circle"
+                />
+                <h3 class="prf-name">{{ referrer?.name }}</h3>
+                <p class="disclaimer-reg">
+                  {{ "your" | translate }}
+                  {{ "independent-pruver" | translate }}
+                </p>
+              </div>
+            </div>
+            <div class="card-col here-help-card">
+              <div class="inner-cont">
+                <h3 class="text-center color-black">
+                  {{ "here-to-help" | translate }}
+                </h3>
+                <div class="btns-group d-flex flex-column">
+                  <button
+                    *ngIf="referrer?.phoneNumber"
+                    class="sk-pruver__btn color-brand color-white-bg"
+                  >
+                    <a
+                      href="tel:{{ referrer?.phoneNumber }}"
+                      class="not-underline"
+                    >
+                      {{ "call-me" | translate }} 📞
+                    </a>
+                  </button>
+
+                  <button
+                    *ngIf="referrer?.phoneNumber"
+                    class="sk-pruver__btn color-brand color-white-bg"
+                  >
+                    <a
+                      [href]="
+                        'sms:' + referrer?.phoneNumber | textSanitizer: 'url'
+                      "
+                      class="not-underline"
+                    >
+                      {{ "text-me" | translate }} 💬
+                    </a>
+                  </button>
+
+                  <button
+                    *ngIf="referrer?.email"
+                    class="sk-pruver__btn color-brand color-white-bg"
+                  >
+                    <a href="mailto:{{ referrer?.email }}" class="not-underline"
+                      >{{ "email-me" | translate }} 📨
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of pruver-mission-wraper -->
+
+  <section class="FAQ-wraper" *ngIf="faqs.length">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12 title text-center">
+          <h1 class="color-black">
+            {{ "frequently-asked-questions" | translate }}
+          </h1>
+        </div>
+      </figure>
+
+      <figure class="row FAQ-accordion">
+        <div class="col-sm-12" id="accordion">
+          <div class="card" *ngFor="let faq of faqs; let index = index">
+            <h4 class="card-header" id="exogenousKetones">
+              <button
+                class="btn btn-link color-black"
+                data-toggle="collapse"
+                attr.data-target="#exogenousKetones-collapse-{{ index }}"
+                aria-expanded="false"
+                attr.aria-controls="exogenousKetones-collapse-{{ index }}"
+              >
+                {{ faq.title }}
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.5 10.875H13.125V7.5C13.125 6.89062 12.6094 6.375 12 6.375C11.4375 6.375 10.875 6.89062 10.875 7.5V10.875H7.5C6.84375 10.875 6.375 11.3906 6.375 12C6.375 12.6562 6.84375 13.125 7.5 13.125H10.875V16.5C10.875 17.1562 11.3438 17.625 12 17.625C12.6094 17.625 13.125 17.1562 13.125 16.5V13.125H16.5C17.1094 13.125 17.625 12.6562 17.625 12C17.625 11.3906 17.1094 10.875 16.5 10.875ZM12 0C5.34375 0 0 5.39062 0 12C0 18.6562 5.34375 24 12 24C18.6094 24 24 18.6562 24 12C24 5.39062 18.6094 0 12 0ZM12 21.75C6.60938 21.75 2.25 17.3906 2.25 12C2.25 6.65625 6.60938 2.25 12 2.25C17.3438 2.25 21.75 6.65625 21.75 12C21.75 17.3906 17.3438 21.75 12 21.75Z"
+                    fill="black"
+                  />
+                </svg>
+              </button>
+            </h4>
+
+            <div
+              id="exogenousKetones-collapse-{{ index }}"
+              class="collapse"
+              aria-labelledby="exogenousKetones"
+              data-parent="#accordion"
+            >
+              <div class="card-body">
+                <p
+                  class="color-black"
+                  [innerHtml]="faq.content | textSanitizer: 'html'"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of FAQ-wraper -->
+
+  <section class="disclaimer-wrap">
+    <article class="container">
+      <div class="row disclaimer-row">
+        <div class="col">
+          <p class="color-gray disclaimer-reg">
+            {{
+              "pruvit-ventures-inc-does-not-provide-any-medical-advice"
+                | translate
+            }}
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+  <!-- END of disclaimer-wrap -->
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

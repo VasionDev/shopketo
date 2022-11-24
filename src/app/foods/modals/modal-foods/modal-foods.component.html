@@ -1,0 +1,208 @@
+<div
+  id="foodDetailsModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade food-details-modal"
+  aria-hidden="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <i class="far fa-times"></i>
+      </button>
+      <div class="modal-body">
+        <div class="food-img-wrap">
+          <div
+            class="modal-img-bg"
+            [ngStyle]="{
+              'background-image': food?.imageUrl
+                ? 'url(' + food?.imageUrl + ')'
+                : 'url(assets/images/food-menu-img1.png)'
+            }"
+          ></div>
+        </div>
+
+        <div class="food-bottom-text">
+          <p class="food-taq-btn text-center">
+            <a
+              (click)="toggleTooltip(food.id, i)"
+              id="{{ 'modal' + food.id + '' + i }}"
+              class="button"
+              data-toggle="tooltip"
+              data-html="true"
+              data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+              [title]="(food?.dietTypes)![i] | format: false"
+              *ngFor="let diet of food?.mappedDietTypes; let i = index"
+              >{{ diet }}
+            </a>
+          </p>
+          <h4 class="color-black text-center" [innerHTML]="food?.name"></h4>
+          <p class="p-small color-gray text-center">
+            {{ food?.price | currency }}
+          </p>
+          <div class="btns-group">
+            <button
+              (click)="onClickPlus()"
+              *ngIf="food?.quantity === 0 && !food.isOutOfStock"
+              class="button button-primary button-large add-btn"
+            >
+              <i class="far fa-plus"></i> {{ "add" | translate }}
+            </button>
+            <div
+              *ngIf="food.quantity && food.quantity > 0 && !food.isOutOfStock"
+              class="button button-primary button-large add-btn added"
+            >
+              <a (click)="onClickMinus()" class="pointer"
+                ><i class="far fa-minus"></i
+              ></a>
+              {{ food?.quantity }} {{ "added" | translate }}
+              <a (click)="onClickPlus()" class="pointer"
+                ><i class="far fa-plus"></i
+              ></a>
+            </div>
+            <div class="sold-out" *ngIf="food.isOutOfStock">
+              <h4>{{ "out-of-stock" | translate }}</h4>
+            </div>
+          </div>
+
+          <ul class="supplement-facts">
+            <li *ngIf="protein(food)">
+              <span>{{ protein(food)?.unitSize }}</span>
+              {{ "protein" | translate }}
+            </li>
+            <li *ngIf="netCarbs(food)">
+              <span>{{ netCarbs(food)?.unitSize }}</span>
+              {{ "net-carbs" | translate }}
+            </li>
+            <li *ngIf="fat(food)">
+              <span>{{ fat(food)?.unitSize }}</span> {{ "fat" | translate }}
+            </li>
+            <li *ngIf="calories(food)">
+              <span>{{ calories(food)?.unitSize }}</span>
+              {{ "calories" | translate }}
+            </li>
+          </ul>
+
+          <p
+            class="color-gray p-small text-center"
+            [innerHTML]="food?.description"
+          ></p>
+
+          <div class="accordion" id="accordion">
+            <div
+              class="card"
+              *ngIf="food.ingredients && food.ingredients.length > 0"
+            >
+              <div class="card-header" id="headingOne">
+                <button
+                  class="button"
+                  data-toggle="collapse"
+                  data-target="#ingredientsAccordion"
+                  aria-expanded="false"
+                  aria-controls="ingredientsAccordion"
+                >
+                  {{ "ingredients" | translate }}
+                </button>
+              </div>
+
+              <div
+                id="ingredientsAccordion"
+                class="collapse"
+                aria-labelledby="headingOne"
+                data-parent="#accordion"
+              >
+                <div class="card-body color-gray">
+                  <ol>
+                    <li *ngFor="let ingredient of food?.ingredients">
+                      {{ ingredient }}
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card"
+              *ngIf="food.instructions && food.instructions.length > 0"
+            >
+              <div class="card-header" id="headingTwo">
+                <button
+                  class="button"
+                  data-toggle="collapse"
+                  data-target="#instructionsAccordion"
+                  aria-expanded="false"
+                  aria-controls="instructionsAccordion"
+                >
+                  {{ "instructions" | translate }}
+                </button>
+              </div>
+              <div
+                id="instructionsAccordion"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordion"
+              >
+                <div class="card-body color-gray">
+                  <ul>
+                    <li *ngFor="let instruction of food?.instructions">
+                      <h4>{{ instruction?.title }}</h4>
+                      <span
+                        [innerHTML]="instruction?.details! | format: true"
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card"
+              *ngIf="food.nutritions && food.nutritions.length > 0"
+            >
+              <div class="card-header" id="headingThree">
+                <button
+                  class="button"
+                  data-toggle="collapse"
+                  data-target="#perServingsAccordion"
+                  aria-expanded="false"
+                  aria-controls="perServingsAccordion"
+                >
+                  {{ "nutrition-per-serving" | translate }}
+                </button>
+              </div>
+              <div
+                id="perServingsAccordion"
+                class="collapse"
+                aria-labelledby="headingThree"
+                data-parent="#accordion"
+              >
+                <div class="card-body color-gray">
+                  <p>
+                    {{
+                      concateNutritions(food.nutritions ? food.nutritions : [])
+                    }}
+                  </p>
+                  <p *ngIf="food.allergens && food.allergens.length > 0">
+                    {{ "contains" | translate }}:
+                    {{ concateAllergens(food.allergens ? food.allergens : []) }}
+                  </p>
+                  <p>
+                    {{
+                      removeSBText(
+                        food.nutritionDisclaimer ? food.nutritionDisclaimer : ""
+                      )
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of food-details-modal -->

@@ -1,0 +1,298 @@
+<main
+  *ngIf="(blog | json) !== '{}'; else notFound"
+  [style.margin-top.px]="discountHeight"
+>
+  <section class="blog-details">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 product-breadcrumbs">
+          <ul class="p-small">
+            <li>
+              <a class="color-gray" (click)="onClickHome()"
+                ><i class="fas fa-home-lg-alt" style="font-size: 12px"></i
+              ></a>
+            </li>
+            <span class="breadcrumb-greater-than">&#8250;</span>
+            <li><a class="color-gray" (click)="onClickBlog()">Blog</a></li>
+            <span class="breadcrumb-greater-than">&#8250;</span>
+            <li>
+              <a
+                class="color-gray"
+                (click)="onClickCategory(category)"
+                [innerHTML]="category.name"
+              ></a>
+            </li>
+            <ng-container *ngIf="(childCategory | json) !== '{}'">
+              <span class="breadcrumb-greater-than">&#8250;</span>
+              <li>
+                <a
+                  class="color-gray"
+                  (click)="onClickCategory(childCategory)"
+                  [innerHTML]="childCategory.name"
+                ></a>
+              </li>
+            </ng-container>
+          </ul>
+
+          <app-vi-offer></app-vi-offer>
+        </div>
+        <div class="col-sm-12">
+          <div class="blog-details-heading">
+            <h2 [innerHTML]="blog.title"></h2>
+            <p [innerHTML]="blog.description"></p>
+          </div>
+
+          <div class="blog-details-img">
+            <div class="blog-details-img-heading">
+              <img
+                src="{{ getBlogAuthorAvatar(blog.authorId) }}"
+                alt=""
+                class="img-fluid"
+              />
+              <p class="d-inline-block">{{ getBlogAuthor(blog.authorId) }}</p>
+            </div>
+            <img
+              src="{{ blog.imageUrl }}"
+              alt=""
+              class="img-fluid blog-details-inner-img"
+            />
+          </div>
+
+          <div
+            class="blog-details-instructions"
+            [innerHTML]="blog.content | textSanitizer: 'html'"
+          ></div>
+
+          <div class="blog-details-category" *ngIf="blog.tags.length > 0">
+            <a href="#" class="btn btn-light" *ngFor="let tag of blog.tags">{{
+              tag
+            }}</a>
+          </div>
+
+          <div class="blog-details-share">
+            <ul class="blog-details-social">
+              <li>
+                <a
+                  href="https://www.facebook.com/sharer/sharer.php?u={{
+                    pageUrl
+                  }}"
+                  target="_blank"
+                >
+                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/intent/tweet?text={{
+                    blog.title
+                  }} {{ pageUrl }}"
+                  target="_blank"
+                >
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://pinterest.com/pin/create/button/?description={{
+                    blog.title
+                  }}&media={{ blog.imageUrl }}&url={{ pageUrl }}"
+                  target="_blank"
+                >
+                  <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/sharing/share-offsite/?url={{
+                    pageUrl
+                  }}"
+                  target="_blank"
+                >
+                  <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://www.reddit.com/submit?url={{ pageUrl }}&title={{
+                    blog.title
+                  }}"
+                  target="_blank"
+                >
+                  <i class="fab fa-reddit-alien" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:?subject={{ blog.title }}&amp;body={{ pageUrl }}"
+                  target="_blank"
+                >
+                  <i class="fas fa-envelope" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <button
+              (click)="onClickHome()"
+              class="button button-primary blog-shop"
+            >
+              Shop
+            </button>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section class="blog-details-comments">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h3 class="blog-details-comments-heading">Comments</h3>
+
+          <div class="form-wrap">
+            <form
+              class="short-form show"
+              [formGroup]="tempCommentForm"
+              *ngIf="!isInputFocused"
+            >
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend comments-from-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <img
+                        src="assets/images/avatar2.png"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="sk-form-control form-control comments-from-control"
+                    placeholder="Write a comment..."
+                    formControlName="response"
+                    (focus)="onInputFocus()"
+                  />
+                </div>
+              </div>
+            </form>
+
+            <form
+              class="full-form show"
+              [formGroup]="commentForm"
+              *ngIf="isInputFocused && commentSuccessMessage === ''"
+              (ngSubmit)="onSubmitComment()"
+            >
+              <h6>Write your comment</h6>
+              <p>
+                Your email address will not be published. Required fields are
+                marked *
+              </p>
+              <div class="form-group">
+                <input
+                  type="name"
+                  class="form-control sk-form-control"
+                  placeholder="* First name"
+                  formControlName="authorName"
+                  #inputAuthorName
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="authorNameControl.errors && authorNameControl.touched"
+                >
+                  <div *ngIf="authorNameControl.errors['required']">
+                    Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control sk-form-control"
+                  placeholder="* Email address"
+                  formControlName="authorEmail"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    authorEmailControl.errors && authorEmailControl.touched
+                  "
+                >
+                  <div *ngIf="authorEmailControl.errors['required']">
+                    Email is required.
+                  </div>
+                  <div *ngIf="authorEmailControl.errors['pattern']">
+                    Must be a valid email format.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea
+                  type="text"
+                  class="form-control sk-form-control comments-textarea"
+                  placeholder="* Your comment"
+                  formControlName="authorResponse"
+                ></textarea>
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    authorResponseControl.errors &&
+                    authorResponseControl.touched
+                  "
+                >
+                  <div *ngIf="authorResponseControl.errors['required']">
+                    Response is required.
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="button button-primary button-fullwidth"
+                [disabled]="!commentForm.valid"
+              >
+                Submit
+              </button>
+            </form>
+
+            <div
+              *ngIf="commentSuccessMessage !== ''"
+              class="alert alert-success"
+            >
+              {{ commentSuccessMessage }}
+            </div>
+          </div>
+
+          <div
+            class="card comments-details"
+            *ngFor="let comment of comments | slice: 0:toCommentIndex"
+          >
+            <div class="card-body">
+              <div class="image">
+                <img
+                  src="assets/images/avatar2.png"
+                  alt="woman"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="comments-content">
+                <h5 class="card-title">{{ comment.commenter }}</h5>
+                <h6 class="comments-date">{{ comment.publisheDdate }}</h6>
+                <p class="card-text" [innerHTML]="comment.comment"></p>
+              </div>
+            </div>
+          </div>
+
+          <p
+            class="text-center comments-seemore pointer"
+            *ngIf="!(toCommentIndex >= comments.length)"
+          >
+            <a (click)="onClickSeeMore()"> See more </a>
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+</main>
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

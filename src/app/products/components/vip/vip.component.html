@@ -1,0 +1,50 @@
+<main [style.margin-top.px]="discountHeight">
+  <section class="sk-vip-wraper">
+    <div class="container">
+      <figure class="row vip-heading text-center">
+        <div class="col-sm-12">
+          <app-vi-offer></app-vi-offer>
+
+          <h1 class="color-black">{{ "very-inspired-pruvers" | translate }}</h1>
+          <h4 class="color-black">
+            {{ "become-a-pruvit-vip-to-get-access" | translate }}
+          </h4>
+          <button
+            (click)="onVipLogin()"
+            class="button button-primary button-large"
+          >
+            {{ "vip-login" | translate }}
+          </button>
+        </div>
+      </figure>
+      <figure class="row vip-card-row">
+        <div class="col-sm-12">
+          <div class="vip-card card">
+            <h3 class="color-black text-center">
+              {{ "how-to-unlock-the-vault" | translate }}
+            </h3>
+            <p class="color-black text-center p-small strong">
+              {{ "100-bv-in-personal-supplements" | translate }}
+            </p>
+            <p class="color-black text-center p-small">
+              {{ "plus" | translate }}
+            </p>
+            <p class="color-black text-center p-small strong">
+              {{ "2-boxes-of-personal-pruvit-food" | translate }}
+            </p>
+            <p class="color-black text-center p-small">
+              {{ "in-the-current-and-or-prior-calendar-month" | translate }}
+            </p>
+            <p class="color-gray text-center disclaimer-reg">
+              {{ "if-you-live-outside-the-contiguous-us" | translate }},
+              {{
+                "in-place-of-pruvit-food-your-personal-supplement-bv"
+                  | translate
+              }}
+            </p>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,144 @@
+<div class="sk-country color-white-bg"
+  [ngStyle]="{ 'touch-action': 'none' }">
+  <ul class="sk-country__list accordion" id="accordionExample">
+    <li class="sk-country__header d-flex justify-content-between">
+      <h4 class="color-black sk-cart__header-title">
+        {{ 'country-region' | translate }}
+      </h4>
+      <a (click)="onClickCloseCountry()" class="pointer">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L13 13" stroke="#131313" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M13 1L1 13" stroke="#131313" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </li>
+
+    <div class="sk-cart__subtitle sk-cart__padd">
+      <h5 class="sk-cart__subtitle--text color-gray">
+        {{ 'americas' | translate }}
+      </h5>
+    </div>
+    <li *ngFor="let country of americas; let i = index">
+      <a (click)="onClickCountry(country.country_code)"
+        class="sk-country__link button color-black"
+        data-toggle="collapse" id="heading{{ i }}"
+        [attr.data-target]="'#collapse' + i" aria-expanded="false"
+        [attr.aria-controls]="'collapse' + i"
+        [class.sk-country__expend-icon]="selectedCountry === country.country_code">
+        <div
+          class="d-flex justify-content-between align-items-center">
+          <span><img class="img-fluid sk-country__logo"
+              src="assets/images/{{ country.country_code }}.svg"
+              alt="Country" />{{ getCountryName(country) }}</span>
+          <span
+            class="disclaimer-reg color-black sk-country__link-lenguage">{{
+            getLanguageName(country.country_code)
+            }}</span>
+        </div>
+      </a>
+
+      <div id="collapse{{ i }}" class="collapse"
+        [attr.aria-labelledby]="'heading' + i"
+        data-parent="#accordionExample">
+        <ul class="sk-country__sub-list">
+          <li
+            *ngFor="let language of getFilteredLanguages(country.country_code, languages)">
+            <a (click)="changeLanguage(language.value, language.elementID)"
+              class="sk-country__sub-link disclaimer-reg color-black pointer">
+              <img class="sk-country__sub-link--icon"
+                src="assets/images/{{ language.flag }}"
+                alt="lang" />{{ language.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <div class="sk-cart__subtitle sk-cart__padd">
+      <h5 class="sk-cart__subtitle--text color-gray">
+        {{ 'asia-pacific' | translate }}
+      </h5>
+    </div>
+    <li *ngFor="let country of asiaPacifics; let i = index">
+      <a (click)="onClickCountry(country.country_code)"
+        class="sk-country__link button color-black"
+        data-toggle="collapse" id="heading{{ (i + americas.length) }}"
+        [attr.data-target]="'#collapse' + (i + americas.length)"
+        aria-expanded="false"
+        [attr.aria-controls]="'collapse' + (i + americas.length)"
+        [class.sk-country__expend-icon]="selectedCountry === country.country_code">
+        <div
+          class="d-flex justify-content-between align-items-center">
+          <span><img class="img-fluid sk-country__logo"
+              src="assets/images/{{ country.country_code }}.svg"
+              alt="Country" />{{ getCountryName(country) }}</span>
+          <span
+            class="disclaimer-reg color-black sk-country__link-lenguage">{{
+            getLanguageName(country.country_code)
+            }}</span>
+        </div>
+      </a>
+
+      <div id="collapse{{ (i + americas.length) }}" class="collapse"
+        [attr.aria-labelledby]="'heading' + (i + americas.length)"
+        data-parent="#accordionExample">
+        <ul class="sk-country__sub-list">
+          <li
+            *ngFor="let language of getFilteredLanguages(country.country_code, languages)">
+            <a (click)="changeLanguage(language.value, language.elementID)"
+              class="sk-country__sub-link disclaimer-reg color-black pointer">
+              <img class="sk-country__sub-link--icon"
+                src="assets/images/{{ language.flag }}"
+                alt="lang" />{{ language.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <div class="sk-cart__subtitle sk-cart__padd">
+      <h5 class="sk-cart__subtitle--text color-gray">
+        {{ 'europe' | translate }}
+      </h5>
+    </div>
+    <li *ngFor="let country of europes; let i = index">
+      <a (click)="onClickCountry(country.country_code)"
+        class="sk-country__link button color-black"
+        data-toggle="collapse"
+        id="heading{{ (i + americas.length + asiaPacifics.length) }}"
+        [attr.data-target]="'#collapse' + (i + americas.length + asiaPacifics.length)"
+        aria-expanded="false"
+        [attr.aria-controls]="'collapse' + (i + americas.length + asiaPacifics.length)"
+        [class.sk-country__expend-icon]="selectedCountry === country.country_code">
+        <div
+          class="d-flex justify-content-between align-items-center">
+          <span><img class="img-fluid sk-country__logo"
+              src="assets/images/{{ country.country_code }}.svg"
+              alt="Country" />{{ getCountryName(country) }}</span>
+          <span
+            class="disclaimer-reg color-black sk-country__link-lenguage">{{
+            getLanguageName(country.country_code)
+            }}</span>
+        </div>
+      </a>
+
+      <div
+        id="collapse{{ (i + americas.length + asiaPacifics.length) }}"
+        class="collapse"
+        [attr.aria-labelledby]="'heading' + (i + americas.length + asiaPacifics.length)"
+        data-parent="#accordionExample">
+        <ul class="sk-country__sub-list">
+          <li
+            *ngFor="let language of getFilteredLanguages(country.country_code, languages)">
+            <a (click)="changeLanguage(language.value, language.elementID)"
+              class="sk-country__sub-link disclaimer-reg color-black pointer">
+              <img class="sk-country__sub-link--icon"
+                src="assets/images/{{ language.flag }}"
+                alt="lang" />{{ language.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

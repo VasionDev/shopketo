@@ -1,0 +1,124 @@
+<div *ngIf="addresses.length > 0 && !loader" class="payment__create">
+  <div class="modal-body" *ngIf="!showCreateAddress">
+    <div class="card modal-body-card">
+      <div class="row">
+        <div class="col-12 form-group">
+          <label for="cardname" class="col-form-label">Cardholder's name</label>
+          <input type="text" class="form-control" [(ngModel)]="creditCardCreate.cardHolderName" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 form-group payment--name">
+          <span class="credit--card" [ngClass]="{
+            amex: cardType === 'amex',
+            visa: cardType === 'visa',
+            mastercard: cardType === 'mastercard',
+            jcb: cardType === 'jcb',
+            discover: cardType === 'discover'
+          }"></span>
+          <label for="cardnumber" class="col-form-label">Card number</label>
+          <input *ngIf="isEdit" type="text" class="form-control" id="cardnumber" [(ngModel)]="creditCardCreate.cardNumber"
+            [disabled]="true" />
+          <input *ngIf="!isEdit" type="text" class="form-control" id="cardnumber"
+            mask="0000 0000 0000 0000||0000 000000 00000" [ngClass]="{
+            error: cardInputError
+          }" [(ngModel)]="creditCardCreate.cardNumber" (keyup)="cardNumber(creditCardCreate.cardNumber)"
+            (focusout)="onCardChange(creditCardCreate.cardNumber)" />
+        </div>
+      </div>
+      <div *ngIf="cardInputError" class="row">
+        <div class="col-12">
+          <p class="text-danger">
+            Please enter a valid card number.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 form-group">
+          <label for="expMonth" class="col-form-label">Exp. month</label>
+          <select class="form-control" [(ngModel)]="cardMonth" [ngClass]="{
+            error: cardExpError
+          }" (change)="checkDate()">
+            <option *ngFor="let month of months; let i = index" value="{{ i }}">{{
+              month
+              }}</option>
+          </select>
+        </div>
+        <div class="col-4 form-group">
+          <label for="year" class="col-form-label">Year</label>
+          <select class="form-control" [(ngModel)]="cardYear" [ngClass]="{
+            error: cardExpError
+          }" (change)="checkDate()">
+            <option *ngFor="let year of years; let i = index" value="{{ year }}">{{
+              year
+              }}</option>
+          </select>
+        </div>
+        <div class="col-4 form-group">
+          <label for="expMonth" class="col-form-label">CVV</label>
+          <input type="text" id="expMonth" class="form-control" [(ngModel)]="securityCode" mask="000||0000" />
+        </div>
+      </div>
+      <div *ngIf="cardExpError" class="row">
+        <div class="col-12">
+          <p class="text-danger">
+            Please enter a valid date.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 form-group">
+          <label for="billing" class="col-form-label">Billing address</label>
+          <select class="form-control" [(ngModel)]="creditCardCreate.addressProfileId"
+            (change)="showAddress(creditCardCreate.addressProfileId)">
+            <option value="0" disabled>Select address</option>
+            <option value="0">New Address</option>
+            <option *ngFor="let x of addresses; let i = index" value="{{ x.id }}">{{
+              x.addressAlias
+              }}</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="error" class="row">
+        <div class="col-12">
+          <p class="text-danger">
+            {{ error }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-add-billing-address *ngIf="showCreateAddress" (hideFormBool)="hideForm($event)"
+    (setNewAddressId)="setAddress($event)">
+  </app-add-billing-address>
+</div>
+<div *ngIf="!showCreateAddress && !loader" class="modal-footer">
+  <button class="button button--default button--grey" data-dismiss="modal" [disabled]="loading">Cancel</button>
+
+  <button *ngIf="!isEdit" class="button button--default" (click)="createPayment()" [disabled]="
+      !creditCardCreate.cardHolderName ||
+      !creditCardCreate.cardNumber ||
+      !cardMonth ||
+      !cardYear ||
+      !securityCode ||
+      cardExpError ||
+      cardInputError ||
+      loading ||
+      creditCardCreate.addressProfileId == 0
+    ">
+    <span *ngIf="!loading">Create</span>
+    <span *ngIf="loading">Saving</span>
+  </button>
+  <button *ngIf="isEdit" (click)="updatePayment()" class="button button--default" [disabled]="
+  !securityCode ||
+  cardExpError ||
+  cardInputError ||
+  loading ||
+  creditCardCreate.addressProfileId == 0
+">
+    <span *ngIf="!loading">Save</span>
+    <span *ngIf="loading">Saving</span>
+  </button>
+
+</div>
+<app-loader *ngIf="addresses.length == 0 || loader" class="payment--loader"></app-loader>

@@ -1,0 +1,158 @@
+<div
+  id="cookieModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade show cookie-modal"
+  aria-modal="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-body" *ngIf="!preference">
+        <h3 class="text-center color-black">
+          🍪 {{ "we-use-cookies" | translate }}
+        </h3>
+        <p class="p-small text-center color-gray">
+          {{ "this-site-uses-cookies" | translate }},
+          {{ "including-third-party-cookies" | translate }},
+          {{ "to-collect-statistical-information" | translate }},
+          {{ "measure-the-sites-performance" | translate }},
+          {{ "remember-your-preferences" | translate }},
+          {{ "personalize-our-advertising-content" | translate }} ({{
+            "including-profiling" | translate
+          }}), {{ "allow-interaction-with-social-networks" | translate }}
+          <a [href]="privacyPolicyUrl" class="color-gray" target="_black"
+            ><u>{{ "read-more" | translate }}</u></a
+          >
+        </p>
+
+        <div class="btn-groups">
+          <button
+            (click)="togglePreference()"
+            class="button button-primary button-large btn-border"
+          >
+            {{ "cookie-settings" | translate }}
+          </button>
+          <div class="btn-right">
+            <button
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="onRejectCookies()"
+              class="button button-primary button-large"
+            >
+              👎 &nbsp; {{ "reject-cookies" | translate }}</button
+            ><button
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="onClickAcceptCookies()"
+              class="button button-primary button-large"
+            >
+              👍 &nbsp; {{ "accept-cookies" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body preferences-body" *ngIf="preference">
+        <h3 class="text-center color-black">
+          🍪 {{ "cookie-preferences" | translate }}
+        </h3>
+
+        <div class="checkbox-wraper">
+          <label class="custom-checkbox color-black selected">
+            <input
+              type="checkbox"
+              [checked]="cookieChecked.performance"
+              disabled
+            />
+            <span class="checkmark-box"></span>
+            <strong class="color-black"
+              >{{ "essential" | translate }} &amp;
+              {{ "performance-cookies" | translate }}</strong
+            >
+            <div class="color-black check-text">
+              {{ "always-enabled" | translate }} –
+              {{ "required-in-order-for-the-website" | translate }}
+              <a
+                [href]="privacyPolicyUrl"
+                target="_black"
+                class="color-black"
+                >{{ "get-more-info" | translate }}</a
+              >
+            </div>
+          </label>
+
+          <label class="custom-checkbox color-black">
+            <input
+              type="checkbox"
+              [checked]="cookieChecked.analytics"
+              (change)="onCookieChecked($event, 'ANALYTICS')"
+            />
+            <span class="checkmark-box"></span>
+            <strong class="color-black">{{
+              "analytics-cookies" | translate
+            }}</strong>
+            <div class="color-black check-text">
+              {{ "used-to-compile-aggregate-statistics" | translate }}
+              {{
+                "allow-us-to-improve-the-structure-of-our-website" | translate
+              }}; {{ "to-help-us-better-understand" | translate }}
+              {{ "how-people-interact-with-website" | translate }}
+              <a
+                [href]="privacyPolicyUrl"
+                class="color-black"
+                target="_black"
+                >{{ "get-more-info" | translate }}</a
+              >
+            </div> </label
+          ><label class="custom-checkbox color-black">
+            <input
+              type="checkbox"
+              [checked]="cookieChecked.advertising"
+              (change)="onCookieChecked($event, 'ADVERTISING')"
+            />
+            <span class="checkmark-box"></span>
+            <strong class="color-black"
+              >{{ "advertising" | translate }} /
+              {{ "targeting-cookies" | translate }}</strong
+            >
+            <div class="color-black check-text">
+              {{ "it-allows-us-to-tailor-content" | translate }}
+              {{ "or" | translate }}
+              {{ "advertising-to-your-interests" | translate }},
+              {{ "geolocation" | translate }}, {{ "or" | translate }}
+              {{
+                "prevent-the-same-ads-from-always-being-presented" | translate
+              }}
+              <a
+                [href]="privacyPolicyUrl"
+                class="color-black"
+                target="_black"
+                >{{ "get-more-info" | translate }}</a
+              >
+            </div>
+          </label>
+        </div>
+
+        <div class="btn-groups">
+          <button
+            (click)="togglePreference()"
+            class="button button-primary button-large btn-border"
+          >
+            <i class="fas fa-long-arrow-alt-left"></i>
+            {{ "go-back" | translate }}
+          </button>
+          <div class="btn-right">
+            <button
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="onSaveCookies()"
+              class="button button-primary button-large"
+            >
+              {{ "save" | translate }} &amp; {{ "close" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="col-lg-12 websites-wraper addresses">
+    <h2 class="color-black title">Prüvit profile</h2>
+    <app-loader *ngIf="!initialPerson" class="payment--loader"></app-loader>
+    <div *ngIf="initialPerson" class="mt-4 pruvit-profile">
+        <app-referral-link [isProfile]="isProfile"></app-referral-link>
+
+        <div *ngIf="initialPerson">
+            <div class="card card-default card-new no-border prof-info-card">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                            <label class="color-black disclaimer-bold mb-1">Public name</label>
+                            <input type="text" [(ngModel)]="person.name" maxlength="75"
+                                class="form-control disclaimer-reg bg-color" />
+                        </div>
+                        <div class="form-group">
+                            <label class="color-black disclaimer-bold mb-1">Public Phone</label>
+                            <div class="d-flex phone-col">
+                                <input #phoneInput="ngModel" type="text" [(ngModel)]="person.publicPhoneNumber"
+                                    maxlength="20" pattern="^[\-\+\(\)\d]{6,20}$"
+                                    class="form-control disclaimer-reg bg-color" />
+                            </div>
+                            <label *ngIf="phoneInput.errors?.['pattern']"
+                                class="color-black disclaimer-bold mb-1 text-danger">
+                                Invalid phone number
+                            </label>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label class="color-black disclaimer-bold mb-1">Public Email</label>
+                            <input #emailInput="ngModel" type="text" [(ngModel)]="person.publicEmail"
+                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" maxlength="256"
+                                class="form-control disclaimer-reg bg-color" />
+                            <label *ngIf="emailInput.errors?.['pattern']"
+                                class="color-black disclaimer-bold mb-1 text-danger">
+                                Invalid email address
+                            </label>
+                            <small class="color-gray d-block copyright-text mt-1">For security reasons, we recommend you
+                                do NOT enter the email
+                                that you use to log in.</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-12 text-center prof-right">
+                        <p *ngIf="imageUrl" class="prof-img">
+                            <img src="{{ imageUrl }}" alt="img" class="img-fluid rounded-circle" />
+                        </p>
+                        <p *ngIf="!imageUrl" class="prof-img">
+                            <img src="../../../assets//images/avatar2.png" alt="img" class="img-fluid rounded-circle" />
+                        </p>
+                        <p class="mt-sm-3 mt-0">
+                            <a href="#" (click)="uploader.click(); (false)" class="btn btn-gray disclaimer-bold">Change
+                                photo</a>
+
+                            <input hidden type="file" #uploader (change)="fileChangeListener($event)" />
+                            <small class="color-gray d-block copyright-text mt-2">PNG, JPG, GIF up to 10MB</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-default card-new no-border social-media-card">
+                <div class="social-media-list">
+                    <h4 class="color-black mb-3">Social media</h4>
+                    <div class="form-group icon">
+                        <i class="fab fa-facebook-square form-icon" style="color: #1d84ed" aria-hidden="true"></i>
+                        <input type="text" class="form-control disclaimer-reg bg-color" placeholder="Facebook link"
+                            [(ngModel)]="facebookProfile.value" />
+                    </div>
+                    <div class="form-group icon">
+                        <i class="fab fa-instagram form-icon" style="color: #121722" aria-hidden="true"></i>
+                        <input type="text" class="form-control disclaimer-reg bg-color" placeholder="Instagram link"
+                            [(ngModel)]="instagramProfile.value" />
+                    </div>
+                    <div class="form-group icon">
+                        <i class="fab fa-tiktok form-icon" style="color: #121722" aria-hidden="true"></i>
+                        <input type="text" class="form-control disclaimer-reg bg-color" placeholder="TikTok link"
+                            [(ngModel)]="tiktokProfile.value" />
+                    </div>
+                </div>
+            </div>
+
+            <p class="save-changes">
+                <button href="#" (click)="save()"
+                    [disabled]="emailInput.errors?.['pattern'] || phoneInput.errors?.['pattern'] || loading"
+                    class="btn button-primary disclaimer-bold">
+                    <span *ngIf="!loading"> Save changes </span>
+                    <span *ngIf="loading">Saving...</span>
+                </button>
+            </p>
+        </div>
+    </div>
+</div>

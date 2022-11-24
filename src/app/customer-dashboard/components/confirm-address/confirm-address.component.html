@@ -1,0 +1,26 @@
+<div *ngIf="!loader" class="modal-body">
+    <div class="card modal-body-card">
+        <div (click)="selectAddress(address, false)" class="form-check form-check--flex py-3"
+            *ngFor="let address of confirmedAddresses; let i = index">
+            <input class="form-check-input" type="radio" name="radio{{i}}" id="radioButton{{i}}">
+            <label class="form-check-label" for="radioButton{{i}}">
+                {{ address.title }}
+            </label>
+        </div>
+        <div (click)="selectAddress(address, true)" class="form-check form-check--flex py-3">
+            <input class="form-check-input" type="radio" name="radio99" id="radioButton99">
+            <label class="form-check-label" for="radioButton99">
+                Keep original address
+            </label>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!loader" class="modal-footer">
+    <button class="button button--default button--grey" (click)="cancel()">Cancel</button>
+    <button class="button button--default" (click)="createAddressProfile()" [disabled]="loading">
+        <span *ngIf="!loading">Save</span>
+        <span *ngIf="loading">Saving</span>
+    </button>
+</div>
+<app-loader *ngIf="loader" class="payment--loader"></app-loader>

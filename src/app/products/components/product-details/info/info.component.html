@@ -1,0 +1,884 @@
+<section class="sk-product__info sk-product__info--desktop">
+  <div class="container">
+    <figure class="sk-product__info-nav" *ngIf="isTabShowable">
+      <ul class="sk-product__info-list" id="sk-product__info-list">
+        <li *ngIf="product?.post_content !== ''">
+          <button data-page="p-info" class="sk-product__info-btn active">
+            {{ "product-information" | translate }}
+          </button>
+        </li>
+        <li *ngIf="chargedState !== ''">
+          <button data-page="s-facts" class="sk-product__info-btn">
+            {{ "ingredients" | translate }}
+          </button>
+        </li>
+        <li *ngIf="suggestedUse !== ''">
+          <button data-page="suggested-use" class="sk-product__info-btn">
+            {{ "suggested-use" | translate }}
+          </button>
+        </li>
+        <li *ngIf="faqs1.length !== 0 || faqs2.length !== 0">
+          <button data-page="faqs" class="sk-product__info-btn">
+            {{ "faq" | translate }}
+          </button>
+        </li>
+        <li *ngIf="reviews.length !== 0">
+          <button data-page="review" class="sk-product__info-btn">
+            {{ "reviews" | translate }} ({{ reviews.length }})
+          </button>
+        </li>
+      </ul>
+    </figure>
+  </div>
+
+  <figure class="sk-product__info-details" id="sk-product__info-details">
+    <div class="sk-product__item-info display-none" data-page="p-info">
+      <div
+        class="prdDetails-video-wrap"
+        *ngIf="product?.show_video_gallery === 'on' && videoSlides.length > 0"
+      >
+        <app-video-slider [videoSlides]="videoSlides"></app-video-slider>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div
+            class="products-details-body-wrap"
+            [innerHTML]="productContent | textSanitizer: 'html'"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- content 2  -->
+    <div class="container">
+      <div
+        class="sk-product__item-info sk-product__item-suggested display-none"
+        data-page="suggested-use"
+      >
+        <div class="row">
+          <div class="col-sm-12 col-12">
+            <div class="sk-product__item-right-content suggested-right-content">
+              <p
+                class="sk-product__item-text color-black"
+                [innerHTML]="suggestedUse"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- content 3  -->
+    <div class="container-fluid">
+      <div
+        class="sk-product__item-info sk-product__review display-none"
+        data-page="review"
+      >
+        <div class="">
+          <div
+            class="sk-product__average-review d-flex"
+            *ngIf="reviews.length === 0"
+          >
+            {{ "there-is-no-reviews" | translate }}
+          </div>
+
+          <div
+            class="sk-product__users-review d-flex"
+            *ngFor="let review of slicedReviews"
+          >
+            <div class="sk-product__users-info d-flex">
+              <figure
+                *ngIf="!review.avatar; else reviewAvatar"
+                class="sk-product__users-img d-flex align-items-center justify-content-center"
+              >
+                <p class="p-small">
+                  {{ getReviewersFirstLetters(review.name) }}
+                </p>
+              </figure>
+              <ng-template #reviewAvatar>
+                <figure
+                  class="sk-product__users-img d-flex align-items-center justify-content-center"
+                  [ngStyle]="{
+                    'background-image': 'url(' + review.avatar + ')'
+                  }"
+                  style="
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: contain;
+                  "
+                ></figure>
+              </ng-template>
+
+              <figure class="sk-product__users-name">
+                <p class="p-small font-bold color-black users-name">
+                  {{ review.name }}
+                </p>
+                <p class="p-small color-black">{{ review.address }}</p>
+              </figure>
+            </div>
+
+            <div class="sk-product__review-details">
+              <figure class="sk-product__s-review-text">
+                <h4 class="color-black sk-product__s-title">
+                  {{ review.title }}
+                </h4>
+
+                <p
+                  class="color-gray sk-product__s-details"
+                  [innerHTML]="review.description"
+                ></p>
+              </figure>
+            </div>
+          </div>
+
+          <figure
+            class="text-center sk-product__more-review"
+            *ngIf="reviews.length !== slicedReviews.length"
+          >
+            <a
+              class="link-hover p-small font-bold"
+              (click)="onClickReadMore()"
+              >{{ "read-more-reviews" | translate }}</a
+            >
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- content 4  -->
+    <div class="container-fluid">
+      <div
+        class="sk-product__item-info sk-product__inside display-none"
+        data-page="s-facts"
+      >
+        <div id="keto-max-id-1" class="sk-sf">
+          <figure class="sk-sf__table-box color-white-bg margin-bottom">
+            <figcaption class="sk-sf__select d-flex justify-content-between">
+              <div>
+                <h3 class="color-black">
+                  {{ "supplement-facts" | translate }}
+                </h3>
+                <p class="sk-sf__serving-size" [innerHTML]="servingSize"></p>
+              </div>
+
+              <div class="sk-sf__select-flavor-content select">
+                <select
+                  class="sk-product__user-select sk-sf__select-flavor form-control p-small color-black"
+                  (change)="onSelectChargedState($event)"
+                  [(ngModel)]="chargedState"
+                >
+                  <option
+                    *ngFor="let flavor of productFlavorTypes"
+                    [value]="flavor.types"
+                  >
+                    {{ flavor.types }}
+                  </option>
+                </select>
+              </div>
+            </figcaption>
+
+            <table class="sk-sf__table table color-black">
+              <tbody>
+                <tr>
+                  <th class="sk-sf__border-large">
+                    {{ "amount-per-serving" | translate }}
+                  </th>
+                  <th
+                    class="sk-sf__border-large"
+                    *ngIf="product?.daily_value_column !== 'on'"
+                  >
+                    <span class="float-right">{{
+                      "daily-value" | translate
+                    }}</span>
+                  </th>
+                  <th
+                    class="sk-sf__border-large"
+                    *ngIf="product?.daily_value_column === 'on'"
+                  >
+                    <span class="float-right">{{
+                      product?.portion_size_column1
+                    }}</span>
+                  </th>
+                  <th
+                    class="sk-sf__border-large"
+                    *ngIf="product?.daily_value_column === 'on'"
+                  >
+                    <span class="float-right">{{
+                      product?.portion_size_column2
+                    }}</span>
+                  </th>
+                </tr>
+
+                <tr *ngFor="let ingredient of ingredients">
+                  <td
+                    [class.sk-sf__table-custom-pad]="ingredient.indent === '1'"
+                  >
+                    {{ ingredient.label }}
+                  </td>
+                  <td *ngIf="product?.daily_value_column !== 'on'">
+                    <span class="float-right">{{ ingredient.amount }} </span>
+                  </td>
+                  <td *ngIf="product?.daily_value_column === 'on'">
+                    <span class="float-right">
+                      {{ ingredient.per_amount }}
+                    </span>
+                  </td>
+                  <td *ngIf="product?.daily_value_column === 'on'">
+                    <span class="float-right"
+                      >{{ ingredient.per_gram_amount }}
+                    </span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="sk-sf__border-large"></td>
+                  <td class="sk-sf__border-large"></td>
+                  <td class="sk-sf__border-large"></td>
+                </tr>
+
+                <tr *ngFor="let supplement of supplements">
+                  <td
+                    [class.sk-sf__table-custom-pad]="supplement.indent === '1'"
+                  >
+                    {{ supplement.label }}
+                  </td>
+                  <td *ngIf="product?.daily_value_column !== 'on'">
+                    <span class="float-right">{{ supplement.amount }} </span>
+                  </td>
+                  <td *ngIf="product?.daily_value_column === 'on'">
+                    <span class="float-right"
+                      >{{ supplement.per_amount }}
+                    </span>
+                  </td>
+                  <td *ngIf="product?.daily_value_column === 'on'">
+                    <span class="float-right"
+                      >{{ supplement.per_gram_amount }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="sk-sf__details">* {{ "percent-daily" | translate }}</p>
+          </figure>
+
+          <div class="color-black" *ngFor="let disclaimer of disclaimers">
+            <p
+              class="sk-sf__details margin-bottom-s text-uppercase"
+              [innerHTML]="getDisclaimerIngredients(disclaimer.ingredient)"
+            ></p>
+
+            <p
+              class="sk-sf__details margin-bottom-s text-uppercase"
+              [innerHTML]="getDisclaimerManufactures(disclaimer.manufacture)"
+            ></p>
+
+            <p
+              class="sk-sf__details margin-bottom-s"
+              [innerHTML]="getDisclaimerStorage(disclaimer.storage)"
+            ></p>
+
+            <p
+              class="sk-sf__details margin-bottom-s"
+              [innerHTML]="getDisclaimerInfo(disclaimer.disclaimer)"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- content FAQ  -->
+    <div class="container">
+      <div
+        class="sk-product__item-info sk-product__faqs display-none"
+        data-page="faqs"
+      >
+        <h2 class="text-center">{{ "have-question" | translate }}</h2>
+
+        <figure
+          class="sk-product__faqs-content"
+          *ngIf="faqs1.length !== 0 || faqs2.length !== 0"
+        >
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="sk-product__faq-padding">
+                <div class="accordion" id="faqAccordionLeft">
+                  <div
+                    class="sk-product-faq"
+                    *ngFor="let faq of faqs1; let i = index"
+                  >
+                    <div
+                      class="sk-product-faq-header position-relative"
+                      id="faq_heading-{{ i }}"
+                    >
+                      <h4
+                        class="color-black sk-product-faq-title collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#faq_' + i"
+                        aria-expanded="false"
+                        [attr.aria-controls]="'faq_' + i"
+                      >
+                        <p>
+                          {{ faq.title }}
+                        </p>
+                      </h4>
+                    </div>
+
+                    <div
+                      id="faq_{{ i }}"
+                      class="collapse"
+                      [attr.aria-labelledby]="'faq_heading-' + i"
+                      data-parent="#faqAccordionLeft"
+                    >
+                      <p
+                        class="sk-product-faq-body"
+                        [innerHTML]="faq.content | textSanitizer: 'html'"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="sk-product__faq-padding">
+                <div class="accordion" id="faqAccordionRight">
+                  <div
+                    class="sk-product-faq"
+                    *ngFor="let faq of faqs2; let i = index"
+                  >
+                    <div
+                      class="sk-product-faq-header position-relative"
+                      id="faq_heading-{{ i + faqs1.length }}"
+                    >
+                      <h4
+                        class="color-black sk-product-faq-title collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#faq_' + (i + faqs1.length)"
+                        aria-expanded="false"
+                        [attr.aria-controls]="'faq_' + (i + faqs1.length)"
+                      >
+                        <p>
+                          {{ faq.title }}
+                        </p>
+                      </h4>
+                    </div>
+
+                    <div
+                      id="faq_{{ i + faqs1.length }}"
+                      class="collapse"
+                      [attr.aria-labelledby]="
+                        'faq_heading-' + (i + faqs1.length)
+                      "
+                      data-parent="#faqAccordionRight"
+                    >
+                      <p
+                        class="sk-product-faq-body"
+                        [innerHTML]="faq.content | textSanitizer: 'html'"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
+        <figure
+          class="sk-product__faqs-content"
+          *ngIf="faqs1.length === 0 && faqs2.length === 0"
+        >
+          {{ "there-is-no-faqs" | translate }}
+        </figure>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- *********************** product details for mobile ************************ -->
+
+<section class="sk-product__info sk-product__info--mobile">
+  <div class="accordion" id="product_info-accordion">
+    <!-- mobile content one  -->
+    <div class="sk-product__info--mobile-card">
+      <div class="" id="sk_product-h-1">
+        <button
+          class="sk-product__info-btn-mobile"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sk_product-info-1"
+          aria-expanded="true"
+          aria-controls="sk_product-info-1"
+          *ngIf="product?.post_content !== ''"
+        >
+          {{ "product-information" | translate }}
+        </button>
+      </div>
+
+      <div
+        id="sk_product-info-1"
+        class="collapse show"
+        aria-labelledby="sk_product-h-1"
+      >
+        <div
+          class="prdDetails-video-wrap"
+          *ngIf="product?.show_video_gallery === 'on' && videoSlides.length > 0"
+        >
+          <app-video-slider [videoSlides]="videoSlides"></app-video-slider>
+        </div>
+        <div
+          class="products-details-body-wrap"
+          [innerHTML]="productContent | textSanitizer: 'html'"
+        ></div>
+      </div>
+    </div>
+
+    <!-- mobile content two  -->
+    <div class="sk-product__info--mobile-card">
+      <div class="" id="sk_product-h-2">
+        <button
+          class="sk-product__info-btn-mobile collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sk_product-info-2"
+          aria-expanded="false"
+          aria-controls="sk_product-info-2"
+          *ngIf="chargedState !== ''"
+        >
+          {{ "ingredients" | translate }}
+        </button>
+      </div>
+      <div
+        id="sk_product-info-2"
+        class="collapse"
+        aria-labelledby="sk_product-h-2"
+      >
+        <div class="container">
+          <div class="sk-product__item-info sk-product__inside">
+            <!-- *************************************** -->
+
+            <div id="keto-max-id-1" class="sk-sf">
+              <figure class="sk-sf__table-box color-white-bg margin-bottom">
+                <figcaption
+                  class="sk-sf__select d-flex justify-content-between"
+                >
+                  <div>
+                    <h3 class="color-black">
+                      {{ "supplement-facts" | translate }}
+                    </h3>
+                    <p
+                      class="sk-sf__serving-size"
+                      [innerHTML]="servingSize"
+                    ></p>
+                  </div>
+
+                  <div class="sk-sf__select-flavor-content select">
+                    <select
+                      class="sk-product__user-select sk-sf__select-flavor form-control p-small color-black"
+                      (change)="onSelectChargedState($event)"
+                      [(ngModel)]="chargedState"
+                    >
+                      <option
+                        *ngFor="let flavor of productFlavorTypes"
+                        [value]="flavor.types"
+                      >
+                        {{ flavor.types }}
+                      </option>
+                    </select>
+                  </div>
+                </figcaption>
+
+                <table class="sk-sf__table table color-black">
+                  <tbody>
+                    <tr>
+                      <th class="sk-sf__border-large">
+                        {{ "amount-per-serving" | translate }}
+                      </th>
+                      <th
+                        class="sk-sf__border-large"
+                        *ngIf="product?.daily_value_column !== 'on'"
+                      >
+                        <span class="float-right">{{
+                          "daily-value" | translate
+                        }}</span>
+                      </th>
+                      <th
+                        class="sk-sf__border-large"
+                        *ngIf="product?.daily_value_column === 'on'"
+                      >
+                        <span class="float-right">{{
+                          product?.portion_size_column1
+                        }}</span>
+                      </th>
+                      <th
+                        class="sk-sf__border-large"
+                        *ngIf="product?.daily_value_column === 'on'"
+                      >
+                        <span class="float-right">{{
+                          product?.portion_size_column2
+                        }}</span>
+                      </th>
+                    </tr>
+                    <tr *ngFor="let ingredient of ingredients">
+                      <td
+                        [class.sk-sf__table-custom-pad]="
+                          ingredient.indent === '1'
+                        "
+                      >
+                        {{ ingredient.label }}
+                      </td>
+                      <td *ngIf="product?.daily_value_column !== 'on'">
+                        <span class="float-right"
+                          >{{ ingredient.amount }}
+                        </span>
+                      </td>
+                      <td *ngIf="product?.daily_value_column === 'on'">
+                        <span class="float-right"
+                          >{{ ingredient.per_amount }}
+                        </span>
+                      </td>
+                      <td *ngIf="product?.daily_value_column === 'on'">
+                        <span class="float-right"
+                          >{{ ingredient.per_gram_amount }}
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="sk-sf__border-large"></td>
+                      <td class="sk-sf__border-large"></td>
+                      <td class="sk-sf__border-large"></td>
+                    </tr>
+
+                    <tr *ngFor="let supplement of supplements">
+                      <td
+                        [class.sk-sf__table-custom-pad]="
+                          supplement.indent === '1'
+                        "
+                      >
+                        {{ supplement.label }}
+                      </td>
+                      <td *ngIf="product?.daily_value_column !== 'on'">
+                        <span class="float-right"
+                          >{{ supplement.amount }}
+                        </span>
+                      </td>
+                      <td *ngIf="product?.daily_value_column === 'on'">
+                        <span class="float-right"
+                          >{{ supplement.per_amount }}
+                        </span>
+                      </td>
+                      <td *ngIf="product?.daily_value_column === 'on'">
+                        <span class="float-right"
+                          >{{ supplement.per_gram_amount }}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="sk-sf__details">
+                  * {{ "percent-daily" | translate }}
+                </p>
+              </figure>
+
+              <div class="color-black" *ngFor="let disclaimer of disclaimers">
+                <p
+                  class="sk-sf__details margin-bottom-s text-uppercase"
+                  [innerHTML]="getDisclaimerIngredients(disclaimer.ingredient)"
+                ></p>
+
+                <p
+                  class="sk-sf__details margin-bottom-s text-uppercase"
+                  [innerHTML]="
+                    getDisclaimerManufactures(disclaimer.manufacture)
+                  "
+                ></p>
+
+                <p
+                  class="sk-sf__details margin-bottom-s"
+                  [innerHTML]="getDisclaimerStorage(disclaimer.storage)"
+                ></p>
+
+                <p
+                  class="sk-sf__details margin-bottom-s"
+                  [innerHTML]="getDisclaimerInfo(disclaimer.disclaimer)"
+                ></p>
+              </div>
+            </div>
+            <!-- *************************************** -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile content three  -->
+    <div class="sk-product__info--mobile-card">
+      <div class="" id="sk_product-h-3">
+        <button
+          class="sk-product__info-btn-mobile collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sk_product-info-3"
+          aria-expanded="false"
+          aria-controls="sk_product-info-3"
+          *ngIf="suggestedUse !== ''"
+        >
+          {{ "suggested-use" | translate }}
+        </button>
+      </div>
+
+      <div
+        id="sk_product-info-3"
+        class="collapse"
+        aria-labelledby="sk_product-h-3"
+      >
+        <div class="container">
+          <div class="sk-product__item-info sk-product__item-suggested">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="sk-product__item-left-content">
+                  <div class="sk-product__item-img"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div
+                  class="sk-product__item-right-content suggested-right-content"
+                >
+                  <p
+                    class="sk-product__item-text color-black"
+                    [innerHTML]="suggestedUse"
+                  ></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile content four  -->
+
+    <div class="sk-product__info--mobile-card">
+      <div class="" id="sk_product-h-4">
+        <button
+          class="sk-product__info-btn-mobile collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sk_product-info-4"
+          aria-expanded="false"
+          aria-controls="sk_product-info-4"
+          *ngIf="faqs1.length !== 0 || faqs2.length !== 0"
+        >
+          {{ "faq" | translate }}
+        </button>
+      </div>
+      <div
+        id="sk_product-info-4"
+        class="collapse"
+        aria-labelledby="sk_product-h-4"
+      >
+        <div class="container">
+          <div class="sk-product__item-info sk-product__faqs">
+            <h3 class="text-center">
+              {{ "have-question" | translate }}
+            </h3>
+            <figure
+              class="sk-product__faqs-content"
+              *ngIf="faqs1.length === 0 && faqs2.length === 0"
+            >
+              {{ "there-is-no-faqs" | translate }}
+            </figure>
+          </div>
+
+          <figure
+            class="sk-product__faqs-content"
+            *ngIf="faqs1.length !== 0 || faqs2.length !== 0"
+          >
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="sk-product__faq-padding">
+                  <div class="accordion" id="faq_accordion-1">
+                    <div
+                      class="sk-product-faq"
+                      *ngFor="let faq of faqs1; let i = index"
+                    >
+                      <div
+                        class="sk-product-faq-header position-relative"
+                        id="faq_heading-{{ i }}"
+                      >
+                        <h4
+                          class="color-black sk-product-faq-title collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          [attr.data-target]="'#faq_' + i"
+                          aria-expanded="false"
+                          [attr.aria-controls]="'faq_' + i"
+                        >
+                          <p>
+                            {{ faq.title }}
+                          </p>
+                        </h4>
+                      </div>
+
+                      <div
+                        id="faq_{{ i }}"
+                        class="collapse"
+                        [attr.aria-labelledby]="'faq_heading-' + i"
+                        data-parent="#faq_accordion-1"
+                      >
+                        <p
+                          class="sk-product-faq-body"
+                          [innerHTML]="faq.content | textSanitizer: 'html'"
+                        ></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="sk-product__faq-padding">
+                  <div class="accordion" id="faq_accordion-2">
+                    <div
+                      class="sk-product-faq"
+                      *ngFor="let faq of faqs2; let i = index"
+                    >
+                      <div
+                        class="sk-product-faq-header position-relative"
+                        id="faq_heading-{{ i + faqs1.length }}"
+                      >
+                        <h4
+                          class="color-black sk-product-faq-title collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          [attr.data-target]="'#faq_' + (i + faqs1.length)"
+                          aria-expanded="false"
+                          [attr.aria-controls]="'faq_' + (i + faqs1.length)"
+                        >
+                          <p>
+                            {{ faq.title }}
+                          </p>
+                        </h4>
+                      </div>
+
+                      <div
+                        id="faq_{{ i + faqs1.length }}"
+                        class="collapse"
+                        [attr.aria-labelledby]="
+                          'faq_heading-' + (i + faqs1.length)
+                        "
+                        data-parent="#faq_accordion-2"
+                      >
+                        <p
+                          class="sk-product-faq-body"
+                          [innerHTML]="faq.content | textSanitizer: 'html'"
+                        ></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile content five  -->
+
+    <div class="sk-product__info--mobile-card">
+      <div class="" id="sk_product-h-5">
+        <button
+          class="sk-product__info-btn-mobile collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#sk_product-info-5"
+          aria-expanded="false"
+          aria-controls="sk_product-info-5"
+          *ngIf="reviews.length !== 0"
+        >
+          {{ "reviews" | translate }} ({{ reviews.length }})
+        </button>
+      </div>
+
+      <div
+        id="sk_product-info-5"
+        class="collapse"
+        aria-labelledby="sk_product-h-5"
+      >
+        <div class="container">
+          <div class="sk-product__item-info sk-product__review">
+            <div
+              class="sk-product__average-review d-flex"
+              *ngIf="reviews.length === 0"
+            >
+              {{ "there-is-no-reviews" | translate }}
+            </div>
+
+            <div
+              class="sk-product__users-review d-flex"
+              *ngFor="let review of slicedReviews"
+            >
+              <div class="sk-product__users-info d-flex">
+                <figure
+                  *ngIf="!review.avatar; else reviewAvatar"
+                  class="sk-product__users-img d-flex align-items-center justify-content-center"
+                >
+                  <p class="p-small">
+                    {{ getReviewersFirstLetters(review.name) }}
+                  </p>
+                </figure>
+                <ng-template #reviewAvatar>
+                  <figure
+                    class="sk-product__users-img d-flex align-items-center justify-content-center"
+                    [ngStyle]="{
+                      'background-image': 'url(' + review.avatar + ')'
+                    }"
+                    style="
+                      background-repeat: no-repeat;
+                      background-position: center center;
+                      background-size: contain;
+                    "
+                  ></figure>
+                </ng-template>
+
+                <figure class="sk-product__users-name">
+                  <p class="p-small font-bold color-black users-name">
+                    {{ review.name }}
+                  </p>
+                  <p class="p-small color-black">
+                    {{ review.address }}
+                  </p>
+                </figure>
+              </div>
+
+              <div class="sk-product__review-details">
+                <figure class="sk-product__s-review-text">
+                  <h4 class="color-black sk-product__s-title">
+                    {{ review.title }}
+                  </h4>
+
+                  <p
+                    class="color-gray sk-product__s-details"
+                    [innerHTML]="review.description"
+                  ></p>
+                </figure>
+              </div>
+            </div>
+
+            <figure
+              class="text-center sk-product__more-review"
+              *ngIf="reviews.length !== slicedReviews.length"
+            >
+              <a
+                class="link-hover p-small font-bold"
+                (click)="onClickReadMore()"
+                >{{ "read-more-reviews" | translate }}</a
+              >
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<div class="sk-main__product-btn">
+  <button
+    class="button button-primary buy-now"
+    data-toggle="modal"
+    data-target="#exampleModalCenter"
+    (click)="onClickBuyNow(product.name)"
+    *ngIf="
+      !(product.isSoldOut || product.isAllVariationOutOfStock) && !isPromoter
+    "
+  >
+    {{ "buy-now" | translate }}
+  </button>
+  <button
+    class="button button-primary buy-now"
+    (click)="onClickPromoter(product)"
+    *ngIf="
+      !(product.isSoldOut || product.isAllVariationOutOfStock) && isPromoter
+    "
+  >
+    {{ "buy-now" | translate }}
+  </button>
+  <div
+    class="sold-out"
+    *ngIf="product.isSoldOut || product.isAllVariationOutOfStock"
+  >
+    <h4>
+      {{
+        product.isAllVariationOutOfStock
+          ? ("out-of-stock" | translate)
+          : product.isSoldOut && product.sellingClosedText !== ""
+          ? product.sellingClosedText
+          : ("currently-sold-out" | translate)
+      }}
+    </h4>
+  </div>
+</div>

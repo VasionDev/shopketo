@@ -1,0 +1,655 @@
+<main [style.margin-top.px]="discountHeight">
+  <section class="research-hero">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12 research-title text-center color-dark">
+          <app-vi-offer></app-vi-offer>
+
+          <h1 data-aos="fade-up">{{ "research" | translate }}</h1>
+          <h4 data-aos="fade-up">
+            {{ "the-power-of-ketone-supplementation" | translate }}
+          </h4>
+        </div>
+      </figure>
+
+      <figure class="row research-slider" data-aos="fade-up">
+        <div class="col-md-4" *ngFor="let video of researchVideos">
+          <div class="slider">
+            <div class="slider-img">
+              <img
+                src="{{ video.thumbnailUrl }}"
+                alt="video"
+                class="img-fluid"
+              />
+              <div class="play-icon">
+                <span
+                  *ngIf="video.isWistia"
+                  class="wistia_embed wistia_async_{{
+                    video.videoID
+                  }} popover=true popoverContent=link"
+                  style="display: inline"
+                >
+                  <svg
+                    width="86"
+                    height="86"
+                    viewBox="0 0 86 86"
+                    fill="#0B6AFF"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                    />
+                    <path
+                      d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                      fill="white"
+                    />
+                  </svg>
+                </span>
+                <a
+                  *ngIf="!video.isWistia"
+                  (click)="onClickYoutube(video.videoID)"
+                >
+                  <svg
+                    width="86"
+                    height="86"
+                    viewBox="0 0 86 86"
+                    fill="#0B6AFF"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M86 43C86 19.2518 66.7482 0 43 0C19.2518 0 0 19.2518 0 43C0 66.7482 19.2518 86 43 86C66.7482 86 86 66.7482 86 43Z"
+                    />
+                    <path
+                      d="M36 34.3691C36 32.851 37.625 31.8863 38.9577 32.6133L53.9258 40.7777C55.2847 41.5189 55.3227 43.4566 53.9938 44.2505L39.0257 53.1924C37.6926 53.9888 36 53.0284 36 51.4755V34.3691Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="inner text-center color-dark">
+              <h3 [innerHTML]="video.title"></h3>
+              <p class="color-gray-dark" [innerHTML]="video.description"></p>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- END of research-slider -->
+
+      <figure class="row dr-details">
+        <div class="col-sm-12 col-md-6 title">
+          <h2 data-aos="fade-up">
+            {{ "pruvit-is-raising-the-bar" | translate }}
+          </h2>
+          <div class="dr-name" data-aos="fade-up">
+            <p>{{ "dr-ryan-lowery" | translate }}</p>
+            <p class="color-gray-dark">{{ "pruvit-scientist" | translate }}</p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 img" data-aos="fade-up">
+          <img
+            src="assets/images/Dr-Ryan-Lowery.png"
+            alt=""
+            class="img-fluid"
+          />
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of research-hero  -->
+
+  <section class="research-lab" data-aos="fade-up">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12 title text-center">
+          <h2>{{ "from-the-lab-to-your-home" | translate }}</h2>
+          <p class="color-gray-dark">
+            {{ "the-path-from-product-conception" | translate }}
+          </p>
+        </div>
+
+        <div class="col-sm-12 col-md-6" appLottiePlayer>
+          <div class="research-card text-center">
+            <div class="card-front">
+              <div class="text-wrap">
+                <h3>{{ "better-validation" | translate }}</h3>
+                <p class="color-gray-dark">
+                  {{ "we-test-raw-materials" | translate }}
+                </p>
+              </div>
+              <div class="img">
+                <lottie-player
+                  src="/assets/animation/icon-better-validation.json"
+                  background="transparent"
+                  speed="1"
+                  count="1"
+                  autoplay
+                >
+                </lottie-player>
+              </div>
+            </div>
+            <div class="card-back card-back-0">
+              <h3>{{ "better-validation" | translate }}</h3>
+              <p class="color-gray-dark">
+                {{ "we-test-raw-materials" | translate }}
+              </p>
+              <p class="color-gray-dark">
+                {{ "constant-service-feedback" | translate }}
+              </p>
+              <p class="color-gray-dark">
+                {{ "pruvit-uses-the-purest" | translate }}
+              </p>
+              <div class="card-close">
+                <i class="fal fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6" appLottiePlayer>
+          <div class="research-card text-center">
+            <div class="card-front">
+              <div class="text-wrap">
+                <h3>{{ "better-research" | translate }}</h3>
+                <p class="color-gray-dark">
+                  {{
+                    "we-work-directly-with-the-worlds-leading-authorities"
+                      | translate
+                  }}
+                </p>
+
+                <a class="learn-more pointer">
+                  {{ "learn-more" | translate }}
+                  <svg
+                    width="19"
+                    height="10"
+                    viewBox="0 0 19 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 5L12.0784 5"
+                      stroke="#2152FF"
+                      stroke-width="1.6"
+                      stroke-miterlimit="16"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M18.1172 5L11.3231 9.33013V0.669873L18.1172 5Z"
+                      fill="#2152FF"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <div class="img">
+                <lottie-player
+                  src="/assets/animation/icon-better-research.json"
+                  background="transparent"
+                  speed="1"
+                  count="1"
+                  autoplay
+                >
+                </lottie-player>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>{{ "our-process" | translate }}</h3>
+              <p class="color-gray-dark">
+                {{ "we-test-raw-materials" | translate }}
+              </p>
+              <p class="color-gray-dark">
+                {{ "constant-service-feedback" | translate }}
+              </p>
+              <p class="color-gray-dark">
+                {{ "pruvit-uses-the-purest" | translate }}
+              </p>
+              <div class="card-close">
+                <i class="fal fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6" appLottiePlayer>
+          <div class="research-card text-center">
+            <div class="card-front">
+              <div class="text-wrap">
+                <h3>{{ "better-innovation" | translate }}</h3>
+                <p class="color-gray-dark">
+                  {{ "we-highly-value-our-product-compliance" | translate }}
+                </p>
+              </div>
+              <div class="img">
+                <lottie-player
+                  src="/assets/animation/icon-better-innovation.json"
+                  background="transparent"
+                  speed="1"
+                  count="1"
+                  autoplay
+                >
+                </lottie-player>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>{{ "better-innovation" | translate }}</h3>
+              <p class="color-gray-dark">
+                {{ "we-highly-value-our-product-compliance" | translate }}
+              </p>
+              <div class="card-close">
+                <i class="fal fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6" appLottiePlayer>
+          <div class="research-card text-center">
+            <div class="card-front">
+              <div class="text-wrap">
+                <h3>{{ "better-optimization" | translate }}</h3>
+                <p class="color-gray-dark">
+                  {{ "we-develop-the-best-products" | translate }}
+                </p>
+              </div>
+              <div class="img">
+                <lottie-player
+                  src="/assets/animation/icon-better-optimization.json"
+                  background="transparent"
+                  speed="1"
+                  count="1"
+                  autoplay
+                >
+                </lottie-player>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>{{ "better-optimization" | translate }}</h3>
+              <p class="color-gray-dark">
+                {{ "we-develop-the-best-products" | translate }}
+              </p>
+              <div class="card-close">
+                <i class="fal fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of research-lab -->
+
+  <section class="research-wild">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12 title text-center">
+          <h2 data-aos="fade-up">{{ "keto-in-the-wild" | translate }}</h2>
+          <p class="color-gray-dark" data-aos="fade-up" data-aos-delay="50">
+            {{ "under-no-circumstance-is-the-information" | translate }}
+          </p>
+        </div>
+      </figure>
+
+      <figure class="row KetoWild-accordion" data-aos="fade-up">
+        <div class="col-sm-12">
+          <div class="card" id="accordion1">
+            <div class="card-header" id="Ketosis-heading">
+              <button
+                class="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target="#Ketosis-collapse"
+                aria-expanded="false"
+                aria-controls="Ketosis-collapse"
+              >
+                {{ "ketosis-and-general-nutrition" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <div
+              id="Ketosis-collapse"
+              class="collapse"
+              aria-labelledby="Ketosis-heading"
+              data-parent="#accordion1"
+            >
+              <div class="card-body">
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.healthline.com/nutrition/10-benefits-of-low-carb-ketogenic-diets"
+                      target="_blank"
+                      >{{ "10-significant-health-benefits" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.healthline.com/nutrition/10-signs-and-symptoms-of-ketosis"
+                      target="_blank"
+                      >{{ "10-signs-and-symptoms" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.amazon.com/Art-Science-Low-Carbohydrate-Living/dp/0983490708/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1431704412&amp;sr=1-1&amp;keywords=the+art+and+science+of+low+carbohydrate+living"
+                      target="_blank"
+                      >{{ "the-art-and-science-of-low" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.charliefoundation.org/"
+                      target="_blank"
+                      >{{ "the-charlie-foundation" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.ketogenic-diet-resource.com/"
+                      target="_blank"
+                      >{{ "ellen-davis-ketogenic-diet" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="accordion2">
+            <div class="card-header" id="cognitive-heading">
+              <button
+                class="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target="#cognitive-collapse"
+                aria-expanded="false"
+                aria-controls="cognitive-collapse"
+              >
+                {{ "cognitive-improvements" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              id="cognitive-collapse"
+              class="collapse"
+              aria-labelledby="cognitive-heading"
+              data-parent="#accordion2"
+            >
+              <div class="card-body">
+                <ul>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pubmed/15123336"
+                      target="_blank"
+                      >{{
+                        "the-effects-of-beta-hydroxybutyrate" | translate
+                      }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pubmed/21130529/"
+                      target="_blank"
+                      >{{ "dietary-ketosis-enhances-memory" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pubmed/23736643"
+                      target="_blank"
+                      >{{ "increased-plasma-ketone-bodies" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pubmed/19227486"
+                      target="_blank"
+                      >{{ "under-conditions-of-ketosis" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="accordion3">
+            <div class="card-header" id="weight-heading">
+              <button
+                class="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target="#weight-collapse"
+                aria-expanded="false"
+                aria-controls="weight-collapse"
+              >
+                {{ "weight-management" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              id="weight-collapse"
+              class="collapse"
+              aria-labelledby="weight-heading"
+              data-parent="#accordion3"
+            >
+              <div class="card-body">
+                <ul>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2716748/"
+                      target="_blank"
+                      >{{ "long-term-ketogenic-diet" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="accordion4">
+            <div class="card-header" id="physical-heading">
+              <button
+                class="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target="#physical-collapse"
+                aria-expanded="false"
+                aria-controls="physical-collapse"
+              >
+                {{ "physical-performance" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              id="physical-collapse"
+              class="collapse"
+              aria-labelledby="physical-heading"
+              data-parent="#accordion4"
+            >
+              <div class="card-body">
+                <ul>
+                  <li>
+                    <a
+                      href="http://nutritionandmetabolism.biomedcentral.com/articles/10.1186/1743-7075-1-2"
+                      target="_blank"
+                      >{{ "no-impaired-endurance-performance" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="accordion5">
+            <div class="card-header" id="neuroprotection-heading">
+              <button
+                class="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target="#neuroprotection-collapse"
+                aria-expanded="false"
+                aria-controls="neuroprotection-collapse"
+              >
+                {{ "neuroprotection-for-the-brain" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              id="neuroprotection-collapse"
+              class="collapse"
+              aria-labelledby="neuroprotection-heading"
+              data-parent="#accordion5"
+            >
+              <div class="card-body">
+                <ul class="brand-primary">
+                  <li>
+                    <a
+                      href="http://www.neurorexia.com/2013/03/24/brain-livin-on-ketones-a-molecular-neuroscience-look-at-the-ketogenic-diet/"
+                      target="_blank"
+                      >{{ "brain-livin-on-ketones" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2367001/"
+                      target="_blank"
+                      >{{
+                        "neuroprotective-and-disease-modifying" | translate
+                      }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="http://www.nap.edu/openbook.php?record_id=13121&amp;page=140"
+                      target="_blank"
+                      >{{ "nutrition-and-traumatic-brain" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="accordion6">
+            <div class="card-header" id="C-Med-heading">
+              <button
+                class="btn btn-link"
+                data-toggle="collapse"
+                data-target="#C-Med-collapse"
+                aria-expanded="false"
+                aria-controls="C-Med-collapse"
+              >
+                {{ "c-med-100" | translate }}
+
+                <svg
+                  class="plus"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 11.25C18 10.9688 17.7188 10.6875 17.4375 10.6875H13.3125V6.5625C13.3125 6.28125 13.0312 6 12.75 6H11.25C10.9219 6 10.6875 6.28125 10.6875 6.5625V10.6875H6.5625C6.23438 10.6875 6 10.9688 6 11.25V12.75C6 13.0781 6.23438 13.3125 6.5625 13.3125H10.6875V17.4375C10.6875 17.7656 10.9219 18 11.25 18H12.75C13.0312 18 13.3125 17.7656 13.3125 17.4375V13.3125H17.4375C17.7188 13.3125 18 13.0781 18 12.75V11.25ZM23.625 12C23.625 5.57812 18.4219 0.375 12 0.375C5.57812 0.375 0.375 5.57812 0.375 12C0.375 18.4219 5.57812 23.625 12 23.625C18.4219 23.625 23.625 18.4219 23.625 12ZM21.375 12C21.375 17.2031 17.1562 21.375 12 21.375C6.79688 21.375 2.625 17.2031 2.625 12C2.625 6.84375 6.79688 2.625 12 2.625C17.1562 2.625 21.375 6.84375 21.375 12Z"
+                    fill="black"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              id="C-Med-collapse"
+              class="collapse"
+              aria-labelledby="C-Med-heading"
+              data-parent="#accordion6"
+            >
+              <div class="card-body">
+                <ul class="brand-primary">
+                  <li>
+                    <a
+                      href="https://media.pruvithq.com/downloads/us/products/en/c-med_studies_volume_1.pdf"
+                      target="_blank"
+                      >{{ "peer-reviewed-studies-volume-1" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://media.pruvithq.com/downloads/us/products/en/c-med_studies_volume_2.pdf"
+                      target="_blank"
+                      >{{ "peer-reviewed-studies-volume-2" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="row inner">
+        <div class="col-sm-12 color-gray-dark bottom-info" data-aos="fade-up">
+          {{ "pruvit-ventures-statement-on-3rd-party-research" | translate }}
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of research-wild -->
+</main>

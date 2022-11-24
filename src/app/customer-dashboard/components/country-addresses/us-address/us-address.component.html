@@ -1,0 +1,60 @@
+<div [hidden]="regions.length == 0" class="modal-body">
+    <div class="newAddress-card">
+        <select class="form-control">
+            <option value="0" disabled>Select country</option>
+            <option value="us">United States</option>
+        </select>
+    </div>
+    <div class="card modal-body-card">
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">Address line 1</label>
+                <input type="text" class="form-control" [(ngModel)]="billingAddress.addressLine1" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">Address line 2</label>
+                <input type="text" class="form-control" [(ngModel)]="billingAddress.addressLine2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">Address line 3</label>
+                <input type="text" class="form-control" [(ngModel)]="billingAddress.addressLine3" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label for="expMonth" class="col-form-label">City</label>
+                <input type="text" class="form-control" [(ngModel)]="billingAddress.city" />
+            </div>
+            <div class="col-4 form-group">
+                <label for="year" class="col-form-label">State</label>
+                <select class="form-control" [(ngModel)]="billingAddress.region">
+                    <option value="0" disabled>State</option>
+                    <option *ngFor="let x of regions; let i = index" value="{{ x.key }}">{{x.value}}</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label for="expMonth" class="col-form-label">Postal Code</label>
+                <input type="text" #zipInput="ngModel" pattern="^\d{5}(?:[-\s]\d{4})?$" class="form-control"
+                    [(ngModel)]="billingAddress.postalCode" />
+
+                <p *ngIf="zipInput.errors?.['pattern']" class="text-danger text--15">
+                    Please enter a postal code.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="button button--default button--grey" (click)="cancel()">Cancel</button>
+    <button class="button button--default" (click)="verifyAddress()"
+        [disabled]="!billingAddress.addressLine1 || !billingAddress.city || !billingAddress.region || !billingAddress.postalCode || zipInput.errors?.['pattern']">
+        <span>Save</span>
+    </button>
+</div>
+
+<app-loader *ngIf="regions.length == 0 || loader" class="payment--loader"></app-loader>

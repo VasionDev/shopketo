@@ -1,0 +1,227 @@
+[
+  {
+    "country_code": "AS",
+    "phone_code": "+1648",
+    "name": "American Samoa"
+  },
+  {
+    "country_code": "AT",
+    "phone_code": "+43",
+    "name": "Austria"
+  },
+  {
+    "country_code": "AU",
+    "phone_code": "+61",
+    "name": "Australia"
+  },
+  {
+    "country_code": "BE",
+    "phone_code": "+32",
+    "name": "Belgium"
+  },
+  {
+    "country_code": "BG",
+    "phone_code": "+359",
+    "name": "Bulgaria"
+  },
+  {
+    "country_code": "CA",
+    "phone_code": "+1",
+    "name": "Canada"
+  },
+  {
+    "country_code": "CH",
+    "phone_code": "+41",
+    "name": "Switzerland"
+  },
+  {
+    "country_code": "CN",
+    "phone_code": "+86",
+    "name": "China"
+  },
+  {
+    "country_code": "CY",
+    "phone_code": "+357",
+    "name": "Cyprus"
+  },
+  {
+    "country_code": "CZ",
+    "phone_code": "+420",
+    "name": "Czech Republic"
+  },
+  {
+    "country_code": "DE",
+    "phone_code": "+49",
+    "name": "Germany"
+  },
+  {
+    "country_code": "DK",
+    "phone_code": "+45",
+    "name": "Denmark"
+  },
+  {
+    "country_code": "EE",
+    "phone_code": "+372",
+    "name": "Estonia"
+  },
+  {
+    "country_code": "ES",
+    "phone_code": "+34",
+    "name": "Spain"
+  },
+  {
+    "country_code": "FI",
+    "phone_code": "+358",
+    "name": "Finland"
+  },
+  {
+    "country_code": "FR",
+    "phone_code": "+33",
+    "name": "France"
+  },
+  {
+    "country_code": "GB",
+    "phone_code": "+44",
+    "name": "United Kingdom"
+  },
+  {
+    "country_code": "GR",
+    "phone_code": "+30",
+    "name": "Greece"
+  },
+  {
+    "country_code": "GU",
+    "phone_code": "+1671",
+    "name": "Guam"
+  },
+  {
+    "country_code": "HK",
+    "phone_code": "+852",
+    "name": "Hong Kong"
+  },
+  {
+    "country_code": "HR",
+    "phone_code": "+385",
+    "name": "Croatia"
+  },
+  {
+    "country_code": "HU",
+    "phone_code": "+36",
+    "name": "Hungary"
+  },
+  {
+    "country_code": "IE",
+    "phone_code": "+353",
+    "name": "Ireland"
+  },
+  {
+    "country_code": "IT",
+    "phone_code": "+39",
+    "name": "Italy"
+  },
+  {
+    "country_code": "LT",
+    "phone_code": "+370",
+    "name": "Lithuania"
+  },
+  {
+    "country_code": "LU",
+    "phone_code": "+352",
+    "name": "Luxembourg"
+  },
+  {
+    "country_code": "LV",
+    "phone_code": "+371",
+    "name": "Latvia"
+  },
+  {
+    "country_code": "MO",
+    "phone_code": "+853",
+    "name": "Macau"
+  },
+  {
+    "country_code": "MT",
+    "phone_code": "+356",
+    "name": "Malta"
+  },
+  {
+    "country_code": "MX",
+    "phone_code": "+52",
+    "name": "Mexico"
+  },
+  {
+    "country_code": "MY",
+    "phone_code": "+60",
+    "name": "Malaysia"
+  },
+  {
+    "country_code": "NL",
+    "phone_code": "+31",
+    "name": "Netherlands"
+  },
+  {
+    "country_code": "NZ",
+    "phone_code": "+64",
+    "name": "New Zealand"
+  },
+  {
+    "country_code": "PL",
+    "phone_code": "+48",
+    "name": "Poland"
+  },
+  {
+    "country_code": "PR",
+    "phone_code": "+1",
+    "name": "Puerto Rico"
+  },
+  {
+    "country_code": "PT",
+    "phone_code": "+351",
+    "name": "Portugal"
+  },
+  {
+    "country_code": "SK",
+    "phone_code": "+421",
+    "name": "Slovakia"
+  },
+  {
+    "country_code": "SE",
+    "phone_code": "+46",
+    "name": "Sweden"
+  },
+  {
+    "country_code": "SG",
+    "phone_code": "+65",
+    "name": "Singapore"
+  },
+  {
+    "country_code": "SI",
+    "phone_code": "+386",
+    "name": "Slovenia"
+  },
+  {
+    "country_code": "SM",
+    "phone_code": "+378",
+    "name": "San Marino"
+  },
+  {
+    "country_code": "TW",
+    "phone_code": "+886",
+    "name": "Taiwan"
+  },
+  {
+    "country_code": "US",
+    "phone_code": "+1",
+    "name": "United States"
+  },
+  {
+    "country_code": "VI",
+    "phone_code": "+1340",
+    "name": "U.S. Virgin Islands"
+  },
+  {
+    "country_code": "ZA",
+    "phone_code": "+27",
+    "name": "South Africa"
+  }
+]

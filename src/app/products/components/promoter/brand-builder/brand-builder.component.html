@@ -1,0 +1,136 @@
+<main
+  [style.margin-top.px]="discountHeight"
+  *ngIf="selectedCountry !== 'GB'; else notFound"
+>
+  <section class="select-pack">
+    <section class="select-pack-heading">
+      <article class="container">
+        <figure class="row">
+          <div class="col-12 product-breadcrumbs">
+            <ul class="p-small">
+              <li>
+                <a class="color-gray" (click)="onClickHome()"
+                  ><i class="fas fa-home-lg-alt" style="font-size: 12px"></i
+                ></a>
+              </li>
+              <span class="breadcrumb-greater-than">&#8250;</span>
+              <li>
+                <a class="color-gray" (click)="onClickPromoter()">{{
+                  "promoter" | translate
+                }}</a>
+              </li>
+            </ul>
+
+            <app-vi-offer></app-vi-offer>
+          </div>
+
+          <div class="col-sm-12 text-center">
+            <h1 class="jumbo-text-big title">
+              {{ "select-pack" | translate }}
+            </h1>
+            <p class="subtitle">
+              {{ "savings-shown-below-are-available-when" | translate }}
+            </p>
+          </div>
+        </figure>
+      </article>
+    </section>
+
+    <section class="select-pack-content">
+      <article class="container">
+        <figure class="row">
+          <div
+            class="col-md-4 col-6 sk-main__custom-pad-l"
+            *ngFor="let variation of variations"
+          >
+            <div class="sk-main__product text-center color-light-white-bg">
+              <figure class="sk-main__product-img">
+                <p
+                  class="nothing-shipped large-tooltip"
+                  *ngIf="
+                    promoterService
+                      .getAttributeValue(variation, 'sku')
+                      ?.includes('CAM-2912-MXC-01')
+                  "
+                  data-toggle="tooltip"
+                  data-template="<div class='tooltip' role='tooltip'><div class='arrow'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                  [attr.data-placement]="getTooltipPlacement()"
+                  title="{{
+                    'trial-credits-get-sent-to-your-pulse-pro' | translate
+                  }}"
+                >
+                  {{ "nothing-shipped" | translate }}
+                  <i class="fad fa-info-circle"></i>
+                </p>
+                <img
+                  alt="Product-1"
+                  class="img-fluid pointer"
+                  [src]="
+                    getVariationImage(variation) !== ''
+                      ? getVariationImage(variation)
+                      : product.thumbUrl
+                  "
+                />
+              </figure>
+              <div class="sk-main__product-details">
+                <h4 class="color-black sk-main__product-title">
+                  {{ getServingName(variation) }}
+                </h4>
+                <small class="color-black">{{
+                  getCaffeineStateName(variation)
+                }}</small>
+
+                <p class="p-small color-gray sk-main__product-from">
+                  <del
+                    class="dis"
+                    *ngIf="
+                      getDiscountPrice(variation) !== 0 &&
+                      !isBothPricesSame(variation)
+                    "
+                    >{{ productSettings.currencySymbol
+                    }}{{
+                      getOriginalPrice(variation)
+                        | customCurrency: productSettings
+                    }}</del
+                  >
+                  <span
+                    [ngClass]="{
+                      'color-green font-bold ml-1':
+                        getDiscountPrice(variation) !== 0 &&
+                        !isBothPricesSame(variation)
+                    }"
+                    >{{ productSettings.currencySymbol
+                    }}{{
+                      getDiscountPrice(variation)
+                        | customCurrency: productSettings
+                    }}</span
+                  >
+                </p>
+              </div>
+              <div class="sk-main__product-btn">
+                <a
+                  (click)="onClickBuyNow(variation)"
+                  class="button button-primary buy-now"
+                >
+                  {{ "buy-now" | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </figure>
+        <div class="row">
+          <div class="col text-center">
+            <p class="promoter-note-text">
+              <strong>{{ "please-note" | translate }}</strong>
+              {{ "pruvit-products-cannot-be-resold" | translate }}
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </section>
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

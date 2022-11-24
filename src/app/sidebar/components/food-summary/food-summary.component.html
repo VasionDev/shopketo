@@ -1,0 +1,75 @@
+<div class="sk-cart color-white-bg" [ngStyle]="{ 'touch-action': 'none' }">
+  <div class="filter-sort-modal bundle-summary">
+    <button type="button" (click)="onClickClose()" class="close">
+      <i class="far fa-times"></i>
+    </button>
+    <div class="modal-body">
+      <p class="text-center icon"><i class="fa fa-shopping-basket"></i></p>
+      <h4 class="filter-title text-center">
+        {{ "your-selections" | translate }}
+      </h4>
+      <p class="date-text text-center p-small">
+        <i class="far fa-truck color-gray" aria-hidden="true"></i>
+        {{ shippingDate }}
+      </p>
+
+      <p class="p-small share-clear-bar">
+        <a *ngIf="false" (click)="shareSelections()" class="share-btn"
+          ><i class="fas fa-share"></i> {{ "share" | translate }}
+          {{ "selections" | translate }}</a
+        >
+        <a (click)="onClickClearAll()" class="clear-btn pointer">{{
+          "clear-all" | translate
+        }}</a>
+      </p>
+
+      <ul class="food-bundle">
+        <li class="card" *ngFor="let food of foodsInBoxes">
+          <div
+            class="col img-box"
+            [ngStyle]="{
+              'background-image': food.imageUrl
+                ? 'url(' + food.imageUrl + ')'
+                : 'url(assets/images/food-menu-img1.png)'
+            }"
+          ></div>
+          <div class="col right-cont">
+            <div class="row">
+              <div class="col">
+                <h4 [innerHTML]="food.name"></h4>
+                <p>{{ food.price | currency }}</p>
+              </div>
+              <div class="col plus-min">
+                <a (click)="onClickPlus(food)" class="pointer"
+                  ><i class="fas fa-plus-circle"></i
+                ></a>
+                <a (click)="onClickMinus(food)" class="pointer"
+                  ><i class="fas fa-minus-circle"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li
+          class="card empty"
+          *ngFor="let emptyFood of emptyFoods; let i = index"
+        >
+          <div class="col img-box"></div>
+          <div class="col right-cont">
+            {{ "item" | translate }} #{{ i + box.boxItems + 1 }}
+          </div>
+        </li>
+
+        <li class="card sub-total text-right">
+          <div class="col">
+            {{ "sub-total" | translate }}
+          </div>
+          <div class="col right-cont">
+            {{ boxTotalPrice | currency }}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,392 @@
+.sk-dashboard .training-center-wrap .training-left-col .img-wrapper {
+    width: 157px;
+    height: 157px;
+    background: rgba(3, 12, 33, 0.121569);
+    border-radius: 100px;
+    text-align: center;
+    overflow: hidden;
+    margin: auto;
+}
+
+.sk-dashboard .training-center-wrap .training-left-col .img-wrapper img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .state-title {
+    margin: 30px 0 6px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card {
+    border: none;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .left-icon .img-wrap {
+    width: 48px;
+    height: 48px;
+    background: rgba(3, 12, 33, 0.121569);
+    border-radius: 30px;
+    border: none;
+    text-align: center;
+    line-height: 39px;
+    overflow: hidden;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .left-icon .img-wrap img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .right-text {
+    margin-left: 13px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .right-text h4 {
+    font-size: 24px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .right-text .progress {
+    width: 133px;
+    height: 4px;
+    background: rgba(3, 12, 33, 0.121569);
+    border-radius: 21px;
+    margin-top: 15px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .right-text .progress .progress-bar {
+    border-radius: 21px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .btn-sec {
+    margin-top: 12px;
+    gap: 15px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .btn-sec .continue-btn {
+    width: 100%;
+    color: #ffffff;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .btn-sec .continue-btn .fa-clock {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .btn-sec .dropdown .share-icon {
+    padding: 6px 30px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.prog-state .card-inner .right-text .progress .progress-bar {
+    background: #ff9000;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.prog-state .card-inner .btn-sec .continue-btn {
+    background: #bc2dd2;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.locked-state .card-inner .btn-sec .continue-btn {
+    background: #ff9000;
+    opacity: 0.48;
+    cursor: not-allowed;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.locked-state .card-inner .btn-sec .dropdown .share-icon {
+    opacity: 0.48;
+    cursor: not-allowed;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.complete-state .right-text .progress .progress-bar {
+    width: 100%;
+    background: #1dbf6c !important;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.complete-state .btn-sec .continue-btn {
+    background: #41bf4e;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card {
+    margin: 24px 0;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .compt-tag {
+    background: #1dbf6c;
+    border-radius: 999px;
+    font-size: 11px;
+    line-height: 13px;
+    padding: 1px 6px 3px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .compt-tag.yellow-bg {
+    background: #ff9000;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .res-btn {
+    background: rgba(3, 12, 33, 0.121569);
+    border-radius: 5px;
+    padding: 3px 12px 4px;
+    margin-left: 10px;
+    color: #131313;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .color-gray {
+    color: rgba(3, 12, 33, 0.5);
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .icon-size {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right.com-module a:hover,
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right.com-module i:hover {
+    color: #131313;
+    text-decoration: none;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head {
+    position: relative;
+    cursor: pointer;
+    padding-right: 48px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="true"] {
+    box-shadow: 0px 11px 32px rgba(0, 0, 0, 0.12);
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="false"]::before,
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="true"]::before {
+    content: "\f078";
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 300;
+    font-size: 18px;
+    color: rgba(3, 12, 33, 0.721569);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="true"]::before {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .collapse-arrow {
+    margin-left: 25px;
+    transition: all 0.3s ease-in-out;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .collapse-arrow[aria-expanded="true"] {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body.challenge-card {
+    padding: 0;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li {
+    list-style: none;
+    padding: 16px 24px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .circle-icon {
+    color: #131313;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .circle-icon.green-color {
+    color: #41bf4e;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .fa-chevron-right {
+    font-size: 18px;
+    color: rgba(3, 12, 33, 0.239216);
+}
+
+.sk-dashboard .training-center-wrap .challenge-side .circle-progress-wrap {
+    max-width: 220px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.join-comunity a.link-hover,
+.modal.resources-modal .modal-body .resource-content a.link-hover {
+    color: #2752FF;
+}
+
+.join-comunity a.link-hover {
+    display: inline-block;
+}
+
+.sk-dashboard .training-center-wrap .challenge-side .circle-progress-wrap svg image {
+    width: 80px;
+    height: 80px;
+    x: 42;
+    y: 42;
+}
+
+.dark-theme .sk-dashboard .breadcrumbs ul li a.color-gray:hover {
+    color: #ffffff !important;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .challenge-side .circle-progress-wrap svg circle {
+    stroke: #1c1c1e;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .res-btn {
+    background-color: #919192;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .collapse-arrow,
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .color-gray:hover {
+    color: #fff;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .color-gray,
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="false"]::before,
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-head[aria-expanded="true"]::before {
+    color: #919192;
+}
+
+.sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right .color-gray {
+    color: rgba(3, 12, 33, 0.5);
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .fa-chevron-right,
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .circle-icon,
+.dark-theme .modal.resources-modal .modal-body .resource-content .items .right-side .color-gray {
+    color: #9191928d;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li.border-bottom {
+    border-color: #000 !important;
+}
+
+.dark-theme .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li .circle-icon.green-color {
+    color: #41bf4e;
+}
+
+
+.modal.join-community-modal .modal-body p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.modal.join-community-modal .modal-body .lesson-modal-detail-content ul,
+.modal.join-community-modal .modal-body .lesson-modal-detail-content ol {
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.modal.join-community-modal .modal-body .lesson-modal-detail-content ul li,
+.modal.join-community-modal .modal-body .lesson-modal-detail-content ol li {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.modal.resources-modal .modal-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.modal.resources-modal .modal-body .resource-content {
+    margin-top: -20px;
+    min-height: 360px;
+}
+
+.modal.resources-modal .modal-body .resource-content .items {
+    padding: 16px 24px;
+}
+
+.modal.resources-modal .modal-body .resource-content .items .left-side .icon {
+    width: 28px;
+}
+
+.modal.resources-modal .modal-body .resource-content .items .left-side p {
+    display: flex;
+    align-items: center;
+}
+
+.modal.resources-modal .modal-body .resource-content .items .right-side a.folder-icon {
+    font-size: 18px;
+    color: #2152ff;
+}
+
+.modal.resources-modal .modal-body .resource-content .items .right-side .color-gray {
+    font-size: 18px;
+    color: rgba(3, 12, 33, 0.239216);
+}
+
+.modal-body .lesson-modal-detail-content p:last-child {
+    display: none;
+}
+
+.modal-body .lesson-modal-detail-content img {
+    max-width: 100%;
+}
+
+.modal-body .lesson-modal-detail-content a {
+    word-break: break-word;
+    color: #2152ff;
+}
+
+@media (max-width: 767px) {
+
+    .sk-dashboard .training-center-wrap .training-left-col  {
+        padding: 0 6px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .state-title {
+        margin: 16px 0 6px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .web-card {
+        padding: 20px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .web-card .card-inner .right-text h4 {
+        font-size: 18px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card {
+        margin: 18px 0;
+        padding: 16px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card.collapse-body .select-list li {
+        padding: 12px 18px;
+    }
+
+    .sk-dashboard .training-center-wrap .training-right-col .web-card.challenge-card .inner-text .right.com-module {
+        margin-top: 7px;
+    }
+
+    .sk-dashboard .training-center-wrap .challenge-side .circle-progress-wrap {
+        max-width: 190px;
+    }
+
+    .modal.addresses-modal .modal-dialog .modal-content .modal-body .modal-body-card .lesson-modal-detail-content {
+        padding: 8px 12px;
+    }
+
+    .modal.resources-modal .modal-body .resource-content {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .modal.resources-modal .modal-body .resource-content .items {
+        padding: 12px 16px;
+    }
+    
+
+}

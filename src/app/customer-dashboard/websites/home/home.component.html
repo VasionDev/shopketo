@@ -1,0 +1,123 @@
+<div class="row websites-dashborad">
+  <div class="col-12 websites-wraper">
+    <div class="row mt-3 mx--15">
+      <div class="col-sm-8 col-12">
+        <h2 class="color-black title">My websites</h2>
+      </div>
+    </div>
+
+    <div class="row mt-3 mx--15">
+      <div
+        class="col-sm-6 col-12"
+        *ngFor="let site of sites | keyvalue: returnZero"
+      >
+        <div class="card card-default web-card">
+          <h3 class="color-black">{{ site.value.name }}</h3>
+          <p class="disclaimer-reg refr-link">Referral link</p>
+          <p class="p-small font-bold mt-1">
+            <a
+              (click)="copy()"
+              href="#"
+              class="link-hover color-black clone-icon-hover"
+              >{{ user?.code }}.{{ site.key }}</a
+            >
+          </p>
+          <div class="row sk-web-button align-items-center mt-4">
+            <div class="col">
+              <button class="btn button-primary" (click)="onClickSettings()">
+                <i class="fa-regular fa-palette"></i>Personalize
+              </button>
+            </div>
+            <div class="col">
+              <app-referral-link [isWebsites]="true"></app-referral-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="proSubscribeModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade sk-modal pro-modal"
+  aria-modal="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header">
+        <button
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+          class="close"
+        >
+          <i class="far fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="pro-text text-center"><span class="btn">PRO</span></p>
+
+        <h3 class="color-black text-center title">You found a PRØ feature!</h3>
+        <p class="color-black details">
+          Upgrade with a Pulse Pro subscription today to enjoy upgraded features
+          both here, and in the Prüvit Pulse app.
+        </p>
+
+        <ul>
+          <li class="color-black">
+            Welcome your website visitors with a personal video
+          </li>
+          <li class="color-black">
+            Personalized links, bio, social buttons, and color theme
+          </li>
+          <li class="color-black">
+            Pick your favorite products for visitors to easily add to cart
+          </li>
+          <li class="color-black">
+            Access detailed visitor stats with Google Analytics
+          </li>
+        </ul>
+
+        <div class="row">
+          <div class="col-sm-6 col-12">
+            <div class="card text-center most">
+              <span class="most-taq">Most popular</span>
+              <h3 class="color-black">$8.25 /mth</h3>
+              <p class="color-black font-bold price">
+                Annual <span class="color-green">Save $140</span>
+              </p>
+              <p class="color-gray p-small">Billed at $99 per year</p>
+              <button
+                (click)="onClickProSubscription('annual')"
+                class="btn button-primary"
+              >
+                Start 14 day FREE trial
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-6 col-12">
+            <div class="card text-center">
+              <h3 class="color-black">$19.99 /mth</h3>
+              <p class="color-black font-bold price">Monthly</p>
+              <p class="color-gray p-small">Billed at $19.99 per month</p>
+              <button
+                (click)="onClickProSubscription('monthly')"
+                class="btn button-primary"
+              >
+                Start 14 day FREE trial
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="note-text p-small color-white font-bold">
+          <i class="fa-solid fa-circle-info mr-2"></i> First charge will process
+          in 14 days after free access expires
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

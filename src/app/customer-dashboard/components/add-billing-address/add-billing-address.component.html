@@ -1,0 +1,7 @@
+
+<app-us-address *ngIf="!confirmShow" [country]="country" (addressSent)="getAddress($event)"
+    (hideForm)="hideForm($event)">
+</app-us-address>
+<app-confirm-address *ngIf="confirmShow" (saveAddressId)="getNewAddressId($event)" (hideConfirm)="hideConfirm($event)"
+    [address]="addressSent">
+</app-confirm-address>

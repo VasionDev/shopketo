@@ -1,0 +1,98 @@
+<div *ngIf="!hideInvoice" class="card modal-body-card invoice--card px-0 mt-sm-3 mt-2 mb-3 dashbooard--invoice">
+    <div class="card alert-card" style="background: linear-gradient(266.25deg, #FF6F66 6.59%, #EB4747 62.86%);">
+        <div class="d-flex alert-text">
+            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+            <div>
+                <p class="p-small pr-sm-5">For security reasons, your recent invoice for US
+                    ${{invoiceInformation.collection[0].total  | number : '1.2-2'}} requires confirmation
+                    before it gets processed.
+                </p>
+                <p *ngIf="!invoiceInformation?.isAllowedToVerifyViaPhone" class="p-small pr-sm-5"> Please stay connected
+                    – we will contact
+                    you
+                    shortly! If we are unable to contact you within 3
+                    days, your
+                    order will be refunded and flagged as fraudulent for your protection.</p>
+                <p *ngIf="!invoiceInformation?.isAllowedToVerifyViaPhone" class="p-small pr-sm-5">
+                    To speed up the process, please call us: +1 (469) 207-3034 (Mon–Fri 8 AM – 5 PM CT)</p>
+            </div>
+
+
+        </div>
+        <div *ngIf="!invoiceInformation?.isAllowedToVerifyViaPhone" class="btn-groups invoice--mobile">
+            <a href="tel:+14692073034" class="btn button-primary"><i class="far fa-phone-alt"></i>Make a call</a>
+        </div>
+
+        <div *ngIf="invoiceInformation?.isAllowedToVerifyViaPhone" class="btn-groups">
+            <button (click)="phoneCodeSend()" [disabled]="loading" class="btn button-primary">Confirm
+                via SMS</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal animate fade right-mobile addresses-modal wdt-480" id="confirmInvoicehoneNumberModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+                            class="fal fa-times"></i></a>
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+                    </a>
+                </p>
+                <h3 class="title color-black">Confirm phone number</h3>
+                <p *ngIf="user" class="p-small color-gray">Please enter a code we just sent to
+                    <strong>+{{user.phoneCountry}}{{user.phoneNumber}}</strong></p>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="card modal-body-card ref-modal-card">
+                    <div class="form-group confirm-code">
+                        <div class="inner-col">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number1" type="text" maxlength="1" class="form-control bg-color">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number2" type="text" maxlength="1" class="form-control bg-color">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number3" type="text" maxlength="1" class="form-control bg-color">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number4" type="text" maxlength="1" class="form-control bg-color">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number5" type="text" maxlength="1" class="form-control bg-color">
+                            <input [ngClass]="{'error': verifyPhoneError == true }" (keyup)="confirmPhoneCode()"
+                                [(ngModel)]="number6" type="text" maxlength="1" class="form-control bg-color">
+                        </div>
+                        <small *ngIf="verifyPhoneError" class="d-block copyright-text font-bold mt-1 error-text">The
+                            entered
+                            verification code is
+                            incorrect</small>
+                        <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops,
+                            something
+                            happened!</small>
+                    </div>
+                    <div class="btn-groups w-100 confirm">
+
+                        <button (click)="phoneCodeSend()" [disabled]="loading" class="btn btn-gray"><i
+                                class="far fa-redo"></i> Resend code</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer mb-hide">
+                <div class="btn-groups">
+
+                    <button (click)="phoneCodeSend()" [disabled]="loading" class="btn btn-gray"><i
+                            class="far fa-redo"></i>
+                        Resend code </button> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="{'show': changesSaved == true}" class="status-msg p-small bottom-animation">Invoice verified
+    successfully</div>

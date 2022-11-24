@@ -1,0 +1,32 @@
+<ng-container #tagContainer>
+  <section
+    class="sk-main__products sk-category__main-products"
+    *ngFor="let tag of tags$ | async"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-md">
+          <div
+            class="sk-category__title d-flex justify-content-between align-items-end"
+          >
+            <h3 class="color-black">{{ tag.name }}</h3>
+            <a
+              (click)="onClickTag(tag.slug)"
+              class="color-blue sk-category__link link-hover sk-category-view-all"
+              >{{ "view-all" | translate }}</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="sk-category__products row {{ tag.slug }}">
+        <div
+          class="col-md-4 sk-category__custom-padd"
+          *ngFor="let product of tag.products"
+        >
+          <app-product-card [product]="product" #child></app-product-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>

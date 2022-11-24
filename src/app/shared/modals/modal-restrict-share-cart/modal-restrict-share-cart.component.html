@@ -1,0 +1,33 @@
+<div id="restrictShareCartModal" tabindex="-1" role="dialog" class="modal animate fade" aria-modal="false">
+    <div role="document" class="modal-dialog modal-dialog-centered modal-newUI restrict-share-cart-modal">
+        <div class="modal-content animate-bottom">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+            </button>
+            <div class="modal-body">
+                <h3 class="color-black text-center mt-2">
+                    {{ "share-carts" | translate }}
+                </h3>
+                <p class="color-black text-center p-small details-text">
+                    {{ "share-cart-restriction-text" | translate }}
+                </p>
+
+                <p class="text-center text-center my-sm-5 my-4">
+                    <button 
+                        data-dismiss="modal" 
+                        aria-label="Close" 
+                        class="button button-primary button-large button-icon"
+                        (click)="onContinueSharing()"
+                        >
+                        {{ "continue-sharing" | translate }}
+                    </button>
+                </p>
+                <p class="text-center mb-3">
+                    <a class="link-hover button-link d-inline" data-dismiss="modal" aria-label="Close">
+                        {{ "cancel-and-edit-products" | translate }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

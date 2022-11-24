@@ -1,0 +1,23 @@
+<div class="mobile__navigation">
+  <div
+    routerLink="/dashboard"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="mobile__navigation__item"
+  >
+    <i class="fa-solid fa-objects-column"></i>
+    <span>Dashboard</span>
+  </div>
+
+  <div class="mobile__navigation__item">
+    <i class="fas fa-repeat"></i><span>Smartship</span>
+  </div>
+  <div
+    routerLink="/dashboard/order-history"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="mobile__navigation__item"
+  >
+    <i class="fas fa-list"></i><span>My orders</span>
+  </div>
+</div>

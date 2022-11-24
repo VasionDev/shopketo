@@ -1,0 +1,65 @@
+<template #modalcontainer> </template>
+
+<div class="drawer-nav">
+  <div>
+    <app-country-bar *ngIf="sidebarName === 'country-bar'"> </app-country-bar>
+
+    <app-add-to-cart *ngIf="sidebarName === 'add-to-cart'"> </app-add-to-cart>
+
+    <app-checkout-cart *ngIf="sidebarName === 'checkout-cart'">
+    </app-checkout-cart>
+
+    <app-delivery-options *ngIf="sidebarName === 'delivery-options'">
+    </app-delivery-options>
+
+    <app-sidebar-container *ngIf="sidebarName === 'dashboard'">
+      <side-navigation [isDashboard]="false"></side-navigation>
+    </app-sidebar-container>
+
+    <div *ngIf="sidebarName === ''"></div>
+  </div>
+</div>
+
+<app-cookie-dialog *ngIf="isEuropeanCountry" [show]="showCookieDialog">
+</app-cookie-dialog>
+
+<app-header (messageEvent)="receiveSidebarName($event)"></app-header>
+<!-- <mobile-navigation *ngIf="isAuthenticated"></mobile-navigation> -->
+<router-outlet
+  (activate)="onActivate()"
+  *ngIf="isLoaded; else loader"
+></router-outlet>
+<app-footer></app-footer>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<div class="navbar-overlay"></div>
+
+<div
+  *ngIf="fbPageID !== ''"
+  class="fb-customerchat"
+  [attr.page_id]="fbPageID"
+></div>
+
+<div
+  class="miniplayer-wrap"
+  [class.msg-popup]="fbPageID !== ''"
+  *ngIf="referrerVideoId !== '' && isRootRoute"
+>
+  <span
+    class="wistia_embed wistia_async_{{
+      referrerVideoId
+    }} popover=false popoverAnimateThumbnail=true videoFoam=true controlsVisibleOnLoad=false"
+    >&nbsp;</span
+  >
+
+  <button
+    type="button"
+    class="close position-absolute"
+    (click)="onClickCloseVideo()"
+  >
+    <i class="fas fa-times-circle"></i>
+  </button>
+</div>

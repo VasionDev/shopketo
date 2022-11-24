@@ -1,0 +1,159 @@
+<section class="sk-main__top">
+  <div class="container sk-main__slider-container">
+    <ng-content></ng-content>
+
+    <div class="sk-main__title text-center" *ngIf="selectedCountry === 'US'">
+      <h4
+        class="color-black sk-main__title-b"
+        *ngIf="referrer.hasOwnProperty('code')"
+      >
+        <img
+          [src]="
+            referrer?.imageUrl
+              ? referrer?.imageUrl
+              : 'assets/images/avatar2.png'
+          "
+          class="referr-img"
+          alt=""
+        />
+        {{ "invited-by" | translate }}
+        <span class="color-brand link-hover" (click)="onClickReferrerName()">{{
+          referrer?.name
+        }}</span>
+      </h4>
+
+      <h1 class="color-black">
+        {{ "fuel" | translate }}
+        {{ "the-best-version-of-yourself" | translate }}
+      </h1>
+
+      <button
+        class="button button-primary btn-create-account buy-now"
+        *ngIf="isSubDomain && isEuropeCountryShown() && !isStaging"
+        (click)="onClickCreateAccount()"
+      >
+        {{ "create-account" | translate }}
+      </button>
+    </div>
+
+    <div
+      class="sk-main__title text-center"
+      *ngIf="selectedCountry !== 'US'"
+      style="margin: 0 auto 40px"
+    >
+      <h1 class="color-black">{{ "official-store" | translate }}</h1>
+
+      <h4
+        class="color-black sk-main__title-b"
+        *ngIf="referrer.hasOwnProperty('code')"
+      >
+        {{ "brought-to-you-by" | translate }}
+        <span class="color-brand link-hover" (click)="onClickReferrerName()">{{
+          referrer?.name
+        }}</span>
+      </h4>
+
+      <button
+        class="button button-primary btn-create-account buy-now"
+        *ngIf="isSubDomain && isEuropeCountryShown() && !isStaging"
+        (click)="onClickCreateAccount()"
+      >
+        {{ "create-account" | translate }}
+      </button>
+    </div>
+
+    <div class="sk-main__banner-slider" *ngIf="featureProducts.length > 0">
+      <div
+        class="sk-main__banner"
+        [style.opacity]="featureProducts.length < 2 ? 1 : null"
+        [ngStyle]="{
+          'background-image': getBackgroundColor(
+            product.bannerImage,
+            product.bannerBgColor1,
+            product.bannerBgColor2
+          )
+        }"
+        *ngFor="let product of featureProducts"
+      >
+        <div class="row">
+          <div class="col-md-6 sk-main__custom-col-m">
+            <div class="sk-main__left">
+              <h1
+                class="color-white sk-main__subtitle-m"
+                [innerHTML]="product.bannerHeadline"
+              ></h1>
+
+              <div class="sk-main__how-it-work">
+                <span
+                  *ngIf="
+                    isPruvitTVPresent(product.wistiaVideoLink);
+                    else wistiaContainer
+                  "
+                  class="a-link link-hover"
+                  (click)="onClickPruvitTvVideo(product.wistiaVideoLink)"
+                  ><i class="far fa-play-circle play-icon"></i
+                  >{{
+                    product.bannerLinkTitle !== ""
+                      ? product.bannerLinkTitle
+                      : getTranslatedText()
+                  }}</span
+                >
+                <ng-template #wistiaContainer>
+                  <span
+                    class="btn btn-brand-primary btn-large btn-icon btn-watch btn-watch-videopop wistia_embed wistia_async_{{
+                      getWistiaVideoID(
+                        product.bannerLink !== ''
+                          ? product.bannerLink
+                          : product.wistiaVideoLink
+                      )
+                    }} popover=true popoverContent=link"
+                    style="display: inline"
+                  >
+                    <span
+                      class="a-link link-hover"
+                      *ngIf="
+                        product.bannerLink !== '' ||
+                        product.wistiaVideoLink !== ''
+                      "
+                      ><i class="far fa-play-circle play-icon"></i
+                      >{{
+                        product.bannerLinkTitle !== ""
+                          ? product.bannerLinkTitle
+                          : getTranslatedText()
+                      }}</span
+                    >
+                  </span>
+                </ng-template>
+              </div>
+
+              <div class="sk-main__banner-btn">
+                <button
+                  class="button button-primary buy-now-lg sk-main__banner-custom-btn"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  (click)="onClickBuyNow(product.name)"
+                >
+                  {{ "buy-now" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 sk-main__custom-col-m">
+            <div class="sk-main__right text-center">
+              <img
+                [src]="
+                  product.bannerFeatureImage !== ''
+                    ? product.bannerFeatureImage
+                    : product.thumbUrl
+                "
+                alt="Banner img"
+                class="img-fluid sk-main__banner-img pointer"
+                (click)="onClickProductImage(product.name)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

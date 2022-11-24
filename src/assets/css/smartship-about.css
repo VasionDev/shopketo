@@ -1,0 +1,408 @@
+.smartship-never {
+  color: #000000;
+}
+.smartship-never .smartship-heading {
+  padding-top: 60px;
+}
+.smartship-never .smartship-heading h1 {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+.smartship-never .smartship-heading h4 {
+  color: #949496;
+  margin-top: 36px;
+  margin-bottom: 38px;
+}
+.smartship-never .smartship-heading .button {
+  color: #ffffff;
+}
+.smartship-never .smartship-save {
+  margin-top: 26px;
+}
+.smartship-never .smartship-save .smarship-products-img {
+  max-width: 70%;
+  width: 100%;
+  margin-bottom: -100px;
+}
+.smartship-never .smartship-save .save-card {
+  background: #fff;
+  border-radius: 25px;
+  padding: 50px 35px;
+  min-height: 348px;
+}
+.smartship-never .smartship-save .save-card h3 {
+  margin-top: 15px;
+}
+.smartship-never .smartship-save .save-card p {
+  margin-top: 25px;
+  color: #8a8a8e;
+  min-height: 84px;
+}
+.smartship-never .smartship-save .exclusive-card {
+  margin-top: 30px;
+  border-radius: 20px;
+  color: #ffffff;
+  min-height: 580px;
+  overflow: hidden;
+  position: relative;
+}
+.smartship-never .smartship-save .exclusive-card.access {
+  background-color: #ff8000;
+}
+.smartship-never .smartship-save .exclusive-card.gift .card-front {
+  background: url(/assets/images/Frame.svg), #4c3549;
+}
+.smartship-never .smartship-save .exclusive-card.gift .card-back {
+  padding: 50px;
+}
+.smartship-never .smartship-save .exclusive-card.gift .card-back h2 {
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  color: #000000;
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+.smartship-never .smartship-save .exclusive-card.gift .card-back h3 {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  color: #8a8a8e;
+  margin-bottom: 92px;
+}
+.smartship-never .smartship-save .exclusive-card.gift .card-back p {
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 22px;
+  color: #8e8e93;
+}
+.smartship-never .smartship-save .exclusive-card.gift h2 {
+  color: #ff4880;
+}
+.smartship-never .smartship-save .exclusive-card.gift a {
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 14px;
+  text-decoration: none;
+}
+.smartship-never .smartship-save .exclusive-card.gift a:hover {
+  color: #ff4880;
+}
+.smartship-never .smartship-save .exclusive-card.gift a:hover svg path {
+  stroke: #ff4880;
+  fill: #ff4880;
+}
+.smartship-never .smartship-save .exclusive-card h2 {
+  margin-top: 58px;
+  margin-bottom: 24px;
+}
+.smartship-never .smartship-save .exclusive-card img {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: 100%;
+}
+.smartship-never .smartship-save .exclusive-card p {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.smartship-never .smartship-save .exclusive-card .card-front,
+.smartship-never .smartship-save .exclusive-card .card-back {
+  border-radius: 20px;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.smartship-never .smartship-save .exclusive-card .card-front .card-close,
+.smartship-never .smartship-save .exclusive-card .card-back .card-close {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #000;
+  border-radius: 100px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.5;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.smartship-never .smartship-save .exclusive-card .card-front .card-close:hover,
+.smartship-never .smartship-save .exclusive-card .card-back .card-close:hover {
+  opacity: 1;
+}
+.smartship-never .smartship-save .exclusive-card .card-back {
+  background: #e5e5ea;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.smartship-never .smartship-save .exclusive-card .active {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+.smartship-never .smartship-get {
+  margin-top: 145px;
+}
+.smartship-never .smartship-get h2 {
+  color: #4c3549;
+}
+.smartship-never .smartship-get .free {
+  font-size: 200px;
+  line-height: 199px;
+  font-weight: 700;
+  margin-top: -18px;
+  margin-bottom: 15px;
+}
+.smartship-never .smartship-get .free span {
+  background: linear-gradient(
+    136.2deg,
+    rgba(255, 128, 0, 0.9) 0.69%,
+    rgba(255, 72, 128, 0.9) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.smartship-never .smartship-get h3 {
+  max-width: 570px;
+  width: 100%;
+  margin: 0 auto;
+  color: #8e8e93;
+}
+.smartship-never .smartship-get .process {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 758px;
+  margin: 0 auto;
+  margin-top: 56px;
+}
+.smartship-never .smartship-get .process .customer {
+  width: 159px;
+  height: 159px;
+  border-radius: 100px;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 64px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 64px rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.smartship-never .smartship-get .process .customer h3 {
+  color: #000000;
+}
+.smartship-never .smartship-get .process .customer.you h2 {
+  background: linear-gradient(
+    136.2deg,
+    rgba(255, 128, 0, 0.9) 0.69%,
+    rgba(255, 72, 128, 0.9) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.smartship-never .smartship-get .process-info {
+  color: #8e8e93;
+  max-width: 844px;
+  margin: 50px auto 90px;
+}
+
+/*---- End of smartship-never style ----*/
+
+.setup-smartShip-row p {
+  margin: 30px 0 60px;
+  color: #8e8e93;
+}
+
+.disclaimer-row .disclaimer-reg {
+  margin-top: 18px;
+  color: #8e8e93;
+}
+
+.disclaimer-wrap {
+  margin-top: -80px;
+  margin-bottom: 60px;
+}
+
+.smartship-never .smartship-save .save-card lottie-player {
+  max-width: 100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.smartship a.learn-more i.fas {
+  margin-left: 5px;
+}
+
+/*------------- Start of Mobile @media CSS -------------*/
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .smartship-never .smartship-save .save-card {
+    padding: 25px 15px;
+  }
+  .smartship-never .smartship-save .exclusive-card {
+    min-height: 450px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back {
+    padding: 40px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back h2 {
+    font-size: 36px;
+    line-height: 36px;
+    margin-bottom: 25px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back h3 {
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 75px;
+  }
+  .smartship-never .smartship-save .exclusive-card h2 {
+    margin-top: 28px;
+  }
+  .smartship-never .smartship-save .exclusive-card img {
+    max-width: 75%;
+  }
+  .smartship-never .smartship-get {
+    margin-top: 80px;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 900px) ----*/
+
+@media (max-width: 767px) {
+  .smartship-never .smartship-heading {
+    padding-top: 30px;
+  }
+  .smartship-never .smartship-heading .button-large {
+    max-width: 268px;
+  }
+  .smartship-never .smartship-heading h4 {
+    margin-top: 20px;
+    margin-bottom: 24px;
+    line-height: initial;
+  }
+  .smartship-never .smartship-save {
+    margin-top: 15px;
+  }
+  .smartship-never .smartship-save .smarship-products-img {
+    max-width: 90%;
+    margin-bottom: -38px;
+  }
+  .smartship-never .smartship-save .save-card {
+    margin-bottom: 25px;
+    padding: 25px;
+    min-height: 250px;
+  }
+  .smartship-never .smartship-save .save-card h3 {
+    margin-top: 0;
+  }
+  .smartship-never .smartship-save .save-card p {
+    margin-top: 15px;
+    min-height: initial;
+  }
+  .smartship-never .smartship-save .exclusive-card {
+    min-height: 400px;
+  }
+  .smartship-never .smartship-save .exclusive-card.access {
+    margin-top: 0;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift {
+    margin-top: 15px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back {
+    padding: 40px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back h2 {
+    margin-bottom: 15px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back h3 {
+    margin-bottom: 15px;
+  }
+  .smartship-never .smartship-save .exclusive-card.gift .card-back p {
+    margin-top: 30px;
+  }
+  .smartship-never .smartship-save .exclusive-card h2 {
+    margin-top: 28px;
+    margin-bottom: 14px;
+  }
+  .smartship-never .smartship-save .exclusive-card img {
+    width: 90%;
+  }
+  .smartship-never .smartship-get {
+    margin-top: 45px;
+  }
+  .smartship-never .smartship-get .free {
+    font-size: 150px;
+    line-height: 150px;
+  }
+  .smartship-never .smartship-get .process {
+    margin-top: 28px;
+  }
+  .smartship-never .smartship-get .process .customer {
+    width: 90px;
+    height: 90px;
+  }
+  .smartship-never .smartship-get .process svg {
+    width: 20px;
+  }
+  .smartship-never .smartship-get .process-info {
+    margin-top: 25px;
+    margin-bottom: 60px;
+  }
+  .disclaimer-wrap {
+    margin-top: 0;
+  }
+  .setup-smartShip-row p {
+    margin: 30px 0;
+  }
+
+  .smartship-never .smartship-save .exclusive-card.gift img {
+    width: 80%;
+  }
+}
+/*---- End of @media (max-width: 767px) ----*/
+
+@media (min-width: 415px) and (max-width: 736px) {
+  .smartship-never .smartship-save .exclusive-card {
+    min-height: 580px;
+  }
+}
+/*---- End of @media (min-width: 415px) and (max-width: 736px) ----*/

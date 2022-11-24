@@ -1,0 +1,186 @@
+<div
+  class="modal fade animate share-modal"
+  id="shareVIModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close"
+            ><i class="fal fa-times"></i
+          ></a>
+          <span
+            *ngIf="offerSuccess && timerSeconds !== 0"
+            class="btn p-small exp"
+            ><i class="fal fa-alarm-clock mr-1" aria-hidden="true"></i> EXPIRES
+            IN {{ timerSeconds | formatTimer }}</span
+          >
+        </p>
+      </div>
+
+      <div class="modal-body">
+        <div class="profile-wrap">
+          <div class="img-wrap" *ngIf="!offerSuccess && !isOfferInvalid">
+            <img
+              [src]="
+                offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'
+              "
+              alt="img"
+            />
+          </div>
+          <div
+            *ngIf="offerSuccess && !isOfferInvalid"
+            class="img-wrap text-center"
+            style="background-color: #41bf4e"
+          >
+            <i class="far fa-check" aria-hidden="true"></i>
+          </div>
+          <div
+            *ngIf="isOfferInvalid"
+            class="img-wrap text-center"
+            style="background-color: #eb4747"
+          >
+            <i class="far fa-times" aria-hidden="true"></i>
+          </div>
+          <div class="price-mony">
+            <h3 class="color-white">$10</h3>
+          </div>
+        </div>
+
+        <h3
+          *ngIf="!offerSuccess && !isOfferInvalid && offerorName !== ''"
+          class="title text-center color-black"
+        >
+          {{ offerorName }} sent you a discount!
+        </h3>
+
+        <h3
+          *ngIf="offerSuccess && !isOfferInvalid"
+          class="title text-center color-black"
+        >
+          It’s all yours!
+        </h3>
+        <p
+          *ngIf="offerSuccess && !isOfferInvalid"
+          class="color-gray mt-2 text-center"
+        >
+          The discount will be automatically applied at the checkout
+        </p>
+
+        <h3 *ngIf="isOfferInvalid" class="title text-center color-black">
+          No longer available
+        </h3>
+        <p *ngIf="isOfferInvalid" class="color-gray mt-2 text-center">
+          The offer has expired, or has already been redeemed.
+        </p>
+
+        <form
+          *ngIf="!offerSuccess && !isOfferInvalid"
+          [formGroup]="discountForm"
+          (ngSubmit)="submitDiscountForm()"
+        >
+          <div class="row form-wraper mt-4">
+            <div class="form-group col-sm-6 col-6">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="First name"
+                formControlName="firstName"
+                [class.is-invalid]="
+                  firstNameControl.errors && firstNameControl.touched
+                "
+              />
+              <small
+                *ngIf="firstNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your First name</small
+              >
+            </div>
+            <div class="form-group col-sm-6 col-6">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Last name"
+                formControlName="lastName"
+                [class.is-invalid]="
+                  lastNameControl.errors && lastNameControl.touched
+                "
+              />
+              <small
+                *ngIf="lastNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Last name</small
+              >
+            </div>
+            <div class="form-group col-12">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                formControlName="email"
+                [class.is-invalid]="emailControl.errors && emailControl.touched"
+              />
+              <small
+                *ngIf="emailControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Email</small
+              >
+              <small
+                *ngIf="emailControl.errors?.['pattern']"
+                class="invalid-feedback"
+                >Please enter a valid Email address</small
+              >
+            </div>
+            <div class="form-group col-12 submit-btn-group">
+              <button
+                [disabled]="!discountForm.valid || isFormSubmitted"
+                type="submit"
+                class="button button-primary button-large claim-disc-btn"
+              >
+                CLAIM DISCOUNT
+                <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i>
+              </button>
+              <span *ngIf="errorMessage !== ''">{{ errorMessage }}</span>
+            </div>
+          </div>
+        </form>
+
+        <div
+          *ngIf="offerSuccess && !isOfferInvalid"
+          class="row form-wraper mt-4"
+        >
+          <div class="col-12 d-flex justify-content-center">
+            <button
+              data-dismiss="modal"
+              aria-label="Close"
+              type="submit"
+              class="button button-primary button-large claim-disc-btn"
+            >
+              ENJOY shopping!
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="isOfferInvalid" class="row form-wraper mt-4">
+          <div class="col-12 d-flex justify-content-center">
+            <button
+              data-dismiss="modal"
+              aria-label="Close"
+              type="submit"
+              class="button button-primary button-large claim-disc-btn"
+            >
+              Continue shopping!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of shareModal -->

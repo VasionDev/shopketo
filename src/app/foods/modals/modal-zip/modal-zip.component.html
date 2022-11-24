@@ -1,0 +1,106 @@
+<div
+  id="userZipModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade zip-code-modal show"
+  style="display: block; padding-right: 15px"
+  aria-modal="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+        (click)="close()"
+      >
+        <i class="far fa-times"></i>
+      </button>
+      <div class="modal-body">
+        <div *ngIf="promptZipCode" class="cont-wrap">
+          <h3 class="title text-center color-black">
+            {{ "check-your-zip-code" | translate }}
+          </h3>
+          <p class="p-small text-center color-black">
+            {{ "lets-make-sure-we-deliver" | translate }}.
+          </p>
+          <form (submit)="checkZipCode()">
+            <div class="form-group">
+              <input
+                class="form-control selected"
+                type="input"
+                placeholder="{{ 'zip-code' | translate }}"
+                [class.selected]="postalCode !== ''"
+                name="postalCode"
+                [(ngModel)]="postalCode"
+                #zipInput
+              />
+            </div>
+            <p class="text-center">
+              <button
+                type="submit"
+                class="button button-primary button-large"
+                [disabled]="postalCode === ''"
+              >
+                {{ "check-now" | translate }}
+                <i class="fa fa-spinner fa-spin" *ngIf="isZipSubmitted"></i>
+              </button>
+            </p>
+          </form>
+        </div>
+
+        <div *ngIf="isPostalAvailable && !promptZipCode" class="cont-wrap">
+          <h3 class="text-center mb-4 mt-2">🎉</h3>
+          <h3 class="title text-center color-black">
+            {{ "yes" | translate }}! {{ "we-deliver-to" | translate }}
+            {{ postalCode }}.
+          </h3>
+          <p class="text-center extr-mrg">
+            <button
+              (click)="onClickContinue()"
+              data-dismiss="modal"
+              aria-label="Close"
+              class="button button-primary button-large"
+            >
+              {{ "continue" | translate }}
+            </button>
+          </p>
+          <p class="text-center">
+            <a class="button color-brand" (click)="onClickEnterZipCode()"
+              >{{ "enter-different" | translate }}
+              {{ "zip-code" | translate }}</a
+            >
+          </p>
+        </div>
+        <!-- zip code not success -->
+        <div
+          *ngIf="!isPostalAvailable && !promptZipCode"
+          class="cont-wrap success"
+        >
+          <h3 class="text-center mb-4 mt-2">🍽</h3>
+          <h3 class="title text-center color-black">
+            {{ "we-do-not-deliver-to" | translate }} {{ postalCode }},
+            {{ "yet" | translate }}.
+          </h3>
+          <p class="text-center extr-mrg">
+            <button
+              (click)="onClickContinue()"
+              data-dismiss="modal"
+              aria-label="Close"
+              class="button button-primary button-large"
+            >
+              {{ "continue-anyway" | translate }}
+            </button>
+          </p>
+          <p class="text-center">
+            <a class="button color-brand" (click)="onClickEnterZipCode()"
+              >{{ "enter-different" | translate }}
+              {{ "zip-code" | translate }}</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

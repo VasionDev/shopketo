@@ -1,0 +1,37 @@
+<div class="video-gallery-slider-wrap">
+  <div class="sk-video-slider">
+    <div class="video-container" *ngFor="let slide of videoSlides">
+      <div *ngIf="slide.type === 'PRUVIT_TV'; else wistiaPlayer">
+        <div class="tradecast-embed__container">
+          <div class="tradecast-embed__inner">
+            <iframe
+              class="tradecast-embed__iframe"
+              [src]="slide.src | textSanitizer: 'resourceUrl'"
+              allowfullscreen="false"
+              width="auto"
+              height="auto"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <ng-template #wistiaPlayer>
+        <div class="wistia_embed wistia_async_{{ slide.src }} videoFoam=true">
+          &nbsp;
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="sk-video-slider-nav-container">
+    <ul class="sk-video-slider-nav">
+      <li *ngFor="let slide of videoSlides">
+        <img
+          [src]="slide.thumbnail$ | async"
+          alt="slide-image"
+          class="img-fluid"
+        />
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<main class="sk-main">
+  <section class="sk-dashboard">
+    <div class="container dashboard--container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="account__profile">
+            <img
+              *ngIf="user?.imageUrl"
+              class="sk-header-user"
+              src="{{ user.imageUrl }}"
+            />
+            <img
+              *ngIf="!user?.imageUrl"
+              class="sk-header-user"
+              src="assets/images/avatar2.png"
+            />
+            <h1>Hi {{ user?.firstName }}</h1>
+          </div>
+          <div class="account_navigation">
+            <ul>
+              <li><i class="fas fa-user"></i>Pruvit profile</li>
+              <li><i class="fas fa-map-marker-alt"></i>Addresses</li>
+              <li routerLink="/dashboard/payment">
+                <i class="fas fa-credit-card-front"></i>Payment methods
+              </li>
+              <li><i class="fas fa-bell"></i>Notifications</li>
+              <li><i class="fas fa-sliders-h"></i>Account settings</li>
+              <li (click)="logout()"><i class="fas fa-sign-out"></i>Logout</li>
+            </ul>
+            <ul class="learning__center__menu">
+              <li><i class="fas fa-user-friends"></i>Become a promoter</li>
+              <li><i class="fas fa-globe"></i>My websites</li>
+              <li><i class="fas fa-briefcase"></i>Training center</li>
+            </ul>
+            <ul class="help__menu">
+              <li><i class="fas fa-question-circle"></i>Help center</li>
+              <li><i class="fas fa-microscope"></i>Research</li>
+              <li><i class="fas fa-comment-alt-edit"></i>Blog</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

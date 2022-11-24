@@ -1,0 +1,291 @@
+<main class="sk-main" [style.margin-top.px]="discountHeight">
+  <section class="smartship-never">
+    <article class="container">
+      <figure class="row smartship-heading text-center">
+        <div class="col-sm-12">
+          <app-vi-offer></app-vi-offer>
+
+          <h1>{{ "setup-smartship-and-never-pay-full-price" | translate }}</h1>
+          <h4>
+            {{ "smartship-rewards-our-loyal-customers" | translate }}
+          </h4>
+          <button
+            (click)="ScrollIntoView()"
+            class="button button-primary button-large"
+          >
+            {{ "setup-smartship" | translate }}
+          </button>
+        </div>
+      </figure>
+
+      <figure class="row smartship-save">
+        <div class="col-sm-12 text-center">
+          <img
+            src="assets/images/smarship-about.png"
+            alt="smarship-products"
+            class="img-flluid smarship-products-img"
+          />
+        </div>
+        <div class="col-sm-12 col-md-4 text-center" appLottiePlayer>
+          <div class="save-card">
+            <lottie-player
+              src="/assets/animation/money_save.json"
+              background="transparent"
+              speed="1"
+              count="1"
+              autoplay
+            >
+            </lottie-player>
+            <h3>
+              {{ "save-money" | translate }}
+            </h3>
+            <p>
+              {{ "smartship-prüvers-enjoy" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 text-center" appLottiePlayer>
+          <div class="save-card">
+            <lottie-player
+              src="/assets/animation/save_time.json"
+              background="transparent"
+              speed="1"
+              count="1"
+              autoplay
+            >
+            </lottie-player>
+            <h3>
+              {{ "save-time" | translate }}
+            </h3>
+            <p>
+              {{ "smartShip-orders-automatically" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 text-center" appLottiePlayer>
+          <div class="save-card">
+            <lottie-player
+              src="/assets/animation/control_svg.json"
+              background="transparent"
+              speed="1"
+              count="1"
+              autoplay
+            >
+            </lottie-player>
+            <h3>
+              {{ "you’re-in-control" | translate }}
+            </h3>
+            <p>
+              {{ "edit-or-cancel-your-SmartShip" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 text-center">
+          <div class="exclusive-card access">
+            <h2>
+              {{ "exclusive-access" | translate }}
+            </h2>
+            <p>
+              {{ "access-to-the-best-offers" | translate }}
+            </p>
+            <p>
+              <img
+                src="assets/images/cotton-candy.png"
+                alt="cotton-candy"
+                class="img-fluid"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 text-center">
+          <div class="exclusive-card gift">
+            <div class="card-front">
+              <h2>
+                {{ "free-gift" | translate }}
+              </h2>
+              <p>
+                {{ "get-a-free-mystery-gift" | translate }}
+              </p>
+              <a class="learn-more pointer">
+                {{ "learn-more" | translate }}
+                <svg
+                  width="19"
+                  height="10"
+                  viewBox="0 0 19 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 5L12.0784 5"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-miterlimit="16"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M18.1172 5L11.3231 9.33013V0.669873L18.1172 5Z"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+              <p>
+                <img
+                  src="assets/images/gift.png"
+                  alt="gift"
+                  class="img-flui9d"
+                />
+              </p>
+            </div>
+            <div class="card-back">
+              <div class="card-close"><i class="fal fa-times"></i></div>
+              <h2>
+                {{ "how-does-it-work" | translate }}
+              </h2>
+              <h3>
+                {{ "for-every-3-consecutive" | translate }},
+                {{
+                  "you-become-eligible-to-receive-a-free-mystery-gift"
+                    | translate
+                }}
+              </h3>
+              <p>
+                {{ "qualifying-smartShip-orders" | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="row smartship-get text-center">
+        <div class="col-sm-12">
+          <h2>
+            {{ "get-your-smartShip-for" | translate }}
+          </h2>
+          <p class="free">
+            <span> {{ "free" | translate }} </span>
+          </p>
+          <h3>
+            {{ "send-your-referral-link" | translate }}
+          </h3>
+
+          <div class="process">
+            <div class="customer you">
+              <h2>{{ "you" | translate }}</h2>
+            </div>
+            <svg
+              width="34"
+              height="33"
+              viewBox="0 0 34 33"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.5791 0.287999V13.048H0.935133V20.008H13.5791V33H20.5971V20.008H33.1251V13.048H20.5971V0.287999H13.5791Z"
+                fill="url(#paint0_linear)"
+                fill-opacity="0.9"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="-3.41156"
+                  y1="-10"
+                  x2="50.8538"
+                  y2="30.9785"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF8000" />
+                  <stop offset="1" stop-color="#FF4880" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div class="customer">
+              <h4>{{ "customer" | translate }}</h4>
+              <h3>1</h3>
+            </div>
+            <svg
+              width="34"
+              height="33"
+              viewBox="0 0 34 33"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.5791 0.287999V13.048H0.935133V20.008H13.5791V33H20.5971V20.008H33.1251V13.048H20.5971V0.287999H13.5791Z"
+                fill="url(#paint0_linear)"
+                fill-opacity="0.9"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="-3.41156"
+                  y1="-10"
+                  x2="50.8538"
+                  y2="30.9785"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF8000" />
+                  <stop offset="1" stop-color="#FF4880" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div class="customer">
+              <h4>{{ "customer" | translate }}</h4>
+              <h3>2</h3>
+            </div>
+          </div>
+          <p class="process-info">
+            {{ "if-you-want-your-smartShip-to-process-for-free" | translate }},
+            {{ "simply-refer-2-smartShip-customers" | translate }}
+            {{ "this-earns-you-prüvit-bucks" | translate }}*
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section id="smartship-products">
+    <div class="container">
+      <div class="row setup-smartShip-row">
+        <div class="col">
+          <h2 class="text-center">
+            {{ "setup-smartship" | translate }}
+          </h2>
+          <p class="text-center color-gray">
+            {{ "choose-from-the-following-smartShip" | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <app-smartship-products> </app-smartship-products>
+  </section>
+
+  <section class="disclaimer-wrap">
+    <div class="container">
+      <div class="row disclaimer-row">
+        <div class="col">
+          <p class="color-gray disclaimer-reg">
+            *{{ "the-average-of-the-2-largest" | translate }},
+            {{ "which-will-automatically-be-applied" | translate }}
+            {{ "new-orders-placed-by-customers" | translate }},
+            {{ "and-customer-smartShip-orders" | translate }}
+          </p>
+
+          <p class="color-gray disclaimer-reg">
+            **{{ "free-gift-earned-after-every-3-consecutive" | translate }},
+            {{ "shipped-with-your-4th-month’s-order" | translate }}
+            {{ "if-free-mystery-gift-is-earned" | translate }},
+            {{ "the-free-mystery-gift" | translate }}
+            {{ "due-to-size-and-weight-shipping" | translate }}
+            {{ "free-mystery-gift" | translate }}
+            {{ "which-will-result" | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

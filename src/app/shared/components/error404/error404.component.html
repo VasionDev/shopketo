@@ -1,0 +1,51 @@
+<main class="sk-main">
+  <section class="error-404-wrap">
+    <div class="container">
+      <div class="row">
+        <figure class="col-md-12">
+          <div class="error-404 text-center">
+            <h1 class="text-center text-404">404</h1>
+            <h2 class="text-center no-keto-here ch-black-color">
+              {{ "oops-no-ketones-here" | translate }}
+            </h2>
+
+            <p class="text-center some-helpful-links ch-brand-gray">
+              {{ "here-are-some-helpful-links-instead" | translate
+              }}<img
+                draggable="false"
+                role="img"
+                class="emoji"
+                alt="🎊"
+                src="https://s.w.org/images/core/emoji/13.0.0/svg/1f38a.svg"
+              />
+            </p>
+
+            <div class="error-page-links">
+              <ul>
+                <li>
+                  <a class="ch-brand-color pointer" (click)="onClickHome()">{{
+                    "home" | translate
+                  }}</a>
+                </li>
+                <li>
+                  <a
+                    class="ch-brand-color pointer"
+                    (click)="onClickShopKetone()"
+                    >{{ "shop-ketone-products" | translate }}</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="ch-brand-color"
+                    href="https://facebook.com/justpruvit/"
+                    >{{ "fb-page" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+</main>

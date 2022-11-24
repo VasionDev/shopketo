@@ -1,0 +1,34 @@
+<div
+  id="foodShippingConfirmModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal fade animate food-details-modal shipping"
+  aria-hidden="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-body">
+        <h4 class="color-black">{{ "confirm-next-shipment" | translate }}</h4>
+        <p class="p-small color-black mt-3 mb-3 opcty">
+          {{ "you-are-changing-your-next-order" | translate }}
+          <strong>{{ shippingDate }}</strong
+          >. {{ "are-you-sure-you-want-to-continue" | translate }}?
+        </p>
+        <p class="btn-wrap confirm">
+          <a
+            class="button button-primary"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="setNextShippingDate()"
+            >{{ "confirm" | translate }}</a
+          ><a
+            class="button button-primary cancel"
+            data-dismiss="modal"
+            aria-label="Close"
+            >{{ "cancel" | translate }}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

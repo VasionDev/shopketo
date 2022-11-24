@@ -1,0 +1,447 @@
+.border-gradient-style {
+  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f7))
+      padding-box,
+    -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb))
+      border-box;
+  background: linear-gradient(#f2f2f7) padding-box,
+    linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  border-radius: 40px;
+  border: 1px solid transparent;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  text-align: center;
+  margin: 15px auto;
+  padding: 6px 20px 8px;
+}
+
+.text-gradient-style {
+  background: linear-gradient(225deg, #0ad8e5 0%, #990cdb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.make-people-better h1,
+.pruvit-mission-wraper h1,
+.we-are-pruvit-wraper h1 {
+  font-size: 120px;
+  line-height: 120px;
+}
+
+.make-people-better {
+  padding: 75px 0;
+}
+
+.make-people-better .video-wrap {
+  position: relative;
+  margin: 80px 0 40px;
+}
+
+.make-people-better .video-wrap img {
+  width: 100%;
+  height: 660px;
+  border-radius: 20px;
+}
+
+.make-people-better .video-wrap .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 86px;
+  height: 110px;
+  width: 110px;
+  line-height: 106px;
+  margin-right: 0;
+  background-color: #2152ff;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.make-people-better .video-wrap .play-icon:hover,
+.make-people-better .video-wrap .play-icon:focus {
+  background-color: #204ceb;
+}
+
+.our-story-wraper .container-fluid {
+  padding: 0;
+}
+
+.our-story-wraper .container-fluid .our-story-text {
+  max-width: 792px;
+  margin: 0 auto;
+}
+
+.our-story-wraper .container-fluid .our-story-text h2 {
+  margin-bottom: 30px;
+}
+
+.our-story-wraper .container-fluid .our-story-text p {
+  margin-bottom: 26px;
+}
+
+.our-story-wraper .container-fluid .our-story-slider {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slider-items {
+  border-radius: 20px;
+  margin: 0 18px;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slider-items .img-fluid {
+  border-radius: 20px;
+  height: 450px;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev,
+.our-story-wraper .container-fluid .our-story-slider .slick-next {
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  top: 50%;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  z-index: 10;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev:hover,
+.our-story-wraper .container-fluid .our-story-slider .slick-next:hover {
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev.slick-disabled,
+.our-story-wraper
+  .container-fluid
+  .our-story-slider
+  .slick-next.slick-disabled {
+  display: none !important;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev::before,
+.our-story-wraper .container-fluid .our-story-slider .slick-next::before {
+  font-family: "Font Awesome 6 Pro";
+  color: #2152ff;
+  opacity: 1;
+  font-size: 22px;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-next {
+  right: 22%;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-next:before {
+  content: "\f054";
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev {
+  left: 22%;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-prev:before {
+  content: "\f053";
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-dots {
+  bottom: -30px;
+}
+
+.our-story-wraper .container-fluid .our-story-slider .slick-dots li {
+  margin: 0;
+}
+
+.our-story-wraper
+  .container-fluid
+  .our-story-slider
+  .slick-dots
+  li
+  button:before {
+  font-size: 28px;
+}
+
+.pruvit-mission-wraper {
+  padding: 70px 0;
+}
+
+.pruvit-mission-wraper .card {
+  max-width: 768px;
+  width: 100%;
+  margin: 100px auto 30px;
+  border: none;
+  background: transparent;
+}
+
+.pruvit-mission-wraper .card .pruvit-ceo-info {
+  background: #ffffff;
+  padding: 70px 60px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.pruvit-mission-wraper .card .pruvit-ceo-info .title {
+  max-width: 480px;
+  margin-bottom: 30px;
+}
+
+.pruvit-mission-wraper .card .founder .founder-img {
+  max-width: 320px;
+  position: absolute;
+  right: 26px;
+  bottom: 0;
+}
+
+.our-brand-wraper {
+  padding: 45px 0;
+}
+
+.our-brand-wraper .container-fluid {
+  padding: 0;
+}
+
+.our-brand-wraper .container-fluid .our-brand-text {
+  max-width: 792px;
+  margin: 0 auto 40px;
+}
+
+.our-brand-wraper .container-fluid .our-brand-text h2 {
+  margin-top: 45px;
+  margin-bottom: 30px;
+}
+
+.our-brand-wraper .container-fluid .our-brand-text p {
+  margin-bottom: 50px;
+}
+
+.our-brand-wraper .container-fluid .brand-cards-slider {
+  margin-top: -78px;
+}
+
+.our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items {
+  background: linear-gradient(225deg, #0ce594 4.17%, #3546ff 100%);
+  -webkit-box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  width: 370px;
+  height: 200px;
+  margin: 50px 15px;
+  direction: ltr;
+}
+
+.our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items h3 {
+  margin-bottom: 20px;
+}
+
+.our-brand-wraper
+  .container-fluid
+  .brand-cards-slider
+  .brand-card-items
+  .details {
+  max-width: 200px;
+  width: 100%;
+}
+
+.our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items h3,
+.our-brand-wraper
+  .container-fluid
+  .brand-cards-slider
+  .brand-card-items
+  .details {
+  color: #ffffff;
+}
+
+.we-are-pruvit-wraper {
+  padding: 70px 0 180px;
+}
+
+.we-are-pruvit-wraper .row .title {
+  margin-bottom: 60px;
+}
+
+.we-are-pruvit-wraper .row .we-are-card .card {
+  border-color: transparent;
+  padding: 30px 28px;
+  -webkit-box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.we-are-pruvit-wraper .row .we-are-card .card h3 {
+  margin-bottom: 18px;
+}
+
+.dark-theme .border-gradient-style {
+  background: linear-gradient(#000) padding-box,
+    linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000))
+      padding-box,
+    -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb))
+      border-box;
+}
+
+.dark-theme .pruvit-mission-wraper .card .pruvit-ceo-info,
+.dark-theme .we-are-pruvit-wraper .row .we-are-card .card {
+  background-color: #1c1c1e;
+}
+
+@media (min-width: 1466px) {
+  .our-story-wraper .container-fluid .our-story-slider .slick-next {
+    right: 29%;
+  }
+  .our-story-wraper .container-fluid .our-story-slider .slick-prev {
+    left: 29%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .our-story-wraper .container-fluid .our-story-slider .slick-next {
+    right: 13%;
+  }
+
+  .our-story-wraper .container-fluid .our-story-slider .slick-prev {
+    left: 13%;
+  }
+}
+
+@media (max-width: 767px) {
+  .make-people-better h1,
+  .pruvit-mission-wraper h1,
+  .we-are-pruvit-wraper h1 {
+    font-size: 52px;
+    line-height: 52px;
+  }
+
+  .make-people-better {
+    padding: 40px 0;
+  }
+
+  .make-people-better .video-wrap {
+    margin: 40px 0 10px;
+  }
+
+  .make-people-better .video-wrap img {
+    height: auto;
+  }
+
+  .make-people-better .video-wrap .play-icon {
+    height: 82px;
+    width: 82px;
+    line-height: 78px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-text h2 {
+    margin-bottom: 20px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-text p {
+    margin-bottom: 18px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-slider {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-slider .slider-items {
+    margin: 0 8px;
+  }
+
+  .our-story-wraper
+    .container-fluid
+    .our-story-slider
+    .slider-items
+    .img-fluid {
+    height: 260px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-slider .slick-prev,
+  .our-story-wraper .container-fluid .our-story-slider .slick-next {
+    height: 34px;
+    width: 34px;
+  }
+
+  .our-story-wraper .container-fluid .our-story-slider .slick-prev::before,
+  .our-story-wraper .container-fluid .our-story-slider .slick-next::before {
+    font-size: 12px;
+  }
+
+  .pruvit-mission-wraper {
+    padding: 30px 0;
+  }
+
+  .pruvit-mission-wraper .card {
+    margin: 50px auto 20px;
+  }
+
+  .pruvit-mission-wraper .card .pruvit-ceo-info {
+    padding: 20px 25px;
+  }
+
+  .pruvit-mission-wraper .card .pruvit-ceo-info .title {
+    max-width: 270px;
+    margin-bottom: 20px;
+  }
+
+  .pruvit-mission-wraper .card .founder .founder-img {
+    max-width: 140px;
+    right: 18px;
+  }
+
+  .our-brand-wraper {
+    padding: 10px 0;
+  }
+
+  .our-brand-wraper .container-fluid .our-brand-text {
+    margin: 0 auto 20px;
+  }
+
+  .our-brand-wraper .container-fluid .our-brand-text h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+
+  .our-brand-wraper .container-fluid .our-brand-text p {
+    margin-bottom: 30px;
+  }
+
+  .our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items {
+    width: 248px;
+    height: 130px;
+    margin: 48px 10px;
+    padding: 20px;
+  }
+
+  .our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items h3 {
+    margin-bottom: 8px;
+  }
+
+  .we-are-pruvit-wraper {
+    padding: 30px 0 80px;
+  }
+
+  .we-are-pruvit-wraper .row .title {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .our-story-wraper .container-fluid .our-story-slider .slick-next {
+    right: 4%;
+  }
+  .our-story-wraper .container-fluid .our-story-slider .slick-prev {
+    left: 4%;
+  }
+}

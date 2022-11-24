@@ -1,0 +1,244 @@
+<main [style.margin-top.px]="discountHeight">
+  <section class="food-experience">
+    <article class="container">
+      <div class="col-12 product-breadcrumbs">
+        <ul class="p-small">
+          <li>
+            <a class="color-gray" (click)="onClickHome()"
+              ><i class="fas fa-home-lg-alt" style="font-size: 12px"></i
+            ></a>
+          </li>
+          <span class="breadcrumb-greater-than">›</span>
+          <li>
+            <a
+              class="color-gray"
+              [routerLink]="['/food']"
+              [queryParams]="language !== 'en' ? { lang: language } : {}"
+              >{{ "explore-menu" | translate }}</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <figure class="row text-center food-exp-banner slt-food">
+        <div class="col-sm-12">
+          <h1>
+            {{
+              isEditSelections
+                ? ("edit-selections" | translate)
+                : ("explore-menu" | translate)
+            }}
+          </h1>
+          <p class="color-gray sub-text" *ngIf="!isEditSelections">
+            {{ "fill-1-or-more-boxes" | translate }}
+          </p>
+        </div>
+      </figure>
+
+      <figure class="row mb-5" *ngIf="isEditSelections">
+        <div class="col-sm-5 col-12 ml-auto mr-auto">
+          <figure class="card nextShipment-card">
+            <div class="row">
+              <div class="col icon">
+                <i class="far fa-calendar"></i>
+              </div>
+              <div class="col">
+                <p class="small-text">{{ "next-shipment" | translate }}</p>
+                <p class="p-small font-bold color-black">
+                  {{
+                    shippingDate
+                      ? shippingDate
+                      : discountInfo.autoshipShippingDate
+                  }}
+                  <a
+                    *ngIf="editOptionsTooltipTitle !== ''"
+                    href
+                    (click)="toggleTooltip($event)"
+                    id="toolTipCard"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    [attr.data-placement]="getTooltipPlacement()"
+                    data-template="<div class='tooltip' role='tooltip'><div class='arrow right'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                    [title]="editOptionsTooltipTitle"
+                    class="info"
+                    ><i class="fas fa-info-circle"></i
+                  ></a>
+                </p>
+                <p class="then-text color-black">
+                  {{ "edit-before" | translate }}
+                  {{ editDate ? editDate : discountInfo.editDate }}
+                </p>
+              </div>
+              <div
+                class="col text-right skip"
+                *ngIf="autoshipScheduleOptions.length > 0"
+              >
+                <div class="dropdown">
+                  <a
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {{ "skip" | translate }}
+                  </a>
+                  <div
+                    aria-labelledby="dropdownMenuButton"
+                    class="dropdown-menu dropdown-menu-right"
+                  >
+                    <button
+                      [disabled]="currentNextRun === autoship.nextRun"
+                      [class.selected]="currentNextRun === autoship.nextRun"
+                      class="dropdown-item"
+                      type="button"
+                      *ngFor="let autoship of autoshipScheduleOptions"
+                      (click)="setNextShippingDate(autoship)"
+                    >
+                      {{
+                        formatShippingDate(autoship.description, true, false)
+                          .shippingDate
+                      }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </figure>
+
+      <figure class="row food-exp-body-wraper" *ngIf="!isEditSelections">
+        <div class="col-sm-12 title-col">
+          <h3 class="color-black">{{ "quick-add" | translate }}</h3>
+        </div>
+        <div class="col-md-6 col-12 food-exp-item quick-add">
+          <div class="card" [style.background]="quickAddMenus.bGColor">
+            <div class="bottom-text">
+              <h3 class="color-white">{{ quickAddMenus.title }}</h3>
+              <h5 class="color-white">{{ quickAddMenus.description }}</h5>
+              <p class="p-small color-white price">
+                {{ boxTotalPrice | currency }} /{{ "week" | translate }}
+              </p>
+              <div class="btns-group">
+                <div
+                  (click)="onClickQuickAddPlus()"
+                  *ngIf="quickAddMenus.quantity === 0"
+                >
+                  <a class="button button-primary button-large add-btn"
+                    ><i class="far fa-plus"></i> {{ "add" | translate }}</a
+                  >
+                </div>
+                <div
+                  *ngIf="quickAddMenus.quantity > 0"
+                  class="button button-primary button-large add-btn added"
+                >
+                  <a (click)="onClickQuickAddMinus()" class="pointer"
+                    ><i class="far fa-minus"></i
+                  ></a>
+                  {{ quickAddMenus.quantity }} {{ "added" | translate }}
+                  <a (click)="onClickQuickAddPlus()" class="pointer"
+                    ><i class="far fa-plus"></i
+                  ></a>
+                </div>
+              </div>
+
+              <p class="p-small">
+                <a
+                  href
+                  (click)="toggleTooltip($event)"
+                  id="toolTipCard"
+                  data-toggle="tooltip"
+                  data-html="true"
+                  data-placement="right"
+                  data-template="<div class='tooltip' role='tooltip'><div class='arrow right'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                  [title]="quickAddMenusList"
+                  class="color-white"
+                  >{{ "whats-in-it" | translate }}
+                </a>
+              </p>
+            </div>
+
+            <div class="top-img img-right">
+              <div
+                class="food-img"
+                [ngStyle]="{
+                  'background-image': 'url(' + quickAddMenus.image + ')'
+                }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <div class="col-sm-12 title-col p-m-0 p-lg-0" *ngIf="newFoods.length > 0">
+        <h3 class="color-black">{{ "new" | translate }}</h3>
+      </div>
+
+      <div
+        class="sk-category__products most-popular food-exp-body-wraper"
+        *ngIf="newFoods.length > 0"
+      >
+        <ngx-slick-carousel [config]="newFoodsSliderConfig">
+          <div
+            ngxSlickItem
+            *ngFor="let food of newFoods; trackBy: newFoodTrackBy"
+            class="col-md-4 col-6 food-exp-item"
+          >
+            <app-food-card [food]="food"></app-food-card>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+
+      <div class="col-sm-12 title-col p-m-0 p-lg-0" *ngIf="!isEditSelections">
+        <h3 class="color-black">{{ "all-products" | translate }}</h3>
+      </div>
+
+      <figure class="row food-exp-body-wraper">
+        <div class="col-sm-12 filter-sort-bar">
+          <div class="filter-col">
+            <a
+              (click)="onClickSubCategory('all')"
+              class="button button-primary"
+              [class.active]="selectedSubCategory === 'all'"
+              >{{ "all" | translate }}</a
+            >
+            <a
+              (click)="onClickSubCategory(subCategory)"
+              class="button button-primary"
+              [class.active]="selectedSubCategory === subCategory"
+              *ngFor="let subCategory of foodSubCategories"
+              >{{
+                subCategory === "OVEN_READY"
+                  ? ("meals" | translate)
+                  : subCategory === "SNACK_PACKS"
+                  ? ("snacks" | translate)
+                  : subCategory
+              }}</a
+            >
+          </div>
+
+          <div class="sort-col">
+            <span (click)="onClickFilterAndSort()"
+              >{{ "filter" | translate }} + {{ "sort" | translate }}</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="col-md-4 col-6 food-exp-item"
+          *ngFor="
+            let food of foods
+              | filterCategory: selectedCategory
+              | filterSubCategory: selectedSubCategory
+              | filterDiet: selectedDiets
+              | sort: selectedSort
+          "
+        >
+          <app-food-card [food]="food"></app-food-card>
+        </div>
+      </figure>
+    </article>
+  </section>
+</main>
+
+<app-foods-box></app-foods-box>

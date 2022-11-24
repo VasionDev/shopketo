@@ -1,0 +1,189 @@
+<div *ngIf="!isWebsites" class="referral__component dashboard--component">
+  <div *ngIf="user && referrer">
+    <div *ngIf="!isProfile">
+      <p>Your unique referral link</p>
+      <h5>
+        <img src="assets/images/referra-pruvit.svg" />{{
+          user.code
+        }}.shopketo.com
+      </h5>
+      <div class="dashboard__buttons mb-2">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menuOrders"
+          class="button button--default"
+        >
+          <i class="far fa-external-link mr-2"></i>Share
+        </button>
+        <mat-menu
+          #menuOrders="matMenu"
+          xPosition="after"
+          class="mat-menu--full"
+        >
+          <button (click)="copy()" class="mat-menu-item--custom" mat-menu-item>
+            <span>Copy</span>
+          </button>
+          <button
+            (click)="redirectFacebook()"
+            class="mat-menu-item--custom"
+            mat-menu-item
+          >
+            <span>Facebook</span>
+          </button>
+          <button
+            (click)="redirectTwitter()"
+            class="mat-menu-item--custom"
+            mat-menu-item
+          >
+            <span>Twitter</span>
+          </button>
+        </mat-menu>
+        <button
+          (click)="manage()"
+          class="button button--default button--grey"
+          data-toggle="modal"
+          data-target="#referralModal"
+        >
+          Manage
+        </button>
+      </div>
+      <p class="mb-2">Your referrer</p>
+      <div *ngIf="referrer" class="referral__component__parent">
+        <div class="referral__component__parent__information">
+          <img
+            *ngIf="referrer.image.imageUrl"
+            src="{{ referrer.image.imageUrl }}"
+          />
+          <img
+            *ngIf="!referrer.image.imageUrl"
+            src="assets/images/avatar2.png"
+          />
+          <span>{{ referrer.name }}</span>
+        </div>
+        <div class="referral__component__parent__contact">
+          <a *ngIf="referrer.phoneNumber" href="tel:{{ referrer.phoneNumber }}"
+            ><i class="far fa-phone-alt"></i
+          ></a>
+          <a *ngIf="referrer.email" href="mailto:{{ referrer.email }}"
+            ><i class="far fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="isProfile"
+      class="d-flex align-items-center justify-content-between"
+    >
+      <div>
+        <p>Your unique referral link</p>
+        <h5>
+          <img src="assets/images/referra-pruvit.svg" />{{
+            user.code
+          }}.shopketo.com
+        </h5>
+      </div>
+      <button
+        (click)="manage()"
+        style="max-width: 100px"
+        class="button button--default button--grey"
+        data-toggle="modal"
+        data-target="#referralModal"
+      >
+        Change
+      </button>
+    </div>
+  </div>
+  <app-loader *ngIf="!user || !referrer" class="payment--loader"></app-loader>
+</div>
+
+<div *ngIf="isWebsites">
+  <a
+    (click)="manage()"
+    class="btn btn-gray"
+    data-toggle="modal"
+    data-target="#referralModal"
+  >
+    Change referral link
+  </a>
+</div>
+
+<div
+  class="modal animate fade right-mobile addresses-modal"
+  id="referralModal"
+  tabindex="-1"
+  aria-labelledby="referralModal"
+  aria-hidden="true"
+>
+  <div class="dashboard--modal modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-hide"
+            ><i class="far fa-times"></i
+          ></a>
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-show"
+            ><i
+              class="fal fa-chevron-left font-weight-normal mr-2"
+              aria-hidden="true"
+            ></i
+            >Dashboard</a
+          >
+        </p>
+        <h3 class="title color-black">Change referral link</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <input
+            type="text"
+            class="form-control referrer--edit--input"
+            #referrerInput="ngModel"
+            pattern="^[0-9a-zA-Z]*$"
+            [(ngModel)]="referrerCode"
+          />
+          <span class="input__pill">shopketo.com</span>
+          <p *ngIf="errorMessage" class="text-danger referrer--alert">
+            {{ errorMessage }}
+          </p>
+          <p
+            *ngIf="referrerInput.errors?.['pattern']"
+            class="text-danger text--15"
+          >
+            Referrer Code should only contain digits and english characters
+          </p>
+          <p *ngIf="referrerCode.length > 128" class="text-danger text--15">
+            Referrer Code should not be more than 128 characters
+          </p>
+          <p *ngIf="successMessage" class="text-success referrer--alert">
+            {{ successMessage }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="button button--default button--grey"
+          data-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="button button--default"
+          (click)="checkReferrerCode()"
+          [disabled]="loading || !referrerCode || referrerInput.errors?.['pattern'] || referrerCode.length > 128"
+        >
+          <span *ngIf="!loading">Save</span>
+          <span *ngIf="loading">Saving</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,622 @@
+<footer class="footer color-black-bg">
+  <div class="footer__top border-bottom-2">
+    <div class="container">
+      <div class="footer__logo-box">
+        <a (click)="onClickLogo()">
+          <app-pruvit-logo-footer></app-pruvit-logo-footer>
+        </a>
+      </div>
+
+      <div class="footer__nav">
+        <div class="footer__nav-content">
+          <div class="footer__nav-item footer__nav-item-d">
+            <figure class="footer__links">
+              <p class="disclaimer-bold color-white-dsrk">
+                {{ "company" | translate }}
+              </p>
+              <ul class="footer__links-list">
+                <li *ngIf="selectedCountry === 'US'">
+                  <a
+                    routerLink="about"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "about" | translate }}</a
+                  >
+                </li>
+                <li>
+                  <a
+                    routerLink="team"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "team" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.shipping_policy !== ''">
+                  <a
+                    href="{{ generalSettings?.shipping_policy }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "shipping-policy" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.refund_policy !== ''">
+                  <a
+                    href="{{ generalSettings?.refund_policy }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "refund-policy" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.privacy !== ''">
+                  <a
+                    href="{{ generalSettings?.privacy }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "privacy-policy" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.terms !== ''">
+                  <a
+                    href="{{ generalSettings?.terms }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "terms" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.policies !== ''">
+                  <a
+                    href="{{ generalSettings?.policies }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "policies-and-procedures" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.income_disclaimer !== ''">
+                  <a
+                    href="{{ generalSettings?.income_disclaimer }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "income-disclaimer" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </figure>
+          </div>
+
+          <!-- footer nav for mobile start -->
+          <div class="accordion footer__nav-item-m" id="accordionExample">
+            <div>
+              <div class="" id="headingOne">
+                <p
+                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                  role="button"
+                >
+                  {{ "company" | translate }}
+                </p>
+              </div>
+
+              <div
+                id="collapseOne"
+                class="collapse"
+                aria-labelledby="headingOne"
+                data-parent="#accordionExample"
+              >
+                <ul class="footer__links-list-m">
+                  <li *ngIf="selectedCountry === 'US'">
+                    <a
+                      routerLink="about"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "about" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      routerLink="team"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "team" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.shipping_policy !== ''">
+                    <a
+                      href="{{ generalSettings?.shipping_policy }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "shipping-policy" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.refund_policy !== ''">
+                    <a
+                      href="{{ generalSettings?.refund_policy }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "refund-policy" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.privacy !== ''">
+                    <a
+                      href="{{ generalSettings?.privacy }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "privacy-policy" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.terms !== ''">
+                    <a
+                      href="{{ generalSettings?.terms }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "terms" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.policies !== ''">
+                    <a
+                      href="{{ generalSettings?.policies }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "policies-and-procedures" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.income_disclaimer !== ''">
+                    <a
+                      href="{{ generalSettings?.income_disclaimer }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "income-disclaimer" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion footer__nav-item-m" id="accordionExample1">
+            <div>
+              <div class="" id="headingTwo">
+                <p
+                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                  role="button"
+                >
+                  {{ "resources" | translate }}
+                </p>
+              </div>
+
+              <div
+                id="collapseTwo"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionExample1"
+              >
+                <ul class="footer__links-list-m">
+                  <li *ngIf="generalSettings?.help_center !== ''">
+                    <a
+                      href="{{ generalSettings?.help_center }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "help-center" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.cloud_url !== ''">
+                    <a
+                      href="{{ generalSettings?.cloud_url }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "cloud-login" | translate }}</a
+                    >
+                  </li>
+                  <li (click)="onClickPromoter()">
+                    <a class="footer__link disclaimer-reg color-gray">{{
+                      "become-a-promoter" | translate
+                    }}</a>
+                  </li>
+                  <li (click)="onClickBlog()" *ngIf="selectedCountry === 'US'">
+                    <a class="footer__link disclaimer-reg color-gray">{{
+                      "blog" | translate
+                    }}</a>
+                  </li>
+                  <li
+                    (click)="onClickResearch()"
+                    *ngIf="selectedCountry === 'US'"
+                  >
+                    <a class="footer__link disclaimer-reg color-gray">{{
+                      "research" | translate
+                    }}</a>
+                  </li>
+                  <li (click)="onClickPress()" *ngIf="selectedCountry === 'US'">
+                    <a class="footer__link disclaimer-reg color-gray">{{
+                      "in-the-press" | translate
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="accordion footer__nav-item-m"
+            id="accordionExample2"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
+          >
+            <div>
+              <div class="" id="headingThree">
+                <p
+                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
+                  data-toggle="collapse"
+                  data-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                  role="button"
+                >
+                  {{ "apps" | translate }}
+                </p>
+              </div>
+
+              <div
+                id="collapseThree"
+                class="collapse"
+                aria-labelledby="headingThree"
+                data-parent="#accordionExample1"
+              >
+                <ul class="footer__links-list-m">
+                  <li>
+                    <a
+                      href="http://pruvitnow.com/pulse"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "pruvit-pulse" | translate }}</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://pruvitnow.com/ped-app"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "ped-pruviteveryday" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.pruvit_tv !== ''">
+                    <a
+                      href="{{ generalSettings?.pruvit_tv }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      >{{ "pruvit-tv" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="accordion footer__nav-item-m"
+            id="accordionExample3"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
+          >
+            <div>
+              <div class="" id="headingFour">
+                <p
+                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
+                  data-toggle="collapse"
+                  data-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                  role="button"
+                >
+                  {{ "follow" | translate }}
+                </p>
+              </div>
+              <div
+                id="collapseFour"
+                class="collapse"
+                aria-labelledby="headingFour"
+                data-parent="#accordionExample3"
+              >
+                <ul class="footer__links-list-m">
+                  <li *ngIf="generalSettings?.facebook !== ''">
+                    <a
+                      href="{{ generalSettings?.facebook }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      ><i class="fab fa-facebook-f"></i
+                      >{{ "facebook" | translate }}</a
+                    >
+                  </li>
+
+                  <li *ngIf="generalSettings?.twitter !== ''">
+                    <a
+                      href="{{ generalSettings?.twitter }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      ><i class="fab fa-twitter"></i
+                      >{{ "twitter" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.instagram !== ''">
+                    <a
+                      href="{{ generalSettings?.instagram }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      ><i class="fab fa-instagram"></i
+                      >{{ "instagram" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.youtube !== ''">
+                    <a
+                      href="{{ generalSettings?.youtube }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      ><i class="fab fa-youtube"></i
+                      >{{ "youtube" | translate }}</a
+                    >
+                  </li>
+                  <li *ngIf="generalSettings?.tiktok !== ''">
+                    <a
+                      href="{{ generalSettings?.tiktok }}"
+                      class="footer__link disclaimer-reg color-gray"
+                      ><i class="fab fa-tiktok"></i
+                      >{{ "tiktok" | translate }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- footer nav for mobile end -->
+
+          <div class="footer__nav-item footer__nav-item-d">
+            <figure class="footer__links">
+              <p class="disclaimer-bold color-white-dsrk">
+                {{ "resources" | translate }}
+              </p>
+              <ul class="footer__links-list">
+                <li *ngIf="generalSettings?.help_center !== ''">
+                  <a
+                    href="{{ generalSettings?.help_center }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "help-center" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.cloud_url !== ''">
+                  <a
+                    href="{{ generalSettings?.cloud_url }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "cloud-login" | translate }}</a
+                  >
+                </li>
+                <li (click)="onClickPromoter()">
+                  <a class="footer__link disclaimer-reg color-gray">{{
+                    "become-a-promoter" | translate
+                  }}</a>
+                </li>
+                <li (click)="onClickBlog()" *ngIf="selectedCountry === 'US'">
+                  <a class="footer__link disclaimer-reg color-gray">{{
+                    "blog" | translate
+                  }}</a>
+                </li>
+                <li
+                  (click)="onClickResearch()"
+                  *ngIf="selectedCountry === 'US'"
+                >
+                  <a class="footer__link disclaimer-reg color-gray">{{
+                    "research" | translate
+                  }}</a>
+                </li>
+                <li (click)="onClickPress()" *ngIf="selectedCountry === 'US'">
+                  <a class="footer__link disclaimer-reg color-gray">{{
+                    "in-the-press" | translate
+                  }}</a>
+                </li>
+              </ul>
+            </figure>
+          </div>
+
+          <div
+            class="footer__nav-item footer__nav-item-d"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
+          >
+            <figure class="footer__links">
+              <p class="disclaimer-bold color-white-dsrk">
+                {{ "apps" | translate }}
+              </p>
+              <ul class="footer__links-list">
+                <li>
+                  <a
+                    href="http://pruvitnow.com/pulse"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "pruvit-pulse" | translate }}</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://pruvitnow.com/ped-app"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "ped-pruviteveryday" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.pruvit_tv !== ''">
+                  <a
+                    href="{{ generalSettings?.pruvit_tv }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    >{{ "pruvit-tv" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </figure>
+          </div>
+
+          <div
+            class="footer__nav-item footer__nav-item-d"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
+          >
+            <figure class="footer__links">
+              <p class="disclaimer-bold color-white-dsrk">
+                {{ "follow" | translate }}
+              </p>
+              <ul class="footer__links-list">
+                <li *ngIf="generalSettings?.facebook !== ''">
+                  <a
+                    href="{{ generalSettings?.facebook }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    ><i class="fab fa-facebook-f"></i
+                    >{{ "facebook" | translate }}</a
+                  >
+                </li>
+
+                <li *ngIf="generalSettings?.twitter !== ''">
+                  <a
+                    href="{{ generalSettings?.twitter }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    ><i class="fab fa-twitter"></i
+                    >{{ "twitter" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.instagram !== ''">
+                  <a
+                    href="{{ generalSettings?.instagram }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    ><i class="fab fa-instagram"></i
+                    >{{ "instagram" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.youtube !== ''">
+                  <a
+                    href="{{ generalSettings?.youtube }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    ><i class="fab fa-youtube"></i
+                    >{{ "youtube" | translate }}</a
+                  >
+                </li>
+                <li *ngIf="generalSettings?.tiktok !== ''">
+                  <a
+                    href="{{ generalSettings?.tiktok }}"
+                    class="footer__link disclaimer-reg color-gray"
+                    ><i class="fab fa-tiktok"></i>{{ "tiktok" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </figure>
+          </div>
+          <div class="footer__nav-item payments-nav">
+            <figure class="footer__links text-right">
+              <p
+                class="disclaimer-bold color-white-dsrk footer__payments-title"
+              >
+                🔒 {{ "secure-payments" | translate }}
+              </p>
+              <div class="footer__payments">
+                <p class="verified-trust-logo">
+                  <a
+                    href="https://seal.godaddy.com/verifySeal?sealID=3yKVEmpS4DcxZvCif5EIPMWgq9VtV87T8i1xgMwbHkti2VZC9xb3wDT52JZM"
+                    ><img
+                      src="assets/images/verified-and-secured-logo.svg"
+                      alt="verified"
+                      class="img-fluid footer__verified"
+                  /></a>
+                  <a
+                    href="https://sealserver.trustwave.com/cert.php?customerId=89f7b095117b4cc193bafffd7d000c39"
+                  >
+                    <img
+                      src="assets/images/secure-trust-seal.png"
+                      alt="Trust logo"
+                      class="img-fluid secure-trust"
+                    />
+                  </a>
+                </p>
+
+                <ul
+                  class="footer__payments-icons"
+                  [class.icons4]="selectedCountry !== 'MX'"
+                >
+                  <li>
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/visa.png"
+                        alt="visa"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                  <li>
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/mastercard.png"
+                        alt="mastercard"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                  <li>
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/americanexpress.png"
+                        alt="americanexpress"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                  <li>
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/PayPal.png"
+                        alt="paypal"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                  <li *ngIf="selectedCountry === 'MX'">
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/oxxo.png"
+                        alt="oxxo"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                  <li
+                    *ngIf="selectedCountry === 'CA' || selectedCountry === 'US'"
+                  >
+                    <a class="footer__payments-img"
+                      ><img
+                        src="assets/images/sezzle-logo.png"
+                        alt="sezzle"
+                        class="img-fluid"
+                    /></a>
+                  </li>
+                </ul>
+              </div>
+            </figure>
+
+            <p
+              class="copyright-text footer__bottom-copy color-gray"
+              *ngIf="selectedCountry === 'AU'; else nz"
+            >
+              {{ "copyright" | translate }} © {{ getCurrentYear() }}
+              {{ "Ketones AU, LLC. All rights reserved." }}
+            </p>
+            <ng-template #nz>
+              <p
+                class="copyright-text footer__bottom-copy color-gray"
+                *ngIf="selectedCountry === 'NZ'; else eu"
+              >
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "Ketones NZ, LLC. All rights reserved." }}
+              </p>
+            </ng-template>
+            <ng-template #eu>
+              <p
+                class="copyright-text footer__bottom-copy color-gray"
+                *ngIf="
+                  isEUCountryExceptGB || selectedCountry === 'GB';
+                  else default
+                "
+              >
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "Ketones EU, LLC. All rights reserved." }}
+              </p>
+            </ng-template>
+            <ng-template #default>
+              <p class="copyright-text footer__bottom-copy color-gray">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+
+                {{ "pruvit-all-rights-reserved" | translate }}
+              </p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="footer__bottom-content color-gray">
+        <p class="copyright-text mb-2" *ngIf="isEUCountryExceptGB">
+          {{ "all-payments-processed-by" | translate }} /
+          <a href="mailto:supporteu@pruvithq.com">supporteu@pruvithq.com</a>
+        </p>
+        <p class="copyright-text">
+          † {{ "statements-not-evaluated-by-1" | translate }}
+          {{ "statements-not-evaluated-by-2" | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

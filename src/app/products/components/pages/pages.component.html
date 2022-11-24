@@ -1,0 +1,15 @@
+<app-loader *ngIf="isRedirectionStarted; else pages"></app-loader>
+
+<ng-template #pages>
+  <main
+    class="sk-main"
+    *ngIf="page !== ''; else notFound"
+    [style.margin-top.px]="discountHeight"
+  >
+    <div [innerHTML]="page | textSanitizer: 'html'"></div>
+  </main>
+</ng-template>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

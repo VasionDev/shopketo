@@ -1,0 +1,139 @@
+<main
+  class="sk-main"
+  *ngIf="isCountryAvailable; else notFound"
+  [style.margin-top.px]="discountHeight"
+>
+  <section *ngIf="isLoaded; else loader" class="sk-specialists-wraper">
+    <article class="container">
+      <figure class="sk-meet-title text-center">
+        <h1 class="color-black">{{ "meet-the-team" | translate }}</h1>
+        <h4 class="color-black sk-title-p">
+          {{ "a-global-community-of-pruvers" | translate }}
+        </h4>
+      </figure>
+
+      <figure *ngIf="specialists.length" class="team-row">
+        <div *ngFor="let specialist of specialists" class="card team-card">
+          <div class="team-img">
+            <img [src]="specialist.avatar" alt="image" class="img-fluid" />
+          </div>
+          <div class="team-details text-center color-black">
+            <h3>{{ specialist.name }}</h3>
+            <p class="color-gray-dark p-small mt-3">
+              {{ specialist.designation }}
+            </p>
+            <div class="social-icon">
+              <a
+                *ngIf="specialist.facebook !== ''"
+                [href]="specialist.facebook"
+                target="_blank"
+                ><i class="fab fa-facebook-square"></i
+              ></a>
+              <a
+                *ngIf="specialist.instagram !== ''"
+                [href]="specialist.instagram"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                *ngIf="specialist.linkedin !== ''"
+                [href]="specialist.linkedin"
+                target="_blank"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+            <button
+              class="btn gray-btn"
+              data-toggle="modal"
+              data-target="#teamDetailsModal"
+              (click)="modalData = specialist"
+            >
+              {{ "read-bio" | translate }}
+            </button>
+          </div>
+        </div>
+      </figure>
+      <figure class="row our-inner-title">
+        <div class="col-sm-12">
+          <h2 class="color-black">
+            {{ "one-of-our-inner-strengths" | translate }}
+          </h2>
+          <p class="color-gray disclaimer-reg mb-sm-5 mb-3">
+            {{
+              "pruvit-ventures-inc-does-not-provide-any-medical-advice"
+                | translate
+            }}
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+</main>
+
+<div
+  class="modal fade sk-modal specialists-modal"
+  id="teamDetailsModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header flex-column gray-bg border-bottom-0">
+        <p class="w-100 d-flex justify-content-between">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close"
+          >
+            <i class="fal fa-times"></i
+          ></a>
+        </p>
+      </div>
+
+      <div class="modal-body">
+        <div
+          class="team-content d-flex align-items-center justify-content-between"
+        >
+          <div class="title">
+            <h3 class="color-black">{{ modalData?.name }}</h3>
+            <span class="color-gray p-small">{{ modalData?.designation }}</span>
+            <div class="social-icon">
+              <a
+                *ngIf="modalData?.facebook !== ''"
+                [href]="modalData?.facebook"
+                target="_blank"
+                ><i class="fab fa-facebook-square"></i
+              ></a>
+              <a
+                *ngIf="modalData?.instagram !== ''"
+                [href]="modalData?.instagram"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                *ngIf="modalData?.linkedin !== ''"
+                [href]="modalData?.linkedin"
+                target="_blank"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+          <div class="team-img d-flex align-items-center">
+            <img [src]="modalData?.avatar" alt="image" class="img-fluid" />
+          </div>
+        </div>
+        <p class="p-small description" [innerHTML]="modalData?.body"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of webTeamBrianModal -->
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

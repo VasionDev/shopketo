@@ -1,0 +1,306 @@
+<article *ngIf="category" class="container">
+    <figure class="row breadcrumbs">
+        <div class="col-12">
+            <ul class="disclaimer-reg">
+                <li>
+                    <a class="color-gray" routerLink="/dashboard">
+                        <i class="fas fa-home-lg-alt" style="font-size: 12px"></i>
+                    </a>
+                </li>
+                <span class="breadcrumb-greater-than">&#8250;</span>
+                <li>
+                    <a class="color-gray" routerLink="/dashboard/training-center">Training center</a>
+                </li>
+                <span class="breadcrumb-greater-than">&#8250;</span>
+                <li>
+                    <span class="color-gray">{{category.catName}}</span>
+                </li>
+            </ul>
+        </div>
+    </figure>
+    <figure class="row training-center-wrap">
+        <div class="col-12">
+            <h2 class="color-black mb-4 mb-sm-5">{{category.catName}}</h2>
+        </div>
+        <div class="col-lg-3 col-12 training-left-col">
+            <div class="challenge-side">
+                <div class="circle-progress-wrap">
+                    <!-- <img [src]="category.catImage" class="img-fluid" alt="icon"> -->
+                    <circle-progress 
+                        [percent]="category.completion_percentage" 
+                        [imageSrc]="category.catImage" 
+                        [showImage]=true
+                        [responsive]=true
+                        [radius]="70"
+                        [showBackground]=true
+                        [backgroundColor]="'transparent'"
+                        [outerStrokeWidth]="6" 
+                        [innerStrokeWidth]="6"
+                        [space]="-6"
+                        [imageHeight]=105
+                        [imageWidth]=105
+                        [outerStrokeColor]="'#ff9000'" 
+                        [innerStrokeColor]="'#030c211f'"
+                        [animation]="true" 
+                        [animationDuration]="400" 
+                        [startFromZero]=false
+                        class="category-progress-wraper"
+                        >
+                    </circle-progress>
+                </div>
+                <div *ngIf="nextLesson" class="join-comunity text-center">
+                    <p class="p-small mt-2">Next up is</p>
+                    <a (click)="lessonDetails(nextPost, nextLesson)" class="p-small font-bold link-hover pointer" style="text-decoration:none">{{nextLesson?.ques}}</a>
+                    <button (click)="lessonDetails(nextPost, nextLesson)" class="btn button-primary font-bold w-100 mt-3 mb-4">
+                        <i class="far fa-arrow-right mr-2" aria-hidden="true"></i>Keep going</button>
+                </div>
+            </div>
+        </div>
+        <!-- END of training-left-col -->
+    
+        <div class="col-lg-9 col-12 websites-wraper training-right-col">
+            <div class="accordion" id="accordionTrainingCenter">
+                <div *ngFor="let post of category.posts; let i = index">
+                    <div *ngIf="isPrerequisiteComplete(post)" class="card web-card challenge-card mt-0 collapse-head collapsed pointer" data-toggle="collapse" [attr.data-target]="'#collapse-'+ (i) + '-lesson'" [attr.aria-expanded]="i==expandIndex" [attr.aria-controls]="'collapse-'+ (i) + '-lesson'">
+                        <div class="inner-text d-flex align-items-center">
+                            <div class="left-text">
+                                <h4 class="color-black">{{post.learnTitle}}</h4>
+                            </div>
+                            <div class="right ml-auto d-flex align-items-center">
+                                <span class="compt-tag disclaimer-reg color-white" [class.yellow-bg]="getCompletedLessonNumber(post) !== post.lesson.length">{{getCompletedLessonNumber(post)}}/{{post.lesson.length}} completed</span>
+                                <a *ngIf="post.resource && post.resource.length" (click)="onResourceModal(post.resource, $event)" class="res-btn pointer">
+                                    <i class="fa-regular fa-book" data-toggle="tooltip" title="Resources"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!isPrerequisiteComplete(post)" class="card web-card challenge-card">
+                        <div class="inner-text d-sm-flex align-items-center justify-content-between">
+                            <div class="left-text">
+                                <h4 class="color-black">{{post.learnTitle}}</h4>
+                            </div>
+                            <div class="right com-module d-flex align-items-center">
+                                <a (click)="prerequisiteModuleList(post.learnTitle, post.prerequisites)" class="color-gray disclaimer-bold d-flex align-items-center pointer"><i class="far fa-lock mr-2 icon-size"></i>Complete these module/s
+                                    first<i class="fa-regular fa-chevron-right ml-2 icon-size"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="isPrerequisiteComplete(post)" id="collapse-{{i + '-lesson'}}" data-parent="#accordionTrainingCenter" [attr.aria-labelledby]="'heading-' + (i) + 'test'" class="collapse-body collapse card web-card challenge-card" [class.show]="i==expandIndex">
+                        <ul class="select-list">
+                            <li *ngFor="let lesson of post.lesson; let i = index" class="border-bottom">
+                                <a (click)="lessonDetails(post, lesson)" class="d-flex align-items-center text-decoration-none pointer">
+                                    <i [ngClass]="!isCompleted(post.learnID, lesson.lesson_id) ? 'far fa-circle circle-icon mr-3' : 'fas fa-check-circle circle-icon mr-3 green-color'" class="mr-3" aria-hidden="true"></i>
+                                    <span class="color-black p-small">{{lesson.ques}}</span>
+                                    <i class="fal fa-chevron-right font-weight-normal ml-auto" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </figure>
+</article>
+
+<!-- all modal html start -->
+
+<div class="modal animate fade right-mobile addresses-modal join-community-modal" id="lessonDetailModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+     
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-hide pointer"><i class="fal fa-times"></i></a>
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-show pointer"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <h3 class="title color-black">{{lesson.ques}}</h3>
+            </div>
+            <div *ngIf="!modalSpinner">
+                <div class="modal-body">
+                    <div class="card modal-body-card">
+                        <div *ngIf="lesson.id != ''" class="video-warp">
+                            <div class="wistia_responsive_wrapper" style="height: 100%;left: 0;top: 0;width: 100%;">
+                                <div class="wistia_embed wistia_async_{{lesson.id}} autoPlay=false seo=false videoFoam=true"
+                                    style="height: 100%; width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lesson-modal-detail-content" [innerHTML]="lesson.ans"></div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer justify-content-between">
+                    <div  *ngIf="lesson.next_lesson" class="btn-groups">
+                        <button class="btn btn-gray mb-show pointer" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button (click)="onNextLesson()" class="btn button-primary mb-show pointer">Next lesson</button>
+                    </div>
+                    <div *ngIf="lesson.next_lesson" class="btn-groups mb-hide">
+                        <button class="btn btn-gray pointer" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button (click)="onNextLesson()" class="btn button-primary pointer"><i class="far fa-arrow-right mr-2"></i>Next lesson</button>
+                    </div>
+                    <div *ngIf="!lesson.next_lesson" class="btn-groups">
+                        <button class="btn btn-gray mb-show pointer" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button (click)="onCompleteLesson()" class="btn button-primary mb-show pointer">Complete module</button>
+                    </div>
+                    <div *ngIf="!lesson.next_lesson" class="btn-groups mb-hide">
+                        <button class="btn btn-gray pointer" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button (click)="onCompleteLesson()" class="btn button-primary pointer" style="background: #41BF4E;">
+                            <i class="far fa-arrow-right mr-2"></i>Complete module</button>
+                    </div>
+                </div>
+            </div>
+            <app-loader *ngIf="modalSpinner" class="payment--loader"></app-loader>
+        </div>
+    </div>
+</div>
+
+<div class="modal animate fade right-mobile addresses-modal congratulationsmodal" id="congratulationsModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-hide pointer"></a>
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-show pointer">
+                        <i class="fal fa-chevron-left font-weight-normal mr-2 color-black" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <h3 class="title color-black">🎉 Congratulations!</h3>
+            </div>
+
+            <div class="modal-body">
+                <p class="p-small color-gray">You just completed <span class="font-bold">{{post.learnTitle}}.</span>
+                </p>
+            </div>
+
+            <div class="modal-footer d-block pb-4" style="border-top: none;">
+                <div class="btn-groups">
+                    <a class="btn btn-gray mb-show pointer" data-dismiss="modal" aria-label="Close">Back</a>
+                    <a class="btn button-primary mb-show pointer">Continue</a>
+                </div>
+                <div class="btn-groups mb-hide">
+                    <button (click)="onTrainingCenterHome()" class="btn btn-gray pointer" data-dismiss="modal" aria-label="Close">Back to Training Center</button>
+                    <button (click)="onNextModule()"  class="btn button-primary pointer">Continue to next module</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END of congratulationsmodal -->
+
+<div class="modal animate fade right-mobile addresses-modal resources-modal" id="incompletedLessonModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-hide pointer"><i
+                            class="fal fa-times"></i></a>
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-show pointer"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <h3 class="title color-black">{{post.learnTitle}}</h3>
+                <P class="p-small color-gray">Please complete the following lesson/s to unlock</P>
+            </div>
+
+            <div class="modal-body">
+                <div class="resource-content">
+                    <div *ngFor="let lesson of incompleteLesson; let i = index" class="items d-flex align-items-center justify-content-between border-bottom">
+                        <div class="left-side">
+                            <span class="p-small color-black font-bold"><i class="far fa-file mr-2"></i>{{lesson.ques}}</span>
+                        </div>
+                        <div class="right-side p-small font-bold">
+                            <a (click)="lessonDetails(post, lesson)" class="link-hover d-flex align-items-center pointer"><i class="far fa-arrow-right mr-2"
+                                    aria-hidden="true"></i>Open lesson</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal animate fade right-mobile addresses-modal resources-modal" id="lockedModuleModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-hide pointer"><i
+                            class="fal fa-times"></i></a>
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-show pointer"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <h3 class="title color-black">{{prerequisiteModalTitle}}</h3>
+                <P class="p-small color-gray">Please complete the following module/s to unlock</P>
+            </div>
+
+            <div class="modal-body">
+                <div class="resource-content">
+                    <div *ngFor="let x_post of prerequisitesPosts; let i = index"
+                        class="items d-flex align-items-center justify-content-between border-bottom">
+                        <div class="left-side">
+                            <span class="p-small color-black font-bold"><i
+                                    class="far fa-file mr-2"></i>{{x_post.learnTitle}}</span>
+                        </div>
+                        <div class="right-side p-small font-bold">
+                            <a (click)="onExpandModule(x_post.index)"
+                                class="link-hover d-flex align-items-center pointer"><i class="far fa-arrow-right mr-2"
+                                    aria-hidden="true"></i>Open module</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal animate fade right-mobile addresses-modal resources-modal" id="resourcesModal" tabindex="-1"
+    aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-hide pointer"><i
+                            class="far fa-times"></i></a>
+                    <a data-dismiss="modal" aria-label="Close" class="modal-close mb-show pointer"><i
+                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <h3 class="title color-black">Resources</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="resource-content">
+                    <div *ngFor="let resource of resources; let i = index" class="items d-flex align-items-center border-bottom">
+                        <div class="left-side">
+                            <p class="p-small color-black font-bold">
+                                <i class="fa-regular fa-file icon"></i>{{resource.title}}
+                            </p>
+                        </div>
+                        <div class="right-side ml-auto">
+                            <a href="{{resource.external_link}}" target="_blank" class="link-hover mr-2 folder-icon"><i class="far fa-folders"></i></a>
+                            <i class="fa-regular fa-arrow-up-right color-gray"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END of resources-modal -->
+
+<app-loader *ngIf="!category" class="payment--loader"></app-loader>

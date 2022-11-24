@@ -1,0 +1,28 @@
+<section class="redeem-feature-wrap">
+  <article class="container">
+    <figure class="row">
+      <div class="col-sm-12 text-center">
+        <div class="img-wrap rounded-circle">
+          <img src="{{ userAvatar }}" class="img-fluid" alt="Redeem-sample" />
+        </div>
+        <h2 class="color-dark">
+          {{ "you-dont-have-access-to-this-page" | translate }}
+        </h2>
+        <div class="promoter-card">
+          <p class="color-black disclaimer-bold">
+            {{ "it-is-available-to" | translate }}
+          </p>
+          <h3 class="color-black">{{ accessLevelTitle }}</h3>
+        </div>
+
+        <p class="color-black pt-2">
+          👤 {{ "you-are-logged-in-as" | translate }}
+          <strong>{{ user?.mvuser_name }}</strong>
+        </p>
+        <button class="button button-primary buy-now-lg" (click)="onLogOut()">
+          {{ "logout" | translate }}
+        </button>
+      </div>
+    </figure>
+  </article>
+</section>

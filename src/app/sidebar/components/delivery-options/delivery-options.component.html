@@ -1,0 +1,48 @@
+<div class="sk-cart color-white-bg"
+  [ngStyle]="{ 'touch-action': 'none' }">
+  <figure class="sk-cart__header d-flex justify-content-between">
+    <h4 class="color-black sk-cart__header-title">
+      {{ 'delivery-options' | translate }}
+    </h4>
+    <a (click)="onClickDeliveryOptions()"
+      class="sk-cart__close-btn pointer">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L13 13" stroke="#131313" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M13 1L1 13" stroke="#131313" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </figure>
+
+  <section class="sk-cart__content-width">
+    <figure
+      class="sk-cart__added-product sk-cart__please-note text-center">
+      <img src="assets/images/please-note-icon.png" alt="High five"
+        class="img-fluid sk-cart__cart-img" />
+
+      <h4 class="color-black sk-cart__header-title">
+        {{ 'save-with-smartship' | translate }}</h4>
+    </figure>
+
+    <figure class="sk-cart__please-note--text">
+      <p class="p-small color-gray">
+        {{ 'setup-smartship-with-discount' | translate }}
+      </p>
+      <p class="p-small color-gray">
+        {{ 'plus-eligible-by-referring-2-smartship' | translate }}
+      </p>
+      <p class="p-small color-gray">
+        {{ 'cancel-or-adjust-order-anytime' | translate }}
+      </p>
+    </figure>
+
+    <figure class="text-center">
+      <button class="button button-primary buy-now sk-cart__cart-btn"
+        (click)="onClickDeliveryOptions()">
+        {{ 'ok-got-it' | translate }}
+      </button>
+    </figure>
+  </section>
+</div>

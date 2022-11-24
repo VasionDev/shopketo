@@ -1,0 +1,108 @@
+<section class="food-step-count-bar">
+  <article class="container">
+    <figure class="row">
+      <div class="col inner-wrap mb-hide">
+        <p class="preload-text" *ngIf="box.boxItems === 0; else discountText">
+          <!-- <a class="pointer" (click)="preloadRyansMenu()"> <i
+              class="fas fa-plus-circle"></i> Quick Add <span
+              class="color-black">{{
+              preloadedMenus?.text }}</span>
+          </a> -->
+        </p>
+        <ng-template #discountText>
+          <p class="preload-text" *ngIf="discount?.discountPercent">
+            🚨 {{ "save-up-to" | translate }}
+            <span class="orng"
+              >{{ discount?.discountPercent }}% {{ "off" | translate }}</span
+            >
+            {{ "by-adding" | translate }} {{ discountedItems }}
+            {{ "more-items" | translate }}
+          </p>
+        </ng-template>
+      </div>
+      <div class="col inner-wrap">
+        <div class="step-btn-group">
+          <div class="alrt-msg" *ngIf="box.boxItems === 1 && box.boxNo === 1">
+            {{ "we-give-you-best-value" | translate }}, {{ "and" | translate }}
+            {{ "freshest-food" | translate }}, {{ "by-shipping" | translate }}
+            {{ discountInfo.itemsPerBox }} {{ "items-per-box" | translate }}
+          </div>
+          <div
+            class="alrt-msg"
+            *ngIf="
+              discountInfo.itemsPerBox &&
+              box.boxNo === 2 &&
+              box.boxItems === discountInfo.itemsPerBox + 1
+            "
+          >
+            {{ "youre- filling-up-2nd-box" | translate }}
+            {{ discountInfo.itemsPerBox }} {{ "items" | translate }}.
+          </div>
+          <a
+            class="button button-primary count-btn"
+            (click)="onClickBox()"
+            *ngIf="box.boxItems !== box.boxLimit; else completedBox"
+          >
+            <i class="fas fa-box"></i>
+            <span>{{ box.boxItems }}</span>
+            /{{ box.boxLimit }}
+          </a>
+          <ng-template #completedBox>
+            <a
+              class="button button-primary count-btn completed"
+              (click)="onClickBox()"
+              ><i class="fas fa-box"></i>
+              <span>{{ box.boxItems }}</span>
+              /{{ box.boxLimit }}
+            </a>
+          </ng-template>
+
+          <a
+            class="button button-primary button-icon disabled"
+            *ngIf="box.boxItems !== box.boxLimit; else addToCart"
+            >{{ "box" | translate }}
+            {{ box.boxNo }}
+            {{ "is-not-full" | translate }}</a
+          >
+          <ng-template #addToCart>
+            <a
+              (click)="onCheckoutSelect()"
+              class="button button-primary button-icon"
+              >{{
+                isEditSelections
+                  ? ("confirm_selections" | translate)
+                  : "Continue to shipping"
+              }}
+              {{
+                isEditSelections ? "(" + (boxTotalPrice | currency) + ")" : ""
+              }}</a
+            >
+          </ng-template>
+        </div>
+      </div>
+      <div class="col inner-wrap mb-show">
+        <p
+          class="preload-text"
+          *ngIf="box.boxItems === 0; else discountTextMobile"
+        >
+          <!-- <a
+            class="pointer" (click)="preloadRyansMenu()"> <i
+              class="fas fa-plus-circle"></i> Quick Add <span
+              class="color-black">{{
+              preloadedMenus?.text }}</span>
+            </a> -->
+        </p>
+        <ng-template #discountTextMobile>
+          <p class="preload-text" *ngIf="discount?.discountPercent">
+            🚨 {{ "save-up-to" | translate }}
+            <span class="orng"
+              >{{ discount?.discountPercent }}% {{ "off" | translate }}</span
+            >
+            {{ "by-adding" | translate }} {{ discountedItems }}
+            {{ "more-items" | translate }}
+          </p>
+        </ng-template>
+      </div>
+    </figure>
+  </article>
+</section>

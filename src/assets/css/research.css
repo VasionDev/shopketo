@@ -1,0 +1,500 @@
+.text-bold {
+  font-weight: 700;
+}
+.color-gray-dark {
+  color: #8a8a8e;
+}
+
+.research-hero {
+  border-bottom: 1px solid #c8c8c8;
+}
+.research-hero .research-title {
+  margin-top: 49px;
+}
+.research-hero .research-title h4 {
+  margin-top: 15px;
+  margin-bottom: 43px;
+}
+.research-hero .research-slider {
+  margin-bottom: 70px;
+}
+.research-hero .research-slider .slick-disabled {
+  display: none !important;
+}
+.research-hero .research-slider .slick-prev,
+.research-hero .research-slider .slick-next {
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  z-index: 10;
+  transition: all 0.2s;
+  background: #fff;
+}
+.research-hero .research-slider .slick-prev:hover,
+.research-hero .research-slider .slick-next:hover {
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.25);
+}
+.research-hero .research-slider .slick-prev::before,
+.research-hero .research-slider .slick-next::before {
+  content: "\f054";
+  margin-left: 3px;
+  font-family: "Font Awesome 6 Pro";
+  color: #2152ff;
+  opacity: 1;
+  font-size: 22px;
+  margin-right: 3px;
+}
+.research-hero .research-slider .slick-prev {
+  left: -8px;
+}
+.research-hero .research-slider .slick-prev::before {
+  content: "\f053";
+  margin-right: 3px;
+}
+.research-hero .research-slider .slick-next {
+  right: -8px;
+}
+.research-hero .research-slider .slick-next::before {
+  content: "\f054";
+  margin-right: 3px;
+}
+.research-hero .slider {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  min-height: 460px;
+}
+.research-hero .slider-img {
+  position: relative;
+}
+.research-hero .slider-img img {
+  width: 100%;
+  height: 235px;
+}
+.research-hero .slider-img .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  box-shadow: 0px 14px 34px rgba(2, 0, 29, 0.3);
+  border-radius: 86px;
+}
+.research-hero .slider-img .play-icon svg {
+  transition: all 0.3s ease-in-out;
+}
+.research-hero .slider-img .play-icon svg:hover {
+  fill: #204ceb;
+}
+.research-hero .slider .inner {
+  padding: 30px 32px 32px;
+}
+.research-hero .slider .inner h3 {
+  max-width: 306px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+.research-hero .dr-details {
+  position: relative;
+  overflow: hidden;
+}
+.research-hero .dr-details .title h2 {
+  max-width: 373px;
+  width: 100%;
+  margin: 120px auto 30px;
+}
+.research-hero .dr-details .dr-name {
+  text-transform: uppercase;
+  text-align: right;
+}
+.research-hero .dr-details .dr-name p {
+  font-family: rift, sans-serif;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+}
+.research-lab {
+  margin-bottom: 70px;
+}
+.research-lab .title {
+  margin-top: 134px;
+}
+.research-lab .title h2 {
+  margin-bottom: 28px;
+}
+.research-lab .title p {
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 54px;
+}
+.research-lab .research-card {
+  position: relative;
+  min-height: 560px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+.research-lab .research-card .card-front {
+  background-color: #ffffff;
+}
+.research-lab .research-card .card-front,
+.research-lab .research-card .card-back {
+  border-radius: 20px;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.research-lab .research-card .card-back {
+  background: #e5e5ea;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.research-lab .research-card .card-back .card-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #ffffff;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #000000;
+  border-radius: 100px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.research-lab .research-card .card-back .card-close:hover {
+  opacity: 1;
+}
+.research-lab .research-card .card-back p {
+  margin-bottom: 27px;
+}
+.research-lab .research-card .active {
+  transform: rotateY(0deg);
+}
+.research-lab .research-card h3 {
+  padding-top: 62px;
+  margin-bottom: 30px;
+}
+.research-lab .research-card p {
+  max-width: 360px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+.research-lab .research-card a {
+  font-weight: 700;
+  color: #2152ff;
+  letter-spacing: -0.05em;
+}
+.research-lab .research-card .img {
+  max-width: 200px;
+  margin: 0 auto;
+  min-height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.research-wild {
+  margin-bottom: 50px;
+}
+.research-wild .title p {
+  max-width: 550px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.research-wild .inner-content {
+  list-style: none;
+  margin-bottom: 28px;
+}
+.research-wild .inner-content .item {
+  padding-bottom: 16px;
+}
+.research-wild .inner .bottom-info {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 65px 0;
+}
+
+/*---------  End of research style ---------*/
+
+.research-wild .KetoWild-accordion {
+  max-width: 800px;
+  width: 100%;
+  margin: 60px auto 0;
+}
+.research-wild .KetoWild-accordion .card {
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #c8c8c8;
+}
+.research-wild .KetoWild-accordion .card .card-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 16px 0 22px;
+}
+
+.research-wild .KetoWild-accordion .card .card-header .btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 100%;
+  letter-spacing: -0.05em;
+  color: #131313;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+}
+
+.research-wild .KetoWild-accordion .card .card-header .btn svg {
+  position: absolute;
+  right: 2px;
+  top: 7px;
+}
+.research-wild
+  .KetoWild-accordion
+  .card
+  .card-header
+  .btn[aria-expanded="false"]
+  svg {
+  transform: rotate(0deg);
+}
+.research-wild
+  .KetoWild-accordion
+  .card
+  .card-header
+  .btn[aria-expanded="true"]
+  svg {
+  transform: rotate(45deg);
+}
+.research-wild .KetoWild-accordion .card .card-body {
+  background: transparent;
+  padding: 0;
+}
+.research-wild .KetoWild-accordion .card .card-body ul {
+  margin: -12px 0 15px;
+  padding-left: 4px;
+  padding-right: 80px;
+}
+.research-wild .KetoWild-accordion .card .card-body ul li {
+  list-style: none;
+  color: #2152ff;
+  padding: 7px 0;
+}
+.research-wild .KetoWild-accordion .card .card-body ul li a {
+  color: #2152ff;
+}
+.research-wild .KetoWild-accordion .card .card-header .btn svg {
+  transition: transform 0.3s ease-out;
+}
+.research-wild .KetoWild-accordion .card .card-header .btn:hover,
+.research-wild .KetoWild-accordion .card .card-header .btn:hover svg path {
+  color: #2152ff;
+  fill: #2152ff;
+  transition: all 0.15s ease-in-out;
+}
+
+.research-wild .KetoWild-accordion .card .card-body ul li {
+  position: relative;
+  padding-left: 34px;
+}
+.research-wild .KetoWild-accordion .card .card-body ul li::before {
+  content: "\f35d";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  left: 0;
+}
+
+/*------------- Start of Mobile @media CSS -------------*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .research-hero .slider {
+    min-height: 380px;
+  }
+  .research-hero .slider-img img {
+    width: 100%;
+    height: 180px;
+  }
+  .research-hero .slider .inner {
+    padding: 20px 24px 24px;
+  }
+  .research-hero .slider .inner h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 1024px) ----*/
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .research-hero .dr-details .dr-name {
+    top: 70%;
+  }
+  .research-lab .research-card {
+    min-height: 500px;
+  }
+  .research-lab .research-card h3 {
+    padding-top: 31px;
+    margin-bottom: 0;
+  }
+  .research-lab .research-card p {
+    padding: 20px;
+    margin-bottom: 0;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 900px) ----*/
+
+@media (min-width: 991px) {
+  .research-lab .research-card .text-wrap {
+    min-height: 280px;
+  }
+}
+/*---- End of @media (max-width: 991px) ----*/
+
+@media (max-width: 767px) {
+  .research-hero .research-title {
+    margin-top: 30px;
+  }
+  .research-hero .research-title h4 {
+    margin-bottom: 30px;
+  }
+  .research-hero .research-slider {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .research-hero .research-slider .col-md-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .research-hero .research-slider .slick-prev,
+  .research-hero .research-slider .slick-next {
+    width: 34px;
+    height: 34px;
+  }
+  .research-hero .research-slider .slick-prev::before,
+  .research-hero .research-slider .slick-next::before {
+    font-size: 12px;
+  }
+  .research-hero .research-slider .slick-prev {
+    left: 5px;
+  }
+  .research-hero .research-slider .slick-next {
+    right: 5px;
+  }
+  .research-hero .slider {
+    margin-bottom: 0;
+    min-height: 250px;
+  }
+  .research-hero .slider-img img {
+    height: auto;
+  }
+  .research-hero .slider .inner {
+    padding: 15px 5px;
+  }
+  .research-hero .slider .inner h3 {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+  .research-hero .dr-details .title {
+    text-align: center;
+  }
+  .research-hero .dr-details .title h2 {
+    margin: 24px 0 30px;
+    max-width: 200px;
+    text-align: left;
+  }
+  .research-hero .dr-details .dr-name {
+    padding-left: 14%;
+    text-align: left;
+    margin-top: 50px;
+  }
+  .research-hero .dr-details .img {
+    margin-top: -140px;
+    text-align: right;
+    position: relative;
+    z-index: -1;
+  }
+  .research-lab {
+    margin-bottom: 10px;
+  }
+  .research-lab .title {
+    margin-top: 50px;
+  }
+  .research-lab .research-card {
+    min-height: 400px;
+  }
+  .research-lab .research-card h3 {
+    padding-top: 30px;
+    margin-bottom: 15px;
+  }
+  .research-wild {
+    margin-bottom: 0;
+  }
+  .research-wild .inner-content {
+    margin-bottom: 15px;
+  }
+  .research-wild .inner .bottom-info {
+    margin: 22px 0;
+  }
+  .research-wild .KetoWild-accordion {
+    margin: 25px auto 0;
+  }
+  .research-wild .KetoWild-accordion .card .card-header .btn svg {
+    top: 2px;
+  }
+  .research-wild .KetoWild-accordion .card .card-header .btn {
+    font-size: 24px;
+    padding: 0 35px 0 0;
+  }
+  .research-hero .slider {
+    margin-bottom: 15px;
+  }
+  .research-hero .dr-details .img img {
+    max-width: 50%;
+  }
+  .research-wild {
+    margin-top: 36px;
+  }
+  .research-wild .KetoWild-accordion .card .card-body ul li a {
+    font-size: 16px;
+  }
+  .research-lab .research-card .img {
+    max-width: 160px;
+    min-height: 160px;
+    margin-top: 40px;
+  }
+  .research-wild .KetoWild-accordion .card .card-body ul li {
+    padding-left: 25px;
+  }
+  .research-lab .col-sm-12:nth-child(3) .research-card {
+    min-height: 440px;
+  }
+  .research-wild .KetoWild-accordion .card .card-body ul {
+    padding-right: 4px;
+  }
+}
+/*---- End of @media (max-width: 767px) ----*/
+
+@media (max-width: 375px) {
+  .research-hero .slider {
+    min-height: 275px;
+  }
+  .research-hero .slider .inner {
+    padding: 10px;
+  }
+}
+/*---- End of @media (max-width: 375px) ----*/

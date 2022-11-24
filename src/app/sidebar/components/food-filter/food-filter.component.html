@@ -1,0 +1,116 @@
+<div class="sk-cart color-white-bg" [ngStyle]="{ 'touch-action': 'none' }">
+  <div class="filter-sort-modal">
+    <button type="button" (click)="close()" class="close">
+      <i class="far fa-times"></i>
+    </button>
+    <div class="modal-body">
+      <h4 class="filter-title">
+        {{ "filter" | translate }} + {{ "sort" | translate }}
+      </h4>
+
+      <figure class="filter-group">
+        <h6 class="sub-title">{{ "diet" | translate }}</h6>
+        <label
+          class="custom-checkbox form-control"
+          *ngFor="let diet of dietTypes"
+          >{{ diet | format: false }}
+          <input
+            type="checkbox"
+            value="{{ diet }}"
+            name="diet"
+            [checked]="isDietSelected(diet)"
+            (change)="onDietSelect($event)"
+          />
+          <span class="checkmark-box"></span>
+        </label>
+      </figure>
+
+      <figure class="filter-group" *ngIf="false">
+        <h6 class="sub-title">{{ "categories" | translate }}</h6>
+        <label class="custom-radio form-control"
+          >{{ "full-menu" | translate }}
+          <input
+            type="radio"
+            value="all"
+            name="categories"
+            [checked]="selectedCategory === 'all'"
+            (change)="onCategorySelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label
+          class="custom-radio form-control"
+          *ngFor="let category of categories"
+          >{{ category }}
+          <input
+            type="radio"
+            value="{{ category }}"
+            name="categories"
+            [checked]="selectedCategory === category"
+            (change)="onCategorySelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </figure>
+
+      <figure class="filter-group">
+        <h6 class="sub-title">{{ "sort-by" | translate }}</h6>
+        <label class="custom-radio form-control"
+          >{{ "default" | translate }}
+          <input
+            type="radio"
+            value="default"
+            name="Sortby"
+            [checked]="selectedSort === 'default'"
+            (change)="onSortSelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio form-control"
+          >{{ "calories-titlecase" | translate }}
+          <input
+            type="radio"
+            value="CALORIES"
+            name="Sortby"
+            [checked]="selectedSort === 'CALORIES'"
+            (change)="onSortSelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio form-control"
+          >{{ "net-carbs-titlecase" | translate }}
+          <input
+            type="radio"
+            value="NET_CARBOHYDRATES"
+            name="Sortby"
+            [checked]="selectedSort === 'NET_CARBOHYDRATES'"
+            (change)="onSortSelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio form-control"
+          >{{ "total-fat-titlecase" | translate }}
+          <input
+            type="radio"
+            value="TOTAL_FAT"
+            name="Sortby"
+            [checked]="selectedSort === 'TOTAL_FAT'"
+            (change)="onSortSelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio form-control"
+          >{{ "protein-titlecase" | translate }}
+          <input
+            type="radio"
+            value="PROTEIN"
+            name="Sortby"
+            [checked]="selectedSort === 'PROTEIN'"
+            (change)="onSortSelect($event)"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </figure>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<router-outlet *ngIf="isLoaded; else loader"></router-outlet>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

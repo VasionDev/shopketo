@@ -1,0 +1,122 @@
+<div
+  id="foodShippingOptionsModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade food-details-modal shipping"
+  aria-modal="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <i class="far fa-times"></i>
+      </button>
+      <div class="modal-body">
+        <h2 class="title text-center color-black">
+          {{ "shipping-options" | translate }}
+        </h2>
+        <figure class="sk-product__form-item">
+          <label
+            class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+            [class.font-bold]="selectedOrder === 'oneTime'"
+            ><span>{{ "one-time-order" | translate }} </span>
+            <input
+              type="radio"
+              name="delivery"
+              value="oneTime"
+              [checked]="selectedOrder === 'oneTime'"
+              (change)="onOrderSelect($event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <label
+            class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+          >
+            <span
+              class="d-flex justify-content-between align-items-start"
+              [class.font-bold]="selectedOrder === 'weekly'"
+            >
+              <span
+                >{{ "weekly-order" | translate }}
+                <div
+                  class="delivery-list-opt one-time"
+                  *ngIf="selectedOrder === 'oneTime'"
+                >
+                  <div class="option-item">
+                    <i class="fas fa-window-close"></i
+                    >{{ "cancel-or-skip-anytime" | translate }}
+                  </div>
+                  <div class="option-item">
+                    <i class="fas fa-window-close"></i
+                    >{{ "edit-selections-weekly" | translate }}
+                  </div>
+                </div>
+                <div
+                  class="delivery-list-opt every-month"
+                  *ngIf="selectedOrder === 'weekly'"
+                >
+                  <div class="option-item">
+                    <i class="fas fa-check-square"></i
+                    >{{ "cancel-or-skip-anytime" | translate }}
+                  </div>
+                  <div class="option-item">
+                    <i class="fas fa-check-square"></i
+                    >{{ "edit-selections-weekly" | translate }}
+                  </div>
+                </div>
+              </span>
+            </span>
+
+            <input
+              type="radio"
+              name="delivery"
+              value="weekly"
+              [checked]="selectedOrder === 'weekly'"
+              (change)="onOrderSelect($event)"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </figure>
+
+        <figure class="card nextShipment-card">
+          <div class="row">
+            <div class="col icon">
+              <i class="far fa-calendar"></i>
+            </div>
+            <div class="col">
+              <p class="small-text" *ngIf="selectedOrder === 'oneTime'">
+                {{ "this-order-will-ship" | translate }}
+              </p>
+              <p class="small-text" *ngIf="selectedOrder === 'weekly'">
+                {{ "first-order-will-ship" | translate }}
+              </p>
+              <p class="p-small font-bold color-black">
+                {{ discountInfo.shippingDate }}
+              </p>
+              <p
+                class="then-text color-black"
+                *ngIf="selectedOrder === 'weekly'"
+              >
+                {{ "then-weekly-thereafter" | translate }}
+              </p>
+            </div>
+          </div>
+        </figure>
+
+        <p class="text-center btn-wrap">
+          <a
+            data-dismiss="modal"
+            aria-label="Close"
+            class="button button-primary button-large button-icon"
+            (click)="onClickAddToCart()"
+            >{{ "add-to-cart-uppercase" | translate }}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

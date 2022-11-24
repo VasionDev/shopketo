@@ -1,0 +1,107 @@
+.error-404-wrap {
+  padding-top: 0;
+}
+
+.error-404-wrap .error-404 .text-404 {
+  font-family: acumin-pro, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 252px;
+  line-height: 251px;
+  letter-spacing: -0.05em;
+  color: white;
+  background: url(/assets/images/error404.png);
+  background-repeat: no-repeat;
+  -webkit-text-fill-color: transparent;
+  background-position: 54% 80%;
+  background-size: 40%;
+}
+
+.error-404-wrap .error-404 .no-keto-here {
+  font-family: acumin-pro, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 42px;
+  letter-spacing: -0.05em;
+  margin-top: 20px;
+}
+
+.error-404-wrap .error-404 .some-helpful-links {
+  margin-top: 100px;
+  margin-bottom: 18px;
+  font-family: acumin-pro, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.error-404-wrap .error-404 .error-page-links {
+  padding-bottom: 85px;
+}
+
+.error-404-wrap .error-404 .error-page-links ul {
+  list-style: none;
+}
+
+.error-404-wrap .error-404 .error-page-links ul li {
+  display: inline;
+  margin: 0 20px;
+}
+
+.error-404-wrap .error-404 .error-page-links ul li a {
+  font-family: acumin-pro, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.error-404-wrap .error-404 .error-page-links ul li a:hover {
+  text-decoration: underline;
+  color: #2152ff;
+}
+
+img.wp-smiley,
+img.emoji {
+  display: inline !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 1em !important;
+  width: 1em !important;
+  margin: 0 0.07em !important;
+  vertical-align: -0.1em !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+.ch-brand-color {
+  color: #2152ff;
+}
+
+@media (max-width: 767px) {
+  .error-404-wrap {
+    padding-top: 20px;
+  }
+  .error-404-wrap .error-404 .text-404 {
+    background-size: 70%;
+  }
+  .error-404-wrap .error-404 .error-page-links ul li {
+    display: block;
+  }
+
+  .error-404-wrap .error-404 .text-404 {
+    line-height: 120px;
+  }
+
+  .error-404-wrap .error-404 .some-helpful-links {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .error-404-wrap .error-404 .text-404 {
+    font-size: 140px;
+  }
+}

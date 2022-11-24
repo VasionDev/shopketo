@@ -1,0 +1,470 @@
+<main
+  class="sk-main"
+  *ngIf="isCountryAvailable; else notFound"
+  [style.margin-top.px]="discountHeight"
+>
+  <section class="better-trips-hero">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 text-center" data-aos="fade-up">
+          <img
+            src="assets/images/better-vector.png"
+            class="better-img img-fluid"
+            alt="img"
+          />
+          <h1 class="color-white better-title">
+            {{ "experience-the-world-pruvit-style" | translate }}
+          </h1>
+          <p class="color-white description">
+            {{ "proximity-is-the-new-currency-text" | translate }}
+          </p>
+
+          <a
+            href="https://support.justpruvit.com/hc/en-us/articles/9085328572813-Better-Trip-Bahamas-2023"
+            target="_blank"
+            class="button qualify-button next-trip"
+          >
+            {{ "qualify-for-the-next-trip" | translate }}
+          </a>
+          <p>
+            <a
+              href="https://pruvitnow.com/better-trip-leaderboard"
+              target="_blank"
+              class="color-white link-hover leaderboard-link"
+              ><i class="fas fa-medal color-black mr-1"></i
+              >{{ "check-current-leaderboard" | translate }}</a
+            >
+          </p>
+
+          <div class="trip-video">
+            <div
+              class="wistia_responsive_padding"
+              style="padding: 56.25% 0 0 0; position: relative"
+            >
+              <div
+                class="wistia_responsive_wrapper"
+                style="
+                  height: 100%;
+                  left: 0;
+                  position: absolute;
+                  top: 0;
+                  width: 100%;
+                "
+              >
+                <div
+                  class="wistia_embed wistia_async_u3m63ehwsr"
+                  videoFoam="true"
+                  style="width: 100%; height: 100%"
+                >
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of better-trips-hero -->
+
+  <section class="better-trips-bahamas">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h4 class="color-black feb-border">
+            {{ "february-2nd-6th-2023" | translate }}
+          </h4>
+          <h1 class="color-black text-center">Bahamas</h1>
+          <diV class="atlantis-logo">
+            <img
+              class="img-fluid"
+              alt="logo"
+              src="assets/images/atlantis-logo.png"
+            />
+          </diV>
+          <h3 class="color-black who-despt">
+            {{ "ready-to-earn-a-better-trip" | translate }}
+            <span class="color-white"
+              >{{ "your-chance-to-hustle-hard-text" | translate }}
+            </span>
+          </h3>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of better-trips-bahamas -->
+
+  <section class="better-trips-slider">
+    <article class="container-fluid">
+      <figure class="better-trips-photo-slider">
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg1.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg2.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg3.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg4.png)"
+            ></div>
+          </div>
+        </div>
+
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg1.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg2.png)"
+            ></div>
+          </div>
+        </div>
+
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg3.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/viewimg4.png)"
+            ></div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of better-trips-slider -->
+
+  <section class="better-trips-you-yes">
+    <article class="container">
+      <figure class="row you-yes-row">
+        <div class="col-sm-12">
+          <h2 class="color-black text-center">
+            {{ "yes-you-need-to-be-there" | translate }}
+          </h2>
+        </div>
+        <div class="col-sm-3 col-6">
+          <div class="card need-card">
+            <div class="need-img">
+              <svg
+                width="60"
+                height="59"
+                viewBox="0 0 60 59"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M26.2617 15.0898L17.8789 1.15625C17.6523 0.589844 16.9727 0.25 16.4062 0.25H2.8125C1.33984 0.25 0.433594 1.94922 1.22656 3.19531L13.9141 21.207C17.1992 18.0352 21.5039 15.8828 26.2617 15.0898ZM30 18.375C18.8984 18.375 10.0625 27.3242 10.0625 38.3125C10.0625 49.4141 18.8984 58.25 30 58.25C40.9883 58.25 49.9375 49.4141 49.9375 38.3125C49.9375 27.3242 40.9883 18.375 30 18.375ZM40.4219 36.2734L36.1172 40.4648L37.1367 46.3555C37.3633 47.375 36.2305 48.2812 35.2109 47.7148L29.8867 44.8828L24.6758 47.7148C23.6562 48.168 22.5234 47.375 22.75 46.3555L23.7695 40.4648L19.4648 36.2734C18.6719 35.4805 19.125 34.1211 20.1445 34.0078L26.1484 33.1016L28.7539 27.7773C28.9805 27.3242 29.4336 27.0977 29.8867 27.0977C30.4531 27.0977 30.9062 27.3242 31.1328 27.7773L33.7383 33.1016L39.7422 34.0078C40.7617 34.1211 41.2148 35.4805 40.4219 36.2734ZM57.0742 0.25H43.4805C42.9141 0.25 42.2344 0.589844 41.8945 1.15625L33.625 14.9766C38.3828 15.7695 42.6875 17.9219 45.9727 21.0938L58.6602 3.08203C59.4531 1.94922 58.5469 0.25 57.0742 0.25Z"
+                  fill="#00A1D9"
+                />
+              </svg>
+            </div>
+            <div class="inner-text">
+              <h4 class="color-black text-center">
+                {{ "learn-from-pruvit-and-industry-legends" | translate }}
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-6">
+          <div class="card need-card">
+            <div class="need-img">
+              <svg
+                width="73"
+                height="59"
+                viewBox="0 0 73 59"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M71.3906 43.2969H65.9531V37.8594C65.9531 37.1797 65.2734 36.5 64.5938 36.5H59.1562C58.3633 36.5 57.7969 37.1797 57.7969 37.8594V43.2969H52.3594C51.5664 43.2969 51 43.9766 51 44.6562V50.0938C51 50.8867 51.5664 51.4531 52.3594 51.4531H57.7969V56.8906C57.7969 57.6836 58.3633 58.25 59.1562 58.25H64.5938C65.2734 58.25 65.9531 57.6836 65.9531 56.8906V51.4531H71.3906C72.0703 51.4531 72.75 50.8867 72.75 50.0938V44.6562C72.75 43.9766 72.0703 43.2969 71.3906 43.2969ZM55.7578 22C54.2852 22 52.9258 22.4531 51.6797 23.0195C51.6797 23.5859 51.793 24.1523 51.793 24.7188C51.793 28.5703 50.4336 32.082 48.0547 34.6875H55.3047C56.2109 33.668 57.5703 32.875 59.1562 32.875H64.5938C66.0664 32.875 67.4258 33.668 68.332 34.6875H70.7109C71.8438 34.6875 72.75 33.7812 72.75 32.6484C72.75 26.7578 68.2188 22 62.668 22H55.7578ZM36.3867 36.5C42.957 36.5 48.168 31.2891 48.168 24.7188C48.168 18.2617 42.8438 12.9375 36.3867 12.9375C29.9297 12.9375 24.7188 18.2617 24.7188 24.7188C24.6055 31.2891 29.9297 36.5 36.3867 36.5ZM58.25 18.375C63.2344 18.375 67.3125 14.4102 67.3125 9.3125C67.3125 4.32812 63.2344 0.25 58.25 0.25C53.1523 0.25 49.1875 4.32812 49.1875 9.3125C49.1875 14.4102 53.1523 18.375 58.25 18.375ZM54.1719 55.0781H52.3594C49.5273 55.0781 47.375 52.9258 47.375 50.0938V44.6562C47.375 43.5234 47.8281 42.3906 48.5078 41.4844C46.582 40.6914 44.4297 40.125 42.0508 40.125H30.8359C21.8867 40.125 14.75 46.9219 14.75 55.3047C14.75 57.0039 16.1094 58.25 17.9219 58.25H54.2852C54.1719 57.9102 54.1719 57.457 54.1719 56.8906V55.0781ZM20.9805 24.7188C20.9805 24.1523 21.0938 23.5859 21.207 23.0195C19.9609 22.3398 18.6016 22 17.1289 22H10.2188C4.66797 22 0.25 26.7578 0.25 32.6484C0.25 33.7812 1.04297 34.6875 2.17578 34.6875H24.832C22.4531 32.082 20.9805 28.5703 20.9805 24.7188ZM14.75 18.375C19.7344 18.375 23.8125 14.4102 23.8125 9.3125C23.8125 4.32812 19.7344 0.25 14.75 0.25C9.65234 0.25 5.6875 4.32812 5.6875 9.3125C5.6875 14.4102 9.65234 18.375 14.75 18.375Z"
+                  fill="#00A1D9"
+                />
+              </svg>
+            </div>
+            <div class="inner-text">
+              <h4 class="color-black text-center">
+                {{ "proximity-is-power" | translate }}
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-6">
+          <div class="card need-card">
+            <div class="need-img">
+              <svg
+                width="58"
+                height="59"
+                viewBox="0 0 58 59"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.625 51C1.58594 51 0 52.6992 0 54.625C0 56.6641 1.58594 58.25 3.625 58.25C5.55078 58.25 7.25 56.6641 7.25 54.625C7.25 52.6992 5.55078 51 3.625 51ZM16.3125 43.75C13.2539 43.75 10.875 46.2422 10.875 49.1875C10.875 52.2461 13.2539 54.625 16.3125 54.625C19.2578 54.625 21.75 52.2461 21.75 49.1875C21.75 46.2422 19.2578 43.75 16.3125 43.75ZM43.5 9.3125C43.0469 9.3125 42.707 9.42578 42.3672 9.42578C40.2148 3.98828 34.8906 0.25 29 0.25C23.1094 0.25 17.7852 3.875 15.6328 9.3125C15.1797 9.19922 14.8398 9.19922 14.5 9.19922C6.45703 9.19922 0 15.6562 0 23.6992C0 31.7422 6.45703 38.1992 14.5 38.1992C15.8594 38.1992 17.332 37.9727 18.8047 37.5195C20.6172 41.3711 24.582 43.8633 29 43.8633C33.3047 43.8633 37.1562 41.4844 39.082 37.6328C40.5547 38.0859 42.0273 38.3125 43.5 38.3125C51.4297 38.3125 58 31.8555 58 23.9258C58 15.8828 51.4297 9.3125 43.5 9.3125Z"
+                  fill="#00A1D9"
+                />
+              </svg>
+            </div>
+            <div class="inner-text">
+              <h4 class="color-black text-center">
+                {{ "expand-your-vision-for-what-is-possible" | translate }}
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-6">
+          <div class="card need-card">
+            <div class="need-img">
+              <svg
+                width="60"
+                height="59"
+                viewBox="0 0 60 59"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.4375 39.4453L19.8047 52.8125L26.6016 50.3203L8.92969 32.6484L6.4375 39.4453ZM1.22656 53.3789C0.660156 54.7383 1 56.2109 2.01953 57.2305C2.69922 57.9102 3.60547 58.25 4.625 58.25C4.96484 58.25 5.41797 58.25 5.87109 58.0234L16.0664 54.2852L4.96484 43.1836L1.22656 53.3789ZM17.9922 23.1328C17.0859 22.2266 15.8398 21.8867 14.707 22.1133C13.4609 22.4531 12.4414 23.2461 12.1016 24.3789L10.4023 28.9102L30.3398 48.8477L34.8711 47.1484C36.0039 46.8086 36.9102 45.7891 37.1367 44.543C37.3633 43.4102 37.0234 42.1641 36.1172 41.2578L17.9922 23.1328ZM21.8438 18.375C22.4102 18.375 22.9766 18.2617 23.543 17.8086C27.6211 14.4102 29.8867 9.42578 29.8867 4.10156V2.96875C29.8867 1.49609 28.7539 0.25 27.2812 0.25C25.9219 0.25 24.6758 1.49609 24.6758 2.96875V4.10156C24.6758 7.83984 23.0898 11.2383 20.2578 13.6172C18.8984 14.6367 18.7852 16.3359 19.6914 17.4688C20.2578 18.1484 21.0508 18.375 21.8438 18.375ZM8.25 7.5C10.1758 7.5 11.7617 5.80078 11.7617 3.875C11.7617 1.94922 10.0625 0.363281 8.25 0.363281C6.32422 0.363281 4.625 1.94922 4.625 3.875C4.625 5.91406 6.21094 7.5 8.25 7.5ZM56.168 29.25H55.0352C49.8242 29.25 44.8398 31.6289 41.4414 35.707C40.5352 36.8398 40.6484 38.5391 41.7812 39.5586C42.3477 40.0117 42.9141 40.125 43.4805 40.125C44.1602 40.125 44.9531 39.8984 45.5195 39.2188C48.0117 36.3867 51.4102 34.6875 55.1484 34.6875H56.2812C57.7539 34.6875 58.8867 33.5547 58.8867 31.9688C58.8867 30.4961 57.7539 29.25 56.168 29.25ZM45.0664 20.1875C47.4453 17.4688 47.332 14.75 47.1055 12.8242C46.9922 11.125 46.9922 10.332 47.8984 9.3125C48.8047 8.29297 49.5977 8.17969 51.2969 7.95312C53.2227 7.83984 55.9414 7.61328 58.3203 4.78125C59.2266 3.64844 59.1133 1.94922 57.9805 0.929688C56.8477 0.0234375 55.1484 0.136719 54.1289 1.26953C53.2227 2.28906 52.543 2.40234 50.8438 2.51562C48.8047 2.74219 46.1992 2.96875 43.8203 5.80078C41.4414 8.51953 41.5547 11.2383 41.7812 13.1641C41.8945 14.8633 41.8945 15.6562 40.9883 16.6758C40.082 17.8086 39.2891 17.8086 37.5898 18.0352C35.6641 18.1484 32.9453 18.375 30.5664 21.207C29.6602 22.3398 29.7734 24.0391 30.9062 25.0586C31.3594 25.5117 32.0391 25.625 32.6055 25.625C33.2852 25.625 34.0781 25.3984 34.6445 24.7188C35.5508 23.6992 36.3438 23.5859 37.9297 23.4727C40.082 23.2461 42.6875 23.0195 45.0664 20.1875ZM55.2617 47.375C53.2227 47.375 51.75 49.0742 51.75 51C51.75 52.9258 53.3359 54.5117 55.2617 54.5117C57.0742 54.5117 58.7734 52.8125 58.7734 51C58.8867 49.0742 57.3008 47.375 55.2617 47.375ZM55.2617 14.75C53.2227 14.75 51.75 16.4492 51.75 18.375C51.75 20.3008 53.3359 21.8867 55.2617 21.8867C57.0742 21.8867 58.7734 20.1875 58.7734 18.375C58.8867 16.4492 57.3008 14.75 55.2617 14.75Z"
+                  fill="#00A1D9"
+                />
+              </svg>
+            </div>
+            <div class="inner-text">
+              <h4 class="color-black text-center">
+                {{ "success-is-best-when-it-is-shared" | translate }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of better-trips-you-yes -->
+
+  <section class="better-trips-last">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h4 class="color-black last-border">
+            {{ "last-better-trip" | translate }}
+          </h4>
+          <h1 class="color-black text-center">Cancun, Mexico</h1>
+
+          <div class="trip-video">
+            <div
+              class="wistia_responsive_padding"
+              style="padding: 56.25% 0 0 0; position: relative"
+            >
+              <div
+                class="wistia_responsive_wrapper"
+                style="
+                  height: 100%;
+                  left: 0;
+                  position: absolute;
+                  top: 0;
+                  width: 100%;
+                "
+              >
+                <div
+                  class="wistia_embed wistia_async_16v2yzvome"
+                  videoFoam="true"
+                  style="width: 100%; height: 100%"
+                >
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-logo">
+            <img
+              class="img-fluid"
+              alt="logo"
+              src="assets/images/hotel_xcaret.png"
+            />
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of better-trips-last -->
+
+  <section class="better-trips-experienced">
+    <article class="container">
+      <figure class="experienced-community-slider">
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            I’ve never experienced anything like this before!! The people, the
+            conversations, the location. Mind blowing fun with my Prüvit peers.
+            Already planning how I can be part of the next one.
+          </p>
+
+          <p class="name color-black disclaimer-bold">Johan Windermere</p>
+          <p class="color-black disclaimer-reg">Independent Prüver</p>
+        </div>
+
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            I came for the ketones but fell head over heels in love with the
+            community! I didn’t realize i needed until i had it.
+          </p>
+          <p class="name color-black disclaimer-bold">Johan Windermere</p>
+          <p class="color-black disclaimer-reg">Independent Prüver</p>
+        </div>
+
+        <div class="testimonial-items text-center d-flex">
+          <p class="description color-black">
+            I came for the ketones but fell head over heels in love with the
+            community! I didn’t realize i needed until i had it.
+          </p>
+          <p class="name color-black disclaimer-bold">Johan Windermere</p>
+          <p class="color-black disclaimer-reg">Independent Prüver</p>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- end of better-trips-experienced -->
+
+  <section class="better-trips-experience-slider">
+    <article class="container-fluid">
+      <figure class="better-trips-photo-slider">
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img1.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img2.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img3.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img4.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img1.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img2.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img3.png)"
+            ></div>
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="item-inner">
+            <div
+              class="photo-bg"
+              style="background-image: url(assets/images/trip-img4.png)"
+            ></div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- end of better-trips-experience-slider -->
+
+  <section class="better-trips-packed">
+    <article class="container">
+      <div class="row text-center">
+        <div class="col-12">
+          <h1 class="color-white title">
+            {{ "packed-your-bags-yet" | translate }}
+            <span class="color-black">{{
+              "better-get-on-it" | translate
+            }}</span>
+          </h1>
+          <a
+            href="https://support.justpruvit.com/hc/en-us/articles/9085328572813-Better-Trip-Bahamas-2023"
+            target="_blank"
+            class="button qualify-button next-trip"
+          >
+            {{ "qualify-for-the-next-trip" | translate }}
+          </a>
+          <p>
+            <a
+              href="https://pruvitnow.com/better-trip-leaderboard"
+              target="_blank"
+              class="color-white link-hover leaderboard-link"
+              ><i class="fas fa-medal color-black mr-1"></i
+              >{{ "check-current-leaderboard" | translate }}</a
+            >
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+  <!-- end of better-trips-packed -->
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

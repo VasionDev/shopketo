@@ -1,0 +1,120 @@
+<ng-container
+  *ngIf="(products | search: searchFilter:'search-modal').length > 0"
+>
+  <p class="dropdown-item title">
+    {{ "products" | translate }}
+  </p>
+  <a
+    (click)="onClickProduct(product.name)"
+    class="dropdown-item pointer"
+    [class.active]="listIndex === i"
+    *ngFor="
+      let product of products
+        | search: searchFilter:'search-modal'
+        | slice: 0:4;
+      let i = index
+    "
+    [innerHTML]="product.title | highlight: searchFilter"
+  ></a>
+  <a
+    (click)="onClickSeeResults()"
+    class="dropdown-item pointer underline"
+    [class.active]="listIndex === 4"
+    *ngIf="(products | search: searchFilter:'search-modal').length >= 4"
+    >{{ "see-results" | translate }}</a
+  >
+  <hr />
+</ng-container>
+
+<ng-container *ngIf="(blogs | searchBlog: searchFilter).length > 0">
+  <p class="dropdown-item title">
+    {{ "blog" | translate }}
+  </p>
+  <a
+    (click)="onClickBlog(blog.slug)"
+    class="dropdown-item pointer"
+    [class.active]="
+      listIndex ===
+      setBlogActiveClass(
+        i,
+        (products | search: searchFilter:'search-modal').length
+      )
+    "
+    *ngFor="
+      let blog of blogs | searchBlog: searchFilter | slice: 0:4;
+      let i = index
+    "
+    [innerHTML]="blog.title | highlight: searchFilter"
+  ></a>
+
+  <hr />
+</ng-container>
+
+<p class="dropdown-item title">
+  {{ "quick-links" | translate }}
+</p>
+<a
+  href="https://support.justpruvit.com/hc/en-us/articles/360052368331-COVID-Notice"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      0,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "covid-notice" | translate }}</a
+>
+<a
+  href="https://support.justpruvit.com/hc/en-us/articles/360052059231-Update-SmartShip-auto-ship-Date"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      1,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "update-smartship-date" | translate }}</a
+>
+<a
+  href="https://support.justpruvit.com/hc/en-us/articles/360052058131-Update-My-Personal-Information"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      2,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "update-my-personal-information" | translate }}</a
+>
+<a
+  href="https://support.justpruvit.com/hc/en-us/articles/360045633072-Pr%C3%BCvit-Product-Guide"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      3,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "pruvit-product-guide" | translate }}</a
+>
+<a
+  href="https://support.justpruvit.com/"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      4,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "help-center" | translate }}</a
+>

@@ -1,0 +1,15 @@
+<h2 class="mb-4 mb-hide">Hi {{ user?.firstName }}</h2>
+<invoice-verification
+  *ngIf="invoiceInformation?.collection.length > 0"
+  [invoiceInformation]="invoiceInformation"
+  [user]="user"
+></invoice-verification>
+<div class="dashboard__grid">
+  <div class="dashboard__grid__left">
+    <app-referral-link></app-referral-link>
+    <app-refer-friend></app-refer-friend>
+  </div>
+  <div class="dashboard__grid__right">
+    <app-pulse-app></app-pulse-app>
+  </div>
+</div>

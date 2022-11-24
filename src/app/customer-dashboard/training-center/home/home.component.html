@@ -1,0 +1,177 @@
+<div *ngIf="categories.length" class="websites-wraper training-center-wrap">
+    <div class="training-right-col">
+        <h2 class="color-black pb-3">Training center</h2>
+        <div *ngIf="inProgressCategories.length">
+            <h3 class="color-black state-title">In progress</h3>
+            <div class="row mx--15">
+            <div *ngFor="let cat of inProgressCategories; let i = index" class="col-12 col-sm-6">
+                <div class="card web-card prog-state" [class.locked-state]="!cat.isUserCanAccess">
+                    <div class="card-inner">
+                        <div class="d-flex">
+                            <div class="left-icon">
+                                <div class="img-wrap">
+                                    <img [src]="cat.catImage" class="img-fluid " alt="{{cat.catName}}">
+                                </div>
+                            </div>
+                            <div class="right-text">
+                                <h4 class="color-black">{{cat.catName}}</h4>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                        aria-valuemax="100" [style.width.%]="cat.completion_percentage">
+                                    </div>
+                                </div>
+                                <span class="color-gray disclaimer-reg">{{cat.completion_percentage}}% completed</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center btn-sec">
+                            <button (click)="onSelectCategory(cat)" class="continue-btn btn button-primary font-bold pointer"><i class="fas fa-check-circle mr-2"> </i>Continue learning
+                            </button>
+                            <div class="dropdown">
+                                <a class="btn share-icon btn-gray pointer" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"><i class="fal fa-external-link font-weight-normal" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
+                                    <a (click)="copy(cat.catSlug)" class="dropdown-item disclaimer-reg pointer">
+                                        <i class="far fa-clone mr-2" aria-hidden="true"></i>Copy link
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out!{{getShareLink(cat.catSlug)}}">
+                                        <i class="far fa-envelope mr-2" aria-hidden="true"></i>Email
+                                    </a>
+                                    <a class="dropdown-item disclaimer-reg" href="sms:?&body={{getShareLink(cat.catSlug)}}">
+                                        <i class="far fa-comment mr-2" aria-hidden="true"></i>SMS
+                                    </a>
+                                    <a (click)="redirectFacebook(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal" data-target="#shareModal">
+                                        <i class="fab fa-facebook-square mr-2" style="color:#1777F2;"
+                                            aria-hidden="true"></i>Facebook
+                                    </a>
+                                    <a (click)="redirectTwitter(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal" data-target="#shareModal">
+                                        <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;" aria-hidden="true"></i>Twitter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <div *ngIf="notStartedCategories.length">
+            <h3 class="color-black state-title">Not started</h3>
+            <div class="row mx--15">
+            
+                <div *ngFor="let cat of notStartedCategories; let i = index" class="col-12 col-sm-6">
+                    <div class="card web-card" [class.locked-state]="!cat.isUserCanAccess">
+                        <div class="card-inner">
+                            <div class="d-flex">
+                                <div class="left-icon">
+                                    <div class="img-wrap">
+                                        <img [src]="cat.catImage" class="img-fluid " alt="{{cat.catName}}">
+                                    </div>
+                                </div>
+                                <div class="right-text">
+                                    <h4 class="color-black">{{cat.catName}}</h4>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" [style.width.%]="cat.completion_percentage">
+                                        </div>
+                                    </div>
+                                    <span class="color-gray disclaimer-reg">Not started</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center btn-sec">
+                                <button *ngIf="cat.isUserCanAccess" (click)="onSelectCategory(cat)" class="continue-btn btn button-primary font-bold pointer"><i
+                                        class="fas fa-arrow-right mr-2" aria-hidden="true"></i>Let’s get started</button>
+                                <button *ngIf="!cat.isUserCanAccess" class="continue-btn btn button-primary font-bold pointer"><i class="fas fa-lock mr-2"></i>Not unlocked</button>
+                                <div class="dropdown">
+                                    <a class="btn share-icon btn-gray pointer" [attr.data-toggle]="cat.isUserCanAccess ? 'dropdown' : ''" aria-haspopup="true"
+                                        aria-expanded="false"><i class="fal fa-external-link font-weight-normal"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <div *ngIf="cat.isUserCanAccess" class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
+                                        <a (click)="copy(cat.catSlug)" class="dropdown-item disclaimer-reg pointer">
+                                            <i class="far fa-clone mr-2" aria-hidden="true"></i>Copy link
+                                        </a>
+                                        <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out!{{getShareLink(cat.catSlug)}}">
+                                            <i class="far fa-envelope mr-2" aria-hidden="true"></i>Email
+                                        </a>
+                                        <a class="dropdown-item disclaimer-reg" href="sms:?&body={{getShareLink(cat.catSlug)}}">
+                                            <i class="far fa-comment mr-2" aria-hidden="true"></i>SMS
+                                        </a>
+                                        <a (click)="redirectFacebook(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal"
+                                            data-target="#shareModal">
+                                            <i class="fab fa-facebook-square mr-2" style="color:#1777F2;" aria-hidden="true"></i>Facebook
+                                        </a>
+                                        <a (click)="redirectTwitter(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal"
+                                            data-target="#shareModal">
+                                            <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;" aria-hidden="true"></i>Twitter
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="completedCategories.length">
+            <h3 class="color-black state-title pt-sm-3">Completed</h3>
+            <div class="row mx--15">
+                <div *ngFor="let cat of completedCategories; let i = index" class="col-12 col-sm-6">
+                    <div class="card web-card complete-state" [class.locked-state]="!cat.isUserCanAccess">
+                        <div class="card-inner">
+                            <div class="d-flex">
+                                <div class="left-icon">
+                                    <div class="img-wrap">
+                                        <img [src]="cat.catImage" class="img-fluid " alt="{{cat.catName}}">
+                                    </div>
+                                </div>
+                                <div class="right-text">
+                                    <h4 class="color-black">{{cat.catName}}</h4>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" [style.width.%]="cat.completion_percentage">
+                                        </div>
+                                    </div>
+                                    <span class="color-gray disclaimer-reg"><i class="far fa-check mr-1"></i>Completed</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center btn-sec">
+                                <button (click)="onRedo(cat)" class="continue-btn btn button-primary font-bold pointer"> 
+                                    <i class="far fa-repeat mr-2"></i>Redo 
+                                </button>
+                                <div class="dropdown">
+                                    <a class="btn share-icon btn-gray pointer" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"><i class="fal fa-external-link font-weight-normal"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
+                                        <a (click)="copy(cat.catSlug)" class="dropdown-item disclaimer-reg pointer">
+                                            <i class="far fa-clone mr-2" aria-hidden="true"></i>Copy link
+                                        </a>
+                                        <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out!{{getShareLink(cat.catSlug)}}">
+                                            <i class="far fa-envelope mr-2" aria-hidden="true"></i>Email
+                                        </a>
+                                        <a class="dropdown-item disclaimer-reg" href="sms:?&body={{getShareLink(cat.catSlug)}}">
+                                            <i class="far fa-comment mr-2" aria-hidden="true"></i>SMS
+                                        </a>
+                                        <a (click)="redirectFacebook(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal"
+                                            data-target="#shareModal">
+                                            <i class="fab fa-facebook-square mr-2" style="color:#1777F2;" aria-hidden="true"></i>Facebook
+                                        </a>
+                                        <a (click)="redirectTwitter(cat.catSlug)" class="dropdown-item disclaimer-reg pointer" data-toggle="modal"
+                                            data-target="#shareModal">
+                                            <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;" aria-hidden="true"></i>Twitter
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loader *ngIf="categories.length == 0" class="payment--loader"></app-loader>

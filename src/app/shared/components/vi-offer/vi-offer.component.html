@@ -1,0 +1,28 @@
+<div *ngIf="isViOffer || isViTimerPresent" class="claim-discount-wrap my-4">
+  <div class="orange-card d-flex" *ngIf="isViTimerPresent; else claimDiscount">
+    <i class="fal fa-alarm-clock" aria-hidden="true"></i>
+    <span class="disclaimer-bold"
+      >$10 discount expires in {{ timerSeconds | formatTimer }}</span
+    >
+  </div>
+
+  <ng-template #claimDiscount>
+    <a (click)="onClaimDiscount()" class="blue-card d-flex">
+      <img class="rounded-circle" [src]="offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'" />
+      <span class="disclaimer-bold">{{
+        offerorName + " sent you a $10 discount!"
+        }}</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+    <!-- <div class="blue-card d-flex">
+      <img
+        class="rounded-circle"
+        [src]="offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'"
+      />
+      <span class="disclaimer-bold">{{
+        offerorName + " sent you a $10 discount!"
+      }}</span>
+      <a (click)="onClaimDiscount()" class="btn-claim">Claim discount</a>
+    </div> -->
+  </ng-template>
+</div>

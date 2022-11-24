@@ -1,0 +1,621 @@
+<div
+  class="modal animate fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered quick-buy" role="document">
+    <div class="modal-content animate-bottom quick-buy__modal-content">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body quick-buy__modal-body">
+        <section class="sk-product__banner-hide-now">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-12 sk-product__img">
+                <figure class="sk-product__banner-left">
+                  <div class="quick-buy__main-img">
+                    <img
+                      src="{{ product.thumbUrl }}"
+                      alt=""
+                      class="img-fluid quick-buy__thum-img"
+                    />
+
+                    <h3
+                      class="sk-product__title color-black"
+                      [innerHTML]="product.title"
+                    ></h3>
+
+                    <div
+                      class="color-gray sk-product__short-details quick-buy__short-details"
+                    >
+                      <p [innerHTML]="product.bannerDiscription"></p>
+
+                      <a
+                        *ngIf="!isSmartshipPage"
+                        (click)="onClickViewDetails(product.name)"
+                        data-dismiss="modal"
+                        class="link link-hover button-link quick-buy__view-details"
+                        >{{ "view-details" | translate }}
+                        <i class="fas fa-long-arrow-alt-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+              <div class="col-md-6 col-12 sk-product__select">
+                <figure
+                  class="sk-product__banner-right quick-buy__right-contetn"
+                >
+                  <div class="sk-product__form quick-buy__form">
+                    <figure
+                      class="sk-product__form-item"
+                      *ngFor="let serving of servings; let i = index"
+                    >
+                      <figcaption class="sk-product__select-title">
+                        <p class="p-small color-black font-bold">
+                          {{ serving.servingTitle }}
+                        </p>
+                      </figcaption>
+
+                      <label
+                        class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                        *ngFor="let attribute of serving.servingAttributes"
+                        [class.sk-product__not-instock]="
+                          attribute.isOutOfStock || !attribute.isAvailable
+                        "
+                        [class.color-gray]="
+                          attribute.isOutOfStock || !attribute.isAvailable
+                        "
+                        >{{ attribute.name }}
+                        <input
+                          type="radio"
+                          [checked]="
+                            i === 0
+                              ? attribute.key === selectedAttribute1.key &&
+                                !attribute.isOutOfStock
+                              : attribute.key === selectedAttribute2.key &&
+                                !attribute.isOutOfStock
+                          "
+                          value="{{ attribute.key }}"
+                          (change)="onServingsSelect(attribute, i)"
+                          [attr.disabled]="
+                            attribute.isOutOfStock || !attribute.isAvailable
+                              ? ''
+                              : null
+                          "
+                          name="{{ i }}"
+                        />
+                        <span
+                          *ngIf="attribute.isOutOfStock"
+                          class="color-gray font-bold"
+                          >{{ "out-of-stock" | translate }}</span
+                        >
+                        <span class="checkmark"></span>
+                      </label>
+                    </figure>
+
+                    <figure
+                      class="sk-product__form-item delivery"
+                      *ngIf="
+                        !(product.isForPromoter && orderTypes.length === 1)
+                      "
+                    >
+                      <figcaption class="sk-product__select-title">
+                        <p class="p-small color-black font-bold">
+                          {{ "delivery" | translate }}
+                        </p>
+                      </figcaption>
+
+                      <ng-container *ngIf="!isSmartshipPage">
+                        <label
+                          class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                          *ngFor="let orderType of orderTypes"
+                        >
+                          <span
+                            class="d-flex justify-content-between align-items-start"
+                          >
+                            <span
+                              >{{ getTranslatedText(orderType) }}
+                              <div
+                                class="delivery-list-opt one-time"
+                                *ngIf="
+                                  orderType === 'ordertype_1' &&
+                                  selectedOrdertype === orderType &&
+                                  orderTypes.length > 1
+                                "
+                              >
+                                <div
+                                  class="option-item"
+                                  *ngIf="
+                                    productVariation.hasOwnProperty(
+                                      'priceObj'
+                                    ) &&
+                                    productVariation.onetimeAndSmartshipDifference !==
+                                      0
+                                  "
+                                >
+                                  <i class="fas fa-window-close"></i>
+                                  {{ "save" | translate }}
+                                  {{ productSettings.currencySymbol
+                                  }}{{
+                                    productVariation.onetimeAndSmartshipDifference
+                                      | customCurrency: productSettings
+                                  }}
+                                  {{ "starting-next" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-window-close"></i>
+                                  {{ "cancel-anytime" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-window-close"></i>
+                                  {{ "eligible-to-earn" | translate }}
+                                  <span
+                                    class="underline"
+                                    (click)="onClickLearnMore()"
+                                    data-dismiss="modal"
+                                  >
+                                    {{ "free-product" | translate }}</span
+                                  >
+                                </div>
+                              </div>
+                              <div
+                                class="delivery-list-opt every-month"
+                                *ngIf="
+                                  orderType === 'ordertype_3' &&
+                                  selectedOrdertype === orderType
+                                "
+                              >
+                                <div
+                                  class="option-item"
+                                  *ngIf="
+                                    productVariation.hasOwnProperty(
+                                      'priceObj'
+                                    ) &&
+                                    productVariation.onetimeAndSmartshipDifference !==
+                                      0
+                                  "
+                                >
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "save" | translate }}
+                                  {{ productSettings.currencySymbol
+                                  }}{{
+                                    productVariation.onetimeAndSmartshipDifference
+                                      | customCurrency: productSettings
+                                  }}
+                                  {{ "starting-next" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "cancel-anytime" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "eligible-to-earn" | translate }}
+                                  <span
+                                    class="underline"
+                                    (click)="onClickLearnMore()"
+                                    data-dismiss="modal"
+                                  >
+                                    {{ "free-product" | translate }}</span
+                                  >
+                                </div>
+                              </div>
+                            </span>
+                            <span
+                              [class.font-bold]="
+                                orderType === selectedOrdertype
+                              "
+                              >{{ productSettings.currencySymbol
+                              }}{{
+                                productVariation.hasOwnProperty("priceObj")
+                                  ? (productVariation.priceObj.oneTime
+                                    | customCurrency: productSettings)
+                                  : 0
+                              }}</span
+                            >
+                          </span>
+                          <input
+                            [checked]="selectedOrdertype === orderType"
+                            type="radio"
+                            name="delivery"
+                            value="{{ orderType }}"
+                            (change)="onOrderTypeSelect($event)"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-container>
+
+                      <ng-container *ngIf="isSmartshipPage">
+                        <label
+                          class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                        >
+                          <span
+                            class="d-flex justify-content-between align-items-start"
+                          >
+                            <span
+                              >{{ getTranslatedText("ordertype_2") }}
+                              <div class="delivery-list-opt every-month">
+                                <div
+                                  class="option-item"
+                                  *ngIf="
+                                    productVariation.hasOwnProperty(
+                                      'priceObj'
+                                    ) &&
+                                    productVariation.onetimeAndSmartshipDifference !==
+                                      0
+                                  "
+                                >
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "save" | translate }}
+                                  {{ productSettings.currencySymbol
+                                  }}{{
+                                    productVariation.onetimeAndSmartshipDifference
+                                      | customCurrency: productSettings
+                                  }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "cancel-anytime" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "eligible-to-earn" | translate }}
+                                  <span
+                                    class="underline"
+                                    (click)="onClickLearnMore()"
+                                    data-dismiss="modal"
+                                  >
+                                    {{ "free-product" | translate }}</span
+                                  >
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{
+                                    "first-smartship-order-processes-in-30-days"
+                                      | translate
+                                  }}
+                                </div>
+                              </div>
+                            </span>
+                          </span>
+                          <input
+                            checked="true"
+                            type="radio"
+                            name="smartship-delivery"
+                            value="ordertype_2"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-container>
+                    </figure>
+
+                    <ng-container *ngIf="!isSmartshipPage">
+                      <ng-container *ngFor="let cartTotal of cartTotalOneTime">
+                        <ng-container *ngIf="cartTotal?.showItem">
+                          <div
+                            class="cart-progress-bar sk-cart__padd"
+                            *ngIf="
+                              cartTotal.isDiscountableInCatalog &&
+                              !cartTotal.isEnabled
+                            "
+                          >
+                            <p
+                              class="p-small color-black"
+                              [innerHTML]="
+                                cartTotal.initialDiscountText !== ''
+                                  ? cartTotal.initialDiscountText
+                                  : cartTotal.bannerText
+                              "
+                              [style.color]="
+                                cartTotal.settings?.banner_info
+                                  ?.banner_bgcolor !== ''
+                                  ? cartTotal.settings?.banner_info
+                                      ?.banner_bgcolor
+                                  : '#FF9000'
+                              "
+                            ></p>
+                          </div>
+
+                          <div
+                            class="cart-progress-bar sk-cart__padd"
+                            *ngIf="
+                              cartTotal.isEnabled &&
+                              cartTotal.requiredPriceOrItems > 0
+                            "
+                          >
+                            <p
+                              class="p-small color-black"
+                              [innerHTML]="cartTotal.bannerText"
+                            ></p>
+
+                            <div class="progress">
+                              <div
+                                class="progress-bar"
+                                role="progressbar"
+                                [style.width.%]="cartTotal.progressPercent"
+                                [style.color]="
+                                  cartTotal.settings?.banner_info
+                                    ?.banner_textcolor !== ''
+                                    ? cartTotal.settings?.banner_info
+                                        ?.banner_textcolor
+                                    : '#fff'
+                                "
+                                [style.backgroundColor]="
+                                  cartTotal.settings?.banner_info
+                                    ?.banner_bgcolor !== ''
+                                    ? cartTotal.settings?.banner_info
+                                        ?.banner_bgcolor
+                                    : '#FF9000'
+                                "
+                                [attr.aria-valuenow]="cartTotal.progressPercent"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                {{ cartTotal.progressPercent }}%
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="cart-success-bar sk-cart__padd"
+                            *ngIf="cartTotal.isUnlocked"
+                          >
+                            <p
+                              class="p-small color-white text-center"
+                              [innerHTML]="
+                                cartTotal?.unlockedText !== ''
+                                  ? cartTotal?.unlockedText
+                                  : '🎉 ' +
+                                    ('youve-unlocked-a-cart-total-discount-1'
+                                      | translate) +
+                                    ' <strong>' +
+                                    ('youve-unlocked-a-cart-total-discount-2'
+                                      | translate) +
+                                    '</strong>'
+                              "
+                            >
+                              <img
+                                draggable="false"
+                                role="img"
+                                class="emoji"
+                                alt="🎉"
+                                src="https://s.w.org/images/core/emoji/13.0.0/svg/1f389.svg"
+                              />
+                            </p>
+                          </div>
+
+                          <div
+                            class="almost-unlocked-wrap text-center"
+                            *ngIf="cartTotal.isAlmostUnlocked"
+                          >
+                            <p>
+                              {{
+                                cartTotal?.almostUnlockedText !== ""
+                                  ? cartTotal?.almostUnlockedText
+                                  : "🎉 " +
+                                    ("youve-almost-unlocked-a-cart-total-discount"
+                                      | translate)
+                              }}
+                            </p>
+                            <p class="text-center eligible-text">
+                              {{
+                                cartTotal?.claimText !== ""
+                                  ? cartTotal?.claimText
+                                  : "👀 " +
+                                    ("add-an-eligible-product-to-claim-offer"
+                                      | translate)
+                              }}
+                              <a (click)="onClickShopNow()">{{
+                                "shop-now" | translate
+                              }}</a>
+                            </p>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+
+                    <div
+                      class="form-check sk-product-checkbox"
+                      *ngIf="isSmartshipPage"
+                    >
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexCheckDefault"
+                        (change)="onTodaysOrderSelect($event)"
+                      />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        {{ "include-in-todays-order" | translate }}
+                      </label>
+                    </div>
+
+                    <figure
+                      class="sk-product__user-amount quick-buy__user-amount d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="sk-product__amount-modify d-flex justify-content-between align-items-center"
+                      >
+                        <button
+                          class="pack-qty-btn"
+                          (click)="onClickQuantityMinus()"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <p class="text-center qty-width p-small font-bold">
+                          {{ productQuantity }}
+                        </p>
+                        <button
+                          class="pack-qty-btn"
+                          (click)="onClickQuantityPlus()"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <div
+                        class="sk-product__amount-cost"
+                        *ngIf="!isSmartshipPage"
+                      >
+                        <h4 [class.color-green]="productVariation.hasDiscount">
+                          <del
+                            class="color-black font-reg"
+                            *ngIf="productVariation.hasDiscount"
+                            >{{ productSettings.currencySymbol
+                            }}{{
+                              productVariation.hasOwnProperty("priceObj")
+                                ? (productQuantity *
+                                    productVariation.priceObj.oneTime
+                                  | customCurrency: productSettings)
+                                : 0
+                            }}</del
+                          >
+                          {{ productSettings.currencySymbol
+                          }}{{
+                            productVariation.finalPrice
+                              | customCurrency: productSettings
+                          }}
+                          <p
+                            class="p-small color-black"
+                            *ngIf="country === 'MX' && language === 'es'"
+                          >
+                            IVA + Envio se calculan al final
+                          </p>
+                          <p
+                            class="p-small color-black"
+                            *ngIf="country === 'MX' && language === 'en'"
+                          >
+                            VAT + Shipping are calculated at the checkout
+                          </p>
+                        </h4>
+                      </div>
+
+                      <div
+                        class="sk-product__amount-cost"
+                        *ngIf="isSmartshipPage"
+                      >
+                        <h4
+                          [class.color-green]="
+                            productVariation.hasOwnProperty('priceObj') &&
+                            productVariation.onetimeAndSmartshipDifference !== 0
+                          "
+                        >
+                          <del
+                            class="color-black font-reg"
+                            *ngIf="
+                              productVariation.hasOwnProperty('priceObj') &&
+                              productVariation.onetimeAndSmartshipDifference !==
+                                0
+                            "
+                            >{{ productSettings.currencySymbol
+                            }}{{
+                              productVariation.hasOwnProperty("priceObj")
+                                ? (productQuantity *
+                                    productVariation.priceObj.oneTime
+                                  | customCurrency: productSettings)
+                                : 0
+                            }}</del
+                          >
+                          {{ productSettings.currencySymbol
+                          }}{{
+                            productVariation.hasOwnProperty("priceObj")
+                              ? (productQuantity *
+                                  productVariation.priceObj.everyMonth
+                                | customCurrency: productSettings)
+                              : 0
+                          }}
+                          <p
+                            class="p-small color-black"
+                            *ngIf="country === 'MX' && language === 'es'"
+                          >
+                            IVA + Envio se calculan al final
+                          </p>
+                          <p
+                            class="p-small color-black"
+                            *ngIf="country === 'MX' && language === 'en'"
+                          >
+                            VAT + Shipping are calculated at the checkout
+                          </p>
+                        </h4>
+                      </div>
+                    </figure>
+
+                    <figure
+                      *ngIf="country === 'CA' || country === 'US'"
+                      class="p-small color-black text-right sezzle-message"
+                    >
+                      <span>{{ "buy-now-pay-later-with" | translate }}</span>
+
+                      <app-sezzle-light></app-sezzle-light>
+                      <app-sezzle-dark></app-sezzle-dark>
+
+                      <a
+                        data-toggle="tooltip"
+                        data-html="true"
+                        data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                        [title]="['check-out-with-sezzle' | translate]"
+                        ><i class="fad fa-info-circle"></i
+                      ></a>
+                    </figure>
+
+                    <figure
+                      class="shipping-note"
+                      *ngIf="product.shippingNote !== '' && !isSmartshipPage"
+                    >
+                      <p class="p-small color-black font-bold">
+                        🚚 {{ "shipping-note" | translate }}
+                      </p>
+                      <p class="expected">{{ product.shippingNote }}</p>
+                    </figure>
+
+                    <div class="sold-out" *ngIf="product.isSoldOut">
+                      <h4>{{ getSoldOutText(product) }}</h4>
+                    </div>
+
+                    <button
+                      *ngIf="!isSmartshipPage"
+                      [disabled]="
+                        (productVariation | json) === '{}' ||
+                        product.isSoldOut ||
+                        productVariation.priceObj.oneTime === 0 ||
+                        productVariation.isOutOfStock
+                      "
+                      class="button button-large button-primary full-width add-to-cart-icon"
+                      data-dismiss="modal"
+                      (click)="onClickAddToCart()"
+                    >
+                      {{ "add-to-cart" | translate }}
+                    </button>
+
+                    <button
+                      *ngIf="isSmartshipPage"
+                      [disabled]="
+                        (productVariation | json) === '{}' ||
+                        product.isSoldOut ||
+                        productVariation.priceObj.everyMonth === 0 ||
+                        productVariation.isOutOfStock
+                      "
+                      class="button button-large button-primary full-width add-to-cart-icon"
+                      data-dismiss="modal"
+                      (click)="onClickAddToSmartship()"
+                    >
+                      {{ "add-to-smartship" | translate }}
+                    </button>
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

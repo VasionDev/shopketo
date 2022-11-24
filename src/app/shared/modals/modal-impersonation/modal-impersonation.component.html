@@ -1,0 +1,44 @@
+<div class="modal fade right-mobile addresses-modal wdt-480" id="impersonationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header flex-column gray-bg">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide">
+                        <i class="fal fa-times"></i>
+                    </a>
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show">
+                        <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"> </i>Impersonation
+                    </a>
+                </p>
+                <h3 class="title color-black">View account</h3>
+            </div>
+            <div>
+                <form (ngSubmit)="onImpersonationAdded()" #impersonationForm="ngForm">
+                    <div class="modal-body">
+                        <div class="card modal-body-card">
+                            <div class="row">
+                                <div class="col-12 my-2">
+                                    <p class="color-black disclaimer-reg">To impersonate a user, please enter the Username below (e.g. john) and click ’View account’. A new browser tab will open.</p>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label class="color-black mb-1">Username</label>
+                                    <input required [(ngModel)]="name" name="name" #nameInput="ngModel" type="text" placeholder="Username"
+                                        class="form-control bg-color">
+                                        <p *ngIf="nameInput.touched && !nameInput.valid" class="text-danger disclaimer-reg"> Username is required. </p>
+                                </div>
+                            </div>
+                            <p *ngIf="errorMessage !== ''" class="text-danger disclaimer-reg">{{errorMessage}}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <div class="btn-groups">
+                            <a data-dismiss="modal" aria-label="Close" class="btn btn-gray pointer">Cancel</a>
+                            <button type="submit" [disabled]="!impersonationForm.valid || !nameInput.valid || isSubmitted" class="btn button-primary">View Account <i *ngIf="isSubmitted" class="fa fa-spinner fa-spin"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

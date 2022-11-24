@@ -1,0 +1,1400 @@
+<!-- END of pruvit-profile -->
+<div class="col-lg-12 websites-wraper account-settings">
+  <h2 class="color-black title">Account settings</h2>
+  <app-loader *ngIf="!userInformation" class="payment--loader"></app-loader>
+  <div *ngIf="userInformation" class="card card-default card-new no-border settings-card mt-sm-5 mt-4">
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Username</p>
+        <p class="color-black font-bold p-18">{{ userInformation.username }}</p>
+      </div>
+      <div class="txt-right">
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal"
+                                  data-target="#changeUsernameModal" class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#changeUsernameModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Email</p>
+        <p class="color-black font-bold p-18">{{ userInformation.email }}</p>
+      </div>
+      <div class="txt-right">
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal" data-target="#changeEmailModal"
+                                  class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#changeEmailModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Phone number</p>
+        <p class="color-black font-bold p-18">
+          +{{
+          userInformation.phoneCountry + " " + userInformation.phoneNumber
+          }}
+        </p>
+        <span *ngIf="userInformation?.phoneNumberIsVerified == false"
+          class="disclaimer-bold alrt-text color-red mb-show mt-3"><i class="far fa-exclamation-circle"></i> not
+          verified</span>
+      </div>
+      <div class="txt-right">
+        <span *ngIf="userPhoneOptions?.phoneNumberIsVerified == false"
+          class="disclaimer-bold alrt-text color-red mb-hide"><i class="far fa-exclamation-circle"></i> not
+          verified</span>
+        <!-- <a *ngIf="userPhoneOptions?.phoneNumberIsVerified == false" href="#" data-toggle="modal"
+                                  data-target="#phoneNumberModal" class="btn btn-gray btn-verify">Verify</a> -->
+        <button *ngIf="userPhoneOptions?.phoneNumberIsVerified == false" data-toggle="modal"
+          data-target="#phoneNumberModal" class="button button--default button--grey btn-verify">
+          Verify
+        </button>
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal" data-target="#phoneNumberModal"
+                                  class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#phoneNumberModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Password</p>
+        <p class="color-gray disclaimer-reg"></p>
+      </div>
+      <div class="txt-right">
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal" data-target="#passwordModal"
+                                  class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#passwordModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Country of residence</p>
+        <p class="color-black font-bold p-18">United States</p>
+        <span *ngIf="historyReview" class="disclaimer-bold alrt-text color-org mb-show mt-2"><i
+            class="far fa-clock"></i> Under review</span>
+      </div>
+      <div class="txt-right">
+        <span *ngIf="historyReview" class="disclaimer-bold alrt-text color-org mb-hide"><i
+            class="far fa-clock"></i>Under review</span>
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal"
+                                  data-target="#countryResidenceModal" class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#countryResidenceModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center info-item">
+      <div class="txt-left">
+        <p class="color-gray p-small font-bold">Full name</p>
+        <p class="color-black font-bold p-18">
+          {{ userInformation.firstName + " " + userInformation.lastName }}
+        </p>
+        <span *ngIf="nameReview" class="disclaimer-bold alrt-text color-org mb-show mt-2"><i class="far fa-clock"></i>
+          Under review</span>
+      </div>
+      <div class="txt-right">
+        <span *ngIf="nameReview" class="disclaimer-bold alrt-text color-org mb-hide"><i class="far fa-clock"></i> Under
+          review</span>
+        <!-- <a href="#" (click)="errorReset()" data-toggle="modal" data-target="#fullNameModal"
+                                  class="btn btn-gray">Change</a> -->
+        <button (click)="errorReset()" data-toggle="modal" data-target="#fullNameModal"
+          class="button button--default button--grey">
+          Change
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userInformation" class="card card-default card-new no-border advanced-card">
+    <h3 class="color-black mb-sm-4 mb-3">Advanced</h3>
+
+    <div class="row">
+      <div class="col-sm-6 col-12 form-group">
+        <div class="birth-date">
+          <label class="disclaimer-bold color-gray mb-1 optional">Birth date <span
+              class="text copyright-text">optional</span></label>
+          <div class="d-flex">
+            <select [(ngModel)]="month" class="form-control disclaimer-bold custom-select custom-select-no-arrow"
+              (ngModelChange)="checkDate()" [ngModelOptions]="{ updateOn: 'blur' }">
+              <option value="99">Select month</option>
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">Jun</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8" selected>September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select [(ngModel)]="day" class="form-control disclaimer-bold custom-select"
+              (ngModelChange)="checkDate()" [ngModelOptions]="{ updateOn: 'blur' }"
+              class="form-control disclaimer-bold custom-select custom-select-no-arrow w-80">
+              <option value="">Select day</option>
+              <option *ngFor="let d of daysArray" value="{{ d }}">
+                {{ d }}
+              </option>
+            </select>
+            <!-- <input type="number" min="1" max="31" [(ngModel)]="day"
+                                          (ngModelChange)="checkDate($event, 'day')"
+                                          [ngModelOptions]="{ updateOn: 'blur' }"
+                                          class="form-control disclaimer-bold custom-select w-80"> -->
+            <input type="text" maxlength="4" [(ngModel)]="year" (ngModelChange)="checkDate()"
+              [ngModelOptions]="{ updateOn: 'blur' }" placeholder="Year"
+              class="form-control disclaimer-bold custom-select custom-select-no-arrow w-80" />
+          </div>
+        </div>
+        <small *ngIf="bdayError" class="d-block copyright-text font-bold mt-1 error-text">Please enter a valid
+          date.</small>
+      </div>
+      <div class="col-sm-6 col-12 form-group">
+        <label class="disclaimer-bold color-gray mb-1 optional">Gender <span
+            class="text copyright-text">optional</span></label>
+        <select [(ngModel)]="gender" class="form-control disclaimer-bold custom-select">
+          <option value="0">Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">I prefer not to say</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-12 form-group">
+        <label class="disclaimer-bold color-gray mb-1 optional">T-shirt size <span
+            class="text copyright-text">optional</span></label>
+        <select [(ngModel)]="shirtSize" class="form-control disclaimer-bold custom-select">
+          <option value="0">Select shirt</option>
+          <option value="MS">Men's Small</option>
+          <option value="MM">Men's Medium</option>
+          <option value="ML">Men's Large</option>
+          <option value="MXL">Men's X Large</option>
+          <option value="M2XL">Men's 2 X Large</option>
+          <option value="M3XL">Men's 3 X Large</option>
+          <option value="WS">Women's Small</option>
+          <option value="WM">Women's Medium</option>
+          <option value="WL">Women's Large</option>
+          <option value="WXL">Women's X Large</option>
+          <option value="W2XL">Women's 2 X Large</option>
+          <option value="W3XL">Women's 3 X Large</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="save-changes">
+      <button [disabled]="bdayError || loading" (click)="saveAdvanced()" class="btn button-primary disclaimer-bold">
+        Save
+      </button>
+    </p>
+  </div>
+</div>
+<div [ngClass]="{ show: changesSaved == true }" class="status-msg p-small bottom-animation">
+  Changes saved
+</div>
+
+<!-- END of sk-dashboard -->
+
+<div *ngIf="userInformation" class="modal animate fade right-mobile addresses-modal wdt-480" id="changeUsernameModal"
+  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Username</h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group">
+            <input type="text" [ngClass]="{ error: userNameError == true }" [(ngModel)]="userName" maxlength="75"
+              class="form-control disclaimer-reg bg-color" value="hubertbest" />
+            <small *ngIf="userName == userInformation.username" class="color-gray d-block copyright-text mt-1">This is
+              your current username</small>
+            <small *ngIf="userNameError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, it’s
+              taken!</small>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+              happened!</small>
+            <small *ngIf="userNameSuccess" class="d-block copyright-text font-bold mt-1 color-brand">Looks good!</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button (click)="saveUserName()" [disabled]="loading || !userName" class="btn button-primary">
+            <span *ngIf="!loading">Save</span>
+            <span *ngIf="loading">Saving</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of changeUsernameModal -->
+
+<div *ngIf="userInformation" class="modal animate fade right-mobile addresses-modal wdt-480" id="changeEmailModal"
+  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Email</h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group">
+            <input type="text" #emailInput="ngModel" class="form-control disclaimer-reg bg-color"
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+              [ngClass]="{'error': emailError == true || emailInput.errors?.['pattern'] }" [(ngModel)]="email" />
+            <small *ngIf="email == userInformation.email" class="color-gray d-block copyright-text mt-1">This is your
+              current Email</small>
+            <small *ngIf="emailError" class="color-black d-block copyright-text mt-1 error-text">Ooops, this email is
+              linked to another account!</small>
+            <small *ngIf="emailInput.errors?.['pattern']"
+              class="color-black d-block copyright-text mt-1 error-text">Please enter a valid email!</small>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+              happened!</small>
+            <small *ngIf="emailSuccess" class="d-block copyright-text font-bold mt-1 color-brand">Looks good!</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button (click)="saveEmail()" class="btn button-primary" [disabled]="loading || !email || emailInput.errors?.['pattern']">
+            <span *ngIf="!loading">Save</span>
+            <span *ngIf="loading">Saving</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of changeEmailModal -->
+
+<div class="modal animate fade right-mobile addresses-modal wdt-480" id="confirmEmailModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Confirm Email</h3>
+        <p class="p-small color-gray">
+          Please enter a code we just sent to
+          <strong>gene@uxtensive.com</strong>
+        </p>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group confirm-code">
+            <div class="inner-col">
+              <input type="text" class="form-control bg-color error" value="2" />
+              <input type="text" class="form-control bg-color error" value="6" />
+              <input type="text" class="form-control bg-color" />
+              <input type="text" class="form-control bg-color" />
+              <input type="text" class="form-control bg-color" />
+              <input type="text" class="form-control bg-color" />
+            </div>
+            <small class="d-block copyright-text font-bold mt-1 error-text">The entered verification code is
+              incorrect</small>
+          </div>
+          <div class="btn-groups w-100 confirm">
+            <button class="btn btn-gray mr-auto">Change Email</button>
+            <button class="btn btn-gray">
+              <i class="far fa-redo"></i> Resend code
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer mb-hide">
+        <div class="btn-groups w-100">
+          <button class="btn btn-gray mr-auto">Change Email</button>
+          <button class="btn btn-gray">
+            <i class="far fa-redo"></i> Resend code
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of confirmEmailModal -->
+
+<div class="modal animate fade right-mobile addresses-modal wdt-480" id="phoneNumberModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Phone number</h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group mt-1">
+            <label class="disclaimer-bold color-gray mb-1">Country code</label>
+            <select class="form-control disclaimer-bold custom-select">
+              <option value="1">+1 United States</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-1">
+            <label class="disclaimer-bold color-gray mb-1">Phone number</label>
+            <div class="phone-control">
+              <input type="text" [(ngModel)]="phoneNumber" class="form-control disclaimer-reg bg-color" />
+              <span class="color-gray p-small font-bold">+{{ phoneCountry }}</span>
+            </div>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+              happened!</small>
+            <!-- <small class="d-block copyright-text font-bold mt-1 color-brand">Looks good!</small> -->
+            <small class="color-black d-block copyright-text mt-1">This is your current phone number</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button (click)="phoneSend()" [disabled]="loading || !phoneNumber" class="btn button-primary">
+            <span *ngIf="!loading">Continue</span>
+            <span *ngIf="loading">Sending</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of phoneNumberModal -->
+
+<div class="modal animate fade right-mobile addresses-modal wdt-480" id="confirmPhoneNumberModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Confirm phone number</h3>
+        <p class="p-small color-gray">
+          Please enter a code we just sent to
+          <strong>+{{ phoneCountry + " " + phoneNumber }}</strong>
+        </p>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group confirm-code">
+            <div class="inner-col">
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number1" type="text" maxlength="1"
+                class="form-control bg-color" />
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number2" type="text" maxlength="1"
+                class="form-control bg-color" />
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number3" type="text" maxlength="1"
+                class="form-control bg-color" />
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number4" type="text" maxlength="1"
+                class="form-control bg-color" />
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number5" type="text" maxlength="1"
+                class="form-control bg-color" />
+              <input [ngClass]="{ error: verifyPhoneError == true }" [(ngModel)]="number6" type="text" maxlength="1"
+                class="form-control bg-color" />
+            </div>
+            <small *ngIf="verifyPhoneError" class="d-block copyright-text font-bold mt-1 error-text">The entered
+              verification code is incorrect</small>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+              happened!</small>
+          </div>
+          <div class="btn-groups w-100 confirm">
+            <button class="btn btn-gray mr-auto" data-dismiss="modal" aria-label="Close">
+              Change Phone
+            </button>
+            <button (click)="phoneCodeSend()" [disabled]="loading" class="btn btn-gray">
+               Send code
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer mb-hide">
+        <div class="btn-groups w-100">
+          <button data-dismiss="modal" aria-label="Close" class="btn btn-gray mr-auto">
+            Change Phone
+          </button>
+          <button (click)="phoneCodeSend()" [disabled]="loading" class="btn btn-gray">
+             Send code
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of
+                                          confirmPhoneNumberModal -->
+
+<div class="modal animate fade right-mobile addresses-modal" id="passwordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Password</h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="form-group mt-0 px-0 px-sm-2">
+                <label class="disclaimer-bold color-gray mb-1">New password</label>
+                <div class="password-icon">
+                  <input #passwordInp="ngModel" [(ngModel)]="password" pattern="^\S*$" id="newPassword" [type]="
+                      showPassword && passwordField == 1 ? 'text' : 'password'
+                    " class="form-control disclaimer-reg bg-color" name="password" value="password" />
+
+                  <span (click)="showPasswordField(1)" class="fa fa-fw fa-eye-slash toggle-password-btn"></span>
+                </div>
+                <p *ngIf="passwordInp.errors?.['pattern']" class="cio_input_label">
+                    problem
+                  </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="form-group mt-0 px-0 px-sm-2">
+                <label [ngClass]="{
+                    'error-text': password !== repeatPassword && repeatPassword
+                  }" class="disclaimer-bold color-gray mb-1 error-text">Repeat new password</label>
+                <div class="password-icon">
+                  <input id="repeatNewPassword" type="password" [ngClass]="{
+                      error: password !== repeatPassword && repeatPassword
+                    }" class="form-control disclaimer-reg bg-color" [type]="
+                      showPassword && passwordField == 2 ? 'text' : 'password'
+                    " [(ngModel)]="repeatPassword" name="password" value="error pass" />
+                  <span (click)="showPasswordField(2)" class="fa fa-fw fa-eye-slash toggle-password-btn"></span>
+                  <small *ngIf="password !== repeatPassword && repeatPassword"
+                    class="d-block copyright-text font-bold mt-1 error-text">Password doesn’t match</small>
+                  <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+                    happened!</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button (click)="changePassword()" [disabled]="
+              (password !== repeatPassword) || loading || !password || !repeatPassword || passwordInp.errors?.['pattern']
+            " class="btn button-primary">
+            <span *ngIf="!loading">Save</span>
+            <span *ngIf="loading">Saving</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of passwordModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal wdt-480" id="fullNameModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Full name</h3>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card">
+          <div class="form-group mt-0 px-sm-0">
+            <label class="disclaimer-bold color-gray mb-1">First name</label>
+            <input type="text" class="form-control disclaimer-reg bg-color" [(ngModel)]="firstName" />
+          </div>
+
+          <div class="form-group mt-1 px-sm-0">
+            <label class="disclaimer-bold color-gray mb-1">Last name</label>
+            <input type="text" class="form-control disclaimer-reg bg-color" [(ngModel)]="lastName" />
+          </div>
+          <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">Ooops, something
+            happened!</small>
+        </div>
+
+        <div class="friends-row change-history-row">
+          <div class="friends-expander">
+            <div class="collapse-head collapsed" data-toggle="collapse" data-target="#changeCollapse"
+              aria-expanded="false" aria-controls="changeCollapse">
+              <h3 class="color-black d-flex align-items-center font-24">
+                Change history
+                <span class="count-taq">{{ nameHistory.length }}</span>
+              </h3>
+            </div>
+            <div id="changeCollapse" class="collapse-body collapse">
+              <ng-container *ngFor="let name of nameHistory; let i = index; let last = last">
+                <div class="change-info-item border-bottom">
+                  <div class="d-flex justify-content-between">
+                    <div class="txt-left">
+                      <p class="color-black p-small">
+                        {{ name.oldFirstName + " " + name.oldLastName }}
+                        <i class="far fa-arrow-right color-gray ml-1"></i>
+                      </p>
+                      <p class="color-black p-small">
+                        {{ name.newFirstName + " " + name.newLastName }}
+                      </p>
+                      <small class="disclaimer-reg color-gray d-block">{{
+                        name.dateCreated | date: "MMM d, y"
+                        }}</small>
+                      <span *ngIf="name.status == 'pending'"
+                        class="disclaimer-bold alrt-text color-org text-uppercase mb-show mt-2"><i class="far fa-clock"
+                          aria-hidden="true"></i> Under
+                        review</span>
+                      <span *ngIf="name.status == 'voided'"
+                        class="disclaimer-bold alrt-text color-red text-uppercase mb-show mt-2"><i class="far fa-times"
+                          aria-hidden="true"></i>
+                        Declined</span>
+                      <span *ngIf="name.status == 'completed'"
+                        class="disclaimer-bold alrt-text color-green text-uppercase mb-show mt-2"><i
+                          class="far fa-check" aria-hidden="true"></i>
+                        Approved</span>
+                    </div>
+                    <div class="txt-right">
+                      <span *ngIf="name.status == 'pending'"
+                        class="disclaimer-bold alrt-text color-org text-uppercase mb-hide"><i class="far fa-clock"
+                          aria-hidden="true"></i> Under
+                        review</span>
+                      <span *ngIf="name.status == 'voided'"
+                        class="disclaimer-bold alrt-text color-red text-uppercase mb-hide mt-2"><i class="far fa-times"
+                          aria-hidden="true"></i>
+                        Declined</span>
+                      <span *ngIf="name.status == 'completed'"
+                        class="disclaimer-bold alrt-text color-green text-uppercase mb-hide"><i class="far fa-check"
+                          aria-hidden="true"></i>
+                        Approved</span>
+                    </div>
+                   
+                  </div>
+                  <div *ngIf="name.status == 'voided'" class="card modal-body-card px-0 mt-sm-3 mt-2">
+                    <div class="card alert-card"
+                      style="background: linear-gradient(266.25deg, #FF6F66 6.59%, #EB4747 62.86%);">
+                      <div class="d-flex alert-text">
+                        <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                        <p class="p-small pr-sm-5">Please check your Email for further instructions or contact our
+                          Customer Support</p>
+                      </div>
+                      <div class="btn-groups">
+                        <a href="https://support.justpruvit.com/hc/en-us" target="_blank" class="btn button-primary">I need support</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button [disabled]="loading || !firstName || !lastName" (click)="saveName()" class="btn button-primary">
+            Request change
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of fullNameModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal" id="countryResidenceModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Country of residence</h3>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card mb-trns">
+          <div class="card modal-body-card p-0 m-0 mb-trns">
+            <div class="card alert-card mx-0" style="
+                background: linear-gradient(
+                  266.25deg,
+                  #ff9e45 6.59%,
+                  #ff9000 62.86%
+                );
+              ">
+              <div class="d-flex alert-text">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p class="p-small pr-sm-5">
+                  Your current country of residence is United States. Changing
+                  your country may require updating your Legal Information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address listing-->
+          <div *ngIf="step == 1" class="form-group px-0">
+            <h3 class="color-black font-24 mb-3">Address</h3>
+            <button (click)="stepChange(2)" class="btn button-primary btn-newAddress p-small font-bold">
+              <i class="far fa-plus mr-1"></i> New address
+            </button>
+            <app-loader *ngIf="loaderAddress" class="payment--loader"></app-loader>
+            <div class="card address-card mt-3 mb-3" *ngIf="!loaderAddress">
+              <ng-container *ngFor="
+                  let address of addresses;
+                  let i = index;
+                  let last = last
+                ">
+                <div (click)="selectAddressProfileId(address.id)" class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault{{ i }}" />
+                  <label class="form-check-label" for="flexRadioDefault{{ i }}">
+                    {{ address.addressLine1 }}, {{ address.region }}
+                    {{ address.postalCode }}, {{ address.country }}
+                  </label>
+                  <span *ngIf="address.isDefault" class="default-status">Default</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <!-- New address-->
+          <div *ngIf="step == 2" class="form-group px-0 mt-0">
+            <div style="border: none" class="card address-card p-3">
+              <h3 class="color-black font-24 mb-2 mb-sm-3 mb-hide">
+                New address
+              </h3>
+              <div class="form-group px-0 mt-3">
+                <label class="disclaimer-bold color-gray mb-1 mb-hide">Country of residence</label>
+                <select [(ngModel)]="address.country" class="form-control disclaimer-bold custom-select">
+                  <option value="0" disabled>Select country</option>
+                  <option value="us" selected>United States</option>
+                </select>
+              </div>
+              <div class="row mx-08">
+                <div class="form-group my-0 col-6 col-sm-3 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">Postal code</label>
+                  <input [(ngModel)]="address.postalCode" #zipInput="ngModel" pattern="^\d{5}(?:[-\s]\d{4})?$"
+                    type="text" class="form-control disclaimer-reg bg-color mb-2" />
+                </div>
+                <div class="form-group my-0 col-6 col-sm-3 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">State</label>
+                  <select [(ngModel)]="address.region" class="form-control disclaimer-bold custom-select">
+                    <option value="0" disabled>Select state</option>
+                    <option *ngFor="let x of regions; let i = index" value="{{ x.key }}">
+                      {{ x.value }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group my-0 col-12 col-sm-6 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">City</label>
+                  <input [(ngModel)]="address.city" type="text" class="form-control disclaimer-reg bg-color mb-2" />
+                </div>
+                <p *ngIf="zipInput.errors?.['pattern']" class="text-danger text--15 px-2">
+                  Please enter a postal code.
+                </p>
+              </div>
+
+              <div class="form-group px-0 my-sm-2 my-0">
+                <label class="disclaimer-bold color-gray mb-1">Address</label>
+                <input type="text" class="form-control disclaimer-reg bg-color mb-2" [(ngModel)]="address.addressLine1"
+                  placeholder="Street and number" />
+                <input type="text" class="form-control disclaimer-reg bg-color" [(ngModel)]="address.addressLine2"
+                  placeholder="Apartment, building, floor (optional)" />
+              </div>
+            </div>
+
+            <div class="btn-groups w-100 confirm edit-address-btns mb-hide">
+              <div class="ml-auto d-flex">
+                <button class="btn btn-gray" data-dismiss="modal">
+                  Cancel
+                </button>
+                <button (click)="verifyAddress()"
+                  [disabled]="loaderVerify || !address.addressLine1 || !address.city || !address.region || address.region == '0' || !address.postalCode || zipInput.errors?.['pattern'] || address.country == '0' || !address.country"
+                  class="btn button-primary">
+                  Continue
+                </button>
+              </div>
+            </div>
+            <div style="left: 0px" class="modal-footer mb-show">
+              <div class="btn-groups">
+                <button class="btn btn-gray" data-dismiss="modal" aria-label="Close">
+                  Cancel
+                </button>
+                <button (click)="verifyAddress()"
+                  [disabled]="loaderVerify || !address.addressLine1 || !address.city || !address.region || address.region == '0' || !address.postalCode || zipInput.errors?.['pattern'] || address.country == '0' || !address.country"
+                  class="btn button-primary">
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--confirm address-->
+          <div *ngIf="step == 3" class="form-group px-0">
+            <div style="border: none" class="card address-card p-3">
+              <h3 class="color-black font-24">Confirm address</h3>
+              <p class="p-small color-gray mb-2 mb-sm-3">
+                We found these verified matches:
+              </p>
+
+              <div class="card address-card mb-3">
+                <div *ngFor="let address of confirmedAddresses; let i = index" (click)="selectAddress(address, false)"
+                  class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="confirmAddressRadio"
+                    id="confirmAddressRadio{{ i }}" />
+                  <label class="form-check-label" for="confirmAddressRadio{{ i }}">{{ address.title }},
+                    {{ address.city }}
+                    {{ address.region }} {{ address.postalCode }}</label>
+                </div>
+
+                <div class="form-check" (click)="selectAddress(address, true)">
+                  <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio99" />
+                  <label class="form-check-label" for="confirmAddressRadio99">Keep original address: <br />
+                    {{ address.addressLine1 }},
+                    {{ address.city }}
+                    {{ address.region }} {{ address.postalCode }}</label>
+                </div>
+              </div>
+
+              <div class="btn-groups w-100 confirm edit-address-btns mb-hide">
+                <div class="ml-auto d-flex">
+                  <button (click)="stepChange(2)" class="btn btn-gray">
+                    Edit address
+                  </button>
+                  <button [disabled]="loaderProfile || !selectedAddress" (click)="createAddressProfile(); (false)"
+                    class="btn button-primary">
+                    Save
+                  </button>
+                </div>
+              </div>
+              <div style="left: 0px" class="modal-footer mb-show">
+                <div class="btn-groups">
+                  <button (click)="stepChange(2)" class="btn btn-gray">
+                    Edit address
+                  </button>
+                  <button [disabled]="loaderProfile || !selectedAddress" (click)="createAddressProfile(); (false)"
+                    class="btn button-primary">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="step == 1" class="friends-row change-history-row">
+          <div class="friends-expander">
+            <div class="collapse-head">
+              <h3 class="color-black d-flex align-items-center font-24">
+                Change requests
+              </h3>
+            </div>
+            <div class="collapse-body">
+              <ng-container *ngFor="
+                  let country of countryHistory;
+                  let i = index;
+                  let last = last
+                ">
+                <div class="change-info-item border-bottom">
+                  <div class="d-flex justify-content-between">
+                    <div class="txt-left">
+                      <p class="color-black p-small">
+                        {{ country.oldCountry }}
+                        <i class="far fa-arrow-right color-gray my-1"></i>
+                        {{ country.newCountry }}
+                      </p>
+                      <small class="disclaimer-reg color-gray d-block">{{
+                        country.dateCreated | date: "MMM d, y"
+                        }}</small>
+                      <span *ngIf="country.status == 'pending'"
+                        class="disclaimer-bold alrt-text color-org text-uppercase mb-show mt-2"><i class="far fa-clock"
+                          aria-hidden="true"></i> Under
+                        review</span>
+                      <span *ngIf="country.status == 'voided'"
+                        class="disclaimer-bold alrt-text color-red text-uppercase mb-show mt-2"><i class="far fa-times"
+                          aria-hidden="true"></i>
+                        Declined</span>
+                      <span *ngIf="country.status == 'completed'"
+                        class="disclaimer-bold alrt-text color-green text-uppercase mb-show mt-2"><i
+                          class="far fa-check" aria-hidden="true"></i>
+                        Approved</span>
+                    </div>
+                    <div class="txt-right">
+                      <span *ngIf="country.status == 'pending'"
+                        class="disclaimer-bold alrt-text color-org text-uppercase mb-hide"><i class="far fa-clock"
+                          aria-hidden="true"></i> Under
+                        review</span>
+                      <span *ngIf="country.status == 'voided'"
+                        class="disclaimer-bold alrt-text color-red text-uppercase mb-hide mt-2"><i class="far fa-times"
+                          aria-hidden="true"></i>
+                        Declined</span>
+                      <span *ngIf="country.status == 'completed'"
+                        class="disclaimer-bold alrt-text color-green text-uppercase mb-hide"><i class="far fa-check"
+                          aria-hidden="true"></i>
+                        Approved</span>
+                    </div>
+                    
+                  </div>
+                </div>
+              </ng-container>
+              <div *ngIf="hasWalletAmount" class="card modal-body-card px-0 mt-sm-3 mt-2">
+                <div class="card alert-card" style="
+                    background: linear-gradient(
+                      266.25deg,
+                      #ff6f66 6.59%,
+                      #eb4747 62.86%
+                    );
+                  ">
+                  <div class="d-flex alert-text">
+                    <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                    <p class="p-small pr-sm-5">
+                      The user must transfer his balance out before the country
+                      change request is fulfilled.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="step == 1" class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button [disabled]="!addressProfileId || loading" (click)="getWalletStatus()" class="btn button-primary">
+            Request changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of countryResidenceModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal" id="viewAddressModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Account settings
+          </a>
+        </p>
+        <h3 class="title color-black">Country of residence</h3>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card mb-trns">
+          <div class="card modal-body-card p-0 m-0 mb-trns">
+            <div class="card alert-card mx-0" style="
+                background: linear-gradient(
+                  266.25deg,
+                  #ff9e45 6.59%,
+                  #ff9000 62.86%
+                );
+              ">
+              <div class="d-flex alert-text">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p class="p-small pr-sm-5">
+                  Your current country of residence is Canada. Changing your
+                  country may require updating your Legal Information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-3">
+            <label class="disclaimer-bold color-gray mb-1 mb-hide">Country of residence</label>
+            <select class="form-control disclaimer-bold custom-select">
+              <option value="1" selected>United States</option>
+              <option value="2">Central African Republic</option>
+              <option value="3">United States</option>
+            </select>
+          </div>
+
+          <div class="form-group px-0">
+            <h3 class="color-black font-24 mb-3">Address</h3>
+
+            <a href="#" class="btn button-primary btn-newAddress p-small font-bold mb-show my-3" data-toggle="modal"
+              data-target="#newAddressModal"><i class="far fa-plus mr-1"></i> New address</a>
+
+            <div class="card address-card mb-3">
+              <div class="form-check default">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  767 5th Ave, New York, NY 10153, United States
+                </label>
+                <span class="default-status">Default</span>
+              </div>
+            </div>
+            <a href="#" class="btn button-primary btn-newAddress p-small font-bold mb-hide" data-toggle="modal"
+              data-target="#newAddressModal"><i class="far fa-plus mr-1"></i> New address</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button class="btn button-primary">Request change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of viewAddressModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal" id="newAddressModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Country of residence
+          </a>
+        </p>
+        <h3 class="title color-black">New address</h3>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card mb-trns">
+          <div class="card modal-body-card p-0 m-0 mb-trns mb-hide">
+            <div class="card alert-card mx-0" style="
+                background: linear-gradient(
+                  266.25deg,
+                  #ff9e45 6.59%,
+                  #ff9000 62.86%
+                );
+              ">
+              <div class="d-flex alert-text">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p class="p-small pr-sm-5">
+                  Your current country of residence is Canada. Changing your
+                  country may require updating your Legal Information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-3 mb-4 mb-hide">
+            <label class="disclaimer-bold color-gray mb-1 mb-hide">Country of residence</label>
+            <select class="form-control disclaimer-bold custom-select">
+              <option value="1" selected>United States</option>
+              <option value="2">Central African Republic</option>
+              <option value="3">United States</option>
+            </select>
+          </div>
+
+          <div class="form-group px-0 mt-0">
+            <div class="card address-card p-3 p-sm-4">
+              <h3 class="color-black font-24 mb-2 mb-sm-3 mb-hide">
+                New address
+              </h3>
+
+              <div class="row mx-08">
+                <div class="form-group my-0 col-6 col-sm-3 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">Postal code</label>
+                  <input type="text" class="form-control disclaimer-reg bg-color mb-2" value="10023" />
+                </div>
+                <div class="form-group my-0 col-6 col-sm-3 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">State</label>
+                  <select class="form-control disclaimer-bold custom-select">
+                    <option value="1" selected="">NY</option>
+                    <option value="2">UK</option>
+                    <option value="3">US</option>
+                  </select>
+                </div>
+                <div class="form-group my-0 col-12 col-sm-6 px-2">
+                  <label class="disclaimer-bold color-gray mb-1">City</label>
+                  <input type="text" class="form-control disclaimer-reg bg-color mb-2" value="New York" />
+                </div>
+              </div>
+
+              <div class="form-group px-0 my-sm-2 my-0">
+                <label class="disclaimer-bold color-gray mb-1">Address</label>
+                <input type="text" class="form-control disclaimer-reg bg-color mb-2" placeholder="Street and number" />
+                <input type="text" class="form-control disclaimer-reg bg-color"
+                  placeholder="Apartment, building, floor (optional)" />
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="form-check py-0 px-3">
+                  <input type="checkbox" class="form-check-input" id="shippingCheck" checked="" />
+                  <label class="form-check-label" for="shippingCheck">Make default for shipping</label>
+                </div>
+                <div class="form-check py-0 px-3">
+                  <input type="checkbox" class="form-check-input" id="billingCheck" />
+                  <label class="form-check-label" for="billingCheck">Make default for billing</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-groups w-100 confirm edit-address-btns mb-hide">
+              <div class="ml-auto d-flex">
+                <button class="btn btn-gray">Cancel</button>
+                <button class="btn button-primary" data-toggle="modal" data-target="#confirmAddressModal">
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer mb-hide">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button class="btn button-primary" disabled>Request change</button>
+        </div>
+      </div>
+      <div class="modal-footer mb-show">
+        <div class="btn-groups">
+          <button class="btn btn-gray" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button class="btn button-primary" data-toggle="modal" data-target="#confirmAddressModal">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of newAddressModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal" id="confirmAddressModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>New address</a>
+        </p>
+        <h3 class="title color-black">Confirm address</h3>
+        <p class="p-small color-gray">We found these verified matches:</p>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card mb-trns">
+          <div class="card modal-body-card p-0 m-0 mb-trns mb-hide">
+            <div class="card alert-card mx-0" style="
+                background: linear-gradient(
+                  266.25deg,
+                  #ff9e45 6.59%,
+                  #ff9000 62.86%
+                );
+              ">
+              <div class="d-flex alert-text">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p class="p-small pr-sm-5">
+                  Your current country of residence is Canada. Changing your
+                  country may require updating your Legal Information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-3 mb-hide">
+            <label class="disclaimer-bold color-gray mb-1 mb-hide">Country of residence</label>
+            <select class="form-control disclaimer-bold custom-select">
+              <option value="1" selected>United States</option>
+              <option value="2">Central African Republic</option>
+              <option value="3">United States</option>
+            </select>
+          </div>
+
+          <div class="form-group px-0 mb-hide">
+            <div class="card address-card p-3 p-sm-4">
+              <h3 class="color-black font-24">Confirm address</h3>
+              <p class="p-small color-gray mb-2 mb-sm-3">
+                We found these verified matches:
+              </p>
+
+              <div class="card address-card mb-3">
+                <div class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio1"
+                    checked />
+                  <label class="form-check-label" for="confirmAddressRadio1">901 Sam Rayburn Hwy, Melissa TX
+                    75454</label>
+                </div>
+                <div class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio2" />
+                  <label class="form-check-label" for="confirmAddressRadio2">901 Samuel Rayburn Highway, Melissa Texas
+                    75454</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio3" />
+                  <label class="form-check-label" for="confirmAddressRadio3">Keep original address: <br />
+                    901 Samuel Rayburn Highway, Melissa Texas 75454</label>
+                </div>
+              </div>
+
+              <div class="btn-groups w-100 confirm edit-address-btns">
+                <button class="btn btn-gray" data-toggle="modal" data-target="#editAddressModal">
+                  Edit address
+                </button>
+                <div class="ml-auto d-flex">
+                  <button class="btn btn-gray">Cancel</button>
+                  <button class="btn button-primary">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-0 mb-show">
+            <div class="card address-card mb-3">
+              <div class="form-check border-bottom">
+                <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio11"
+                  checked />
+                <label class="form-check-label" for="confirmAddressRadio11">901 Sam Rayburn Hwy, Melissa TX
+                  75454</label>
+              </div>
+              <div class="form-check border-bottom">
+                <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio22" />
+                <label class="form-check-label" for="confirmAddressRadio22">901 Samuel Rayburn Highway, Melissa Texas
+                  75454</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="confirmAddressRadio" id="confirmAddressRadio33" />
+                <label class="form-check-label" for="confirmAddressRadio33">Keep original address: <br />
+                  901 Samuel Rayburn Highway, Melissa Texas 75454</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer mb-hide">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button class="btn button-primary" disabled>Request change</button>
+        </div>
+      </div>
+      <div class="modal-footer mb-show">
+        <div class="btn-groups">
+          <button class="btn btn-gray" data-toggle="modal" data-target="#editAddressModal">
+            Edit address
+          </button>
+          <button class="btn button-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of confirmAddressModal -->
+
+<div class="modal animate fade right-mobile addresses-modal manage-modal" id="editAddressModal" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i
+              class="fal fa-times"></i></a>
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show"><i
+              class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>New address</a>
+        </p>
+        <h3 class="title color-black">Confirm address</h3>
+        <p class="p-small color-gray">We found these verified matches:</p>
+      </div>
+
+      <div class="modal-body pt-3">
+        <div class="card modal-body-card ref-modal-card mb-trns">
+          <div class="card modal-body-card p-0 m-0 mb-trns mb-hide">
+            <div class="card alert-card mx-0" style="
+                background: linear-gradient(
+                  266.25deg,
+                  #ff9e45 6.59%,
+                  #ff9000 62.86%
+                );
+              ">
+              <div class="d-flex alert-text">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p class="p-small pr-sm-5">
+                  Your current country of residence is Canada. Changing your
+                  country may require updating your Legal Information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-3 mb-hide">
+            <label class="disclaimer-bold color-gray mb-1 mb-hide">Country of residence</label>
+            <select class="form-control disclaimer-bold custom-select">
+              <option value="1" selected>United States</option>
+              <option value="2">Central African Republic</option>
+              <option value="3">United States</option>
+            </select>
+          </div>
+
+          <div class="form-group px-0 mb-hide">
+            <div class="card address-card p-3 p-sm-4">
+              <h3 class="color-black font-24">Confirm address</h3>
+              <p class="p-small color-gray mb-2 mb-sm-3">
+                We found these verified matches:
+              </p>
+
+              <div class="card address-card mb-3">
+                <div class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault113" />
+                  <label class="form-check-label" for="flexRadioDefault113">901 Sam Rayburn Hwy, Melissa TX
+                    75454</label>
+                </div>
+                <div class="form-check border-bottom">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault123" />
+                  <label class="form-check-label" for="flexRadioDefault123">901 Samuel Rayburn Highway, Melissa Texas
+                    75454</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault131"
+                    checked />
+                  <label class="form-check-label" for="flexRadioDefault131">Keep original address: <br />
+                    901 Samuel Rayburn Highway, Melissa Texas 75454</label>
+                </div>
+              </div>
+
+              <div class="btn-groups w-100 confirm edit-address-btns">
+                <button class="btn btn-gray" data-toggle="modal" data-target="#editAddressModal">
+                  Edit address
+                </button>
+                <div class="ml-auto d-flex">
+                  <button class="btn btn-gray">Cancel</button>
+                  <button class="btn button-primary">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group px-0 mt-0 mb-show">
+            <div class="card address-card mb-3">
+              <div class="form-check border-bottom">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1111" />
+                <label class="form-check-label" for="flexRadioDefault1111">901 Sam Rayburn Hwy, Melissa TX 75454</label>
+              </div>
+              <div class="form-check border-bottom">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1222" />
+                <label class="form-check-label" for="flexRadioDefault1222">901 Samuel Rayburn Highway, Melissa Texas
+                  75454</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1333"
+                  checked />
+                <label class="form-check-label" for="flexRadioDefault1333">Keep original address: <br />
+                  901 Samuel Rayburn Highway, Melissa Texas 75454</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer mb-hide">
+        <div class="btn-groups">
+          <button class="btn btn-gray mb-show" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button class="btn button-primary" disabled>Request change</button>
+        </div>
+      </div>
+      <div class="modal-footer mb-show">
+        <div class="btn-groups">
+          <button class="btn btn-gray" data-toggle="modal" data-target="#editAddressModal">
+            Edit address
+          </button>
+          <button class="btn button-primary">Save unverified</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END of editAddressModal -->

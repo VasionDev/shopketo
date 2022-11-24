@@ -1,0 +1,120 @@
+<div class="sk-main__product text-center color-light-white-bg">
+  <ng-container *ngIf="!isEveryoneAccess">
+    <ng-container [ngTemplateOutlet]="availabilityTooltip"></ng-container>
+  </ng-container>
+
+  <ng-container
+    *ngIf="
+      isLearnPage && product.learnPageTitle !== '' && product.learnPageSubTitle
+    "
+  >
+    <span class="p-small most-populer-text" *ngIf="product.isMostPopular">{{
+      "most-popular" | translate
+    }}</span>
+    <div class="product-offer-title">
+      <h3 class="color-black text-center">{{ product.learnPageTitle }}</h3>
+      <p
+        class="color-gray text-center"
+        [innerHtml]="product.learnPageSubTitle"
+      ></p>
+    </div>
+  </ng-container>
+
+  <figure class="sk-main__product-img">
+    <img
+      src="{{ product.homeThumbUrl }}"
+      srcset="{{ product.homeThumbUrl }} 1x, {{ product.homeThumbRetinaUrl }} 2x"
+      class="img-fluid pointer"
+      alt="Product-1"
+      [class.product-sold-out]="
+        product.isSoldOut ||
+        product.isAllVariationOutOfStock ||
+        !isUserCanAccess
+      "
+      (click)="onClickProductImage(product.name)"
+    />
+  </figure>
+
+  <div class="sk-main__product-details">
+    <h4
+      class="color-black sk-main__product-title"
+      [innerHTML]="product.title"
+    ></h4>
+    <ng-template #nonChinesePrice>
+      <p class="p-small color-gray sk-main__product-from">
+        {{ "from" | translate }}
+        <del
+          class="font-reg"
+          *ngIf="
+            product.finalPrice !== 0 &&
+            product.finalPrice !== product.originalPrice
+          "
+          >{{ productSettings.currencySymbol
+          }}{{ product.originalPrice | customCurrency: productSettings }}</del
+        >
+        <wbr />
+        <span
+          [ngClass]="{
+            'color-green font-bold ml-1':
+              product.finalPrice !== 0 &&
+              product.finalPrice !== product.originalPrice
+          }"
+          >{{ productSettings.currencySymbol
+          }}{{ product.finalPrice | customCurrency: productSettings }}</span
+        >
+      </p>
+    </ng-template>
+    <p
+      class="p-small color-gray sk-main__product-from"
+      *ngIf="
+        selectedLanguage === 'zh-hans' || selectedLanguage === 'zh-hant';
+        else nonChinesePrice
+      "
+    >
+      <del
+        class="font-reg"
+        *ngIf="
+          product.finalPrice !== 0 &&
+          product.finalPrice !== product.originalPrice
+        "
+        >{{ productSettings.currencySymbol
+        }}{{ product.originalPrice | customCurrency: productSettings }}</del
+      >
+      <wbr />
+      <span
+        [ngClass]="{
+          'color-green font-bold ml-1':
+            product.finalPrice !== 0 &&
+            product.finalPrice !== product.originalPrice
+        }"
+        >{{ productSettings.currencySymbol
+        }}{{ product.finalPrice | customCurrency: productSettings }}</span
+      >
+      {{ "from" | translate }}
+    </p>
+  </div>
+
+  <ng-container *ngTemplateOutlet="isUserCanAccess ? buy : availability">
+  </ng-container>
+</div>
+
+<ng-template #buy>
+  <app-product-buy
+    [product]="product"
+    [isPromoter]="isPromoter"
+  ></app-product-buy>
+</ng-template>
+
+<ng-template #availability>
+  <app-product-availability
+    [accessLevels]="product.accessLevels"
+    [accessLevelTitle]="accessLevelTitle"
+  ></app-product-availability>
+</ng-template>
+
+<ng-template #availabilityTooltip>
+  <app-product-availability-tooltip
+    [accessLevelTitle]="accessLevelTitle"
+    [isUserCanAccess]="isUserCanAccess"
+  ></app-product-availability-tooltip>
+</ng-template>

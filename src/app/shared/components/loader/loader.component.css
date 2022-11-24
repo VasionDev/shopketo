@@ -1,0 +1,28 @@
+.loader-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 340px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.loader {
+  position: relative;
+  border-radius: 50%;
+  margin: 60px;
+  display: inline-block;
+}
+
+.loader i {
+  font-size: 64px;
+}
+
+@media only screen and (max-width: 767px) {
+  .loader i {
+    font-size: 36px;
+  }
+}

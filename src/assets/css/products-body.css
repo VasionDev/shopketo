@@ -1,0 +1,6932 @@
+@charset "UTF-8";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,500italic);
+
+@font-face {
+  font-family: "BebasNeueLight";
+  src: url("../fonts/BebasNeueLight.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/BebasNeueLight.otf") format("opentype"),
+    url("../fonts/BebasNeueLight.woff") format("woff"),
+    url("../fonts/BebasNeueLight.ttf") format("truetype"),
+    url("../fonts/BebasNeueLight.svg#BebasNeueLight") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "bebas_neuebook";
+  src: url("../fonts/bebasneuebook-webfont.eot");
+  src: url("../fonts/bebasneuebook-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/bebasneuebook-webfont.woff2") format("woff2"),
+    url("../fonts/bebasneuebook-webfont.woff") format("woff"),
+    url("../fonts/bebasneuebook-webfont.ttf") format("truetype"),
+    url("../fonts/bebasneuebook-webfont.svg#bebas_neuebook") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "bebas_neuebold";
+  src: url("../fonts/bebasneuebold-webfont.eot");
+  src: url("../fonts/bebasneuebold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/bebasneuebold-webfont.woff2") format("woff2"),
+    url("../fonts/bebasneuebold-webfont.woff") format("woff"),
+    url("../fonts/bebasneuebold-webfont.ttf") format("truetype"),
+    url("../fonts/bebasneuebold-webfont.svg#bebas_neuebold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ProximaNovaExCn-Regular";
+  src: url("../fonts/ProximaNovaExCn-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/ProximaNovaExCn-Regular.otf") format("opentype"),
+    url("../fonts/ProximaNovaExCn-Regular.woff") format("woff"),
+    url("../fonts/ProximaNovaExCn-Regular.ttf") format("truetype"),
+    url("../fonts/ProximaNovaExCn-Regular.svg#ProximaNovaExCn-Regular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*--------- End of font-face ---------*/
+
+.products-details-body-wrap .primary-color {
+  color: #ffffff;
+}
+
+.products-details-body-wrap .brand-primary {
+  color: #2152ff;
+}
+
+.products-details-body-wrap .brand-success {
+  color: #3cb878;
+}
+
+.products-details-body-wrap .brand-info {
+  color: #2acef1;
+}
+
+.products-details-body-wrap .brand-warning {
+  color: #ff9f19;
+}
+
+.products-details-body-wrap .brand-danger {
+  color: #f35958;
+}
+
+.products-details-body-wrap .gray-dark {
+  color: #666666;
+}
+
+.products-details-body-wrap .gray-darker {
+  color: #333333;
+}
+
+.products-details-body-wrap .gray {
+  color: #959595;
+}
+
+.products-details-body-wrap .gray-light {
+  color: #d6d6d6;
+}
+
+.products-details-body-wrap .gray-lighter {
+  color: #f2f2f2;
+}
+
+.products-details-body-wrap .link-color {
+  color: #2152ff;
+}
+
+.products-details-body-wrap .green-alert {
+  color: #3cb878;
+}
+
+.products-details-body-wrap .orange-alert {
+  color: #ff9f19;
+}
+
+.products-details-body-wrap .p-gray-darker {
+  color: #333333;
+}
+
+.products-details-body-wrap .p-gray {
+  color: #959595;
+}
+
+/*--------- End of Color ---------*/
+
+.broth-body-health-wraper article.container h2 span,
+.MCTProduct-formula-ketosis article .formulaText,
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  h3
+  span {
+  font-family: "BebasNeueLight";
+  font-weight: initial;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .the-text-wrap
+  .the-better
+  span,
+.ketoKremeFFT-optimizedFormula
+  article
+  .optimizedFormula-right
+  .optimizedTitle
+  em {
+  font-family: "bebas_neuebook";
+}
+
+.products-details-body-wrap .jumbo1,
+.products-details-body-wrap .jumbo2,
+.products-details-body-wrap h2,
+.products-details-body-wrap h3,
+.MCTProduct-formula-ketosis article .formulaText span,
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitNumberSqr .inner span {
+  font-family: "bebas_neuebold";
+}
+
+/*
+.products-details-body-wrap h1,
+.products-details-body-wrap h4,
+.products-details-body-wrap h5,
+.products-details-body-wrap h6,
+.products-details-body-wrap p,
+.products-details-body-wrap small {
+  font-family: "Roboto", sans-serif;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-right .withText,
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .textRight
+  p,
+.ketoKremeFFT-benefits article .benefitsCatagory .catagoryDetails,
+.ketoKremeFFT-benefits article .Note,
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 small,
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse h5,
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h5,
+.ketoKremeFFT-highQualityTop .highQualityTitle,
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .highQualitySliderItem
+  .highQualitySliderText
+  .sliderDetails,
+.ketoKremeFFT-highQualityBottom article.container .cautionPara,
+.about-nat-wraper .aboutTtl-overlay,
+.NATBenefits-wraper .aboutTtl-overlay,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-top
+  .suppliment-fat-title,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .serving-size,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .theseStatements,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  th,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td,
+.ketoKalm-why-wrap article.container .why-text .title-wrap .title span sup,
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .title-wrap
+  .title
+  span
+  sup {
+  font-family: proxima-nova, sans-serif;
+} */
+
+.broth-gut-friendly-wraper article.container .these-note,
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item.right-item
+  .these-note {
+  font-family: "ProximaNovaExCn-Regular";
+}
+
+.products-details-body-wrap .ch-jumbo-acu1,
+.products-details-body-wrap .ch-jumbo-acu2,
+.products-details-body-wrap .ch-jumbo-acu3,
+.products-details-body-wrap .ch-jumbo-acu4,
+.products-details-body-wrap .ch-p-reg,
+.products-details-body-wrap .ch-caption,
+.products-details-body-wrap .ch-p-bold,
+.products-details-body-wrap .ch-disclaimer-bold,
+.products-details-body-wrap .ch-disclaimer,
+.challenge-pack-primary > li > div > p,
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-details
+  .item-details
+  > p,
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  p,
+.challenge-pack-primary > li > div > p {
+  font-family: acumin-pro, sans-serif;
+}
+
+.products-details-body-wrap .jumbo1,
+.products-details-body-wrap .jumbo2,
+.products-details-body-wrap h2,
+.products-details-body-wrap h3 {
+  letter-spacing: 0;
+}
+
+.products-details-body-wrap h1,
+.products-details-body-wrap h2,
+.products-details-body-wrap h3,
+.products-details-body-wrap h4,
+.products-details-body-wrap h5,
+.products-details-body-wrap h6,
+.products-details-body-wrap p {
+  color: #212529;
+  margin-bottom: 12px;
+}
+
+.dark-theme .products-details-body-wrap h1,
+.dark-theme .products-details-body-wrap h2,
+.dark-theme .products-details-body-wrap h3,
+.dark-theme .products-details-body-wrap h4,
+.dark-theme .products-details-body-wrap h5,
+.dark-theme .products-details-body-wrap h6,
+.dark-theme .products-details-body-wrap p,
+.dark-theme .products-details-body-wrap ul li {
+  color: #ffffff;
+}
+
+.products-details-body-wrap ul {
+  margin-left: 20px;
+}
+
+.products-details-body-wrap .jumbo1 {
+  font-size: 60px;
+  line-height: 60px;
+}
+
+.products-details-body-wrap .jumbo2 {
+  font-size: 100px;
+  line-height: 90px;
+}
+
+/*.products-details-body-wrap h1 {
+  font-size: 40px;
+  line-height: 60px;
+  font-weight: 300;
+  color: #333333;
+}
+
+.products-details-body-wrap h2 {
+  font-size: 40px;
+  line-height: 40px;
+  color: #333333;
+}
+
+.products-details-body-wrap h3 {
+  font-size: 24px;
+  line-height: 24px;
+  color: #333333;
+}
+
+.products-details-body-wrap h4 {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 300;
+  color: #333333;
+}
+
+.products-details-body-wrap h5 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 300;
+}
+
+.products-details-body-wrap h6 {
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 500;
+}
+ .products-details-body-wrap p {
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 300;
+} */
+
+.products-details-body-wrap small {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+}
+
+.products-details-body-wrap img {
+  display: block;
+}
+
+.products-details-body-wrap .img-fluid,
+.products-details-body-wrap .img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+/*--------- End of Global Style ---------*/
+
+/*------------------------------------------
+              (BETTER//BROTH™)
+-------------------------------------------*/
+
+.bone-broth-wraper {
+  background: url("/assets/images/the-bone-broth-sagebg.png") no-repeat left
+    top/cover;
+  padding: 110px 20px 80px;
+}
+
+.bone-broth-wraper article.container .bone-img {
+  margin: 0;
+  text-align: center;
+}
+
+.bone-broth-wraper article.container .bone-img img {
+  max-width: 155px;
+  margin: 0 auto;
+}
+
+/*---End of .bone-broth-wraper---*/
+
+.broth-body-health-wraper {
+  background: #bf6916;
+  padding: 61px 20px 48px;
+}
+
+.broth-body-health-wraper article.container h2 {
+  font-size: 58px;
+  line-height: 50px;
+  margin: 0;
+}
+
+/*---End of .broth-body-health-wraper---*/
+
+.broth-body-health-wraper.sage {
+  background: #8131a5;
+}
+
+/*---End of .broth-body-health-wraper.sage---*/
+
+.broth-gut-friendly-wraper {
+  background: #ffffff;
+  padding: 50px 20px 75px;
+}
+
+.broth-gut-friendly-wraper article.container .gut-title {
+  font-size: 58px;
+  color: #e7b97b;
+  margin: 90px 0 48px;
+}
+
+.broth-gut-friendly-wraper article.container .utilizing-text {
+  color: #303e48;
+  padding: 0 15px;
+}
+
+.broth-gut-friendly-wraper article.container .utilizing-text .regular-text {
+  font-weight: 400;
+}
+
+.broth-gut-friendly-wraper article.container .utilizing-text .bold-text {
+  font-weight: 500;
+}
+
+.broth-gut-friendly-wraper article.container .the-better-broth {
+  margin: 32px 0 0;
+}
+
+.broth-gut-friendly-wraper article.container .the-better-broth .the-text-wrap {
+  padding-right: 40px;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .the-text-wrap
+  .the-better {
+  font-size: 58px;
+  line-height: 56px;
+  color: #303e48;
+  margin: 0;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .the-text-wrap
+  .the-better
+  span {
+  display: block;
+  font-weight: normal;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .the-text-wrap
+  .caramel-img {
+  margin: 0;
+  text-align: right;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .the-text-wrap
+  .caramel-img
+  img {
+  max-width: 100%;
+  margin: 78px auto 0;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .lower-upper-wrap {
+  padding-left: 42px;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .lower-upper-wrap
+  p {
+  margin: 0;
+}
+
+.broth-gut-friendly-wraper
+  article.container
+  .the-better-broth
+  .lower-upper-wrap
+  p
+  img {
+  max-width: 100%;
+  margin: 5px auto 0;
+}
+
+.broth-gut-friendly-wraper article.container .these-note {
+  margin: 0;
+  float: left;
+  width: 100%;
+  color: #231f20;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.broth-skin-wraper.sage {
+  background: url(/assets/images/broth-skin-acti-sage-bg1.png) no-repeat center
+    center/cover;
+}
+
+.broth-skin-wraper.sage .broth-skin-bg {
+  background: url(/assets/images/broth-skin-acti-sage-bg2.png) no-repeat left
+    top/auto 100%;
+  padding: 68px 20px;
+}
+
+.broth-skin-wraper {
+  background: url(/assets/images/broth-skin-acti-bg1.png) no-repeat center
+    center/100% auto;
+  margin-bottom: -35px;
+}
+
+.broth-skin-wraper .broth-skin-bg {
+  background: url(/assets/images/broth-skin-acti-bg2.png) no-repeat left
+    top/auto 100%;
+  padding: 68px 20px;
+}
+
+.broth-skin-wraper .broth-skin-bg article.container .broth-skin-item {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item
+  .brothSkin-img {
+  margin: 0 0 15px;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item
+  .brothSkin-img
+  img {
+  max-width: 92px;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item
+  .brothSkin-text {
+  margin: 0;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item
+  .brothSkin-text
+  span {
+  font-weight: 500;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-img-wrap
+  .img-wrap {
+  margin: 0;
+  text-align: center;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-img-wrap
+  .img-wrap
+  img {
+  max-width: 340px;
+  width: 100%;
+  margin: 12px auto 0;
+}
+
+.broth-skin-wraper .broth-skin-bg article.container .broth-skin-item.mrg-rmv {
+  margin-bottom: 0;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item.right-item {
+  margin: 145px 0 0;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item.right-item
+  .brothSkin-text {
+  color: #414042;
+}
+
+.broth-skin-wraper
+  .broth-skin-bg
+  article.container
+  .broth-skin-item.right-item
+  .these-note {
+  margin: 25px 0 0;
+  float: left;
+  width: 100%;
+  color: #231f20;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 18px;
+  padding-right: 10px;
+}
+
+.the-better-broth .lower-upper-wrap .inner-text {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.the-better-broth .lower-upper-wrap .inner-text h3 {
+  font-size: 32px;
+  color: #2f3d48;
+  font-family: acumin-pro, sans-serif;
+  line-height: 32px;
+}
+
+.the-better-broth .lower-upper-wrap .inner-text h4 {
+  font-size: 30px;
+  color: #e7b97b;
+  font-weight: bold;
+  font-family: acumin-pro, sans-serif;
+  margin: 20px 0;
+  line-height: 32px;
+}
+
+/*---End of .broth-skin-wraper---*/
+
+.wpb_single_image img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+/*------------------------------------------
+              (MCT//143)
+-------------------------------------------*/
+
+.food-for-thought .row img {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto 90px;
+  display: block;
+}
+
+.mct-banner-text {
+  color: #aa7d51;
+}
+
+.product-banner
+  article.container
+  figure
+  .keto-right-banner
+  p.btn-watch-video.mct-btn
+  .btn-watch {
+  background: #148e9f;
+  color: #fff;
+}
+
+.product-banner
+  article.container
+  figure
+  .keto-right-banner
+  p.btn-watch-video.mct-btn
+  .btn-watch:hover {
+  background: #148e9f;
+}
+
+.MCTProduct-whereIT {
+  padding: 100px 0;
+  background: white url("/assets/images/MCT-where-it-started-bg.png") no-repeat
+    scroll center center/cover;
+}
+
+.MCTProduct-whereIT article .whereIT-left img {
+  max-width: 290px;
+  margin-top: 6px;
+  display: block;
+}
+
+.MCTProduct-whereIT article .whereIT-right h5 {
+  margin: 0;
+  max-width: 360px;
+  text-align: justify;
+  color: #ffffff;
+}
+
+.MCTProduct-whereIT article .whereIT-right h5 b {
+  font-weight: 700;
+}
+
+.MCTProduct-whereIT article .whereIT-right .whereIT-line {
+  margin: 0;
+}
+
+.MCTProduct-whereIT article .whereIT-right .whereIT-line span {
+  display: block;
+  height: 2px;
+  width: 44px;
+  background: #ffffff;
+  margin: 120px 0 20px 60px;
+}
+
+/*---End of MCTProduct-whereIT---*/
+
+.MCTProduct-formula-ketosis {
+  background: #aa7d51;
+  padding: 50px 20px 42px;
+}
+
+.MCTProduct-formula-ketosis article .formulaText {
+  margin: 0;
+  font-size: 60px;
+  line-height: 45px;
+  font-style: italic;
+}
+
+.MCTProduct-about {
+  padding: 80px 20px;
+}
+
+.MCTProduct-about article figure h2 {
+  color: #bb9875 !important;
+  font-style: italic;
+  margin: 0 0 15px;
+  letter-spacing: 1.25px;
+}
+
+.MCTProduct-about article figure h5 {
+  color: #414042 !important;
+  margin: 0 auto;
+  max-width: 950px;
+}
+
+.MCTProduct-about article figure .about-img {
+  margin: 62px 0 6px;
+}
+
+.MCTProduct-about article figure .about-img img {
+  max-width: 935px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/*---End of MCTProduct-about---*/
+.MCTProduct-coconut-banner {
+  background: white url("/assets/images/MCT-coconut-banner-bg.png") no-repeat
+    scroll center center/cover;
+  padding: 140px 20px 64px;
+}
+
+.MCTProduct-coconut-banner article .coconut-banner-content {
+  max-width: 500px;
+  margin: 0 auto 50px;
+  position: relative;
+}
+
+.MCTProduct-coconut-banner article .coconut-banner-content .inner-bg {
+  background-color: #1890a1;
+  padding: 20px;
+  mix-blend-mode: multiply;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border {
+  border: 1px solid #ffffff;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text {
+  max-width: 340px;
+  text-align: right;
+  padding-left: 12px;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  h5 {
+  margin: 25px 0 20px;
+  font-style: italic;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  .coconut143img {
+  margin: 0;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  .coconut143img
+  img {
+  max-width: 240px;
+  margin: 0 0 0 auto;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  h3 {
+  color: #bb9875;
+  line-height: 30px;
+  margin: 26px 0 15px;
+}
+
+.MCTProduct-coconut-banner
+  article
+  .coconut-banner-content
+  .inner-bg
+  .inner-border
+  .inner-text
+  h3
+  span {
+  display: block;
+  color: #ffffff;
+  padding-left: 40px;
+  font-weight: normal;
+}
+
+.MCTProduct-coconut-banner article .coconut-banner-content .coconutPrd-img {
+  position: absolute;
+  right: -250px;
+  top: -45px;
+  max-width: 510px;
+}
+
+/*---End of MCTProduct-coconut-banner---*/
+.MCTProduct-suggested-uses {
+  background: #ffffff;
+  padding: 56px 20px;
+}
+
+.MCTProduct-suggested-uses article .suggested-title {
+  color: #bb9875;
+  font-style: italic;
+  margin: 20px 0 105px;
+  letter-spacing: 1.25px;
+}
+
+.MCTProduct-suggested-uses article .suggested-item {
+  margin-bottom: 82px;
+}
+
+.MCTProduct-suggested-uses article .suggested-item .item-img {
+  margin: 0;
+}
+
+.MCTProduct-suggested-uses article .suggested-item .item-img img {
+  max-width: 88px;
+  margin: 0 auto;
+}
+
+.MCTProduct-suggested-uses article .suggested-item h3 {
+  color: #000000;
+  margin: 18px 0 0;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+/*---End of MCTProduct-suggested-uses---*/
+.MCTProduct-mary-banner {
+  background: white url("/assets/images/MCT-mary-banner-bg.png") no-repeat
+    scroll center center/cover;
+  padding: 70px 20px;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-left .maryImg {
+  width: 155px;
+  height: 155px;
+  background: #fff;
+  border: 3px solid #aa7d51;
+  border-radius: 50%;
+  float: left;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-left .maryImg img {
+  width: 100%;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-left h3 {
+  color: #aa7d51;
+  float: left;
+  font-size: 32px;
+  font-style: italic;
+  letter-spacing: 1.25px;
+  line-height: 28px;
+  margin: 50px 0 0 25px;
+  max-width: 110px;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-right .clone {
+  display: block;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-right .clone img {
+  max-width: 45px;
+  margin: 0 auto 10px 180px;
+}
+
+.MCTProduct-mary-banner article .mary-banner-cont .mary-right .mary-text {
+  color: #414042;
+  text-align: justify;
+  margin: 0;
+  max-width: 492px;
+  font-style: italic;
+}
+
+/*---End of MCTProduct-mary-banner---*/
+.MCTProduct-info143 {
+  background: white url("/assets/images/infoMCT143-bg.png") no-repeat scroll
+    center center/cover;
+  padding: 108px 20px 38px;
+  margin-bottom: -35px;
+}
+
+.MCTProduct-info143 article .info143-text-left {
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+.MCTProduct-info143 article .info143-text-left .info143-text-block {
+  max-width: 100%;
+  margin: 0 auto 58px;
+}
+
+.MCTProduct-info143 article .info143-text-left .info143-text-block h4 {
+  margin: 0 0 20px 0;
+}
+
+.MCTProduct-info143 article .info143-text-left .info143-text-block h4 img {
+  max-width: 210px;
+  margin: 0 0 0 auto;
+}
+
+.MCTProduct-info143 article .info143-text-left .info143-text-block p {
+  font-size: 15px;
+  line-height: 25px;
+  margin: 0;
+  text-align: justify;
+  direction: rtl;
+}
+
+.MCTProduct-info143 article .info143-img-center img {
+  margin: 38px auto 0;
+  max-width: 360px;
+}
+
+.MCTProduct-info143 article .info143-text-right {
+  padding-top: 112px;
+}
+
+.MCTProduct-info143 article .info143-text-right h4 {
+  margin: 0 0 16px 0;
+}
+
+.MCTProduct-info143 article .info143-text-right h4 img {
+  max-width: 210px;
+  margin: 0 auto 0 0;
+}
+
+.MCTProduct-info143 article .info143-text-right h3 {
+  color: #a97c51;
+  margin: 0 0 20px;
+  letter-spacing: 1.25px;
+}
+
+.MCTProduct-info143 article .info143-text-right p {
+  font-size: 15px;
+  line-height: 25px;
+  margin: 0;
+  text-align: justify;
+  color: #666;
+}
+
+.MCTProduct-info143 article .info143-text-left .info143-text-block p span {
+  float: right;
+}
+
+/*---End of MCTProduct-info143---*/
+
+.MCTProduct-ingredients-instructions {
+  padding: 90px 20px;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-text-left {
+  padding-right: 50px;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-text-left
+  h2 {
+  color: #bb9875;
+  text-align: right;
+  margin: 10px 8px 10px;
+  font-style: italic;
+  letter-spacing: 1.25px;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-text-left
+  .betaText {
+  margin: 0 0 35px auto;
+  font-size: 15px;
+  line-height: 25px;
+  color: #414042;
+  max-width: 300px;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-text-left
+  .coconut-isolated-img {
+  margin: 0;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-text-left
+  .coconut-isolated-img
+  img {
+  max-width: 410px;
+  margin: 0 -80px 0 auto;
+  position: relative;
+  z-index: 100;
+}
+
+.MCTProduct-ingredients-instructions
+  article
+  .ingredients
+  .ingredients-img-right
+  img {
+  max-width: 300px;
+  margin: 0 auto 0 0;
+}
+
+.MCTProduct-ingredients-instructions article .instructions h2 {
+  color: #bb9875;
+  margin: 50px 0 12px;
+  font-style: italic;
+  letter-spacing: 1.25px;
+}
+
+.MCTProduct-ingredients-instructions article .instructions p {
+  font-size: 20px;
+  line-height: 30px;
+  color: #414042;
+  max-width: 790px;
+  margin: 0 auto;
+}
+
+.MCTProduct-ingredients-instructions article .instructions .caution-text {
+  font-size: 15px;
+  line-height: 25px;
+  color: #414042;
+  max-width: 790px;
+  margin: 40px auto 5px;
+}
+
+.MCTProduct-ingredients-instructions .disclaimer-title {
+  margin: 50px auto 25px;
+  max-width: 602px;
+  width: 100%;
+  line-height: 18px;
+  font-weight: 700;
+  border: 3px solid #333333;
+  padding: 4px 0;
+}
+
+/*---End of MCTProduct-ingredients-instructions---*/
+
+/*------------------------------------------
+              (KETO//KREME®)
+-------------------------------------------*/
+
+.ketoKremeFFT-optimizedFormula {
+  border-top: 1px solid #e6e6e6;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-left {
+  background: #ffffff;
+  text-align: right;
+  padding: 110px 60px 130px 15px;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-left img {
+  max-width: 215px;
+  display: inline-block;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-right {
+  background: #f5f5f5;
+  padding: 126px 15px 136px 60px;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-right .optimizedTitle {
+  margin: 0;
+}
+
+.ketoKremeFFT-optimizedFormula
+  article
+  .optimizedFormula-right
+  .optimizedTitle
+  span {
+  color: #333333;
+  float: left;
+  line-height: 50px;
+  max-width: 200px;
+}
+
+.ketoKremeFFT-optimizedFormula
+  article
+  .optimizedFormula-right
+  .optimizedTitle
+  em {
+  color: #9b8656;
+  font-size: 130px;
+  line-height: 100px;
+  font-style: normal;
+}
+
+.ketoKremeFFT-optimizedFormula article .optimizedFormula-right .withText {
+  max-width: 580px;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 26px 0 0;
+  color: #8e8e93;
+}
+
+/*---End of ketoKremeFFT-optimizedFormula---*/
+.ketoKremeFFT-naturalIngredients {
+  background: transparent url("/assets/images/natural-ingredients-bg.png")
+    no-repeat scroll left top/cover;
+  padding: 122px 0 78px;
+}
+
+.ketoKremeFFT-naturalIngredients article .naturalTitle {
+  color: #9b8656;
+  margin: 16px auto 74px;
+  max-width: 530px;
+  line-height: 50px;
+}
+
+.ketoKremeFFT-naturalIngredients article .natural-ingredient-item {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .imgLeft {
+  width: 26%;
+  float: left;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .imgLeft
+  img {
+  max-width: 80px;
+  margin: 0 auto;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .textRight {
+  width: 74%;
+  float: left;
+  padding: 0 15px;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .textRight
+  h2 {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 16px 0 10px;
+  max-width: 185px;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item
+  .item-inner
+  .textRight
+  p {
+  color: #999999;
+  min-height: 165px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item.rightBorder:after {
+  content: " ";
+  position: absolute;
+  height: 210px;
+  width: 1px;
+  background: #ffffff;
+  opacity: 0.25;
+  right: 0;
+  top: 0;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item.bottomRightBorder:before {
+  content: " ";
+  position: absolute;
+  height: 1px;
+  width: 380px;
+  background: #ffffff;
+  opacity: 0.25;
+  right: 30px;
+  bottom: 0;
+}
+
+.ketoKremeFFT-naturalIngredients
+  article
+  .natural-ingredient-item.bottomLeftBorder:before {
+  content: " ";
+  position: absolute;
+  height: 1px;
+  width: 380px;
+  background: #ffffff;
+  opacity: 0.25;
+  left: 30px;
+  bottom: 0;
+}
+
+/*---End of ketoKremeFFT-naturalIngredients---*/
+.ketoKremeFFT-benefits {
+  background: url(/assets/images/benefits-background-img.png) no-repeat scroll
+    center center/100% auto;
+  padding: 90px 0 95px;
+  margin-bottom: -35px;
+}
+
+.ketoKremeFFT-benefits article {
+  max-width: 1170px;
+}
+
+.ketoKremeFFT-benefits article .benefitsTitle {
+  color: #333333 !important;
+  margin: 0 0 66px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory {
+  padding: 0;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .catagoryTitle {
+  font-size: 24px;
+  line-height: 24px;
+  color: #333333;
+  margin: 10px 0 12px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .catagoryDetails {
+  color: #999999;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  min-height: 130px;
+  max-width: 220px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitNumberSqr {
+  position: relative;
+  width: 80px;
+  margin: 0 auto 9px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitNumberSqr .inner {
+  background: #fff;
+  height: 46px;
+  width: 46px;
+  border: 1px solid #9b8656;
+  text-align: center;
+  border-radius: 6px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitNumberSqr .inner span {
+  display: block;
+  color: #9b8656;
+  font-size: 18px;
+  line-height: 46px;
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitNumberSqr:after {
+  background: #9b8656;
+  content: " ";
+  height: 1px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  width: 80px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitsCatagoryImg {
+  margin: 0;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagory .benefitsCatagoryImg img {
+  max-width: 320px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagoryLeft .catagoryDetails {
+  float: right;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagoryRight .catagoryDetails {
+  float: left;
+}
+
+.ketoKremeFFT-benefits article .benefitsCatagoryCenter .catagoryDetails {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.ketoKremeFFT-benefits article .Note {
+  color: #ababab;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  margin: 10px auto 0;
+  max-width: 600px;
+}
+
+.CMed100Peer {
+  text-align: center;
+}
+
+/*---End of ketoKremeFFT-benefits---*/
+.ketoKremeFFT-useIngredientsWrap {
+  background: url(/assets/images/Use-Ingredients-bg.png) no-repeat scroll left
+    top/cover;
+  padding: 110px 0 164px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .useIngredientsTitle {
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .dnaRepair {
+  margin-bottom: 76px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .dnaRepair img {
+  display: inline-block;
+  max-width: 420px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 700px;
+  height: 510px;
+  position: relative;
+  background: url(/assets/images/coffee-step-bg.png) no-repeat scroll left top
+    5px/100% auto;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 {
+  color: #5d5d5d;
+  margin: 0;
+  position: relative;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 span {
+  color: #ffffff;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 small {
+  color: #878787;
+  font-size: 12px;
+  position: absolute;
+  bottom: -12px;
+  left: 91px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.step-1 {
+  padding-bottom: 20px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.step-2 {
+  padding: 15px 0;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.step-3 {
+  padding-top: 20px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse,
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.optimaUsel {
+  border-radius: 50%;
+  display: table-cell;
+  height: 183px;
+  text-align: center;
+  vertical-align: middle;
+  width: 183px;
+  position: relative;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse h3,
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse h5,
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h3,
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h5 {
+  color: #ffffff;
+  margin: 0 auto;
+  max-width: 110px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse h5,
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h5 {
+  font-weight: 400;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse h3,
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h3 {
+  font-size: 18px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse {
+  background: #7a7a7d;
+  left: 120px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.optimaUsel {
+  background: #9a8556;
+  top: 142px;
+}
+
+.ketoKremeFFT-useIngredientsWrap
+  article
+  .stepBody
+  .stepContent
+  li.optimaUsel
+  h5 {
+  color: #333333;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .supplementFactImg {
+  margin-top: 18px;
+}
+
+.ketoKremeFFT-useIngredientsWrap article .supplementFactImg img {
+  max-width: 271px;
+  display: inline-block;
+}
+
+/*---End of ketoKremeFFT-useIngredientsWrap---*/
+
+.ketoKremeFFT-highQualityTop {
+  padding: 80px 0 20px;
+}
+
+.ketoKremeFFT-highQualityTop .highQualityTitle {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  margin-bottom: 35px;
+}
+
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .highQualitySliderItem
+  .highQualitySliderImg
+  img {
+  display: inline-block;
+  max-width: 140px;
+}
+
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .highQualitySliderItem
+  .highQualitySliderText
+  .sliderTitle {
+  color: #333333;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .highQualitySliderItem
+  .highQualitySliderText
+  .sliderDetails {
+  color: #999999;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.ketoKremeFFT-highQualityTop article.container .highQualitySlider .slick-prev,
+.ketoKremeFFT-highQualityTop article.container .highQualitySlider .slick-next {
+  width: 14px;
+  box-shadow: none;
+}
+
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .slick-prev:before {
+  content: url(/assets/images/Arrow-Left.png);
+}
+
+.ketoKremeFFT-highQualityTop
+  article.container
+  .highQualitySlider
+  .slick-next:before {
+  content: url(/assets/images/Arrow-Right.png);
+}
+
+/*---End of ketoKremeFFT-highQualityTop---*/
+.ketoKremeFFT-highQualityBottom {
+  border-top: 1px solid #e6e6e6;
+  padding: 50px 0 60px;
+}
+
+.ketoKremeFFT-highQualityBottom article.container {
+  max-width: 650px;
+  width: 100%;
+}
+
+.ketoKremeFFT-highQualityBottom article.container .cautionPara {
+  color: #999999;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.ketoKremeFFT-highQualityBottom article.container .cautionPara span {
+  font-weight: 700;
+}
+
+/*------------------------------------------
+              (Challenge Pack)
+-------------------------------------------*/
+
+.products-details-body-wrap .ch-jumbo-acu1 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 72px;
+  line-height: 72px;
+  letter-spacing: -0.05em;
+}
+
+.products-details-body-wrap .ch-jumbo-acu2 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 58px;
+  line-height: 52px;
+  letter-spacing: -0.05em;
+}
+
+.products-details-body-wrap .ch-jumbo-acu3 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 36px;
+  letter-spacing: -0.05em;
+}
+
+.products-details-body-wrap .ch-jumbo-acu4 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 33px;
+  letter-spacing: -0.05em;
+}
+
+.products-details-body-wrap .ch-p-reg {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.005rem;
+}
+
+.products-details-body-wrap .ch-caption {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.products-details-body-wrap .ch-p-bold {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.products-details-body-wrap .ch-disclaimer-bold {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.products-details-body-wrap .ch-disclaimer {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.products-details-body-wrap .ch-brand-gray {
+  color: #919192;
+}
+
+.products-details-body-wrap .ch-dark-white {
+  color: #fafafa;
+}
+
+.products-details-body-wrap .primary-color {
+  color: #fff;
+}
+
+.products-details-body-wrap .ch-brand-color {
+  color: #2152ff;
+}
+
+.products-details-body-wrap .ch-color-black {
+  color: #131313;
+}
+
+.product-page-header-banner {
+  padding-top: 78px;
+  background: #131313;
+  background: -moz-linear-gradient(
+    top,
+    #131313 0%,
+    #141414 52%,
+    #121212 52%,
+    #141414 52%,
+    #131313 53%,
+    #151515 53%,
+    #151515 55%,
+    #1d1d1d 65%,
+    #1b1b1b 65%,
+    #1d1d1d 65%,
+    #1e1e1e 66%,
+    #232323 75%,
+    #252525 75%,
+    #262626 80%,
+    #282828 80%,
+    #282828 82%,
+    #2b2b2b 84%,
+    #292929 84%,
+    #2b2b2b 84%,
+    #2c2c2c 89%,
+    #2e2e2e 89%,
+    #303030 91%,
+    #303030 94%,
+    #333333 95%,
+    #333333 97%,
+    #353535 97%,
+    #333333 97%,
+    #353535 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    #131313 0%,
+    #141414 52%,
+    #121212 52%,
+    #141414 52%,
+    #131313 53%,
+    #151515 53%,
+    #151515 55%,
+    #1d1d1d 65%,
+    #1b1b1b 65%,
+    #1d1d1d 65%,
+    #1e1e1e 66%,
+    #232323 75%,
+    #252525 75%,
+    #262626 80%,
+    #282828 80%,
+    #282828 82%,
+    #2b2b2b 84%,
+    #292929 84%,
+    #2b2b2b 84%,
+    #2c2c2c 89%,
+    #2e2e2e 89%,
+    #303030 91%,
+    #303030 94%,
+    #333333 95%,
+    #333333 97%,
+    #353535 97%,
+    #333333 97%,
+    #353535 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    #131313 0%,
+    #141414 52%,
+    #121212 52%,
+    #141414 52%,
+    #131313 53%,
+    #151515 53%,
+    #151515 55%,
+    #1d1d1d 65%,
+    #1b1b1b 65%,
+    #1d1d1d 65%,
+    #1e1e1e 66%,
+    #232323 75%,
+    #252525 75%,
+    #262626 80%,
+    #282828 80%,
+    #282828 82%,
+    #2b2b2b 84%,
+    #292929 84%,
+    #2b2b2b 84%,
+    #2c2c2c 89%,
+    #2e2e2e 89%,
+    #303030 91%,
+    #303030 94%,
+    #333333 95%,
+    #333333 97%,
+    #353535 97%,
+    #333333 97%,
+    #353535 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#131313', endColorstr='#353535', GradientType=0);
+}
+
+.product-page-header-banner .header-banner-image {
+  margin-top: 30px;
+}
+
+.product-page-header-banner
+  .header-banner-image
+  .vi-video-banner
+  .wistia_responsive_padding {
+  margin: 42px auto 0;
+  padding: 227px 0 0 0 !important;
+}
+
+.what-is-includes-wrap {
+  margin-top: 70px;
+}
+
+.what-is-includes-wrap .custom-width {
+  max-width: 921px;
+}
+
+.what-is-includes-wrap .custom-width .custom-padding {
+  padding: 0;
+}
+
+.what-is-includes-wrap .custom-width .what-is-challenge-details {
+  width: 535px;
+  margin: 32px auto;
+}
+
+.what-is-includes-wrap .custom-width .content-right {
+  margin-top: 80px;
+  margin-left: 20px;
+}
+
+.what-is-includes-wrap .custom-width .content-right .content-right-details h3 {
+  margin-bottom: 20px;
+}
+
+.what-is-includes-wrap .custom-width .content-right ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.what-is-includes-wrap .custom-width .content-right ul li {
+  line-height: 32px;
+  position: relative;
+  font-weight: 700;
+  padding-left: 35px;
+  margin-bottom: 10px;
+}
+
+.what-is-includes-wrap .custom-width .content-right .price-text-shiping {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.challenge-pack-primary > li > div > p {
+  color: #fff;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
+.your-daily-guide-wrap {
+  padding-top: 90px;
+  padding-bottom: 15px;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop h2 {
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .short-details {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  color: #919192;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .steps {
+  display: flex;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .steps .step-title {
+  width: 45%;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .item-title {
+  margin-top: 25px;
+  margin-right: 40px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .lunch-title {
+  margin-top: 135px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .mid-afternoon-title {
+  margin-top: 130px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .dinner-title,
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .repeat-title {
+  margin-top: 130px;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .steps .steps-logo {
+  width: 10%;
+  background-image: url(https://challenge.com/wp-content/themes/pruvit-challenge/img/icon/Line.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .steps .steps-logo .step-icon {
+  height: 94px;
+  width: 94px;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 auto 68px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .steps-logo
+  .lunch-logo {
+  padding-top: 15px;
+  padding-left: 3px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .steps-logo
+  .mid-afternoon-logo {
+  padding-top: 19px;
+  padding-left: 3px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .steps-logo
+  .dinner-logo {
+  padding-top: 20px;
+  padding-left: 0;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .steps-logo
+  .repeat-logo {
+  background-color: #131313;
+  padding-top: 30px;
+  padding-left: 0;
+}
+
+.your-daily-guide-wrap .your-daily-guide-desktop .steps .step-details {
+  width: 45%;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-details
+  .item-details {
+  margin-left: 43px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-details
+  .mid-afternoon-details {
+  margin-top: 150px;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-details
+  .dinner-details {
+  margin-top: 115px;
+}
+
+.your-daily-guide-wrap .your-daily-guide-mobile {
+  display: none;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-details
+  .item-details
+  > p {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 28px;
+  color: #333333;
+}
+
+.your-daily-guide-wrap
+  .your-daily-guide-desktop
+  .steps
+  .step-title
+  .item-title
+  h4 {
+  color: #333;
+}
+
+.product-lineup-wrap .ch-jumbo-acu2 {
+  color: #333 !important;
+}
+
+.How-ketones-works .How-ketones-works-content {
+  background: linear-gradient(
+    288.95deg,
+    #f60ab0 0%,
+    #a416c5 18.68%,
+    #2a46d9 65.9%,
+    #35b0e6 100%
+  );
+  border-radius: 20px;
+}
+
+.How-ketones-works .How-ketones-works-content h2 {
+  padding-top: 80px !important;
+  margin-bottom: 32px;
+}
+
+.How-ketones-works .How-ketones-works-content .dont-worry {
+  margin-bottom: 50px;
+}
+
+.product-lineup-wrap {
+  padding-top: 90px;
+  padding-bottom: 200px;
+}
+
+.product-lineup-wrap .processed-by {
+  max-width: 600px;
+  margin: 32px auto 0;
+  color: #919192 !important;
+}
+
+.product-lineup-wrap .product-lineup-items {
+  margin-top: 35px;
+  padding-bottom: 35px;
+  border: 1px solid transparent;
+  box-shadow: 0 24px 53px #eeeff4;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.product-lineup-wrap .product-lineup-items .keto-os-nat-right {
+  margin-top: 25px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  .product-lineup-item-img {
+  margin-left: auto;
+  margin-bottom: 50px;
+  margin-right: auto;
+  height: 400px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  ul
+  li
+  img {
+  max-height: 29px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  .product-lineup-item-img-title {
+  margin-left: 45px;
+  margin-top: -50px;
+}
+
+.product-lineup-wrap .product-lineup-items .product-lineup-item-right ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  margin-left: 0;
+  padding: 0 20px;
+}
+
+.product-lineup-wrap .product-lineup-items .product-lineup-item-right ul li {
+  margin-right: 10px !important;
+  padding-bottom: 6px;
+  width: 32px;
+  text-align: center;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  ul
+  .active {
+  border-bottom: 1px solid #000;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .custom-h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .mini-details {
+  margin-bottom: 2px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .watch-the-video {
+  position: relative;
+  padding-left: 35px;
+}
+
+.product-lineup-wrap .product-lineup-items .product-lineup-item-left .benefits {
+  margin-top: 25px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  p,
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-body
+  p,
+.product-lineup-wrap .product-lineup-items .keto-os-nat-right p,
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  .product-lineup-item-img-title {
+  color: #212529;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li {
+  margin-right: 20px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  .focus {
+  height: 37px;
+  width: 38px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  .fatloss {
+  width: 28.57px;
+  height: 28.7px;
+  margin-bottom: 18px;
+  margin-left: 10px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  .energy {
+  width: 27.83px;
+  height: 35.1px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul
+  li
+  p {
+  text-align: center;
+  font-size: 16px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group {
+  margin-bottom: 0;
+  width: 422px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel {
+  box-shadow: none;
+  margin-top: 0;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default {
+  border: none;
+  border-top: 1px solid rgba(14, 18, 35, 0.2);
+  border-radius: 0;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-heading {
+  padding: 15px 0;
+  color: inherit;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-heading
+  .panel-title
+  a {
+  text-decoration: none;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-body {
+  padding: 15px 0;
+  border: none;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .custom-panel-default {
+  border-bottom: 1px solid rgba(14, 18, 35, 0.2);
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  ul {
+  list-style: none;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-heading
+  .panel-title
+  a:after {
+  content: "\f0d7";
+  position: absolute;
+  right: 163px;
+  font-family: "Font Awesome 6 Pro";
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-heading {
+  background-image: unset;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-right
+  ul
+  li:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #000;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .watch-the-video:before {
+  position: absolute;
+  content: url(https://challenge.com/wp-content/themes/pruvit-challenge/img/icon/play-icon.svg);
+  left: 0;
+  top: 3px;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .watch-the-video:hover {
+  color: #1140e6;
+}
+
+.product-lineup-wrap
+  .product-lineup-items
+  .product-lineup-item-left
+  .benefits
+  .panel-group
+  .panel-default
+  .panel-heading
+  .panel-title
+  a[aria-expanded="true"]:after {
+  content: "\f0d8";
+}
+
+.plus-background {
+  background-image: url(https://challenge.com/wp-content/themes/pruvit-challenge/img/background-plus.png);
+  height: 240px;
+  background-repeat: no-repeat;
+  position: relative;
+  left: -185px;
+  top: -250px;
+}
+
+.not-doing-this-alone-wrap {
+  margin-top: -310px;
+}
+
+.not-doing-this-alone-wrap .not-doing-this-alone-content {
+  border-radius: 5px;
+  padding: 60px 80px;
+}
+
+.not-doing-this-alone-wrap .not-doing-this-alone-content .custom-murgin-buttom {
+  margin-bottom: 30px;
+  color: #333333;
+}
+
+.not-doing-along-left > h4.ch-jumbo-acu4 {
+  color: #333 !important;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .custom-murgin-buttom
+  span {
+  margin-bottom: -10px;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with {
+  margin-top: 18px;
+  list-style: none;
+  margin-left: 0;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li {
+  display: flex;
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  .li-back-color {
+  background-color: #000;
+  padding: 5px 20px 5px 10px;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  .item-1 {
+  max-width: 290px;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li
+  img {
+  margin-right: 8px;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li
+  h4 {
+  color: #fff;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li
+  .challenge-pack-comes-with-2 {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 0;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li
+  .challenge-pack-comes-with-2
+  li {
+  margin-bottom: 0;
+}
+
+.not-doing-this-alone-wrap
+  .not-doing-this-alone-content
+  .not-doing-along-left
+  .challenge-pack-comes-with
+  li
+  .challenge-pack-comes-with-2
+  li:first-child {
+  margin-right: 10px;
+}
+
+.yours-for-only-wrap {
+  padding-top: 63px;
+}
+
+.yours-for-only-wrap .yours-for-only-content {
+  background-color: #131313;
+  border-radius: 20px;
+  box-shadow: 0 24px 53px #c7c7c7;
+}
+
+.yours-for-only-wrap .yours-for-only-content .group-99-img .challenge-box-2 {
+  max-width: 120%;
+  margin-left: -50px;
+}
+
+.yours-for-only-wrap .yours-for-only-content .yours-for-only-left {
+  margin-top: 30px;
+}
+
+.yours-for-only-wrap
+  .yours-for-only-content
+  .yours-for-only-left
+  .value-at-over {
+  color: #b1b1b1;
+}
+
+.yours-for-only-wrap
+  .yours-for-only-content
+  .yours-for-only-left
+  .yours-for-only-bnr {
+  color: #fff;
+  margin-top: 20px;
+}
+
+.yours-for-only-wrap
+  .yours-for-only-content
+  .yours-for-only-left
+  .tax-and-shipping {
+  color: #fff;
+  margin-top: 2px;
+  margin-bottom: 40px;
+}
+
+.doctor-formulated .doctor-formulated-content .doctor-formulated-header {
+  margin-bottom: 30px;
+  color: #333333;
+}
+
+.doctor-formulated .doctor-formulated-content .doctor-formulated-short-details {
+  max-width: 701px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  color: #212529;
+}
+
+.doctor-formulated .doctor-formulated-content .doctor-formulated-video {
+  margin: 0 auto 35px;
+}
+
+.doctor-formulated .doctor-formulated-content .custom-ch-caption {
+  max-width: 570px;
+  margin: 0 auto 10px;
+  color: #212529;
+}
+
+.doctor-formulated .doctor-formulated-content .custom-ch-p-bold {
+  margin-bottom: 5px;
+  color: #212529;
+}
+
+.doctor-formulated .doctor-formulated-content p.ch-p-reg {
+  color: #212529;
+}
+
+.plus-get-access.hide {
+  display: none;
+}
+
+.plus-get-access {
+  margin-top: 10px;
+}
+
+.plus-get-access h4 {
+  margin-bottom: 25px;
+}
+
+.plus-get-access ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+
+.plus-get-access ul li .fire-tv {
+  height: 45.92px;
+}
+
+.plus-get-access ul li .apple-tv {
+  height: 34.25px;
+}
+
+.plus-get-access ul li .roku {
+  height: 50.6px;
+}
+
+.plus-get-access ul li .android-tv {
+  height: 22.57px;
+}
+
+.plus-get-access ul li .app-stor {
+  height: 45.41px;
+}
+
+.plus-get-access ul li .play-stor {
+  height: 44.11px;
+}
+
+.challenge-disclaimer {
+  padding-bottom: 60px;
+  margin-bottom: -35px;
+}
+
+.challenge-disclaimer .challenge-disclaimer-content {
+  margin-top: 62px;
+}
+
+.challenge-disclaimer .challenge-disclaimer-content .custom-ch-disclaimer-bold {
+  max-width: 660px;
+  margin: 0 auto 40px;
+  border: 1px solid #919192;
+  padding: 10px;
+  color: #212529;
+}
+
+.challenge-disclaimer
+  .challenge-disclaimer-content
+  .challenge-disclaimer-details {
+  max-width: 941px;
+  margin: 0 auto;
+}
+
+.challenge-disclaimer
+  .challenge-disclaimer-content
+  .challenge-disclaimer-details
+  .ch-disclaimer-1 {
+  margin-bottom: 15px;
+  color: #212529;
+}
+
+.challenge-disclaimer
+  .challenge-disclaimer-content
+  .challenge-disclaimer-details
+  .ch-disclaimer {
+  color: #212529;
+}
+
+.create-better-you-wrap .create-a-better-you {
+  background: #131313;
+}
+
+.create-better-you-wrap .create-a-better-you .create-a-better-you-content {
+  margin-top: 100px;
+  margin-bottom: 90px;
+}
+
+.create-better-you-wrap
+  .create-a-better-you
+  .create-a-better-you-content
+  .custom-ch-jumbo-acu2 {
+  margin-top: 100px;
+  margin-bottom: 90px;
+}
+
+.challenge-pack-primary > li > div > p {
+  color: #fff;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.products-details-body-wrap .ch-brand-gray.what-is-challenge-details {
+  color: #919192;
+}
+
+/*------------------------------------------
+              (KETO//OS NAT®)
+-------------------------------------------*/
+
+.about-nat-wraper {
+  padding: 150px 0 100px;
+  background: #ffffff;
+}
+
+.about-nat-wraper .aboutTtl-overlay,
+.NATBenefits-wraper .aboutTtl-overlay {
+  color: #cfcfcf !important;
+  position: absolute;
+  top: -14px;
+  left: -20px;
+  opacity: 0.2;
+  font-size: 132px;
+  font-weight: 600;
+  margin: 0;
+  z-index: 1;
+  letter-spacing: -0.25px;
+}
+
+.about-nat-wraper .aboutTtl-overlay sup,
+.NATBenefits-wraper .aboutTtl-overlay sup {
+  top: -32px;
+  font-weight: 400;
+}
+
+/*---End of .aboutTtl-overlay---*/
+
+.about-nat-wraper article.container .nutri-text {
+  z-index: 10;
+  position: relative;
+}
+
+.about-nat-wraper article.container .nutri-text .about-nutri {
+  color: #ed3e77;
+  line-height: 52px;
+  position: relative;
+  margin-bottom: 80px;
+  max-width: 350px;
+}
+
+.about-nat-wraper article.container .nutri-text .about-nutri sup {
+  top: -21px;
+  font-size: 50%;
+  left: 8px;
+}
+
+.about-nat-wraper article.container .nutri-text .about-nutri:after {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  content: "";
+  height: 4px;
+  width: 60px;
+  background: #f16592;
+}
+
+.about-nat-wraper article.container .nutri-text .text {
+  font-weight: 400;
+  margin: 10px 0;
+  color: #333333;
+}
+
+.dulce-white-bg .wpb_wrapper h5,
+.dulce-white-bg .wpb_wrapper p {
+  color: #212529;
+}
+
+.about-nat-wraper article.container .nutri-img {
+  z-index: 10;
+  position: relative;
+}
+
+.about-nat-wraper article.container .nutri-img .img-responsive {
+  max-width: 420px;
+  margin: 40px auto 0;
+  width: 100%;
+}
+
+/*---End of .about-nat-wraper---*/
+.naturally-created-wraper {
+  padding: 50px 0 70px;
+  background: #f2f2f2;
+  position: relative;
+}
+
+.naturally-created-wraper article.container .theFirst {
+  font-weight: 400;
+  margin: 0;
+  color: #959595;
+}
+
+.naturally-created-wraper article.container .puretext {
+  max-width: 450px;
+  margin: 0 auto;
+  color: #959595;
+}
+
+.naturally-created-wraper article.container .puretext sup {
+  top: -25px;
+  font-size: 40%;
+  left: 3px;
+}
+
+/*---End of .naturally-created-wraper---*/
+.downSectionArrow {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  right: 0;
+  background: url("/assets/images/downSectionArrow-bg.png") no-repeat center
+    top/contain;
+  max-width: 240px;
+  margin: 0 auto;
+  padding: 14px 0 5px;
+}
+
+.downSectionArrow img {
+  max-width: 24px;
+  margin: 0 auto;
+  display: block;
+}
+
+.downSectionArrow.bnft {
+  background: url("/assets/images/downSectionArrow-bg1.png") no-repeat center
+    top/contain;
+}
+
+/*---End of .downSectionArrow---*/
+.NATBenefits-wraper {
+  padding: 150px 0 80px;
+  position: relative;
+  background: #94025c;
+  background: linear-gradient(-30deg, #94025c 0%, #ff4a7d 100%);
+  margin-bottom: -35px;
+}
+
+.NATBenefits-wraper article.container .benefitsItem {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 30px;
+}
+
+.NATBenefits-wraper article.container .benefitsItem .title {
+  max-width: 152px;
+  min-height: 50px;
+  position: relative;
+  margin: 8px 0 50px 0;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.NATBenefits-wraper article.container .benefitsItem .title:after {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  content: "";
+  height: 4px;
+  width: 60px;
+  background: #f16592;
+}
+
+.NATBenefits-wraper article.container .benefitsItem .text {
+  margin: 0;
+  min-height: 130px;
+}
+
+.NATBenefits-wraper article.container .benefitsItem .text strong {
+  font-weight: 400;
+}
+
+.NATBenefits-wraper article.container .benefitsItemImg {
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+.NATBenefits-wraper article.container .benefitsItemImg li {
+  display: inline-block;
+  list-style: none;
+  margin: 0 30px;
+}
+
+.NATBenefits-wraper article.container .benefitsItemImg li img {
+  max-width: 120px;
+}
+
+/*---End of .NATBenefits-wraper ---*/
+
+/*------------------------------------------
+              (Keto Reboot™)
+-------------------------------------------*/
+.reboot-landing-banner {
+  background: #fff;
+  padding-top: 30px;
+}
+
+.reboot-landing-banner .reboot-banner-text .gray-darker {
+  color: #000000 !important;
+}
+
+.reboot-landing-banner .reboot-banner-text h1 {
+  margin: 0 0 45px;
+}
+
+.reboot-landing-banner .reboot-banner-text h3 {
+  margin: 0 0 60px;
+  color: #000000 !important;
+}
+
+.reboot-landing-banner .reboot-banner-text .jumbo2.gray-darker.text-center {
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.reset-your-metabolism-wrap .metabolism-background-img {
+  background-image: url("/assets/images/ketoreboot-potoype.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
+  height: 500px;
+  margin-top: -120px;
+  margin-bottom: -120px;
+}
+
+.reset-your-metabolism-wrap .metabolism-wrap-banner h5 {
+  margin-bottom: 100px;
+  color: #000000 !important;
+}
+
+.reset-your-metabolism-wrap .reset-your-metabolism-img-item {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.reset-your-metabolism-wrap
+  .reset-your-metabolism-img-item
+  .reset-your-metabolism-img {
+  max-width: 66px;
+  width: 100%;
+  height: 66px;
+  margin: 0 auto;
+}
+
+.reset-your-metabolism-wrap
+  .reset-your-metabolism-img-item
+  .reset-your-metabolism-img
+  img {
+  height: auto;
+  width: 66px;
+}
+
+.reset-your-metabolism-wrap .reset-your-metabolism-img-item h2 {
+  font-style: italic;
+  margin-top: 15px;
+  font-size: 40px;
+  line-height: 40px;
+  color: #333333 !important;
+}
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  p {
+  font-size: 15px;
+  line-height: 15px;
+}
+
+.reset-your-metabolism-wrap
+  .reset-your-metabolism-img-item
+  .reset-your-metabolism-img
+  .last-img {
+  height: 70px;
+  width: 50px;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .right-section .text-bold {
+  color: #935eff;
+  font-weight: 900;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .right-section .text-semi-bold {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .left-section {
+  max-width: 270px;
+  padding-left: 25px;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .right-section {
+  padding-right: 25px;
+  margin-top: 15px;
+}
+
+.reset-your-metabolism-wrap
+  .metabolism-bottom
+  .right-section
+  .text-bold::before {
+  content: " ";
+  border-bottom: 2px solid #935eff;
+  width: 35px;
+  position: absolute;
+  top: 0;
+  right: 110px;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom {
+  margin-top: 80px;
+}
+
+.metabolism-wrap-banner {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.reset-your-metabolism-wrap .metabolism-wrap-banner h2 {
+  margin-bottom: 30px;
+  color: #000000 !important;
+  font-size: 40px;
+  line-height: 40px;
+  margin-top: 20px;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .right-section {
+  float: none;
+  text-align: center;
+  padding-right: 0;
+  margin: 15px auto 20px;
+}
+
+.reset-your-metabolism-wrap
+  .metabolism-bottom
+  .right-section
+  .text-bold::before {
+  right: 165px;
+}
+
+section.block.reset-your-metabolism-wrap {
+  padding-top: 100px;
+  background: #ffffff;
+}
+
+.metabolism-bottom h5 {
+  font-size: 17px;
+  margin: 10px 0;
+  color: #333333 !important;
+}
+
+.reset-your-metabolism-wrap .metabolism-bottom .left-section {
+  max-width: 270px;
+  float: none;
+  text-align: center;
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+.community-support-wrap {
+  background: #fff;
+}
+
+.community-support-wrap .social-community {
+  display: flex;
+  max-width: 360px;
+  margin: 30px auto 0;
+}
+
+.community-support-wrap .social-community .logo {
+  width: 100%;
+  padding-right: 35px;
+  padding-top: 10px;
+}
+
+.community-support-wrap .social-community .logo img {
+  height: auto;
+  width: 55px;
+  float: right;
+}
+
+.community-support-wrap .social-community .text {
+  padding-left: 0;
+}
+
+.community-support-wrap .community-support-banner {
+  margin-top: 70px;
+}
+
+.community-support-wrap .videos {
+  max-width: 550px;
+  margin: 45px auto 30px;
+}
+
+.community-support-banner .jumbo1.gray-darker.text-center {
+  font-size: 40px;
+  line-height: 40px;
+  margin-bottom: 40px;
+  color: #333333;
+}
+
+.community-support-wrap h5.gray-darker,
+.community-support-wrap .social-community h6.gray-darker {
+  color: #8e8e93;
+}
+
+.reboot-product-box-wrap {
+  background: #ffffff url(/assets/images/dna-bg.png) no-repeat scroll top
+    left/100% auto;
+  margin-top: -190px;
+  padding-top: 230px;
+}
+
+.reboot-product-box-wrap .product-box-content .product-box {
+  margin-bottom: 42px;
+}
+
+.reboot-product-box-wrap .product-box-content .product-box img {
+  display: inline-block;
+  max-width: 1005px;
+  width: 100%;
+}
+
+.reboot-product-box-wrap .product-box-content h5 {
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto 73px;
+  font-size: 20px;
+  line-height: 30px;
+  color: #333333;
+}
+
+.reboot-product-box-wrap .product-box-content h2 {
+  margin-bottom: 30px;
+  font-size: 40px;
+  line-height: 40px;
+  color: #333333;
+}
+
+.product-box-content .reboot_bundle img {
+  margin: 0 auto;
+}
+
+/*--End of reboot-product-box-wrap --*/
+.reboot-product-iteam-wrap {
+  background: #ffffff;
+}
+
+.reboot-product-iteam-wrap .slick-track-first {
+  transform: translate3d(0px, 0px, 0px) !important;
+}
+
+.reboot-product-iteam-details .container {
+  max-width: 1170px;
+}
+
+.reboot-product-iteam-wrap .reboot-product-iteam article {
+  padding: 0;
+  background: white;
+  background: -moz-linear-gradient(top, white 0%, #fdfdfd 38%, #ededed 100%);
+  background: -webkit-linear-gradient(top, white 0%, #fdfdfd 38%, #ededed 100%);
+  background: linear-gradient(to bottom, white 0%, #fdfdfd 38%, #ededed 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav {
+  margin-bottom: 0 !important;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam {
+  margin: 0;
+  padding: 0px 20px 20px;
+  min-height: 250px;
+  cursor: pointer;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  .product-img {
+  margin-bottom: 17px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  .product-img
+  img {
+  display: inline-block;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  .product-name {
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  .product-count {
+  margin-bottom: 5px;
+  font-size: 15px;
+  line-height: 30px;
+  color: #333333;
+}
+
+.dark-theme .wpb_text_column:last-child h4 {
+  color: #fff;
+  margin-top: 15px;
+}
+
+.dark-theme .ketoUp-product-videoTitle {
+  background: transparent;
+}
+
+.dark-theme .ketoUp-product-videoTitle h2 {
+  color: #fff !important;
+}
+
+.reboot-product-iteam-wrap .reboot-product-iteam .product-single-iteam:focus {
+  outline: none;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  .product-single-iteam.slick-current {
+  background: #fff;
+  opacity: 1;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  .product-single-iteam.slick-current
+  .brand-purple {
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  .product-single-iteam.slick-current
+  .pro-details-link {
+  display: none;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content {
+  margin-top: 85px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info {
+  max-width: 400px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info
+  h5 {
+  margin-bottom: 28px;
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info
+  .product-info-img {
+  margin-bottom: 42px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info
+  .product-info-img
+  img {
+  display: inline;
+  max-width: 95px;
+  margin-right: 15px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info
+  .product-info-img
+  img:last-child {
+  margin-right: 0;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .product-details-info
+  p {
+  margin-bottom: 10px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-top
+  .suppliment-text
+  .suppliment-fat-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-top
+  .reboot-keto-flavor {
+  max-width: 265px;
+  width: 100%;
+  height: 30px;
+  background: #f7f7f7;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.reboot-product-iteam-wrap .suppliment-fat-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-top
+  .reboot-keto-flavor
+  .flavor-select {
+  font-size: 14px;
+  padding: 0 4px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  -webkit-appearance: auto;
+  -moz-appearance: unset;
+  appearance: auto;
+  background: url(/assets/images/select-bg.png) no-repeat scroll right 30px
+    center/9px auto;
+  cursor: pointer;
+  display: block;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .serving-size {
+  margin-bottom: 7px;
+  font-weight: 400;
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .suppliment-fat-details,
+.product-details-info-content .product-details-info p.ingredient-warning {
+  font-size: 12px;
+  line-height: 16px;
+  color: #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .margin-bottom {
+  margin-bottom: 20px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table {
+  margin-bottom: 0;
+  border-bottom: 8px solid #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  th {
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  th.border-large,
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-large {
+  border-top: 14px solid #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td {
+  border-top: 1px solid #333333;
+  padding: 4px 0;
+  font-weight: 400;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table {
+  margin-bottom: 0;
+  border: none;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td {
+  padding-left: 19px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td
+  .table {
+  border: none;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td
+  .table
+  tr
+  td {
+  border: none;
+  padding: 0 0 0 20px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-medium {
+  border-top: 8px solid #333333;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-none {
+  border-top: none;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr.padding-left2x
+  td {
+  padding-left: 40px;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam-details
+  .product-details-info-content
+  .reboot-suppliment-fat
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-large {
+  padding: 0;
+}
+
+.reboot-product-iteam-wrap .uniUseIngredientsTitle {
+  margin-top: 100px;
+}
+
+.products-details-body-wrap .gray-darker {
+  color: #333 !important;
+}
+
+.reboot-product-iteam-wrap
+  .reboot-product-iteam
+  article
+  .reboot-iteam-slider-nav
+  .product-single-iteam
+  .product-img
+  img {
+  height: 103px;
+}
+
+/*--End of reboot-product-iteam-wrap --*/
+
+.reboot-disclaimer-wrap {
+  background: #ffffff;
+  margin-bottom: -35px;
+  padding: 57px 0;
+}
+
+.reboot-disclaimer-wrap .reboot-disclaimer-content .disclaimer-title {
+  margin: 0 auto 25px;
+  max-width: 602px;
+  width: 100%;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+  border: 3px solid #333333;
+  padding: 6px 8px !important;
+  letter-spacing: 0;
+  color: #333333;
+}
+
+.the-first-re-engineered-banner h3 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.reboot-disclaimer-wrap .reboot-disclaimer-content .disclaimer-details {
+  font-size: 12px;
+  line-height: 18px;
+  max-width: 770px;
+  width: 100%;
+  margin: 0 auto 10px;
+  color: #333333;
+}
+
+.reboot-disclaimer-wrap.reboot-choose-disclaimer-wrap {
+  padding-bottom: 95px;
+}
+
+/*--End of reboot-disclaimer-wrap --*/
+.the-first-re-engineered-wrap {
+  background: #ffffff;
+}
+
+/*------------------------------------------
+              (KETO//UP®)
+-------------------------------------------*/
+
+.ketoUp-drinkIt-wrap {
+  background: #000000;
+  padding: 110px 0;
+  margin-bottom: -35px;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canImg {
+  margin: 0 0 30px 0;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canImg .img img {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk {
+  display: block;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk .title {
+  color: #6fe32e;
+  margin: 0 0 8px 0;
+  font-style: italic;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.cherry-canText-blk
+  .title {
+  color: #ec0b37;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.blue-razz-blk
+  .title {
+  color: #3399ff;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.vanilla-canText-blk
+  .title {
+  color: #ff954a;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk .subText {
+  margin: 0;
+  font-weight: 400;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk
+  .subText
+  sup {
+  top: -0.3em;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk
+  .subText.strong {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk
+  .subText.strongText {
+  font-weight: 600;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk {
+  margin-bottom: 0;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap {
+  background: #ffffff;
+  padding: 12px 30px;
+  margin-top: 10px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-top
+  .suppliment-fat-title {
+  text-align: left;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .serving-size {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .suppliment-fat-details {
+  font-size: 12px;
+  line-height: 16px;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .margin-bottom {
+  margin-bottom: 20px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .theseStatements {
+  color: #333333;
+  font-weight: 600;
+  line-height: 18px;
+  border: 1px solid #000000;
+  padding: 10px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table {
+  margin-bottom: 0;
+  border-bottom: 8px solid #333333;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  th {
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  th.border-large,
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-large {
+  border-top: 14px solid #333333;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td {
+  border-top: 1px solid #333333;
+  padding: 4px 0;
+  font-weight: 400;
+  text-align: left;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table {
+  margin-bottom: 0;
+  border: none;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td {
+  padding-left: 19px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td
+  .table {
+  border: none;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td
+  .table
+  tr
+  td
+  .table
+  tr
+  td {
+  border: none;
+  padding: 0 0 0 20px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-medium {
+  border-top: 8px solid #333333;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.supplement-factsBlk
+  .content-wrap
+  .suppliment-fat-table-content
+  .table.suppliment-fat-table
+  tr
+  td.border-none {
+  border-top: none;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk.extrMarg {
+  margin-top: 80px;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canText {
+  position: relative;
+  z-index: 1;
+}
+
+.ketoUp-drinkIt-wrap article.container .ketoUp-canImg .img {
+  margin: 0 -100px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk
+  .subText.extrMrg {
+  margin-bottom: 10px;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.unicorn-canText-blk
+  .title {
+  color: #e65e74;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.tango-can
+  .title {
+  color: #23abe2;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.vanilla-canText-blk
+  .title {
+  color: #ff954a;
+}
+
+.ketoUp-product-videoTitle {
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+.ketoUp-product-videoTitle .jumbo1 {
+  max-width: 770px;
+  margin: 0 auto;
+  color: #000 !important;
+}
+
+.ketoUp-canImg-sticky .img {
+  position: sticky;
+  top: 120px;
+  position: -webkit-sticky;
+}
+
+/*------------------------------------------
+              (KETO//KALM™)
+-------------------------------------------*/
+
+.ketoKalm-why-wrap {
+  background: #f2f2f2 url("/assets/images/why-ketoKalm-bg.png") no-repeat right
+    top/auto 100%;
+  padding: 100px 0 220px;
+}
+
+.ketoKalm-why-wrap article.container {
+  background: url("/assets/images/peace-img.png") no-repeat left top/450px auto;
+}
+
+.ketoKalm-why-wrap article.container .why-text {
+  max-width: 640px;
+  margin: 70px auto 0;
+  border-left: 4px solid #333333;
+  position: relative;
+  padding: 20px 0 40px 100px;
+}
+
+.ketoKalm-why-wrap article.container .why-text .title-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: -120px;
+  top: 50%;
+}
+
+.ketoKalm-why-wrap article.container .why-text .title-wrap .title {
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.ketoKalm-why-wrap article.container .why-text .title-wrap .title span {
+  background: #f2f2f2;
+  position: relative;
+  padding: 0 15px;
+  display: inline-block;
+  transform: rotate(-90deg);
+}
+
+.ketoKalm-why-wrap article.container .why-text .title-wrap .title span sup {
+  font-weight: 400;
+  top: -12px;
+  font-size: 24px;
+}
+
+.ketoKalm-why-wrap article.container .why-text .why-img {
+  margin-bottom: 30px;
+}
+
+.ketoKalm-why-wrap article.container .why-text .why-img img {
+  max-width: 52px;
+}
+
+.ketoKalm-why-wrap article.container .why-text .ptext {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 20px;
+}
+
+.ketoKalm-why-wrap.apple-flavor-why-wrap {
+  background: #f2f2f2 url("/assets/images/why-ketoKalm-bg-appleFlavor.png")
+    no-repeat right top/auto 100%;
+}
+
+/*---End of .ketoKalm-why-wrap---*/
+.ketoKalm-whatdoesIt-wrap {
+  background: #f2f2f2 url("/assets/images/what-does-itdo-bg.png") no-repeat
+    right top/auto 100%;
+  padding: 110px 0 230px;
+}
+
+.ketoKalm-whatdoesIt-wrap article.container {
+  background: url("/assets/images/purpose-img.png") no-repeat left top/540px
+    auto;
+}
+
+.ketoKalm-whatdoesIt-wrap article.container .whatdoes-wrap {
+  max-width: 640px;
+  margin: 70px auto 0;
+  border-left: 4px solid #333333;
+  position: relative;
+  padding: 20px 0 40px 100px;
+}
+
+.ketoKalm-whatdoesIt-wrap article.container .whatdoes-wrap .title-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: -120px;
+  top: 50%;
+}
+
+.ketoKalm-whatdoesIt-wrap article.container .whatdoes-wrap .title-wrap .title {
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .title-wrap
+  .title
+  span {
+  background: #f2f2f2;
+  position: relative;
+  padding: 0 15px;
+  display: inline-block;
+  transform: rotate(-90deg);
+}
+
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .title-wrap
+  .title
+  span
+  sup {
+  font-weight: 400;
+  top: -12px;
+  font-size: 24px;
+}
+
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .whatdoes-cont
+  .pimg {
+  text-align: center;
+  margin: 0;
+}
+
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .whatdoes-cont
+  .pimg
+  img {
+  max-width: 122px;
+  margin: 0 auto 30px;
+}
+
+.ketoKalm-whatdoesIt-wrap
+  article.container
+  .whatdoes-wrap
+  .whatdoes-cont
+  .ptext {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 50px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/*---End of .ketoKalm-whatdoesIt-wrap---*/
+
+/*------------------------------------------
+              (KETO//OS® MAX)
+-------------------------------------------*/
+
+.product-keto-os-max {
+  padding-bottom: 15px !important;
+}
+
+.product-keto-os-max article.container figure.keto-os-max-bottom h2 {
+  max-width: 290px;
+  margin: 80px auto 0;
+}
+
+.product-keto-os-max article.container figure.keto-os-max-bottom h2 i.fa {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.product-keto-os-max article.container figure.keto-os-max-bottom h2 sup {
+  font-size: 20px;
+  top: -16px;
+}
+
+.product-keto-os-max article.container figure.keto-os-max-bottom figcaption {
+  max-width: 624px;
+  margin: 35px auto 90px;
+  display: block;
+}
+
+.product-keto-os-max
+  article.container
+  figure.keto-os-max-bottom
+  figcaption
+  .social-img {
+  max-width: 280px;
+  margin-right: 25px;
+  display: inline-block;
+}
+
+.product-keto-os-max
+  article.container
+  figure.keto-os-max-bottom
+  figcaption
+  .trusted-img {
+  max-width: 130px;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.product-keto-os-max
+  article.container
+  figure.keto-os-max-bottom
+  figcaption
+  .social-img-update {
+  max-width: 205px;
+  display: block;
+  margin: 0 auto;
+}
+
+/*--End of product-keto-os-max--*/
+
+.customer-better-benefits {
+  background: #f2f2f2;
+}
+
+.customer-better-benefits article {
+  background: transparent url("/assets/images/customer-better-benefits-bg.png")
+    no-repeat scroll center top/100% 100%;
+  padding-top: 109px;
+  padding-bottom: 28px;
+}
+
+.customer-better-benefits article .jumbo1 {
+  margin-bottom: 20px;
+}
+
+.customer-better-benefits article figure {
+  margin-top: 86px;
+}
+
+.customer-better-benefits article figure .benefits-items {
+  margin-top: 26px;
+}
+
+.customer-better-benefits article figure .benefits-items .media {
+  margin-bottom: 10px;
+}
+
+.customer-better-benefits article figure .benefits-items .media .media-left {
+  padding-right: 27px;
+}
+
+.customer-better-benefits
+  article
+  figure
+  .benefits-items
+  .media
+  .media-left
+  img {
+  max-width: 46px;
+  max-height: 46px;
+}
+
+.customer-better-benefits article figure .benefits-items .media .media-body h2 {
+  margin-top: 6px;
+}
+
+.customer-better-benefits article figure .benefits-items .media .media-body p {
+  margin-top: 6px;
+  min-height: 75px;
+}
+
+.customer-better-benefits article figure .benefits-items .media .media-right {
+  padding: 0 0 0 27px;
+}
+
+.customer-better-benefits
+  article
+  figure
+  .benefits-items
+  .media
+  .media-right
+  img {
+  max-width: 46px;
+  max-height: 46px;
+}
+
+.customer-better-benefits article figure figcaption .benefits-img-big {
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.customer-better-benefits article figure figcaption .keto-gluten {
+  margin-top: 36px;
+}
+
+.customer-better-benefits article figure figcaption .keto-gluten ul li img {
+  max-width: 55px;
+}
+
+.customer-better-benefits article .view-packages-btn {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+.customer-better-benefits article small {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.customer-better-benefits article p.max-wdt-p {
+  max-width: 620px;
+  margin: 0 auto 15px;
+}
+
+/*---- End of customer-better-benefits ----*/
+
+/*------------------------------------------
+              (Keto Reboot Excel)
+-------------------------------------------*/
+
+.exlKitAngledEdge {
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 180px;
+}
+
+.exlKitAngledEdge polygon {
+  fill: #fff;
+}
+
+.exlKitAngledEdge.top {
+  top: -1px;
+  bottom: initial;
+}
+
+.exlKitAngledEdge.top.gray-light polygon {
+  fill: #f2f2f2;
+}
+
+.exlKit-nextKeto-benner {
+  background: #1c252e;
+  padding: 120px 0 300px;
+  position: relative;
+}
+
+.exlKit-nextKeto-benner article.container {
+  max-width: 840px;
+  position: relative;
+  z-index: 2;
+}
+
+.exlKit-nextKeto-benner article.container .row h3 {
+  font-style: italic;
+  margin: 0;
+}
+
+.exlKit-nextKeto-benner article.container .row h3 span {
+  color: #03d034;
+}
+
+.exlKit-nextKeto-benner article.container .row h2 {
+  font-style: italic;
+  margin: 25px 0 0;
+}
+
+.exlKit-nextKeto-benner .dna-bg-overlay {
+  background: url(/assets/images/exlKit-nextKeto-benner-bg.png) no-repeat scroll
+    right top/100% auto;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 170px;
+  width: 100%;
+  height: 150%;
+  z-index: 1;
+}
+
+/*---End of .exlKit-nextKeto-benner---*/
+.exlKit-kitSales-open {
+  background: #ffffff;
+  padding: 110px 0 360px;
+  position: relative;
+}
+
+.exlKit-kitSales-open article.container {
+  max-width: 840px;
+  position: relative;
+  z-index: 2;
+}
+
+.exlKit-kitSales-open article.container .row .youAlready {
+  margin-bottom: 55px;
+  color: #1c252e;
+}
+
+.exlKit-kitSales-open article.container .row h3 {
+  font-style: italic;
+  margin: 0;
+  color: #1c252e;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.exlKit-kitSales-open article.container .row h2 {
+  font-style: italic;
+  margin: 0;
+}
+
+.exlKit-kitSales-open article.container .row .date {
+  color: #03d034;
+  font-size: 90px;
+  line-height: 90px;
+  margin-top: 16px;
+}
+
+/*---End of .exlKit-kitSales-open---*/
+
+.exlKit-includes {
+  background: #f2f2f2;
+  padding: 60px 0;
+  position: relative;
+}
+
+.exlKit-includes article.container {
+  margin-top: -250px;
+  position: relative;
+  z-index: 2;
+}
+
+.exlKit-includes article.container .row .includes-title {
+  font-style: italic;
+  margin: 0 auto 50px;
+  color: #1c252e;
+  font-size: 40px;
+  line-height: 40px;
+  max-width: 280px;
+}
+
+.exlKit-includes article.container .row .andText {
+  margin-top: 110px;
+}
+
+.exlKit-includes article.container .row .andText span {
+  font-style: italic;
+  font-family: "bebas_neuebold";
+  font-size: 40px;
+  line-height: 84px;
+  text-decoration: underline;
+  margin: 0 auto;
+  background: #1c252e;
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  display: block;
+}
+
+.exlKit-includes article.container .row .exlKit-prdImg img {
+  max-width: 100%;
+  margin-bottom: 32px;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.exlKit-includes article.container .row .exlKit-prdText .jumbo1 {
+  font-style: italic;
+  margin: 20px 0 0;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText ul {
+  padding: 25px 5px 30px;
+  margin: 0 0 30px;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText ul li {
+  position: relative;
+  list-style: none;
+  font-size: 18px;
+  line-height: 30px;
+  color: #1c252e;
+  padding-left: 26px;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText ul li:before {
+  content: "\f00c";
+  color: #03d034;
+  left: 0;
+  top: 0;
+  font-family: FontAwesome;
+  position: absolute;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText .valuedPrice {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText .valuedPrice h6 {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #1c252e;
+  margin: 0 0 12px;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText .valuedPrice h4 {
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #1c252e;
+  margin: 0;
+}
+
+.exlKit-includes
+  article.container
+  .row
+  .exlKit-prdText
+  .valuedPrice
+  .savePrice {
+  position: absolute;
+  right: 0;
+  bottom: -60px;
+  height: 160px;
+  width: 160px;
+  background: #03d034;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding-top: 20px;
+}
+
+.exlKit-includes article.container .row .exlKit-prdText .valuedPrice.save h4 {
+  max-width: 200px;
+}
+
+/*---End of .exlKit-includes---*/
+
+.exlKit-totalCost {
+  background: #1c252e;
+  padding: 320px 0 200px;
+  position: relative;
+  margin-top: -200px;
+}
+
+.exlKit-totalCost article.container {
+  position: relative;
+  z-index: 2;
+}
+
+.exlKit-totalCost article.container .row .jumbo1 {
+  font-style: italic;
+  margin: 0;
+}
+
+.exlKit-totalCost article.container .row .jumbo1 span {
+  text-decoration: line-through;
+}
+
+.exlKit-totalCost article.container .row .jumbo2 {
+  font-style: italic;
+  margin: 0;
+  font-size: 90px;
+  line-height: 90px;
+}
+
+.exlKit-totalCost article.container .row .shippingTax {
+  margin: 10px 0 0;
+}
+
+.exlKit-totalCost article.container .row .buyNow {
+  margin: 40px auto 130px;
+  max-width: 320px;
+}
+
+.exlKit-totalCost article.container .row .buyNow .btn {
+  background: #03d034;
+  width: 100%;
+}
+
+.exlKit-totalCost article.container .row .buyNow .btn:hover,
+.exlKit-totalCost article.container .row .buyNow .btn:focus {
+  box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.exlKit-totalCost .dna-bg-overlay {
+  background: url(/assets/images/exlKit-nextKeto-benner-bg.png) no-repeat scroll
+    right -300px top/100% auto;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -280px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/*---End of .exlKit-totalCost---*/
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.sk-product__info-details .vc_row,
+.sk-product__info-details .vc_section {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.sk-product__info-details .vc_row.container.fixed-width-container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.products-details-body-wrap .vc_column-inner {
+  padding: 0;
+}
+
+.ketoKremeFFT-optimizedFormula .container-fluid {
+  padding: 0;
+}
+
+.broth-skin-wraper .broth-skin-item.text-right .brothSkin-img img {
+  margin: 0 0 0 auto;
+}
+
+.limonada-prd-info {
+  background: #0a0a0a;
+  padding: 80px 15px 20px !important;
+}
+
+.limonada-prd-info .wpb_text_column {
+  margin-bottom: 60px;
+}
+
+.limonada-prd-info .wpb_wrapper h2 {
+  margin: 20px 0 10px;
+}
+
+.mvpflavor-supp-facts .product-details-info-content > div {
+  padding-left: 0;
+}
+
+.mvpflavor-supp-facts .product-details-info-content .flavor-select {
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: auto;
+  -moz-appearance: unset;
+  appearance: auto;
+  background: url(/assets/images/select-bg.png) no-repeat scroll right 30px
+    center/9px auto;
+  cursor: pointer;
+  padding-left: 6px;
+}
+
+.dulce-white-bg {
+  background: #ffffff;
+}
+
+.ketoUp-drinkIt-wrap
+  article.container
+  .ketoUp-canText
+  .canText-blk.rootBear-canText-blk
+  .title {
+  color: #d1996e;
+}
+
+.ch-jumbo-acu1 .ch-p-reg.old-price {
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: line-through;
+  margin-right: 5px;
+}
+
+.ch-jumbo-acu1 {
+  margin-top: -5px;
+}
+
+.vc_column_container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.full-width .vc_column_container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*---- New Product video body style ----*/
+
+.prdDetails-video-wrap {
+  max-width: 770px;
+  margin: 0 auto;
+}
+.prdDetails-video-wrap .video-gallery-slider-wrap {
+  margin-bottom: 90px;
+}
+.prdDetails-video-wrap .sk-video-slider .video-container {
+  width: 100%;
+  height: 434px;
+}
+.prdDetails-video-wrap .sk-video-slider-nav-container {
+  margin: 30px 0;
+}
+.prdDetails-video-wrap .sk-video-slider-nav img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+.prdDetails-video-wrap .sk-video-slider-nav {
+  margin: 0 -15px;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-slide {
+  margin: 0 15px;
+  cursor: pointer;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-slide:hover {
+  opacity: 0.8;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-arrow {
+  height: 34px;
+  width: 34px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 1px 4px rgba(32, 38, 62, 0.25);
+  box-shadow: 0px 1px 4px rgba(32, 38, 62, 0.25);
+  border-radius: 50%;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-prev {
+  left: 0;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-next {
+  right: 0;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-prev:before {
+  content: "\f053";
+  margin-right: 2px;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-next:before {
+  content: "\f054";
+  margin-left: 2px;
+}
+.prdDetails-video-wrap .sk-video-slider-nav .slick-prev:before,
+.prdDetails-video-wrap .sk-video-slider-nav .slick-next:before {
+  font-family: "Font Awesome 6 Pro";
+  color: #2152ff;
+  opacity: 1;
+  font-size: 12px;
+}
+.prdDetails-video-wrap
+  .sk-video-slider-nav
+  .slick-prev.slick-arrow.slick-disabled,
+.prdDetails-video-wrap
+  .sk-video-slider-nav
+  .slick-next.slick-arrow.slick-disabled {
+  display: none !important;
+}
+.prdDetails-video-wrap .sk-video-slider .slick-arrow {
+  display: none !important;
+}
+.prdDetails-video-wrap h2 {
+  font-size: 58px;
+  line-height: 100%;
+  margin: 0 0 24px;
+  letter-spacing: -0.05em;
+}
+.prdDetails-video-wrap h3 {
+  margin: 0 0 24px;
+  letter-spacing: -0.05em;
+}
+.prdDetails-video-wrap h4 {
+  letter-spacing: -0.05em;
+  margin: 0 0 16px;
+}
+.prdDetails-video-wrap p {
+  margin: 0 0 24px;
+  line-height: 140%;
+}
+.prdDetails-video-wrap pre {
+  font-weight: bold;
+  color: #919192;
+  text-transform: uppercase;
+  letter-spacing: -0.7px;
+  margin: 0 0 16px;
+}
+.prdDetails-video-wrap small {
+  margin: 0 0 24px;
+  display: inline-block;
+}
+.prdDetails-video-wrap a,
+.prdDetails-video-wrap a:visited {
+  color: #000;
+  text-decoration: underline;
+}
+.prdDetails-video-wrap a:active,
+.prdDetails-video-wrap a:focus,
+.prdDetails-video-wrap a:hover {
+  background: rgba(196, 196, 196, 0.2);
+  margin: -4px -5px;
+  padding: 4px 5px;
+  border-radius: 4px;
+}
+.prdDetails-video-wrap h2,
+.prdDetails-video-wrap h3,
+.prdDetails-video-wrap h4,
+.prdDetails-video-wrap h5,
+.prdDetails-video-wrap h6,
+.prdDetails-video-wrap p,
+.prdDetails-video-wrap a,
+.prdDetails-video-wrap pre,
+.prdDetails-video-wrap small {
+  font-family: acumin-pro, sans-serif;
+}
+.prdDetails-video-wrap small {
+  font-size: 14px;
+  line-height: 21px;
+  margin: 0 0 24px;
+}
+
+/*------------- Start of Mobile @media CSS -------------*/
+
+@media (min-width: 300px) {
+  .product-page-header-banner {
+    padding-top: 15px;
+  }
+
+  .product-page-header-banner .header-content .ch-jumbo-acu4 {
+    margin-top: 5px;
+  }
+
+  .product-page-header-banner .header-banner-image .video-eanble-sound-content {
+    padding-top: 35px;
+  }
+
+  .product-page-header-banner .header-banner-image .custom-header-banner-form {
+    position: relative;
+  }
+
+  .product-page-header-banner .header-banner-image .enable-sound-here {
+    margin: 0 auto;
+    max-width: 22px;
+  }
+
+  .product-page-header-banner
+    .header-banner-image
+    .custom-header-banner-form-video {
+    max-width: 745px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .product-page-header-banner .custom-btn-link-2 {
+    margin-top: 65px;
+  }
+
+  .product-page-header-banner .custom-btn-link-2 {
+    margin-top: 65px;
+  }
+
+  .header-go-img {
+    width: 48px;
+    margin: 0 auto 5px;
+  }
+
+  .custom-header-banner-form .video-eanble-sound {
+    margin-bottom: 10px;
+  }
+
+  .custom-header-banner-form .video-eanble-sound h6 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+
+  .header-banner-image-new
+    .custom-header-banner-form-video
+    .wistia_responsive_padding {
+    padding: 419px 0 0 0 !important;
+  }
+
+  .header-banner-image-new
+    .custom-header-banner-form-video
+    .wistia_responsive_padding {
+    margin: 0 auto;
+  }
+
+  .what-is-includes-wrap {
+    padding-bottom: 90px;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .challenge-box-1 {
+    max-width: 80%;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .watch-video {
+    margin-top: 40px;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .watch-the-video {
+    position: relative;
+    display: inline-block;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .watch-the-video::before {
+    position: absolute;
+    top: 3px;
+    left: -30px;
+  }
+
+  .what-is-includes-wrap .watch-the-video::before {
+    content: url(https://challenge.com/wp-content/themes/pruvit-challenge/img/icon/play-icon.svg);
+  }
+
+  .what-is-includes-wrap .custom-width .content-right ul li {
+    display: flex;
+    padding-left: 0;
+  }
+
+  .what-is-includes-wrap .custom-width .content-right ul li img {
+    height: 25px;
+    margin-right: 6px;
+  }
+
+  .what-is-includes-wrap .custom-width .content-right .price-text-shiping {
+    font-size: 20px;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .watch-the-video:hover {
+    color: #1140e6;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .steps-logo
+    .upon-awakening-logo {
+    padding-top: 18px;
+  }
+
+  .your-daily-guide-wrap .steps .steps-logo .step-icon img {
+    height: 59px;
+    width: 59px;
+    margin: 0 auto;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .steps-logo
+    .lunch-logo {
+    padding-top: 16px;
+    padding-left: 0;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .steps-logo
+    .mid-afternoon-logo {
+    padding-top: 18px;
+    padding-left: 0;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .steps-logo
+    .dinner-logo {
+    padding-top: 16px;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .steps-logo
+    .repeat-logo {
+    padding-top: 18px;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .step-details
+    .item-details {
+    max-width: 80%;
+    margin-top: 30px;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .step-details
+    .lunch-details,
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .step-details
+    .mid-afternoon-details {
+    margin-top: 135px;
+  }
+
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .step-details
+    .dinner-details,
+  .your-daily-guide-wrap
+    .your-daily-guide-desktop
+    .steps
+    .step-details
+    .repeat-details {
+    margin-top: 120px;
+  }
+
+  .your-daily-guide-wrap
+    .steps
+    .steps-logo
+    .step-icon.repeat-logo
+    .step-icon-img,
+  .your-daily-guide-wrap
+    .your-daily-guide-mobile
+    .step-icon.repeat-logo
+    .step-icon-img {
+    max-width: 35px;
+    height: initial;
+    margin-top: 10px;
+  }
+
+  .your-guide-mobile-content .steps-for-mobile {
+    display: flex;
+  }
+
+  .your-guide-mobile-content .step-icon {
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 auto 60px;
+    padding: 25px;
+  }
+
+  .your-guide-mobile-content .step-icon .step-icon-img {
+    height: 46px;
+    width: 46px;
+  }
+
+  .your-guide-mobile-content .item-details {
+    padding-left: 20px;
+  }
+
+  .your-guide-mobile-content .step-icon.repeat-logo {
+    background-color: #131313;
+    padding: 30px;
+  }
+
+  .How-ketones-works-content .ch-jumbo-acu2 {
+    font-size: 40px;
+    line-height: 36px;
+  }
+
+  .How-ketones-works .How-ketones-works-content .dont-worry {
+    opacity: 0.7;
+  }
+
+  .How-ketones-works-content .wistia_responsive_padding {
+    padding: 227px 0 80px 0 !important;
+    margin: 0 auto;
+  }
+
+  .ch-brand-gray.processed-by a {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  .product-lineup-wrap .product-lineup-items {
+    margin-top: 80px;
+    padding-top: 30px;
+  }
+
+  .product-lineup-wrap .product-lineup-items .product-lineup-item-right ul {
+    margin-bottom: 20px;
+    color: #212529;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    h4 {
+    color: #212529;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .mini-details {
+    margin-bottom: 20px;
+    color: #919192;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    .panel-group
+    .panel-default
+    .panel-heading
+    .panel-title
+    a {
+    font-size: 16px;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    .panel-group
+    .panel-default
+    .panel-body
+    h5 {
+    line-height: 21px;
+    margin-bottom: 10px;
+  }
+
+  .reboot-suppliment-fat {
+    margin-top: 20px !important;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .serving-size {
+    margin-bottom: 7px;
+    font-weight: 400;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table {
+    margin-bottom: 0;
+    border-bottom: 8px solid #333;
+    font-size: 15px;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table
+    tr
+    th {
+    padding: 3px 0;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table
+    tr
+    th.border-large,
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table
+    tr
+    td.border-large {
+    border-top: 14px solid #333;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table
+    tr
+    td {
+    border-top: 1px solid #333;
+    padding: 4px 0;
+    font-weight: 400;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .suppliment-fat-details,
+  .product-details-info-content .product-details-info p.ingredient-warning {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .margin-bottom {
+    margin-bottom: 20px;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .serving-size {
+    margin-bottom: 7px;
+    font-weight: 400;
+  }
+
+  .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-table-content
+    .table.suppliment-fat-table {
+    margin-bottom: 0;
+    border-bottom: 8px solid #333;
+    font-size: 15px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .custom-murgin-buttom
+    .challenge-text {
+    color: white;
+    background: url(https://challenge.com/wp-content/themes/pruvit-challenge/img/challenge-text.png)
+      no-repeat;
+    -webkit-text-fill-color: transparent;
+    background-position: bottom;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .custom-murgin-buttom
+    .challenge-text {
+    background-size: 100%;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-1 {
+    max-width: 300px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-1
+    img {
+    width: 51px;
+    height: 42.21px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    li
+    h4 {
+    margin-top: 6px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-2
+    img {
+    width: 40px;
+    height: 42.11px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-3
+    img {
+    width: 46px;
+    height: 43.11px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-4 {
+    max-width: 300px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-4
+    img {
+    width: 47px;
+    height: 45.29px;
+  }
+
+  .yours-for-only-wrap .yours-for-only-content {
+    padding: 30px 0 65px;
+  }
+
+  .yours-for-only-wrap .yours-for-only-content .group-99-img .challenge-box-2 {
+    height: auto;
+  }
+
+  .yours-for-only-wrap
+    .yours-for-only-content
+    .group-99-img
+    .challenge-box-2.img-responsive {
+    max-width: 50%;
+    margin: 30px auto 0;
+  }
+
+  .yours-for-only-wrap
+    .yours-for-only-content
+    .yours-for-only-left
+    .tax-and-shipping {
+    margin-bottom: 35px;
+  }
+
+  .join-challenge-wrap > h4 > a {
+    text-decoration: underline;
+  }
+
+  .doctor-formulated {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .doctor-formulated-video {
+    max-width: 701px;
+    padding: 34.15% 0 0 0;
+  }
+
+  .challenge-disclaimer {
+    border-top: 1px solid #cacaca;
+  }
+
+  .challenge-disclaimer-details .ch-disclaimer a {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  .create-better-you-wrap
+    .create-a-better-you
+    .create-a-better-you-content
+    .custom-ch-jumbo-acu2 {
+    margin-bottom: 0;
+    max-width: 323px;
+    margin-right: 50px;
+    width: 100%;
+  }
+
+  .create-better-you-wrap
+    .create-a-better-you
+    .create-a-better-you-content
+    .custom-ch-jumbo-acu2.ch-jumbo-acu1 {
+    max-width: 890px;
+    margin-left: auto;
+    margin-bottom: 90px;
+    text-align: right;
+  }
+}
+/*---- End of @media (min-width: 300px) ----*/
+
+@media (max-width: 1366px) {
+  .broth-skin-wraper .broth-skin-bg,
+  .broth-skin-wraper.sage .broth-skin-bg {
+    background-size: 800px 100%;
+  }
+
+  .exlKit-nextKeto-benner .dna-bg-overlay {
+    background-position: center top;
+    background-size: 120% auto;
+  }
+
+  .exlKit-totalCost .dna-bg-overlay {
+    background-position: right -320px top;
+    background-size: 120% auto;
+    top: -180px;
+  }
+}
+/*---- End of @media (max-width: 1366px) ----*/
+
+@media (min-width: 1370px) {
+  .reboot-reset-wrap {
+    background-size: contain;
+  }
+
+  .reboot-product-box-wrap {
+    padding-top: 260px;
+  }
+}
+/*---- End of @media (min-width: 1370px) ----*/
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .reboot-reset-wrap {
+    background-size: 600px auto;
+  }
+
+  .reboot-60hour-wrap {
+    background-size: cover;
+    padding-bottom: 250px;
+    margin-bottom: 100px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .reboot-keto-flavor {
+    max-width: 175px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .reboot-keto-flavor
+    .flavor-select {
+    max-width: 190px;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 1200px) ----*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .ketoKremeFFT-benefits article .benefitsCatagory .catagoryTitle {
+    font-size: 18px;
+  }
+
+  .customer-better-benefits {
+    background: none;
+  }
+
+  .customer-better-benefits article figure .benefits-items {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .customer-better-benefits article figure .benefits-items .media .media-right {
+    padding-left: 10px;
+  }
+
+  .customer-better-benefits article figure .benefits-items .media .media-left {
+    padding-right: 10px;
+  }
+
+  /*====--End of customer-better-benefits--====*/
+  .ketoKremeFFT-useIngredientsWrap article .supplementFactImg img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ketoKremeFFT-highQualityTop
+    article.container
+    .highQualitySlider
+    .slick-prev {
+    left: 0;
+  }
+
+  .ketoKremeFFT-highQualityTop
+    article.container
+    .highQualitySlider
+    .slick-next {
+    right: 0;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 1024px) ----*/
+
+@media (max-width: 1024px) {
+  .MCTProduct-coconut-banner article .coconut-banner-content {
+    margin: 0 10% 50px;
+  }
+
+  .MCTProduct-formula-ketosis article .formulaText {
+    line-height: 60px;
+  }
+
+  .about-nat-wraper .aboutTtl-overlay,
+  .NATBenefits-wraper .aboutTtl-overlay {
+    font-size: 110px;
+  }
+}
+/*---- End of @media (max-width: 1024px) ----*/
+
+@media (max-width: 991px) {
+  .MCTProduct-coconut-banner {
+    padding-top: 80px;
+    padding-bottom: 0;
+  }
+
+  .MCTProduct-coconut-banner article .coconut-banner-content {
+    margin: 0 auto;
+  }
+
+  .MCTProduct-coconut-banner
+    article
+    .coconut-banner-content
+    .inner-bg
+    .inner-border
+    .inner-text {
+    max-width: 100%;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .MCTProduct-coconut-banner
+    article
+    .coconut-banner-content
+    .inner-bg
+    .inner-border
+    .inner-text
+    .coconut143img
+    img {
+    margin: 0 auto;
+  }
+
+  .MCTProduct-coconut-banner article .coconut-banner-content .coconutPrd-img {
+    position: relative;
+    right: initial;
+    top: 30px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text {
+    float: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text
+    .suppliment-fat-title {
+    font-size: 20px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .reboot-keto-flavor {
+    float: left !important;
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+  }
+}
+/*---- End of @media (max-width: 991px) ----*/
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text
+    .suppliment-fat-title {
+    font-size: 20px;
+  }
+}
+/*---- End of @media (min-width: 768px) and (max-width: 991px) ----*/
+
+@media (min-width: 768px) {
+  .ketoKremeFFT-benefits.mobileShow {
+    display: none;
+  }
+
+  .reboot-product-box-wrap .product-box-content .product-box .mb-show {
+    display: none;
+  }
+}
+/*---- End of @media (min-width: 768px) ----*/
+
+@media (max-width: 767px) {
+  .products-details-body-wrap .container-fluid {
+    padding: 0;
+  }
+
+  .products-details-body-wrap .col-xs-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /*------------------------------------------
+                    (BETTER//BROTH™)
+  -------------------------------------------*/
+
+  .broth-gut-friendly-wraper
+    article.container
+    .the-better-broth
+    .the-text-wrap {
+    padding: 0;
+  }
+
+  .broth-gut-friendly-wraper
+    article.container
+    .the-better-broth
+    .the-text-wrap
+    .the-better,
+  .broth-gut-friendly-wraper
+    article.container
+    .the-better-broth
+    .the-text-wrap
+    .caramel-img,
+  .broth-gut-friendly-wraper
+    article.container
+    .the-better-broth
+    .lower-upper-wrap
+    p {
+    text-align: center !important;
+  }
+
+  .broth-gut-friendly-wraper
+    article.container
+    .the-better-broth
+    .lower-upper-wrap {
+    padding: 0;
+    margin-top: 40px;
+  }
+
+  .broth-skin-wraper .broth-skin-bg {
+    background-size: cover;
+  }
+
+  .broth-skin-wraper .broth-skin-bg article.container .broth-skin-item,
+  .broth-gut-friendly-wraper article.container .utilizing-text {
+    text-align: center !important;
+  }
+
+  .broth-skin-wraper
+    .broth-skin-bg
+    article.container
+    .broth-skin-item
+    .brothSkin-img
+    img {
+    margin: 0 auto;
+  }
+
+  .broth-skin-wraper .broth-skin-bg article.container .broth-skin-item.mrg-rmv {
+    margin-bottom: 50px;
+  }
+
+  .broth-skin-wraper
+    .broth-skin-bg
+    article.container
+    .broth-skin-item.right-item {
+    margin-top: 30px;
+  }
+
+  .broth-skin-wraper
+    .broth-skin-bg
+    article.container
+    .broth-skin-item.right-item
+    .brothSkin-text,
+  .broth-skin-wraper
+    .broth-skin-bg
+    article.container
+    .broth-skin-item.right-item
+    .these-note {
+    color: #ffffff;
+  }
+
+  .broth-skin-wraper.sage .broth-skin-bg {
+    background-size: cover;
+  }
+
+  /*---End of .broth-skin-wraper---*/
+
+  /*------------------------------------------
+                    (MCT//143)
+    -------------------------------------------*/
+
+  .MCTProduct-whereIT {
+    background: #ffffff;
+    padding: 0;
+  }
+
+  .MCTProduct-whereIT .whereIT-left {
+    padding: 80px 20px;
+  }
+
+  .MCTProduct-whereIT .whereIT-left img {
+    width: 100%;
+  }
+
+  .MCTProduct-whereIT .whereIT-right {
+    background: white url("/assets/images/MCT-where-it-started-bg-mb.png")
+      no-repeat scroll center center/cover;
+    padding: 80px 20px;
+  }
+
+  .MCTProduct-whereIT article .whereIT-left img,
+  .MCTProduct-whereIT article .whereIT-right h5,
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-img-right
+    img {
+    margin: 0 auto;
+  }
+
+  .MCTProduct-whereIT article .whereIT-right .whereIT-line span {
+    margin: 40px auto 0;
+  }
+
+  .MCTProduct-coconut-banner {
+    padding-bottom: 30px;
+  }
+
+  .MCTProduct-mary-banner article .mary-banner-cont .mary-right .clone img {
+    display: block;
+    margin: 30px auto 10px;
+  }
+
+  .MCTProduct-mary-banner article .mary-banner-cont .mary-right .mary-text {
+    max-width: 100%;
+  }
+
+  .MCTProduct-info143 {
+    background-position: left top;
+    padding: 80px 20px;
+  }
+
+  .MCTProduct-info143 article .info143-text-left .info143-text-block h4 img,
+  .MCTProduct-info143 article .info143-text-right h4 img {
+    margin: 0 auto;
+  }
+
+  .MCTProduct-info143 article .info143-text-left .info143-text-block p,
+  .MCTProduct-info143 article .info143-text-right p {
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+    direction: initial;
+    color: #959595;
+  }
+
+  .MCTProduct-info143 article .info143-text-right {
+    padding-top: 70px;
+  }
+
+  .MCTProduct-info143 article .info143-text-right h3 {
+    text-align: center;
+  }
+
+  .MCTProduct-info143 article .info143-img-center img {
+    width: 100%;
+  }
+
+  .MCTProduct-ingredients-instructions article .ingredients,
+  .MCTProduct-ingredients-instructions article .instructions {
+    padding: 0 20px;
+  }
+
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-text-left {
+    padding: 0;
+  }
+
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-text-left
+    h2 {
+    text-align: center;
+  }
+
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-text-left
+    .betaText {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-text-left
+    .coconut-isolated-img
+    img {
+    margin: 50px auto;
+    width: 100%;
+  }
+
+  .MCTProduct-ingredients-instructions
+    article
+    .ingredients
+    .ingredients-img-right
+    img {
+    width: 100%;
+  }
+
+  /*------------------------------------------
+                    (KETO//KREME®)
+        -------------------------------------------*/
+
+  .ketoKremeFFT-optimizedFormula article .optimizedFormula-left img {
+    display: inherit;
+    margin: 0 auto;
+  }
+
+  .ketoKremeFFT-optimizedFormula article .optimizedFormula-left,
+  .ketoKremeFFT-optimizedFormula article .optimizedFormula-right {
+    padding: 120px 40px;
+  }
+
+  .ketoKremeFFT-naturalIngredients
+    article
+    .natural-ingredient-item.bottomRightBorder::before,
+  .ketoKremeFFT-naturalIngredients
+    article
+    .natural-ingredient-item.rightBorder::after,
+  .ketoKremeFFT-naturalIngredients
+    article
+    .natural-ingredient-item.bottomLeftBorder::before {
+    content: normal;
+  }
+
+  .ketoKremeFFT-benefits article .benefitsCatagory .benefitsCatagoryItem {
+    padding: 0 20px;
+    margin: 15px auto;
+  }
+
+  .ketoKremeFFT-benefits
+    article
+    .benefitsCatagory
+    .benefitsCatagoryItem
+    .col-xs-3,
+  .ketoKremeFFT-benefits
+    article
+    .benefitsCatagory
+    .benefitsCatagoryItem
+    .col-xs-9 {
+    width: initial;
+  }
+
+  .ketoKremeFFT-highQualityTop
+    article.container
+    .highQualitySlider
+    .slick-prev {
+    left: 0;
+  }
+
+  .ketoKremeFFT-highQualityTop
+    article.container
+    .highQualitySlider
+    .slick-next {
+    right: 0;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 small {
+    left: 71px;
+  }
+
+  .ketoKremeFFT-benefits.mobileShow {
+    display: block;
+  }
+
+  .ketoKremeFFT-benefits.mobileHide {
+    display: none;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 {
+    font-size: 30px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .supplementFactImg {
+    margin-top: 100px;
+    text-align: center;
+  }
+
+  /*------------------------------------------
+                    (Challenge Pack)
+        -------------------------------------------*/
+
+  .product-page-header-banner
+    .header-banner-image
+    .vi-video-banner
+    .wistia_responsive_padding {
+    margin-top: 20px;
+  }
+
+  .what-is-includes-wrap .custom-width .what-is-challenge-details {
+    max-width: 100%;
+    padding: 0 25px;
+    width: 100%;
+  }
+
+  .what-is-includes-wrap .custom-width .content-right ul li {
+    padding-left: 0;
+    display: flex;
+  }
+
+  .what-is-includes-wrap .custom-width .content-right {
+    padding: 0 30px;
+  }
+
+  .what-is-includes-wrap .custom-width .content-left .challenge-box-1 {
+    padding-bottom: 0 !important;
+    margin: 0 auto 50px;
+    max-width: 70%;
+  }
+
+  .what-is-includes-wrap .custom-width .content-right {
+    margin-top: 0;
+  }
+
+  .your-daily-guide-wrap .your-daily-guide-desktop {
+    display: none;
+  }
+
+  .your-daily-guide-wrap .your-daily-guide-mobile {
+    display: block;
+    padding: 0 20px;
+  }
+
+  .your-guide-mobile-content {
+    padding: 0 40px;
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .How-ketones-works .How-ketones-works-content {
+    margin: 0 15px;
+  }
+
+  .How-ketones-works .How-ketones-works-content .dont-worry {
+    padding: 0 15px;
+  }
+
+  .product-lineup-wrap {
+    padding: 0 15px;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .custom-h2 {
+    text-align: center;
+  }
+
+  .ch-disclaimer.ch-brand-gray.text-center {
+    padding: 0 15px;
+  }
+
+  .keto-os-nat-left.product-lineup-item-left {
+    padding: 0 15px;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    ul {
+    justify-content: space-around;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    .panel-group {
+    width: 100%;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-left
+    .benefits
+    .panel-group
+    .panel-default
+    .panel-heading
+    .panel-title
+    a:after {
+    right: 40px;
+  }
+
+  .not-doing-this-alone-wrap .not-doing-this-alone-content {
+    padding: 0 20px 30px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .custom-murgin-buttom {
+    text-align: center;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-1,
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    .item-4 {
+    max-width: 100%;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    li
+    .challenge-pack-comes-with-2 {
+    display: block;
+    width: 100%;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    li
+    .challenge-pack-comes-with-2
+    li {
+    margin-bottom: 7px;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    li
+    .challenge-pack-comes-with-2
+    li:first-child {
+    margin-right: 0;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .not-doing-along-left
+    .challenge-pack-comes-with
+    li
+    .challenge-pack-comes-with-2
+    li:last-child {
+    margin-bottom: 0;
+  }
+
+  .not-doing-this-alone-wrap
+    .not-doing-this-alone-content
+    .custom-murgin-buttom {
+    padding-top: 0 !important;
+  }
+
+  .not-doing-this-alone-wrap {
+    margin-top: -280px;
+    padding-top: 50px;
+  }
+
+  .product-lineup-wrap {
+    padding-bottom: 100px;
+  }
+
+  .plus-background {
+    left: -60px;
+    top: -120px;
+    background-size: 140px auto;
+  }
+
+  .yours-for-only-wrap {
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .not-doing-along-left {
+    padding: 0 15px;
+  }
+
+  .doctor-formulated {
+    padding: 50px 15px 40px;
+  }
+
+  .products-details-body-wrap .ch-jumbo-acu1 {
+    font-size: 54px;
+    line-height: 54px;
+  }
+
+  .products-details-body-wrap .challenge-disclaimer {
+    padding: 0 15px;
+  }
+
+  .create-better-you-wrap .create-a-better-you .create-a-better-you-content {
+    padding: 0 15px;
+  }
+
+  /*------------------------------------------
+                    (Keto Reboot™)
+  -------------------------------------------*/
+
+  .reset-your-metabolism-wrap .metabolism-wrap-banner h2 {
+    margin-bottom: 30px;
+    color: #000000 !important;
+  }
+
+  .reset-your-metabolism-wrap .reset-your-metabolism-img-item {
+    padding-bottom: 50px;
+  }
+
+  .reboot-product-box-wrap .product-box-content .product-box .mb-show {
+    display: block;
+  }
+
+  .reboot-product-box-wrap .product-box-content .product-box .mb-hide {
+    display: none;
+  }
+
+  .reboot-product-box-wrap {
+    background: url(/assets/images/dna-bg.png) no-repeat scroll top center/cover;
+    padding-top: 150px;
+    padding-bottom: 40px;
+  }
+
+  .reboot-product-box-wrap .product-box-content .product-box {
+    padding: 0 20px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .product-details-info {
+    margin: 0 auto 40px;
+    max-width: 100%;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text {
+    float: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text
+    .suppliment-fat-title {
+    font-size: 20px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .reboot-keto-flavor {
+    float: left !important;
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam
+    .reboot-iteam-slider-nav
+    .product-single-iteam {
+    min-height: 240px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam
+    .reboot-iteam-slider-nav
+    .product-single-iteam
+    .product-name {
+    font-size: 18px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content {
+    margin-top: 0px;
+  }
+
+  .products-details-body-wrap .slick-prev,
+  .products-details-body-wrap .slick-next {
+    background: #ffffff;
+    height: auto;
+    padding: 19px 16px 13px;
+    top: 50%;
+    width: auto;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+  }
+  .products-details-body-wrap .slick-prev {
+    left: -8px;
+    z-index: 1;
+  }
+  .products-details-body-wrap .slick-next {
+    right: -8px;
+  }
+  .products-details-body-wrap .slick-prev::before,
+  .products-details-body-wrap .slick-next::before {
+    color: #007bff;
+    font-family: "Font Awesome 6 Pro";
+    font-size: 24px;
+    line-height: 0;
+    opacity: 1;
+  }
+  .products-details-body-wrap .slick-prev::before {
+    content: "\f104";
+  }
+  .products-details-body-wrap .slick-next::before {
+    content: "\f105";
+  }
+  .products-details-body-wrap .slick-prev.slick-disabled:before,
+  .products-details-body-wrap .slick-next.slick-disabled:before {
+    opacity: 0.25;
+  }
+
+  /*------------------------------------------
+                    (KETO//UP®)
+        -------------------------------------------*/
+
+  .ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk {
+    text-align: center !important;
+  }
+
+  .ketoUp-drinkIt-wrap article.container .ketoUp-canImg .img {
+    margin: 30px 0;
+  }
+
+  .ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk .subText {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+
+  .ketoUp-drinkIt-wrap
+    article.container
+    .ketoUp-canText
+    .canText-blk
+    .subText.strong {
+    margin: 0 auto 10px;
+  }
+
+  .ketoUp-drinkIt-wrap article.container .ketoUp-canText .canText-blk.extrMarg {
+    margin-top: 0;
+  }
+
+  /*------------------------------------------
+                    (KETO//KALM™)
+        -------------------------------------------*/
+
+  .ketoKalm-why-wrap {
+    background: #f2f2f2;
+    padding: 40px 0 100px;
+  }
+
+  .ketoKalm-why-wrap article.container,
+  .ketoKalm-whatdoesIt-wrap article.container {
+    padding-top: 40px;
+    background-size: 300px auto;
+  }
+
+  .ketoKalm-why-wrap article.container .why-text,
+  .ketoKalm-whatdoesIt-wrap article.container .whatdoes-wrap {
+    max-width: 100%;
+    margin: 0;
+    border-left: none;
+    padding: 20px 30px;
+  }
+
+  .ketoKalm-why-wrap article.container .why-text .title-wrap,
+  .ketoKalm-whatdoesIt-wrap article.container .whatdoes-wrap .title-wrap {
+    position: relative;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ketoKalm-why-wrap article.container .why-text .title-wrap .title:before,
+  .ketoKalm-whatdoesIt-wrap
+    article.container
+    .whatdoes-wrap
+    .title-wrap
+    .title:before {
+    position: absolute;
+    content: "";
+    background: #333;
+    height: 3px;
+    width: 100%;
+    left: 0;
+    bottom: 15px;
+  }
+
+  .ketoKalm-why-wrap article.container .why-text .title-wrap .title span,
+  .ketoKalm-whatdoesIt-wrap
+    article.container
+    .whatdoes-wrap
+    .title-wrap
+    .title
+    span {
+    position: relative;
+    transform: initial;
+  }
+
+  .ketoKalm-why-wrap article.container .why-text .title-wrap .title span sup,
+  .ketoKalm-whatdoesIt-wrap
+    article.container
+    .whatdoes-wrap
+    .title-wrap
+    .title
+    span
+    sup {
+    font-weight: 400;
+    top: -10px;
+    font-size: 26px;
+  }
+
+  /*------------------------------------------
+                    (KETO//OS® MAX)
+        -------------------------------------------*/
+
+  .customer-better-benefits .benefits-items .media {
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    margin-bottom: 40px !important;
+  }
+
+  .customer-better-benefits .benefits-items .media .media-left {
+    padding-right: 0 !important;
+    position: absolute;
+    top: -40%;
+    left: 44%;
+  }
+
+  .customer-better-benefits .benefits-items .media .media-right {
+    padding-left: 0 !important;
+    position: absolute;
+    top: -40%;
+    left: 44%;
+  }
+
+  .customer-better-benefits .benefits-items .media:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .customer-better-benefits figcaption .keto-gluten {
+    margin-bottom: 120px;
+  }
+
+  .customer-better-benefits button.view-packages-btn {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .customer-better-benefits article figure figcaption img.benefits-img-big {
+    margin-bottom: 90px;
+  }
+
+  /*====--End of customer-better-benefits--====*/
+
+  /*------------------------------------------
+                    (Keto Reboot Excel)
+        -------------------------------------------*/
+
+  .exlKitAngledEdge {
+    height: 100px;
+  }
+
+  .exlKit-includes article.container .row .exlKit-prdText .valuedPrice.save h4 {
+    max-width: initial;
+  }
+
+  .exlKit-nextKeto-benner .dna-bg-overlay {
+    background-size: 150% auto;
+  }
+
+  .exlKit-nextKeto-benner article.container .row h2,
+  .exlKit-kitSales-open article.container .row .youAlready {
+    padding: 0 15px;
+  }
+
+  .exlKit-totalCost .dna-bg-overlay {
+    background-position: right -280px top;
+    background-size: 130% auto;
+    top: 0px;
+  }
+
+  .exlKit-nextKeto-benner {
+    padding: 100px 0 200px;
+  }
+
+  .exlKit-kitSales-open {
+    padding: 100px 0 300px;
+  }
+
+  .exlKit-nextKeto-benner article.container .row h2,
+  .exlKit-kitSales-open article.container .row .youAlready,
+  .exlKit-includes article.container .row .exlKit-prdText .jumbo1,
+  .exlKit-totalCost article.container .row .jumbo1 {
+    font-size: 48px;
+    line-height: 48px;
+  }
+
+  .exlKit-kitSales-open article.container .row h3 {
+    font-size: 26px;
+    line-height: 26px;
+  }
+
+  .exlKit-kitSales-open article.container .row .date,
+  .exlKit-totalCost article.container .row .jumbo2 {
+    font-size: 60px;
+    line-height: 60px;
+  }
+
+  .exlKit-includes article.container .row .includes-title {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .exlKit-includes article.container .row .exlKit-prdText .valuedPrice.save h4 {
+    max-width: 200px;
+  }
+
+  .exlKit-includes
+    article.container
+    .row
+    .exlKit-prdText
+    .valuedPrice
+    .savePrice {
+    height: 120px;
+    width: 120px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .exlKit-includes article.container .row .andText {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .exlKit-includes article.container .row .exlKit-prdText .valuedPrice h4 {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .exlKit-totalCost {
+    padding: 250px 0 150px;
+  }
+
+  .exlKit-totalCost article.container .row .buyNow {
+    margin: 30px auto 60px;
+  }
+
+  .products-details-body-wrap .vc_row.wpb_row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .reboot-product-iteam-wrap {
+    padding: 15px;
+  }
+
+  /*---- New Product video body style ----*/
+
+  .prdDetails-video-wrap {
+    padding: 0 15px;
+  }
+  .prdDetails-video-wrap .sk-video-slider .video-container {
+    height: 221px;
+    margin: 0;
+  }
+  .prdDetails-video-wrap .video-gallery-slider-wrap {
+    margin: 25px 0 0 0;
+  }
+  .prdDetails-video-wrap .sk-video-slider-nav img {
+    height: 52px;
+  }
+  .prdDetails-video-wrap .sk-video-slider-nav {
+    margin: 0 -10px;
+  }
+  .prdDetails-video-wrap .sk-video-slider-nav .slick-slide {
+    margin: 6px 10px;
+  }
+  .prdDetails-video-wrap .sk-video-slider-nav-container {
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+  .prdDetails-video-wrap h2 {
+    margin: 30px 0 20px !important;
+  }
+  .products-details-body-wrap .ch-jumbo-acu2,
+  .products-details-body-wrap h2,
+  .prdDetails-video-wrap h2 {
+    font-size: 40px;
+    line-height: 43px;
+  }
+  .products-details-body-wrap .ch-jumbo-acu3,
+  .products-details-body-wrap h3,
+  .prdDetails-video-wrap h3 {
+    font-size: 30px;
+    line-height: 33px;
+  }
+}
+/*---- End of @media (max-width: 767px) ----*/
+
+@media (max-width: 640px) {
+  .ketoKremeFFT-naturalIngredients article .naturalTitle,
+  .ketoKremeFFT-benefits article .benefitsTitle,
+  .ketoKremeFFT-useIngredientsWrap article .useIngredientsTitle {
+    font-size: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+  }
+
+  .ketoKremeFFT-optimizedFormula
+    article
+    .optimizedFormula-right
+    .optimizedTitle
+    span {
+    font-size: 40px;
+    line-height: 40px;
+    max-width: 140px;
+  }
+
+  .ketoKremeFFT-optimizedFormula
+    article
+    .optimizedFormula-right
+    .optimizedTitle
+    em {
+    font-size: 100px;
+    line-height: 80px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel {
+    height: 160px;
+    width: 160px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .dnaRepair img {
+    max-width: 100%;
+  }
+
+  .about-nat-wraper {
+    padding: 100px 0;
+  }
+
+  .about-nat-wraper article.container .nutri-text .about-nutri {
+    font-size: 40px;
+    line-height: 36px;
+  }
+
+  .about-nat-wraper .aboutTtl-overlay,
+  .NATBenefits-wraper .aboutTtl-overlay {
+    font-size: 60px;
+    left: 0;
+  }
+
+  .naturally-created-wraper article.container .puretext {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .downSectionArrow.bnft {
+    background-image: url("/assets/images/downSectionArrow-bgmb.png");
+  }
+
+  .NATBenefits-wraper {
+    padding: 100px 0 80px;
+  }
+
+  .NATBenefits-wraper article.container .benefitsItem {
+    margin-bottom: 50px;
+  }
+
+  .NATBenefits-wraper article.container .benefitsItem .text {
+    min-height: initial;
+  }
+
+  .NATBenefits-wraper article.container .benefitsItemImg li {
+    margin: 0;
+  }
+
+  .NATBenefits-wraper article.container .benefitsItemImg li img {
+    max-width: 90px;
+  }
+
+  .NATBenefits-wraper {
+    background: #bf1f69;
+  }
+
+  .product-keto-os-max article.container figure.keto-os-max-bottom figcaption {
+    text-align: center !important;
+  }
+
+  .product-keto-os-max
+    article.container
+    figure.keto-os-max-bottom
+    figcaption
+    .social-img {
+    max-width: 96%;
+    margin-right: 0;
+  }
+
+  .product-keto-os-max
+    article.container
+    figure.keto-os-max-bottom
+    figcaption
+    .trusted-img {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-right
+    .product-lineup-item-img {
+    height: initial;
+  }
+
+  .product-lineup-wrap .product-lineup-items .product-lineup-item-right ul li {
+    margin-right: 3px !important;
+  }
+
+  .mvpflavor-supp-facts .product-details-info-content .flavor-select {
+    -webkit-appearance: menulist;
+    height: 40px;
+  }
+
+  .mvpflavor-supp-facts .product-details-info-content > div {
+    padding-right: 0;
+  }
+
+  .reboot-suppliment-fat {
+    padding: 0;
+  }
+
+  .not-doing-along-left {
+    padding: 0;
+  }
+
+  .the-better-broth .lower-upper-wrap .inner-text {
+    text-align: center;
+  }
+
+  .product-lineup-wrap
+    .product-lineup-items
+    .product-lineup-item-right
+    .product-lineup-item-img {
+    max-height: 240px;
+  }
+}
+/*---- End of @media (max-width: 640px) ----*/
+
+@media (max-width: 460px) {
+  .ketoKremeFFT-benefits article .benefitsCatagory .catagoryTitle {
+    font-size: 18px;
+  }
+
+  .ketoKremeFFT-benefits article .benefitsCatagory .benefitsCatagoryImg img {
+    max-width: 100%;
+  }
+
+  .exlKit-includes article.container .row .exlKit-prdText ul li {
+    font-size: 16px;
+  }
+
+  .exlKit-includes article.container .row .exlKit-prdText .valuedPrice.save h4 {
+    max-width: 180px;
+  }
+
+  .exlKit-totalCost .dna-bg-overlay {
+    background-position: right -220px top;
+    background-size: 160% auto;
+    top: 20px;
+  }
+
+  .exlKit-nextKeto-benner {
+    padding: 100px 0 160px;
+  }
+
+  .exlKit-nextKeto-benner .dna-bg-overlay {
+    top: 300px;
+  }
+
+  .reset-your-metabolism-wrap .metabolism-background-img {
+    height: 280px;
+    margin-bottom: -60px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent {
+    background: none;
+    height: initial;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li {
+    padding: 15px !important;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel {
+    position: initial;
+    left: 20px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 {
+    font-size: 24px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li h2 small {
+    left: 60px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .supplementFactImg img {
+    max-width: 100%;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.novelUse
+    h3,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel
+    h3 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.novelUse
+    h5,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel
+    h5 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+/*---- End of @media (max-width: 460px) ----*/
+
+@media (max-width: 390px) {
+  .MCTProduct-mary-banner article .mary-banner-cont .mary-left .maryImg {
+    height: 140px;
+    width: 140px;
+  }
+
+  .MCTProduct-mary-banner article .mary-banner-cont .mary-left h3 {
+    font-size: 26px;
+    line-height: 24px;
+    margin: 45px 0 0 25px;
+    max-width: 90px;
+  }
+
+  .reboot-product-iteam-wrap
+    .reboot-product-iteam-details
+    .product-details-info-content
+    .reboot-suppliment-fat
+    .suppliment-fat-top
+    .suppliment-text
+    .suppliment-fat-title {
+    font-size: 20px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap article .stepBody .stepContent li.novelUse,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel {
+    height: 130px;
+    width: 130px;
+  }
+
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.novelUse
+    h3,
+  .ketoKremeFFT-useIngredientsWrap
+    article
+    .stepBody
+    .stepContent
+    li.optimaUsel
+    h3 {
+    font-size: 16px;
+  }
+  .what-is-includes-wrap .custom-width .content-right {
+    margin-top: 20px;
+  }
+}
+/*---- End of @media (max-width: 390px) ----*/

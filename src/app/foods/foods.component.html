@@ -1,0 +1,7 @@
+<ng-container *ngIf="isLoaded; else loader">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

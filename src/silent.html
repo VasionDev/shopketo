@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>QoreModeration</title>
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <script>
+      window.onload = function() {
+        /* The parent window hosts the Angular application */
+        var parent = window.parent;
+        /* Send the id_token information to the oidc message handler */
+        var event = new CustomEvent("oidc-silent-renew-message", {
+          detail: window.location.hash.substr(1)
+        });
+        parent.dispatchEvent(event);
+      };
+    </script>
+  </body>
+</html>

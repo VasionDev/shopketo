@@ -1,0 +1,60 @@
+<div class="dashboard__side__navigation">
+  <ul>
+    <li *ngIf="isDashboard" routerLink="/dashboard" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fa-solid fa-objects-column"></i>Dashboard
+    </li>
+    <li *ngIf="!isDashboard" routerLink="/dashboard" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M7.25 0.5H2.75C1.48438 0.5 0.5 1.53125 0.5 2.75V10.25C0.5 11.5156 1.48438 12.5 2.75 12.5H7.25C8.46875 12.5 9.5 11.5156 9.5 10.25V2.75C9.5 1.53125 8.46875 0.5 7.25 0.5ZM7.25 15.5H2.75C1.48438 15.5 0.5 16.5312 0.5 17.75V19.25C0.5 20.5156 1.48438 21.5 2.75 21.5H7.25C8.46875 21.5 9.5 20.5156 9.5 19.25V17.75C9.5 16.5312 8.46875 15.5 7.25 15.5ZM19.25 9.5H14.75C13.4844 9.5 12.5 10.5312 12.5 11.75V19.25C12.5 20.5156 13.4844 21.5 14.75 21.5H19.25C20.4688 21.5 21.5 20.5156 21.5 19.25V11.75C21.5 10.5312 20.4688 9.5 19.25 9.5ZM19.25 0.5H14.75C13.4844 0.5 12.5 1.53125 12.5 2.75V4.25C12.5 5.51562 13.4844 6.5 14.75 6.5H19.25C20.4688 6.5 21.5 5.51562 21.5 4.25V2.75C21.5 1.53125 20.4688 0.5 19.25 0.5Z"
+          fill="#2752FF" />
+      </svg>
+      Dashboard
+    </li>
+    <li><i class="fas fa-repeat"></i>Smartship</li>
+    <li routerLink="/dashboard/order-history" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-history"></i>Orders
+    </li>
+    <li routerLink="/dashboard/addresses" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-map-marker-alt"></i>Addresses
+    </li>
+    <li routerLink="/dashboard/payment" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-credit-card-front"></i>Payment Methods
+    </li>
+    <li routerLink="/dashboard/profile" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-user"></i>Prüvit Profile
+    </li>
+    <li routerLink="/dashboard/settings" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="far fa-sliders-h"></i>Account settings
+    </li>
+    <li routerLink="/dashboard/notifications" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-bell"></i>Notifications
+    </li>
+  </ul>
+  <ul class="learning__center__menu">
+    <li routerLink="/dashboard/websites" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fas fa-globe"></i>My websites
+    </li>
+    <li routerLink="/dashboard/training-center" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="fas fa-toolbox"></i>Training center</li>
+  </ul>
+  <ul class="help__menu">
+    <li *ngIf="isAdmin" (click)="onManageImpersonationAccount()">
+      <i class="fas fa-eye"></i>{{ isImpersonationPresent ? "Exit Account" : "View Account"
+      }}<span class="menu-tag ml-3">Admin</span>
+    </li>
+    <li><i class="fas fa-question-circle"></i>Get help</li>
+    <li (click)="logout()"><i class="fas fa-sign-out"></i>Logout</li>
+  </ul>
+</div>
+<ngx-slick-carousel *ngIf="imageCollection.length > 0 && !hideNav" class="carousel mb-3" [config]="slideConfig">
+  <div ngxSlickItem *ngFor="let x of imageCollection; let i = index" class="slide">
+    <a target="_blank" href="{{ x.link }}">
+      <img src="{{ x.content.uri }}" />
+    </a>
+    <h5>{{ x.name }}</h5>
+  </div>
+</ngx-slick-carousel>

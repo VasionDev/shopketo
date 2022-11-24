@@ -1,0 +1,275 @@
+<main
+  class="sk-main"
+  *ngIf="isCountryAvailable; else notFound"
+  [style.margin-top.px]="discountHeight"
+>
+  <section class="make-people-better">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h4 class="border-gradient-style">
+            <span class="text-gradient-style">{{
+              "pruvit-was-founded-with-a-simple-philosophy" | translate
+            }}</span>
+          </h4>
+          <h1 class="color-black text-center">
+            {{ "Make People Better" | translate }}
+          </h1>
+
+          <div class="video-wrap">
+            <img
+              src="assets/images/People-Better-video-img.png"
+              alt="img"
+              class="img-fluids"
+            />
+            <a
+              href="#"
+              (click)="onClickPruvitTv()"
+              class="play-icon color-white"
+            >
+              <i class="fas fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of make-people-better -->
+
+  <section class="our-story-wraper">
+    <article class="container-fluid">
+      <figure class="row our-story-text">
+        <div class="col-sm-12">
+          <h2 class="color-black">{{ "our-story" | translate }}</h2>
+          <p class="color-black">
+            {{ "based-on-this-core-belief" | translate }}
+          </p>
+          <p class="color-black">
+            {{ "pruvit-is-proud-to-be-the-worldwide-leader" | translate }}
+          </p>
+        </div>
+      </figure>
+      <figure class="our-story-slider">
+        <div class="slider-items">
+          <img
+            src="assets//images/ouer-story-slider-img1.png"
+            alt="slider image"
+            class="img-fluid"
+          />
+        </div>
+        <div class="slider-items">
+          <img
+            src="assets//images/ouer-story-slider-img2.png"
+            alt="slider image"
+            class="img-fluid"
+          />
+        </div>
+        <div class="slider-items">
+          <img
+            src="assets//images/ouer-story-slider-img3.png"
+            alt="slider image"
+            class="img-fluid"
+          />
+        </div>
+        <div class="slider-items">
+          <img
+            src="assets//images/ouer-story-slider-img4.png"
+            alt="slider image"
+            class="img-fluid"
+          />
+        </div>
+        <div class="slider-items">
+          <img
+            src="assets//images/ouer-story-slider-img5.png"
+            alt="slider image"
+            class="img-fluid"
+          />
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of our-story-wraper -->
+
+  <section class="pruvit-mission-wraper">
+    <article class="container">
+      <figure class="row">
+        <div class="col-sm-12">
+          <h4 class="border-gradient-style">
+            <span class="text-gradient-style">{{
+              "pruvits-mission" | translate
+            }}</span>
+          </h4>
+          <h1 class="color-black text-center">
+            {{ "inspire-people-to-become-a" | translate }}
+            <span class="text-gradient-style">{{ "better" | translate }}</span>
+            {{ "version-of-themselves" | translate }}
+          </h1>
+
+          <div class="card">
+            <div class="pruvit-ceo-info">
+              <h2 class="title color-black">
+                <span class="text-gradient-style">{{
+                  "our-vision" | translate
+                }}</span>
+                {{ "is-to-build-a-lifestyle-brand" | translate }}
+              </h2>
+              <div class="founder">
+                <h4 class="color-black">{{ "brian-underwood" | translate }}</h4>
+                <p class="color-gray">
+                  {{ "pruvit" | translate }}
+                  {{ "cofounder-and-ceo" | translate }}
+                </p>
+                <img
+                  src="assets/images/brain.png"
+                  alt="img"
+                  class="img-fluid founder-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of pruvit-mission-wraper -->
+
+  <section class="our-brand-wraper">
+    <article class="container-fluid">
+      <figure class="row our-brand-text">
+        <div class="col-sm-12">
+          <h4 class="border-gradient-style">
+            <span class="text-gradient-style">{{
+              "our-brand" | translate
+            }}</span>
+          </h4>
+          <h2 class="color-black">
+            {{ "we-crafted-this-list-of-words" | translate }}
+          </h2>
+          <p class="color-black">
+            {{ "words-that-together-shape" | translate }}
+          </p>
+        </div>
+      </figure>
+
+      <figure class="brand-cards-slider left-move">
+        <div
+          class="brand-card-items"
+          style="background: linear-gradient(225deg, #ffdf34 0%, #ff4534 100%)"
+        >
+          <h3 class="color-white">{{ "inspiring" | translate }}</h3>
+          <p class="details">{{ "serve-and-encourage" | translate }}</p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="
+            background: linear-gradient(225deg, #0ce594 4.17%, #3546ff 100%);
+          "
+        >
+          <h3 class="color-white">{{ "better-l" | translate }}</h3>
+          <p class="details">
+            {{ "constant-never-ending-improvement" | translate }}
+          </p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="background: linear-gradient(225deg, #0ad8e5 0%, #990cdb 100%)"
+        >
+          <h3 class="color-white">{{ "daring" | translate }}</h3>
+          <p class="details">{{ "pushing-limits" | translate }}</p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="
+            background: linear-gradient(225deg, #ffdf34 8.33%, #2e9e8a 84.54%);
+          "
+        >
+          <h3 class="color-white">{{ "transparent" | translate }}</h3>
+          <p class="details">{{ "puving-the-truth" | translate }}</p>
+        </div>
+      </figure>
+
+      <figure class="brand-cards-slider right-move" dir="rtl">
+        <div
+          class="brand-card-items"
+          style="
+            background: linear-gradient(225deg, #0ce594 4.17%, #3546ff 100%);
+          "
+        >
+          <h3 class="color-white">{{ "strength" | translate }}</h3>
+          <p class="details">{{ "leading-the-way" | translate }}</p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="
+            background: linear-gradient(
+              225deg,
+              #cc15df 0%,
+              #f01687 51.56%,
+              #ff7834 100%
+            );
+          "
+        >
+          <h3 class="color-white">{{ "truth" | translate }}</h3>
+          <p class="details">{{ "seeking-what-is-real" | translate }}</p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="background: linear-gradient(225deg, #ffdf34 0%, #ff4534 100%)"
+        >
+          <h3 class="color-white">{{ "persevering" | translate }}</h3>
+          <p class="details">{{ "always-finish" | translate }}</p>
+        </div>
+        <div
+          class="brand-card-items"
+          style="
+            background: linear-gradient(225deg, #ffdf34 8.33%, #2e9e8a 84.54%);
+          "
+        >
+          <h3 class="color-white">{{ "focused" | translate }}</h3>
+          <p class="details">{{ "never-waiver-ever" | translate }}</p>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of our-brand-wraper -->
+
+  <section class="we-are-pruvit-wraper">
+    <article class="container">
+      <figure class="row justify-content-center">
+        <div class="col-sm-12">
+          <h1 class="color-black text-center title">
+            {{ "we-are-pruvit" | translate }}
+          </h1>
+        </div>
+
+        <div class="col-sm-4 col-12 we-are-card">
+          <div class="card">
+            <h3 class="color-gray">
+              <span class="text-gradient-style">{{ "prove" | translate }}</span>
+              | {{ "verb-pruv" | translate }}
+            </h3>
+            <p class="color-black">
+              {{ "to-show-that" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-4 col-12 we-are-card">
+          <div class="card">
+            <h3 class="color-gray">
+              <span class="text-gradient-style">{{ "it" | translate }}</span> |
+              {{ "pronoun-it" | translate }}
+            </h3>
+            <p class="color-black">
+              {{ "used-in-the-place-of-a-noun" | translate }}
+            </p>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of we-are-pruvit-wraper -->
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

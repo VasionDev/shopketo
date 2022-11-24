@@ -1,0 +1,237 @@
+<section
+  class="sk-main__products sk-category__main-products"
+  *ngIf="mostPopularSmartships.length > 0"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        <div
+          class="sk-category__title d-flex justify-content-between align-items-end"
+        >
+          <h3 class="color-black">
+            {{ "most-popular" | translate }}
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="sk-category__products row most-popular">
+      <div
+        class="col-md-4 sk-category__custom-padd"
+        *ngFor="let product of mostPopularSmartships"
+      >
+        <div class="sk-main__product text-center color-light-white-bg">
+          <figure class="sk-main__product-img">
+            <img
+              src="{{ product.homeThumbUrl }}"
+              srcset="{{ product.homeThumbUrl }} 1x, {{ product.homeThumbRetinaUrl }} 2x"
+              class="img-fluid"
+              alt="Product-1"
+              [class.product-sold-out]="isSoldOut(product)"
+            />
+          </figure>
+
+          <div class="sk-main__product-details">
+            <h4
+              class="color-black sk-main__product-title"
+              [innerHTML]="product.title"
+            ></h4>
+            <ng-template #nonChinesePrice>
+              <p class="p-small color-gray sk-main__product-from">
+                {{ "from" | translate }}
+                <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                  >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+                >
+                <wbr />
+                <span
+                  [ngClass]="{
+                    'color-green font-bold ml-1': !isBothPricesSame(product)
+                  }"
+                  >{{ currencySymbol
+                  }}{{ getSmartshipDiscountPrice(product) }}</span
+                >
+              </p>
+            </ng-template>
+            <p
+              class="p-small color-gray sk-main__product-from"
+              *ngIf="
+                selectedLanguage === 'zh-hans' ||
+                  selectedLanguage === 'zh-hant';
+                else nonChinesePrice
+              "
+            >
+              <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+              >
+              <wbr />
+              <span
+                [ngClass]="{
+                  'color-green font-bold ml-1': !isBothPricesSame(product)
+                }"
+                >{{ currencySymbol
+                }}{{ getSmartshipDiscountPrice(product) }}</span
+              >
+              {{ "from" | translate }}
+            </p>
+          </div>
+
+          <div class="sk-main__product-btn">
+            <button
+              class="button button-primary buy-now"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              (click)="onClickBuyNow(product.name)"
+              *ngIf="!isSoldOut(product)"
+            >
+              {{ "select-options" | translate }}
+            </button>
+            <div class="sold-out" *ngIf="isSoldOut(product)">
+              <h4>{{ getSoldOutText(product) }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sk-category allProducts">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="color-black">{{ "all-products" | translate }}</h3>
+
+        <div class="sort-by-dropdown">
+          <select
+            class="form-select"
+            aria-label="example"
+            (change)="onChangeSort($event)"
+            [(ngModel)]="sortOrder"
+          >
+            <option value="price">{{ "sort-by-price" | translate }}</option>
+            <option value="alphabetic">
+              {{ "sort-by-a-z" | translate }}
+            </option>
+          </select>
+          <svg
+            viewBox="0 0 10 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.62515 0.365234H8.66578C9.22202 0.365234 9.50015 1.03711 9.1064 1.43086L5.08765 5.45273C4.8439 5.69648 4.44703 5.69648 4.20328 5.45273L0.184525 1.43086C-0.209225 1.03711 0.0689002 0.365234 0.62515 0.365234Z"
+              fill="#2152FF"
+            ></path>
+          </svg>
+        </div>
+        <ul class="sk-category__list d-flex">
+          <li
+            class="sk-category__list-item"
+            *ngFor="let category of categories$ | async"
+          >
+            <a
+              (click)="onClickCategory(category)"
+              [class.active]="selectedCategory === category.slug"
+              class="color-black border-0 sk-category__link sk-category__btn"
+              [innerHTML]="
+                category.name + ' (' + category.products.length + ')'
+              "
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sk-category__parent-products ext-mrg">
+  <div class="container">
+    <div class="row">
+      <ng-container
+        *ngFor="
+          let product of categorySmartshipProducts
+            | sort: sortOrder:'smartship';
+          let i = index
+        "
+      >
+        <div
+          class="col-md-4 col-6"
+          [ngClass]="{
+            'sk-main__custom-pad-l': (i + 1) % 2 !== 0,
+            'sk-main__custom-pad-r': (i + 1) % 2 === 0
+          }"
+        >
+          <div class="sk-main__product text-center color-light-white-bg">
+            <figure class="sk-main__product-img">
+              <img
+                src="{{ product.homeThumbUrl }}"
+                srcset="{{ product.homeThumbUrl }} 1x, {{ product.homeThumbRetinaUrl }} 2x"
+                class="img-fluid"
+                alt="Product-1"
+                [class.product-sold-out]="isSoldOut(product)"
+              />
+            </figure>
+
+            <div class="sk-main__product-details">
+              <h4
+                class="color-black sk-main__product-title"
+                [innerHTML]="product.title"
+              ></h4>
+              <ng-template #nonChinesePrice>
+                <p class="p-small color-gray sk-main__product-from">
+                  {{ "from" | translate }}
+                  <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                    >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+                  >
+                  <wbr />
+                  <span
+                    [ngClass]="{
+                      'color-green font-bold ml-1': !isBothPricesSame(product)
+                    }"
+                    >{{ currencySymbol
+                    }}{{ getSmartshipDiscountPrice(product) }}</span
+                  >
+                </p>
+              </ng-template>
+              <p
+                class="p-small color-gray sk-main__product-from"
+                *ngIf="
+                  selectedLanguage === 'zh-hans' ||
+                    selectedLanguage === 'zh-hant';
+                  else nonChinesePrice
+                "
+              >
+                <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                  >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+                >
+                <wbr />
+                <span
+                  [ngClass]="{
+                    'color-green font-bold ml-1': !isBothPricesSame(product)
+                  }"
+                  >{{ currencySymbol
+                  }}{{ getSmartshipDiscountPrice(product) }}</span
+                >
+                {{ "from" | translate }}
+              </p>
+            </div>
+
+            <div class="sk-main__product-btn">
+              <button
+                class="button button-primary buy-now"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                (click)="onClickBuyNow(product.name)"
+                *ngIf="!isSoldOut(product)"
+              >
+                {{ "select-options" | translate }}
+              </button>
+              <div class="sold-out" *ngIf="isSoldOut(product)">
+                <h4>{{ getSoldOutText(product) }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

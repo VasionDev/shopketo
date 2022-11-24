@@ -1,0 +1,56 @@
+<h2 class="color-black mb-3 title-thank">{{ user?.firstName }}, thank you!</h2>
+<h3 class="color-gray font-weight-normal">
+  Your order has been received
+</h3>
+<div *ngIf="orderHistory.length > 0" class="mt-3 mb-3" style="border-radius: 12px;background: #fff;">
+  <ng-container *ngFor="let order of orderHistory; let i = index">
+    <div
+      [ngClass]="{'fulfilment': order.shipStatus == 2, 'shipped' : order.shipStatus == 10, 'canceled' : order.shipStatus == 27,
+      'shipment' : order.shipStatus == 19, 'delivered' : order.shipStatus == 23, 'not-paid': order.shipStatus == 12 || order.shipStatus == 22 }"
+      class="order__history__item shipped">
+      <div class="order__information">
+        <div>
+          <span *ngIf="order.shipStatus == 2" class="order__name">Fulfilment</span>
+          <span *ngIf="order.shipStatus == 12" class="order__name">Returned Initial</span>
+          <span *ngIf="order.shipStatus == 23" class="order__name">Delivered</span>
+          <span *ngIf="order.shipStatus == 19" class="order__name">Automate hold</span>
+          <span *ngIf="order.shipStatus == 10" class="order__name">Shipped</span>
+          <span *ngIf="order.shipStatus == 22" class="order__name">Returned before shippment</span>
+
+        </div>
+        <span class="order__date">
+          ${{ order.amount  }}
+        </span>
+        <span class="order__date">
+          {{ order.dateCreated | date: "MMM d" }}
+        </span>
+        <span class="order__date"> #{{ order.orderId }}<i class="fal fa-repeat"></i></span>
+      </div>
+      <div class="order__options">
+
+
+        <span *ngFor="
+              let product of order.orderItems.slice(0, 3);
+              let i = index
+            " class="order__history__item__product">
+          <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
+            title="{{ product.quantity }} x {{ product.name }}" />
+          <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
+            title="{{ product.quantity }} x {{ product.name }}" />
+        </span>
+        <span *ngIf="order.orderItems.length > 3"
+          class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+<h3 class="color-black pt-2 mb-4">What now?</h3>
+<div class="dashboard__grid">
+  <div class="dashboard__grid__left">
+    <app-refer-friend></app-refer-friend>
+  </div>
+  <div class="dashboard__grid__right">
+    <app-pulse-app></app-pulse-app>
+  </div>
+</div>

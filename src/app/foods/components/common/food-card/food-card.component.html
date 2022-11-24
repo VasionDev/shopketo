@@ -1,0 +1,67 @@
+<div class="card">
+  <div
+    [attr.data-toggle]="!isStartPlanning ? 'modal' : ''"
+    [attr.data-target]="!isStartPlanning ? '#foodDetailsModal' : ''"
+    class="top-img"
+    [ngStyle]="{ cursor: isStartPlanning ? 'default' : 'pointer' }"
+    (click)="onClickFoodImage(food.id)"
+  >
+    <div
+      class="food-img"
+      [ngStyle]="{
+        'background-image': food.imageUrl
+          ? 'url(' + food.imageUrl + ')'
+          : 'url(assets/images/food-menu-img1.png)'
+      }"
+    >
+      <div class="view-details" *ngIf="!isStartPlanning">
+        <button class="btn btn-outline-light">
+          {{ "view-details" | translate }}
+        </button>
+      </div>
+    </div>
+    <span class="newTaq" *ngIf="food?.isNew">{{ "new" | translate }}</span>
+  </div>
+  <div class="bottom-text text-center">
+    <p class="food-taq-btn">
+      <a
+        (click)="toggleTooltip(food.id, i)"
+        class="button"
+        id="{{ 'card' + food.id + '' + i }}"
+        data-toggle="tooltip"
+        data-html="true"
+        data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+        [title]="(food?.dietTypes)![i] | format: false"
+        *ngFor="let diet of food?.mappedDietTypes; let i = index"
+        >{{ diet }}</a
+      >
+    </p>
+    <h4 class="color-black" [innerHTML]="food.name"></h4>
+    <p class="p-small color-gray" *ngIf="!isStartPlanning">
+      {{ food.price | currency }}
+    </p>
+    <div class="btns-group" *ngIf="!isStartPlanning">
+      <a
+        (click)="onClickPlus()"
+        *ngIf="food.quantity === 0 && !food.isOutOfStock"
+        class="button button-primary button-large add-btn"
+        ><i class="far fa-plus"></i> {{ "add" | translate }}</a
+      >
+      <div
+        *ngIf="food.quantity && food.quantity > 0 && !food.isOutOfStock"
+        class="button button-primary button-large add-btn added"
+      >
+        <a (click)="onClickMinus()" class="pointer"
+          ><i class="far fa-minus"></i
+        ></a>
+        {{ food.quantity }} {{ "added" | translate }}
+        <a (click)="onClickPlus()" class="pointer"
+          ><i class="far fa-plus"></i
+        ></a>
+      </div>
+      <div class="sold-out" *ngIf="food.isOutOfStock">
+        <h4>{{ "out-of-stock" | translate }}</h4>
+      </div>
+    </div>
+  </div>
+</div>

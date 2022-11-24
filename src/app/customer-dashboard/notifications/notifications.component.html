@@ -1,0 +1,144 @@
+<h2>Notifications</h2>
+<div class="mt-4" *ngIf="notifications.length > 0">
+  <div class="notification mb-3">
+    <div class="notification__main">
+      <div class="notification__text">
+        <h3>Email</h3>
+      </div>
+      <div class="notification__buttons">
+        <div class="notification__buttons__switch">
+          <div>
+            <div class="custom-control custom-switch">
+              <!-- <input [checked]="emailAll" (change)="updateAll('email')" [disabled]="loading" type="checkbox"
+                  class="custom-control-input" id="email" /> -->
+              <input
+                data-toggle="collapse"
+                data-target="#collapseEmail"
+                aria-expanded="false"
+                aria-controls="collapseEmail"
+                type="checkbox"
+                class="custom-control-input"
+                id="email"
+              />
+              <label class="custom-control-label" for="email"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse w-100" id="collapseEmail">
+      <div class="d-flex align-items-center flex-column pt-3">
+        <ng-container *ngFor="let n of notifications; let i = index">
+          <div *ngIf="n.email || !n.email" class="notification__checkbox">
+            <span class="form-check-label">{{ n.type.name }}</span>
+            <input
+              type="checkbox"
+              class=""
+              id="{{ 'email' + i }}"
+              (change)="updateSettings(n.type.code, 'email', $event, i)"
+              [checked]="n.email"
+              [disabled]="n.email == 'disabled' || loading"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification mb-3">
+    <div class="notification__main">
+      <div class="notification__text">
+        <h3>SMS</h3>
+      </div>
+      <div class="notification__buttons">
+        <div class="notification__buttons__switch">
+          <div>
+            <div class="custom-control custom-switch">
+              <!-- <input [disabled]="loading" [checked]="smsAll" (change)="updateAll('sms')" type="checkbox"
+                  class="custom-control-input" id="sms" /> -->
+              <input
+                data-toggle="collapse"
+                data-target="#collapseSms"
+                aria-expanded="false"
+                aria-controls="collapseSms"
+                type="checkbox"
+                class="custom-control-input"
+                id="sms"
+              />
+              <label class="custom-control-label" for="sms"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="collapse w-100" id="collapseSms">
+      <div class="d-flex align-items-center flex-column pt-3">
+        <ng-container *ngFor="let n of notifications; let i = index">
+          <div *ngIf="n.sms || !n.sms" class="notification__checkbox">
+            <span class="form-check-label">{{ n.type.name }}</span>
+            <input
+              type="checkbox"
+              class=""
+              id="{{ 'sms' + i }}"
+              (change)="updateSettings(n.type.code, 'sms', $event, i)"
+              [checked]="n.sms"
+              [disabled]="n.sms == 'disabled' || loading"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification mb-3">
+    <div class="notification__main">
+      <div class="notification__text">
+        <h3>In-App</h3>
+      </div>
+      <div class="notification__buttons">
+        <div class="notification__buttons__switch">
+          <div>
+            <div class="custom-control custom-switch">
+              <!-- <input [disabled]="loading" [checked]="appAll" (change)="updateAll('web')" type="checkbox"
+                  class="custom-control-input" id="web" /> -->
+              <input
+                data-toggle="collapse"
+                data-target="#collapseWeb"
+                aria-expanded="false"
+                aria-controls="collapseWeb"
+                type="checkbox"
+                class="custom-control-input"
+                id="web"
+              />
+              <label class="custom-control-label" for="web"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse w-100" id="collapseWeb">
+      <div class="d-flex align-items-center flex-column pt-3">
+        <ng-container *ngFor="let n of notifications; let i = index">
+          <div *ngIf="n.web || !n.web" class="notification__checkbox">
+            <span class="form-check-label">{{ n.type.name }}</span>
+            <input
+              type="checkbox"
+              class=""
+              id="{{ 'web' + i }}"
+              [checked]="n.web"
+              (change)="updateSettings(n.type.code, 'web', $event, i)"
+              [disabled]="n.web == 'disabled' || loading"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader
+  *ngIf="notifications.length == 0"
+  class="payment--loader"
+></app-loader>

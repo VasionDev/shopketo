@@ -1,0 +1,142 @@
+<main [style.margin-top.px]="discountHeight">
+  <section class="blog-top">
+    <article class="container blog-container">
+      <figure class="row blog-title">
+        <div class="col-sm-12 text-center">
+          <app-vi-offer></app-vi-offer>
+
+          <h1 class="color-black">Blog</h1>
+
+          <h4 class="color-black blog-title-b">
+            Catch up on current trends from leading throught-leaders in the
+            ketone space.
+          </h4>
+        </div>
+      </figure>
+
+      <figure class="row blog-slider-wrap">
+        <div class="col-sm-12 sk-main__banner-slider">
+          <div
+            class="blog-inner-cont"
+            *ngFor="let blog of featureBlogs | slice: 0:10"
+            [style.backgroundImage]="'url(' + blog.imageUrl + ')'"
+          >
+            <div class="blog-text">
+              <p class="color-white blog-subtitle-s">
+                {{ getBlogAuthor(blog.authorId) !== "" ? "by" : "" }}
+                <a class="pointer" (click)="onClickAuthor(blog.authorId)">{{
+                  getBlogAuthor(blog.authorId)
+                }}</a>
+                {{ blog.categories?.length !== 0 ? "in" : "" }}
+                <ng-container
+                  *ngFor="let category of blog.categories; let i = index"
+                >
+                  <a class="pointer" (click)="onClickCategory(category)"
+                    >{{ category.name }}
+                  </a>
+                  <span>
+                    {{ i === blog.categories.length - 1 ? "" : ", " }}
+                  </span>
+                </ng-container>
+              </p>
+              <h2
+                class="color-white blog-subtitle"
+                [innerHTML]="blog.title | textTruncate: 45"
+              ></h2>
+              <p
+                class="blog-slider-description color-white"
+                [innerHTML]="
+                  (blog.description[0] === ''
+                    ? blog.content
+                    : blog.description[0]
+                  )
+                    | textTruncate: 140
+                    | textSanitizer: 'html'
+                "
+              ></p>
+              <div class="blog-slider-btn">
+                <button
+                  (click)="onClickReadPost(blog.slug)"
+                  class="button button-primary buy-now-lg sk-main__banner-custom-btn"
+                >
+                  Read Post
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section class="blog-topic">
+    <article class="container">
+      <div class="row">
+        <div class="col-sm-12 blog-topic-title">
+          <h3>Topics</h3>
+        </div>
+      </div>
+
+      <figure class="row blog-topic-container">
+        <div
+          class="col-sm-6 col-md-3"
+          *ngFor="let category of categories"
+          (click)="onClickCategory(category)"
+        >
+          <div
+            class="topic-inner"
+            [style.backgroundImage]="getCategoryImage(category.imageUrl)"
+          >
+            <div class="topic-inner-text color-white">
+              <h3>{{ category.name }}</h3>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section class="blog-latest-post">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <h3 class="blog-latest-post-title">Latest Post</h3>
+        </div>
+        <div
+          class="col-sm-12 col-md-4"
+          *ngFor="let blog of blogs | slice: 0:toBlogIndex"
+        >
+          <div class="blog-latest-post-inner">
+            <div
+              class="inner-img pointer"
+              (click)="onClickReadPost(blog.slug)"
+              [style.backgroundImage]="'url(' + blog.imageUrl + ')'"
+            ></div>
+
+            <div class="inner-text">
+              <p>
+                <a
+                  (click)="onClickReadPost(blog.slug)"
+                  class="color-black pointer"
+                  [innerHTML]="blog.title"
+                ></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 text-center blog-posts-seemore pointer"
+          *ngIf="!(isAllBlogsLoaded && toBlogIndex >= noOfBlogsLoaded)"
+        >
+          <a
+            (click)="onClickSeeMore()"
+            [style.pointerEvents]="isLoading ? 'none' : 'auto'"
+          >
+            See more
+          </a>
+        </div>
+      </figure>
+    </article>
+  </section>
+</main>

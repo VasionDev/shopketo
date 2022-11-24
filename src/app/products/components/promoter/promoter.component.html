@@ -1,0 +1,170 @@
+<main
+  [style.margin-top.px]="discountHeight"
+  *ngIf="selectedCountry !== 'GB'; else notFound"
+>
+  <section class="promoter-wrapper">
+    <section class="promoter-banner text-center">
+      <article class="container">
+        <figure class="row justify-content-center">
+          <div class="col-sm-12">
+            <app-vi-offer></app-vi-offer>
+
+            <h1 class="jumbo-text-big title">
+              {{ "become-a-promoter" | translate }}
+            </h1>
+            <p class="subtitle">
+              {{ "join-the-pursuit-of-better" | translate }}
+            </p>
+          </div>
+
+          <div
+            class="col-sm-12 col-md-4"
+            *ngFor="let product of promoterProducts"
+          >
+            <div class="pr-card" [class.max]="!isPromoterMini(product)">
+              <div class="pr-img">
+                <img
+                  [src]="
+                    product.promoterPageImageUrl !== ''
+                      ? product.promoterPageImageUrl
+                      : isPromoterMini(product)
+                      ? 'assets/images/MINI_m1.png'
+                      : 'assets/images/MAX_m1.png'
+                  "
+                  alt="img"
+                  class="img-fluid"
+                />
+              </div>
+              <p
+                [innerHTML]="
+                  product.promoterTitle !== ''
+                    ? product.promoterTitle
+                    : 'Brand Builder'
+                "
+              ></p>
+              <h1
+                class="jumbo-text-big"
+                [style.color]="product.promoterGradientColor1"
+              >
+                {{ product.promoterSubtitle }}
+              </h1>
+              <span class="membership">
+                {{ "from" | translate }} {{ productSettings.currencySymbol
+                }}{{
+                  getPromoterStartingPrice(product)
+                    | customCurrency: productSettings
+                }}
+                + {{ productSettings.currencySymbol
+                }}{{ getPromoterFee() | customCurrency: productSettings }}
+                {{ "annual-membership" | translate }}
+              </span>
+              <p
+                class="popular"
+                [ngStyle]="{ color: product.promoterGradientColor2 }"
+                *ngIf="product.isMostPopular"
+              >
+                {{ "most-popular" | translate }}
+              </p>
+              <div class="inner">
+                <ul class="pr-list" *ngIf="product.bannerDiscription !== ''">
+                  <li
+                    class="list-item"
+                    *ngFor="
+                      let benefit of getPromoterBenefits(
+                        product.bannerDiscription
+                      );
+                      let i = index
+                    "
+                  >
+                    <strong *ngIf="i === 0"> {{ benefit }} </strong>
+                    <ng-container *ngIf="i !== 0"> {{ benefit }} </ng-container>
+                    <a
+                      *ngIf="i === 0 && product.promoterTooltipNote !== ''"
+                      class="large-tooltip"
+                      data-toggle="tooltip"
+                      [attr.data-placement]="getTooltipPlacement()"
+                      data-html="true"
+                      data-template="<div class='tooltip' role='tooltip'><div class='arrow'></div><div class='promoter-pack tooltip-inner'></div></div>"
+                      [title]="product.promoterTooltipNote"
+                    >
+                      <i class="fad fa-info-circle"></i>
+                    </a>
+                  </li>
+                </ul>
+                <a
+                  (click)="onClickPromoter(product)"
+                  class="button button-primary buy-now"
+                  [style.background]="
+                    'linear-gradient(91.49deg,' +
+                    product.promoterGradientColor1 +
+                    ' 1.62%,' +
+                    product.promoterGradientColor2 +
+                    ' 100%)'
+                  "
+                >
+                  {{
+                    (isPromoterMini(product)
+                      ? "lets-get-started"
+                      : "im-ready-to-go"
+                    ) | translate
+                  }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="limited-time-offer-wrap"
+            *ngIf="limitedPromoterProducts.length > 0 && limitedPromoterMarkets"
+          >
+            <h3 class="text-center color-black">
+              {{ "limited-time-offer" | translate }}
+            </h3>
+            <p class="text-center color-gray sub-text">
+              {{ "join-the-dollar-keto-club" | translate }}
+              {{ "from" | translate }}
+              {{ productSettings.currencySymbol
+              }}{{
+                limitedPromoterStartingPrice | customCurrency: productSettings
+              }}
+              {{ "plus" | translate }} {{ productSettings.currencySymbol
+              }}{{ getPromoterFee() | customCurrency: productSettings }}
+              annual membership.
+            </p>
+            <div class="row">
+              <ng-container
+                *ngFor="let product of limitedPromoterProducts; let i = index"
+              >
+                <div
+                  class="col-md-6 col-6"
+                  [ngClass]="{
+                    'sk-main__custom-pad-l': (i + 1) % 2 !== 0,
+                    'sk-main__custom-pad-r': (i + 1) % 2 === 0
+                  }"
+                >
+                  <app-product-card
+                    [product]="product"
+                    [isPromoter]="true"
+                    #child
+                  ></app-product-card>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <p class="pr-addcart">
+            <a (click)="onClickPromoterFee()" [ngStyle]="{ visibility: !isAsianMarkets && selectedCountry.toLowerCase() !== 'it' ? 'visible' : 'hidden' }"
+              class="pointer">
+              {{ "add-promoter-membership-fee-to-cart" | translate }}
+            </a>
+          </p>
+        </figure>
+      </article>
+    </section>
+    <!-- END of promoter-banner -->
+  </section>
+</main>
+
+<ng-template #notFound>
+  <app-error404></app-error404>
+</ng-template>

@@ -1,0 +1,47 @@
+<div
+  id="limitedTimeModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade zip-code-modal show"
+  aria-modal="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <i class="far fa-times"></i>
+      </button>
+      <div class="modal-body">
+        <div class="cont-wrap keeping">
+          <h3 class="title text-center color-black">Keeping it fresh!</h3>
+
+          <p class="p-small text-center color-black mb-2">
+            This limited time meal is available until
+            <strong>{{ food.limitedTimeAvailability?.availableUntil }}.</strong>
+          </p>
+
+          <p class="p-small text-center color-black">
+            After that, a delicious new meal will replace it – but don’t worry,
+            you can change it if you’d like before the usual cut-off time.
+          </p>
+
+          <p class="text-center">
+            <button
+              (click)="onClickGotIt()"
+              data-dismiss="modal"
+              aria-label="Close"
+              type="submit"
+              class="button button-primary button-large"
+            >
+              Okay, got it
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

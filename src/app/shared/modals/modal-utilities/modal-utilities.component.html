@@ -1,0 +1,761 @@
+<div
+  id="joinAsPromoterModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade"
+  aria-modal="false"
+>
+  <div
+    role="document"
+    class="modal-dialog modal-dialog-centered smartShip-discount-modal quick-buy"
+  >
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body">
+        <h3 class="color-black text-center">
+          {{
+            "discount-available"
+              | translate
+              | smartshipDiscountText: smartshipDiscountPercent
+          }}
+        </h3>
+        <p
+          class="color-black text-center save-more-text"
+          [innerHTML]="
+            'get-product-off-if-you-setup-smartship'
+              | translate
+              | smartshipDiscountText
+                : smartshipDiscountPercent
+                : smartshipProductName
+          "
+        ></p>
+
+        <p class="text-center subscribe-save-btn">
+          <button
+            (click)="onClickSubscribe()"
+            class="button button-primary button-large claim-btn-large"
+          >
+            {{ "claim-discount-and-setup-smartship" | translate }}
+            <svg
+              width="19"
+              height="10"
+              viewBox="0 0 19 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 5.26904L12.0784 5.26904"
+                stroke="white"
+                stroke-width="1.6"
+                stroke-miterlimit="16"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M18.1172 5.26882L11.3231 9.27146V1.26618L18.1172 5.26882Z"
+                fill="white"
+              ></path>
+            </svg>
+          </button>
+        </p>
+        <p class="text-center">
+          <a (click)="onClickSkip()" class="button">{{
+            "skip-and-pay-full-price" | translate
+          }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="pruvitTVModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade"
+  aria-modal="false"
+>
+  <div
+    role="document"
+    class="modal-dialog modal-dialog-centered join-as-promoter-modal quick-buy"
+  >
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        class="close checkout_widget__close-btn"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="modal-body pruvit-tv-embed-video">
+        <div class="tradecast-embed__container">
+          <div class="tradecast-embed__inner">
+            <iframe
+              class="tradecast-embed__iframe"
+              [src]="pruvitTvLink | textSanitizer: 'resourceUrl'"
+              allowfullscreen="false"
+              __idm_id__="718216193"
+              width="auto"
+              height="auto"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="shareCartModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade"
+  aria-modal="false"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered quick-buy">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body share-cart-modal-body">
+        <h3 class="color-black text-center">
+          {{ "share-your-cart" | translate }}
+        </h3>
+        <p class="color-black text-center">
+          {{ "link-recipient" | translate }}
+        </p>
+
+        <div class="form-group copy-link-group" #container>
+          <input
+            type="text"
+            class="form-control sk-form-control"
+            value="{{ bitlyLink }}"
+            [disabled]="isTinyConversionStarted"
+          />
+          <a
+            [class.disabled]="isTinyConversionStarted"
+            (cbOnSuccess)="bitlyLinkCopied($event)"
+            ngxClipboard
+            [cbContent]="bitlyLink"
+            [container]="container"
+            class="copy-link button"
+            >{{ copyLinkText }}</a
+          >
+        </div>
+        <div class="form-group share-btn-group text-center">
+          <button
+            (click)="onClickEmail()"
+            type="submit"
+            class="button button-large button-primary button-icon"
+          >
+            {{ "email" | translate }}
+          </button>
+          <button
+            (click)="onClickText()"
+            type="submit"
+            class="button button-large button-primary button-icon"
+          >
+            {{ "text" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="smartshipWarningModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade"
+  aria-modal="false"
+>
+  <div
+    role="document"
+    class="modal-dialog modal-dialog-centered smartShip-discount-modal quick-buy no-products"
+  >
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body">
+        <h3 class="color-black text-center">
+          {{ "no-products-will-ship-today" | translate }}
+        </h3>
+        <p class="color-black text-center save-more-text">
+          {{ "you-have-only-setup-a-future-smartship-order" | translate }}
+        </p>
+
+        <p class="text-center subscribe-save-btn">
+          <button
+            data-dismiss="modal"
+            aria-label="Close"
+            class="button button-primary button-large"
+            (click)="onClickContinueToCheckout()"
+          >
+            {{ "i-understand-continue-to-checkout" | translate }}
+            <svg
+              width="19"
+              height="10"
+              viewBox="0 0 19 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 5.26904L12.0784 5.26904"
+                stroke="white"
+                stroke-width="1.6"
+                stroke-miterlimit="16"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M18.1172 5.26882L11.3231 9.27146V1.26618L18.1172 5.26882Z"
+                fill="white"
+              ></path>
+            </svg>
+          </button>
+        </p>
+        <p class="text-center">
+          <a class="button" data-dismiss="modal" aria-label="Close">{{
+            "oops-continue-shopping-instead" | translate
+          }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal animate fade"
+  id="special-offer"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered liOf__modal-dialog"
+    role="document"
+  >
+    <div class="modal-content animate-bottom border-0 overflow-hidden liOf__modal-content">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+        (click)="onClickProductOfferNoThanks()"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+
+      <div class="modal-body p-0">
+        <section class="">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-12 p-0">
+                <figure class="liOf__banner-left">
+                  <div class="liOf__main-img">
+                    <img
+                      src="{{ offerProduct.thumbUrl }}"
+                      alt="Limited offer"
+                      class="img-fluid offer__thum-img"
+                    />
+                  </div>
+                </figure>
+              </div>
+
+              <div class="col-md-6 col-12 liOf-product__select">
+                <figure class="liOf__banner-right">
+                  <div class="liOf__style-for-m">
+                    <h6 class="liOf__time-title color-white">
+                      {{ offer.tag }}
+                    </h6>
+
+                    <h3
+                      class="color-black liOf__title"
+                      [innerHTML]="offer.title"
+                    ></h3>
+                    <div class="color-gray sk-product__short-details">
+                      <p [innerHTML]="offer.description"></p>
+                    </div>
+                    <p class="color-gray" [innerHTML]="offer.condition"></p>
+                    <p
+                      class="color-gray"
+                      [innerHTML]="offer.additionalDescription"
+                    ></p>
+
+                    <figure
+                      class="sk-product__form-item"
+                      *ngFor="let serving of servings; let i = index"
+                    >
+                      <ng-container
+                        *ngIf="serving.servingAttributes.length > 1"
+                      >
+                        <figcaption class="sk-product__select-title">
+                          <p class="p-small color-black font-bold">
+                            {{ serving.servingTitle }}
+                          </p>
+                        </figcaption>
+
+                        <label
+                          class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                          *ngFor="let attribute of serving.servingAttributes"
+                          >{{ attribute.name }}
+                          <input
+                            type="radio"
+                            [checked]="
+                              i === 0
+                                ? attribute.key === selectedAttribute1.key &&
+                                  !attribute.isOutOfStock
+                                : attribute.key === selectedAttribute2.key &&
+                                  !attribute.isOutOfStock
+                            "
+                            value="{{ attribute.key }}"
+                            (change)="onServingsSelect(attribute, i)"
+                            name="{{ i }}"
+                          />
+
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-container>
+                    </figure>
+
+                    <figure
+                      class="sk-product__form-item"
+                      *ngIf="
+                        orderTypes.length > 1 ||
+                        offer.offerAppliedFor === 'ONE_TIME'
+                      "
+                    >
+                      <figcaption class="sk-product__select-title">
+                        <p class="p-small color-black font-bold">
+                          {{ "delivery" | translate }}
+                        </p>
+                      </figcaption>
+
+                      <ng-container
+                        *ngIf="offer.offerAppliedFor !== 'SMARTSHIP'"
+                      >
+                        <label
+                          class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                          *ngFor="let orderType of orderTypes"
+                        >
+                          <span
+                            class="d-flex justify-content-between align-items-start"
+                          >
+                            <span>{{ getTranslatedText(orderType) }} </span>
+                            <span
+                              [class.font-bold]="
+                                orderType === selectedOrdertype
+                              "
+                              >{{ productSettings.currencySymbol
+                              }}{{
+                                productVariation.hasOwnProperty("priceObj")
+                                  ? (productVariation.priceObj.oneTime
+                                    | customCurrency: productSettings)
+                                  : 0
+                              }}</span
+                            >
+                          </span>
+                          <input
+                            [checked]="selectedOrdertype === orderType"
+                            type="radio"
+                            name="delivery"
+                            value="{{ orderType }}"
+                            (change)="onOrderTypeSelect($event)"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="offer.offerAppliedFor === 'SMARTSHIP'"
+                      >
+                        <label
+                          class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                        >
+                          <span
+                            class="d-flex justify-content-between align-items-start"
+                          >
+                            <span
+                              >{{ getTranslatedText("ordertype_2") }}
+                              <div class="delivery-list-opt every-month">
+                                <div
+                                  class="option-item"
+                                  *ngIf="
+                                    productVariation.hasOwnProperty(
+                                      'priceObj'
+                                    ) &&
+                                    productVariation.onetimeAndSmartshipDifference +
+                                      this.offerDiscountedPrice !==
+                                      0
+                                  "
+                                >
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "save" | translate }}
+                                  {{ productSettings.currencySymbol
+                                  }}{{
+                                    productVariation.onetimeAndSmartshipDifference +
+                                      this.offerDiscountedPrice
+                                      | customCurrency: productSettings
+                                  }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "cancel-anytime" | translate }}
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{ "eligible-to-earn" | translate }}
+                                  <span
+                                    class="underline"
+                                    (click)="onClickLearnMore()"
+                                    data-dismiss="modal"
+                                  >
+                                    {{ "free-product" | translate }}</span
+                                  >
+                                </div>
+                                <div class="option-item">
+                                  <i class="fas fa-check-square"></i>
+                                  {{
+                                    "first-smartship-order-processes-in-30-days"
+                                      | translate
+                                  }}
+                                </div>
+                              </div>
+                            </span>
+                          </span>
+                          <input
+                            checked="true"
+                            type="radio"
+                            name="smartship-delivery"
+                            value="ordertype_2"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-container>
+                    </figure>
+
+                    <div
+                      class="form-check sk-product-checkbox"
+                      *ngIf="offer.offerAppliedFor === 'SMARTSHIP'"
+                    >
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexCheckDefault"
+                        (change)="onTodaysOrderSelect($event)"
+                      />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        {{ "include-in-todays-order" | translate }}
+                      </label>
+                    </div>
+
+                    <figure
+                      class="sk-product__user-amount d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="sk-product__amount-modify d-flex justify-content-between align-items-center"
+                      >
+                        <button
+                          class="pack-qty-btn"
+                          (click)="onClickOfferMinus()"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <p class="text-center qty-width p-small font-bold">
+                          {{ offerQuantity }}
+                        </p>
+                        <button
+                          class="pack-qty-btn"
+                          (click)="onClickOfferPlus()"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <div
+                        class="sk-product__amount-cost"
+                        *ngIf="offer.offerAppliedFor !== 'SMARTSHIP'"
+                      >
+                        <h4 [class.color-green]="productVariation.hasDiscount">
+                          <del
+                            class="color-black font-reg"
+                            *ngIf="productVariation.hasDiscount"
+                            >{{ productSettings.currencySymbol
+                            }}{{
+                              productVariation.hasOwnProperty("priceObj")
+                                ? (offerQuantity *
+                                    productVariation.priceObj.oneTime
+                                  | customCurrency: productSettings)
+                                : 0
+                            }}</del
+                          >
+                          {{ productSettings.currencySymbol
+                          }}{{
+                            productVariation.finalPrice
+                              | customCurrency: productSettings
+                          }}
+                        </h4>
+                      </div>
+
+                      <div
+                        class="sk-product__amount-cost"
+                        *ngIf="offer.offerAppliedFor === 'SMARTSHIP'"
+                      >
+                        <h4
+                          [class.color-green]="
+                            productVariation.hasOwnProperty('priceObj') &&
+                            productVariation.onetimeAndSmartshipDifference !== 0
+                          "
+                        >
+                          <del
+                            class="color-black font-reg"
+                            *ngIf="
+                              productVariation.hasOwnProperty('priceObj') &&
+                              productVariation.onetimeAndSmartshipDifference !==
+                                0
+                            "
+                            >{{ productSettings.currencySymbol
+                            }}{{
+                              productVariation.hasOwnProperty("priceObj")
+                                ? (offerQuantity *
+                                    productVariation.priceObj.oneTime
+                                  | customCurrency: productSettings)
+                                : 0
+                            }}</del
+                          >
+                          {{ productSettings.currencySymbol
+                          }}{{
+                            productVariation.hasOwnProperty("priceObj")
+                              ? (offerQuantity *
+                                  productVariation.priceObj.everyMonth
+                                | customCurrency: productSettings)
+                              : 0
+                          }}
+                        </h4>
+                      </div>
+                    </figure>
+                  </div>
+
+                  <button
+                    *ngIf="offer.type !== 'FOOD'"
+                    [disabled]="
+                      (productVariation | json) === '{}' ||
+                      orderTypes.length === 0
+                    "
+                    class="button button-large button-primary full-width add-to-cart-icon"
+                    (click)="onAddProductOffer()"
+                    data-dismiss="modal"
+                  >
+                    {{ "add-to-order" | translate }}
+                  </button>
+
+                  <button
+                    *ngIf="offer.type === 'FOOD'"
+                    [disabled]="
+                      (productVariation | json) === '{}' ||
+                      orderTypes.length === 0
+                    "
+                    class="button button-large button-primary full-width add-to-cart-icon"
+                    (click)="onAddFoodOffer()"
+                    data-dismiss="modal"
+                  >
+                    {{ "add-to-order" | translate }}
+                  </button>
+
+                  <div
+                    class="text-center liOf__no-thanks"
+                    *ngIf="offer.type !== 'FOOD'"
+                  >
+                    <a
+                      (click)="onClickProductOfferNoThanks()"
+                      class="a-link link-hover color-black font-reg"
+                      data-dismiss="modal"
+                      >{{ "no-thanks" | translate }}</a
+                    >
+                  </div>
+
+                  <div
+                    class="text-center liOf__no-thanks"
+                    *ngIf="offer.type === 'FOOD'"
+                  >
+                    <a
+                      (click)="onClickFoodOfferNoThanks()"
+                      class="a-link link-hover color-black font-reg"
+                      data-dismiss="modal"
+                      >{{ "no-thanks" | translate }}</a
+                    >
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="pulse-pro"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade"
+  aria-modal="true"
+>
+  <div
+    role="document"
+    class="modal-dialog modal-dialog-centered quick-buy pulse-pro"
+  >
+    <div class="modal-content animate-bottom quick-buy__modal-content">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body quick-buy__modal-body">
+        <section class="sk-product__banner-hide-now">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-12 sk-product__img">
+                <figure class="sk-product__banner-left">
+                  <div class="quick-buy__main-img">
+                    <img
+                      alt=""
+                      class="img-fluid quick-buy__thum-img"
+                      src="assets/images/pulse-pro-nothing.png"
+                    />
+                  </div>
+                </figure>
+              </div>
+
+              <div class="col-md-6 col-12 sk-product__select">
+                <figure
+                  class="sk-product__banner-right quick-buy__right-contetn"
+                >
+                  <div class="sk-product__form quick-buy__form">
+                    <figure class="sk-product__form-item">
+                      <figcaption class="pulse-pro-description">
+                        <h3 class="title">
+                          {{ "pulse-pro-free-trial" | translate }}
+                        </h3>
+                        <p class="description">
+                          {{ "your-promoter-membership-includes" | translate }}
+                        </p>
+                        <span class="text-warning">{{
+                          "pulse-pro-is-required" | translate
+                        }}</span>
+                      </figcaption>
+                    </figure>
+
+                    <figure class="sk-product__form-item">
+                      <figcaption class="sk-product__select-title">
+                        <p class="p-small color-black font-bold">
+                          {{ "billing" | translate }}
+                        </p>
+                      </figcaption>
+                      <label
+                        class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                      >
+                        <span
+                          class="d-flex justify-content-between align-items-start"
+                        >
+                          <span>{{ "pay-monthly" | translate }} </span>
+                          <span [class.font-bold]="billing === 'monthly'"
+                            >$19.99</span
+                          >
+                        </span>
+                        <input
+                          type="radio"
+                          name="billing"
+                          value="monthly"
+                          (change)="onBillingSelect($event)"
+                        />
+                        <span class="checkmark"></span>
+                      </label>
+
+                      <label
+                        class="custom-radio sk-product__user-select sk-product__select-formula form-control p-small color-black"
+                      >
+                        <span
+                          class="d-flex justify-content-between align-items-start"
+                        >
+                          <span
+                            >{{ "pay-annually" | translate }}
+                            <div class="delivery-list-opt every-month">
+                              <div class="option-item">
+                                <i class="fas fa-check-square"></i>
+                                {{ "save" | translate }} $140
+                              </div>
+                              <div class="option-item">
+                                <i class="fas fa-check-square"></i>
+                                {{ "billed-at" | translate }} $99
+                                {{ "per-year" | translate }}
+                              </div>
+                              <div class="option-item">
+                                <i class="fas fa-check-square"></i>
+                                {{ "cancel-anytime" | translate }}
+                                {{ "during-your-free-trial" | translate }}
+                              </div>
+                            </div>
+                          </span>
+                          <span [class.font-bold]="billing === 'annually'"
+                            >$99</span
+                          >
+                        </span>
+                        <input
+                          type="radio"
+                          name="billing"
+                          checked
+                          (change)="onBillingSelect($event)"
+                          value="annually"
+                        />
+                        <span class="checkmark"></span>
+                      </label>
+                    </figure>
+
+                    <button
+                      (click)="onPulseProAddToCart()"
+                      data-dismiss="modal"
+                      class="button button-large button-primary full-width add-to-cart-icon"
+                    >
+                      {{ "add-to-cart" | translate }}
+                    </button>
+                    <a
+                      type="button"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                      class="no-thank"
+                      >{{ "no-thanks" | translate }}</a
+                    >
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

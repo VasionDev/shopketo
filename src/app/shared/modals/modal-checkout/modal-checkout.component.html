@@ -1,0 +1,349 @@
+<!-- referral modal 2 start  -->
+<div
+  class="modal animate fade sk-ref"
+  id="referrerCode"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="referrerCodeTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog sk-ref__dialog modal-dialog-centered"
+    role="document"
+  >
+    <div class="modal-content animate-bottom sk-ref__content">
+      <div class="modal-body sk-ref__body">
+        <button
+          type="button"
+          class="close position-absolute"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+        </button>
+        <h3 class="color-black text-center sk-ref__title">
+          {{ "who-told-you-about-pruvit" | translate }}
+        </h3>
+        <h4 class="text-center color-gray sk-ref__subtitle">
+          {{ "please-enter-your-referrers-code" | translate }}
+        </h4>
+
+        <form (submit)="onSubmit()">
+          <div class="form-row align-items-center sk-ref__form-box">
+            <div class="sk-ref__input-form flex-fill">
+              <label class="sr-only" for="referrerEmail">{{
+                "name" | translate
+              }}</label>
+              <input
+                type="email"
+                class="form-control sk-form-control referrer-code-focused"
+                id="referrerEmail"
+                placeholder="{{ 'referrer-code' | translate }}"
+                [(ngModel)]="refCode"
+                name="email"
+                #input
+                [disabled]="isSubmittable"
+              />
+            </div>
+
+            <div class="sk-ref__input-btn">
+              <button
+                [disabled]="!refCode"
+                type="submit"
+                class="button button-large button-primary button-icon"
+              >
+                {{ !isSubmittable ? ("submit" | translate) : "" }}
+                <i class="fa fa-spinner fa-spin" *ngIf="isSubmittable"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <p class="color-gray disclaimer-bold sk-ref__msg">
+          {{ "not-sure-what-referrer-code-is-contact" | translate }}
+          <a href="{{ getContactFormUrl() }}" class="color-gray link-hover">{{
+            "support-team" | translate
+          }}</a>
+        </p>
+
+        <p
+          class="color-red disclaimer-bold sk-ref__msg"
+          *ngIf="!isReferrerPresent"
+        >
+          {{ "this-referrer-code-is-invalid-please-try-again" | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- referral modal 2 end  -->
+
+<!-- Referrer Info Modal start -->
+<div
+  class="modal animate fade pv-refby"
+  id="referrerBy"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="referrerByTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog pv-refby__dialog modal-dialog-centered"
+    role="document"
+  >
+    <div class="modal-content animate-bottom pv-refby__content">
+      <button
+        type="button"
+        class="close position-absolute pv-refby__close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+
+      <div class="modal-body pv-refby__body text-center">
+        <h4 class="color-gray pv-refby-title">
+          {{ "you-were-referred-by" | translate }}
+        </h4>
+
+        <div>
+          <img
+            *ngIf="hasImageUrl(referrer)"
+            src="{{ referrer?.imageUrl }}"
+            class="pv-refby-img rounded-circle"
+          />
+          <img
+            *ngIf="!hasImageUrl(referrer)"
+            src="assets/images/avatar2.png"
+            class="pv-refby-img rounded-circle"
+          />
+        </div>
+
+        <h3 class="color-black pv-refby-name">{{ referrer?.name }}</h3>
+
+        <div class="d-flex flex-column align-items-center">
+          <a
+            href="tel:{{ referrer?.phoneNumber }}"
+            class="p-small color-gray d-inline-block link-hover"
+            >{{ referrer?.phoneNumber }}</a
+          >
+          <a
+            href="mailto:{{ referrer?.email }}"
+            class="p-small color-gray d-inline-block link-hover"
+            >{{ referrer?.email }}</a
+          >
+        </div>
+
+        <div class="pv-refby-btn">
+          <button
+            class="button button-primary pv-refby__button p-0"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="onClickReferrer()"
+          >
+            {{ "yes-this-is-my-referrer" | translate }}
+          </button>
+        </div>
+
+        <a
+          class="pv-refby__notmy p-small color-black d-inline-block link-hover"
+          (click)="onClickNotReferrer()"
+          >{{ "no-this-is-not-my-referrer" | translate }}</a
+        >
+
+        <p class="disclaimer-reg pv-refby__note color-gray">
+          ⚠️ {{ "referrer-cannot-be-changed-after" | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Referrer Info Modal end -->
+
+<!-- Independent Pruver Modal Start-->
+<div
+  class="modal animate fade sk-pruver"
+  id="independentPruver"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="independentPruverTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog sk-pruver__dialog modal-dialog-centered"
+    role="document"
+  >
+    <div class="modal-content animate-bottom sk-pruver__content color-light-white-bg">
+      <div class="modal-body sk-pruver__body" *ngIf="referrerVideoId === ''">
+        <button
+          type="button"
+          class="close position-absolute"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+        </button>
+
+        <div class="sk-pruver__user-info text-center">
+          <figure class="sk-pruver__user-img mx-auto">
+            <img
+              *ngIf="hasImageUrl(referrer)"
+              src="{{ referrer?.imageUrl }}"
+              class="img-fluid rounded-circle"
+              alt="pruver"
+            />
+            <img
+              *ngIf="!hasImageUrl(referrer)"
+              src="assets/images/avatar2.png"
+              class="img-fluid rounded-circle"
+              alt="pruver"
+            />
+          </figure>
+
+          <h3 class="color-black sk-pruver__user-name">
+            {{ referrer?.name }}
+          </h3>
+
+          <p
+            *ngIf="referrer?.code !== 'go'"
+            class="disclaimer-reg color-gray sk-pruver__user-designation"
+          >
+            {{ "independent-pruver" | translate }}
+          </p>
+
+          <a
+            *ngIf="referrer?.phoneNumber"
+            href="tel:{{ referrer?.phoneNumber }}"
+            class="p-small color-gray d-block link-hover"
+            >{{ referrer?.phoneNumber }}</a
+          >
+
+          <a
+            *ngIf="referrer?.email"
+            href="mailto:{{ referrer?.email }}"
+            class="p-small color-gray link-hover d-block"
+            >{{ referrer?.email }}</a
+          >
+        </div>
+
+        <div class="ff">
+          <div class="sk-pruver__btns">
+            <button
+              *ngIf="referrer?.phoneNumber"
+              class="sk-pruver__btn color-brand color-white-bg"
+            >
+              <a href="tel:{{ referrer?.phoneNumber }}" class="not-underline">
+                {{ "call-me" | translate }} 📞
+              </a>
+            </button>
+            <button
+              *ngIf="referrer?.phoneNumber"
+              class="sk-pruver__btn color-brand color-white-bg"
+            >
+              <a
+                [href]="'sms:' + referrer?.phoneNumber | textSanitizer: 'url'"
+                class="not-underline"
+              >
+                {{ "text-me" | translate }} 💬
+              </a>
+            </button>
+            <button
+              *ngIf="referrer?.email"
+              class="sk-pruver__btn color-brand color-white-bg"
+            >
+              <a href="mailto:{{ referrer?.email }}" class="not-underline"
+                >{{ "email-me" | translate }} 📨
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="referrer-popup-wrap ref-video-popup"
+        *ngIf="referrerVideoId !== ''"
+      >
+        <div class="popup-left-col">
+          <div class="video-popup-wrap">
+            <span
+              class="wistia_embed wistia_async_{{
+                referrerVideoId
+              }} popover=false popoverAnimateThumbnail=true videoFoam=true controlsVisibleOnLoad=false"
+              >&nbsp;</span
+            >
+          </div>
+        </div>
+
+        <div class="popup-right-col">
+          <button
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="close position-absolute"
+          >
+            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+          </button>
+          <div class="sk-pruver__user-info text-center">
+            <h3 class="color-black sk-pruver__user-name">
+              {{ referrer?.name }}
+            </h3>
+
+            <p
+              *ngIf="referrer?.code !== 'go'"
+              class="disclaimer-reg color-gray sk-pruver__user-designation"
+            >
+              {{ "independent-pruver" | translate }}
+            </p>
+
+            <a
+              *ngIf="referrer?.phoneNumber"
+              href="tel:{{ referrer?.phoneNumber }}"
+              class="p-small color-gray d-block link-hover"
+              >{{ referrer?.phoneNumber }}</a
+            >
+
+            <a
+              *ngIf="referrer?.email"
+              href="mailto:{{ referrer?.email }}"
+              class="p-small color-gray link-hover d-block"
+              >{{ referrer?.email }}</a
+            >
+          </div>
+          <div class="ff">
+            <div class="sk-pruver__btns">
+              <button
+                *ngIf="referrer?.phoneNumber"
+                class="sk-pruver__btn color-brand color-white-bg"
+              >
+                <a href="tel:{{ referrer?.phoneNumber }}" class="not-underline">
+                  {{ "call-me" | translate }} 📞
+                </a>
+              </button>
+              <button
+                *ngIf="referrer?.phoneNumber"
+                class="sk-pruver__btn color-brand color-white-bg"
+              >
+                <a
+                  [href]="'sms:' + referrer?.phoneNumber | textSanitizer: 'url'"
+                  class="not-underline"
+                >
+                  {{ "text-me" | translate }} 💬
+                </a>
+              </button>
+              <button
+                *ngIf="referrer?.email"
+                class="sk-pruver__btn color-brand color-white-bg"
+              >
+                <a href="mailto:{{ referrer?.email }}" class="not-underline"
+                  >{{ "email-me" | translate }}
+                  📨
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Independent Pruver Modal End-->

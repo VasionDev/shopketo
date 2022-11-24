@@ -1,0 +1,412 @@
+<header class="sk-header" #discountBanner>
+  <app-confirm-country
+    (bannerHeightEvent)="changeBannerHeight($event)"
+  ></app-confirm-country>
+
+  <app-discount-banner-slider></app-discount-banner-slider>
+
+  <nav
+    class="sk-header__navbar border-bottom-1 sk-header__nav-desktop"
+    id="navbar-header"
+  >
+    <div class="container">
+      <div
+        class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar sk-header__navbar-padding"
+      >
+        <a
+          class="navbar-brand sk-header__logo-box pointer"
+          (click)="onClickLogo()"
+          aria-label="Bootstrap"
+        >
+          <app-pruvit-logo-desktop></app-pruvit-logo-desktop>
+        </a>
+
+        <ul class="navbar-nav mr-auto sk-center-menu-wrap">
+          <li class="nav-item dropdown full-nav" *ngIf="enableOtherMenuItem()">
+            <a
+              class="nav-link dropdown-toggle pointer"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+              (click)="onClickShopAllPage()"
+              >{{ "shop" | translate }}</a
+            >
+            <div
+              class="dropdown-menu"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+            >
+              <div class="container">
+                <div class="row">
+                  <div class="col-3">
+                    <ul class="dropdown-menu-item">
+                      <li>
+                        <p class="disclaimer-bold">
+                          {{ "supplements" | translate }}
+                        </p>
+                      </li>
+
+                      <app-header-categories
+                        [categories]="categories"
+                      ></app-header-categories>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li
+            class="nav-item dropdown single-nav"
+            *ngIf="enableLearnMenuItem()"
+          >
+            <a
+              class="nav-link dropdown-toggle pointer"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+            >
+              {{ "learn" | translate }}
+            </a>
+            <div
+              class="dropdown-menu"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+            >
+              <ul class="dropdown-menu-item">
+                <li>
+                  <a
+                    class="dropdown-item pointer"
+                    (click)="onClickResearchPage()"
+                  >
+                    {{ "research" | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item pointer" (click)="onClickBlogPage()">
+                    {{ "blog" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="enableOtherMenuItem()">
+            <a class="nav-link pointer" (click)="onClickSmartshipSavePage()">
+              {{ "smartShip-&-save" | translate }}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="enableOtherMenuItem()">
+            <a class="nav-link pointer" (click)="onClickPromoterPage()">
+              {{ "become-a-promoter" | translate }}
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-md-auto text-right">
+          <li
+            class="nav-item search-pruvit-nav"
+            [class.search-focus]="isInputFocused"
+            *ngIf="isSearchShowable"
+          >
+            <app-search-desktop
+              (inputFocusEvent)="setInputFocusStatus($event)"
+            ></app-search-desktop>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link sk-header__nav-link pointer drawer-toggle"
+              (click)="onClickCountry()"
+              ><img
+                src="assets/images/{{
+                  selectedCountry === '' ? 'US' : selectedCountry
+                }}.svg"
+                class="img-fluid sk-header__country-icon"
+                alt="country"
+              />
+              <span class="text-label">{{
+                selectedCountry === "" ? "US" : selectedCountry
+              }}</span>
+            </a>
+          </li>
+
+          <li class="nav-item dropdown single-nav account-dropdown">
+            <a
+              *ngIf="!isUserLoggedIn"
+              class="nav-link sk-header__nav-link pointer"
+              (click)="onlogin()"
+            >
+              <i class="far fa-user sk-header__user-card color-black"></i>
+              <span class="text-label">
+                {{ "login" | translate }}
+              </span>
+            </a>
+            <a
+              *ngIf="isUserLoggedIn"
+              class="nav-link dropdown-toggle pointer sk-header__nav-link"
+              [class.view-account]="impersonationPresent"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+            >
+              <img src="{{ userAvatar }}" class="user-img img-fluid" />
+              <span class="text-label">
+                {{ "account" | translate }}
+              </span>
+            </a>
+            <div
+              class="dropdown-menu"
+              (mouseenter)="onHoverNavbarShow()"
+              (mouseleave)="onHoverNavbarHide()"
+            >
+              <ul class="dropdown-menu-item">
+                <li>
+                  <a
+                    class="dropdown-item pointer"
+                    (click)="redirectToPruvitCloud()"
+                  >
+                    {{ "cloud" | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item pointer" (click)="onLogout()">
+                    {{ "log-out" | translate }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link sk-header__nav-link pointer"
+              [ngClass]="cartStatus ? 'cart-has-product' : ''"
+              (click)="onClickCart()"
+              ><i
+                class="far fa-shopping-cart sk-header__user-card color-black"
+              ></i>
+              <span class="text-label">
+                {{ "cart" | translate }}
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- navbar mobile  -->
+  <nav class="sk-header__navbar border-bottom-1 sk-header__nav-mobile">
+    <div class="container">
+      <div class="navbar navbar-expand flex-md-row bd-navbar">
+        <ul class="navbar-nav ml-md-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link sk-header__nav-link nav-menu-btn pointer"
+              role="button"
+              data-toggle="collapse"
+              data-target="#mobileNavbarMenu"
+              aria-controls="mobileNavbarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <div class="menu-icon">
+                <svg
+                  class="bars"
+                  width="14"
+                  height="16"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.25 10.25H0.71875C0.3125 10.25 0 10.5938 0 11C0 11.4375 0.3125 11.75 0.71875 11.75H13.25C13.6562 11.75 14 11.4375 14 11.0312C14 10.5938 13.6562 10.25 13.25 10.25ZM13.25 0.25H0.71875C0.3125 0.25 0 0.59375 0 1C0 1.375 0.3125 1.75 0.71875 1.75H13.25C13.6562 1.75 14 1.4375 14 1.03125C14 0.65625 13.6562 0.25 13.25 0.25ZM13.25 5.25H0.71875C0.3125 5.25 0 5.59375 0 6C0 6.4375 0.3125 6.75 0.71875 6.75H13.25C13.6562 6.75 14 6.4375 14 6C14 5.59375 13.6562 5.25 13.25 5.25Z"
+                    fill="black"
+                  />
+                </svg>
+                <svg
+                  class="close"
+                  width="12"
+                  height="16"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.75 9.71875C11.0312 10.0312 11.0312 10.5 10.75 10.7812C10.4375 11.0938 9.96875 11.0938 9.6875 10.7812L6 7.0625L2.28125 10.7812C1.96875 11.0938 1.5 11.0938 1.21875 10.7812C0.90625 10.5 0.90625 10.0312 1.21875 9.71875L4.9375 6L1.21875 2.28125C0.90625 1.96875 0.90625 1.5 1.21875 1.21875C1.5 0.90625 1.96875 0.90625 2.25 1.21875L6 4.96875L9.71875 1.25C10 0.9375 10.4688 0.9375 10.75 1.25C11.0625 1.53125 11.0625 2 10.75 2.3125L7.03125 6L10.75 9.71875Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+
+              <span class="text-label">{{ "menu" | translate }}</span>
+            </a>
+          </li>
+        </ul>
+
+        <a
+          class="m-auto logo pointer"
+          (click)="onClickLogo()"
+          aria-label="Bootstrap"
+        >
+          <app-pruvit-logo-mobile></app-pruvit-logo-mobile>
+        </a>
+
+        <ul class="navbar-nav ml-auto text-right">
+          <li class="nav-item dropdown user-dropdown">
+            <a
+              *ngIf="!isUserLoggedIn"
+              class="nav-link sk-header__nav-link pointer"
+              (click)="onlogin()"
+            >
+              <i class="far fa-user sk-header__user-card color-black"></i>
+              <span class="text-label">
+                {{ "login" | translate }}
+              </span>
+            </a>
+            <a
+              *ngIf="isUserLoggedIn"
+              class="nav-link sk-header__nav-link pointer dropdown-toggle"
+              [class.view-account]="impersonationPresent"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img src="{{ userAvatar }}" class="user-img img-fluid" />
+              <span class="text-label">
+                {{ "account" | translate }}
+              </span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="redirectToPruvitCloud()">
+                {{ "prüvit-cloud" | translate }}
+              </a>
+              <a class="dropdown-item" (click)="onLogout()">{{
+                "log-out" | translate
+              }}</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link sk-header__nav-link"
+              (click)="onClickCart()"
+              [ngClass]="cartStatus ? 'cart-has-product' : ''"
+            >
+              <i
+                class="far fa-shopping-cart sk-header__user-card color-black"
+              ></i>
+              <span class="text-label">
+                {{ "cart" | translate }}
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <app-search-mobile *ngIf="isMobileSearch"></app-search-mobile>
+</header>
+<!-- end of header  -->
+
+<div
+  class="collapse mobile-nav-menu-wrap"
+  id="mobileNavbarMenu"
+  [style.padding-top.px]="discountBannerHeight"
+>
+  <ul class="nav-menu-top">
+    <li>
+      <a (click)="onClickCountry()" class="drawer-toggle">
+        <img
+          src="assets/images/{{
+            selectedCountry === '' ? 'US' : selectedCountry
+          }}.svg"
+          class="img-fluid drawer-toggle"
+          alt="flag-img"
+        />
+        <span class="name-text">{{
+          selectedCountry === "" ? "US" : selectedCountry
+        }}</span>
+      </a>
+    </li>
+    <li id="navbarSearchFocused" (click)="onClickMobileSearch()">
+      <a id="navbarSearchFocused">
+        <svg
+          id="navbarSearchFocused"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            id="navbarSearchFocused"
+            d="M15.75 14.7188L11.562 10.5312C12.469 9.4375 12.969 8.0312 12.969 6.5C12.969 2.9375 10.031 0 6.46899 0C2.87499 0 0 2.9375 0 6.5C0 10.0938 2.90599 13 6.46899 13C7.96899 13 9.375 12.5 10.5 11.5938L14.688 15.7812C14.844 15.9375 15.031 16 15.25 16C15.438 16 15.625 15.9375 15.75 15.7812C16.062 15.5 16.062 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.719 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.2812 9.25 11.5 6.5 11.5C3.719 11.5 1.5 9.2812 1.5 6.5Z"
+            fill="black"
+          />
+        </svg>
+        <span class="name-text" id="navbarSearchFocused">
+          {{ "search" | translate }}
+        </span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="nav-menu-bottom">
+    <li class="dropdown-submenu" *ngIf="enableOtherMenuItem()">
+      <a
+        data-toggle="collapse"
+        href="#dropdownSubmenuShop"
+        role="button"
+        aria-expanded="false"
+        aria-controls="dropdownSubmenuShop"
+      >
+        {{ "shop" | translate }}
+      </a>
+      <div id="dropdownSubmenuShop" class="collapse">
+        <ul>
+          <li>
+            <p class="disclaimer-bold color-gray text-uppercase">
+              {{ "supplements" | translate }}
+            </p>
+          </li>
+
+          <app-header-categories
+            [categories]="categories"
+          ></app-header-categories>
+        </ul>
+      </div>
+    </li>
+    <li class="dropdown-submenu" *ngIf="enableLearnMenuItem()">
+      <a
+        data-toggle="collapse"
+        href="#dropdownSubmenu"
+        role="button"
+        aria-expanded="false"
+        aria-controls="dropdownSubmenu"
+      >
+        {{ "learn" | translate }}
+      </a>
+      <ul class="collapse" id="dropdownSubmenu">
+        <li>
+          <a (click)="onClickResearchPage()">
+            {{ "research" | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="onClickBlogPage()">
+            {{ "blog" | translate }}
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li *ngIf="enableOtherMenuItem()">
+      <a (click)="onClickSmartshipSavePage()">
+        {{ "smartShip-&-save" | translate }}
+      </a>
+    </li>
+    <li *ngIf="enableOtherMenuItem()">
+      <a (click)="onClickPromoterPage()">
+        {{ "become-a-promoter" | translate }}
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- END of mobile-nav-menu-wrap  -->

@@ -1,0 +1,525 @@
+<div class="sk-cart color-white-bg" [ngStyle]="{ 'touch-action': 'none' }">
+  <figure class="sk-cart__header d-flex justify-content-between">
+    <h4 class="color-black sk-cart__header-title">
+      {{ "your-cart" | translate }}
+    </h4>
+    <a (click)="onClickCloseCart()" class="sk-cart__close-btn pointer">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 1L13 13"
+          stroke="#131313"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M13 1L1 13"
+          stroke="#131313"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+  </figure>
+
+  <figure *ngIf="oneTimeCart.length > 0">
+    <div class="sk-cart__subtitle sk-cart__padd">
+      <h5 class="sk-cart__subtitle--text color-gray">
+        {{ "todays-order" | translate }} 🛒
+      </h5>
+    </div>
+
+    <ng-container *ngFor="let cartTotal of cartTotalOneTime">
+      <ng-container *ngIf="cartTotal?.showItem">
+        <div
+          class="cart-progress-bar sk-cart__padd"
+          *ngIf="cartTotal.isDiscountableInCart && !cartTotal.isEnabled"
+        >
+          <p
+            class="p-small color-black"
+            [innerHTML]="cartTotal.bannerText"
+            [style.color]="
+              cartTotal.settings?.banner_info?.banner_bgcolor !== ''
+                ? cartTotal.settings?.banner_info?.banner_bgcolor
+                : '#FF9000'
+            "
+          ></p>
+        </div>
+
+        <div
+          class="cart-progress-bar sk-cart__padd"
+          *ngIf="cartTotal.isEnabled && cartTotal.requiredPriceOrItems > 0"
+        >
+          <p class="p-small color-black" [innerHTML]="cartTotal.bannerText"></p>
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [style.width.%]="cartTotal.progressPercent"
+              [style.color]="
+                cartTotal.settings?.banner_info?.banner_textcolor !== ''
+                  ? cartTotal.settings?.banner_info?.banner_textcolor
+                  : '#fff'
+              "
+              [style.backgroundColor]="
+                cartTotal.settings?.banner_info?.banner_bgcolor !== ''
+                  ? cartTotal.settings?.banner_info?.banner_bgcolor
+                  : '#FF9000'
+              "
+              [attr.aria-valuenow]="cartTotal.progressPercent"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ cartTotal.progressPercent }}%
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="cart-success-bar sk-cart__padd"
+          *ngIf="cartTotal.isUnlocked"
+        >
+          <p
+            class="p-small color-white text-center"
+            [innerHTML]="
+              cartTotal?.unlockedText !== ''
+                ? cartTotal?.unlockedText
+                : '🎉 ' +
+                  ('youve-unlocked-a-cart-total-discount-1' | translate) +
+                  ' <strong>' +
+                  ('youve-unlocked-a-cart-total-discount-2' | translate) +
+                  '</strong>'
+            "
+          >
+            <img
+              draggable="false"
+              role="img"
+              class="emoji"
+              alt="🎉"
+              src="https://s.w.org/images/core/emoji/13.0.0/svg/1f389.svg"
+            />
+          </p>
+        </div>
+
+        <div
+          class="almost-unlocked-wrap text-center"
+          *ngIf="cartTotal.isAlmostUnlocked"
+        >
+          <p>
+            {{
+              cartTotal?.almostUnlockedText !== ""
+                ? cartTotal?.almostUnlockedText
+                : "🎉 " +
+                  ("youve-almost-unlocked-a-cart-total-discount" | translate)
+            }}
+          </p>
+          <p class="text-center eligible-text">
+            {{
+              cartTotal?.claimText !== ""
+                ? cartTotal?.claimText
+                : "👀 " + ("add-an-eligible-product-to-claim-offer" | translate)
+            }}
+            <a (click)="onClickShopNow()">{{ "shop-now" | translate }}</a>
+          </p>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <figure
+      class="sk-cart__item-box sk-cart__padd position-relative"
+      *ngFor="let oneTimeItem of oneTimeCart"
+    >
+      <button
+        class="sk-cart__item-close-btn position-absolute"
+        (click)="onClickCartRemove('OneTimeCart', oneTimeItem)"
+      >
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <div class="sk-cart__item-content d-flex">
+        <div class="sk-cart__item-img">
+          <img
+            src="{{ oneTimeItem.cart.productImageUrl }}"
+            alt="cart-item-img"
+            class="img-fluid cart-item-img"
+          />
+        </div>
+
+        <div class="sk-cart__item-details flex-fill">
+          <p
+            class="p-small font-bold color-black sk-cart__item-title"
+            [innerHTML]="oneTimeItem.cart.productName"
+          ></p>
+          <p class="disclaimer-reg color-gray">
+            {{ oneTimeItem.cart.servingsName }} <br />
+            {{ oneTimeItem.cart.caffeineState }}
+          </p>
+
+          <div class="sk-cart__item-modify d-flex justify-content-between">
+            <div
+              class="sk-cart__select-number d-flex align-items-center justify-content-between"
+            >
+              <button
+                *ngIf="oneTimeItem.cart.productID !== -1"
+                class="sk-cart__plus-minus color-white color-brand-bg"
+                (click)="onClickCartMinus('OneTimeCart', oneTimeItem)"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <p class="p-small font-bold color-black">
+                {{ oneTimeItem.cart.quantity }}
+              </p>
+              <button
+                *ngIf="oneTimeItem.cart.productID !== -1"
+                class="sk-cart__plus-minus color-white plus-icon color-brand-bg"
+                (click)="onClickCartPlus('OneTimeCart', oneTimeItem)"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <h4
+              class="color-black"
+              [class.color-green]="oneTimeItem?.isDiscountable"
+            >
+              <del
+                class="color-black font-reg"
+                *ngIf="oneTimeItem?.isDiscountable"
+                >{{ currencySymbol
+                }}{{
+                  oneTimeItem.cart.quantity * oneTimeItem.cart.price.oneTime
+                    | customCurrency: productSettings
+                }}</del
+              >
+              {{ currencySymbol
+              }}{{
+                oneTimeItem.cart.quantity * oneTimeItem.finalPrice
+                  | customCurrency: productSettings
+              }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <figure class="sk-cart__item-box sk-cart__padd position-relative">
+      <div class="sk-cart__item-content">
+        <div _ class="sk-cart__item-details">
+          <div class="sk-cart__item-modify mt-0">
+            <h4
+              class="color-black"
+              [class.color-green]="
+                oneTimeCartTotalSumPrice !== oneTimeCartTotalDiscountSumPrice
+              "
+            >
+              <del
+                *ngIf="
+                  oneTimeCartTotalSumPrice !== oneTimeCartTotalDiscountSumPrice
+                "
+                class="color-black font-reg"
+                >{{ currencySymbol
+                }}{{
+                  oneTimeCartTotalSumPrice | customCurrency: productSettings
+                }}</del
+              >
+              {{ currencySymbol
+              }}{{
+                oneTimeCartTotalDiscountSumPrice
+                  | customCurrency: productSettings
+              }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </figure>
+  </figure>
+
+  <!-- smartship start in 30 days  -->
+
+  <figure *ngIf="everyMonthCart.length > 0">
+    <div class="sk-cart__subtitle sk-cart__padd">
+      <h5 class="sk-cart__subtitle--text color-gray">
+        {{ "smartship-starts-in-days" | translate }} 🚀
+      </h5>
+    </div>
+
+    <ng-container *ngFor="let cartTotal of cartTotalEveryMonth">
+      <ng-container *ngIf="cartTotal?.showItem">
+        <div
+          class="cart-progress-bar sk-cart__padd"
+          *ngIf="cartTotal.isDiscountableInCart && !cartTotal.isEnabled"
+        >
+          <p
+            class="p-small color-black"
+            [innerHTML]="cartTotal.bannerText"
+            [style.color]="
+              cartTotal.settings?.banner_info?.banner_bgcolor !== ''
+                ? cartTotal.settings?.banner_info?.banner_bgcolor
+                : '#FF9000'
+            "
+          ></p>
+        </div>
+
+        <div
+          class="cart-progress-bar sk-cart__padd"
+          *ngIf="cartTotal.isEnabled && cartTotal.requiredPriceOrItems > 0"
+        >
+          <p class="p-small color-black" [innerHTML]="cartTotal.bannerText"></p>
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [style.width.%]="cartTotal.progressPercent"
+              [style.color]="
+                cartTotal.settings?.banner_info?.banner_textcolor !== ''
+                  ? cartTotal.settings?.banner_info?.banner_textcolor
+                  : '#fff'
+              "
+              [style.backgroundColor]="
+                cartTotal.settings?.banner_info?.banner_bgcolor !== ''
+                  ? cartTotal.settings?.banner_info?.banner_bgcolor
+                  : '#FF9000'
+              "
+              [attr.aria-valuenow]="cartTotal.progressPercent"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ cartTotal.progressPercent }}%
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="cart-success-bar sk-cart__padd"
+          *ngIf="cartTotal.isEnabled && cartTotal.requiredPriceOrItems <= 0"
+        >
+          <p
+            class="p-small color-white text-center"
+            [innerHTML]="
+              cartTotal?.unlockedText !== ''
+                ? cartTotal?.unlockedText
+                : '🎉 ' +
+                  ('youve-unlocked-a-cart-total-discount-1' | translate) +
+                  ' <strong>' +
+                  ('youve-unlocked-a-cart-total-discount-2' | translate) +
+                  '</strong>'
+            "
+          >
+            <img
+              draggable="false"
+              role="img"
+              class="emoji"
+              alt="🎉"
+              src="https://s.w.org/images/core/emoji/13.0.0/svg/1f389.svg"
+            />
+          </p>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <figure
+      class="sk-cart__item-box sk-cart__padd position-relative"
+      *ngFor="let everyMonthItem of everyMonthCart"
+    >
+      <button
+        class="sk-cart__item-close-btn position-absolute"
+        (click)="onClickCartRemove('EveryMonthCart', everyMonthItem)"
+      >
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <div class="sk-cart__item-content d-flex">
+        <div class="sk-cart__item-img">
+          <img
+            src="{{ everyMonthItem.cart.productImageUrl }}"
+            alt="cart-item-img"
+            class="img-fluid cart-item-img"
+          />
+        </div>
+
+        <div class="sk-cart__item-details flex-fill">
+          <p
+            class="p-small font-bold color-black sk-cart__item-title"
+            [innerHTML]="everyMonthItem.cart.productName"
+          ></p>
+          <p class="disclaimer-reg color-gray">
+            {{ everyMonthItem.cart.servingsName }} <br />
+            {{ everyMonthItem.cart.caffeineState }}
+          </p>
+
+          <div class="sk-cart__item-modify d-flex justify-content-between">
+            <div
+              class="sk-cart__select-number d-flex align-items-center justify-content-between"
+            >
+              <button
+                class="sk-cart__plus-minus color-white color-brand-bg"
+                (click)="onClickCartMinus('EveryMonthCart', everyMonthItem)"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <p class="p-small font-bold color-black">
+                {{ everyMonthItem.cart.quantity }}
+              </p>
+              <button
+                class="sk-cart__plus-minus color-white plus-icon color-brand-bg"
+                (click)="onClickCartPlus('EveryMonthCart', everyMonthItem)"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <h4
+              class="color-black"
+              [class.color-green]="!isBothPricesSame(everyMonthItem)"
+            >
+              <del
+                class="color-black font-reg"
+                *ngIf="!isBothPricesSame(everyMonthItem)"
+                >{{ currencySymbol
+                }}{{
+                  everyMonthItem.cart.quantity *
+                    everyMonthItem.cart.price.oneTime
+                    | customCurrency: productSettings
+                }}</del
+              >
+              {{ currencySymbol
+              }}{{
+                everyMonthItem.finalPrice | customCurrency: productSettings
+              }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </figure>
+  </figure>
+
+  <ng-container *ngIf="everyMonthCart.length > 0 || oneTimeCart.length > 0">
+    <div class="sk-cart__checkout-msg text-center">
+      <p class="p-small">
+        {{ "shipping-and-tax-calc-at-checkout" | translate }}
+      </p>
+    </div>
+
+    <figure class="sk-cart__padd sk-cart__chackout-btn-wrap">
+      <button
+        class="button button-large sk-cart__chackout-btn position-relative"
+        (click)="onClickCheckout()"
+      >
+        {{ "checkout" | translate }}
+      </button>
+    </figure>
+
+    <figure class="text-center sk-cart__padd sk-cart__payment">
+      <a
+        href="https://seal.godaddy.com/verifySeal?sealID=3yKVEmpS4DcxZvCif5EIPMWgq9VtV87T8i1xgMwbHkti2VZC9xb3wDT52JZM"
+        ><img
+          src="assets/images/verified-and-secured-logo.svg"
+          alt="verified-2"
+          class="img-fluid sk-cart__varified-logo"
+      /></a>
+      <a
+        href="https://sealserver.trustwave.com/cert.php?customerId=89f7b095117b4cc193bafffd7d000c39"
+        ><img
+          src="assets/images/secure-trust-seal.png"
+          alt="Trust logo"
+          class="img-fluid secure-trust"
+      /></a>
+
+      <ul class="d-flex justify-content-center sk-cart__payment-method">
+        <li>
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/americanexpress.png"
+            alt="americanexpress"
+          />
+        </li>
+        <li>
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/mastercard.png"
+            alt="mastercard"
+          />
+        </li>
+        <li>
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/visa.png"
+            alt="visa"
+          />
+        </li>
+        <li>
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/PayPal.png"
+            alt="paypal"
+          />
+        </li>
+        <li *ngIf="selectedCountry === 'MX'">
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/oxxo.png"
+            alt="oxxo"
+          />
+        </li>
+        <li *ngIf="selectedCountry === 'CA' || selectedCountry === 'US'">
+          <img
+            class="sk-cart__payment-icon"
+            src="assets/images/sezzle-logo.png"
+            alt="sezzle"
+          />
+        </li>
+      </ul>
+
+      <p class="p-small sk-cart__we-accept">
+        {{ "visa-mastercard-amex-paypal-1" | translate }}
+        <br />{{
+          selectedCountry !== "MX"
+            ? ("visa-mastercard-amex-paypal-2" | translate)
+            : selectedLanguage === "es"
+            ? "PayPal, y OXXO aceptado"
+            : "PayPal, and OXXO accepted."
+        }}
+      </p>
+    </figure>
+
+    <figure class="text-center sk-cart__shipment">
+      <img
+        src="assets/images/shipment.png"
+        alt="shipment"
+        class="sk-cart__shipment-icon"
+      />
+
+      <p class="p-small">
+        {{ "shipping-note-supplements" | translate }}
+        <!-- {{ selectedCountry === "US" ? ("shipping-note-food" | translate) : "" }} -->
+      </p>
+
+      <a
+        *ngIf="shippingPolicyLink !== ''"
+        href="{{ shippingPolicyLink }}"
+        class="link-hover p-small"
+        >{{ "shipping-policy" | translate }}</a
+      >
+    </figure>
+
+    <div class="text-center share-my-cart-link pointer">
+      <a (click)="onClickShareMyCart()">
+        {{ "share-carts" | translate }}
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </ng-container>
+  <div
+    class="sk-cart__checkout-msg text-center"
+    *ngIf="everyMonthCart.length === 0 && oneTimeCart.length === 0"
+  >
+    <p class="p-small">{{ "your-cart-is-currently-empty" | translate }}.</p>
+  </div>
+</div>

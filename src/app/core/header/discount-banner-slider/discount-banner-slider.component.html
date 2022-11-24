@@ -1,0 +1,17 @@
+<div class="text-center offer-slider">
+  <div
+    class="container-fluid sk-header__offer"
+    [style.background-color]="banner.backgroundColor"
+    *ngFor="let banner of banners"
+  >
+    <p
+      class="sk-header__offer--link disclaimer-reg"
+      [style.color]="banner.textColor"
+      (click)="onClickBanner($event)"
+      [innerHTML]="
+        getBannerTitle(banner.bannerText + (banner?.countDown$ | async))
+          | textSanitizer: 'html'
+      "
+    ></p>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<main class="sk-main" [style.margin-top.px]="discountHeight">
+  <section class="sk-product__banner SmartShip">
+    <div class="container">
+      <div class="row">
+        <div class="col-md">
+          <app-vi-offer></app-vi-offer>
+
+          <figure class="sk-category__parent-title-wrap smartship text-center">
+            <h1 class="color-black sk-category__parent-title">
+              {{ "setup-smartship-and-never-pay-full-price" | translate }}
+            </h1>
+            <p class="color-gray sk-category__parent-subtitle">
+              {{ "set-up-a-monthly-smartship-order-with-any" | translate }}
+            </p>
+            <a (click)="onClickLearnMore()" class="learn-more"
+              >{{ "learn-more" | translate }}
+              <i class="fas fa-long-arrow-alt-right"></i
+            ></a>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-smartship-products></app-smartship-products>
+</main>

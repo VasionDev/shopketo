@@ -1,0 +1,44 @@
+<div
+  id="PurchaseWarningModal"
+  tabindex="-1"
+  role="dialog"
+  class="modal animate fade zip-code-modal"
+  aria-modal="true"
+>
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <button
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        class="close"
+      >
+        <i class="far fa-times"></i>
+      </button>
+      <div class="modal-body success">
+        <h3 class="title text-center color-black">
+          {{ "prüvit-food-beta-launch" | translate }}
+        </h3>
+        <p class="text-center p-small color-black">
+          {{ "the-beta-rollout-of-prüvit-food" | translate }}.
+          {{ "please-complete-your-order" | translate }},
+          {{ "or-empty-and-continue-shopping" | translate }}.
+        </p>
+        <p class="text-center extr-mrg">
+          <button
+            class="button button-primary button-large button-icon"
+            (click)="goToCart()"
+          >
+            {{ "go-to-cart" | translate }}
+          </button>
+        </p>
+        <p class="text-center">
+          <a class="button color-brand" (click)="emptyCart()"
+            >{{ "empty-cart" | translate }} {{ "and" | translate }}
+            {{ "continue-shopping" | translate }}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
