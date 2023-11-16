@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Blog } from 'src/app/blogs/models/blog.model';
 import { Product } from 'src/app/products/models/product.model';
 
@@ -8,14 +8,24 @@ import { Product } from 'src/app/products/models/product.model';
   styleUrls: ['./search-bar-results.component.css'],
 })
 export class SearchBarResultsComponent {
+  private regularProducts: Product[] = [];
   @Output() productSlugEvent = new EventEmitter<string>();
   @Output() seeResultsEvent = new EventEmitter<boolean>(false);
   @Output() blogEvent = new EventEmitter<string>();
 
-  @Input() products: Product[] = [];
+  @Input() 
+  set products(prods: Product[]) {
+    this.regularProducts = prods.filter(prod => {
+      return prod.variations.some(varEl => varEl.orderType === 'ordertype_1')
+    });
+  }
   @Input() blogs: Blog[] = [];
   @Input() searchFilter = '';
   @Input() listIndex = -1;
+
+  get products(): Product[] {
+    return this.regularProducts;
+  }
 
   setQuickLinkActiveClass(
     itemIndex: number,

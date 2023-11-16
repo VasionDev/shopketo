@@ -1,15 +1,116 @@
-<main
-  class="sk-main"
-  *ngIf="isCountryAvailable; else notFound"
-  [style.margin-top.px]="discountHeight"
->
-  <app-banner-slider>
-    <app-vi-offer></app-vi-offer>
-  </app-banner-slider>
-  <app-categories-list></app-categories-list>
-  <app-tags-list></app-tags-list>
-</main>
+<ng-container *ngIf="tenant === 'pruvit'">
+  <main
+    class="sk-main"
+    *ngIf="isCountryAvailable; else notFound"
+    [style.margin-top.px]="discountHeight"
+  >
+    <app-banner-slider></app-banner-slider>
+    <app-categories-list></app-categories-list>
+    <app-tags-list></app-tags-list>
+  </main>
 
-<ng-template #notFound>
-  <app-error404></app-error404>
-</ng-template>
+  <ng-template #notFound>
+    <app-error404></app-error404>
+  </ng-template>
+</ng-container>
+<ng-container *ngIf="tenant === 'ladyboss'">
+  <main
+    class="sk-main"
+    *ngIf="isCountryAvailable; else notFound"
+    [style.margin-top.px]="discountHeight"
+  >
+    <section class="ladyBoss-landing-wraper">
+      <article class="container">
+        <figure class="ladyBoss-title">
+          <h2 class="color-black">Welcome to LadyBoss.</h2>
+          <p class="color-black">
+            Having helped over 450,000 women, LadyBoss is on a mission to help
+            women lose weight and live a healthy lifestyle all while loving
+            themselves again. Women join for LadyBoss’s powerful online support
+            community, amazing tasting science-based supplement line,
+            easy-to-follow programs, and empowering apparel line.
+          </p>
+        </figure>
+
+        <figure class="ladyBoss-landing-slider">
+          <div class="sk-main__banner-slider ladyBoss-product-slider-for">
+            <div class="slider-img">
+              <img
+                src="assets/ladyboss/images/product_vanilla.jpg"
+                alt="img"
+                class="img-fluid"
+              />
+            </div>
+            <div class="slider-img">
+              <img
+                src="assets/ladyboss/images/ingredients-vanilla.jpg"
+                alt="img"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+
+          <ul class="ladyBoss-product-slider-thumb">
+            <li>
+              <img
+                alt="1"
+                class="img-fluid"
+                src="assets/ladyboss/images/image-one.png"
+              />
+            </li>
+            <li>
+              <img
+                alt="1"
+                class="img-fluid"
+                src="assets/ladyboss/images/image-two.png"
+              />
+            </li>
+          </ul>
+        </figure>
+
+        <figure class="ladyBoss-product-info">
+          <ul class="color-black">
+            <li class="p-small">
+              <span class="font-bold">HIGH PROTEIN MEAL REPLACEMENT†</span> – 15
+              grams of grass fed non GMO whey protein meal shake can boost your
+              metabolism and give you more energy
+            </li>
+
+            <li class="p-small">
+              <span class="font-bold">PROMOTE IMMUNE SYSTEM HEALTH†</span> – Now
+              featuring Vitamins A, C, and E plus numerous other vitamins,
+              minerals & ProHydrolase digestive enzymes to support proper
+              digestion of protein without gas and bloating
+            </li>
+
+            <li class="p-small">
+              <span class="font-bold">CONTROL SWEET CRAVINGS†</span> – Most
+              cravings stem from a lack of key nutrients and having a quick
+              nutritious snack can be a life saver.LEAN will help you keep that
+              metabolism going
+            </li>
+
+            <li class="p-small">
+              <span class="font-bold">SUPPORT FAT LOSS†</span> – LadyBoss LEAN
+              is a quick way to get the protein and vitamins your body needs to
+              increase your metabolism and recover from workouts
+            </li>
+
+            <li class="p-small">
+              <span class="font-bold">THE LADYBOSS COMPANY MISSION</span>:
+              Supporting the busy women that support everyone else
+            </li>
+          </ul>
+          <h6 class="color-black p-small font-bold">
+            † These statements have not been evaluated by the FDA. This product
+            is not intended to diagnose, treat, cure, or prevent any disease.
+          </h6>
+        </figure>
+      </article>
+    </section>
+  </main>
+
+  <ng-template #notFound>
+    <app-error404></app-error404>
+  </ng-template>
+</ng-container>

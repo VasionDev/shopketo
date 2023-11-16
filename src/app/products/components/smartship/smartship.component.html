@@ -3,19 +3,63 @@
     <div class="container">
       <div class="row">
         <div class="col-md">
-          <app-vi-offer></app-vi-offer>
+          <!-- <figure class="sk-category__parent-title-wrap smartship text-center">
 
-          <figure class="sk-category__parent-title-wrap smartship text-center">
+            <app-vi-offer></app-vi-offer>
+
             <h1 class="color-black sk-category__parent-title">
               {{ "setup-smartship-and-never-pay-full-price" | translate }}
             </h1>
             <p class="color-gray sk-category__parent-subtitle">
               {{ "set-up-a-monthly-smartship-order-with-any" | translate }}
             </p>
-            <a (click)="onClickLearnMore()" class="learn-more"
+            <a *ngIf="tenant === 'pruvit'" (click)="onClickLearnMore()" class="learn-more"
               >{{ "learn-more" | translate }}
               <i class="fas fa-long-arrow-alt-right"></i
             ></a>
+          </figure> -->
+
+          <figure class="sk-category__parent-title-wrap smartship vip-today">
+            <h1 class="color-black sk-category__parent-title text-center">
+              {{ "smartship" | translate }}
+            </h1>
+            <p class="color-gray sk-category__parent-subtitle text-center">
+              {{ "all-benefits-plus-many-more" | translate }}
+              {{ "start-earning-points-today-every-dollar" | translate }}
+            </p>
+            <ul>
+              <li>
+                {{ "get" | translate }}
+                <b>15% {{ "off" | translate | uppercase }}</b>
+                {{ "today-order-every-order-ongoing" | translate }}
+              </li>
+              <li>
+                {{ "immediately-start-earning-points-next-order" | translate }}
+              </li>
+              <li>
+                {{ "access-the" | translate }}
+                <b>{{ "vip-vault" | translate }}</b>
+                {{ "with-exclusive-products" | translate }}
+              </li>
+              <li>
+                <b>{{ "edit-or-cancel" | translate }}</b>
+                {{ "anytime" | translate }}
+              </li>
+              <li>
+                <b>{{ "save-time" | translate }}</b>
+                {{ "with-automatic-monthly-processing" | translate }}
+              </li>
+            </ul>
+            <p class="text-center">
+              <a
+                (click)="onClickVipClub()"
+                class="learn-more"
+                href="javascript:void(0)"
+              >
+                {{ "learn-more-about-vip-club" | translate }}
+                <i class="far fa-arrow-right ml-2"></i>
+              </a>
+            </p>
           </figure>
         </div>
       </div>

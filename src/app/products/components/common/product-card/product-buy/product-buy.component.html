@@ -1,25 +1,40 @@
 <div class="sk-main__product-btn">
   <button
     class="button button-primary buy-now"
-    data-toggle="modal"
-    data-target="#exampleModalCenter"
-    (click)="onClickBuyNow(product.name)"
+    (click)="onClickAddToCart(product)"
     *ngIf="
-      !(product.isSoldOut || product.isAllVariationOutOfStock) && !isPromoter
+      !(product.isSoldOut || product.isAllVariationOutOfStock) &&
+        !isPromoter &&
+        isSingleVariation(product) &&
+        tenant === 'ladyboss';
+      else buyNowRef
     "
   >
-    {{ "buy-now" | translate }}
+    {{ "add-to-cart" | translate }}
   </button>
-  <button
-    class="button button-primary buy-now"
-    (click)="onClickPromoter(product)"
-    *ngIf="
-      !(product.isSoldOut || product.isAllVariationOutOfStock) && isPromoter
-    "
-  >
-    {{ "buy-now" | translate }}
-  </button>
-  <div
+  <ng-template #buyNowRef>
+    <button
+      class="button button-primary buy-now"
+      data-toggle="modal"
+      data-target="#exampleModalCenter"
+      (click)="onClickBuyNow(product)"
+      *ngIf="
+        !(product.isSoldOut || product.isAllVariationOutOfStock) && !isPromoter
+      "
+    >
+      {{ "buy-now" | translate }}
+    </button>
+    <button
+      class="button button-primary buy-now"
+      (click)="onClickPromoter(product)"
+      *ngIf="
+        !(product.isSoldOut || product.isAllVariationOutOfStock) && isPromoter
+      "
+    >
+      {{ "buy-now" | translate }}
+    </button>
+  </ng-template>
+  <!-- <div
     class="sold-out"
     *ngIf="product.isSoldOut || product.isAllVariationOutOfStock"
   >
@@ -32,5 +47,24 @@
           : ("currently-sold-out" | translate)
       }}
     </h4>
-  </div>
+  </div> -->
+  <ng-container *ngIf="product.isSoldOut; then waitListAction; else outofStock">
+  </ng-container>
+
+  <ng-template #outofStock>
+    <div class="sold-out" *ngIf="product.isAllVariationOutOfStock">
+      <h4>{{ "out-of-stock" | translate }}</h4>
+    </div>
+  </ng-template>
+
+  <ng-template #waitListAction>
+    <button
+      (click)="onWaitlistAdd()"
+      *ngIf="product.isSoldOut"
+      class="button button-primary buy-now button-icon button-waitlist"
+      [ngStyle]="{ backgroundColor: '#FF9000' }"
+    >
+      Notify me
+    </button>
+  </ng-template>
 </div>

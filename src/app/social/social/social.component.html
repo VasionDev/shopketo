@@ -1,0 +1,84 @@
+<section class="pruvit-social-media-wrap">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <figure class="social-media-title text-center">
+                  <h1 class="color-black">{{ "pruvit-on-social-media" | translate }}</h1>
+                  <p class="color-black sk-category__parent-subtitle">{{ "keep-up-with-pruvit-on-the-various-social-media-platforms" | translate }}</p>
+              </figure>
+          </div>
+      </div>
+
+      <div *ngIf="settings.facebook" class="row social-media-row">
+          <div class="col-md-4 col-12">
+            <a href="https://facebook.com/{{ settings.facebook }}" target="_blank">
+              <div class="inner-cont color-light-white-bg">
+                  <figure class="social-img">
+                      <img alt="img" class="img-fluid" src="../../../assets/images/social_img/facebook-logo.svg">
+                  </figure>
+                  <div class="icon-details text-center">
+                      <h4 class="color-black sk-main__product-title">{{"pruvit-on-facebook" | translate }}</h4>
+                      <p class="link color-brand">facebook.com/{{ settings.facebook }} <i class="fa-regular fa-arrow-up-right"></i></p>
+                  </div>
+              </div>
+            </a>
+          </div>
+
+          <div *ngIf="settings.instagram" class="col-md-4 col-12">
+            <a href="https://instagram.com/{{ settings.instagram }}" target="_blank">
+              <div class="inner-cont color-light-white-bg">
+                  <figure class="social-img">
+                      <img alt="img" class="img-fluid" src="../../../assets/images/social_img/instagram-logo.svg">
+                  </figure>
+                  <div class="icon-details text-center">
+                      <h4 class="color-black sk-main__product-title">{{ "pruvit-on-instagram" | translate }}</h4>
+                      <p class="link color-brand">instagram.com/{{ settings.instagram }} <i class="fa-regular fa-arrow-up-right"></i></p>
+                  </div>
+              </div>
+            </a>
+          </div>
+
+          <div *ngIf="settings.twitter"  class="col-md-4 col-12">
+            <a href="https://twitter.com/{{ settings.twitter }}" target="_blank">
+              <div class="inner-cont color-light-white-bg">
+                  <figure class="social-img">
+                      <img alt="img" class="img-fluid" src="../../../assets/images/social_img/twitter-logo.svg">
+                  </figure>
+                  <div class="icon-details text-center">
+                      <h4 class="color-black sk-main__product-title">{{ "pruvit-on-twitter" | translate }}</h4>
+                      <p class="link color-brand">twitter.com/{{ settings.twitter }} <i class="fa-regular fa-arrow-up-right"></i></p>
+                  </div>
+              </div>
+            </a>
+          </div>
+
+          <div *ngIf="settings.youtube"  class="col-md-4 col-12">
+            <a href="https://youtube.com/{{ settings.youtube }}" target="_blank">
+              <div class="inner-cont color-light-white-bg">
+                  <figure class="social-img">
+                      <img alt="img" class="img-fluid" src="../../../assets/images/social_img/youtube-logo.svg">
+                  </figure>
+                  <div class="icon-details text-center">
+                      <h4 class="color-black sk-main__product-title">{{ "pruvit-on-youtube" | translate }}</h4>
+                      <p class="link color-brand">youtube.com/{{ settings.youtube }} <i class="fa-regular fa-arrow-up-right"></i></p>
+                  </div>
+              </div>
+            </a>
+          </div>
+
+          <div *ngIf="settings.tiktok" class="col-md-4 col-12">
+            <a href="https://tiktok.com/{{ settings.tiktok }}" target="_blank">
+              <div class="inner-cont color-light-white-bg">
+                  <figure class="social-img">
+                      <img alt="img" class="img-fluid" src="../../../assets/images/social_img/tiktok-logo.svg">
+                  </figure>
+                  <div class="icon-details text-center">
+                      <h4 class="color-black sk-main__product-title">{{ "pruvit-on-tiktok" | translate }}</h4>
+                      <p class="link color-brand">tiktok.com/{{ settings.tiktok }} <i class="fa-regular fa-arrow-up-right"></i></p>
+                  </div>
+              </div>
+            </a>
+          </div>
+      </div>
+  </div>
+</section>

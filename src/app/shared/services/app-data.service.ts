@@ -24,6 +24,9 @@ export class AppDataService {
   private categories: BehaviorSubject<ProductTagOrCategory[]> =
     new BehaviorSubject<ProductTagOrCategory[]>([]);
 
+  private childCategories: BehaviorSubject<ProductTagOrCategory[]> =
+    new BehaviorSubject<ProductTagOrCategory[]>([]);
+
   private modalName: Subject<{
     postName: string;
     payload?: { key: string; value: any };
@@ -32,6 +35,7 @@ export class AppDataService {
   private selectedlanguage = new BehaviorSubject('en');
 
   private referrerData = new BehaviorSubject(false);
+  private isMobileView = new BehaviorSubject(false);
 
   private selectedCountry = new BehaviorSubject('');
 
@@ -42,6 +46,8 @@ export class AppDataService {
   );
 
   private discountHeight = new BehaviorSubject(0);
+
+  private cartPageCheckoutBtnHeight = new BehaviorSubject(0);
 
   private pruvitTvLink = new BehaviorSubject('');
 
@@ -54,6 +60,8 @@ export class AppDataService {
 
   private isCheckout = new BehaviorSubject(false);
   private isAdminUser = new BehaviorSubject(false);
+  private isChampion = new BehaviorSubject(false);
+
   private isImpersonationPresent = new BehaviorSubject(false);
 
   private isSubdomain = new BehaviorSubject(false);
@@ -66,9 +74,13 @@ export class AppDataService {
     index: 0,
   });
 
-  private trainingData: BehaviorSubject<[]> = new BehaviorSubject([])
-  private trainingCategory: BehaviorSubject<{}> = new BehaviorSubject({})
-  private trainingCategoryList: BehaviorSubject<any[]> = new BehaviorSubject([{}])
+  private trainingData: BehaviorSubject<[]> = new BehaviorSubject([]);
+  private trainingCategory: BehaviorSubject<{}> = new BehaviorSubject({});
+  private trainingCategoryList: BehaviorSubject<any[]> = new BehaviorSubject([
+    {},
+  ]);
+  private smartshipCart: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private bundleBuilderCart: BehaviorSubject<Cart[]> = new BehaviorSubject<Cart[]>([]);
 
   private isOfferFlow = new BehaviorSubject(false);
 
@@ -111,6 +123,22 @@ export class AppDataService {
   private viTimer = new BehaviorSubject('');
 
   private userWithScopes: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private userProfile: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  private promoterMembership: Product | null = null;
+  private isBundleBuilderCheckout: boolean = false;
+
+  setBBCheckoutStatus(status: boolean) {
+    this.isBundleBuilderCheckout = status;
+  }
+
+  getBBCheckoutStatus() {
+    return this.isBundleBuilderCheckout;
+  }
+
+  private categoryUniqueID: string ='';
+
+  private isCountrySwithched: boolean = false;
 
   get currentTags$() {
     return this.tags.asObservable();
@@ -118,6 +146,10 @@ export class AppDataService {
 
   get currentCategories$() {
     return this.categories.asObservable();
+  }
+
+  get currentChildCategories$() {
+    return this.childCategories.asObservable();
   }
 
   get currentProductsData$() {
@@ -132,8 +164,20 @@ export class AppDataService {
     return this.isAdminUser.asObservable();
   }
 
+  get championStatus$() {
+    return this.isChampion.asObservable();
+  }
+
   get impersonationStatus$() {
     return this.isImpersonationPresent.asObservable();
+  }
+
+  get smartshipCartList$() {
+    return this.smartshipCart.asObservable();
+  }
+
+  get bundleBuilderCartList$() {
+    return this.bundleBuilderCart.asObservable();
   }
 
   get currentSelectedLanguage$() {
@@ -158,6 +202,10 @@ export class AppDataService {
 
   get currentDiscountHeight$() {
     return this.discountHeight.asObservable();
+  }
+
+  get currentCheckoutBtnHeight$() {
+    return this.cartPageCheckoutBtnHeight.asObservable();
   }
 
   get currentPruvitTvLink$() {
@@ -260,20 +308,32 @@ export class AppDataService {
     return this.trainingCategoryList.asObservable();
   }
 
+  get currentUserProfile$() {
+    return this.userProfile.asObservable();
+  }
+
   setProductsData(data: ProductData) {
     this.productsData.next(data);
   }
 
   setTrainingData(data: []) {
-    this.trainingData.next(data)
+    this.trainingData.next(data);
   }
 
   setTrainingCategoryList(data: any[]) {
-    this.trainingCategoryList.next(data)
+    this.trainingCategoryList.next(data);
+  }
+
+  setSmartshipCart(data: any[]) {
+    this.smartshipCart.next(data);
+  }
+
+  setBundleBuilderCart(data: Cart[]) {
+    this.bundleBuilderCart.next(data);
   }
 
   setCurrentTrainingCategory(data: {}) {
-    this.trainingCategory.next(data)
+    this.trainingCategory.next(data);
   }
 
   changePostName(data: {
@@ -307,6 +367,10 @@ export class AppDataService {
     this.discountHeight.next(height);
   }
 
+  changeCheckoutBtnHeight(height: number) {
+    this.cartPageCheckoutBtnHeight.next(height);
+  }
+
   setPruvitTvLink(link: string) {
     this.pruvitTvLink.next(link);
   }
@@ -316,11 +380,15 @@ export class AppDataService {
   }
 
   setAdminStatus(value: boolean) {
-    this.isAdminUser.next(value)
+    this.isAdminUser.next(value);
+  }
+
+  setChampionStatus(value: boolean) {
+    this.isChampion.next(value);
   }
 
   setImpersonationStatus(value: boolean) {
-    this.isImpersonationPresent.next(value)
+    this.isImpersonationPresent.next(value);
   }
 
   changeRedirectedCountry(country: string) {
@@ -403,12 +471,28 @@ export class AppDataService {
     this.userWithScopes.next(data);
   }
 
+  setUserProfile(data: any) {
+    this.userProfile.next(data);
+  }
+
   setTags(tags: ProductTagOrCategory[]) {
     this.tags.next(tags);
   }
 
   setCategories(categories: ProductTagOrCategory[]) {
     this.categories.next(categories);
+  }
+
+  setChildCategories(categories: ProductTagOrCategory[]) {
+    this.childCategories.next(categories);
+  }
+
+  setPromoterMembership(product: Product | null) {
+    this.promoterMembership = product;
+  }
+
+  getPromoterMembership() {
+    return this.promoterMembership;
   }
 
   set searchKey(data: string) {
@@ -419,4 +503,23 @@ export class AppDataService {
     return this.searchKeyValue;
   }
 
+  setCurrentCategoryUniqueID(id: string){
+    this.categoryUniqueID = id;
+  }
+
+  getCurrentCategoryUniqueID(){
+    return this.categoryUniqueID;
+  }
+
+  setMobileView(view: boolean) {
+    this.isMobileView.next(view);
+  }
+
+  get mobileView$() {
+    return this.isMobileView.asObservable();
+  }
+
+  isProductHasOrderTypeOne(product: Product) {
+    return product.variations.some(varEl => varEl.orderType === 'ordertype_1')
+  }
 }

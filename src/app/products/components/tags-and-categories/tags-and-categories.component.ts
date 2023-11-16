@@ -8,6 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
@@ -34,6 +35,8 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
   childInSaleComponents!: QueryList<ProductCardComponent>;
   @ViewChildren('childOutOfStock')
   childOutOfStockComponents!: QueryList<ProductCardComponent>;
+  @ViewChildren('childRestricted')
+  childRestrictedComponents!: QueryList<ProductCardComponent>;
   user: any;
   selectedLanguage = '';
   selectedCountry = '';
@@ -42,6 +45,8 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
   tagsOrCategories: ProductTagOrCategory[] = [];
   inSaleProducts: Product[] = [];
   outOfStockProducts: Product[] = [];
+  restrictedProducts: Product[] = [];
+  mostPopularProducts: Product[] = [];
   categoryOrTag = {} as ProductTagOrCategory;
   parentCategory = {} as ProductTagOrCategory;
   isParentCategory = false;
@@ -53,6 +58,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
   discountHeight$ = this.dataService.currentDiscountHeight$;
   subscriptions: SubscriptionLike[] = [];
   selectedChildCategory = '';
+  isShopAllPage: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -62,6 +68,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
     private productsTagAndCategoryService: ProductsTagAndCategoryService,
     private location: Location,
     private seoService: AppSeoService,
+    private meta: Meta,
     private userService: AppUserService,
     private changeDetectionRef: ChangeDetectorRef,
     private store: Store<AppState>
@@ -162,8 +169,11 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
   getCategories() {
     this.subscriptions.push(
       this.dataService.currentCategories$.subscribe((categories) => {
-        this.tagsOrCategories = categories;
-
+        this.tagsOrCategories = categories.filter((c) => c.products.length !== 0);
+        this.tagsOrCategories.forEach(cat => {
+          const popularProd = cat.products.filter(p => p.isMostPopular);
+          this.mostPopularProducts.push(...popularProd);
+        })
         this.getCategoryOrTag();
       })
     );
@@ -189,6 +199,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
     this.selectedChildCategory = '';
     this.subscriptions.push(
       this.activatedRoute.params.subscribe((params) => {
+        this.isShopAllPage = params['id'].includes('shop-all');
         this.changeDetectionRef.markForCheck();
 
         this.parentCategory = {} as ProductTagOrCategory;
@@ -205,8 +216,31 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
           params['id']
         ).category;
 
+        if(Object.keys(this.categoryOrTag).length === 0) {
+          const currentCategoryUId = this.dataService.getCurrentCategoryUniqueID();
+          if (currentCategoryUId !== '') {
+            const selectedCatInfo = this.tagsOrCategories.find((category) => {
+              return category.english_unique_id === currentCategoryUId;
+            })
+            if (selectedCatInfo) {
+              this.categoryOrTag = this.productsTagAndCategoryService.getCategoryInfo(
+                this.tagsOrCategories,
+                selectedCatInfo.slug,
+              ).category;
+            }
+          }
+        }
+
+        if(this.categoryOrTag && Object.keys(this.categoryOrTag).length) {
+          const navigateUrl = `/${this.pageName === 'category' ? 'category' : 'tag'}/${this.categoryOrTag.slug}`;
+          this.utilityService.navigateToRoute(navigateUrl);
+        }else {
+          this.utilityService.navigateToRoute('/');
+        }
+
         const isSoldOutProducts: Product[] = [];
         const inSaleProducts: Product[] = [];
+        const restrictedProducts: Product[] = [];
 
         if (
           !(
@@ -216,11 +250,18 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         ) {
           this.categoryOrTag.products.forEach((product) => {
             if (
-              !product.accessLevels.isLoggedUser.on ||
-              (product.accessLevels.isLoggedUser.on && this.isLoggedUserExist)
+              this.dataService.isProductHasOrderTypeOne(product) &&
+              (!product.accessLevels.isLoggedUser.on ||
+              (product.accessLevels.isLoggedUser.on && this.isLoggedUserExist))
             ) {
+              const canAccess = this.userService.checkUserAccess(
+                product.accessLevels,
+                product.customUsers
+              );
               if (this.isSoldOut(product)) {
                 isSoldOutProducts.push(product);
+              } else if (!canAccess) {
+                restrictedProducts.push(product);
               } else {
                 inSaleProducts.push(product);
               }
@@ -229,6 +270,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
 
           this.outOfStockProducts = isSoldOutProducts;
           this.inSaleProducts = inSaleProducts;
+          this.restrictedProducts = restrictedProducts;
         }
 
         this.sortOrder = 'alphabetic';
@@ -240,29 +282,43 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
   }
 
   onClickChildCategory(category?: ProductTagOrCategory) {
+    const isSoldOutProducts: Product[] = [];
+    const inSaleProducts: Product[] = [];
+    const restrictedProducts: Product[] = [];
     if (
       this.selectedChildCategory === category?.slug ||
       category === undefined
     ) {
       this.selectedChildCategory = '';
-      const isSoldOutProducts: Product[] = [];
-      const inSaleProducts: Product[] = [];
-      this.categoryOrTag.products.forEach((product) => {
+      const regularProducts = this.categoryOrTag.products.filter(prod => this.dataService.isProductHasOrderTypeOne(prod));
+      regularProducts.forEach((product) => {
+        const canAccess = this.userService.checkUserAccess(
+          product.accessLevels,
+          product.customUsers
+        );
         if (this.isSoldOut(product)) {
           isSoldOutProducts.push(product);
+        } else if (!canAccess) {
+          restrictedProducts.push(product);
         } else {
           inSaleProducts.push(product);
         }
       });
       this.outOfStockProducts = isSoldOutProducts;
       this.inSaleProducts = inSaleProducts;
+      this.restrictedProducts = restrictedProducts;
     } else {
       if (category.products.length) {
-        const isSoldOutProducts: Product[] = [];
-        const inSaleProducts: Product[] = [];
-        category.products.forEach((product) => {
+        const regularProducts = category.products.filter(prod => this.dataService.isProductHasOrderTypeOne(prod));
+        regularProducts.forEach((product) => {
+          const canAccess = this.userService.checkUserAccess(
+            product.accessLevels,
+            product.customUsers
+          );
           if (this.isSoldOut(product)) {
             isSoldOutProducts.push(product);
+          } else if (!canAccess) {
+            restrictedProducts.push(product);
           } else {
             inSaleProducts.push(product);
           }
@@ -270,6 +326,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         this.selectedChildCategory = category.slug;
         this.outOfStockProducts = isSoldOutProducts;
         this.inSaleProducts = inSaleProducts;
+        this.restrictedProducts = restrictedProducts;
       }
     }
   }
@@ -330,9 +387,9 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
           this.categoryOrTag.constructor === Object
         )
           ? this.userService.isUserCanAccess(
-              this.categoryOrTag.accessLevels,
-              this.categoryOrTag.customUsers
-            )
+            this.categoryOrTag.accessLevels,
+            this.categoryOrTag.customUsers
+          )
           : false;
 
         if (!this.user) {
@@ -399,6 +456,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         if (status) {
           if (this.categoryOrTag.slug !== '') {
             this.seoService.updateTitle(this.categoryOrTag.name);
+            this.meta.updateTag( { property: 'og:title', content: this.categoryOrTag.name });
             this.seoService.updateDescription(this.categoryOrTag.description);
           } else {
             this.seoService.updateTitle('Page not found');
@@ -406,6 +464,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         } else {
           if (this.categoryOrTag.slug !== '') {
             this.seoService.updateTitle(this.categoryOrTag.name);
+            this.meta.updateTag( { property: 'og:title', content: this.categoryOrTag.name });
             this.seoService.updateDescription(this.categoryOrTag.description);
             this.seoService.updateRobots('index,follow');
           } else {
@@ -425,7 +484,7 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         shopAllSlug = categoryOrTag.slug;
       }
     });
-    shopAllSlug = shopAllSlug === '' ? 'shop-all' : shopAllSlug;
+    shopAllSlug = shopAllSlug === '' ? (this.selectedLanguage === 'en' ? 'shop-all' : `shop-all-${this.selectedLanguage}`) : shopAllSlug;
 
     this.utilityService.navigateToRoute('/category/' + shopAllSlug);
   }
@@ -440,9 +499,14 @@ export class TagsAndCategoriesComponent implements OnInit, OnDestroy {
         .toArray()
         .forEach((c) => c.manageUserAccess());
     }
+
+    if (this.childRestrictedComponents) {
+      this.childRestrictedComponents.toArray().forEach((c) => c.manageUserAccess());
+    }
   }
 
   ngOnDestroy() {
+    this.dataService.setCurrentCategoryUniqueID(this.categoryOrTag.english_unique_id);
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });

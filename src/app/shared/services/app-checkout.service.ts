@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as cryptojs from 'crypto-js';
 import { FoodCart } from 'src/app/foods/models/food-cart.model';
 import { environment } from 'src/environments/environment';
+import { Cart } from '../models/cart.model';
 import { AppDataService } from './app-data.service';
 import { AppUserService } from './app-user.service';
 import { AppUtilityService } from './app-utility.service';
@@ -21,11 +23,13 @@ export class AppCheckoutService {
   sha256Salt = '';
   referrer: any = {};
   user: any;
+  tenant!: string;
 
   constructor(
     private dataService: AppDataService,
     private utilityService: AppUtilityService,
-    private userService: AppUserService
+    private userService: AppUserService,
+    private router: Router
   ) {
     this.isStaging = environment.isStaging;
     this.foodCheckoutURL = environment.foodCheckoutUrl;
@@ -33,7 +37,7 @@ export class AppCheckoutService {
     this.redirectURL = environment.redirectDomain;
     this.clientDomain = environment.clientDomain;
     this.sha256Salt = environment.shaSalt;
-
+    this.tenant = environment.tenant;
     this.dataService.currentSelectedLanguage$.subscribe((language: string) => {
       this.language = language;
     });
@@ -201,7 +205,7 @@ export class AppCheckoutService {
 
     checkoutLink =
       this.foodCheckoutURL +
-      refCode +
+      refCode.toLowerCase() +
       '?products=' +
       foodSkus +
       '&country=' +
@@ -235,7 +239,127 @@ export class AppCheckoutService {
     this.openCheckoutWindow(checkoutLink);
   }
 
+  setBundleBuilderCheckoutUrl(
+    refCode: string, 
+    redirectUrl: string,
+    country: string,
+    language: string,
+    cartData: Cart[]
+  ) {
+    let productSkus = '';
+    let checkoutLink = '';
+
+    cartData.forEach((item, index) => {
+      if(item.orderType === 'ordertype_3') {
+        productSkus += item.cart.productSku.oneTime + ':' + item.cart.quantity + ',';
+        productSkus += item.cart.productSku.everyMonth + ':' + item.cart.quantity;
+      }else {
+        productSkus += (item.orderType === 'ordertype_1' ? item.cart.productSku.oneTime : item.cart.productSku.everyMonth) + ':' + item.cart.quantity;
+      }
+      if (cartData.length - 1 !== index) {
+        productSkus += ',';
+      }
+    });
+
+    checkoutLink =
+        this.checkoutDomain +
+        refCode +
+        '?products=' +
+        productSkus +
+        '&country=' +
+        country.toLowerCase() +
+        '&redirect_url=' +
+        redirectUrl +
+        '&language=' +
+        language +
+        '&promptLogin=true';
+        
+    this.openCheckoutWindow(checkoutLink);
+  }
+
   setSupplementsCheckoutUrl(
+    refCode: string,
+    promptLogin: string,
+    viCode: string,
+    viProductId?: string,
+    firstName?: string,
+    lastName?: string,
+    email?: string,
+    productSku?: string,
+    redirectURL?: string,
+    phone?: string
+  ) {
+    const productSkus = productSku ? productSku : this.utilityService.productSkus;
+    let checkoutLink = '';
+    
+    let redirectUrl = '';
+    if(this.router.url.startsWith('/challenge/')) {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/challenge/thank-you-yes';
+    } else if (this.router.url.startsWith('/5daycakechallenge/')) {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/5daycakechallenge/prepare';
+    } else if(this.tenant === 'pruvit') {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/cloud/order-success';
+    } else {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/dashboard/order-success';
+    }
+  
+    const gaCode = this.referrer.hasOwnProperty('ga_track_id') ? this.referrer.ga_track_id : '';
+    let fbCode = this.referrer.hasOwnProperty('fb_pixel_id') ? this.referrer.fb_pixel_id : '';
+    const googleConversionId = this.referrer.hasOwnProperty('ga_ad_track_id') ? this.referrer.ga_ad_track_id : '';
+    const googleConversionLabel = this.referrer.hasOwnProperty('ga_ad_conv_lbl') ? this.referrer.ga_ad_conv_lbl : '';
+
+    if(this.tenant === 'ladyboss' && !this.isStaging) {
+      fbCode = '325342767664802';
+    }
+
+    if (this.checkoutPath !== '') {
+      checkoutLink = this.checkoutPath
+        .replace('{invite_id}', refCode.toLowerCase())
+        .replace('{product_skus}', productSkus)
+        .replace('{country}', this.country.toLowerCase())
+        .replace('{language}', this.language)
+        .replace('{redirect_url}', redirectUrl);
+    } else {
+      checkoutLink =
+        this.checkoutDomain +
+        refCode.toLowerCase() +
+        '?products=' +
+        productSkus +
+        '&country=' +
+        this.country.toLowerCase() +
+        '&redirect_url=' +
+        redirectUrl +
+        '&language=' +
+        this.language;
+    }
+
+    checkoutLink +=
+      '&gaCode=' +
+      gaCode +
+      '&fbCode=' +
+      fbCode +
+      '&googleConversionId=' +
+      googleConversionId +
+      '&googleConversionLabel=' +
+      googleConversionLabel +
+      '&promptLogin=' +
+      promptLogin;
+
+    checkoutLink = viCode !== '' ? checkoutLink + '&vicode=' + viCode : checkoutLink;
+    checkoutLink = viProductId ? checkoutLink + '&viProductId=' + viProductId : checkoutLink;
+    checkoutLink = firstName ? checkoutLink + '&firstName=' + firstName : checkoutLink;
+    checkoutLink = lastName ? checkoutLink + '&lastName=' + lastName : checkoutLink;
+    email = email ? email.replace('+', '%2B') : '';
+    checkoutLink = email ? checkoutLink + '&email=' + email : checkoutLink;
+    checkoutLink = phone ? checkoutLink + '&phone=' + phone : checkoutLink;
+    
+    const hash = cryptojs.SHA256(checkoutLink + this.sha256Salt).toString(cryptojs.enc.Hex).toUpperCase();
+    checkoutLink = viCode !== '' ? checkoutLink + '&hash=' + hash : checkoutLink;
+
+    this.openCheckoutWindow(checkoutLink);
+  }
+
+  setLadyboosSupplementsCheckoutUrl(
     refCode: string,
     promptLogin: string,
     viCode: string,
@@ -249,16 +373,21 @@ export class AppCheckoutService {
     const productSkus = productSku
       ? productSku
       : this.utilityService.productSkus;
-    const redirectUrl = redirectURL
-      ? redirectURL
-      : this.clientDomain + '/dashboard/order-success';
+    let redirectUrl = '';
+    if(this.router.url.startsWith('/challenge/')) {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/challenge/thank-you-yes';
+    } else if (this.router.url.startsWith('/5daycakechallenge/')) {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/5daycakechallenge/prepare';
+    } else {
+      redirectUrl = redirectURL ? redirectURL : this.clientDomain + '/dashboard/order-success';
+    }
 
     let checkoutLink = '';
 
     const gaCode = this.referrer.hasOwnProperty('ga_track_id')
       ? this.referrer.ga_track_id
       : '';
-    const fbCode = this.referrer.hasOwnProperty('fb_pixel_id')
+    let fbCode = this.referrer.hasOwnProperty('fb_pixel_id')
       ? this.referrer.fb_pixel_id
       : '';
     const googleConversionId = this.referrer.hasOwnProperty('ga_ad_track_id')
@@ -268,9 +397,13 @@ export class AppCheckoutService {
       ? this.referrer.ga_ad_conv_lbl
       : '';
 
+    if(!this.isStaging) {
+      fbCode = '325342767664802';
+    }
+
     if (this.checkoutPath !== '') {
       checkoutLink = this.checkoutPath
-        .replace('{invite_id}', refCode)
+        .replace('{invite_id}', refCode.toLowerCase())
         .replace('{product_skus}', productSkus)
         .replace('{country}', this.country.toLowerCase())
         .replace('{language}', this.language)
@@ -278,7 +411,7 @@ export class AppCheckoutService {
     } else {
       checkoutLink =
         this.checkoutDomain +
-        refCode +
+        refCode.toLowerCase() +
         '?products=' +
         productSkus +
         '&country=' +
@@ -315,7 +448,7 @@ export class AppCheckoutService {
     checkoutLink = lastName
       ? checkoutLink + '&lastName=' + lastName
       : checkoutLink;
-
+    email = email ? email.replace('+', '%2B') : '';
     checkoutLink = email ? checkoutLink + '&email=' + email : checkoutLink;
 
     const hash = cryptojs
@@ -326,7 +459,7 @@ export class AppCheckoutService {
     checkoutLink =
       viCode !== '' ? checkoutLink + '&hash=' + hash : checkoutLink;
 
-    this.openCheckoutWindow(checkoutLink);
+    return checkoutLink;
   }
 
   setModals() {
@@ -373,5 +506,15 @@ export class AppCheckoutService {
         topPosition +
         ',toolbar=no,menubar=no,scrollbars=no,location=no,directories=no'
     );
+  }
+
+  canCheckoutFromCurrentCountry() {
+    if (this.user && this.user.hasOwnProperty('checkoutCountries')) {
+      const isCheckoutAvailable = this.user.checkoutCountries.find(
+        (countryObj: any) => countryObj.code === this.country
+      );
+      return isCheckoutAvailable ? true : false;
+    }
+    return true;
   }
 }

@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { forkJoin, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { InviteService } from 'src/app/ladyboss-invite/service/invite.service';
 import { environment } from 'src/environments/environment';
 import { UnicomShortenUrlResponse } from '../interface';
 
@@ -19,7 +20,11 @@ export class AppApiService {
   apiPath = 'wp-json/wp/pruvitnow/products';
   usersPath = 'wp-json/wp/pruvitnow/mvuser-info';
 
-  constructor(private http: HttpClient, private apollo: Apollo) {
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private inviteService: InviteService
+  ) {
     this.domainPath = environment.apiDomain;
     this.phraseBase = environment.phraseBase;
     this.clientDomain = environment.clientDomain;
@@ -60,25 +65,29 @@ export class AppApiService {
   }
 
   getUsers(country: string) {
-    let fullApiPath = '';
-
-    if (country.toLowerCase() === 'us') {
-      fullApiPath = this.domainPath + '/' + this.usersPath;
-    } else {
-      fullApiPath =
-        this.domainPath + '/' + country.toLowerCase() + '/' + this.usersPath;
-    }
-
+    let fullApiPath = this.domainPath + '/' + this.usersPath;
+    // if (country.toLowerCase() === 'us') {
+    //   fullApiPath = this.domainPath + '/' + this.usersPath;
+    // } else {
+    //   fullApiPath =
+    //     this.domainPath + '/' + country.toLowerCase() + '/' + this.usersPath;
+    // }
     const time = new Date().getTime();
     fullApiPath += `?t=${time}`;
-
     return this.http.get<any>(fullApiPath);
   }
 
   getReferrer(refCode: string) {
-    return this.http.get(
-      this.domainPath + '/wp-json/wp/pruvitnow/referrer/?ref_code=' + refCode
-    );
+    if (environment.tenant === 'pruvit')
+      return this.http.get(
+        this.domainPath +
+          '/wp-json/wp/pruvitnow/referrer/?ref_code_2=' +
+          refCode
+      );
+    else
+      return this.http.get(
+        this.domainPath + '/wp-json/wp/pruvitnow/referrer/?ref_code=' + refCode
+      );
   }
 
   getAuthCheckoutURL(code: string, productSku: string) {
@@ -135,15 +144,36 @@ export class AppApiService {
     );
   }
 
-  getPhraseTranslation(langID: string) {
+  getLocalPhraseLanguages(): Observable<any> {
+    return this.http.get(this.domainPath +
+      '/wp-json/wp/pruvitnow/phrase/translation/locals/'
+    );
+  }
+
+  getPhraseTranslation(langID: string, fallbackId?: string) {
     return this.http
       .get(
         this.phraseBase +
           environment.phraseAppId +
           '/locales/' +
           langID +
-          '/download/?file_format=json'
+          '/download/?file_format=json' + (fallbackId && fallbackId !== '' ? `&include_empty_translations=true&fallback_locale_id=${fallbackId}` : '')
       )
+      .pipe(
+        map((responseData: any) => {
+          const finalData = Object.entries(responseData).map((item: any) => {
+            var translationObj: any = {};
+            translationObj[item[0]] = item[1].message;
+            return translationObj;
+          });
+          return Object.assign({}, ...finalData);
+        })
+      );
+  }
+
+  getLocalPhraseTranslation(langCode: string, fallbackId?: string) {
+    return this.http
+      .get(this.domainPath + '/wp-json/wp/pruvitnow/phrase/translation/?lang_code=' + langCode.toLowerCase())
       .pipe(
         map((responseData: any) => {
           const finalData = Object.entries(responseData).map((item: any) => {
@@ -226,15 +256,111 @@ export class AppApiService {
   }
 
   getContactToken() {
+    if (environment.tenant === 'ladyboss') {
+      return this.getContactTokenForLadyboss();
+    } else {
+      return this.getContactTokenForShopketo();
+    }
+  }
+
+  getSponsorIdByEmail(email: string) {
+    return this.http.get(
+      `${this.domainPath}/wp-json/wp/ladyboss/get-sponsorid-by-email?email=${email}`
+    );
+  }
+
+  getReferrerByUserId(id: string) {
+    return this.http.get(
+      `${this.domainPath}/wp-json/wp/ladyboss/mvuser/get-referrer?userId=${id}`
+    );
+  }
+
+  getContactByUserId(tokenType: string, accessToken: string, userId: string) {
+    const payLoad = {
+      sponsorId: userId,
+      claims: [],
+      paging: {
+        skipRecords: 0,
+        pageSize: 100,
+      },
+    };
+    const headers = {
+      Authorization: `${tokenType} ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+    return this.http.post(`${this.contactHost}/contact`, payLoad, {
+      headers: new HttpHeaders(headers),
+    });
+  }
+
+  private getContactTokenForShopketo() {
     return this.http.get(
       this.domainPath + '/wp-json/wp/pruvitnow/get-contact-token'
     );
   }
 
+  private getContactTokenForLadyboss() {
+    return this.http.get(
+      this.domainPath + '/wp-json/wp/ladyboss/get-contact-token'
+    );
+    /*var urlencoded = new URLSearchParams();
+    urlencoded.append('grant_type', 'client_credentials');
+    urlencoded.append('scope', environment.inviteScopes);
+    return this.http.post<any>(
+      environment.contactTokenHost + '/connect/token',
+      urlencoded,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Basic ' +
+            btoa(
+              environment.inviteClientId + ':' + environment.inviteClientSecret
+            ),
+        }),
+      }
+    );*/
+  }
+
+  /*getContacts(skipRecords: number, pageSize: number) {
+    const payLoad = {
+      claims: [],
+      paging: {
+        skipRecords: skipRecords,
+        pageSize: pageSize,
+      },
+    };
+
+    return this.http.get('../../../assets/test-leads-data.json');
+  }*/
+
+  getContacts(skipRecords: number, pageSize: number) {
+    const payLoad = {
+      claims: [],
+      paging: {
+        skipRecords: skipRecords,
+        pageSize: pageSize,
+      },
+    };
+
+    return this.http.post(`${this.contactHost}/contact`, payLoad);
+  }
+
+  downloadLeadCSVFile() {
+    const millis = Date.now();
+    return this.http.get(`${this.contactHost}/contact/csv?t_f=${millis}`, {
+      observe: 'response',
+      responseType: 'blob',
+    });
+  }
+
   sendContactActivity(
     tokenType: string,
     accessToken: string,
-    contactId: string
+    contactId: string,
+    text?: string,
+    source?: string,
+    body?: string
   ) {
     const headers = {
       Authorization: `${tokenType} ${accessToken}`,
@@ -245,9 +371,9 @@ export class AppApiService {
       contactId: contactId,
       body: {
         bodyType: 1,
-        text: 'Give & Get form submitted.',
+        text: text && text !== '' ? text : 'Give & Get form submitted.',
       },
-      source: this.clientDomain,
+      source: source ? source : this.clientDomain,
     };
 
     return this.http.post(`${this.contactHost}/contact/SendActivity`, payLoad, {
@@ -259,6 +385,52 @@ export class AppApiService {
     return this.http.get(
       this.domainPath + '/wp-json/wp/pruvitnow/get-system-alert-token'
     );
+  }
+
+  /*updateContactPhone(
+    tokenType: string,
+    accessToken: string,
+    contactId: string,
+    phone: string
+  ) {
+    const headers = {
+      Authorization: `${tokenType} ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const payLoad = {
+      contactId: contactId,
+      phoneNumber: phone,
+    };
+
+    return this.http.post(
+      `${this.contactHost}/contact/ChangePhoneNumber`,
+      payLoad,
+      {
+        headers: new HttpHeaders(headers),
+      }
+    );
+  }*/
+
+  updateContactSource(
+    tokenType: string,
+    accessToken: string,
+    contactId: string,
+    source: string
+  ) {
+    const headers = {
+      Authorization: `${tokenType} ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const payLoad = {
+      contactId: contactId,
+      source: source,
+    };
+
+    return this.http.post(`${this.contactHost}/contact/ChangeSource`, payLoad, {
+      headers: new HttpHeaders(headers),
+    });
   }
 
   updateContactNameAndEmail(
@@ -314,7 +486,6 @@ export class AppApiService {
     const headers = {
       Authorization: `${tokenType} ${accessToken}`,
       'Content-Type': 'application/json',
-      // Host: this.contactHost,
     };
     const payLoad = {
       contactId: contactId,
@@ -356,6 +527,56 @@ export class AppApiService {
     );
   }
 
+  updateContactPhone(
+    tokenType: string,
+    accessToken: string,
+    contactId: string,
+    phone: string
+  ) {
+    const headers = {
+      Authorization: `${tokenType} ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const payLoad = {
+      contactId: contactId,
+      phoneNumber: phone,
+    };
+
+    return this.http.post(
+      `${this.contactHost}/contact/ChangePhoneNumber`,
+      payLoad,
+      {
+        headers: new HttpHeaders(headers),
+      }
+    );
+  }
+
+  AddCustomClaims(
+    tokenType: string,
+    accessToken: string,
+    contactId: string,
+    claims: any[]
+  ) {
+    const headers = {
+      Authorization: `${tokenType} ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const payLoad = {
+      contactId: contactId,
+      claims: claims,
+    };
+
+    return this.http.post(
+      `${this.contactHost}/contact/AddCustomClaims`,
+      payLoad,
+      {
+        headers: new HttpHeaders(headers),
+      }
+    );
+  }
+
   createContactId(
     tokenType: string,
     accessToken: string,
@@ -364,7 +585,10 @@ export class AppApiService {
     lastName: string,
     email: string,
     countryCode: string,
-    phone?: string
+    phone?: string,
+    source?: string,
+    claimType?: string,
+    claimValue?: string
   ) {
     const headers = {
       Authorization: `${tokenType} ${accessToken}`,
@@ -372,7 +596,7 @@ export class AppApiService {
       // Host: this.contactHost,
     };
 
-    const payLoad = {
+    const payLoad: any = {
       sponsorId: userId,
       name: {
         name: `${firstName} ${lastName}`,
@@ -390,9 +614,18 @@ export class AppApiService {
         region: '',
       },
       phoneNumber: phone ? phone : '',
-      source: this.domainPath,
+      source: source ? source : this.domainPath,
       status: 'Not Contacted',
     };
+
+    if (claimType && claimValue && claimType !== '' && claimValue !== '') {
+      payLoad.customClaims = [
+        {
+          type: claimType,
+          value: claimValue,
+        },
+      ];
+    }
 
     return this.http.post(
       `${this.contactHost}/contact/CreateAndGenerateTrackingCode`,
@@ -403,9 +636,61 @@ export class AppApiService {
     );
   }
 
+  deleteContact(contactId: string) {
+    return this.http.delete<any>(
+      `${this.contactHost}/contact/delete?contactId=${contactId}`
+    );
+  }
+
   getGngProposal(offerId: string, contactId: string) {
+    if (environment.tenant === 'ladyboss') {
+      return this.getGngProposalForLadyboss(offerId, contactId);
+    } else {
+      return this.getOfferProposal(offerId, contactId);
+    }
+  }
+
+  getOfferProposal(offerId: string, contactId: string) {
+    return this.http.get<any>(
+      this.domainPath +
+        `/wp-json/wp/pruvitnow/get-offer-proposal?offerId=${offerId}&contactId=${contactId}`
+    );
+  }
+
+  getOffer(userId: string, productId: string) {
+    return this.http.get<any>(
+      this.domainPath +
+        `/wp-json/wp/pruvitnow/get-offer?userId=${userId}&productId=${productId}`
+    );
+  }
+
+  generateOfferAndProposal(
+    userId: string,
+    contactId: string,
+    productId: string
+  ) {
+    return this.http.get<any>(
+      this.domainPath +
+        `/wp-json/wp/pruvitnow/generate-offer-n-proposal?userId=${userId}&contactId=${contactId}&productId=${productId}`
+    );
+  }
+
+  private getGngProposalForShopketo(offerId: string, contactId: string) {
     return this.http.get(
       `${this.vaptHost}/Samples/GetProposal?offerId=${offerId}&contactId=${contactId}`
+    );
+  }
+
+  private getGngProposalForLadyboss(offerId: string, contactId: string) {
+    return this.inviteService.inviteAPIToken$.pipe(
+      switchMap((authToken) => {
+        return this.inviteService.getProposal(
+          offerId,
+          contactId,
+          'en',
+          authToken
+        );
+      })
     );
   }
 
@@ -443,28 +728,38 @@ export class AppApiService {
   getTrainingCenterData(language?: string) {
     const langCode = language && language !== '' ? language : 'en';
     return this.http.get<[]>(
-      this.domainPath + '/wp-json/wp/pruvitnow/training-data/?lang_code='+langCode
-    )
+      this.domainPath +
+        '/wp-json/wp/pruvitnow/training-data/?lang_code=' +
+        langCode
+    );
   }
 
   getUserTrainingData(userId: number) {
     return this.http.get<any>(
-      this.domainPath + '/wp-json/wp/pruvitnow/user/training-center/training-data/?userId='+userId,
-    )
+      this.domainPath +
+        '/wp-json/wp/pruvitnow/user/training-center/training-data/?userId=' +
+        userId
+    );
   }
 
-  saveUserTrainingData(userId: number, indexArray: any[], lessonArray: any[], completedCategory: any[]) {
+  saveUserTrainingData(
+    userId: number,
+    indexArray: any[],
+    lessonArray: any[],
+    completedCategory: any[]
+  ) {
     return this.http.post<any>(
-      this.domainPath + '/wp-json/wp/pruvitnow/user/training-center/training-data',
+      this.domainPath +
+        '/wp-json/wp/pruvitnow/user/training-center/training-data',
       {
         userId: userId,
         indexArray: indexArray,
         lessonArray: lessonArray,
-        completedCategory: completedCategory
+        completedCategory: completedCategory,
       }
-    )
+    );
   }
-  
+
   setImpersonation(name: string, token: string) {
     const urlencoded = new URLSearchParams();
     urlencoded.append('grant_type', 'password');
@@ -499,6 +794,12 @@ export class AppApiService {
   getSpecialists() {
     return this.http.get<any>(
       this.domainPath + '/wp-json/wp/pruvitnow/specialists'
+    );
+  }
+
+  getChallengeSettings() {
+    return this.http.get<any>(
+      this.domainPath + '/wp-json/wp/ladyboss/challenge-settings'
     );
   }
 }

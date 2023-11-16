@@ -1,34 +1,21 @@
-<div
-  class="sk-cart color-white-bg sk-dashboard sidebar-container"
-  [ngStyle]="{ 'touch-action': 'none' }"
->
-  <figure class="sk-cart__header d-flex justify-content-between">
-    <h4 class="color-black sk-cart__header-title">Menu</h4>
-    <a (click)="onClickClose()" class="sk-cart__close-btn pointer">
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 14 14"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1 1L13 13"
-          stroke="#131313"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M13 1L1 13"
-          stroke="#131313"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+<figure class="color-white-bg sk-dashboard sidebar-container" [ngStyle]="{ 'touch-action': 'none' }">
+ 
+  <figure class="drawer-nav-header top-fixed d-flex justify-content-between align-items-center">
+    <h4 *ngIf="user" class="color-black drawer-title user-title-menu d-flex">
+      <img class="user-img img-fluid" [src]="userAvatar" />
+      <div class="cont">
+        <small class="color-gray d-block">{{ 'logged-in-as' | translate }}</small>
+        {{user.mvuser_name}}
+      </div>
+    </h4>
+
+    <a (click)="onClickClose()" class="drawer-close-btn pointer">
+      <i class="fa-regular fa-xmark"></i>
     </a>
   </figure>
 
-  <ng-content></ng-content>
-</div>
+  <figure class="drawer-nav-body">
+    <ng-content></ng-content>
+  </figure>
+  
+</figure>

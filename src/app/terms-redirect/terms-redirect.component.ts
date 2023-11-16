@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppDataService } from '../shared/services/app-data.service';
 import { AppSeoService } from '../shared/services/app-seo.service';
+import { isEuropeanCountry } from '../shared/utils/country-list';
 
 @Component({
   selector: 'app-terms-redirect',
@@ -18,7 +19,26 @@ export class TermsRedirectComponent implements OnInit {
 
   ngOnInit(): void {
     this.setSeo();
-    this.getSelectedCountry();
+    this.getRedirectTermPage();
+  }
+
+  getRedirectTermPage() {
+    this.isPageFound = false;
+    this.dataService.currentSelectedCountry$.subscribe(
+      (countryCode: string) => {
+        this.selectedCountry = countryCode;
+        if (this.selectedCountry.toLowerCase() === 'au') {
+          this.isPageFound = true;
+          window.location.href = 'https://support.justpruvit.com/hc/articles/4427525130381-Terms-Australia';
+        }else if (this.selectedCountry.toLowerCase() === 'nz') {
+          this.isPageFound = true;
+          window.location.href = 'https://support.justpruvit.com/hc/articles/4427981556749-Terms-New-Zealand';
+        }else {
+          this.isPageFound = true;
+          window.location.href = 'https://support.justpruvit.com/hc/articles/360052190452-Terms';
+        }
+      }
+    );
   }
 
   getSelectedCountry() {
@@ -52,11 +72,11 @@ export class TermsRedirectComponent implements OnInit {
         } else if (this.selectedCountry.toLowerCase() === 'nz') {
           // window.location.href =
           //   'https://support.justpruvit.com/hc/en-us/articles/360052118492';
-        } else if (this.selectedCountry.toLowerCase() === 'de') {
+        } else if (isEuropeanCountry(this.selectedCountry.toUpperCase())) {
           this.isPageFound = true;
           window.location.href =
-            'https://support.justpruvit.com/hc/de/articles/360052190452';
-        } else if (this.selectedCountry.toLowerCase() === 'gb') {
+            'https://support.justpruvit.com/hc/en-us/articles/360052190452-Terms';
+        } /*else if (this.selectedCountry.toLowerCase() === 'gb') {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360052190452';
@@ -112,7 +132,7 @@ export class TermsRedirectComponent implements OnInit {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360052190452';
-        } else {
+        }*/ else {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360052190452';

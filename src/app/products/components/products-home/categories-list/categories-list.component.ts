@@ -97,12 +97,19 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
       this.selectedCountry === 'HK' ||
       this.selectedCountry === 'MO' ||
       this.selectedCountry === 'MY' ||
-      this.selectedCountry === 'SG'
+      this.selectedCountry === 'SG' ||
+      this.selectedCountry === 'TW' ||
+      this.selectedCountry === 'JP'
     ) {
       return true;
     } else {
       return false;
     }
+  }
+
+  isProductExist(category: ProductTagOrCategory) {
+    const prodList = category.products.filter(prod => this.dataService.isProductHasOrderTypeOne(prod));
+    return prodList.length ? true : false;
   }
 
   ngOnDestroy() {

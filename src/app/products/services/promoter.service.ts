@@ -5,6 +5,7 @@ import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
 import { ProductVariation } from '../models/product-variation.model';
 import { Product } from '../models/product.model';
 import { ProductSettings } from '../models/product-settings.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class PromoterService {
@@ -82,6 +83,17 @@ export class PromoterService {
     return tempVariations;
   }
 
+  getOnetimeAndEveryMonthVariations(variations: ProductVariation[]) {
+    const ordertype_1 = variations.filter(
+      (variation) => variation.orderType === 'ordertype_1'
+    );
+
+    const ordertype_3 = variations.filter(
+      (variation) => variation.orderType === 'ordertype_3'
+    );
+    return { ordertype_1, ordertype_3 };
+  }
+
   onPromoterAddToCart(
     selectedCountry: string,
     selectedLanguage: string,
@@ -93,23 +105,36 @@ export class PromoterService {
     this.dataService.setIsFromSmartshipStatus(false);
 
     let cartDataWithLanguages: Cart[] = [];
-
     if (
-      selectedCountry !== 'IT' &&
+      // selectedCountry !== 'IT' &&
       selectedCountry !== 'HK' &&
       selectedCountry !== 'MO' &&
       selectedCountry !== 'MY' &&
-      selectedCountry !== 'SG'
+      selectedCountry !== 'SG' &&
+      selectedCountry !== 'TW' /*&&
+      selectedCountry !== 'JP'*/
     ) {
-      const promoterFee: Cart = this.getPromoterFeeCart(
-        selectedCountry,
-        selectedLanguage,
-        productSettings
-      );
-      cartDataWithLanguages.push(promoterFee);
+      if (environment.tenant === 'ladyboss' && product?.promoterSku !== '') {
+        const promoterFee: Cart = this.getPromoterFeeCartLadyboss(
+          selectedCountry,
+          selectedLanguage,
+          productSettings,
+          product?.promoterSku
+        );
+        cartDataWithLanguages.push(promoterFee);
+      }
+      if (environment.tenant !== 'ladyboss') {
+        const promoterFee: Cart = this.getPromoterFeeCart(
+          selectedCountry,
+          selectedLanguage,
+          productSettings
+        );
+        cartDataWithLanguages.push(promoterFee);
+      }
     }
 
-    if (variationObj.length !== 0 && product && selectedCountry !== 'IT') {
+    // if (variationObj.length !== 0 && product && selectedCountry !== 'IT') {
+    if (variationObj.length !== 0 && product) {
       const promoter: Cart = this.getPromoterCart(
         selectedCountry,
         selectedLanguage,
@@ -187,7 +212,60 @@ export class PromoterService {
   getPromoterFeeCart(
     selectedCountry: string,
     selectedLanguage: string,
-    productSettings: ProductSettings
+    productSettings: ProductSettings,
+  ): Cart {
+    const promoterMembership = this.dataService.getPromoterMembership();
+    const membershipVariation = promoterMembership && 
+      promoterMembership.variations.length 
+        ? promoterMembership.variations[0]
+        : null;
+    const membershipServing = promoterMembership && 
+      promoterMembership.servings.length
+        ? promoterMembership.servings[0]
+        : null;
+    const membershipAttribute = membershipServing &&
+      (membershipServing.servingAttributes && membershipServing.servingAttributes.length)
+      ? membershipServing.servingAttributes[0] : null;
+    return {
+      country: selectedCountry.toLowerCase(),
+      language: selectedLanguage,
+      orderType: 'ordertype_1',
+      isPromoter: true,
+      isCurrent: true,
+      cart: {
+        productID: -1,
+        productName: promoterMembership ? promoterMembership.title : 'Promoter membership',
+        productImageUrl: promoterMembership ? promoterMembership.thumbUrl : 'assets/images/badge-promoter-membership.png',
+        servingsName: membershipAttribute ? membershipAttribute.name : '(Annual fee)',
+        caffeineState: '',
+        totalQuantity: 1,
+        quantity: 1,
+        price: {
+          oneTime: membershipVariation ? membershipVariation.priceObj.oneTime : productSettings.promoterPrice,
+          everyMonth: 0,
+        },
+        discountPrice: 0,
+        productSku: {
+          oneTime: membershipVariation ? membershipVariation.skuObj.oneTime : productSettings.promoterSku,
+          everyMonth: '',
+        },
+        discountPercent: 0,
+        smartshipDiscountPrice: 0,
+        smartshipDiscountPercent: 0,
+        isUserCanAccess: true,
+        discountType: '',
+        offerDiscountPrice: 0,
+        isSmartshipDiscountOn: false,
+      },
+      finalPrice: 0,
+    };
+  }
+
+  getPromoterFeeCartLadyboss(
+    selectedCountry: string,
+    selectedLanguage: string,
+    productSettings: ProductSettings,
+    promoterSku = ''
   ): Cart {
     return {
       country: selectedCountry.toLowerCase(),
@@ -197,8 +275,8 @@ export class PromoterService {
       isCurrent: true,
       cart: {
         productID: -1,
-        productName: 'Promoter membership',
-        productImageUrl: 'assets/images/badge-promoter-membership.png',
+        productName: 'Champion membership',
+        productImageUrl: 'assets/ladyboss/images/champion-badge.jpeg',
         servingsName: '(Annual fee)',
         caffeineState: '',
         totalQuantity: 1,
@@ -209,7 +287,8 @@ export class PromoterService {
         },
         discountPrice: 0,
         productSku: {
-          oneTime: productSettings.promoterSku,
+          oneTime:
+            promoterSku !== '' ? promoterSku : productSettings.promoterSku,
           everyMonth: '',
         },
         discountPercent: 0,

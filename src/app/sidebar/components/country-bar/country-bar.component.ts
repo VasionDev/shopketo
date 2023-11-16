@@ -1,16 +1,18 @@
-import { ActivatedRoute } from '@angular/router';
 import {
-  Component,
-  OnInit,
-  HostListener,
-  OnDestroy,
   AfterViewInit,
   ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { SubscriptionLike } from 'rxjs';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { isEuropeanCountry } from 'src/app/shared/utils/country-list';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 
 @Component({
@@ -28,13 +30,16 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
   currentURL = '';
   defaultLanguage = '';
   subscriptions: SubscriptionLike[] = [];
+  tenant: string = '';
 
   constructor(
     private dataService: AppDataService,
     private utilityService: AppUtilityService,
     private translate: TranslateService,
-    private changeDetectionRef: ChangeDetectorRef
+    private changeDetectionRef: ChangeDetectorRef,
+    private router: Router
   ) {
+    this.tenant = environment.tenant;
     $(document).on('shown.bs.collapse', '#accordionExample', () => {
       setTimeout(() => {
         $('.drawer').drawer('softRefresh');
@@ -73,7 +78,7 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.push(
       this.dataService.currentCountries$.subscribe((countries: any) => {
         const allCountries: any[] = countries.filter(
-          (country: any) => country.active === '1'
+          (country: any) => country.active === '1' && country.hide !== '1'
         );
         this.getGroupWiseCountries(allCountries);
       })
@@ -100,7 +105,8 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
         country.country_code === 'MY' ||
         country.country_code === 'NZ' ||
         country.country_code === 'SG' ||
-        country.country_code === 'TW'
+        country.country_code === 'TW' ||
+        country.country_code === 'JP'
       ) {
         tempAsiaPacifics.push(country);
       }
@@ -120,7 +126,20 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
         country.country_code === 'SE' ||
         country.country_code === 'CH' ||
         country.country_code === 'RO' ||
-        country.country_code === 'GB'
+        country.country_code === 'GB' ||
+        country.country_code === 'BG' ||
+        country.country_code === 'HR' ||
+        country.country_code === 'CY' ||
+        country.country_code === 'CZ' ||
+        country.country_code === 'DK' ||
+        country.country_code === 'EE' ||
+        country.country_code === 'GR' ||
+        country.country_code === 'LV' ||
+        country.country_code === 'LT' ||
+        country.country_code === 'LU' ||
+        country.country_code === 'MT' ||
+        country.country_code === 'SK' ||
+        country.country_code === 'SI'
       ) {
         tempEuropes.push(country);
       }
@@ -162,6 +181,7 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       const splitedLink: string = this.currentURL.split('/')[1];
       const splitedSlug: string = this.currentURL.split('/')[2];
+      const cloudExist = splitedLink ? splitedLink.includes('cloud') : false;
 
       if (
         splitedLink !== 'page' &&
@@ -170,7 +190,13 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
         splitedLink !== 'tag' &&
         splitedLink !== 'search' &&
         splitedLink !== 'smartship' &&
-        splitedLink !== 'research'
+        splitedLink !== 'research' &&
+        splitedLink !== 'learn' &&
+        splitedLink !== 'team' &&
+        splitedLink !== 'vip' &&
+        splitedLink !== 'promoter' &&
+        splitedLink !== 'about' &&
+        !cloudExist
       ) {
         filteredUrl = '';
         filteredSlug = '';
@@ -260,6 +286,16 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
           value: 'es-es',
           name: 'Spanish',
           flag: 'ES.svg',
+          elementID: 0,
+        },
+      };
+    } else if (lang === 'ja') {
+      return {
+        found: true,
+        langObj: {
+          value: 'ja',
+          name: '日本語',
+          flag: 'JP.svg',
           elementID: 0,
         },
       };
@@ -365,7 +401,13 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
           page.url === '' ||
           page.url === 'search' ||
           page.url === 'smartship' ||
-          page.url === 'research'
+          page.url === 'research' ||
+          page.url === 'learn' ||
+          page.url === 'team' ||
+          page.url === 'vip' ||
+          page.url === 'promoter' ||
+          page.url === 'about' ||
+          page.url.includes('cloud')
         ) {
           this.subscriptions.push(
             this.dataService.currentLanguagesData$.subscribe(
@@ -386,6 +428,7 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
           );
         } else {
           this.languages = this.getPageLanguages(data.productsData, page);
+          // console.log(this.languages)
         }
         this.changeDetectionRef.detectChanges();
       })
@@ -410,15 +453,42 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onClickCountry(countryCode: string) {
     if (this.selectedCountry !== countryCode) {
+      let relativeUrl = this.router.url.split('?')[0];
+      if(this.selectedCountry.toLowerCase() != 'us' && !relativeUrl.includes('cloud')) {
+        const splitedUrl = relativeUrl.split(`/${this.selectedCountry.toLowerCase()}/`);
+        relativeUrl = splitedUrl.length > 1 ? splitedUrl[1] : '';
+      }
+      relativeUrl = relativeUrl.replace(/^\/+/g, '');
       this.languages = [];
-
       this.dataService.setPageSlug({});
 
-      this.utilityService.navigateToRoute('/', countryCode);
-
+      if(relativeUrl.includes('cloud')) {
+        this.utilityService.navigateToRoute(`/${relativeUrl}`, 'US');
+      }else {
+        if(
+          (
+            // relativeUrl === 'smartship' ||
+            relativeUrl === 'research' ||
+            relativeUrl === 'learn' ||
+            relativeUrl === 'team' ||
+            relativeUrl === 'about' ||
+            // relativeUrl === 'vip' ||
+            (relativeUrl === 'promoter' && (countryCode === 'GB' || countryCode === 'CH'))
+          ) && isEuropeanCountry(countryCode)
+        ) {
+          this.utilityService.navigateToRoute('/', countryCode);
+        } else {
+          this.utilityService.navigateToRoute(`/${relativeUrl}`, countryCode);
+        }
+      }
       this.selectedCountry = countryCode;
-      this.dataService.changeSelectedCountry(this.selectedCountry);
 
+      this.dataService.changeSelectedCountry(this.selectedCountry);
+      const localMVUser = sessionStorage.getItem('MVUser');
+      const MVUser = localMVUser ? JSON.parse(localMVUser) : null;
+      if(MVUser && this.tenant === 'pruvit') {
+        sessionStorage.setItem('mvuser_selected_country', countryCode);
+      }
       $('.drawer').drawer('close');
       $('.collapse.mobile-nav-menu-wrap').collapse('hide');
     }
@@ -471,6 +541,18 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
         redirectUrl = '/smartship';
       } else if (page.url === 'research') {
         redirectUrl = '/research';
+      } else if (page.url === 'learn') {
+        redirectUrl = '/learn';
+      } else if (page.url === 'team') {
+        redirectUrl = '/team';
+      } else if (page.url === 'about') {
+        redirectUrl = '/about';
+      } else if (page.url === 'vip') {
+        redirectUrl = '/vip';
+      } else if (page.url === 'promoter') {
+        redirectUrl = '/promoter';
+      } else if (page.url.includes('cloud')) {
+        redirectUrl = `/${page.url}`;
       } else {
         const pageSlug = { url: page.url, elementId: elementID };
         this.dataService.setPageSlug(pageSlug);
@@ -480,14 +562,24 @@ export class CountryBarComponent implements OnInit, AfterViewInit, OnDestroy {
         page.url === '' ||
         page.url === 'search' ||
         page.url === 'smartship' ||
-        page.url === 'research'
+        page.url === 'research' ||
+        page.url === 'learn' ||
+        page.url === 'team' ||
+        page.url === 'vip' ||
+        page.url === 'promoter' ||
+        page.url === 'about' ||
+        page.url.includes('cloud')
       ) {
         this.dataService.setPageSlug({});
 
         this.selectedLanguage = language;
         this.dataService.changeSelectedLanguage(this.selectedLanguage);
 
-        this.utilityService.navigateToRoute(redirectUrl);
+        if(redirectUrl.includes('cloud')) {
+          this.utilityService.navigateToRoute(redirectUrl, 'US');
+        }else {
+          this.utilityService.navigateToRoute(redirectUrl);
+        }
 
         this.dataService.changeSelectedCountry(this.selectedCountry);
       } else {

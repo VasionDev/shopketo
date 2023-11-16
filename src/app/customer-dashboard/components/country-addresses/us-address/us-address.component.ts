@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { BillingAddress } from '../../../models/billingAddress';
 import { NewgenApiService } from 'src/app/shared/services/newgen-api.service';
+import { AddressEmitterService } from '../../../services/address-emitter.service';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
@@ -17,19 +18,29 @@ export class UsAddressComponent implements OnInit, OnDestroy {
     city: '',
     postalCode: '',
     region: '',
-    country: ''
+    country: '',
+    isValidZip: false
   }
+
   public regions: Array<any> = [];
   public confirmedAddresses: Array<any> = []
   public loader: boolean = false;
   @Input('country')
   public country: string = '';
+  @Input('showFooter')
+  public showFooter: boolean = true;
+  @Input('removePadding')
+  public removePadding: boolean = false;
+  @Input('hideCountry')
+  public hideCountry: boolean = false;
+  @Input('confirmShow')
+  public confirmShow: boolean = false;
   @Output() addressSent = new EventEmitter<BillingAddress>();
   @Output() hideForm = new EventEmitter<boolean>();
   @ViewChild('zipInput', { static: false, read: ElementRef })
   public zipInp!: ElementRef;
 
-  constructor(private newgenSvc: NewgenApiService) { }
+  constructor(private newgenSvc: NewgenApiService, private addressEmitter: AddressEmitterService) { }
 
   ngOnInit(): void {
     this.billingAddress.country = this.country;
@@ -38,6 +49,7 @@ export class UsAddressComponent implements OnInit, OnDestroy {
 
   verifyAddress() {
     this.addressSent.emit(this.billingAddress)
+    this.confirmShow = true;
   }
 
   getState() {
@@ -50,6 +62,15 @@ export class UsAddressComponent implements OnInit, OnDestroy {
 
   cancel() {
     this.hideForm.emit(true)
+  }
+
+  sendAddress() {
+    if (!this.showFooter) {
+      if (this.billingAddress.postalCode && this.billingAddress.postalCode.trim() !== '') {
+        this.billingAddress.isValidZip = this.zipInp.nativeElement.validity.valid;
+      }
+      this.addressEmitter.setAddress(this.billingAddress);
+    }
   }
 
   ngOnDestroy() {

@@ -13,6 +13,8 @@ import { NewgenApiService } from 'src/app/shared/services/newgen-api.service';
 import { UserEmitterService } from 'src/app/shared/services/user-emitter.service';
 import { environment } from 'src/environments/environment';
 declare var $: any;
+declare var tooltipJS: any;
+
 @Component({
   selector: 'app-referral-link',
   templateUrl: './referral-link.component.html',
@@ -22,11 +24,17 @@ export class ReferralLinkComponent implements OnInit, OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   public referrer: any;
   public user: any;
-  public facebookId: string = environment.facebookAppId;
+  public facebookAppId: string = environment.facebookAppId;
   public referrerCode!: string;
   public errorMessage!: string;
   public successMessage!: string;
   public loading: boolean = false;
+  public siteName!: string;
+  public tenant!: string;
+  public twitterMessage!: string;
+  public tld!: string;
+  public referralLink: string = '5daycakechallenge';
+  linkCopied = false;
   @Input('isProfile')
   public isProfile: boolean = false;
   @Input('isWebsites')
@@ -37,7 +45,15 @@ export class ReferralLinkComponent implements OnInit, OnDestroy {
     private newgenService: NewgenApiService,
     private userEmitterService: UserEmitterService,
     private clipboard: Clipboard
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+    this.siteName = this.tenant === 'pruvit' ? 'shopketo' : 'ladyboss';
+    this.tld = this.tenant === 'ladyboss' ? 'io' : 'com';
+    this.twitterMessage =
+      this.tenant === 'pruvit'
+        ? 'I just wanted to share with you PruvIt! Please take a look'
+        : 'I just wanted to share with you! Please take a look';
+  }
 
   ngOnInit(): void {
     this.userEmitterService
@@ -58,21 +74,78 @@ export class ReferralLinkComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((x) => {
         this.referrer = x.collection[0];
+        this.loadTooltip();
       });
   }
 
   copy() {
-    this.clipboard.copy(this.user.code + '.shopketo.com');
+    this.clipboard.copy(
+      this.user.code.toLowerCase() +
+        '.' +
+        this.siteName +
+        '.' +
+        this.tld +
+        (this.tenant === 'ladyboss' && this.referralLink
+          ? '/' + this.referralLink
+          : '')
+    );
+    this.linkCopied = true;
+    setTimeout(() => {
+      this.linkCopied = false;
+      this.loadTooltip();
+    }, 1500);
+  }
+
+  sendEmail() {
+    const link =
+      this.user.code.toLowerCase() +
+      '.' +
+      this.siteName +
+      '.' +
+      this.tld +
+      (this.tenant === 'ladyboss' && this.referralLink
+        ? '/' + this.referralLink
+        : '');
+    window.location.href = `mailto:?&body=Check this out! ${link}`;
+  }
+
+  sendSMS() {
+    const link =
+      this.user.code.toLowerCase() +
+      '.' +
+      this.siteName +
+      '.' +
+      this.tld +
+      (this.tenant === 'ladyboss' && this.referralLink
+        ? '/' + this.referralLink
+        : '');
+    window.location.href = `sms:?&body=${link}`;
+  }
+
+  loadTooltip() {
+    $(document).ready(() => {
+      tooltipJS();
+    });
   }
 
   redirectFacebook() {
     window.open(
       'https://www.facebook.com/dialog/share?' +
         'app_id=' +
-        this.facebookId +
+        this.facebookAppId +
         '&display=popup' +
         '&href=' +
-        encodeURIComponent('https://' + this.user.code + '.shopketo.com') +
+        encodeURIComponent(
+          'https://' +
+            this.user.code +
+            '.' +
+            this.siteName +
+            '.' +
+            this.tld +
+            (this.tenant === 'ladyboss' && this.referralLink
+              ? '/' + this.referralLink
+              : '')
+        ) +
         '&redirect_uri=' +
         encodeURIComponent('https://' + window.location.host + '/close.html'),
       'mywin',
@@ -84,11 +157,19 @@ export class ReferralLinkComponent implements OnInit, OnDestroy {
     window.open(
       'https://twitter.com/intent/tweet' +
         '?url=' +
-        encodeURIComponent('https://' + this.user.code + '.shopketo.com') +
-        '&text=' +
         encodeURIComponent(
-          'I just wanted to share with you PruvIt! Please take a look ;) '
-        ),
+          'https://' +
+            this.user.code +
+            '.' +
+            this.siteName +
+            '.' +
+            this.tld +
+            (this.tenant === 'ladyboss' && this.referralLink
+              ? '/' + this.referralLink
+              : '')
+        ) +
+        '&text=' +
+        encodeURIComponent(this.twitterMessage),
       'mywin',
       'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'
     );

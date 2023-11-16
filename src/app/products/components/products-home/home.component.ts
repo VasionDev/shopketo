@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppSeoService } from 'src/app/shared/services/app-seo.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
+declare var ladybossHomeJS: any;
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,8 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, OnDestroy {
   selectedCountry = '';
+  tenant!: string;
+  isStaging!: boolean;
   isCountryAvailable = true;
   discountHeight = 0;
   subscriptions: SubscriptionLike[] = [];
@@ -23,12 +27,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router,
     private seoService: AppSeoService
   ) {
+    this.tenant = environment.tenant;
+    this.isStaging = environment.isStaging;
     this.checkCountry();
   }
 
   ngOnInit(): void {
     this.getDiscountHeight();
     this.getSelectedCountry();
+    if (this.tenant === 'ladyboss') {
+      setTimeout(() => {
+        ladybossHomeJS();
+      });
+    }
   }
 
   checkCountry() {
@@ -42,6 +53,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       countryCode === 'hk' ||
       countryCode === 'sg' ||
       countryCode === 'my' ||
+      countryCode === 'tw' ||
+      countryCode === 'jp' ||
       countryCode === 'mx' ||
       countryCode === 'nz' ||
       countryCode === 'de' ||
@@ -59,6 +72,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       countryCode === 'fi' ||
       countryCode === 'be' ||
       countryCode === 'ro' ||
+      countryCode === 'bg' ||
+      countryCode === 'hr' ||
+      countryCode === 'ch' ||
+      countryCode === 'cy' ||
+      countryCode === 'cz' ||
+      countryCode === 'dk' ||
+      countryCode === 'ee' ||
+      countryCode === 'gr' ||
+      countryCode === 'lv' ||
+      countryCode === 'lt' ||
+      countryCode === 'lu' ||
+      countryCode === 'mt' ||
+      countryCode === 'sk' ||
+      countryCode === 'si' ||
       countryCode === 'us' ||
       routeUrl === ''
     ) {

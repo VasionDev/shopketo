@@ -539,6 +539,7 @@ export class AppCartTotalService {
         initialDiscountText,
         bannerText,
         progressPercent,
+        priceAfterDiscount: maxCartTotalDiscount,
         isUnlocked: false,
         isAlmostUnlocked: false,
         unlockedText: unlockedText ? unlockedText : '',
@@ -569,6 +570,16 @@ export class AppCartTotalService {
     }
 
     return discountObj;
+  }
+
+  updateShowItemStatusForCartTotal(cartTotal:CartTotal, maxRegularDiscount: number) {
+    cartTotal.showItem = !(
+          typeof maxRegularDiscount !== 'undefined' &&
+          maxRegularDiscount !== 0 &&
+          cartTotal.priceAfterDiscount !== 0 &&
+          cartTotal.priceAfterDiscount >= maxRegularDiscount
+        )
+    return cartTotal;
   }
 
   getOneTimeBestCartTotalPriceAndStatus(

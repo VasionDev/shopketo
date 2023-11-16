@@ -1,27 +1,40 @@
 <main
   [style.margin-top.px]="discountHeight"
-  *ngIf="selectedCountry !== 'GB'; else notFound"
+  *ngIf="selectedCountry !== 'GB' && selectedCountry !== 'CH'; else notFound"
 >
   <section class="promoter-wrapper">
     <section class="promoter-banner text-center">
       <article class="container">
         <figure class="row justify-content-center">
           <div class="col-sm-12">
-            <app-vi-offer></app-vi-offer>
+            <div *ngIf="tenant === 'pruvit'">
+              <h1 class="jumbo-text-big title">
+                {{ "become-a-promoter" | translate }}
+              </h1>
+              <p class="subtitle">
+                {{ "join-the-pursuit-of-better" | translate }}
+              </p>
+            </div>
 
-            <h1 class="jumbo-text-big title">
-              {{ "become-a-promoter" | translate }}
-            </h1>
-            <p class="subtitle">
-              {{ "join-the-pursuit-of-better" | translate }}
-            </p>
+            <div *ngIf="tenant === 'ladyboss'">
+              <h1 class="jumbo-text-big title">Become a ladyboss</h1>
+              <p class="subtitle">
+                LadyBosses come in all shapes and sizes thats why we offer
+                different options to fit exactly how you want to express your
+                inner LadyBoss.
+              </p>
+            </div>
           </div>
 
           <div
             class="col-sm-12 col-md-4"
             *ngFor="let product of promoterProducts"
           >
-            <div class="pr-card" [class.max]="!isPromoterMini(product)">
+            <div
+              class="pr-card"
+              [class.best-value]="product.isMostPopular"
+              [class.max]="!isPromoterMini(product)"
+            >
               <div class="pr-img">
                 <img
                   [src]="
@@ -35,36 +48,61 @@
                   class="img-fluid"
                 />
               </div>
-              <p
-                [innerHTML]="
-                  product.promoterTitle !== ''
-                    ? product.promoterTitle
-                    : 'Brand Builder'
-                "
-              ></p>
-              <h1
-                class="jumbo-text-big"
-                [style.color]="product.promoterGradientColor1"
-              >
-                {{ product.promoterSubtitle }}
-              </h1>
-              <span class="membership">
-                {{ "from" | translate }} {{ productSettings.currencySymbol
-                }}{{
-                  getPromoterStartingPrice(product)
-                    | customCurrency: productSettings
-                }}
-                + {{ productSettings.currencySymbol
-                }}{{ getPromoterFee() | customCurrency: productSettings }}
-                {{ "annual-membership" | translate }}
-              </span>
-              <p
-                class="popular"
-                [ngStyle]="{ color: product.promoterGradientColor2 }"
-                *ngIf="product.isMostPopular"
-              >
-                {{ "most-popular" | translate }}
-              </p>
+              <div *ngIf="tenant === 'ladyboss'">
+                <h6 class="best-value-text">Best Value</h6>
+                <h2
+                  class="color-brand"
+                  [innerHTML]="
+                    product.promoterTitle !== ''
+                      ? product.promoterTitle
+                      : 'Customer Kit'
+                  "
+                ></h2>
+                <h3 class="color-black">{{ product.promoterSubtitle }}</h3>
+              </div>
+
+              <div *ngIf="tenant === 'pruvit'">
+                <p
+                  [innerHTML]="
+                    product.promoterTitle !== ''
+                      ? product.promoterTitle
+                      : 'Brand Builder'
+                  "
+                ></p>
+
+                <h1
+                  class="jumbo-text-big"
+                  [style.color]="product.promoterGradientColor1"
+                >
+                  {{ product.promoterSubtitle }}
+                </h1>
+                <!-- <span class="membership">
+                  {{ "from" | translate }} {{ productSettings.currencySymbol
+                  }}{{
+                    getPromoterStartingPrice(product)
+                      | customCurrency : productSettings
+                  }}
+                  + {{ productSettings.currencySymbol
+                  }}{{ getPromoterFee() | customCurrency : productSettings }}
+                  {{ "annual-membership" | translate }}
+                </span> -->
+                <span class="membership">
+                  {{ "from" | translate }} {{ productSettings.currencySymbol
+                  }}{{
+                    getPromoterStartingPrice(product)
+                      | customCurrency : productSettings
+                  }}
+                  + {{ "annual-membership-fee" | translate }}
+                </span>
+                <p
+                  class="popular"
+                  [ngStyle]="{ color: product.promoterGradientColor2 }"
+                  *ngIf="product.isMostPopular"
+                >
+                  {{ "most-popular" | translate }}
+                </p>
+              </div>
+
               <div class="inner">
                 <ul class="pr-list" *ngIf="product.bannerDiscription !== ''">
                   <li
@@ -76,22 +114,30 @@
                       let i = index
                     "
                   >
-                    <strong *ngIf="i === 0"> {{ benefit }} </strong>
-                    <ng-container *ngIf="i !== 0"> {{ benefit }} </ng-container>
-                    <a
-                      *ngIf="i === 0 && product.promoterTooltipNote !== ''"
-                      class="large-tooltip"
-                      data-toggle="tooltip"
-                      [attr.data-placement]="getTooltipPlacement()"
-                      data-html="true"
-                      data-template="<div class='tooltip' role='tooltip'><div class='arrow'></div><div class='promoter-pack tooltip-inner'></div></div>"
-                      [title]="product.promoterTooltipNote"
-                    >
-                      <i class="fad fa-info-circle"></i>
-                    </a>
+                    <ng-container *ngIf="tenant === 'ladyboss'">
+                      {{ benefit.trim() }}
+                    </ng-container>
+                    <ng-container *ngIf="tenant === 'pruvit'">
+                      <strong *ngIf="i === 0"> {{ benefit.trim() }} </strong>
+                      <ng-container *ngIf="i !== 0">
+                        {{ benefit.trim() }}
+                      </ng-container>
+                      <a
+                        *ngIf="i === 0 && product.promoterTooltipNote !== ''"
+                        class="large-tooltip"
+                        data-toggle="tooltip"
+                        [attr.data-placement]="getTooltipPlacement()"
+                        data-html="true"
+                        data-template="<div class='tooltip' role='tooltip'><div class='arrow'></div><div class='promoter-pack tooltip-inner'></div></div>"
+                        [title]="product.promoterTooltipNote"
+                      >
+                        <i class="fad fa-info-circle"></i>
+                      </a>
+                    </ng-container>
                   </li>
                 </ul>
                 <a
+                  *ngIf="tenant === 'pruvit'"
                   (click)="onClickPromoter(product)"
                   class="button button-primary buy-now"
                   [style.background]="
@@ -102,11 +148,36 @@
                     ' 100%)'
                   "
                 >
-                  {{
+                  <!-- {{
                     (isPromoterMini(product)
                       ? "lets-get-started"
                       : "im-ready-to-go"
                     ) | translate
+                  }} -->
+                  {{"select" | translate}}
+                </a>
+                <a
+                  *ngIf="tenant === 'ladyboss' && product.promoterBtnUrl === ''"
+                  (click)="onClickPromoter(product)"
+                  class="button button-primary"
+                  [class.button-border]="!product.isMostPopular"
+                >
+                  {{
+                    product.promoterBtnLabel !== ""
+                      ? product.promoterBtnLabel
+                      : "Order Now!"
+                  }}
+                </a>
+                <a
+                  *ngIf="tenant === 'ladyboss' && product.promoterBtnUrl !== ''"
+                  (click)="onClickPromoterDetailPage(product)"
+                  class="button button-primary"
+                  [class.button-border]="!product.isMostPopular"
+                >
+                  {{
+                    product.promoterBtnLabel !== ""
+                      ? product.promoterBtnLabel
+                      : "Order Now!"
                   }}
                 </a>
               </div>
@@ -115,7 +186,11 @@
 
           <div
             class="limited-time-offer-wrap"
-            *ngIf="limitedPromoterProducts.length > 0 && limitedPromoterMarkets"
+            *ngIf="
+              limitedPromoterProducts.length > 0 &&
+              limitedPromoterMarkets &&
+              tenant === 'pruvit'
+            "
           >
             <h3 class="text-center color-black">
               {{ "limited-time-offer" | translate }}
@@ -125,10 +200,10 @@
               {{ "from" | translate }}
               {{ productSettings.currencySymbol
               }}{{
-                limitedPromoterStartingPrice | customCurrency: productSettings
+                limitedPromoterStartingPrice | customCurrency : productSettings
               }}
               {{ "plus" | translate }} {{ productSettings.currencySymbol
-              }}{{ getPromoterFee() | customCurrency: productSettings }}
+              }}{{ getPromoterFee() | customCurrency : productSettings }}
               annual membership.
             </p>
             <div class="row">
@@ -152,9 +227,17 @@
             </div>
           </div>
 
-          <p class="pr-addcart">
-            <a (click)="onClickPromoterFee()" [ngStyle]="{ visibility: !isAsianMarkets && selectedCountry.toLowerCase() !== 'it' ? 'visible' : 'hidden' }"
-              class="pointer">
+          <p *ngIf="tenant === 'pruvit'" class="pr-addcart">
+            <a
+              (click)="onClickPromoterFee()"
+              [ngStyle]="{
+                visibility:
+                  !isAsianMarkets
+                    ? 'visible'
+                    : 'hidden'
+              }"
+              class="pointer"
+            >
               {{ "add-promoter-membership-fee-to-cart" | translate }}
             </a>
           </p>

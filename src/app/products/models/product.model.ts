@@ -8,10 +8,14 @@ import {
 
 export interface Product {
   id: number;
+  uniqueId: string;
   title: string;
   content: string;
   name: string;
+  englishTitle: string;
+  englishName: string;
   flavor: string;
+  themeColor: string;
   thumbUrl: string;
   customGallery: string[];
   mediumThumbUrl: string;
@@ -21,14 +25,20 @@ export interface Product {
   tags: ProductTagOrCategory[];
   isForPromoter: boolean;
   isForLimitedPromoter: boolean;
+  isPromoterMembershipProduct: boolean;
+  promoterSku: string;
+  promoterBtnLabel: string;
+  promoterBtnUrl: string;
   promoterOrder: number;
   promoterPageImageUrl: string;
   promoterTooltipNote: string;
+  productCallOut: string;
   promoterTitle: string;
   promoterSubtitle: string;
   promoterGradientColor1: string;
   promoterGradientColor2: string;
   isMostPopular: boolean;
+  isGeneralMostPopular: boolean;
   learnPageTitle: string;
   learnPageSubTitle: string;
   productOrder: number;
@@ -46,9 +56,13 @@ export interface Product {
   bannerHeadline: string;
   bannerLinkTitle: string;
   bannerLink: string;
+  bannerCtaBtnTitle: string;
+  bannerCtaBtnLink: string;
   bannerDiscription: string;
   bannerStartUnixTime: number;
   bannerEndUnixTime: number;
+  headerBgImage: string;
+  headerImage: string;
 
   variations: ProductVariation[];
   servings: ProductServing[];
@@ -63,6 +77,7 @@ export interface Product {
   isAllVariationOutOfStock: boolean;
   sellingClosedText: string;
   shippingNote: string;
+  moneyBackNote: string;
   showRelatedProducts: boolean;
   relatedProducts: Product[];
   accessLevels: ProductAccess;

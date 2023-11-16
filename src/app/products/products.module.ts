@@ -1,12 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { CartComponent } from './components/cart/cart.component';
-import { ProductAvailabilityTooltipComponent } from './components/common/product-card/product-availability-tooltip/product-availability-tooltip.component';
 import { ProductAvailabilityComponent } from './components/common/product-card/product-availability/product-availability.component';
 import { ProductBuyComponent } from './components/common/product-card/product-buy/product-buy.component';
 import { ProductCardComponent } from './components/common/product-card/product-card.component';
 import { VideoSliderComponent } from './components/common/video-slider/video-slider.component';
 import { LearnComponent } from './components/learn/learn.component';
+import { MostPopularComponent } from './components/most-popular/most-popular.component';
 import { PagesComponent } from './components/pages/pages.component';
 import { ProductDetailComponent } from './components/product-details/details.component';
 import { FormComponent } from './components/product-details/form/form.component';
@@ -16,6 +16,8 @@ import { CategoriesListComponent } from './components/products-home/categories-l
 import { HomeComponent } from './components/products-home/home.component';
 import { TagsListComponent } from './components/products-home/tags-list/tags-list.component';
 import { BrandBuilderComponent } from './components/promoter/brand-builder/brand-builder.component';
+import { PhoenixComponent } from './components/promoter/phoenix/phoenix.component';
+import { PromoterLadybossComponent } from './components/promoter/promoter-ladyboss/promoter-ladyboss.component';
 import { PromoterComponent } from './components/promoter/promoter.component';
 import { ReferrerHomeComponent } from './components/referrer-home/referrer-home.component';
 import { SearchComponent } from './components/search/search.component';
@@ -60,10 +62,12 @@ import { SezzleLightComponent } from './svgs/sezzle-light/sezzle-light.component
     ModalAccessLevelComponent,
     ProductBuyComponent,
     ProductAvailabilityComponent,
-    ProductAvailabilityTooltipComponent,
     VideoSliderComponent,
     ReferrerHomeComponent,
     CartComponent,
+    PhoenixComponent,
+    PromoterLadybossComponent,
+    MostPopularComponent,
   ],
   imports: [SharedModule, ProductsRoutingModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

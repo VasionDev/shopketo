@@ -1,0 +1,837 @@
+<div class="ladyboss-challenge-header">
+  <p class="text-center color-white">
+    <i class="fa-regular fa-calendar-days mr-1"></i>LIVE! '21-Day Love Yourself
+    &amp; Lose Weight' Challenge {{ settings.eventDate }}
+  </p>
+</div>
+<section class="ladyboss-challenge-wrap">
+  <article class="container-fluid">
+    <figure class="row challenge-video-wrap">
+      <div class="col-12 px-0 px-md-0">
+        <div class="row title-wrap">
+          <div class="col-sm-6 col-12 col-text">
+            <h1 class="color-brand">GIVE US 21 DAYS...</h1>
+            <h4 class="color-black">
+              And We'll Show Your How you can LOSE WEIGHT, Ditch the 'Diet' and
+              create Healthy Habits that STICK FOR LIFE
+            </h4>
+            <p class="sub-text color-black">
+              <u>WITHOUT</u> Going To The Gym, Or Giving Up <u>ANY</u> Of Your
+              Favorite Foods – Like Pizza, Ice Cream, Or Donuts!
+            </p>
+            <div
+              class="enroll-end d-flex align-items-center justify-content-center"
+            >
+              <div>
+                <p>
+                  <i class="far fa-calendar-alt mr-2"></i>Enrollment Ends In:
+                </p>
+              </div>
+              <div
+                class="invite-timer color-brand"
+                [innerHTML]="settings.countdownDate | inviteTimer | async"
+              ></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-12 col-img">
+            <div class="video-wrap">
+              <iframe
+                src="https://embed.voomly.com/embed/assets/embed.html?videoId=5AcagaqM37_Kil0LiFY3y7FjGg9PGo7RwzFE209eLNRbDBFkW&videoRatio=1.777778&type=v"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <button
+            (click)="ScrollIntoView('leadFormWrapper')"
+            class="button button-large button-primary mt-4"
+            style="max-width: 1170px"
+          >
+            <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For Free!
+            <p>Click here to join the 21-Day Challenge now</p>
+          </button>
+        </div>
+
+        <div class="verified-custo-wrap">
+          <img
+            class="img-fluid women-img"
+            src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/355504/file/b58729cc84ce6d674365940436d263aa.png"
+            alt="Women png"
+          />
+
+          <div class="row custo-card">
+            <div class="col-md-4 col-12 padd-0">
+              <div class="card">
+                <p class="text-center">
+                  “My skin on my face has completely changed since I started
+                  drinking a gallon of water a day and eating healthy.<b
+                    class="id-6Z-ppkEy-73"
+                  >
+                    No more discoloration and breakouts.</b
+                  >
+                  I can't wait to see more changes!”
+                </p>
+                <div class="custo-info">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/353101/file/26711842b6460bded43b2ccd2ab10c6b.png"
+                    alt="Captura de Pantalla 2023-01-24 a la(s) 10 11 37 a m  png"
+                  />
+
+                  <div>
+                    <h4 class="color-black">Amanda Bal</h4>
+                    <p class="color-brand disclaimer-bold">VERIFIED CUSTOMER</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-12 padd-0">
+              <div class="card">
+                <p class="text-center">
+                  “<b
+                    >Checking in with a 7lb and 2.5 inch loss! I have never felt
+                    better and more proud of myself!</b
+                  >
+                  I am also proud of all you LadyBosses! You are all so
+                  inspiring and help keep me going everyday! I am so happy I am
+                  finally able to wear my shirt... I made myself earn it!”
+                </p>
+                <div class="custo-info">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/353145/file/59f68b9f3ec62f9392151cad476ef6d4.png"
+                    alt="Captura de Pantalla 2023-01-24 a la(s) 10 11 37 a m  png"
+                  />
+
+                  <div>
+                    <h4 class="color-black">Marlee Gardner-Pitts</h4>
+                    <p class="color-brand disclaimer-bold">VERIFIED CUSTOMER</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12 padd-0">
+              <div class="card mb-0 mb-md-0">
+                <p class="text-center">
+                  “My daughter comes and gives me a hug and says
+                  <b
+                    >'finally I can hug you all the way around and my hands are
+                    touching'</b
+                  >
+                  - then she replies 'Thanks to you, LadyBoss'”
+                </p>
+                <div class="custo-info">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/353146/file/9efaae7eb0a1ebed55a0b95801b594a0.png"
+                    alt="Captura de Pantalla 2023-01-24 a la(s) 10 11 37 a m  png"
+                  />
+                  <div>
+                    <h4 class="color-black">Rachel Hagedorn</h4>
+                    <p class="color-brand disclaimer-bold">VERIFIED CUSTOMER</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-center ch-disclaimer-reg mt-3">
+              The results depicted in the photo (or described in the
+              testimonial) are unique to the individual and achieved only
+              through dedication to a specific diet and exercise regimen in
+              conjunction with LadyBoss’s dietary supplements. Results may vary.
+            </p>
+          </div>
+        </div>
+
+        <div class="next-event">
+          <div class="row">
+            <div class="col-sm-5 col-12">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357117/file/281b94f952b5c39e1bf910a87398673a.png"
+                alt="21daychallenge_mockup1 png"
+              />
+            </div>
+            <div class="col-sm-7 col-12">
+              <h1 class="color-black text-center">Next LIVE ‘21-Day</h1>
+              <h3 class="text-center">
+                Love Yourself &amp; Lose Weight’ Challenge Begins:
+              </h3>
+              <h4 class="text-center">
+                Enrollment for the next Challenge closes in:
+                <div
+                  class="invite-timer mt-2 color-white"
+                  [innerHTML]="settings.countdownDate | inviteTimer | async"
+                ></div>
+              </h4>
+
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-center">
+          <span class="color-brand">Here's What’s&nbsp;&nbsp;</span> INCLUDED!
+        </h1>
+        <p class="text-center join-txt">
+          Join The LadyBoss<b class="color-brand">
+            <u>'21-Day Love Yourself &amp; Lose Weight' Challenge</u></b
+          >
+          For FREE…And <b class="color-brand"><u>Get $1,068 In Value! </u></b>
+        </p>
+
+        <div class="signup-form-wrap">
+          <div class="signup-form">
+            <div class="row">
+              <div id="leadFormWrapper" class="col-sm-7 col-12">
+                <h3 class="sign-title">
+                  Sign Up Now For <span class="color-brand">FREE</span>
+                </h3>
+                <p class="color-black ent-txt">
+                  Enter your contact information below to enroll for the next
+                  Challenge!
+                </p>
+                <h2>
+                  <span class="color-brand">STEP 1&nbsp;-</span> CONTACT
+                  INFORMATION
+                </h2>
+                <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+                  <div class="form-group">
+                    <label class="color-black disclaimer-bold mb-1"
+                      >Full Name:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control disclaimer-reg border"
+                      placeholder="Enter Your Full Name Here..."
+                      [class.is-invalid]="
+                        fullNameControl.errors && fullNameControl.touched
+                      "
+                      formControlName="fullName"
+                    />
+                    <small
+                      *ngIf="fullNameControl.errors?.['required']"
+                      class="invalid-feedback"
+                      >Please enter your full name</small
+                    >
+                  </div>
+
+                  <div class="form-group">
+                    <label class="color-black disclaimer-bold mb-1"
+                      >Email Address</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control disclaimer-reg border"
+                      placeholder="Your Email Address Here..."
+                      [class.is-invalid]="
+                        emailControl.errors && emailControl.touched
+                      "
+                      formControlName="email"
+                    />
+                    <small
+                      *ngIf="emailControl.errors?.['required']"
+                      class="invalid-feedback"
+                      >Please enter your Email</small
+                    >
+                    <small
+                      *ngIf="emailControl.errors?.['pattern']"
+                      class="invalid-feedback"
+                      >Please enter a valid Email address</small
+                    >
+                  </div>
+
+                  <div class="form-group">
+                    <label class="color-black disclaimer-bold mb-1"
+                      >Phone</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control disclaimer-reg border"
+                      placeholder="Your Phone Number Here..."
+                      [class.is-invalid]="
+                        phoneControl.errors && phoneControl.touched
+                      "
+                      formControlName="phone"
+                    />
+                    <small
+                      *ngIf="phoneControl.touched && phoneControl.errors?.['required']"
+                      class="invalid-feedback"
+                      >Please enter your Phone</small
+                    >
+                    <small
+                      *ngIf="phoneControl.touched && phoneControl.errors?.['pattern']"
+                      class="invalid-feedback"
+                      >Please enter a valid Phone number</small
+                    >
+                  </div>
+
+                  <p class="text-center color-black">
+                    By clicking 'Join the Challenge for Free', I agree to the
+                    <a
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE"
+                      target="_blank"
+                      >Terms and Conditions</a
+                    >
+                    and
+                    <a
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/12188684698253-Lady-Boss-Privacy-Policies"
+                      target="_blank"
+                      >Privacy Policy</a
+                    >, I agree to receive emails and text reminders at the
+                    number & email provided.
+                  </p>
+
+                  <div class="form-group text-center mt-4">
+                    <button
+                      class="button button-primary button-large"
+                      [disabled]="leadForm.invalid || isLoading"
+                      type="submit"
+                    >
+                      <i class="fa-solid fa-ticket mr-3"></i>
+                      Join The Challenge For Free!
+                      <i
+                        class="fa fa-spinner fa-spin ml-2"
+                        *ngIf="isLoading"
+                      ></i>
+                      <p>Click here to join the 21-Day Challenge now</p>
+                    </button>
+
+                    <p *ngIf="error" class="text-danger text-center mt-2">
+                      {{ error }}
+                    </p>
+                  </div>
+                </form>
+              </div>
+              <div class="col-sm-5 col-12 right-img">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357179/file/f4effc8535b65000d9f0d86638c2ac4e.png"
+                  alt="side-bar-img1-min png"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="list d-flex align-items-center justify-content-center">
+            <p><i class="fa-regular fa-circle-check"></i>No Hidden Fees.</p>
+            <p><i class="fa-regular fa-circle-check"></i>No Monthly Charges.</p>
+            <p><i class="fa-regular fa-circle-check"></i>Nothing to Lose.</p>
+          </div>
+        </div>
+
+        <div class="custo-review">
+          <div class="row">
+            <div class="col-sm-6 col-12">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/348746/file/c971cef74a141f98c6a4612a15eb92f4.png"
+                alt="testimonialslb14-min png"
+              />
+            </div>
+
+            <div class="col-sm-6 col-12 text-center">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/348749/file/69330e7b7a605c8774134ac9abb8ce1b.png"
+                alt="testimonialslb4 png"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown-bg">
+          <p class="text-center">
+            <img
+              class="img-fluid"
+              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354143/file/026718632d3f30f7b6994313cedfdd6c.png"
+              alt="LB_logo2_new png"
+              width="252"
+            />
+          </p>
+          <h4 class="color-white text-center">
+            Here’s A Breakdown Of <u>EVERYTHING</u> You’ll Get:
+          </h4>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">21 Day Step-By-Step</h4>
+              <h3>Challenge DIGITAL Playbook</h3>
+              <ul>
+                <li>
+                  <b>Includes 45 pages of workouts and recipes,</b> many of
+                  which are new to the Playbook!
+                </li>
+                <li>
+                  <b>This DIGITAL Playbook</b> is beautifully designed and
+                  simple to use. Get your Delicious Recipes, see your simple
+                  After-burn At Home Workouts, track your progress and take
+                  notes on how you feel each day. The 4 Dimensions of the
+                  LadyBoss Lifestyle make it FUN to lose the weight!
+                </li>
+                <li>
+                  <b>No complicated plans</b>, boring checklists, or hard to
+                  understand guidelines. Your Challenge Playbook is your weight
+                  loss simplified for the average woman who doesn't have the
+                  time to "figure everything out" and just wants it clean and
+                  simple.
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+            <div class="col-sm-6 col-12 img-col">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354893/file/f7422cc6d6ddbf8e1ec7c6cf6b2d9a2a.png"
+                alt="21-Day-Challenge-Book-min png"
+                width="394"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357195/file/01d4faec94d040b8aabe3f0e14bf8319.png"
+                alt="2-3d-img1 png"
+              />
+              <p class="ch-disclaimer-reg mt-3">
+                The results depicted in the photo (or described in the
+                testimonial) are unique to the individual and achieved only
+                through dedication to a specific diet and exercise regimen in
+                conjunction with LadyBoss’s dietary supplements. Results may
+                vary.
+              </p>
+            </div>
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">Complete Workout Plan</h4>
+              <h3 class="color-black">Proprietary “AfterBurn At Home”</h3>
+              <ul>
+                <li>
+                  <b>Burn Fat For DAYS After Your Quick Simple Home Workout:</b>
+                  Tap into the AfterBurn Effect (Excess Post-Exercise Oxygen
+                  Consumption or EPOC) by doing fun &amp; simple workouts that
+                  are easy to adjust no matter what your current skill level...
+                  <b>ALL from the COMFORT of your home!</b>
+                </li>
+
+                <li>
+                  <b
+                    >No Equipment Needed, No Gym Membership Required, &amp; No
+                    Boring Allowed!
+                  </b>
+                  As you go through your 21 Day Challenge LIVE with other
+                  LadyBosses, you will gradually ascend through the AfterBurn At
+                  Home workouts and start to see massive progress without
+                  getting bored! You will even
+                  <b
+                    >have the option to do some of them LIVE along with a
+                    Champion in your group!</b
+                  >
+                </li>
+
+                <li>
+                  <b>Tone Up &amp; Fit Better In Your Clothes:</b>Each workout
+                  was hand crafted to sculpt lean muscle in all the right
+                  places! It's time to get rid of the wiggles and jiggles and
+                  start building the confidence and bikini body you've always
+                  wanted.
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">Complete Meal Plan</h4>
+              <h3 class="color-black">
+                The “Blocking Method” Quick &amp; Easy Healthy Meals
+              </h3>
+              <ul>
+                <li>
+                  <b
+                    >Recipes So Delicious You Won't Believe They're Healthy:
+                  </b>
+                  You DON’T have to give up everything you love to lose weight.
+                  Recipes like Portabella Pizza, Peach Cobbler Oatmeal, and
+                  Breakfast Banana Split will blow your mind! Trust us… you’re
+                  going to be fending off your kids from these delicious goods.
+                </li>
+
+                <li>
+                  <b>Meals &amp; Snacks Easy To Make In Minutes: </b> No
+                  professional chef degree required! It's all about having the
+                  <b>GOOD Carbs</b> and the <b>GOOD Fats</b> that will actually
+                  make the weight melt off.
+                </li>
+
+                <li>
+                  <b>Complete Grocery Lists With Everyday Ingredients:</b>No
+                  crazy, expensive, or complicated ingredients. Take your simple
+                  grocery list to your local Walmart or Aldi and you'll have
+                  yummy waist slimming meals to eat in no time.
+                </li>
+                <li>
+                  <b>COOKING TUTORIAL VIDEO FOR EVERY RECIPE:</b>This is so epic
+                  it needs to be all caps! We hired a professional film crew to
+                  film an "Instagram style" 30 second video for every recipe
+                  showing you <b>EXACTLY</b> how to make it. With the simplicity
+                  and clarity of your Challenge Meal Plan you will be a pro
+                  healthy chef in 30 seconds!
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+            <div class="col-sm-6 col-12 text-right">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/352515/file/62d855575ab7aec9503701184ca61f9f.png"
+                alt="3-3d png"
+                width="460"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12 img-cols">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/352512/file/1a0f60741d0df429ca223137490fbcb0.png"
+                alt="4-3d png"
+                width="450"
+              />
+              <p class="ch-disclaimer-reg mt-3">
+                The results depicted in the photo (or described in the
+                testimonial) are unique to the individual and achieved only
+                through dedication to a specific diet and exercise regimen in
+                conjunction with LadyBoss’s dietary supplements. Results may
+                vary.
+              </p>
+            </div>
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">Daily LIVE Weight Loss Coaching</h4>
+              <h3 class="color-black">From Independent LadyBoss Champions!</h3>
+              <ul>
+                <li>
+                  <b>LIVE Coaching From LadyBoss Champions:</b> Experience a
+                  LIVE coaching session with our LadyBoss Champions, and you’ll
+                  see why there isn't a more passionate, more qualified group of
+                  women on the planet.<b
+                    >They are all here to support you during the Challenge...
+                    <u>LIVE!</u></b
+                  >
+                </li>
+
+                <li>
+                  <b>Daily Support &amp; Help From Women Who LIVE IT:</b>
+                  Imagine getting hand picked tips, strategies, and tactics
+                  specific to you and your challenge mission each and every day
+                  to hold you accountable to finally make this happen!
+                </li>
+
+                <li>
+                  <b>LIVE "Hold You By The Hand" Help:</b> Your Challenge Team
+                  will be LIVE every day in your Private Accountability Group to
+                  walk you through your Challenge Playbook to
+                  <b>make sure you never feel alone during your Challenge.</b>
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/352512/file/1a0f60741d0df429ca223137490fbcb0.png"
+                alt="4-3d png"
+                width="450"
+              />
+              <p class="ch-disclaimer-reg mt-3">
+                The results depicted in the photo (or described in the
+                testimonial) are unique to the individual and achieved only
+                through dedication to a specific diet and exercise regimen in
+                conjunction with LadyBoss’s dietary supplements. Results may
+                vary.
+              </p>
+            </div>
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">Daily LIVE Weight Loss Coaching</h4>
+              <h3 class="color-black">From Independent LadyBoss Champions!</h3>
+              <ul>
+                <li>
+                  <b>LIVE Coaching From LadyBoss Champions:</b> Experience a
+                  LIVE coaching session with our LadyBoss Champions, and you’ll
+                  see why there isn't a more passionate, more qualified group of
+                  women on the planet.<b
+                    >They are all here to support you during the Challenge...
+                    <u>LIVE!</u></b
+                  >
+                </li>
+
+                <li>
+                  <b>Daily Support &amp; Help From Women Who LIVE IT:</b>
+                  Imagine getting hand picked tips, strategies, and tactics
+                  specific to you and your challenge mission each and every day
+                  to hold you accountable to finally make this happen!
+                </li>
+
+                <li>
+                  <b>LIVE "Hold You By The Hand" Help:</b> Your Challenge
+                  Coaches will be LIVE every day in your Private Accountability
+                  Group to walk you through your Challenge Playbook to
+                  <b>make sure you never feel alone during your Challenge.</b>
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-by-card">
+          <div class="row">
+            <div class="col-sm-6 col-12 text-col">
+              <h4 class="color-brand">Private Accountability</h4>
+              <h3 class="color-black">LIVE Challenge Group</h3>
+              <ul>
+                <li>
+                  <b>Private Facebook Virtual Accountability Group:</b> Get the
+                  support, motivation, and encouragement you NEED. You will get
+                  a welcome text right when your LIVE Challenge Group opens and
+                  meet all the ladies doing the LIVE Challenge with you!
+                </li>
+
+                <li>
+                  <b>Stop Trying To Do This Alone: </b> Have you ever felt like
+                  those around you are trying to tear you down from reaching
+                  your goal? That’s why you will get real time support from our
+                  LadyBoss Champions and other LadyBosses just like you.
+                </li>
+              </ul>
+              <button
+                (click)="ScrollIntoView('leadFormWrapper')"
+                class="button button-large button-primary"
+              >
+                <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+                Free!
+                <p>Click here to join the 21-Day Challenge now</p>
+              </button>
+            </div>
+
+            <div class="col-sm-6 col-12 col-img text-right">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357214/file/7d62936bac5e8c10cfaa2afe5a4a6d8d.png"
+                alt="Live_challenge-group_1 png"
+                width="450"
+              />
+              <p class="ch-disclaimer-reg mt-3 text-left">
+                The results depicted in the photo (or described in the
+                testimonial) are unique to the individual and achieved only
+                through dedication to a specific diet and exercise regimen in
+                conjunction with LadyBoss’s dietary supplements. Results may
+                vary.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="next-challenge">
+          <p class="top-bg text-center">
+            You’ll Have The Chance To Be Voted By The Group As Our
+            <img
+              class="img-fluid"
+              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/352589/file/0a7b4e73b1f7b4bf146c1827f4a9f7b1.png"
+              alt="plus-icon png"
+            />
+          </p>
+          <h1 class="color-brand text-center">NEXT ‘CHALLENGE CHAMPION’</h1>
+        </div>
+
+        <div class="champion-card">
+          <div class="row">
+            <div class="col-sm-4 col-12">
+              <div class="card">
+                <div class="pr-img text-center">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/358806/file/7f29ab3672dbd966189aea21ca852908.png"
+                    alt="LBC 100-min png"
+                    width="741"
+                  />
+                  <p class="color-brand">1st Place</p>
+                  <h3>100 LADYBOSS BUCKS</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4 col-12">
+              <div class="card">
+                <div class="pr-img text-center">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/358806/file/7f29ab3672dbd966189aea21ca852908.png"
+                    alt="LBC 100-min png"
+                    width="741"
+                  />
+                  <p class="color-brand">2nd Place</p>
+                  <h3>75 LADYBOSS BUCKS</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-12">
+              <div class="card">
+                <div class="pr-img text-center">
+                  <img
+                    class="img-fluid"
+                    src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/358806/file/7f29ab3672dbd966189aea21ca852908.png"
+                    alt="LBC 100-min png"
+                    width="741"
+                  />
+                  <p class="color-brand">3rd Place</p>
+                  <h3>50 LADYBOSS BUCKS</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-val text-center">
+          <p>Total Value <del>$1,068</del></p>
+          <h4>
+            Sign Up Now, Get It ALL For <span class="color-brand">FREE!</span>
+          </h4>
+          <img
+            class="img-fluid"
+            src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+            alt="Arrows Down svg"
+            width="137"
+          />
+        </div>
+
+        <div class="px-3">
+          <button
+            (click)="ScrollIntoView('leadFormWrapper')"
+            class="button button-large button-primary"
+          >
+            <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For Free!
+            <p>Click here to join the 21-Day Challenge now</p>
+          </button>
+        </div>
+
+        <div class="challenge-faq-wrap faq-wrap">
+          <h3 class="color-black text-center mb-3">LIVE CHALLENGE</h3>
+          <h4 class="text-center color-brand mb-5">
+            Frequently Asked Questions
+          </h4>
+
+          <figure class="row FAQ-accordion">
+            <div *ngIf="faqs.length" class="col-sm-12" id="accordion">
+              <div
+                class="header-bg"
+                *ngFor="let faq of faqs; let index = index"
+              >
+                <h4 class="" id="exogenousKetones">
+                  <button
+                    class="btn btn-link color-black"
+                    data-toggle="collapse"
+                    attr.data-target="#exogenousKetones-collapse-{{ index }}"
+                    aria-expanded="false"
+                    attr.aria-controls="exogenousKetones-collapse-{{ index }}"
+                  >
+                    <span class="">+</span> {{ faq.title }}
+                  </button>
+                </h4>
+
+                <div
+                  id="exogenousKetones-collapse-{{ index }}"
+                  class="collapse"
+                  aria-labelledby="exogenousKetones"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body">
+                    <p
+                      class="p-small color-black"
+                      [innerHtml]="faq.content | textSanitizer : 'html'"
+                    ></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+          <div class="px-3 mt-4">
+            <button
+              (click)="ScrollIntoView('leadFormWrapper')"
+              class="button button-large button-primary"
+            >
+              <i class="fa-solid fa-ticket mr-3"></i>Join The Challenge For
+              Free!
+              <p>Click here to join the 21-Day Challenge now</p>
+            </button>
+            <p class="text-center ch-footer-disclaimer font-bold mt-4">
+              These statements have not been evaluated by the Food and Drug
+              Administration. This product is not intended to diagnose, treat,
+              cure, or prevent any disease.
+            </p>
+          </div>
+        </div>
+      </div>
+    </figure>
+  </article>
+</section>

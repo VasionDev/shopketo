@@ -5,7 +5,7 @@
     <div class="sk-main__title text-center" *ngIf="selectedCountry === 'US'">
       <h4
         class="color-black sk-main__title-b"
-        *ngIf="referrer.hasOwnProperty('code')"
+        *ngIf="tenant === 'ladyboss' && referrer.hasOwnProperty('code')"
       >
         <img
           [src]="
@@ -27,13 +27,13 @@
         {{ "the-best-version-of-yourself" | translate }}
       </h1>
 
-      <button
+      <!-- <button
         class="button button-primary btn-create-account buy-now"
         *ngIf="isSubDomain && isEuropeCountryShown() && !isStaging"
         (click)="onClickCreateAccount()"
       >
         {{ "create-account" | translate }}
-      </button>
+      </button> -->
     </div>
 
     <div
@@ -43,19 +43,9 @@
     >
       <h1 class="color-black">{{ "official-store" | translate }}</h1>
 
-      <h4
-        class="color-black sk-main__title-b"
-        *ngIf="referrer.hasOwnProperty('code')"
-      >
-        {{ "brought-to-you-by" | translate }}
-        <span class="color-brand link-hover" (click)="onClickReferrerName()">{{
-          referrer?.name
-        }}</span>
-      </h4>
-
       <button
         class="button button-primary btn-create-account buy-now"
-        *ngIf="isSubDomain && isEuropeCountryShown() && !isStaging"
+        *ngIf="referrer?.code && isEuropeCountryShown()"
         (click)="onClickCreateAccount()"
       >
         {{ "create-account" | translate }}
@@ -125,16 +115,34 @@
                   </span>
                 </ng-template>
               </div>
-
               <div class="sk-main__banner-btn">
                 <button
+                  *ngIf="
+                    product.bannerCtaBtnTitle !== '' &&
+                      product.bannerCtaBtnLink !== '';
+                    else defaultLink
+                  "
                   class="button button-primary buy-now-lg sk-main__banner-custom-btn"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter"
-                  (click)="onClickBuyNow(product.name)"
+                  (click)="onClickCutomCtaBtn(product.bannerCtaBtnLink)"
                 >
-                  {{ "buy-now" | translate }}
+                  {{ product.bannerCtaBtnTitle }}
                 </button>
+                <ng-template #defaultLink>
+                  <button
+                    class="button button-primary buy-now-lg sk-main__banner-custom-btn"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                    (click)="onClickBuyNow(product)"
+                  >
+                    {{ "buy-now" | translate }}
+                  </button>
+                  <!-- <button
+                    class="button button-primary buy-now-lg sk-main__banner-custom-btn"
+                    (click)="onClickCutomCtaBtn(product.bannerCtaBtnLink)"
+                  >
+                    {{ product.bannerCtaBtnTitle }}
+                  </button> -->
+                </ng-template>
               </div>
             </div>
           </div>
@@ -148,7 +156,7 @@
                 "
                 alt="Banner img"
                 class="img-fluid sk-main__banner-img pointer"
-                (click)="onClickProductImage(product.name)"
+                (click)="onClickProductImage(product)"
               />
             </div>
           </div>

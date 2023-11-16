@@ -1,0 +1,279 @@
+<section id="ga4-registration-success-wrap" *ngIf="!isRussellBrunson">
+  <div class="invitation-event-alrt-wrap text-center">
+    <strong
+      >We go LIVE On Wednesday, January 18th @ 3 pm PST, 4 pm MST, 5 pm CST, 6
+      pm EST</strong
+    >
+  </div>
+
+  <section class="invitation-landing-wrap thank-you-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 your-seat-col">
+          <h1 class="title color-brand text-center">YOUR SEAT IS SAVED!! 🎉</h1>
+          <p class="color-black text-center">
+            Please Read Below To Know What To Do Next!
+          </p>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/Calendar_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">
+                STEP 1 - Mark your calendar!
+              </h2>
+              <p class="color-black mb-5">
+                Put “LadyBoss Phoenix Rise-Up Event” in your calendar in your
+                smartphone, on your fridge, or on the cat calendar with the fun
+                motivational quotes...
+              </p>
+              <p class="color-black font-bold">
+                Doesn’t matter where, just as long as you DON’T FORGET!
+              </p>
+              <button
+                class="button button-primary add-to-calendar-btn mt-2"
+                id="adddToCalenderBtn"
+                (click)="addToCalender()"
+              >
+                <i class="fa-regular fa-calendar-days"></i> Add to calendar
+              </button>
+            </div>
+          </div>
+
+          <p class="invitation-event-alrt-wrap reminder text-center">
+            <i class="fa-regular fa-calendar-days"></i>
+            <strong>REMINDER:</strong> We go LIVE On Wednesday, January 18th @ 3
+            pm PST, 4 pm MST, 5 pm CST, 6 pm EST
+          </p>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/email_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">STEP 2 - Check Your Email!</h2>
+              <p class="color-black mb-5">
+                We sent you a <strong>confirmation email</strong> to the primary
+                email address you used to register for the event.
+              </p>
+
+              <p class="color-black">
+                If you don’t see it in your “inbox,” make sure to check your
+                SPAM folder and whitelist us, so when we do go
+                <strong>
+                  LIVE on January 18th, you won’t miss our special Zoom link
+                  you’ll need to attend!</strong
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/Share_withfriends_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">
+                STEP 3 - Share This Event With 5 Of Your Closest Friends!
+              </h2>
+              <p class="color-black mb-5">
+                <strong
+                  >Please don’t broadcast this announcement everywhere.</strong
+                >
+              </p>
+
+              <p class="color-black mb-5">
+                This top secret, super “hush-hush” event is too awesome to blast
+                it everywhere... where it can get muddled with all of the other
+                news people are getting on a daily basis.
+              </p>
+              <p class="color-black mb-5">
+                <strong>We want this event to be special</strong> and only have
+                those who are truly interested in taking part in the future of
+                LadyBoss and becoming their own brand ambassador!
+              </p>
+              <p class="color-black">
+                So with that in mind,
+                <strong> please accept the invite tokens below</strong> and
+                share this event with five of your closest friends.
+              </p>
+
+              <div class="text-center my-3">
+                <button
+                  class="button button-primary button-large accept-btn"
+                  (click)="autoLoginToDashboard()"
+                >
+                  accept the invite token <i class="fa-solid fa-coins ml-2"></i>
+                  <i
+                    class="fa fa-spinner fa-spin ml-2"
+                    *ngIf="isFormSubmitted"
+                  ></i>
+                </button>
+                <p *ngIf="error" class="text-danger text-center mt-2">
+                  {{ error }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+</section>
+<section
+  id="ga4-registration-success-wrap"
+  class="russell-theme"
+  *ngIf="isRussellBrunson"
+>
+  <div class="invitation-event-alrt-wrap text-center">
+    <strong
+      >We go LIVE On Wednesday, January 18th @ 3 pm PST, 4 pm MST, 5 pm CST, 6
+      pm EST</strong
+    >
+  </div>
+
+  <section class="invitation-landing-wrap thank-you-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 your-seat-col">
+          <h1 class="title color-brand text-center">🎉 YOUR SEAT IS SAVED!!</h1>
+          <p class="color-black text-center">
+            Please Read Below To Know What To Do Next!
+          </p>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/Calendar_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">
+                STEP 1 - Mark your calendar!
+              </h2>
+              <p class="color-black mb-5">
+                Put “LadyBoss Phoenix Rise-Up Event” in your calendar in your
+                smartphone, on your fridge, or on the cat calendar with the fun
+                motivational quotes...
+              </p>
+              <p class="color-black font-bold">
+                Doesn’t matter where, just as long as you DON’T FORGET!
+              </p>
+            </div>
+          </div>
+
+          <p class="invitation-event-alrt-wrap reminder text-center">
+            <i class="fa-regular fa-calendar-days"></i>
+            <strong>REMINDER:</strong> We go LIVE On Wednesday, January 18th @ 3
+            pm PST, 4 pm MST, 5 pm CST, 6 pm EST
+          </p>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/email_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">STEP 2 - Check Your Email!</h2>
+              <p class="color-black mb-5">
+                We sent you a <strong>confirmation email</strong> to the primary
+                email address you used to register for the event.
+              </p>
+
+              <p class="color-black">
+                If you don’t see it in your “inbox,” make sure to check your
+                SPAM folder and whitelist us, so when we do go
+                <strong>
+                  LIVE on January 18th, you won’t miss our special Zoom link
+                  you’ll need to attend!</strong
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 step-col">
+          <div class="inner-cont">
+            <div class="img-left">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/Share_withfriends_ladyboss-min.png"
+                alt="Calendar_ladyboss-min"
+              />
+            </div>
+            <div class="right-text">
+              <h2 class="color-brand mb-2 mt-3">
+                STEP 3 - Share This Event With 5 Of Your Closest Friends!
+              </h2>
+              <p class="color-black mb-5">
+                <strong
+                  >Please don’t broadcast this announcement everywhere.</strong
+                >
+              </p>
+
+              <p class="color-black mb-5">
+                This top secret, super “hush-hush” event is too awesome to blast
+                it everywhere... where it can get muddled with all of the other
+                news people are getting on a daily basis.
+              </p>
+              <p class="color-black mb-5">
+                <strong>We want this event to be special</strong> and only have
+                those who are truly interested in taking part in the future of
+                LadyBoss and becoming their own brand ambassador!
+              </p>
+              <p class="color-black">
+                So with that in mind,
+                <strong> please accept the invite tokens below</strong> and
+                share this event with five of your closest friends.
+              </p>
+
+              <div class="text-center my-3">
+                <button
+                  class="button button-primary button-large accept-btn"
+                  (click)="autoLoginToDashboard()"
+                >
+                  accept the invite token <i class="fa-solid fa-coins ml-2"></i>
+                  <i
+                    class="fa fa-spinner fa-spin ml-2"
+                    *ngIf="isFormSubmitted"
+                  ></i>
+                </button>
+                <p *ngIf="error" class="text-danger text-center mt-2">
+                  {{ error }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+</section>

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { AppUserService } from '../../services/app-user.service';
+import { ProductAccess } from '../../models/product-access.model';
 
 @Component({
   selector: 'app-special-login',
@@ -9,6 +10,7 @@ import { AppUserService } from '../../services/app-user.service';
 })
 export class SpecialLoginComponent {
   @Input() accessLevelTitle = '';
+  @Input() accessLevels!: ProductAccess;
   subscriptions: SubscriptionLike[] = [];
 
   constructor(private userService: AppUserService) {}

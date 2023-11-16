@@ -7,6 +7,9 @@ import { ProductSettings } from 'src/app/products/models/product-settings.model'
 import { PromoterService } from 'src/app/products/services/promoter.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
+import { AppOfferService } from 'src/app/shared/services/app-offer.service';
+import { Offer } from 'src/app/shared/models/offer.model';
 declare var $: any;
 declare var tooltipJS: any;
 
@@ -16,12 +19,14 @@ declare var tooltipJS: any;
   styleUrls: ['./brand-builder.component.css'],
 })
 export class BrandBuilderComponent implements OnInit, OnDestroy {
+  tenant: string = '';
   discountHeight = 0;
   selectedLanguage = '';
   selectedCountry = '';
   defaultLanguage = '';
   refCode = '';
   variations: any[] = [];
+  offers: Offer[] = [];
   product = {} as Product;
   productsData: any = {};
   productSettings = {} as ProductSettings;
@@ -31,11 +36,14 @@ export class BrandBuilderComponent implements OnInit, OnDestroy {
     private dataService: AppDataService,
     private translate: TranslateService,
     public utilityService: AppUtilityService,
+    private offerService: AppOfferService,
     private router: Router,
     private route: ActivatedRoute,
     public promoterService: PromoterService,
     private appUtilityService: AppUtilityService
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getDiscountHeight();
@@ -52,7 +60,7 @@ export class BrandBuilderComponent implements OnInit, OnDestroy {
   getDiscountHeight() {
     this.subscriptions.push(
       this.dataService.currentDiscountHeight$.subscribe((height: number) => {
-        this.discountHeight = height;
+        this.discountHeight = this.tenant === 'ladyboss' ? height + 20 : height;
       })
     );
   }
@@ -96,6 +104,7 @@ export class BrandBuilderComponent implements OnInit, OnDestroy {
 
         this.defaultLanguage = data.productsData.default_lang;
         this.productsData = data.productsData;
+        this.offers = data.offers;
 
         const products = data.products.filter(
           (p) =>
@@ -233,11 +242,50 @@ export class BrandBuilderComponent implements OnInit, OnDestroy {
           this.productSettings
         );
 
-        this.dataService.setOfferFlowStatus(true);
+        if(this.tenant === 'ladyboss') {
+          if (
+            this.product.showRelatedProducts &&
+            this.product.relatedProducts.length > 0
+          ) {
+            this.dataService.changeSidebarName('add-to-cart');
+          } else {
+            this.dataService.changeSidebarName('checkout-cart');
+          }
 
-        const routeURL = '/smartship';
+          const cartOneTime = this.utilityService.getOneTimeStorage(
+            this.selectedCountry.toLowerCase(),
+            this.selectedLanguage
+          );
+    
+          const cartEveryMonth = this.utilityService.getEveryMonthStorage(
+            this.selectedCountry.toLowerCase(),
+            this.selectedLanguage
+          );
+    
+          const availableOffers = this.offerService.getAvailableOffers(
+            this.offers,
+            [],
+            cartOneTime,
+            cartEveryMonth
+          );
+          if(availableOffers.length > 0) {
+            this.dataService.setOfferArray(availableOffers, 0);
 
-        this.utilityService.navigateToRoute(routeURL);
+            this.dataService.changePostName({
+              postName: 'pruvit-modal-utilities',
+            });
+  
+            setTimeout(() => {
+              $('#special-offer').modal('show');
+            }, 0);
+          }else {
+            $('.drawer').drawer('open');
+          }
+        }else {
+          this.dataService.setOfferFlowStatus(true);
+          const routeURL = '/smartship';
+          this.utilityService.navigateToRoute(routeURL);
+        }
       }
     }
   }
@@ -247,7 +295,8 @@ export class BrandBuilderComponent implements OnInit, OnDestroy {
   }
 
   onClickPromoter() {
-    this.utilityService.navigateToRoute('/promoter');
+    const navigatorPath = this.tenant === 'ladyboss' ? '/champion': '/promoter';
+    this.utilityService.navigateToRoute(navigatorPath);
   }
 
   getTooltipPlacement() {

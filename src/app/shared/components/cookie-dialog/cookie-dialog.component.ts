@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppDataService } from '../../services/app-data.service';
 declare var $: any;
 
@@ -7,10 +7,18 @@ declare var $: any;
   templateUrl: './cookie-dialog.component.html',
   styleUrls: ['./cookie-dialog.component.css'],
 })
-export class CookieDialogComponent {
+export class CookieDialogComponent implements OnInit {
   @Input() show = false;
 
   constructor(private dataService: AppDataService) {}
+
+  ngOnInit(): void {
+    $(document).ready(() => {
+      $('body').on('hidden.bs.modal', '#cookieModal', function () {
+        if ($('.modal-backdrop').length) $('.modal-backdrop').remove();
+      });
+    });
+  }
 
   onEditPreference() {
     this.show = false;

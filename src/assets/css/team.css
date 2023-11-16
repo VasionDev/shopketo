@@ -1,5 +1,5 @@
 .sk-specialists-wraper {
-  padding-top: 50px;
+  /* padding-top: 50px; */
 }
 
 .sk-specialists-wraper .sk-meet-title .sk-title-p {
@@ -49,13 +49,7 @@
 }
 
 .sk-specialists-wraper .team-row .team-card .team-details .social-icon a :hover,
-.sk-specialists-wraper
-  .team-row
-  .team-card
-  .team-details
-  .social-icon
-  i
-  :hover {
+.sk-specialists-wraper .team-row .team-card .team-details .social-icon i :hover {
   -webkit-transform: scale(1.12);
   transform: scale(1.12);
 }
@@ -92,21 +86,13 @@
   padding: 11px 20px 0;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-header
-  .modal-close {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-header .modal-close {
   color: rgba(3, 12, 33, 0.721569);
   font-size: 24px;
   font-weight: 700;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-header
-  .modal-close:hover {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-header .modal-close:hover {
   color: #030c21;
 }
 
@@ -114,59 +100,26 @@
   padding: 28px 24px 36px;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content {
   margin-bottom: 28px;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .title
-  h3 {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .title h3 {
   margin-bottom: 11px;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .team-img
-  img {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .team-img img {
   max-width: 96px;
   border-radius: 100px;
   border: none;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon {
   margin-top: 5px;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  a,
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  i {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon a,
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon i {
   font-size: 24px;
   color: #131313;
   margin-right: 4px;
@@ -176,78 +129,24 @@
   transition: all 0.2s ease-in-out;
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  a
-  :hover,
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  i
-  :hover {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon a :hover,
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon i :hover {
   -webkit-transform: scale(1.12);
   transform: scale(1.12);
 }
 
-.modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .description {
+.modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .description {
   font-size: 18px;
   letter-spacing: -0.015em;
   color: #121722;
 }
 
-.dark-theme
-  .modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .description,
-.dark-theme
-  .sk-specialists-wraper
-  .team-row
-  .team-card
-  .team-details
-  .social-icon
-  a,
-.dark-theme
-  .sk-specialists-wraper
-  .team-row
-  .team-card
-  .team-details
-  .social-icon
-  i,
-.dark-theme
-  .modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  a,
-.dark-theme
-  .modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  .team-content
-  .social-icon
-  i,
-.dark-theme
-  .modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-header
-  .modal-close:hover {
+.dark-theme .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .description,
+.dark-theme .sk-specialists-wraper .team-row .team-card .team-details .social-icon a,
+.dark-theme .sk-specialists-wraper .team-row .team-card .team-details .social-icon i,
+.dark-theme .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon a,
+.dark-theme .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .social-icon i,
+.dark-theme .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-header .modal-close:hover {
   color: #ffffff;
 }
 
@@ -255,31 +154,16 @@
   background-color: #1c1c1e;
 }
 
-.dark-theme
-  .sk-specialists-wraper
-  .team-row
-  .team-card
-  .team-details
-  .gray-btn {
+.dark-theme .sk-specialists-wraper .team-row .team-card .team-details .gray-btn {
   background-color: #7e7e7e;
   color: #000;
 }
 
-.dark-theme
-  .sk-specialists-wraper
-  .team-row
-  .team-card
-  .team-details
-  .gray-btn:hover {
+.dark-theme .sk-specialists-wraper .team-row .team-card .team-details .gray-btn:hover {
   background-color: #ffffff;
 }
 
-.dark-theme
-  .modal.sk-modal.specialists-modal
-  .modal-dialog
-  .modal-content
-  .modal-header
-  .modal-close {
+.dark-theme .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-header .modal-close {
   color: #fff6;
 }
 
@@ -287,59 +171,50 @@
   .sk-specialists-wraper {
     padding: 25px 20px 0;
   }
+
   .sk-specialists-wraper .sk-meet-title .sk-title-p {
     margin: 10px 0 20px;
   }
+
   .sk-specialists-wraper .team-row {
     grid-gap: 10px;
     -ms-grid-columns: (minmax(100%, 1fr)) [auto-fill];
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
+
   .sk-specialists-wraper .team-row .team-card {
     margin-bottom: 15px;
   }
+
   .sk-specialists-wraper .team-row .team-card .team-img img {
     height: 290px;
   }
+
   .sk-specialists-wraper .team-row .team-card .team-details {
     padding: 20px 20px 28px;
   }
+
   .sk-specialists-wraper .our-inner-title h2 {
     margin: 20px auto 35px;
   }
+
   .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body {
     padding: 20px 20px 28px;
   }
-  .modal.sk-modal.specialists-modal
-    .modal-dialog
-    .modal-content
-    .modal-body
-    .team-content {
+
+  .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content {
     margin-bottom: 15px;
   }
-  .modal.sk-modal.specialists-modal
-    .modal-dialog
-    .modal-content
-    .modal-body
-    .team-content
-    .title
-    h3 {
+
+  .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .title h3 {
     margin-bottom: 6px;
   }
-  .modal.sk-modal.specialists-modal
-    .modal-dialog
-    .modal-content
-    .modal-body
-    .team-content
-    .team-img
-    img {
+
+  .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .team-content .team-img img {
     max-width: 50px;
   }
-  .modal.sk-modal.specialists-modal
-    .modal-dialog
-    .modal-content
-    .modal-body
-    .description {
+
+  .modal.sk-modal.specialists-modal .modal-dialog .modal-content .modal-body .description {
     font-size: 16px;
   }
 }

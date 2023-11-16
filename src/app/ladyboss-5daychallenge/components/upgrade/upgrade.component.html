@@ -1,0 +1,732 @@
+<section class="ladyboss-5dayCake-header" [ngClass]="{ 'challenge-contact-success': isContactSuccess }">
+  <article class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <img src="https://statics.myclickfunnels.com/image/555085/file/3761f9a96ceb263ef6d89e2ca544be61.png"
+            class="img-fluid logo">
+          <div class="right-login-group d-flex">
+            <a *ngIf="!isUserLoggedIn" class="nav-link sk-header__nav-link pointer" href="/dashboard">
+              <i class="far fa-user sk-header__user-card color-black"></i>
+              <span class="text-label color-black"> {{ "login" | translate }} </span>
+            </a>
+            <a *ngIf="isUserLoggedIn" class="nav-link sk-header__nav-link pointer" (click)="onClickAvatar()">
+              <img src="{{ userAvatar }}" class="user-img img-fluid" />
+              <span class="text-label color-black"> {{ "account" | translate }} </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-welvideo-wrap">
+  <article class="container-fluid">
+    <div class="row mxwdt-1130">
+      <div class="col-12">
+        <h4 class="text-center color-black font-24">Congratulations &amp; Welcome To The 5-Day Cake Challenge!</h4>
+        <h2 class="text-center color-brand title mb-2">Watch This Quick Message From LadyBoss Founder Kaelin
+          Poulin</h2>
+        <h3 class="text-center color-black">To Help <span class="color-brand">MAXIMIZE</span> Your 5-Day Cake
+          Challenge</h3>
+
+        <p class="video-title text-center">
+          <u class="font-bold">ATTENTION:</u> Once You Leave This Page, The Video Below Disappears...
+        </p>
+        <div class="ladyboss-videoWrap">
+          <iframe frameborder="0" allowfullscreen="true" wmode="opaque"
+            src="https://embed.voomly.com/embed/assets/embed.html?videoId=B1vcUWefhtMI1MpJh440sxni1WBWEHDLcFeFHm4GdZKkMigkY&videoRatio=1.777778&type=v"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-VIPOffer">
+  <article class="container">
+    <div class="row">
+      <div class="col-12 card">
+
+        <h2 class="text-center color-brand title mb-2">VIP Upgrade Offer</h2>
+        <h3 class="text-center color-black sub-title mb-3">Available On This Page Only!</h3>
+
+
+        <ul class="nav nav-tabs">
+          <li>
+            <button data-toggle="tab" data-target="#SubscribeSave" class="button button-primary active">
+              Subscribe &amp; Save
+            </button>
+          </li>
+          <li>
+            <button data-toggle="tab" data-target="#OneTimePurchase" class="button button-primary">
+              ONE-TIME PURCHASE
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content mt-4">
+          <div id="SubscribeSave" class="tab-pane fade active show">
+            <div class="row">
+              <div *ngFor="let product of products; let i = index" class="col-12 col-sm-4">
+                <ng-container *ngIf="product.orderType === 'ordertype_3'">
+                  <div class="card text-center">
+                    <h3 class="color-black fw-800">{{product.title}}</h3>
+                    <h6 class="color-brand">{{product.servings}}</h6>
+                    <img class="img-fluid" [src]="product.thumb">
+                    <h4 class="color-black">Normally <del>${{product.price.oneTime}}</del></h4>
+                    <h2 class="color-brand">${{product.price.everyMonth}}</h2>
+                    <button (click)="onClickAddToCart(product.id, i)"
+                      class="button fw-800 button-large button-primary button-green">
+                      <i class="fa-solid fa-cart-plus"></i> Add To Cart
+                    </button>
+                    <p class="color-black p-small">
+                      <strong class="fw-800">Limited Time Offer</strong> So Act Now While It's Still Available!
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+
+
+            </div>
+          </div>
+          <div id="OneTimePurchase" class="tab-pane fade">
+            <div class="row">
+              <div *ngFor="let product of products; let i = index" class="col-12 col-sm-4">
+                <ng-container *ngIf="product.orderType === 'ordertype_1'">
+                  <div class="card text-center">
+                    <h3 class="color-black fw-800">{{product.title}}</h3>
+                    <h6 class="color-brand">{{product.servings}}</h6>
+                    <img class="img-fluid" [src]="product.thumb">
+                    <h2 class="color-brand">${{product.price.oneTime}}</h2>
+                    <button (click)="onClickAddToCart(product.id, i)" class="button fw-800 button-large button-primary">
+                      <i class="fa-solid fa-cart-plus"></i> Add To Cart
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center mt-4 mt-sm-5">
+          <a href="javascript:void(0);" data-target="#lady-cake-offer" data-toggle="modal" class="color-brand"><i>No,
+              thanks, Kaelin, I'm not interested and would rather pay full price at a later time...</i></a>
+        </p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-secureOrder">
+  <article class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="attention-text">
+          <h2 class="color-brand text-center">ATTENTION: <span class="color-black"> <b>Space Is Limited</b> For VIP
+              Upgrade – So Act Now While It's Still Available!</span></h2>
+        </div>
+        <h3 class="color-brand text-center">Secure Your Order Of LEAN</h3>
+        <h4 class="one-time">At A Special, One-Time Discount Now!</h4>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-upgradevip">
+  <article class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <img
+          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/564194/file/fc1f64c3b7682c1e3f7043ee0669c3df.png"
+          class="img-fluid lean-img">
+        <h2 class="color-black">Upgrade To VIP Now And You’ll Receive…</h2>
+        <div class="card">
+          <div class="row">
+            <div class="col img-left"> <img class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/617083/file/9ea115d0b9abea8eb4ba2c10d1b29686.png">
+            </div>
+            <div class="col right-text text-left">
+              <p class="color-brand title"><i class="far fa-star mr-1"></i>VIP UPGRADE</p>
+              <h4 class="color-black border-bottom">Special, One-Time Discount On LEAN</h4>
+              <div class="desp">
+                <p class="color-black my-3">(NOT available outside of this page)...</p>
+                <p class="color-black my-3">This is the delicious secret weapon to slimming down, feeling great, and
+                  giving you the energy to keep going!</p>
+                <p class="color-black my-3">You DON’T want to miss your chance to secure LEAN at this incredible low low
+                  price – plus when you choose “subscribe &amp; save” option, you can get locked in at a monthly special
+                  discount!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="col img-left"> <img class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/617082/file/8554dff75b04b614e382527ab2d7e6c4.png">
+            </div>
+            <div class="col right-text text-left">
+              <p class="color-brand title"><i class="far fa-star mr-1"></i>VIP UPGRADE</p>
+              <h4 class="color-black border-bottom">Exclusive Private Afterparty With Kaelin And Friends!</h4>
+              <div class="desp">
+                <p class="color-black my-3">Here’s why you’re gonna love <b> VIP back-stage pass:</b> Kaelin will be
+                  bringing on her closest friends in the weight loss industry.</p>
+                <p class="color-black my-3">This is the delicious secret weapon to slimming down, feeling great, and
+                  giving you the energy to keep going!</p>
+                <p class="color-black my-3">You DON’T want to miss your chance to secure LEAN at this incredible low low
+                  price – plus when you choose “subscribe &amp; save” option, you can get locked in at a monthly special
+                  discount!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="col img-left"> <img class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/620043/file/88373d7a856115d894d52f491b439d23.png">
+            </div>
+            <div class="col right-text text-left">
+              <p class="color-brand title"><i class="far fa-star mr-1"></i>VIP UPGRADE</p>
+              <h4 class="color-black border-bottom">Pocket Personal Trainer</h4>
+              <div class="desp">
+                <p class="color-black my-3"><b>Boost your results with easy-to-follow exercises!</b> (For Subscribe
+                  &amp; Save buyers only) Never get stuck, lost, or confused every again when doing your exercise
+                  routine.
+                </p>
+                <p class="color-black my-3">This Pocket Personal Trainer has ALL of the exercises you need, along with
+                  easy to follow instructions, so you can get in shape, feel amazing, and without hiring an expensive
+                  personal trainer!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-challenge-wrap pt-0">
+  <article class="container-fluid">
+    <figure class="row">
+      <div class="col-12 px-0 px-md-0">
+        <div class="faq-wrap faq5DayCake">
+          <div class="attention-row">
+            <div class="card">
+              <img
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/564230/file/f8e2e248bc68c1c42bd92ca776eaef33.png"
+                width="150" class="img-fluid money-back-img">
+              <h3 class="color-black text-center mt-2 mb-4 fw-800">Covered By Our 30-Day Money Back
+                Guarantee!</h3>
+              <p class="color-black text-center mb-4">If for any reason you are not satisfied with
+                your order of LEAN, then you may return your order <b>within 30 days of purchase
+                  for a full refund!</b></p>
+              <p class="color-black text-center mb-4"> We’re confident you’ll <b>LOVE</b> your order of LEAN (...it’s
+                legit hard to keep it in stock, it’s THAT
+                yummy 😋)</p>
+              <p class="color-black text-center">However, if you aren’t happy, then we’re not
+                happy, and we’ll do whatever it takes to make it right, <b>including returning your
+                  full investment.</b>
+              </p>
+            </div>
+          </div>
+          <h4 class="text-center color-black fw-800 mb-5">Frequently Asked Questions</h4>
+          <figure class="row FAQ-accordion">
+            <div id="accordion" class="col-sm-12">
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-0"
+                    aria-controls="exogenousKetones-collapse-0"><span>+</span> Which LEAN package is right for me?
+                  </button></h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-0">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      Many of our customers that experience the best results— including noticeable weight loss efforts,
+                      more energy, and less food cravings— often secure the 2 and 3 boxes of LEAN with the Subscribe
+                      &amp; Save<br><br>Remember, to achieve the best weight loss results, the key is consistency. While
+                      a single box of LEAN can give you many of the weight loss benefits, we recommend taking LEAN on a
+                      regular basis for up to 3 months or longer to experience everything the premium protein has to
+                      offer. <br><br>There’s no added risk to you by ordering more today. You are still covered by our
+                      100%, 30-day money-back guarantee.<br><br>Additionally, when you order today while on this page,
+                      you can claim a special, one-time discount you won’t find anywhere else!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-1"
+                    aria-controls="exogenousKetones-collapse-1"><span>+</span> How soon will I notice positive weight
+                    loss results? </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-1">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      Many of our LadyBoss customers have noticed positive weight loss results in as little as 2
+                      weeks—some even see a difference in their waist, thighs, and booty in just 5 days! However, this
+                      does not take in account diet, exercise, and proper nutrition. Everyone’s different. Supplements
+                      love hard work. LEAN will provide optimal results when combined with a healthy diet and exercise.
+                      It gives a healthy alternative to the sweet treats you are used to.<br><br>But what we can say is
+                      that with consistent use of LEAN, you can begin to feel and see a noticeable change in your
+                      overall weight loss efforts within 30 days of purchase or we’ll return your money without hassle.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-2"
+                    aria-controls="exogenousKetones-collapse-2"><span>+</span> What makes LEAN better than other protein
+                    formulas? </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-2">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      First off, we’re delicious. Seriously. Try us just once and you’ll be hooked. We don’t say we
+                      taste like “cake” for marketing reasons. We literally spent months and months, working the premium
+                      formula until it tasted like a decadent vanilla cake. And we’re happy to say, we nailed it.
+                      <br><br>
+                      Plus, it not only tastes incredible, it’s also made with HIGH-END, premium ingredients, including
+                      grass-fed whey protein. It contains zero fillers or other junk you’d find in lower quality,
+                      run-of-the-mill protein formulas out there. Just take a look at the nutrition label and see for
+                      yourself:
+                      <br><br><img style="width:300px;height:auto;"
+                        src="https://funnelbuilding.s3.us-east-2.amazonaws.com/LEAN+NF-8.png"
+                        alt="LEAN Nutritional Label">
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-3"
+                    aria-controls="exogenousKetones-collapse-3"><span>+</span> Will this protein formula give me gas?
+                  </button></h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-3">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      No. LEAN is formulated with Prohydrolase® Digestion Enzymes, a special blend of digestive enzymes
+                      helps improve the absorption of protein amino acids so you can feel the benefits faster and
+                      without the bloat!<br class="id-6Z-DKGMl-51"><br class="id-6Z-DKGMl-52">Prohydrolase ® Digestive
+                      Enzymes promote increased protein absorption! This patented blend helps to increase your body’s
+                      retention &amp; use of protein from supplements! It supports proper digestion of protein to
+                      increase absorption, reduces stomach discomfort, and maximizes the availability of amino acids
+                      essential to muscle recovery.<br class="id-6Z-DKGMl-54"><br class="id-6Z-DKGMl-55">In order to get
+                      the MOST out of protein, it must be broken down into smaller particles called peptides within a
+                      90-minute time window after eating. ProHydrolase helps to break down protein into these peptides!
+                      That means that LEAN’s 15g (30% of your daily value) of protein is more readily absorbed by
+                      pairing with these digestive enzymes!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-4"
+                    aria-controls="exogenousKetones-collapse-4"><span>+</span> Can I drink LEAN if I am lactose
+                    intolerant? </button></h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-4">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      LadyBoss LEAN is made with whey protein, which is a byproduct of dairy. However, whey protein
+                      contains less than 1% lactose! This makes whey protein isolate virtually lactose-free
+                      (whaaaat?!).<br class="id-6Z-DKGMl-65"><br class="id-6Z-DKGMl-66">If you are lactose intolerant or
+                      have lactose sensitivities you may be able to consume LadyBoss LEAN, but please be sure to reach
+                      out to your doctor if you have any concerns!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-5"
+                    aria-controls="exogenousKetones-collapse-5"><span>+</span> Can I drink LEAN if I am
+                    pregnant/breastfeeding? </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-5">
+                  <div class="card-body">
+                    <p class="p-small color-black">We recommend checking with your doctor first, as each LadyBoss may
+                      have unique needs during this special time.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-6"
+                    aria-controls="exogenousKetones-collapse-6"><span>+</span> What is grass-fed whey protein? </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-6">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      Grass-fed whey is a type of protein isolate that comes from grass-fed cows. It contains vitamins
+                      and essential amino acids that help to boost our metabolisms and promote muscle growth! Plus,
+                      research shows that grass-fed whey protein helps to support a healthy immune system and a healthy
+                      inflammatory response while ALSO supporting healthy energy levels! So many helpful perks packed
+                      into this amazing protein!<br class="id-6Z-DKGMl-84"><br class="id-6Z-DKGMl-85">We are proud to
+                      say every ingredient in LadyBoss LEAN is powered by science. We aim to help promote incredible
+                      results with these ingredients not because we say so, but because SCIENCE says so!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-7"
+                    aria-controls="exogenousKetones-collapse-5"><span>+</span> What if I'm not satisfied with my results
+                    while taking LEAN? </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-7">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      We always recommend securing the 2 or 3 box package of LEAN so you can give it a fair chance at
+                      providing the positive weight loss benefits as promised on this page.<br
+                        class="id-6Z-DKGMl-95"><br class="id-6Z-DKGMl-96">With that said, if you are unhappy with your
+                      results by taking LEAN on a regular basis, then you may return your order within 30 days of
+                      purchase for a full refund.<br class="id-6Z-DKGMl-98"><br class="id-6Z-DKGMl-99">We promise that
+                      by enjoying LEAN daily as part of your routine, you will begin to experience positive weight loss
+                      results within a few short weeks’ time!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-8"
+                    aria-controls="exogenousKetones-collapse-5"><span>+</span>Is my credit card information safe?
+                  </button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-8">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      Yes! We process all of our orders through a safe, encryption payment processing system.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="header-bg">
+                <h4 id="exogenousKetones"><button data-toggle="collapse" aria-expanded="false"
+                    class="btn btn-link color-black" data-target="#exogenousKetones-collapse-9"
+                    aria-controls="exogenousKetones-collapse-5"><span>+</span> After I place my order, how soon will I
+                    receive my package?</button>
+                </h4>
+                <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse"
+                  id="exogenousKetones-collapse-9">
+                  <div class="card-body">
+                    <p class="p-small color-black">
+                      If you live in the United States, your order should arrive within 5 business days.<br
+                        class="id-6Z-DKGMl-117"><br class="id-6Z-DKGMl-118">If you live outside of the United States,
+                      your order should arrive within 10 business days.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </figure>
+  </article>
+</section>
+
+<div id="lady-cake-offer" tabindex="-1" role="dialog" class="modal vip-upgrade-modal animate fade" aria-modal="true">
+  <div role="document" class="modal-dialog modal-dialog-centered liOf__modal-dialog">
+    <div class="modal-content animate-top border-0 overflow-hidden liOf__modal-content">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+      </button>
+      <div class="modal-body">
+        <section>
+          <div class="container">
+            <div class="row">
+              <div class="col-12 p-0">
+                <h4 class="color-brand title text-center">FINAL OFFER!</h4>
+                <p class="text-center subtitle">Get 5 Servings of LEAN For Only <span class="color-gray">
+                    ${{ offer5DaykitProduct.price.oneTime }}</span>... <span class="color-brand">${{
+                    offer5DaykitProduct.price.everyMonth }}!</span></p>
+                <div class="lean-img">
+                  <img class="img-fluid"
+                    src="https://statics.myclickfunnels.com/image/564343/file/e2428dfe38508e672e6d3b078496c432.png">
+                </div>
+                <div class="pro-des">
+                  <p class="color-black">“Wow Kaelin, you really want me to buy LEAN...”</p>
+                  <p class="color-black my-3">It’s true, and that’s because <b>I know our LEAN protein
+                      formula is the “secret sauce”</b> that allows you to make DELICIOUS desserts
+                    that satisfy your sweet tooth and lose weight <b>AT THE SAME TIME!</b>
+                  </p>
+                  <p class="color-black my-3">Plus, I promise once you taste it… <b>you’ll be back for more.</b> But why
+                    pay full price later when you can snag a discount
+                    <b><u>RIGHT NOW!!</u></b>
+                  </p>
+                  <p class="color-black my-3">But this is it— this is your very <b>LAST CHANCE</b> to
+                    taste-test LEAN today for <b>one small payment of just $17!</b>
+                  </p>
+
+                  <p class="color-black my-3">This offer disappears once you leave this page...</p>
+                  <p class="color-black my-3"><b>So don’t wait!</b></p>
+                  <p class="color-black">Hit the pink <b>“Gimme LEAN!”</b> button below right now and before it’s gone
+                    for good...
+                  </p>
+                  <div class="form-border">
+                    <div class="form-group form-check custom-checkbox">
+                      <input (click)="onClickOfferCheckBox()" type="checkbox" id="offerFormCheckAgree"
+                        class="form-check-input">
+                      <label for="offerFormCheckAgree" class="form-check-label disclaimer-reg pointer">
+                        28 days later you’ll be placed on auto-ship of 1 Box of Lean / $67 per month. You can cancel a
+                        any time. I also agree to the <a target="_blank"
+                          href="https://ladyboss3844.zendesk.com/hc/en-us/articles/12188684698253-Lady-Boss-Privacy-Policies"
+                          class="color-black font-bold">Privacy, </a><a target="_blank"
+                          href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE"
+                          class="color-black font-bold">Terms</a> and <a target="_blank"
+                          href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures"
+                          class="color-black font-bold">Policies and Procedures</a> of Ladyboss.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button data-dismiss="modal" [disabled]="!isOfferChecked" (click)="onClickBuyNowOfferProduct()"
+                    class="button button-primary button-large">
+                    <i class="fas fa-cart-plus mr-2"></i>Gimme LEAN!
+                  </button>
+                </div>
+                <div class="forget-wrap text-center">
+                  <h4 class="color-brand">Don't Forget!</h4>
+                  <p class="color-black font-bold mt-3">You're Still Covered By Our No-Nonsense, 30-Day Money Back
+                    Guarantee!</p>
+                  <p class="color-black my-3">There’s literally <b>ZERO </b>risk for you to try out
+                    LEAN today! <b>What are you waiting for?!?</b> Your taste-buds are like, “Come
+                    oooooooon, we wants this!!”
+                  </p>
+
+                  <a routerLink="/5daycakechallenge/confirmation" data-dismiss="modal" class="color-brand">No thanks,
+                    I'd rather buy LEAN at the full price...</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cake-bundle-builder" class="modal animate right-mobile addresses-modal fade bundle-builder-modal wdt-800">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center mb-hide">
+          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close ">
+            <i aria-hidden="true" class="far fa-times"></i>
+          </a>
+        </p>
+        <h3 class="title color-black mb-show">
+          <a data-dismiss="modal" aria-label="Close" class="color-black pointer ">
+            <i aria-hidden="true" class="far fa-chevron-left font-weight-normal mr-3"></i>
+            Pick your variety!
+          </a>
+        </h3>
+        <h3 class="title color-black mb-hide">Pick your variety!</h3>
+      </div>
+
+      <div class="modal-body body-gray">
+        <div class="nav-tabs update-products-nav d-flex">
+          <div class="form-check">
+            <input (click)="onClickRadioCheckbox('maintainIt');" class="form-check-input" type="radio"
+              name="varietyRadio" id="maintainIt" [checked]="currProductSlug == 'maintainIt'">
+            <label class="form-check-label" for="maintainIt">Maintain it! <span class="disclaimer-reg color-gray">1
+                shake /day</span> </label>
+          </div>
+          <div class="form-check">
+            <input (click)="onClickRadioCheckbox('toneIt');" class="form-check-input" type="radio" name="varietyRadio"
+              id="toneIt" [checked]="currProductSlug == 'toneIt'">
+            <label class="form-check-label" for="toneIt">Tone it!<span class="disclaimer-reg color-gray">2 shakes
+                /day</span> </label>
+          </div>
+          <div class="form-check">
+            <input (click)="onClickRadioCheckbox('loseIt');" class="form-check-input" type="radio" name="varietyRadio"
+              id="loseIt" [checked]="currProductSlug == 'loseIt'">
+            <label class="form-check-label" for="loseIt">Lose it!<span class="disclaimer-reg color-gray">3 shakes
+                /day</span> </label>
+          </div>
+        </div>
+        <div class="update-products-tabs">
+          <div class="products-accordion row">
+            <div class="col-12 col-sm-6">
+              <div class="card-wrapper">
+                <div class="card no-border products-card">
+                  <div class="hide1 products-item d-flex align-items-center">
+                    <div class="image-auto-slider">
+                      <div class="image-wraper d-flex align-items-center">
+                        <div class="prev-img-wrap">
+                          <img alt="img" [src]="leanProductVars[1].variationImage">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="right-text d-flex justify-content-between align-items-center w-100 ml-2">
+
+                      <div class="prd-info d-flex">
+                        <p class="color-black p-small font-bold">Brownie Batter</p>
+                        <span class="disclaimer-reg color-gray">Chocolate lovers rejoice!</span>
+                      </div>
+
+                      <div *ngIf="currProduct?.offerQty > 1 && currProduct?.variation1Qty > 0"
+                        class="d-flex justify-content-between align-items-center prd-btn-count">
+                        <button [disabled]="currProduct?.totalVariationQty === 0" (click)="onRemoveVar1Qty()"
+                          class="btn"><i class="far fa-minus"></i></button>
+                        <p class="text-center p-small font-bold number-field"> {{currProduct?.variation1Qty}} </p>
+                        <button *ngIf="currProduct?.totalVariationQty !== currProduct?.offerQty"
+                          (click)="onAddVar1Qty()" class="btn"><i class="far fa-plus"></i></button>
+                        <button *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty" data-toggle="tooltip"
+                          title="Bundle is full"
+                          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                          class="btn disabled"><i class="far fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <div *ngIf="currProduct?.offerQty > 1 && currProduct?.variation1Qty === 0"
+                        class="d-flex justify-content-between align-items-center prd-btn-count">
+                        <button *ngIf="currProduct?.totalVariationQty !== currProduct?.offerQty"
+                          (click)="onAddVar1Qty()" class="btn"><i class="far fa-plus"></i></button>
+                        <button *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty" data-toggle="tooltip"
+                          title="Bundle is full"
+                          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                          class="btn disabled"><i class="far fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <button *ngIf="currProduct?.offerQty === 1" (click)="onClickBuyNow(leanProductVars[1])"
+                        class="btn button-primary">Add to cart</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="card-wrapper">
+                <div class="card no-border products-card">
+                  <div class="products-item d-flex align-items-center">
+                    <div class="image-auto-slider">
+                      <div class="image-wraper d-flex align-items-center">
+                        <div class="prev-img-wrap">
+                          <img alt="img" [src]="leanProductVars[0].variationImage">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="right-text d-flex justify-content-between align-items-center w-100 ml-2">
+
+                      <div class="prd-info d-flex">
+                        <p class="color-black p-small font-bold">Vanilla Cake</p>
+                        <span class="disclaimer-reg color-gray">Smooth and creamy</span>
+                      </div>
+
+                      <div *ngIf="currProduct?.offerQty > 1 && currProduct?.variation2Qty > 0"
+                        class="d-flex justify-content-between align-items-center prd-btn-count">
+                        <button [disabled]="currProduct?.totalVariationQty === 0" (click)="onRemoveVar2Qty()"
+                          class="btn"><i class="far fa-minus"></i></button>
+                        <p class="text-center p-small font-bold number-field"> {{currProduct?.variation2Qty}} </p>
+                        <button *ngIf="currProduct?.totalVariationQty !== currProduct?.offerQty"
+                          (click)="onAddVar2Qty()" class="btn"><i class="far fa-plus"></i></button>
+                        <button *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty" data-toggle="tooltip"
+                          title="Bundle is full"
+                          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                          class="btn disabled"><i class="far fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <div *ngIf="currProduct?.offerQty > 1 && currProduct?.variation2Qty === 0"
+                        class="d-flex justify-content-between align-items-center prd-btn-count">
+                        <button *ngIf="currProduct?.totalVariationQty !== currProduct?.offerQty"
+                          (click)="onAddVar2Qty()" class="btn"><i class="far fa-plus"></i></button>
+                        <button *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty" data-toggle="tooltip"
+                          title="Bundle is full"
+                          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                          class="btn disabled"><i class="far fa-plus"></i>
+                        </button>
+                      </div>
+
+                      <button *ngIf="currProduct?.offerQty === 1" (click)="onClickBuyNow(leanProductVars[0])"
+                        class="btn button-primary">Add to cart</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-between update-products-footer">
+        <div class="btn-groups justify-content-between w-100 mb-show">
+          <div class="left-cont d-flex justify-content-between ">
+            <span *ngIf="currProduct?.offerQty > 1 && currProduct?.totalVariationQty !== currProduct?.offerQty"
+              class="color-orange p-small font-bold"><i class="fa-regular fa-basket-shopping"></i>
+              {{currProduct?.totalVariationQty}} of {{currProduct?.offerQty}} boxes selected</span>
+
+            <span *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty"
+              class="color-green p-small font-bold"><i class="fa-regular fa-check"></i>
+              {{currProduct?.totalVariationQty}} of {{currProduct?.offerQty}} boxes selected</span>
+
+            <span *ngIf="isOneTimeClicked" class="price-text "><strong
+                class="color-black">${{currProduct?.price.oneTime}}</strong></span>
+
+            <span *ngIf="!isOneTimeClicked" class="price-text "><em>${{currProduct?.price.oneTime}}</em><strong
+                class="color-black">${{currProduct?.price.everyMonth}}</strong></span>
+
+          </div>
+
+          <div class="right-cont d-flex justify-content-between ml-auto">
+            <button *ngIf="currProduct?.offerQty > 1" (click)="onAddToCartWithBundle()"
+              class="btn button-primary confirm-btn"
+              [disabled]="currProduct?.totalVariationQty !== currProduct?.offerQty">
+              <i aria-hidden="true" class="far fa-check mr-2"></i>Add to cart
+            </button>
+          </div>
+        </div>
+        <div class="btn-groups justify-content-between w-100 mb-hide">
+          <div class="left-cont">
+            <span *ngIf="currProduct?.offerQty > 1 && currProduct?.totalVariationQty !== currProduct?.offerQty"
+              class="color-orange p-small font-bold"><i class="fa-regular fa-basket-shopping"></i>
+              {{currProduct?.totalVariationQty}} of {{currProduct?.offerQty}} boxes selected</span>
+            <span *ngIf="currProduct?.totalVariationQty === currProduct?.offerQty"
+              class="color-green p-small font-bold"><i class="fa-regular fa-check"></i>
+              {{currProduct?.totalVariationQty}} of {{currProduct?.offerQty}} boxes selected</span>
+          </div>
+          <div *ngIf="isOneTimeClicked" class="right-cont d-flex align-items-center ml-auto">
+            <span class="mr-3 price-text "><strong class="color-black">${{currProduct.price.oneTime}}</strong></span>
+            <button *ngIf="currProduct?.offerQty > 1" (click)="onAddToCartWithBundle()"
+              class="btn button-primary confirm-btn"
+              [disabled]="currProduct?.totalVariationQty !== currProduct?.offerQty">
+              <i aria-hidden="true" class="far fa-check mr-2"></i>Add to cart
+            </button>
+          </div>
+          <div *ngIf="!isOneTimeClicked" class="right-cont d-flex align-items-center ml-auto">
+            <span class="mr-3 price-text "><em>${{currProduct?.price.oneTime}}</em><strong
+                class="color-black">${{currProduct?.price.everyMonth}}</strong></span>
+            <button *ngIf="currProduct?.offerQty > 1" (click)="onAddToCartWithBundle()"
+              class="btn button-primary confirm-btn"
+              [disabled]="currProduct?.totalVariationQty !== currProduct?.offerQty">
+              <i aria-hidden="true" class="far fa-check mr-2"></i>Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

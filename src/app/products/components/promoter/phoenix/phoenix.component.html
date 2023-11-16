@@ -1,0 +1,147 @@
+<main [style.margin-top.px]="discountHeight">
+  <div class="ladyboss-product-banner-header"></div>
+
+  <section class="phoenix-kit-wraper">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 product-breadcrumbs">
+          <ul class="p-small">
+            <li>
+              <a class="color-gray" (click)="onClickHome()">
+                <i class="fas fa-home-lg-alt" style="font-size: 12px"></i>
+              </a>
+            </li>
+            <span class="breadcrumb-greater-than">›</span>
+            <li>
+              <a class="color-gray" (click)="onClickHome()">Shop All</a>
+            </li>
+            <span class="breadcrumb-greater-than">›</span>
+            <li>
+              <span class="color-gray">Phoenix</span>
+            </li>
+          </ul>
+        </div>
+      </figure>
+
+      <figure *ngIf="product" class="row prd-details-row">
+        <div class="col-sm-6 col-12 sk-product__img">
+          <div class="sk-product__banner-left">
+            <div
+              class="slider sk-product-slider-for sk-product__main-img"
+              *ngIf="
+                product.hasOwnProperty('customGallery') &&
+                  product.customGallery.length > 0;
+                else singleImage
+              "
+            >
+              <div *ngFor="let image of product.customGallery">
+                <img src="{{ image }}" alt="" class="img-fluid" />
+              </div>
+            </div>
+            <ng-template #singleImage>
+              <img alt="img" class="img-fluid" src="{{ product.thumbUrl }}" />
+            </ng-template>
+          </div>
+          <!-- <div
+                    class="sk-product__flavor-img"
+                    *ngIf="
+                    product.hasOwnProperty('customGallery') &&
+                    product.customGallery.length > 0
+                    "
+                >
+                    <ul class="sk-product__flavor-list slider sk-product-slider-nav">
+                    <li *ngFor="let image of product.customGallery">
+                        <img class="img-fluid" src="{{ image }}" alt="1" />
+                    </li>
+                    </ul>
+                </div> -->
+        </div>
+        <div class="col-sm-6 col-12 details-col">
+          <div class="phoenix-kit">
+            <h2 class="color-brand title">
+              <span
+                [innerHTML]="
+                  product.promoterTitle !== ''
+                    ? product.promoterTitle
+                    : product.title
+                "
+              ></span
+              ><span class="color-black price"
+                >{{ this.productSettings.currencySymbol
+                }}{{ getTotalPrice() }}</span
+              >
+            </h2>
+            <h3 class="sub-title color-black">
+              {{ product.promoterSubtitle }}
+            </h3>
+            <p class="color-black p-small">{{ product.promoterTooltipNote }}</p>
+
+            <ul class="membership-list">
+              <li *ngFor="let benefit of promoterBenefits">{{ benefit }}</li>
+            </ul>
+            <div class="shiping-note mb-4">
+              <p class="color-black d-flex mb-2">
+                <i class="fa-light fa-truck"></i>
+                <span class="ml-2"
+                  ><i class="font-bold d-block">Shipping Note</i>
+                  {{
+                    product.shippingNote !== ""
+                      ? product.shippingNote
+                      : "Expected to ship within 1-4 days."
+                  }}</span
+                >
+              </p>
+              <p class="color-black d-flex">
+                <i class="fa-light fa-badge-check"></i>
+                <span class="ml-2"
+                  ><i class="font-bold d-block">30 Day Money Back Guarantee</i
+                  >See Policy &amp; Procedures for detailed return policy.</span
+                >
+              </p>
+            </div>
+            <button
+              (click)="onClickPromoter()"
+              class="button button-large button-primary full-width"
+            >
+              ADD To Cart <i class="fa-regular fa-cart-shopping"></i>
+            </button>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="row even-more-row">
+        <div class="col-sm-12">
+          <h3 class="text-center color-black title">
+            And there Is Even More...
+          </h3>
+        </div>
+        <div class="col-sm-6 col-12 col-wrap">
+          <div class="card">
+            <h3 class="text-center">40% POWER HOUSE BONUS</h3>
+            <p class="color-black">
+              <i class="fa-regular fa-money-bills"></i> Purchase the
+              <strong>Phoenix Kit</strong> to receive
+              <strong>30 days of 40%</strong> on Level 1
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-12 col-wrap">
+          <div class="card">
+            <h3 class="text-center">SILVER RANK PASS</h3>
+            <p class="color-black">
+              <i class="fa-regular fa-money-bills"></i> Purchase the
+              <strong>Phoenix Kit</strong> to Lock in
+              <strong>Silver Rank</strong> for 1 year.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <ul class="color-black even-list">
+            <li>Full details in LadyBoss Compensation Plan</li>
+            <li>For new LadyBoss Champions only</li>
+          </ul>
+        </div>
+      </figure>
+    </article>
+  </section>
+</main>

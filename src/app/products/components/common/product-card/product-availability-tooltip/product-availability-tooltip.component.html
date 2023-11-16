@@ -5,9 +5,9 @@
     data-toggle="tooltip"
     data-html="true"
     data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
-    [title]="'Exclusively for: ' + accessLevelTitle"
+    [attr.data-original-title]="tooltipText+': ' + accessLevelTitle"
   >
-    <i *ngIf="!isUserCanAccess" class="fas fa-lock"></i>
+    <i *ngIf="!isUserCanAccess" [class]="lockIconClass"></i>
     <i *ngIf="isUserCanAccess" class="fas fa-lock-open"></i>
   </a>
 </div>

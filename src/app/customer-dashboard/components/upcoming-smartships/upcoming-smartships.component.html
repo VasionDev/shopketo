@@ -1,0 +1,1818 @@
+<h4 *ngIf="orderHistory && !hideTitle" [hidden]="orderHistory.length == 0">
+  {{ "upcoming" | translate }}
+</h4>
+<app-loader *ngIf="loaderHistory" class="payment--loader"></app-loader>
+<div [ngClass]="{ 'dashboard__wrapper orders--wrapper mb-4': !hideTitle }">
+  <div *ngIf="orderHistory && !loaderHistory">
+    <ng-container *ngFor="let order of orderHistory; let i = index">
+      <div class="order__history__item shipped canceled">
+        <div class="order__information">
+          <div>
+            <span *ngIf="order.status !== 'canceled'" class="order__name">
+              {{ "scheduled" | translate}}
+            </span>
+            <span *ngIf="order.status == 'canceled'" class="order__name">
+              {{ "canceled" | translate }}</span>
+          </div>
+          <span class="order__date">
+            {{ "next-run-on" | translate }}
+            {{ order.nextRun | date : "MMM d" }}
+          </span>
+        </div>
+
+        <div class="order__options">
+          <span
+            *ngIf="order.autoshipType.code == 'smartOrder' || order.autoshipType.code == 'subscribeAndSave'"
+            class="order__smartship">
+            <i class="far fa-repeat"></i>
+            {{ (tenant === "ladyboss" ? "subscribe-save" : "smartship") | translate }}
+          </span>
+          <span
+            *ngIf="order.autoshipType.code == 'promoterMembership' || order.autoshipType.code == 'championMembership'"
+            class="order__smartship order--membership">
+            <i class="fa-solid fa-shield-check"></i>
+            {{ "membership" | translate }}
+          </span>
+          <span
+            *ngIf="order.autoshipType.code == 'ketolifeMembershipAnnual' || order.autoshipType.code == 'ketolifeMembershipMonthly'"
+            class="order__smartship order--membership">
+            <i class="fa-solid fa-rectangle-pro"></i>
+            {{ "pulse-pro" | translate }}
+          </span>
+          <div>
+            <span
+              *ngFor="let product of order.products.slice(0, 3); let i = index"
+              class="order__history__item__product"
+            >
+              <img
+                *ngIf="!product.imageUrl"
+                src="assets/images/no-product-image.png"
+                data-toggle="tooltip"
+                title="{{ product.quantity }} x {{ product.name }}"
+              />
+              <img
+                *ngIf="product.imageUrl"
+                src="{{ product.imageUrl }}"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ product.quantity }} x {{ product.name }}"
+              />
+              <span class="order__history__item__product__quantity">{{
+                product.quantity
+              }}</span>
+            </span>
+            <span
+              *ngIf="order.products.length > 3"
+              class="more__products__indicator"
+              >+{{ order.products.length - 3 }}</span
+            >
+          </div>
+          <div class="order__options__menus">
+            <span (click)="viewDetails(order)" data-toggle="modal" data-target="#smartShipModal" class="order__track mb-show">
+              <i class="fa-regular fa-circle-info"></i>{{ "view-details" | translate }}
+            </span>
+
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menuOrders"
+              class="button orders--button"
+            >
+              <span class="desktop__actions"
+                >{{ "actions" | translate }} <i class="fas fa-angle-down"></i
+              ></span>
+            </button>
+            <mat-menu #menuOrders="matMenu" xPosition="before">
+              <button
+                [disabled]="loading"
+                (click)="viewDetails(order)"
+                class="mat-menu-item--custom"
+                mat-menu-item
+                data-toggle="modal"
+                data-target="#smartShipModal"
+              >
+                <i class="fa-regular fa-circle-info"></i
+                ><span>{{ "view-details" | translate }}</span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'smartOrder' ||
+                  order.autoshipType.code == 'subscribeAndSave'
+                "
+                (click)="updateProducts(order)"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-basket-shopping"></i
+                ><span>{{ "update-products" | translate }}</span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'smartOrder' ||
+                  order.autoshipType.code == 'subscribeAndSave'
+                "
+                [disabled]="loading"
+                (click)="viewDetails(order, 1)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-calendar"></i
+                ><span>{{ "change-next-run-date" | translate }}</span>
+              </button>
+              <button
+                [disabled]="loading"
+                (click)="viewDetails(order, 3)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-credit-card"></i
+                ><span>{{ "change-payment-method" | translate }}</span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'smartOrder' ||
+                  order.autoshipType.code == 'subscribeAndSave'
+                "
+                [disabled]="loading"
+                (click)="viewDetails(order, 2)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-box"></i
+                ><span>{{ "change-shipping-address" | translate }}</span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'smartOrder' ||
+                  order.autoshipType.code == 'subscribeAndSave'
+                "
+                [disabled]="order.status == 'canceled'"
+                (click)="viewDetails(order, 4)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-face-frown-slight"></i
+                ><span>
+                  {{ "cancel" | translate }}
+                  {{
+                    (tenant === "ladyboss" ? "subscribe-save" : "smartship")
+                      | translate
+                  }}
+                  </span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'ketolifeMembershipAnnual' ||
+                  order.autoshipType.code == 'ketolifeMembershipMonthly'
+                "
+                [disabled]="order.status == 'canceled'"
+                (click)="viewDetails(order, 4)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-face-frown-slight"></i
+                ><span>{{ "Upcoming" | translate }}Cancel Pulse Pro</span>
+              </button>
+              <button
+                *ngIf="
+                  order.autoshipType.code == 'promoterMembership' ||
+                  order.autoshipType.code == 'championMembership'
+                "
+                [disabled]="order.status == 'canceled'"
+                (click)="viewDetails(order, 4)"
+                data-toggle="modal"
+                data-target="#smartShipModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fa-regular fa-face-frown-slight"></i
+                ><span>{{ "cancel-membership" | translate }}</span>
+              </button>
+              <button
+                *ngIf="order.status == 'canceled'"
+                (click)="activateOrderSelected(order)"
+                data-toggle="modal"
+                data-target="#reactivateModal"
+                class="mat-menu-item--custom"
+                mat-menu-item
+              >
+                <i class="fas fa-repeat"></i
+                ><span>{{ "reactivate" | translate }}</span>
+              </button>
+              <!-- <button class="mat-menu-item--custom" mat-menu-item>
+                <span>Cancel</span>
+              </button> -->
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div
+  class="modal animate fade right-mobile addresses-modal smartship--modal wdt-480"
+  id="reactivateModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-hide"
+            ><i class="fal fa-times"></i
+          ></a>
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-show"
+            ><i
+              class="fal fa-chevron-left font-weight-normal mr-2"
+              aria-hidden="true"
+            ></i>
+            {{ "dashboard" | translate }}
+          </a>
+        </p>
+        <h3 class="pt-3 pb-3">
+          {{ "reactivate" | translate }}
+          {{
+            (tenant === "ladyboss" ? "subscribe-save" : "smartship") | translate
+          }}
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="card modal-body-card p-0 m-0 mb-trns">
+          <div
+            class="card alert-card mx-0"
+            style="
+              background: linear-gradient(
+                266.25deg,
+                #ff9e45 6.59%,
+                #ff9000 62.86%
+              );
+            "
+          >
+            <div class="d-flex alert-text">
+              <i class="fas fa-info-circle" aria-hidden="true"></i>
+              <p *ngIf="tenant === 'pruvit'" class="p-small pr-sm-5">
+                {{
+                  "if-you-have-an-existing-smartship-order-setup" | translate
+                }}
+              </p>
+              <p *ngIf="tenant === 'ladyboss'" class="p-small pr-sm-5">
+                {{
+                  "if-you-have-an-existing-subscribe-save-order-setup"
+                    | translate
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-groups">
+          <button
+            [disabled]="loading"
+            (click)="activateAutoship()"
+            class="btn button-primary"
+          >
+            <span *ngIf="loading">{{ "saving" | translate }}Saving...</span>
+            <span *ngIf="!loading">{{ "continue" | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal animate fade right-mobile addresses-modal smartship--modal wdt-640"
+  id="smartShipModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            [hidden]="activeSetting > 0"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-hide"
+            ><i class="fal fa-times"></i
+          ></a>
+          <a
+            href="#"
+            *ngIf="activeSetting == 0"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-show"
+            ><i
+              class="fal fa-chevron-left font-weight-normal mr-2"
+              aria-hidden="true"
+            ></i
+            >{{ "dashboard" | translate }}
+          </a>
+          <span *ngIf="activeSetting == 0">
+            <span
+              *ngIf="
+                selectedOrder?.autoshipType?.code == 'smartOrder' ||
+                selectedOrder?.autoshipType?.code == 'subscribeAndSave'
+              "
+              class="order__smartship"
+            >
+              <i class="far fa-repeat"></i
+              >{{
+                (tenant === "ladyboss" ? "subscribe-Save" : "smartship")
+                  | translate
+              }}</span
+            >
+            <span
+              *ngIf="
+                selectedOrder?.autoshipType?.code ==
+                  'ketolifeMembershipAnnual' ||
+                selectedOrder?.autoshipType?.code == 'ketolifeMembershipMonthly'
+              "
+              class="order__smartship order--membership"
+              ><i class="fa-solid fa-rectangle-pro"></i
+              >{{ "pulse-pro" | translate }}</span
+            >
+            <span
+              *ngIf="
+                selectedOrder?.autoshipType?.code == 'promoterMembership' ||
+                selectedOrder?.autoshipType?.code == 'championMembership'
+              "
+              class="order__smartship order--membership"
+              ><i class="fa-solid fa-shield-check"></i
+              >{{ "membership" | translate }}</span
+            >
+          </span>
+
+          <a
+            href="#"
+            (click)="popUpState(); (false)"
+            [hidden]="activeSetting == 0"
+            class="modal-close"
+          >
+            <span
+              ><i
+                class="fal fa-chevron-left font-weight-normal mr-2"
+                aria-hidden="true"
+              ></i
+              >{{ "back" | translate }}</span
+            >
+          </a>
+        </p>
+        <h3
+          *ngIf="activeSetting == 3 && activeTab == 2 && paymentStep == 1"
+          class="mt-4 color-black font-24"
+        >
+          {{ "new-payment" | translate }}
+        </h3>
+        <h3
+          *ngIf="activeSetting == 3 && activeTab == 2 && paymentStep == 0"
+          class="mt-4 color-black font-24"
+        >
+          {{ "change-payment" | translate }}
+        </h3>
+        <h3
+          *ngIf="activeSetting == 2 && activeTab == 2 && addressStep == 3"
+          class="mt-4 color-black font-24"
+        >
+          {{ "confirm-address" | translate }}
+        </h3>
+        <h3
+          *ngIf="activeSetting == 2 && activeTab == 2 && addressStep == 2"
+          class="mt-4 color-black font-24"
+        >
+          {{ "new-address" | translate }}
+        </h3>
+        <h3
+          *ngIf="activeSetting == 2 && activeTab == 2 && addressStep == 1"
+          class="mt-4 color-black font-24"
+        >
+          {{ "change-address" | translate }}
+        </h3>
+        <h3
+          *ngIf="
+            activeSetting == 4 &&
+            activeTab == 2 &&
+            (selectedOrder?.autoshipType?.code == 'smartOrder' ||
+              selectedOrder?.autoshipType?.code == 'subscribeAndSave')
+          "
+          class="mt-4 color-black font-24"
+        >
+          {{ "cancel" | translate }}
+          {{
+            (tenant === "ladyboss" ? "subscribe-save" : "smartship") | translate
+          }}
+        </h3>
+        <h3
+          *ngIf="
+            activeSetting == 4 &&
+            activeTab == 2 &&
+            (selectedOrder?.autoshipType?.code == 'ketolifeMembershipAnnual' ||
+              selectedOrder?.autoshipType?.code == 'ketolifeMembershipMonthly')
+          "
+          class="mt-4 color-black font-24"
+        >
+          {{ "cancel-pulse-pro" | translate }}
+        </h3>
+        <h3
+          *ngIf="
+            activeSetting == 4 &&
+            activeTab == 2 &&
+            (selectedOrder?.autoshipType?.code == 'promoterMembership' ||
+              selectedOrder?.autoshipType?.code == 'championMembership')
+          "
+          class="mt-4 color-black font-24"
+        >
+          {{ "cancel-membership" | translate }}
+        </h3>
+        <h3
+          *ngIf="activeSetting == 1 && activeTab == 2"
+          class="mt-4 color-black font-24"
+        >
+          {{ "change-next-run-date" | translate }}
+        </h3>
+        <div [hidden]="activeSetting > 0" class="modal__tabs mt-2">
+          <span
+            (click)="changeTab(1)"
+            [ngClass]="{ 'active--tab': activeTab == 1 }"
+            class="active--tab"
+            >{{ "summary" | translate }}</span
+          >
+          <span
+            (click)="changeTab(2)"
+            [ngClass]="{ 'active--tab': activeTab == 2 }"
+            >{{ "settings" | translate }}</span
+          >
+          <span
+            (click)="changeTab(3)"
+            [ngClass]="{ 'active--tab': activeTab == 3 }"
+            >{{ "history" | translate }}</span
+          >
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          selectedOrder &&
+          selectedOrderInformation &&
+          activeTab == 1 &&
+          !loaderPayment
+        "
+        class="modal-body"
+      >
+        <div
+          *ngIf="showPb == '$points_balance' || showPb == '$ladyboss_buck_balance'"
+          class="card modal-body-card pb--card ref-modal-card mb-4"
+        >
+          <div class="form-group">
+            <p class="p-small">
+              <strong *ngIf="tenant === 'ladyboss'">{{ "this-order-is-qualified-to-use" | translate }}
+                <span>{{ "ladyboss-bucks" | translate }}</span>!
+              </strong>
+              <strong *ngIf="tenant === 'pruvit'">
+                {{ "your-smartship-order-will-automatically-apply-up-to-50-off" | translate }}
+              </strong>
+            </p>
+            <p class="p-small">
+              {{ "your-current-balance-is" | translate }}
+              {{ pbAmount }} <span *ngIf="tenant === 'pruvit'">{{"P" | translate}}</span
+              ><span *ngIf="tenant === 'ladyboss'">LBB</span>
+            </p>
+          </div>
+        </div>
+        <div class="card modal-body-card ref-modal-card mb-4">
+          <div class="form-group">
+            <h5 class="color-gray">
+              {{ "total-estimate" | translate }}
+            </h5>
+            <div class="d-flex justify-content-between">
+              <span class="bold--span color-black"
+                >{{productSettings.currencySymbol}}{{ selectedOrder.total }}</span
+              >
+              <span class="color-black"
+                >BV{{ bv | number : "1.2-2" }} / QV{{
+                  qv | number : "1.2-2"
+                }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="card modal-body-card ref-modal-card mb-4">
+          <div class="form-group">
+            <h5 class="color-gray">
+              {{ "next-run-date" | translate }}
+            </h5>
+            <div class="d-flex justify-content-between">
+              <span class="bold--span color-black">{{
+                selectedOrder.nextRun | date : "MMMM d, y"
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="selectedOrderInformation"
+          class="card modal-body-card ref-modal-card mb-4 p-0"
+        >
+          <div class="form-group">
+            <ng-container
+              *ngFor="
+                let sub of selectedOrderInformation.subscriptions;
+                let i = index
+              "
+            >
+              <div *ngFor="let s of sub.items" class="autoship__order__wrapper">
+                <div class="autoship__order__wrapper__image">
+                  <img
+                    *ngIf="!s.product.image?.imageUrl"
+                    src="assets/images/no-product-image.png"
+                  />
+                  <img
+                    *ngIf="s.product.image?.imageUrl"
+                    src="{{ s.product.image?.imageUrl }}"
+                  />
+                  <span>{{ s.quantity }}</span>
+                </div>
+                <div class="autoship__order__wrapper__text">
+                  <div class="autoship__order__wrapper__text__main mb-3">
+                    <div class="text color-black">{{ s.product.name }}</div>
+                    <span class="price color-gray"
+                      >{{productSettings.currencySymbol}}{{ s.quantity * s.unitPrice }}</span
+                    >
+                  </div>
+                  <div *ngIf="s.discounts.length > 0">
+                    <div
+                      *ngFor="let disc of s.discounts"
+                      class="autoship__order__wrapper__text__discount"
+                    >
+                      <div class="text__discount color-black">
+                        {{ "discounts-(pre-tax)" | translate }}
+                        <span class="color-gray"
+                          >{{ disc.quantity }} ×
+                          {{ disc.name | translate }}</span
+                        >
+                      </div>
+                      <span class="price color-gray"
+                        >{{productSettings.currencySymbol}}{{ disc.quantity * disc.priceDiscount }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div
+          *ngIf="selectedOrderInformation"
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div class="form-group">
+            <div class="smarhip__pricing__dropdown collapse" id="collapseTotal">
+              <div class="smarthip__total d-flex justify-content-between mb-3">
+                <span class="smarthip__total_title color-black">{{
+                  "discount" | translate
+                }}</span>
+                <span class="smarthip__total__price"
+                  >-{{productSettings.currencySymbol}}{{ selectedOrderInformation.totalDiscount }}</span
+                >
+              </div>
+              <div class="smarthip__total d-flex justify-content-between mb-3">
+                <span class="smarthip__total_title color-black">{{
+                  "shipping" | translate
+                }}</span>
+                <span class="smarthip__total__price"
+                  >{{productSettings.currencySymbol}}{{ selectedOrderInformation.shippingPrice }}</span
+                >
+              </div>
+              <div
+                *ngIf="selectedOrderInformation.tax > 0"
+                class="smarthip__total d-flex justify-content-between mb-3"
+              >
+                <span class="smarthip__total_title color-black">{{
+                  "tax" | translate
+                }}</span>
+                <span class="smarthip__total__price"
+                  >{{productSettings.currencySymbol}}{{ selectedOrderInformation.tax }}</span
+                >
+              </div>
+              <div class="smarthip__total d-flex justify-content-between">
+                <span class="smarthip__total_title color-black">{{
+                  "total" | translate
+                }}</span>
+                <span class="smarthip__total__price"
+                  >{{productSettings.currencySymbol}}{{ selectedOrderInformation.total - selectedOrderInformation.totalDiscount | number : '1.2-2'}}</span
+                >
+              </div>
+            </div>
+            <div
+              [ngClass]="{
+                'justify-content-center': showMoreTotalBool == true,
+                'justify-content-between': showMoreTotalBool == false
+              }"
+              (click)="showMoreTotal()"
+              data-toggle="collapse"
+              data-target="#collapseTotal"
+              aria-expanded="false"
+              aria-controls="collapseTotal"
+              class="smarthip__total__visible d-flex cursor-pointer"
+            >
+              <h5
+                [ngClass]="{ hide: showMoreTotalBool == true }"
+                class="color-black"
+              >
+                {{ "total" | translate }}
+              </h5>
+              <span class="color-black">
+                <h5
+                  [ngClass]="{ hide: showMoreTotalBool == true }"
+                  style="display: inline; margin-right: 5px"
+                >
+                {{productSettings.currencySymbol}}{{ selectedOrderInformation.total - selectedOrderInformation.totalDiscount| number : '1.2-2'}}
+                </h5>
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-loader
+        *ngIf="!selectedOrderInformation || loaderPayment || !autoshipHistory"
+        class="payment--loader"
+      >
+      </app-loader>
+      <div
+        [hidden]="activeTab !== 2 || !selectedOrderInformation"
+        class="modal-body"
+      >
+        <div
+          *ngIf="activeSetting == 0"
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div class="form-group">
+            <h5 class="color-gray">
+              {{ "next-run-date" | translate }}
+            </h5>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="bold--span color-black">{{
+                  selectedOrder?.nextRun | date : "MMMM d, y"
+                }}</span>
+                <button
+                  *ngIf="
+                    selectedOrder?.autoshipType?.code == 'smartOrder' ||
+                    selectedOrder?.autoshipType?.code == 'subscribeAndSave'
+                  "
+                  (click)="changeSetting(1)"
+                  class="button button--default button--grey"
+                >
+                  {{ "change" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          [hidden]="activeSetting !== 1 || loaderPayment"
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div class="form-group">
+            <h5 *ngIf="!pendingAutoshipPayment" class="mb-2 color-gray">
+              {{ "next-run-date" | translate }}
+            </h5>
+            <select
+              *ngIf="!pendingAutoshipPayment"
+              class="form-control"
+              [(ngModel)]="scheduledDate"
+            >
+              <option
+                *ngFor="let x of scheduledAutoshipsOptions; let i = index"
+                value="{{ x.nextRun }}"
+              >
+                {{ x.nextRun | date : "MMMM d, y"
+                }}<span *ngIf="x.description">: {{ x.description }}</span>
+              </option>
+            </select>
+            <p
+              *ngIf="pendingAutoshipPayment && tenant === 'pruvit'"
+              class="color-black"
+            >
+              {{
+                "reschedule-available-after-your-first-smartship" | translate
+              }}
+            </p>
+            <p
+              *ngIf="pendingAutoshipPayment && tenant === 'ladyboss'"
+              class="color-black"
+            >
+              {{
+                "reschedule-available-after-your-first-subscribe-save"
+                  | translate
+              }}
+            </p>
+            <div
+              class="policy__dropdown"
+              data-toggle="collapse"
+              data-target="#collapsePolicy"
+              aria-expanded="false"
+              aria-controls="collapsePolicy"
+            >
+              <i class="fa-regular fa-circle-info"></i>
+              {{ "rescheduling-policy" | translate }}
+              <i class="fas fa-angle-down"></i>
+            </div>
+            <div id="collapsePolicy" class="policy collapse">
+              <h5 *ngIf="tenant === 'pruvit'" class="color-black">
+                {{ "before-your-first-smartship-has-processed" | translate }}
+              </h5>
+              
+              <p *ngIf="tenant === 'pruvit'" class="color-black">
+                {{ "the-option-to-reschedule-your-smartship" | translate }}
+              </p>
+
+              <p *ngIf="tenant === 'pruvit'" class="color-black">
+                {{ "if-you-had-smartship-setup-in-the-past" | translate }}
+              </p>
+              <h5 *ngIf="tenant === 'pruvit'" class="color-black">
+                {{ "after-your-first-smartship-has-processed" | translate }}
+              </h5>
+              
+              <p *ngIf="tenant === 'pruvit'" class="color-black" [innerHTML]="'if-your-smartship-has-not-processed-yet-this-month'
+              | translate">
+              </p>
+
+              <p *ngIf="tenant === 'pruvit'" class="color-black">
+                {{
+                  "however-please-be-aware-this-could-affect-your" | translate
+                }}
+              </p>
+              <p *ngIf="tenant === 'pruvit'"  class="color-black" [innerHTML]="'if-your-smartship-has-already-processed'
+              | translate">
+              </p>
+              <h5 class="color-black">Failed Payments:</h5>
+              <p class="color-black">
+                {{
+                  "if-the-payment-fails-on-your-autoship-smartship" | translate
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            activeSetting == 0 &&
+            (selectedOrder?.autoshipType?.code == 'smartOrder' ||
+              selectedOrder?.autoshipType?.code == 'subscribeAndSave')
+          "
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div
+            class="form-group d-flex justify-content-between align-items-center"
+          >
+            <div class="activeSetting__text__wrap">
+              <h5 class="color-gray">{{ "shipping-address" | translate }}</h5>
+              <div class="">
+                <span class="bold--span color-black">{{
+                  selectedOrder?.shippingAddress?.addressAlias
+                }}</span>
+              </div>
+            </div>
+            <button
+              (click)="changeSetting(2)"
+              class="button button--default button--grey"
+            >
+              {{ "change" | translate }}
+            </button>
+          </div>
+        </div>
+        <div
+          [hidden]="activeSetting !== 2 || loaderPayment"
+          class="card modal-body-card ref-modal-card ref-card--noborder mb-4"
+        >
+          <div *ngIf="addressStep == 1" class="card address-card mt-3 mb-3">
+            <div *ngIf="!loaderAddress">
+              <ng-container
+                *ngFor="
+                  let address of addresses;
+                  let i = index;
+                  let last = last
+                "
+              >
+                <div
+                  (click)="selectAddressProfileId(address.id)"
+                  class="form-check border-bottom"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault{{ i }}"
+                  />
+                  <label class="form-check-label color-black" for="flexRadioDefault{{ i }}">
+                    {{ address.addressLine1 }}, {{ address.region }}
+                    {{ address.postalCode }}, {{ address.country }}
+                  </label>
+                </div>
+              </ng-container>
+            </div>
+
+            <app-loader
+              *ngIf="!addresses || loaderAddress"
+              class="payment--loader"
+            ></app-loader>
+          </div>
+          <button
+            (click)="stepChangeAddress(2)"
+            *ngIf="addressStep == 1"
+            class="btn button-primary btn-newAddress p-small font-bold"
+          >
+            <i class="far fa-plus mr-1"></i> {{ "new-address" | translate }}
+          </button>
+
+          <div
+            [hidden]="addressStep !== 2"
+            style="border: none"
+            class="card address-card"
+          >
+            <div class="form-group px-0 mt-3">
+              <label class="disclaimer-bold color-gray mb-1 mb-hide">{{
+                "country-of-residence" | translate
+              }}</label>
+              <select
+              (change)="onSelectCountry()"
+                [(ngModel)]="address.country"
+                class="form-control disclaimer-bold custom-select"
+              >
+                <option value="0" disabled>
+                  {{ "select-country" | translate }}
+                </option>
+                <option value="us" selected>
+                  {{ "united-states" | translate }}
+                </option>
+                <option value="ca" selected="">
+                  {{ "canada" | translate }}
+                </option>
+                <option value="au" selected="">
+                  {{ "australia" | translate }}
+                </option>
+                <option value="nz" selected="">
+                  {{ "New Zealand" | translate }}
+                </option>
+                <option value="mx" selected="">
+                  {{ "Mexico" | translate }}
+                </option>
+                <option value="cn" selected="">
+                  {{ "China" | translate }}
+                </option>
+                <option value="al" selected="">
+                  {{ "Albania" | translate }}
+                </option>
+                <option value="at" selected="">
+                  {{ "Austria" | translate }}
+                </option>
+                <option value="bg" selected="">
+                  {{ "Bulgaria" | translate }}
+                </option>
+                <option value="be" selected="">
+                  {{ "Belgium" | translate }}
+                </option>
+                <option value="cy" selected="">
+                  {{ "Cyprus" | translate }}
+                </option>
+                <option value="ch" selected="">
+                  {{ "Switzerland" | translate }}
+                </option>
+                <option value="cz" selected="">
+                  {{ "Czech republic" | translate }}
+                </option>
+                <option value="de" selected="">
+                  {{ "Germany" | translate }}
+                </option>
+                <option value="dk" selected="">
+                  {{ "Denmark" | translate }}
+                </option>
+                <option value="ee" selected="">
+                  {{ "Estonia" | translate }}
+                </option>
+                <option value="es" selected="">
+                  {{ "Spain" | translate }}
+                </option>
+                <option value="fi" selected="">
+                  {{ "Finland" | translate }}
+                </option>
+                <option value="fr" selected="">
+                  {{ "France" | translate }}
+                </option>
+                <option value="jp" selected="">
+                  {{ "Japan" | translate }}
+                </option>
+                <option value="gb" selected="">
+                  {{ "United kingdom" | translate }}
+                </option>
+                <option value="ie" selected="">
+                  {{ "Ireland" | translate }}
+                </option>
+                <option value="it" selected="">
+                  {{ "Italy" | translate }}
+                </option>
+                <option value="gr" selected="">
+                  {{ "Greece" | translate }}
+                </option>
+                <option value="hr" selected="">
+                  {{ "Croatia" | translate }}
+                </option>
+                <option value="hu" selected="">
+                  {{ "Hungary" | translate }}
+                </option>
+                <option value="lt" selected="">
+                  {{ "Lithuania" | translate }}
+                </option>
+                <option value="lu" selected="">
+                  {{ "Luxembourg" | translate }}
+                </option>
+                <option value="ro" selected="">
+                  {{ "Romania" | translate }}
+                </option>
+                <option value="si" selected="">
+                  {{ "Slovenia" | translate }}
+                </option>
+                <option value="sk" selected="">
+                  {{ "Slovakia" | translate }}
+                </option>
+                <option value="lv" selected="">
+                  {{ "Latvia" | translate }}
+                </option>
+                <option value="mt" selected="">
+                  {{ "Malta" | translate }}
+                </option>
+                <option value="nl" selected="">
+                  {{ "Netherlands" | translate }}
+                </option>
+                <option value="pl" selected="">
+                  {{ "Poland" | translate }}
+                </option>
+                <option value="pt" selected="">
+                  {{ "Portugal" | translate }}
+                </option>
+                <option value="se" selected="">
+                  {{ "Sweden" | translate }}
+                </option>
+                <option value="hk" selected="">
+                  {{ "Hong kong" | translate }}
+                </option>
+                <option value="mo" selected="">
+                  {{ "Macau" | translate }}
+                </option>
+                <option value="my" selected="">
+                  {{ "Malaysia" | translate }}
+                </option>
+                <option value="sg" selected="">
+                  {{ "Singapore" | translate }}
+                </option>
+                <option value="tw" selected="">
+                  {{ "Taiwan" | translate }}
+                </option>
+              </select>
+            </div>
+            <div style="padding:4px;">
+              <template #addresscontainer> </template>
+            </div>
+            
+
+            
+          </div>
+
+          <div [hidden]="addressStep !== 3" class="form-group px-0">
+            <div style="border: none" class="card address-card">
+              <p class="p-small color-gray mb-2 mb-sm-3">
+                {{ "we-found-these-verified-matches" | translate }}
+              </p>
+
+              <div class="card address-card mb-3">
+                <div
+                  *ngFor="let address of confirmedAddresses; let i = index"
+                  (click)="selectAddress(address, false)"
+                  class="form-check border-bottom"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="confirmAddressRadio"
+                    id="confirmAddressRadio{{ i }}"
+                  />
+                  <label
+                    class="form-check-label color-black"
+                    for="confirmAddressRadio{{ i }}"
+                    >{{ address.title }},
+                    {{ address.city }}
+                    {{ address.region }} {{ address.postalCode }}</label
+                  >
+                </div>
+
+                <div class="form-check" (click)="selectAddress(address, true)">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="confirmAddressRadio"
+                    id="confirmAddressRadio99"
+                  />
+                  <label class="form-check-label color-black" for="confirmAddressRadio99"
+                    >{{ "keep-original-address" | translate }}
+                    <br />
+                    {{ address.addressLine1 }},
+                    {{ address.city }}
+                    {{ address.region }} {{ address.postalCode }}</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="activeSetting == 0"
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div
+            class="form-group d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <h5 class="color-gray">{{ "payment" | translate }}</h5>
+              <div
+                *ngIf="selectedOrder?.payment.type == 'storedCardProfile'"
+                class=""
+              >
+                <span class="bold--span color-black"
+                  ><span class="payment--style">•••• ••••</span>
+                  {{ selectedOrder?.payment.last4Digits }}</span
+                >
+              </div>
+              <div
+                *ngIf="selectedOrder?.payment.type == 'threeDomainSecure'"
+                class=""
+              >
+                <span class="bold--span color-black">
+                  {{ selectedOrder?.payment.name }}</span
+                >
+              </div>
+            </div>
+            <button
+              (click)="changeSetting(3)"
+              class="button button--default button--grey"
+            >
+              {{ "change" | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div
+          [hidden]="activeSetting !== 3 || loaderPayment"
+          class="card modal-body-card ref-modal-card ref-card--noborder mb-4"
+        >
+          <div *ngIf="paymentStep == 0" class="card address-card mt-3 mb-3">
+            <ng-container *ngFor="let payment of paymentMethods; let i = index">
+              <div
+                *ngIf="payment.paymentType !== 'ThreeDomainSecure'"
+                class="form-check border-bottom"
+              >
+                <div
+                  (click)="
+                    selectPaymentProfileId(payment.id, payment.paymentType)
+                  "
+                  class="smartship__payment"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="paymentDefault"
+                    id="paymentDefault{{ i }}"
+                    [checked]="paymentProfileId == 0 ? false : ''"
+                  />
+                  <label class="form-check-label color-black" for="paymentDefault{{ i }}">
+                    <span class="payment--style">•••• ••••</span>
+                    {{ payment.last4Digits }}
+                  </label>
+                </div>
+                <div
+                  *ngIf="payment.id == paymentProfileId"
+                  class="smartship__payment__cvv"
+                >
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg bg-color mt-3"
+                    mask="000||0000"
+                    [(ngModel)]="cvv"
+                    placeholder="{{ 'security-code-cvv' | translate }}"
+                  />
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <button
+            *ngIf="paymentStep == 0 && paymentMethods.length > 0"
+            (click)="stepChangePayment(1)"
+            class="btn button-primary btn-newAddress p-small font-bold mt-3"
+          >
+            <i class="far fa-plus mr-1"></i> {{ "new-payment" | translate }}
+          </button>
+
+          <div [hidden]="paymentStep !== 1">
+            <div *ngIf="!showCreateAddress">
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label for="cardname" class="col-form-label color-black">{{
+                    "cardholders-name" | translate
+                  }}</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="creditCardCreate.cardHolderName"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group payment--name">
+                  <span
+                    class="credit--card"
+                    [ngClass]="{
+                      amex: cardType === 'amex',
+                      visa: cardType === 'visa',
+                      mastercard: cardType === 'mastercard',
+                      jcb: cardType === 'jcb',
+                      discover: cardType === 'discover'
+                    }"
+                  ></span>
+                  <label for="cardnumber" class="col-form-label color-black">{{
+                    "card-number" | translate
+                  }}</label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cardnumber"
+                    mask="0000 0000 0000 0000||0000 000000 00000"
+                    [ngClass]="{
+                      error: cardInputError
+                    }"
+                    [(ngModel)]="creditCardCreate.cardNumber"
+                    (keyup)="cardNumber(creditCardCreate.cardNumber)"
+                    (focusout)="onCardChange(creditCardCreate.cardNumber)"
+                  />
+                </div>
+              </div>
+              <div *ngIf="cardInputError" class="row">
+                <div class="col-12">
+                  <p class="text-danger">
+                    {{ "please-enter-a-valid-card-number" | translate }}
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 form-group">
+                  <label for="expMonth" class="col-form-label color-black">{{
+                    "exp-month" | translate
+                  }}</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="cardMonth"
+                    [ngClass]="{
+                      error: cardExpError
+                    }"
+                    (change)="checkDate()"
+                  >
+                    <option
+                      *ngFor="let month of months; let i = index"
+                      value="{{ i }}"
+                    >
+                      {{ month | lowercase | translate }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-4 form-group">
+                  <label for="year" class="col-form-label color-black">{{
+                    "year" | translate
+                  }}</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="cardYear"
+                    [ngClass]="{
+                      error: cardExpError
+                    }"
+                    (change)="checkDate()"
+                  >
+                    <option
+                      *ngFor="let year of years; let i = index"
+                      value="{{ year }}"
+                    >
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-4 form-group">
+                  <label for="expMonth" class="col-form-label color-black">CVV</label>
+                  <input
+                    type="text"
+                    id="expMonth"
+                    class="form-control"
+                    [(ngModel)]="securityCode"
+                    mask="000||0000"
+                  />
+                </div>
+              </div>
+              <div *ngIf="cardExpError" class="row">
+                <div class="col-12">
+                  <p class="text-danger">
+                    {{ "please-enter-a-valid-date" | translate }}
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 form-group">
+                  <label for="billing" class="col-form-label color-black">{{
+                    "billing-address" | translate
+                  }}</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="creditCardCreate.addressProfileId"
+                    (change)="showAddress(creditCardCreate.addressProfileId)"
+                  >
+                    <option value="0" disabled>
+                      {{ "select-address" | translate }}
+                    </option>
+                    <option value="0">{{ "new-address" | translate }}</option>
+                    <option
+                      *ngFor="let x of addresses; let i = index"
+                      value="{{ x.id }}"
+                    >
+                      {{ x.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="error" class="row">
+                <div class="col-12">
+                  <p class="text-danger">
+                    {{ error }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div [hidden]="!showCreateAddress">
+              <div [hidden]="showCreateAddressConfirm">
+                <div class="newAddress-card">
+                  <select
+                    [(ngModel)]="billingAddress.country"
+                    class="form-control"
+                  >
+                    <option value="0" disabled>
+                      {{ "select-country" | translate }}
+                    </option>
+                    <option value="us">
+                      {{ "united-states" | translate }}
+                    </option>
+                  </select>
+                </div>
+                <div class="card modal-body-card">
+                  <div class="row">
+                    <div class="col-12 form-group">
+                      <label for="cardname" class="col-form-label color-black">{{
+                        "address-line-1" | translate
+                      }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="billingAddress.addressLine1"
+                        maxlength="50"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 form-group">
+                      <label for="cardname" class="col-form-label color-black">{{
+                        "address-line-2" | translate
+                      }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="billingAddress.addressLine2"
+                        maxlength="50"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 form-group">
+                      <label for="cardname" class="col-form-label color-black">{{
+                        "address-line-3" | translate
+                      }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="billingAddress.addressLine3"
+                        maxlength="50"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 form-group">
+                      <label for="expMonth" class="col-form-label color-black">{{
+                        "city" | translate
+                      }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="billingAddress.city"
+                        maxlength="30"
+                      />
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for="year" class="col-form-label color-black">{{
+                        "state" | translate
+                      }}</label>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="billingAddress.region"
+                      >
+                        <option value="0" disabled>
+                          {{ "state" | translate }}
+                        </option>
+                        <option
+                          *ngFor="let x of regions; let i = index"
+                          value="{{ x.key }}"
+                        >
+                          {{ x.value }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for="expMonth" class="col-form-label color-black">{{
+                        "postal-code" | translate
+                      }}</label>
+                      <input
+                        type="text"
+                        #zipInputBilling="ngModel"
+                        pattern="^\d{5}(?:[-\s]\d{4})?$"
+                        class="form-control"
+                        [(ngModel)]="billingAddress.postalCode"
+                      />
+
+                      <p
+                        *ngIf="zipInputBilling.errors?.['pattern']"
+                        class="text-danger text--15"
+                      >
+                        {{ "please-enter-a-postal-code" | translate }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="!showCreateAddressConfirm">
+                <div class="form-group px-0">
+                  <div style="border: none" class="card address-card">
+                    <p class="p-small color-gray mb-2 mb-sm-3">
+                      {{ "we-found-these-verified-matches" | translate }}
+                    </p>
+
+                    <div class="card address-card mb-3">
+                      <div
+                        *ngFor="
+                          let address of confirmedAddresses;
+                          let i = index
+                        "
+                        (click)="selectAddress(address, false)"
+                        class="form-check border-bottom"
+                      >
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="confirmAddressRadioPayment"
+                          id="confirmAddressRadioPayment{{ i }}"
+                        />
+                        <label
+                          class="form-check-label color-black"
+                          for="confirmAddressRadioPayment{{ i }}"
+                          >{{ address.title }},
+                          {{ address.city }}
+                          {{ address.region }} {{ address.postalCode }}</label
+                        >
+                      </div>
+
+                      <div
+                        class="form-check"
+                        (click)="selectAddress(address, true)"
+                      >
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="confirmAddressRadioPayment"
+                          id="confirmAddressRadioPayment99"
+                        />
+                        <label
+                          class="form-check-label color-black"
+                          for="confirmAddressRadioPayment99"
+                          >{{ "keep-original-address" | translate }}
+                          <br />
+                          {{ address.addressLine1 }},
+                          {{ address.city }}
+                          {{ address.region }} {{ address.postalCode }}</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="activeSetting == 0"
+          class="card modal-body-card p-0 invoice__settings__buttons"
+        >
+          <div class="invoice__settings__buttons">
+            <button
+              *ngIf="
+                selectedOrder?.autoshipType?.code == 'smartOrder' ||
+                selectedOrder?.autoshipType?.code == 'subscribeAndSave'
+              "
+              (click)="updateProducts(selectedOrder)"
+              class="btn btn-gray"
+            >
+              <i class="fa-regular fa-basket-shopping"></i>
+              {{ "update-products" | translate }}
+            </button>
+            <button
+              *ngIf="
+                selectedOrder?.autoshipType?.code == 'smartOrder' ||
+                selectedOrder?.autoshipType?.code == 'subscribeAndSave'
+              "
+              (click)="changeSetting(4)"
+              class="btn btn-gray"
+            >
+              <i class="fa-regular fa-face-frown-slight"></i> Cancel
+              {{
+                (tenant === "ladyboss" ? "subscribe-save" : "smartship")
+                  | translate
+              }}
+            </button>
+            <button
+              *ngIf="
+                selectedOrder?.autoshipType?.code ==
+                  'ketolifeMembershipAnnual' ||
+                selectedOrder?.autoshipType?.code == 'ketolifeMembershipMonthly'
+              "
+              (click)="changeSetting(4)"
+              class="btn btn-gray w-100"
+            >
+              <i class="fa-regular fa-face-frown-slight"></i>
+              {{ "cancel-pulse-pro" | translate }}
+            </button>
+            <button
+              *ngIf="
+                selectedOrder?.autoshipType?.code == 'promoterMembership' ||
+                selectedOrder?.autoshipType?.code == 'championMembership'
+              "
+              (click)="changeSetting(4)"
+              class="btn btn-gray w-100"
+            >
+              <i class="fa-regular fa-face-frown-slight"></i>
+              {{ "cancel-membership" | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div
+          [hidden]="activeSetting !== 4 || loaderPayment"
+          class="card modal-body-card ref-modal-card mb-4"
+        >
+          <div class="form-group">
+            <h5 class="color-gray">
+              {{ "are-you-sure-you-want-to-cancel-this-order" | translate }}
+            </h5>
+          </div>
+        </div>
+      </div>
+
+      <div [hidden]="activeTab !== 3" class="modal-body">
+        <div
+          *ngIf="
+            autoshipHistory &&
+            autoshipHistory.length == 0 &&
+            selectedOrderInformation &&
+            !loaderPayment
+          "
+        >
+          <h4>{{ "no-history-has-been-found" | translate }}</h4>
+        </div>
+        <div
+          *ngIf="autoshipHistory && selectedOrderInformation && !loaderPayment"
+        >
+          <ng-container *ngFor="let order of autoshipHistory; let i = index">
+            <div
+              class="order__history__item shipped canceled card ref-modal-card"
+            >
+              <div class="order__information">
+                <div>
+                  <span class="order__name">{{ "canceled" | translate }}</span>
+                </div>
+                <span class="order__date"> #{{ order.autoshipId }} </span>
+                <span class="order__date">
+                  {{ order.lastRun | date : "MMM d" }}
+                </span>
+              </div>
+
+              <div class="order__options">
+                <span
+                  *ngIf="
+                    order.autoshipType == 'smartOrder' ||
+                    order.autoshipType == 'subscribeAndSave'
+                  "
+                  class="order__smartship"
+                >
+                  <i class="far fa-repeat"></i
+                  >{{
+                    (tenant === "ladyboss" ? "subscribe-save" : "smartship")
+                      | translate
+                  }}</span
+                >
+                <span
+                  *ngIf="
+                    order.autoshipType == 'ketolifeMembershipAnnual' ||
+                    order.autoshipType == 'ketolifeMembershipMonthly'
+                  "
+                  class="order__smartship order--membership"
+                  ><i class="fa-solid fa-rectangle-pro"></i
+                  >{{ "pulse-pro" | translate }}</span
+                >
+                <span
+                  *ngIf="
+                    order.autoshipType == 'promoterMembership' ||
+                    order.autoshipType == 'championMembership'
+                  "
+                  class="order__smartship order--membership"
+                  ><i class="fa-solid fa-shield-check"></i
+                  >{{ "membership" | translate }}</span
+                >
+
+                <div>
+                  <span
+                    *ngFor="
+                      let product of order.autoshipItems.slice(0, 3);
+                      let i = index
+                    "
+                    class="order__history__item__product"
+                  >
+                    <img
+                      *ngIf="!product.imageUrl"
+                      src="assets/images/no-product-image.png"
+                      data-toggle="tooltip"
+                      title="{{ product.quantity }} x {{ product.name }}"
+                    />
+                    <img
+                      *ngIf="product.imageUrl"
+                      src="{{ product.imageUrl }}"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="{{ product.quantity }} x {{ product.name }}"
+                    />
+                    <span class="order__history__item__product__quantity">{{
+                      product.quantity
+                    }}</span>
+                  </span>
+                  <span
+                    *ngIf="order.autoshipItems.length > 3"
+                    class="more__products__indicator"
+                    >+{{ order.autoshipItems.length - 3 }}</span
+                  >
+                </div>
+                <div class="order__options__menus">
+                  <button
+                    (click)="details(order.invoiceId)"
+                    class="button orders--button"
+                  >
+                    <span class="desktop__actions">{{
+                      "details" | translate
+                    }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <ng-container *ngIf="selectedOrderInformation && !loaderPayment">
+        <div
+          *ngIf="
+            activeSetting > 0 &&
+            activeSetting !== 4 &&
+            activeTab == 2 &&
+            addressStep == 1 &&
+            paymentStep == 0
+          "
+          class="modal-footer"
+        >
+          <div class="btn-groups">
+            <button
+              class="btn btn-gray mb-show"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <button
+              (click)="save()"
+              [disabled]="
+                loading ||
+                (!addressProfileId &&
+                  addressStep == 1 &&
+                  this.activeSetting == 2) ||
+                (paymentStep == 0 &&
+                  this.activeSetting == 3 &&
+                  (!cvv || !paymentProfileId))
+              "
+              class="btn button-primary"
+            >
+              <span *ngIf="loading">{{ "saving" | translate }}...</span>
+              <span *ngIf="!loading">{{ "save" | translate }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          *ngIf="activeSetting > 0 && activeTab == 2 && addressStep > 1"
+          class="modal-footer"
+        >
+          <div *ngIf="addressStep == 2" class="btn-groups">
+            <button
+              class="btn btn-gray mb-show"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <button
+              (click)="verifyAddress()"
+              [disabled]="!address.addressLine1 || !address.city || !address.region || address.region == '0' || !address.postalCode || address.country == '0' || !address.country || !address.isValidZip || (address.country == 'hk' && !address.addressLine3)"
+              
+              class="btn button-primary"
+            >
+              <span>{{ "continue" | translate }}</span>
+            </button>
+          </div>
+
+          <div *ngIf="addressStep == 3" class="btn-groups">
+            <button (click)="stepChangeAddress(2)" class="btn btn-gray mb-show">
+              {{ "edit-address" | translate }}
+            </button>
+            <button
+              [disabled]="loaderProfile || !selectedAddress"
+              (click)="createAddressProfile(); (false)"
+              class="btn button-primary"
+            >
+              <span *ngIf="!loaderProfile">{{ "save" | translate }}</span>
+              <span *ngIf="loaderProfile">{{ "saving" | translate }}...</span>
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            activeSetting > 0 &&
+            activeTab == 2 &&
+            paymentStep == 1 &&
+            !showCreateAddress
+          "
+          class="modal-footer"
+        >
+          <div class="btn-groups">
+            <button
+              class="btn btn-gray mb-show"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <button
+              (click)="createPayment()"
+              class="btn button-primary"
+              [disabled]="
+                !creditCardCreate.cardHolderName ||
+                !creditCardCreate.cardNumber ||
+                !cardMonth ||
+                !cardYear ||
+                !securityCode ||
+                cardExpError ||
+                cardInputError ||
+                loading ||
+                creditCardCreate.addressProfileId == 0
+              "
+            >
+              {{ "create" | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div
+          *ngIf="
+            activeSetting > 0 &&
+            activeTab == 2 &&
+            paymentStep == 1 &&
+            showCreateAddress &&
+            !showCreateAddressConfirm
+          "
+          class="modal-footer"
+        >
+          <div class="btn-groups">
+            <button
+              (click)="showCreateAddress = false"
+              class="btn btn-gray mb-show"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <button
+              (click)="verifyAddress()"
+              class="btn button-primary"
+              [disabled]="
+                                    loaderVerify ||
+                                    !billingAddress.addressLine1 ||
+                                    !billingAddress.city ||
+                                    !billingAddress.region ||
+                                    !billingAddress.postalCode ||
+                                    zipInputBilling.errors?.['pattern']||
+                                    billingAddress.country == '0' ||
+                                    !billingAddress.country"
+            >
+              {{ "continue" | translate }}
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            activeSetting > 0 &&
+            activeTab == 2 &&
+            paymentStep == 1 &&
+            showCreateAddress &&
+            showCreateAddressConfirm
+          "
+          class="modal-footer"
+        >
+          <div class="btn-groups">
+            <button
+              (click)="showCreateAddressConfirm = false"
+              class="btn btn-gray"
+            >
+              {{ "edit-address" | translate }}
+            </button>
+            <button
+              [disabled]="loaderProfile || !selectedAddress"
+              (click)="createAddressProfile(); (false)"
+              class="btn button-primary"
+            >
+              <span *ngIf="!loaderProfile">{{ "save" | translate }}</span>
+              <span *ngIf="loaderProfile">{{ "saving" | translate }}...</span>
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="activeSetting > 0 && activeSetting == 4"
+          class="modal-footer"
+        >
+          <div class="btn-groups">
+            <button
+              class="btn btn-gray mb-show"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <button
+              [disabled]="loading"
+              (click)="cancelAutoship()"
+              class="btn button-primary"
+            >
+              <span *ngIf="loading">{{ "saving" | translate }}...</span>
+              <span *ngIf="!loading">{{ "continue" | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

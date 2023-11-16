@@ -1,107 +1,158 @@
-<h2>Orders</h2>
+<div class="row mx--15">
+  <div class="col-sm-6 col-12">
+    <h2 class="color-black page-title">{{ "orders" | translate }}</h2>
+  </div>
+  <div class="col-sm-6 col-12 mt-3">
+    <button (click)="onClickNewOrder()" class="button ml-auto addNew-btn">
+      <i aria-hidden="true" class="far fa-plus mr-2"></i>{{ 'New order' | translate }}
+    </button>
+  </div>
+</div>
 
-
-<div class="dashboard__wrapper pending--wrapper" *ngIf="pendingPaymentOrders && pendingPaymentOrders.length > 0">
+<div *ngIf="orderHistory.length == 0 && !loader" class="missing__payments">
+  <i class="fa-solid fa-list-ul"></i>
+  <h3>{{ "no-order-history-can-be-found" | translate }}</h3>
+</div>
+<div class="dashboard__wrapper pending--wrapper mb-3" *ngIf="pendingPaymentOrders && pendingPaymentOrders.length > 0">
   <div *ngFor="let order of pendingPaymentOrders; let i = index" class="order__history__item not-paid">
     <div class="order__information">
       <div>
-        <span class="order__name">Not paid</span>
-
-
+        <span class="order__name">{{ "not-paid" | translate }}</span>
       </div>
+      <span class="order__date"> {{productSettings.currencySymbol}}{{ order.total | number : "1.2-2" }} </span>
       <span class="order__date">
-        ${{ order.total  }}
+        {{ order.dateCreated | date : "MMM d" }}
       </span>
       <span class="order__date">
-        {{ order.dateCreated | date: "MMM d" }}
-      </span>
-      <span class="order__date"> #{{ order.cartId }}<i *ngIf="order.orderName == 'smartOrder'"
-          class="fal fa-repeat"></i></span>
+        #{{ order.cartId
+        }}<i *ngIf="order.orderName == 'smartOrder'" class="far fa-repeat"></i></span>
     </div>
     <div class="order__options">
-      <span class="order__track pay--now" (click)="pay(order.cartId)"> Pay
-        now <i class="fal fa-chevron-right" style="margin-left: 10px;"></i></span>
+      <div>
+        <span class="order__track pay--now mb-hide" (click)="pay(order.cartId)">
+          {{ "pay-now" | translate }} <i class="fal fa-chevron-right" style="margin-left: 10px"></i></span>
 
-      <span *ngFor="
-                        let product of order.products?.slice(0, 3);
-                        let i = index
-                      " class="order__history__item__product">
-        <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
-          title="{{ product.quantity }} x {{ product.title }}" />
-        <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
-          title="{{ product.quantity }} x {{ product.title }}" />
-        <span class="order__history__item__product__quantity">{{ product.quantity }}</span>
-      </span>
-      <span *ngIf="order.products?.length > 3"
-        class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+        <span *ngFor="let product of order.products?.slice(0, 3); let i = index" class="order__history__item__product">
+          <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
+            title="{{ product.quantity }} x {{ product.title }}" />
+          <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
+            title="{{ product.quantity }} x {{ product.title }}" />
+          <span class="order__history__item__product__quantity">{{
+            product.quantity
+          }}</span>
+        </span>
+        <span *ngIf="order.products?.length > 3"
+          class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+      </div>
+      <div class="order__options__menus">
+        <span (click)="pay(order.cartId)" class="order__track pay--now mb-show">{{ "pay-now" | translate }} <i
+            class="fal fa-chevron-right" style="margin-left: 10px"></i></span>
 
+        <button mat-icon-button [matMenuTriggerFor]="menuOrders" class="button orders--button">
+          <span class="desktop__actions">{{ "actions" | translate }} <i class="fas fa-angle-down"></i></span>
+        </button>
+        <mat-menu #menuOrders="matMenu" xPosition="before">
+          <button class="mat-menu-item--custom" mat-menu-item (click)="pay(order.cartId)">
+            <i class="fa-regular fa-credit-card"></i><span>{{ "pay-now" | translate }}</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </div>
-  <div class="order__history__item">
-
-  </div>
-</div>
-<div class="dashboard__wrapper" *ngIf="orderHistory.length == 0 && !loader">
-  <h3>No order history can be found</h3>
 </div>
 
-<div class="dashboard__wrapper">
-  <app-loader *ngIf="loader" class="payment--loader"></app-loader>
-  <div *ngIf="orderHistory.length > 1">
+<app-loader *ngIf="loader" class="payment--loader"></app-loader>
+<div *ngIf="orderHistory.length > 1" class="dashboard__wrapper orders-wrap">
+
+  <div>
     <ng-container *ngFor="let order of orderHistory; let i = index">
-      <div
-        [ngClass]="{'fulfilment': order.shipStatus == 2, 'shipped' : order.shipStatus == 10, 'canceled' : order.shipStatus == 27,
-                'shipment' : order.shipStatus == 19, 'delivered' : order.shipStatus == 23, 'not-paid': order.shipStatus == 12 || order.shipStatus == 22 }"
-        class="order__history__item shipped">
+      <div [ngClass]="{
+          fulfilment: order.shipStatus == 2,
+          shipped: order.shipStatus == 10,
+          canceled: order.shipStatus == 27,
+          shipment: order.shipStatus == 19 || order.shipStatus == 14,
+          delivered: order.shipStatus == 23,
+          'not-paid':
+            order.shipStatus == 12 ||
+            order.shipStatus == 22 ||
+            order.shipStatus == 18
+        }" class="order__history__item shipped">
         <div class="order__information">
           <div>
-            <span *ngIf="order.shipStatus == 2" class="order__name">Fulfilment</span>
-            <span *ngIf="order.shipStatus == 12" class="order__name">Returned Initial</span>
-            <span *ngIf="order.shipStatus == 23" class="order__name">Delivered</span>
-            <span *ngIf="order.shipStatus == 19" class="order__name">Automate hold</span>
-            <span *ngIf="order.shipStatus == 10" class="order__name">Shipped</span>
-            <span *ngIf="order.shipStatus == 22" class="order__name">Returned before shippment</span>
-
+            <span *ngIf="order.shipStatus == 2" class="order__name">{{ "fulfillment" | translate }}</span>
+            <span *ngIf="order.shipStatus == 12" class="order__name">{{ "returned-initial" | translate }}</span>
+            <span *ngIf="order.shipStatus == 23" class="order__name">{{ "delivered" | translate }}</span>
+            <span *ngIf="order.shipStatus == 18" class="order__name">{{ "returned-undelivered" | translate }}</span>
+            <span *ngIf="order.shipStatus == 19" class="order__name">{{ "automated-hold" | translate }}</span>
+            <span *ngIf="order.shipStatus == 10" class="order__name">{{ "shipped" | translate }}</span>
+            <span *ngIf="order.shipStatus == 14" class="order__name">{{ "returned-refund" | translate }}</span>
+            <span *ngIf="order.shipStatus == 22" class="order__name">{{ "returned-before-shipment" | translate }}</span>
+            <span *ngIf="order.shipStatus == 27" class="order__name">{{ "canceled" | translate }}</span>
           </div>
           <span class="order__date">
-            ${{ order.amount  }}
+            {{productSettings.currencySymbol}}{{ order.amount | number : "1.2-2" }}
           </span>
           <span class="order__date">
-            {{ order.dateCreated | date: "MMM d" }}
+            {{ order.dateCreated | date : "MMM d" }}
           </span>
-          <span class="order__date"> #{{ order.orderId }}<i *ngIf="order.orderName == 'smartOrder'"
-              class="fal fa-repeat"></i></span>
+          <span class="order__date">
+            #{{ order.orderId
+            }}<i *ngIf="order.orderName == 'smartOrder'" class="far fa-repeat"></i></span>
         </div>
         <div class="order__options">
+
           <div>
+            <span class="cancelation__request">
+              <app-timer *ngIf="order.cancellationAvailableUntil || order.cancellationStatus"
+                [cancelStatus]="order.cancellationStatus" [cancelUntil]="order.cancellationAvailableUntil"
+                (click)="showCancelationPop(order.orderId, order.cancellationStatus)">
+              </app-timer>
+            </span>
+
+            <span
+              *ngIf="order.shipStatus == 19 && tenant == 'pruvit' && !order.cancellationAvailableUntil && !order.cancellationStatus"
+              class="order__view__updates mr-2">
+              <a class="color-gray" href="https://support.justpruvit.com/hc/en-us/articles/360060948311--Shipping-Updates-"
+                target="_blank">{{ "view-shipping-updates" | translate }} <i
+                  class="fal fa-chevron-right font-weight-normal ml-1" aria-hidden="true"></i></a></span>
+
+            <span *ngIf="order.trackingNumberUrl" (click)="goToTracking(order.trackingNumberUrl)"
+              class="order__track"><i class="far fa-location-circle"></i> {{ "track-order" | translate }}</span>
             <span *ngFor="
-                        let product of order.orderItems.slice(0, 3);
-                        let i = index
-                      " class="order__history__item__product">
+                let product of order.orderItems.slice(0, 3);
+                let i = index
+              " class="order__history__item__product">
               <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
                 title="{{ product.quantity }} x {{ product.name }}" />
               <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
                 title="{{ product.quantity }} x {{ product.name }}" />
-              <span class="order__history__item__product__quantity">{{ product.quantity }}</span>
+              <span class="order__history__item__product__quantity">{{
+                product.quantity
+              }}</span>
             </span>
             <span *ngIf="order.orderItems.length > 3"
               class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
-
-
           </div>
           <div class="order__options__menus">
-            <span *ngIf="order.trackingNumberUrl" (click)="goToTracking(order.trackingNumberUrl)"
-              class="order__track"><i class="fal fa-location-circle"></i> Track</span>
+            <span class="cancelation__request cancelation__request--mobile">
+              <app-timer *ngIf="order.cancellationAvailableUntil || order.cancellationStatus"
+                [cancelStatus]="order.cancellationStatus" [cancelUntil]="order.cancellationAvailableUntil"
+                (click)="showCancelationPop(order.orderId, order.cancellationStatus)">
+              </app-timer>
+            </span>
+            <span
+              *ngIf="order.shipStatus == 19 && tenant == 'pruvit' && !order.cancellationAvailableUntil && !order.cancellationStatus"
+              class="order__view__updates mr-2 view__updates--mobile">
+              <a class="color-gray" href="https://support.justpruvit.com/hc/en-us/articles/360060948311--Shipping-Updates-"
+                target="_blank">{{ "view-shipping-updates" | translate }} <i
+                  class="fal fa-chevron-right font-weight-normal ml-1" aria-hidden="true"></i></a></span>
 
-
-            <button mat-icon-button [matMenuTriggerFor]="menuOrders" aria-label="Example icon-button with a menu"
-              class="button orders--button">
-              <span class="desktop__actions">Actions <i class="fas fa-angle-down"></i></span>
+            <button mat-icon-button [matMenuTriggerFor]="menuOrders" class="button orders--button">
+              <span class="desktop__actions">{{ "actions" | translate }} <i class="fas fa-angle-down"></i></span>
             </button>
             <mat-menu #menuOrders="matMenu" xPosition="before">
-
               <button class="mat-menu-item--custom" mat-menu-item (click)="printReceipt(order.invoiceId)">
-                <i class="far fa-print"></i><span>Print receipt</span>
+                <i class="far fa-print"></i><span>{{ "print-receipt" | translate }}</span>
               </button>
             </mat-menu>
           </div>
@@ -110,7 +161,40 @@
     </ng-container>
     <button *ngIf="orderHistory" class="button button-primary older-olders" (click)="loadMore()"
       [disabled]="loadMoreLoading">
-      {{ loadMoreButton }}
+      {{ loadMoreButton | translate }}
     </button>
+  </div>
+</div>
+<div class="modal animate fade right-mobile addresses-modal change-referrer-code-modal" id="cancelationModal"
+  tabindex="-1" aria-labelledby="cancelationModal" aria-hidden="true" data-backdrop="static">
+  <div class="dashboard--modal modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column">
+
+        <h3 class="title color-black">
+          {{ 'cancel_order_title' | translate }}
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex pl-3 pr-3 mb-3">
+          <p>
+            {{ 'cancelation_message' | translate : {orderId:orderId} }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pl-3 pr-3 justify-content-start d-flex" style="width: 100%;">
+          <button type="button" class="button  button--default button--grey" data-dismiss="modal" aria-label="Close">
+            <span>{{ "close" | translate }}</span>
+          </button>
+          <button [disabled]="loading" type="button" class="button button--default button--danger ml-3"
+            (click)="requestCancel()">
+            {{ 'request_cancellation' | translate}}
+
+          </button>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>

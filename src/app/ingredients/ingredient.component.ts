@@ -209,10 +209,8 @@ export class IngredientComponent implements OnInit, OnDestroy {
       let isNoServings = true;
 
       products.forEach((product: any) => {
-        if (product.product_flavorTypes) {
-          const servings = product.product_flavorTypes;
-
-          if (servings.length !== 0) isNoServings = false;
+        if(product.show_ingredients && product.product_flavorTypes.length > 0) {
+          isNoServings = false;
         }
       });
 
@@ -256,7 +254,8 @@ export class IngredientComponent implements OnInit, OnDestroy {
           (x: any) =>
             x.term_id === category.term_id || x.parent === category.term_id
         );
-        if (result) {
+        const isIngredientShow = product.show_ingredients && product.product_flavorTypes.length > 0 ? true : false;
+        if (result && isIngredientShow) {
           tempProducts.push(product);
         }
       });

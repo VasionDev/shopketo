@@ -1,0 +1,116 @@
+<section class="ladyboss-5servings-header">
+    <article class="container">
+        <figure class="row">
+            <div class="col-12">
+                <nav class="sk-header__navbar border-bottom-1 sk-header__nav-desktop">
+                    <div class="container">
+                        <div
+                            class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar sk-header__navbar-padding">
+                            <div class="navbar-collapse">
+                                <div class="navbar-nav flex-row mx-auto">
+                                    <a class="navbar-brand" href="#">
+                                        <img src="assets/ladyboss/images/ladyboss-logo.svg" class="img-fluid logo">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown single-nav account-dropdown">
+                                    <a *ngIf="!isUserLoggedIn" class="nav-link sk-header__nav-link pointer"
+                                        (click)="onlogin()">
+                                        <i class="far fa-user sk-header__user-card color-black"></i>
+                                        <span class="text-label">
+                                            {{ "login" | translate }}
+                                        </span>
+                                    </a>
+                                    <a *ngIf="isUserLoggedIn" class="nav-link pointer sk-header__nav-link"
+                                        [class.view-account]="impersonationPresent" (click)="onClickAvatar()">
+                                        <img width="24" src="{{ userAvatar }}" class="user-img img-fluid" />
+                                        <span class="text-label">
+                                            {{ "account" | translate }}
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </figure>
+    </article>
+</section>
+
+<section class="ladyboss-5servings-claim-wrap">
+    <article class="container">
+        <figure class="row">
+            <div class="col-12">
+                <div class="inner-content d-flex justify-content-center">
+                    <div class="left-col">
+                        <h2 class="color-white text-center">Start your Summer off with Brownie Batter LEAN!</h2>
+                        <h4 class="text-center"><i class="far fa-clock color-white mr-2"></i>Hurry, this offer expires when the timer reaches zero:</h4>
+                    </div>
+
+                    <div class="right-col">
+                        <div class="servings enroll-end d-flex align-items-center justify-content-center">
+                            <div class="invite-timer color-white"
+                                [innerHTML]="timer | inviteTimer: '5servings' | async">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </figure>
+    </article>
+</section>
+
+<section class="ladyboss-5servings-special-offer">
+    <article class="container">
+        <figure class="row">
+            <div class="col-md-6 col-12 text-center">
+                <p class="color-black">Shake things up this Summer with our Brownie Batter Quickie Sale..</p>
+                <h2 class="color-black">5 servings of Brownie Batter LEAN AND a Shaker Cup</h2>
+                <h1 class="color-brand">For just $21!</h1>
+                <h3>Claim yours, because like most quickies, this offer won't last long!</h3>
+            </div>
+
+            <div class="col-md-6 col-12 text-center">
+                <img class="img-fluid lean-img"
+                    src="assets/ladyboss/images/side_2.png">
+                <button (click)="onClickBuyNowOfferProduct()" class="button fw-800 button-large button-primary button-green"><i
+                        class="fa-solid fa-cart-plus mr-1"></i> Add To Cart </button>
+            </div>
+        </figure>
+    </article>
+</section>
+
+<section id="ladyboss5servingsTrial5Pack" class="ladyboss-5servings-trial5Pack">
+    <article class="container">
+        <figure class="row">
+            <div class="col-12">
+                <div class="dont-forget-wrap">
+                    <div class="inner-wrap d-flex align-items-center justify-content-betweens">
+                        <div class="left-img">
+                            <img class="img-fluid"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/564230/file/f8e2e248bc68c1c42bd92ca776eaef33.png">
+                        </div>
+
+                        <div class="center-text">
+                            <h3 class="color-brand text-center">Don't Forget!</h3>
+                            <h4 class="color-black">You're Still Covered By Our No-Nonsense, 30-Day Money Back
+                                Guarantee!</h4>
+                        </div>
+
+                        <div class="right-text">
+                            <p class="text-center">There’s literally <b>ZERO</b> risk for you to try out LEAN today!
+                                <b>What are you waiting for?!?</b> Your taste-buds are like, “Come oooooooon, we want
+                                this!!”
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </figure>
+    </article>
+</section>
+
+<p class="ladyboss-5servings-customer-review mb-hide"></p>

@@ -1,0 +1,80 @@
+<div class="sk-category__products row most-popular">
+    <div 
+      *ngFor="let product of mostPopularProducts" 
+      class="col-md-4 col-6 sk-category__custom-padd"
+    >
+      <ng-container *ngIf="!isSmartshipOnly">
+        <app-product-card
+          [product]="product"
+          #childPopular
+        ></app-product-card>
+      </ng-container>
+      <ng-container *ngIf="isSmartshipOnly">
+        <div class="sk-main__product text-center color-light-white-bg">
+          <figure class="sk-main__product-img">
+              <img
+                src="{{ product.homeThumbUrl }}"
+                srcset="{{ product.homeThumbUrl }} 1x, {{ product.homeThumbRetinaUrl }} 2x"
+                alt="Product-1" 
+                class="img-fluid"
+                [class.product-sold-out]="isSoldOut(product)"
+              >
+          </figure>
+          <div class="sk-main__product-details">
+              <h4 class="color-black sk-main__product-title" [innerHTML]="product.title"></h4>
+              <ng-template #nonChinesePrice>
+                <p class="p-small color-gray sk-main__product-from">
+                  {{ "from" | translate }}
+                  <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                    >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+                  >
+                  <wbr />
+                  <span
+                    [ngClass]="{
+                      'color-green font-bold ml-1': !isBothPricesSame(product)
+                    }"
+                    >{{ currencySymbol
+                    }}{{ getSmartshipDiscountPrice(product) }}</span
+                  >
+                </p>
+              </ng-template>
+              <p
+                class="p-small color-gray sk-main__product-from"
+                *ngIf="
+                  selectedLanguage === 'zh-hans' ||
+                    selectedLanguage === 'zh-hant';
+                  else nonChinesePrice
+                "
+              >
+                <del class="font-reg" *ngIf="!isBothPricesSame(product)"
+                  >{{ currencySymbol }}{{ getOriginalPrice(product) }}</del
+                >
+                <wbr />
+                <span
+                  [ngClass]="{
+                    'color-green font-bold ml-1': !isBothPricesSame(product)
+                  }"
+                  >{{ currencySymbol
+                  }}{{ getSmartshipDiscountPrice(product) }}</span
+                >
+                {{ "from" | translate }}
+              </p>
+          </div>
+          <div class="sk-main__product-btn">
+            <button
+              class="button button-primary buy-now"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              (click)="onClickBuyNow(product.name)"
+              *ngIf="!isSoldOut(product)"
+            >
+              {{ "select-options" | translate }}
+            </button>
+            <div class="sold-out" *ngIf="isSoldOut(product)">
+              <h4>{{ getSoldOutText(product) }}</h4>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+</div>

@@ -2,12 +2,14 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AppCheckoutService } from 'src/app/shared/services/app-checkout.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { UserEmitterService } from 'src/app/shared/services/user-emitter.service';
 import { environment } from 'src/environments/environment';
 import { WebsiteService } from '../service/websites-service';
 declare var $: any;
+declare var tooltipJS: any;
 
 interface Site {
   name:
@@ -27,6 +29,7 @@ interface Site {
 export class WebsiteHomeComponent implements OnInit {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   user: any;
+  linkCopied = false;
   discountHeight$ = this.dataService.currentDiscountHeight$;
   facebookId: string = environment.facebookAppId;
   isPro: boolean = false;
@@ -48,21 +51,41 @@ export class WebsiteHomeComponent implements OnInit {
   ngOnInit(): void {
     this.userEmitterService.getProfileObs().subscribe((x) => {
       this.user = x;
+      this.getPulseProStatus(x.id);
     });
+    this.loadTooltip();
+  }
 
-    this.websiteSvc.userProStatus$.subscribe((status: boolean) => {
-      this.isPro = status;
-    });
+  getPulseProStatus(userId: number) {
+    this.websiteSvc
+      .getPulseProStatus(userId)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((res: any) => {
+        if (res.isSuccess && res?.result?.isPro) {
+          this.isPro = true;
+        }
+      });
   }
 
   copy() {
     this.clipboard.copy(this.user.code + '.shopketo.com');
+    this.linkCopied = true;
+    setTimeout(() => {
+      this.linkCopied = false;
+      this.loadTooltip();
+    }, 1500);
     return false;
+  }
+
+  loadTooltip() {
+    $(document).ready(() => {
+      tooltipJS();
+    });
   }
 
   onClickSettings() {
     if (this.isPro) {
-      this.router.navigate(['/dashboard/websites/shopketo']);
+      this.router.navigate(['/cloud/websites/shopketo']);
     } else {
       $('#proSubscribeModal').modal();
     }
@@ -70,7 +93,7 @@ export class WebsiteHomeComponent implements OnInit {
 
   onClickProSubscription(type: string) {
     const proSku = type === 'annual' ? 'MEM-PUL-PRO-T2:1' : 'MEM-PUL-PRO-T1:1';
-    const redirectURL = this.clientDomain + '/dashboard/websites/shopketo';
+    const redirectURL = this.clientDomain + '/cloud/websites/shopketo';
     this.checkoutSvc.setSupplementsCheckoutUrl(
       this.user.code,
       'true',

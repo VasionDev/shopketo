@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ReplaySubject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { ProductSettings } from 'src/app/products/models/product-settings.model';
 import { PromoterService } from 'src/app/products/services/promoter.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { isEuropeanCountry } from 'src/app/shared/utils/country-list';
 import { environment } from 'src/environments/environment';
 declare var $: any;
 
@@ -14,14 +17,23 @@ declare var $: any;
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
+  private destroyedCheckoutHeight$: ReplaySubject<boolean> = new ReplaySubject(1);
+  @Input() isRussellBrunson: boolean = false;
+  tenant!: string;
   selectedCountry = '';
   selectedLanguage = '';
   generalSettings: any = {};
   defaultLanguage = '';
   isEUCountryExceptGB = false;
+  isEUCountry = false;
   isStaging: boolean;
   productSettings = {} as ProductSettings;
   productsData: any = {};
+  ladybossFooter: string = '';
+  showPruvitFooter: boolean = false;
+  checkoutBtnHeight: number = 0;
+  isLoaded: boolean = false;
+  cloudUrl: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -32,17 +44,68 @@ export class FooterComponent implements OnInit {
     private promoterService: PromoterService
   ) {
     this.isStaging = environment.isStaging;
+    this.tenant = environment.tenant;
+    this.cloudUrl = environment.clientDomain !== '' ? `${environment.clientDomain}/cloud` : '';
   }
 
   ngOnInit(): void {
     this.getSelectedCountry();
     this.getSelectedLanguage();
+    this.checkRoutePaths();
+  }
+
+  checkRoutePaths() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((res) => {
+        let routePath = res.url.includes('?') ? res.url.split('?')[0] : res.url;
+        if (this.tenant === 'ladyboss') {
+          if (routePath.startsWith('/dashboard')) {
+            this.ladybossFooter = 'minimal';
+          } else if(routePath.startsWith('/5daycakechallenge') || routePath.startsWith('/burnit') || routePath.startsWith('/30day-slimdown') || routePath.startsWith('/5servings') || routePath.startsWith('/quickie')) {
+            this.ladybossFooter = '5daycakechallenge';
+          } else if(routePath.startsWith('/makecake')) {
+            this.ladybossFooter = 'makecake';
+          } else if (
+            routePath.startsWith('/invite') ||
+            routePath.startsWith('/challenge') 
+          ) {
+            this.ladybossFooter = 'invite';
+          } else if (routePath.startsWith('/replay')) {
+            this.ladybossFooter = 'replay';
+          } else {
+            this.ladybossFooter = 'main';
+          }
+        } else {
+          const selectedPath = routePath && routePath !== '' ? routePath : '';
+          if (routePath !== '' && this.selectedCountry !== 'US') {
+            routePath = routePath.split(this.selectedCountry.toLowerCase())[1];
+          }
+          if (routePath === '/me' && 0) {
+            this.showPruvitFooter = false;
+          } else {
+            this.showPruvitFooter = true;
+          }
+          this.setPaddingToFooterOnCart(selectedPath);
+        }
+      });
+  }
+
+  setPaddingToFooterOnCart(routePath: string) {
+    if(routePath.startsWith('/cart')) {
+      this.dataService.currentCheckoutBtnHeight$
+      .pipe(takeUntil(this.destroyedCheckoutHeight$))
+      .subscribe(res=> this.checkoutBtnHeight = res)
+    }else {
+      this.destroyedCheckoutHeight$.next(true);
+      this.destroyedCheckoutHeight$.complete();
+      this.checkoutBtnHeight = 0;
+    }
   }
 
   getSelectedCountry() {
     this.dataService.currentSelectedCountry$.subscribe((country: string) => {
       this.selectedCountry = country;
-
       this.checkEUCountries();
     });
   }
@@ -51,7 +114,6 @@ export class FooterComponent implements OnInit {
     this.dataService.currentSelectedLanguage$.subscribe((language: string) => {
       this.selectedLanguage = language;
       this.translate.use(this.selectedLanguage);
-
       this.getPages();
     });
   }
@@ -71,6 +133,7 @@ export class FooterComponent implements OnInit {
       this.productSettings = data.productSettings;
 
       this.getGeneralSettings(data.productsData);
+      this.isLoaded = true;
     });
   }
 
@@ -136,6 +199,7 @@ export class FooterComponent implements OnInit {
   }
 
   checkEUCountries() {
+    this.isEUCountry = isEuropeanCountry(this.selectedCountry.toUpperCase());
     if (
       this.selectedCountry === 'AT' ||
       this.selectedCountry === 'BE' ||
@@ -151,7 +215,20 @@ export class FooterComponent implements OnInit {
       this.selectedCountry === 'ES' ||
       this.selectedCountry === 'SE' ||
       this.selectedCountry === 'CH' ||
-      this.selectedCountry === 'RO'
+      this.selectedCountry === 'RO' ||
+      this.selectedCountry === 'BG' ||
+      this.selectedCountry === 'HR' ||
+      this.selectedCountry === 'CY' ||
+      this.selectedCountry === 'CZ' ||
+      this.selectedCountry === 'DK' ||
+      this.selectedCountry === 'EE' ||
+      this.selectedCountry === 'GR' ||
+      this.selectedCountry === 'LV' ||
+      this.selectedCountry === 'LT' ||
+      this.selectedCountry === 'LU' ||
+      this.selectedCountry === 'MT' ||
+      this.selectedCountry === 'SK' ||
+      this.selectedCountry === 'SI'
     ) {
       this.isEUCountryExceptGB = true;
     } else {

@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SubscriptionLike } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BlogAuthor } from '../../models/blog-author.model';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { BlogAuthor } from '../../models/blog-author.model';
 import { Blog } from '../../models/blog.model';
 import { BlogState } from '../../store/blogs.reducer';
 

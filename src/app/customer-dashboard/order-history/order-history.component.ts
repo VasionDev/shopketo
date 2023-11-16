@@ -1,9 +1,12 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { NewgenApiService } from 'src/app/shared/services/newgen-api.service';
 import { UserEmitterService } from 'src/app/shared/services/user-emitter.service';
 import { environment } from 'src/environments/environment';
-import { takeUntil } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
+import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { ProductSettings } from 'src/app/products/models/product-settings.model';
+import { ThankYouYesComponent } from 'src/app/ladyboss-5daychallenge/components/thank-you-yes/thank-you-yes.component';
 declare var $: any;
 @Component({
   selector: 'app-order-history',
@@ -19,19 +22,27 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
   public pendingPaymentOrders: Array<any> = [];
   public loader: boolean = false;
   public loadMoreLoading: boolean = false;
+  public orderId!: number;
   public loadMoreButton: string = 'Older orders';
+  public loading: boolean = false;
   public newgenPath = environment.newgenUrl;
+  public tenant!: string;
+  productSettings = {} as ProductSettings;
   constructor(
     private newgenService: NewgenApiService,
-    private userEmitterService: UserEmitterService
-  ) { }
+    private userEmitterService: UserEmitterService,
+    private dataService: AppDataService
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
-    this.userEmitterService.getProfileObs().subscribe((x) => {
+    this.userEmitterService.getProfileObs().pipe(takeUntil(this.destroyed$)).subscribe((x) => {
       this.user = x;
       this.getCartPendingPayment(this.user.id);
     });
     this.getOrderHistory(this.pageSize, this.startIndex);
+    this.getProductSettings();
   }
 
   getOrderHistory(pageSize: number, startIndex: number) {
@@ -49,6 +60,17 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
         this.loader = false;
 
       });
+  }
+
+  showCancelationPop(orderId: number, cancelStatus: number) {
+    if (cancelStatus == 1) {
+      return;
+    } else {
+      this.orderId = 0;
+      this.orderId = orderId;
+      $('#cancelationModal').modal('show');
+    }
+
   }
 
   getPendingPaymentOrders() {
@@ -105,7 +127,38 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
   }
 
   printReceipt(invoice: string) {
-    window.open(this.newgenPath + '#/invoice/' + invoice, "_blank");
+    window.open(this.newgenPath + '#/invoice/' + invoice + '?userId=' + this.user.id, "_blank");
+  }
+
+  requestCancel() {
+    this.loading = true;
+    this.newgenService.requestCancel(this.orderId, this.user.id).pipe(takeUntil(this.destroyed$)).subscribe(x => {
+      $('#cancelationModal').modal('hide');
+      this.loading = false;
+      this.getOrderHistory(this.pageSize, this.startIndex);
+    })
+  }
+
+  getProductSettings() {
+    this.dataService.currentProductsData$.pipe(takeUntil(this.destroyed$)).subscribe(data => {
+      if (
+        data &&
+        Object.keys(data).length === 0 &&
+        data.constructor === Object
+      ) {
+        return;
+      }
+      this.productSettings = data.productSettings;
+    })
+  }
+
+  onClickNewOrder() {
+    this.dataService.changePostName({
+      postName: 'bundle-builder-modal',
+      payload: { key: 'bundleBuilder', value: { autoshipOrder: null, onetimeOrder: true, modalTitle: 'New order', modalDescription: 'VIP Points will be calculated and applied at checkout.' } },
+    });
+    $('#bundleBuilderModal').modal('show');
+    return false;
   }
 
   ngOnDestroy() {

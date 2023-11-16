@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 
 @Component({
@@ -12,6 +13,7 @@ declare var $: any;
   styleUrls: ['./smartship.component.css'],
 })
 export class SmartshipComponent implements OnInit, OnDestroy {
+  tenant: string = '';
   discountHeight = 0;
   selectedLanguage = '';
   selectedCountry = '';
@@ -23,7 +25,9 @@ export class SmartshipComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private utilityService: AppUtilityService,
     private router: Router
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getDiscountHeight();
@@ -83,7 +87,11 @@ export class SmartshipComponent implements OnInit, OnDestroy {
 
   onClickLearnMore() {
     const routeURL = '/smartship/about';
+    this.utilityService.navigateToRoute(routeURL);
+  }
 
+  onClickVipClub() {
+    const routeURL = '/vip';
     this.utilityService.navigateToRoute(routeURL);
   }
 

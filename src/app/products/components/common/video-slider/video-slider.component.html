@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="sk-video-slider-nav-container">
+  <div *ngIf="videoSlides.length > 1" class="sk-video-slider-nav-container">
     <ul class="sk-video-slider-nav">
       <li *ngFor="let slide of videoSlides">
         <img

@@ -1,11 +1,60 @@
 <div *ngIf="!isWebsites" class="referral__component dashboard--component">
   <div *ngIf="user && referrer">
     <div *ngIf="!isProfile">
-      <p>Your unique referral link</p>
+      <p>{{ "your-unique-referral-link" | translate }}</p>
       <h5>
-        <img src="assets/images/referra-pruvit.svg" />{{
-          user.code
-        }}.shopketo.com
+        <img
+          *ngIf="this.tenant === 'pruvit'"
+          src="assets/images/referra-pruvit.svg"
+        />
+        <i
+          *ngIf="this.tenant === 'ladyboss'"
+          class="fas fa-link color-brand mr-1"
+          aria-hidden="true"
+        ></i
+        >{{ user.code + "." + siteName }}.<span *ngIf="this.tenant === 'pruvit'"
+          >com</span
+        ><span *ngIf="this.tenant === 'ladyboss'">io/5daycakechallenge</span>
+        <i
+          (click)="copy()"
+          data-toggle="tooltip"
+          title="Copy link"
+          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+          class="fa-clone fa-regular {{ linkCopied ? 'hide' : '' }}"
+        ></i>
+        <i
+          data-toggle="tooltip"
+          title="Link copied"
+          data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+          class="color-green fa-check fa-regular {{
+            !linkCopied ? 'hide' : ''
+          }}"
+        ></i>
+      </h5>
+      <h5 class="form-group" *ngIf="this.tenant === 'ladyboss'">
+        <select
+          [(ngModel)]="referralLink"
+          class="form-control disclaimer-bold custom-select"
+        >
+          <option value="5daycakechallenge">
+            {{ user.code.toLowerCase() + "." + siteName }}.io/5daycakechallenge
+          </option>
+          <option value="replay">
+            {{ user.code.toLowerCase() + "." + siteName }}.io/replay
+          </option>
+          <option value="">
+            {{ user.code.toLowerCase() + "." + siteName }}.io
+          </option>
+          <option value="5daycakechallenge/upgrade">
+            {{ user.code.toLowerCase() + "." + siteName }}.io/5daycakechallenge/upgrade
+          </option>
+          <option value="champion">
+            {{ user.code.toLowerCase() + "." + siteName }}.io/champion
+          </option>
+          <option value="lean">
+            {{ user.code.toLowerCase() + "." + siteName }}.io/lean
+          </option>
+        </select>
       </h5>
       <div class="dashboard__buttons mb-2">
         <button
@@ -13,7 +62,7 @@
           [matMenuTriggerFor]="menuOrders"
           class="button button--default"
         >
-          <i class="far fa-external-link mr-2"></i>Share
+          <i class="far fa-external-link mr-2"></i>{{ "share" | translate }}
         </button>
         <mat-menu
           #menuOrders="matMenu"
@@ -21,21 +70,50 @@
           class="mat-menu--full"
         >
           <button (click)="copy()" class="mat-menu-item--custom" mat-menu-item>
-            <span>Copy</span>
+            <i class="far fa-clone mr-2" aria-hidden="true"></i
+            ><span>{{ "copy-link" | translate }}</span>
+          </button>
+          <button
+            (click)="sendEmail()"
+            class="mat-menu-item--custom"
+            mat-menu-item
+          >
+            <i class="far fa-envelope mr-2" aria-hidden="true"></i
+            ><span>{{ "email" | translate }}</span>
+          </button>
+          <button
+            (click)="sendSMS()"
+            class="mat-menu-item--custom"
+            mat-menu-item
+          >
+            <i class="far fa-comment mr-2" aria-hidden="true"></i
+            ><span>{{ "sms" | translate }}</span>
           </button>
           <button
             (click)="redirectFacebook()"
             class="mat-menu-item--custom"
             mat-menu-item
           >
-            <span>Facebook</span>
+            <i
+              class="fab fa-facebook-square mr-2"
+              [style.color]="tenant === 'ladyboss' ? '#f0006f' : '#1777f2'"
+              aria-hidden="true"
+            ></i
+            ><span>{{ "facebook" | translate }}</span>
           </button>
           <button
             (click)="redirectTwitter()"
             class="mat-menu-item--custom"
             mat-menu-item
           >
-            <span>Twitter</span>
+            <i
+              class="fab fa-twitter-square mr-2"
+              [style.color]="
+                tenant === 'ladyboss' ? '#f0006f' : 'rgb(0, 172, 238)'
+              "
+              aria-hidden="true"
+            ></i
+            ><span>{{ "twitter" | translate }}</span>
           </button>
         </mat-menu>
         <button
@@ -44,10 +122,10 @@
           data-toggle="modal"
           data-target="#referralModal"
         >
-          Manage
+          {{ "manage" | translate }}
         </button>
       </div>
-      <p class="mb-2">Your referrer</p>
+      <p class="mb-2">{{ "your-referrer" | translate }}</p>
       <div *ngIf="referrer" class="referral__component__parent">
         <div class="referral__component__parent__information">
           <img
@@ -75,11 +153,36 @@
       class="d-flex align-items-center justify-content-between"
     >
       <div>
-        <p>Your unique referral link</p>
+        <p>{{ "your-unique-referral-link" | translate }}</p>
         <h5>
-          <img src="assets/images/referra-pruvit.svg" />{{
-            user.code
-          }}.shopketo.com
+          <img
+            *ngIf="this.tenant === 'pruvit'"
+            src="assets/images/referra-pruvit.svg"
+          />
+          <i
+            *ngIf="this.tenant === 'ladyboss'"
+            class="fas fa-link color-brand mr-1"
+            aria-hidden="true"
+          ></i
+          >{{ user.code + "." + siteName }}.<span
+            *ngIf="this.tenant === 'pruvit'"
+            >com</span
+          ><span *ngIf="this.tenant === 'ladyboss'">io/5daycakechallenge</span>
+          <i
+            (click)="copy()"
+            data-toggle="tooltip"
+            title="Copy link"
+            data-template="<div class='websites-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+            class="fa-clone fa-regular {{ linkCopied ? 'hide' : '' }}"
+          ></i>
+          <i
+            data-toggle="tooltip"
+            title="Link copied"
+            data-template="<div class='websites-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+            class="color-green fa-check fa-regular {{
+              !linkCopied ? 'hide' : ''
+            }}"
+          ></i>
         </h5>
       </div>
       <button
@@ -89,7 +192,7 @@
         data-toggle="modal"
         data-target="#referralModal"
       >
-        Change
+        {{ "change" | translate }}
       </button>
     </div>
   </div>
@@ -103,12 +206,12 @@
     data-toggle="modal"
     data-target="#referralModal"
   >
-    Change referral link
+    {{ "change-referral-link" | translate }}
   </a>
 </div>
 
 <div
-  class="modal animate fade right-mobile addresses-modal"
+  class="modal animate fade right-mobile addresses-modal change-referrer-code-modal"
   id="referralModal"
   tabindex="-1"
   aria-labelledby="referralModal"
@@ -134,10 +237,12 @@
               class="fal fa-chevron-left font-weight-normal mr-2"
               aria-hidden="true"
             ></i
-            >Dashboard</a
+            >{{ "dashboard" | translate }}</a
           >
         </p>
-        <h3 class="title color-black">Change referral link</h3>
+        <h3 class="title color-black">
+          {{ "change-referral-link" | translate }}
+        </h3>
       </div>
       <div class="modal-body">
         <div class="form-group mb-3">
@@ -148,7 +253,10 @@
             pattern="^[0-9a-zA-Z]*$"
             [(ngModel)]="referrerCode"
           />
-          <span class="input__pill">shopketo.com</span>
+          <span class="input__pill"
+            >{{ siteName }}.<span *ngIf="this.tenant === 'pruvit'">com</span
+            ><span *ngIf="this.tenant === 'ladyboss'">io</span></span
+          >
           <p *ngIf="errorMessage" class="text-danger referrer--alert">
             {{ errorMessage }}
           </p>
@@ -156,10 +264,18 @@
             *ngIf="referrerInput.errors?.['pattern']"
             class="text-danger text--15"
           >
-            Referrer Code should only contain digits and english characters
+            {{
+              "referrer-code-should-only-contain-digits-and-english-characters"
+                | translate
+            }}
           </p>
-          <p *ngIf="referrerCode.length > 128" class="text-danger text--15">
-            Referrer Code should not be more than 128 characters
+          <p
+            *ngIf="referrerCode && referrerCode.length > 128"
+            class="text-danger text--15"
+          >
+            {{
+              "referrer-code-should-not-be-more-than-128-characters" | translate
+            }}
           </p>
           <p *ngIf="successMessage" class="text-success referrer--alert">
             {{ successMessage }}
@@ -172,7 +288,7 @@
           class="button button--default button--grey"
           data-dismiss="modal"
         >
-          Cancel
+          {{ "cancel" | translate }}
         </button>
         <button
           type="button"
@@ -180,8 +296,8 @@
           (click)="checkReferrerCode()"
           [disabled]="loading || !referrerCode || referrerInput.errors?.['pattern'] || referrerCode.length > 128"
         >
-          <span *ngIf="!loading">Save</span>
-          <span *ngIf="loading">Saving</span>
+          <span *ngIf="!loading">{{ "save" | translate }}</span>
+          <span *ngIf="loading">{{ "saving" | translate }}</span>
         </button>
       </div>
     </div>

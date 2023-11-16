@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -5,17 +6,23 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionLike } from 'rxjs';
+import { Offer } from 'src/app/shared/models/offer.model';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppOfferService } from 'src/app/shared/services/app-offer.service';
+import { AppSeoService } from 'src/app/shared/services/app-seo.service';
+import { AppUserService } from 'src/app/shared/services/app-user.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
-import { Product } from '../../models/product.model';
+import { AppState } from 'src/app/store/app.reducer';
+import { environment } from 'src/environments/environment';
 import { ProductSettings } from '../../models/product-settings.model';
+import { Product } from '../../models/product.model';
 import { PromoterService } from '../../services/promoter.service';
 import { ProductCardComponent } from '../common/product-card/product-card.component';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducer';
 declare var $: any;
 declare var tooltipJS: any;
 
@@ -26,6 +33,7 @@ declare var tooltipJS: any;
 })
 export class PromoterComponent implements OnInit, OnDestroy {
   @ViewChildren('child') childComponents!: QueryList<ProductCardComponent>;
+  tenant: string = '';
   discountHeight = 0;
   selectedLanguage = '';
   selectedCountry = '';
@@ -33,27 +41,38 @@ export class PromoterComponent implements OnInit, OnDestroy {
   refCode = '';
   productsData: any = {};
   promoterProducts: Product[] = [];
+  offers: Offer[] = [];
   limitedPromoterStartingPrice = 0;
   limitedPromoterProducts: Product[] = [];
   productSettings = {} as ProductSettings;
   subscriptions: SubscriptionLike[] = [];
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private userService: AppUserService,
     private dataService: AppDataService,
     private translate: TranslateService,
     public utilityService: AppUtilityService,
     private router: Router,
     private promoterService: PromoterService,
+    private offerService: AppOfferService,
     private appUtilityService: AppUtilityService,
-    private store: Store<AppState>
-  ) {}
+    private store: Store<AppState>,
+    private seoService: AppSeoService,
+    private meta: Meta
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
-    this.getDiscountHeight();
+    //if (this.tenant === 'ladyboss') this.getDiscountHeight();
     this.getSelectedLanguage();
     this.getSelectedCountry();
+    this.checkUserAccess();
     this.getCarts();
     this.getUser();
+    this.setSeo();
   }
 
   getDiscountHeight() {
@@ -90,6 +109,41 @@ export class PromoterComponent implements OnInit, OnDestroy {
     this.utilityService.setRedirectURL(this.router.url, this.selectedCountry);
   }
 
+  checkUserAccess() {
+    const viCode = this.activatedRoute.snapshot.queryParamMap.get('vicode');
+    const viProductId =
+      this.activatedRoute.snapshot.queryParamMap.get('viProductId');
+    const referrer = this.activatedRoute.snapshot.queryParamMap.get('ref');
+    const promptLogin =
+      this.activatedRoute.snapshot.queryParamMap.get('promptLogin');
+    const isWindowReferrer = document.referrer.includes('experienceketo.com');
+
+    const removedParamsUrl = this.router.url.substring(
+      0,
+      this.router.url.indexOf('?')
+    );
+    if (
+      viCode !== null &&
+      viProductId !== null &&
+      viCode !== '' &&
+      referrer !== null &&
+      promptLogin !== null &&
+      isWindowReferrer
+    ) {
+      this.userService.setVIUser(
+        referrer,
+        promptLogin,
+        viCode,
+        false,
+        viProductId
+      );
+      this.dataService.setViTimer('');
+    }
+    if (viCode !== null) {
+      this.location.go(removedParamsUrl);
+    }
+  }
+
   getCarts() {
     this.subscriptions.push(
       this.store.select('cartList').subscribe(() => {
@@ -120,6 +174,7 @@ export class PromoterComponent implements OnInit, OnDestroy {
         this.productSettings = data.productSettings;
         this.defaultLanguage = data.productsData.default_lang;
         this.productsData = data.productsData;
+        this.offers = data.offers;
 
         const products = data.products.filter(
           (p) =>
@@ -130,7 +185,6 @@ export class PromoterComponent implements OnInit, OnDestroy {
         this.getPromoters(products);
         this.getLimitedPromoters(products);
         this.getLimitedPromoterStartingPrice();
-
         $(document).ready(() => {
           tooltipJS();
         });
@@ -197,6 +251,11 @@ export class PromoterComponent implements OnInit, OnDestroy {
     }
   }
 
+  onClickPromoterDetailPage(product: Product) {
+    const routeURL = product.promoterBtnUrl;
+    this.utilityService.navigateToRoute(routeURL);
+  }
+
   onClickPromoter(product: Product) {
     const oneTimeVariations = this.promoterService.getVariations(
       product.variations
@@ -206,7 +265,7 @@ export class PromoterComponent implements OnInit, OnDestroy {
       const isInvalidSupplement =
         this.appUtilityService.isIncompatibleCheckout(false);
 
-      if (isInvalidSupplement) {
+      if (isInvalidSupplement && this.tenant !== 'ladyboss') {
         this.dataService.changePostName({ postName: 'purchase-modal' });
         $('#PurchaseWarningModal').modal('show');
       } else {
@@ -218,15 +277,56 @@ export class PromoterComponent implements OnInit, OnDestroy {
           this.productSettings
         );
 
-        this.dataService.setOfferFlowStatus(true);
+        if (this.tenant === 'ladyboss') {
+          if (
+            product.showRelatedProducts &&
+            product.relatedProducts.length > 0
+          ) {
+            this.dataService.changeSidebarName('add-to-cart');
+          } else {
+            this.dataService.changeSidebarName('checkout-cart');
+          }
 
-        const routeURL = '/smartship';
+          const cartOneTime = this.utilityService.getOneTimeStorage(
+            this.selectedCountry.toLowerCase(),
+            this.selectedLanguage
+          );
 
-        this.utilityService.navigateToRoute(routeURL);
+          const cartEveryMonth = this.utilityService.getEveryMonthStorage(
+            this.selectedCountry.toLowerCase(),
+            this.selectedLanguage
+          );
+
+          const availableOffers = this.offerService.getAvailableOffers(
+            this.offers,
+            [],
+            cartOneTime,
+            cartEveryMonth
+          );
+          if (availableOffers.length > 0) {
+            this.dataService.setOfferArray(availableOffers, 0);
+
+            this.dataService.changePostName({
+              postName: 'pruvit-modal-utilities',
+            });
+
+            setTimeout(() => {
+              $('#special-offer').modal('show');
+            }, 0);
+          } else {
+            $('.drawer').drawer('open');
+          }
+        } else {
+          this.dataService.setOfferFlowStatus(true);
+          const routeURL = '/smartship';
+          this.utilityService.navigateToRoute(routeURL);
+        }
       }
     } else {
-      const routeURL = '/promoter/' + product.name;
-
+      const routeURL =
+        this.tenant === 'ladyboss'
+          ? '/champion/' + product.name
+          : '/promoter/' + product.name;
       this.utilityService.navigateToRoute(routeURL);
     }
   }
@@ -281,7 +381,9 @@ export class PromoterComponent implements OnInit, OnDestroy {
       this.selectedCountry === 'HK' ||
       this.selectedCountry === 'MO' ||
       this.selectedCountry === 'MY' ||
-      this.selectedCountry === 'SG'
+      this.selectedCountry === 'SG' ||
+      this.selectedCountry === 'TW' ||
+      this.selectedCountry === 'JP'
     ) {
       return true;
     } else {
@@ -293,6 +395,11 @@ export class PromoterComponent implements OnInit, OnDestroy {
     if (this.childComponents) {
       this.childComponents.toArray().forEach((c) => c.manageUserAccess());
     }
+  }
+
+  setSeo() {
+    this.seoService.updateTitle('Promoter');
+    this.meta.updateTag( { property: 'og:title', content: 'Promoter' });
   }
 
   ngOnDestroy() {

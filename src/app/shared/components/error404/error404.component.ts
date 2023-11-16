@@ -4,6 +4,7 @@ import { SubscriptionLike } from 'rxjs';
 import { ProductTagOrCategory } from 'src/app/products/models/product-tag-or-category.model';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 
 @Component({
@@ -12,6 +13,7 @@ declare var $: any;
   styleUrls: ['./error404.component.css'],
 })
 export class Error404Component implements OnInit, OnDestroy {
+  tenant!: string;
   searchFilter = '';
   selectedLanguage = '';
   selectedCountry = '';
@@ -26,7 +28,9 @@ export class Error404Component implements OnInit, OnDestroy {
     private dataService: AppDataService,
     private translate: TranslateService,
     private utilityService: AppUtilityService
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getSelectedLanguage();

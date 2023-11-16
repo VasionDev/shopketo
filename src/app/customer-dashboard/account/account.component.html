@@ -20,7 +20,11 @@
             <ul>
               <li><i class="fas fa-user"></i>Pruvit profile</li>
               <li><i class="fas fa-map-marker-alt"></i>Addresses</li>
-              <li routerLink="/dashboard/payment">
+              <li
+                routerLink="/{{
+                  tenant === 'pruvit' ? 'cloud' : 'dashboard'
+                }}/payment"
+              >
                 <i class="fas fa-credit-card-front"></i>Payment methods
               </li>
               <li><i class="fas fa-bell"></i>Notifications</li>

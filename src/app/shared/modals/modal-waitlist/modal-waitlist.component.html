@@ -1,0 +1,110 @@
+<div id="waitlistModal" tabindex="-1" role="dialog" class="modal animate fade share-modal" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom no-bg">
+            <div class="modal-header flex-column">
+                <p class="w-100 d-flex justify-content-between align-items-center">
+                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close"><i class="fal fa-times"
+                            aria-hidden="true"></i></a>
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="profile-wrap mb-3" [class.products-img]="!state && !isSuccess">
+                    <div class="img-wrap">
+                        <img src="{{!state && !isSuccess ? product.homeThumbUrl : referrer.imageUrl}}" alt="img">
+                    </div>
+                </div>
+                <h3 class="title text-center color-black mb-3 font-44">{{ !state && !isSuccess ? 'Join my waitlist' : 'Thanks, ' + f['firstName'].value + '!'}}</h3>
+                <form 
+                    *ngIf="!isSuccess && state === 0"
+                    [formGroup]="waitlistForm"
+                    (ngSubmit)="onSubmitWaitlistForm()"
+                >
+                    <div class="row form-wraper mt-4">
+                        <div class="form-group col-sm-6 col-6">
+                            <input 
+                                formControlName="firstName" 
+                                type="text" class="form-control" 
+                                placeholder="First name"
+                                [class.is-invalid]="f['firstName'].errors && f['firstName'].touched"
+                            >
+                            <small *ngIf="f['firstName'].errors?.['required']" class="invalid-feedback">Please enter your First name</small>
+                        </div>
+                        <div class="form-group col-sm-6 col-6">
+                            <input 
+                                formControlName="lastName" 
+                                type="text" class="form-control" 
+                                placeholder="Last name"
+                                [class.is-invalid]="f['lastName'].errors && f['lastName'].touched"
+                            >
+                            <small *ngIf="f['lastName'].errors?.['required']" class="invalid-feedback">Please enter your Last name</small>
+                        </div>
+                        <div class="form-group col-12">
+                            <input
+                                formControlName="email"
+                                type="email" 
+                                class="form-control is-invalid" 
+                                placeholder="Email"
+                                [class.is-invalid]="f['email'].errors && f['email'].touched"
+                            >
+                            <small *ngIf="f['email'].errors?.['required']" class="invalid-feedback">Please enter your Email</small>
+                            <small *ngIf="f['email'].errors?.['pattern']" class="invalid-feedback">Please enter a valid Email address</small>
+                        </div>
+                        <div class="form-group phone-country-code col-sm-4 col-4">
+                            <div class="inner-cont">
+                                <div class="dropdown">
+                                    <div class="dropdown-btn form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="assets/images/{{userSelectedCountry.country_code}}.svg" alt="flag" />
+                                        <span class="country-code">{{userSelectedCountry.phone_code}}</span>
+                                        <i class="fal fa-angle-down color-gray arrow"></i>
+                                    </div>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <span *ngFor="let country of countries" class="dropdown-item" (click)="setUserSelectedCountryPhoneCode(country)">
+                                            <img src="assets/images/{{ country.country_code }}.svg" alt="flag" />
+                                            {{ country.name }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-8 col-8">
+                            <input
+                                formControlName="phone"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Phone number"
+                                [class.is-invalid]="f['phone'].errors && f['phone'].touched"
+                            >
+                            <small *ngIf="f['phone'].errors?.['required']" class="invalid-feedback">Please enter your Phone number</small>
+                            <small *ngIf="f['phone'].errors?.['pattern']" class="invalid-feedback">Please enter a valid Phone number</small>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button
+                                [disabled]="waitlistForm.invalid || isFormSubmitted" 
+                                type="submit" 
+                                class="button button-primary button-large mt-3"
+                            >Notify me when available
+                            <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i></button>
+                        </div>
+                    </div>
+                    <p *ngIf="errorMessage !== ''" class="disclaimer-reg text-center mt-2" style="color: #f35958; font-weight: 700">
+                        {{ errorMessage }}
+                    </p>
+                    <p *ngIf="successMessage !== ''" class="disclaimer-reg text-center mt-2" style="color: #219653; font-weight: 700">
+                        {{ successMessage }}
+                    </p>
+                </form>
+                <div *ngIf="isSuccess && state === 1">
+                    <p class="color-gray mt-2 text-center">I’ll be in touch with more information about <b>{{product.title}}</b> soon.</p>
+                    <div class="row form-wraper mt-4">
+                        <div class="col-12 d-flex justify-content-center">
+                            <button data-dismiss="modal" aria-label="Close" type="submit"
+                                class="button button-primary button-large claim-disc-btn">
+                                ENJOY shopping!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

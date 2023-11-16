@@ -1,0 +1,56 @@
+<div [hidden]="confirmShow" class="modal-body" [style.padding]="removePadding ? '0px': ''">
+    <div class="card modal-body-card" [style.padding]="removePadding ? '0px': ''">
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">{{
+            "address-line-1" | translate
+          }}</label>
+                <input (focusout)="sendAddress()" type="text" class="form-control"
+                    [(ngModel)]="billingAddress.addressLine1" maxlength="50" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">{{
+            "Attention of" | translate
+          }}</label>
+                <input (focusout)="sendAddress()" type="text" class="form-control"
+                    [(ngModel)]="billingAddress.attentionOf" maxlength="50" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">{{
+            "city" | translate
+          }}</label>
+                <input (focusout)="sendAddress()" type="text" class="form-control" maxlength="50"
+                    [(ngModel)]="billingAddress.city" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="expMonth" class="col-form-label">{{
+            "postal-code" | translate
+          }}</label>
+                <input (keyup)="sendAddress()" type="text" #zipInput="ngModel" pattern="^([A-Za-z]{3}\s{0,1}\d{4})$"
+                    class="form-control" [(ngModel)]="billingAddress.postalCode" (focusout)="checkPost()" />
+
+                <p *ngIf="zipInput.errors?.['pattern']" class="text-danger text--15">
+                    {{ "please-enter-a-postal-code" | translate }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showFooter && !confirmShow" class="modal-footer">
+    <button class="button button--default button--grey" (click)="cancel()">
+        {{ "cancel" | translate }}
+    </button>
+    <button class="button button--default" (click)="verifyAddress()"
+        [disabled]="!billingAddress.addressLine1 || !billingAddress.city || !billingAddress.postalCode || zipInput.errors?.['pattern']">
+        <span>{{ "save" | translate }}</span>
+    </button>
+</div>
+
+<app-loader *ngIf="loader" class="payment--loader"></app-loader>

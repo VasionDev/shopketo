@@ -1,0 +1,10 @@
+<span class="cancel__timer" *ngIf="!hideCounter || cancelStatus == 1">
+    <span *ngIf="cancelStatus == 0 || !cancelStatus">
+        <!-- <i class="fa-regular fa-clock mr-2"></i> Cancel within
+        {{ timeRemaining$ | async | date:'mm:ss' }} <i class="fal fa-chevron-right mr-2 ml-2"></i> -->
+        <i class="fa-regular fa-clock mr-2"></i> {{ "cancel-within" | translate}} {{cancelUntil | inviteTimer : (selectedLanguage === 'ja' ? 'cancel-timer-ja' : 'cancel-timer') | async}} <i class="fal fa-chevron-right mr-2 ml-2"></i>
+    </span>
+    <span *ngIf="cancelStatus == 1">{{ 'cancellation_requested' | translate}} <i data-toggle="tooltip"
+            title="{{ 'cancellation_tooltip' | translate}}" data-placement="top"
+            class="ml-2 mr-2 fa-circle-info fa-regular"></i></span>
+</span>

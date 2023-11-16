@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProductAccess } from 'src/app/shared/models/product-access.model';
+import { ProductVariation } from '../models/product-variation.model';
 import { Product } from '../models/product.model';
 import { ProductCardService } from './product-card.service';
 
@@ -87,7 +88,11 @@ export class ProductsUtilityService {
       },
       isSmartship: {
         on: availability === 'smartship',
-        title: 'Active SmartShip',
+        title: 'VIP Prüvers',
+      },
+      isLoggedSmartship: {
+        on: availability === 'loggedVipPruver',
+        title: 'Logged In VIP Prüvers',
       },
       isLoyalSmartship: {
         on: availability === 'loyal_smartship',
@@ -97,12 +102,43 @@ export class ProductsUtilityService {
         on: availability === 'vip',
         title: 'VIP',
       },
+      isVipPlus: {
+        on: availability === 'vipPlus',
+        title: 'VIP+',
+      },
       isCustom: {
         on: availability === 'custom_user',
         title: 'Custom users',
       },
+      isSpromoter: {
+        on: availability === 's_promoter',
+        title: 'S&SPromoters'
+      },
+      isScustomer: {
+        on: availability === 's_customer',
+        title: 'S&SCustomers'
+      }
     };
 
     return accessLevels;
+  }
+
+  getMostPopularSmartships(products: Product[]) {
+    const tempMostPopularProducts: Product[] = [];
+
+    products.forEach((product) => {
+      let smartshipFound = false;
+      product.variations.forEach((variation) => {
+        if (variation.orderType === 'ordertype_2') {
+          smartshipFound = true;
+        }
+      });
+
+      if (product.isMostPopular && smartshipFound) {
+        tempMostPopularProducts.push(product);
+      }
+    });
+
+    return tempMostPopularProducts;
   }
 }

@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  tenant: 'pruvit',
   isStaging: false,
   userURL: 'https://cloud.justpruvit.com/',
   checkoutDomain: 'https://checkout.justpruvit.com/',
@@ -7,6 +8,9 @@ export const environment = {
   apiDomain: 'https://api.shopketo.com',
   redirectDomain: 'https://cloud.justpruvit.com',
   clientID: 'pruvitomicronclientv2',
+  inviteClientId: '',
+  inviteClientSecret: '',
+  inviteScopes: '',
   returningDomain: 'https://account.justpruvit.com/',
   accountHost: 'https://account.justpruvit.com',
   accountClientId: 'pruvitshopketoroclient',
@@ -49,8 +53,10 @@ export const environment = {
   },
   newgenUrl: 'https://cloud.justpruvit.com/',
   bonusServiceIrl: 'https://api-bonusgw.onebigsplash.com',
+  //inviteApiUrl: 'https://invites.integration.onebigsplash.com',
+  inviteApiUrl: 'api-invites.onebigsplash.com',
   facebookAppId: '1555318601409164',
   unicomShortenUrlEndPoint: 'https://pvt.ai/links/shorten',
   unicomAuthUserName: 'pruvit',
-  unicomAuthPassword: 'viOBl4gM'
+  unicomAuthPassword: 'viOBl4gM',
 };

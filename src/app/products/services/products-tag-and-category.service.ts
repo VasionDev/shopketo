@@ -21,6 +21,7 @@ export class ProductsTagAndCategoryService {
     const tempChildCategoriesOrTags = categories.map((childCategory: any) => {
       return {
         termId: childCategory.term_id,
+        english_unique_id: childCategory.hasOwnProperty('english_unique_id') && childCategory.english_unique_id ? childCategory.english_unique_id : '',
         name: childCategory.name,
         description: childCategory.description,
         slug: childCategory.slug,
@@ -64,13 +65,14 @@ export class ProductsTagAndCategoryService {
 
       return {
         termId: category.term_id,
+        english_unique_id: category.hasOwnProperty('english_unique_id') && category.english_unique_id ? category.english_unique_id : '',
         name: category.name,
         description: category.description,
         slug: category.slug,
         parentTermId: category.parent,
 
         order: category.meta.hasOwnProperty('order')
-          ? category.meta.order[0]
+          ? +category.meta.order[0]
           : 0,
         backgroundColor: category.meta.hasOwnProperty('cat_bg_color')
           ? category.meta.cat_bg_color[0]
@@ -81,10 +83,17 @@ export class ProductsTagAndCategoryService {
         isNew:
           category.meta.hasOwnProperty('cat_as_new') &&
           category.meta.cat_as_new[0] === 'on',
-        childs: category.hasOwnProperty('child_categories')
+        /*childs: category.hasOwnProperty('child_categories')
           ? this.getChildCategoriesOrTags(
               category.child_categories,
               [],
+              products,
+              isCategory
+            )
+          : [],*/
+        childs: category.hasOwnProperty('child_categories')
+          ? this.getCategoriesOrTags(
+              category.child_categories,
               products,
               isCategory
             )

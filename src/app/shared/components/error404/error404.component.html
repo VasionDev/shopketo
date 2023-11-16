@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <figure class="col-md-12">
-          <div class="error-404 text-center">
+          <div *ngIf="tenant === 'pruvit'" class="error-404 text-center">
             <h1 class="text-center text-404">404</h1>
             <h2 class="text-center no-keto-here ch-black-color">
               {{ "oops-no-ketones-here" | translate }}
@@ -43,6 +43,14 @@
                 </li>
               </ul>
             </div>
+          </div>
+
+          <div *ngIf="tenant === 'ladyboss'" class="ladyboss-404 text-center">
+            <h1 class="color-black mb-2">Page not found</h1>
+            <h6 class="color-black">
+              Please check the URL then try again.
+              <p></p>
+            </h6>
           </div>
         </figure>
       </div>

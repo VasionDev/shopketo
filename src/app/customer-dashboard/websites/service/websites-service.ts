@@ -11,8 +11,10 @@ export class WebsiteService {
   vaptHost!: string;
   checkoutDomain!: string;
   referrer: any = {};
+  tenant: string = '';
+  apiClientPath: string = '';
 
-  private userProStatus = new BehaviorSubject(false);
+  private userCustomizeData = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {
     this.clientDomain = environment.clientDomain;
@@ -20,23 +22,31 @@ export class WebsiteService {
     this.contactHost = environment.contactHost;
     this.vaptHost = environment.vaptHost;
     this.checkoutDomain = environment.checkoutDomain;
+    this.tenant = environment.tenant;
+    this.apiClientPath = this.tenant === 'pruvit' ? 'pruvitnow' : 'ladyboss';
   }
 
-  get userProStatus$() {
-    return this.userProStatus.asObservable();
+  get userCustomizeData$() {
+    return this.userCustomizeData.asObservable();
   }
 
-  setUserProStatus(status: boolean) {
-    this.userProStatus.next(status);
+  setUserCustomizeData(data: any) {
+    this.userCustomizeData.next(data);
   }
 
-  getCustomizeData(userId: number, getToken: boolean) {
+  getCustomizeData(userId: number) {
     return this.http.get<any>(
       this.apiDomain +
         '/wp-json/wp/pruvitnow/mvuser/customize-data/?userId=' +
-        userId +
-        '&getToken=' +
-        getToken
+        userId
+    );
+  }
+
+  getProductByCountry(countryCode: string) {
+    return this.http.get<any>(
+      this.apiDomain +
+        (countryCode === 'us' ? '' : '/' + countryCode) +
+        '/wp-json/wp/pruvitnow/mvuser/products/'
     );
   }
 
@@ -61,7 +71,93 @@ export class WebsiteService {
 
   approveCustomizeData(data: object) {
     return this.http.post<any>(
-      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/approve',
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/approve1',
+      data
+    );
+  }
+
+  saveThemeData(
+    data: object,
+    userId: number) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/save/theme',
+      {
+        userId: userId,
+        data: data
+      }
+    );
+  }
+
+  saveLinksData(
+    data: object,
+    userId: number) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/save/links',
+      {
+        userId: userId,
+        data: data
+      }
+    );
+  }
+
+  saveFavProductsData(
+    data: object,
+    userId: number) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/save/products',
+      {
+        userId: userId,
+        data: data
+      }
+    );
+  }
+
+  saveShortBioData(
+    data: object,
+    userId: number,
+    name: string,
+    email: string,
+    refCode: string) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/save/short-bio',
+      {
+        userId: userId,
+        name: name,
+        email: email,
+        data: data,
+        refCode: refCode,
+      }
+    );
+  }
+
+  saveIntroVideoData(
+    data: string,
+    userId: number,
+    name: string,
+    email: string,
+    refCode: string) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/save/video',
+      {
+        userId: userId,
+        name: name,
+        email: email,
+        data: data,
+        refCode: refCode,
+      }
+    );
+  }
+
+  removeIntoVideo(data: object) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/remove/video',
+      data
+    );
+  }
+
+  cancelShortBioData(data: object) {
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/customize-data/cancel/short-bio',
       data
     );
   }
@@ -89,11 +185,12 @@ export class WebsiteService {
     );
   }
 
-  saveTrackingeData(data: object, userId: number) {
+  saveTrackingeData(data: object, userId: number, refCode: string) {
     return this.http.post<any>(
       this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/tracking-data',
       {
         userId: userId,
+        refCode: refCode,
         data: data,
       }
     );
@@ -118,6 +215,54 @@ export class WebsiteService {
   //   );
   // }
 
+  createContact(
+    userId: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    countryCode: string,
+    source?: string,
+    claimType?: string,
+    claimValue?: string
+  ) {
+    const payLoad: any = {
+      sponsorId: userId,
+      name: {
+        name: `${firstName} ${lastName}`,
+        firstName: firstName,
+        middleName: '',
+        lastName: lastName,
+      },
+      email: email,
+      address: {
+        streetAddress: '',
+        formatted: '',
+        postalCode: '',
+        locality: '',
+        country: countryCode,
+        region: '',
+      },
+      phoneNumber: phone ? phone : '',
+      source: source ? source : this.clientDomain,
+      status: 'Not Contacted',
+    };
+
+    if (claimType && claimValue && claimType !== '' && claimValue !== '') {
+      payLoad.customClaims = [
+        {
+          type: claimType,
+          value: claimValue,
+        },
+      ];
+    }
+
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/create-contact',
+      payLoad
+    );
+  }
+
   createContactId(
     tokenType: string,
     accessToken: string,
@@ -126,12 +271,14 @@ export class WebsiteService {
     lastName: string,
     email: string,
     phone: string,
-    countryCode: string
+    countryCode: string,
+    source?: string
   ) {
     const headers = {
       Authorization: `${tokenType} ${accessToken}`,
       'Content-Type': 'application/json',
-      //Host: this.contactHost.split('https://')[0],
+      'Access-Control-Allow-Origin': '*',
+      Host: this.contactHost,
     };
 
     const payLoad = {
@@ -152,7 +299,7 @@ export class WebsiteService {
         region: '',
       },
       phoneNumber: phone ? phone : '',
-      source: this.clientDomain,
+      source: source ? source : this.clientDomain,
       status: 'Not Contacted',
     };
 
@@ -165,30 +312,53 @@ export class WebsiteService {
     );
   }
 
-  createContactActivity(
-    tokenType: string,
-    accessToken: string,
-    contactId: string,
-    interested: string
-  ) {
-    const headers = {
-      Authorization: `${tokenType} ${accessToken}`,
-      'Content-Type': 'application/json',
-      //Host: this.contactHost,
-    };
+  // createContactActivity(
+  //   tokenType: string,
+  //   accessToken: string,
+  //   contactId: string,
+  //   interested: string
+  // ) {
+  //   const headers = {
+  //     Authorization: `${tokenType} ${accessToken}`,
+  //     'Content-Type': 'application/json',
+  //   };
 
+  //   const payLoad = {
+  //     contactId: contactId,
+  //     body: {
+  //       bodyType: 1,
+  //       text: `Interested in ${interested}`,
+  //     },
+  //     source: this.clientDomain,
+  //   };
+
+  //   return this.http.post(`${this.contactHost}/contact/SendActivity`, payLoad, {
+  //     headers: new HttpHeaders(headers),
+  //   });
+  // }
+
+  createContactActivity(
+    contactId: string,
+    interested: string,
+    source: string,
+    bodyText?: string
+  ) {
     const payLoad = {
       contactId: contactId,
       body: {
         bodyType: 1,
-        text: `Interested in ${interested}`,
+        text:
+          bodyText && bodyText !== ''
+            ? bodyText
+            : `Interested in ${interested}`,
       },
-      source: this.clientDomain,
+      source: source,
     };
 
-    return this.http.post(`${this.contactHost}/contact/SendActivity`, payLoad, {
-      headers: new HttpHeaders(headers),
-    });
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/create-activity',
+      payLoad
+    );
   }
 
   createSystemAlert(
@@ -197,7 +367,8 @@ export class WebsiteService {
     userId: number,
     fName: string,
     lName: string,
-    interested: string
+    interested: string,
+    text?: string
   ) {
     const headers = {
       Authorization: `${tokenType} ${accessToken}`,
@@ -218,7 +389,10 @@ export class WebsiteService {
               bodyType: 6,
               body: [
                 {
-                  text: `${fName} ${lName} is interested in ${interested}`,
+                  text:
+                    text && text !== ''
+                      ? text
+                      : `${fName} ${lName} is interested in ${interested}`,
                   bodyType: 1,
                 },
                 {
@@ -237,5 +411,147 @@ export class WebsiteService {
     return this.http.post(`${this.vaptHost}/feed/systemmessage`, payLoad, {
       headers: new HttpHeaders(headers),
     });
+  }
+  createSystemAlertNew(
+    userId: number,
+    fName: string,
+    lName: string,
+    interested: string,
+    text?: string
+  ) {
+    const payLoad = {
+      tenant: 'pruvit',
+      sender: 'urn:pruvit:profile:2',
+      recipient: `urn:pruvit:profile:${userId}`,
+      body: {
+        bodyType: 6,
+        body: [
+          {
+            bodyType: 8,
+            body: {
+              bodyType: 6,
+              body: [
+                {
+                  text:
+                    text && text !== ''
+                      ? text
+                      : `${fName} ${lName} is interested in ${interested}`,
+                  bodyType: 1,
+                },
+                {
+                  uri: `${this.clientDomain}/images/pruvit-social-blue.jpg`,
+                  thumbnailUri: `${this.clientDomain}/images/pruvit-social-blue.jpg`,
+                  bodyType: 2,
+                },
+              ],
+            },
+            culture: 'en',
+          },
+        ],
+      },
+    };
+
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/create-alert',
+      payLoad
+    );
+  }
+
+  updateContactName(contactId: string, firstName: string, lastName: string) {
+    const payLoad = {
+      contactId: contactId,
+      name: {
+        name: firstName + ' ' + lastName,
+        firstName: firstName,
+        middleName: '',
+        lastName: lastName,
+      },
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/'+this.apiClientPath+'/mvuser/update-contact-name',
+      payLoad
+    );
+  }
+
+  updateContactPhone(contactId: string, phone: string) {
+    const payLoad = {
+      contactId: contactId,
+      phoneNumber: phone,
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/'+this.apiClientPath+'/mvuser/update-contact-number',
+      payLoad
+    );
+  }
+
+  updateContactEmail(contactId: string, email: string) {
+    const payLoad = {
+      contactId: contactId,
+      email: email,
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/'+this.apiClientPath+'/mvuser/update-contact-email',
+      payLoad
+    );
+  }
+
+  updateContactSource(contactId: string, source: string) {
+    const payLoad = {
+      contactId: contactId,
+      source: source,
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/'+this.apiClientPath+'/mvuser/update-contact-source',
+      payLoad
+    );
+  }
+
+  AddCustomClaims(contactId: string, claims: any[]) {
+    const payLoad = {
+      contactId: contactId,
+      claims: claims,
+    };
+
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/add-custom-claims',
+      payLoad
+    );
+  }
+
+  getContactByUserId(userId: string) {
+    const payLoad = {
+      sponsorId: userId,
+      claims: [],
+      paging: {
+        skipRecords: 0,
+        pageSize: 100,
+      },
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/user-contact',
+      payLoad
+    );
+  }
+
+  getContactByUserIdAndEmail(userId: string, email: string) {
+    const payLoad = {
+      userId: userId,
+      email: email
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/get-contact-details',
+      payLoad
+    );
+  }
+
+  getContactByUserEmail(userId: string, email: string) {
+    const payLoad = {
+      userId: userId,
+      email: email
+    };
+    return this.http.post<any>(
+      this.apiDomain + '/wp-json/wp/pruvitnow/mvuser/get-contact-id',
+      payLoad
+    );
   }
 }

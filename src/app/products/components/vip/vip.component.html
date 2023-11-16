@@ -1,50 +1,413 @@
-<main [style.margin-top.px]="discountHeight">
-  <section class="sk-vip-wraper">
-    <div class="container">
-      <figure class="row vip-heading text-center">
-        <div class="col-sm-12">
-          <app-vi-offer></app-vi-offer>
+<main [style.margin-top.px]="0">
 
-          <h1 class="color-black">{{ "very-inspired-pruvers" | translate }}</h1>
-          <h4 class="color-black">
-            {{ "become-a-pruvit-vip-to-get-access" | translate }}
-          </h4>
-          <button
-            (click)="onVipLogin()"
-            class="button button-primary button-large"
-          >
-            {{ "vip-login" | translate }}
-          </button>
-        </div>
-      </figure>
-      <figure class="row vip-card-row">
-        <div class="col-sm-12">
-          <div class="vip-card card">
-            <h3 class="color-black text-center">
-              {{ "how-to-unlock-the-vault" | translate }}
-            </h3>
-            <p class="color-black text-center p-small strong">
-              {{ "100-bv-in-personal-supplements" | translate }}
-            </p>
-            <p class="color-black text-center p-small">
-              {{ "plus" | translate }}
-            </p>
-            <p class="color-black text-center p-small strong">
-              {{ "2-boxes-of-personal-pruvit-food" | translate }}
-            </p>
-            <p class="color-black text-center p-small">
-              {{ "in-the-current-and-or-prior-calendar-month" | translate }}
-            </p>
-            <p class="color-gray text-center disclaimer-reg">
-              {{ "if-you-live-outside-the-contiguous-us" | translate }},
-              {{
-                "in-place-of-pruvit-food-your-personal-supplement-bv"
-                  | translate
-              }}
-            </p>
-          </div>
-        </div>
-      </figure>
-    </div>
+  <section class="vip-club-hero">
+      <article class="container">
+          <figure class="row">
+              <div class="col-12 text-center color-white">
+                  <div class="border-gradient-vip-style">
+                      <span class="introducing"><i class="fa-solid fa-crown mr-2"></i> {{ "introducing" | translate }}</span>
+                  </div>
+                  <h1 class="title">{{ "vip-club" | translate }}</h1>
+                  <h3>{{ "you-invited-better-savings-and-rewards" | translate }}</h3>
+                  <button (click)="onSubscribeSavePage()" class="button button-primary button-large subscribe-btn"> {{ "setup-smartship-to-join-today" | translate }} 
+                      <i class="far fa-arrow-right ml-2"></i> 
+                  </button>
+              </div>
+          </figure>
+      </article>
+  </section>
+
+  <section class="vip-club-so-simple">
+      <article class="container">
+          <figure class="row" data-aos="fade-up">
+              <div class="col-12 text-center">
+                  <h1 class="page-title color-black">{{ "oh-so-simple" | translate }}</h1>
+                  <p class="color-gray-1 benefits-text">{{ "all-benefits-plus-many-more" | translate }} {{ "start-earning-points-today-every-dollar" | translate }}</p>
+              </div>
+          </figure>
+          <figure class="row simple-items" data-aos="fade-up">
+              <div class="col-12 col-sm-4 text-center">
+                  <svg width="142" height="142" viewBox="0 0 142 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_972_2441)">
+                  <circle cx="71" cy="71" r="70" stroke="url(#paint0_linear_972_2441)" stroke-width="2"/>
+                  <path d="M38 39H35V45H38H44.5L52 84.625L52.5 87H55H96H99V81H96H57.375L56.25 75H97L107 43H50.25L49.875 41.5L49.375 39H47H38ZM57 103C60.25 103 63 100.375 63 97C63 93.75 60.25 91 57 91C53.625 91 51 93.75 51 97C51 100.375 53.625 103 57 103ZM99 97C99 93.75 96.25 91 93 91C89.625 91 87 93.75 87 97C87 100.375 89.625 103 93 103C96.25 103 99 100.375 99 97Z" fill="url(#paint1_linear_972_2441)"/>
+                  </g>
+                  <defs>
+                  <linearGradient id="paint0_linear_972_2441" x1="142" y1="0" x2="0" y2="142" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.0416667" stop-color="#0CE594"/>
+                  <stop offset="1" stop-color="#3546FF"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_972_2441" x1="87" y1="39" x2="35.8" y2="64.6" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.0416667" stop-color="#0CE594"/>
+                  <stop offset="1" stop-color="#3546FF"/>
+                  </linearGradient>
+                  <clipPath id="clip0_972_2441">
+                  <rect width="142" height="142" fill="white"/>
+                  </clipPath>
+                  </defs>
+                  </svg>
+                  
+                  <h3 class="color-black">{{ "shop" | translate }}</h3>
+                  <p class="color-gray-1">{{ "limited-edition-technology-vip-vault" | translate }}</p>
+              </div>
+
+              <div class="col-12 col-sm-4 text-center">
+                  <svg width="278" height="142" viewBox="0 0 278 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_972_2449)">
+                  <circle cx="139" cy="71" r="70" stroke="url(#paint0_linear_972_2449)" stroke-width="2"/>
+                  <path d="M139 39C143.5 39 147.5 41.625 149.5 45.5C153.625 44.125 158.375 45.125 161.625 48.375C164.875 51.625 165.875 56.375 164.5 60.5C168.375 62.5 171 66.5 171 71C171 75.625 168.375 79.625 164.5 81.625C165.875 85.75 164.875 90.375 161.625 93.625C158.375 96.875 153.625 97.875 149.5 96.625C147.5 100.5 143.5 103 139 103C134.375 103 130.375 100.5 128.375 96.625C124.25 97.875 119.625 96.875 116.375 93.625C113.125 90.375 112.125 85.75 113.375 81.625C109.5 79.625 107 75.625 107 71C107 66.5 109.5 62.5 113.375 60.5C112.125 56.375 113.125 51.625 116.375 48.375C119.625 45.125 124.25 44.125 128.375 45.5C130.375 41.625 134.375 39 139 39ZM131 67C133.125 67 135 65.25 135 63C135 60.875 133.125 59 131 59C128.75 59 127 60.875 127 63C127 65.25 128.75 67 131 67ZM151 79C151 76.875 149.125 75 147 75C144.75 75 143 76.875 143 79C143 81.25 144.75 83 147 83C149.125 83 151 81.25 151 79ZM149.125 65.125L151.25 63L147 58.875L144.875 61L128.875 76.875L126.75 79L131 83.25L133.125 81.125L149.125 65.125Z" fill="url(#paint1_linear_972_2449)"/>
+                  </g>
+                  <defs>
+                  <linearGradient id="paint0_linear_972_2449" x1="210" y1="0" x2="68" y2="142" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.182292" stop-color="#7937FD"/>
+                  <stop offset="1" stop-color="#F0164A"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_972_2449" x1="155" y1="39" x2="103.8" y2="64.6" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.182292" stop-color="#7937FD"/>
+                  <stop offset="1" stop-color="#F0164A"/>
+                  </linearGradient>
+                  <clipPath id="clip0_972_2449">
+                  <rect width="142" height="142" fill="white" transform="translate(68)"/>
+                  </clipPath>
+                  </defs>
+                  </svg>
+                  
+                  <h3 class="color-black">{{ (language === 'ja' ? "save-money" : "save") | translate }}</h3>
+                  <p class="color-gray-1">{{ "up-to-25-off-with-vip-discounts" | translate }}</p>
+              </div>
+
+              <div class="col-12 col-sm-4 text-center">
+                  <svg width="278" height="142" viewBox="0 0 278 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_972_2459)">
+                  <circle cx="139" cy="71" r="70" stroke="url(#paint0_linear_972_2459)" stroke-width="2"/>
+                  <path d="M111 43V87H179V43H111ZM119 71C123.375 71 127 74.625 127 79H119V71ZM127 51C127 55.5 123.375 59 119 59V51H127ZM171 71V79H163C163 74.625 166.5 71 171 71ZM163 51H171V59C166.5 59 163 55.5 163 51ZM155 65C155 70.625 150.5 75 145 75C139.375 75 135 70.625 135 65C135 59.5 139.375 55 145 55C150.5 55 155 59.5 155 65ZM105 54V51H99V54V96V99H102H164H167V93H164H105V54Z" fill="url(#paint1_linear_972_2459)"/>
+                  </g>
+                  <defs>
+                  <linearGradient id="paint0_linear_972_2459" x1="210" y1="0" x2="68" y2="142" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FE2E68"/>
+                  <stop offset="1" stop-color="#FFAF32"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_972_2459" x1="155" y1="39" x2="103.8" y2="64.6" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FE2E68"/>
+                  <stop offset="1" stop-color="#FFAF32"/>
+                  </linearGradient>
+                  <clipPath id="clip0_972_2459">
+                  <rect width="142" height="142" fill="white" transform="translate(68)"/>
+                  </clipPath>
+                  </defs>
+                  </svg>
+                  
+                  <h3 class="color-black">{{ "earn" | translate }}</h3>
+                  <p class="color-gray-1">{{ "points-to-save-extra-50" | translate }}</p>
+              </div>
+          </figure>
+      </article>
+  </section>
+
+  <section class="vip-club-dollar-wrap">
+      <article class="container">
+          <figure class="row dollar-wrap-row" data-aos="fade-up">
+              <div class="col text-center">
+                  <div class="card dollar-spent-card">
+                  <h1 class="title color-black">{{ "a-dollar-spent-is-a-point" | translate }} <span class="text-gradient">{{ "earned" | translate }}</span></h1>
+                  <h3 class="color-gray">{{ "use-points-towards-next-order" | translate }}</h3>
+                  <p class="color-gray disclaimer-reg">{{ "10-points-when-redeemed" | translate }} <br/> {{ "redeem-up-to-50-off-order-with-points" | translate }}</p>
+                  </div>
+              </div>
+          </figure>
+          <figure class="row dollar-wrap-row" data-aos="fade-up">
+              <div class="col col-md-6 text-center">
+                  <div class="card vault-card">
+                      <i class="fas fa-solid fa-lock-keyhole-open"></i>
+                      <h1>{{ "vip-vault" | translate }}. <span class="gray">{{ "access-granted" | translate }}.</span></h1>
+                      <p class="color-gray">{{ "complete-with-vip-discount" | translate }}</p>
+                  </div>
+              </div>
+              <div class="col col-md-6 text-center">
+                  <div class="card limited-edition-card">
+                      <div class="limited-product-slider left-move">
+                          <img alt="Product-1" class="img-fluid" src="assets/images/vip/vip-club-slider-img-1.png">
+                          <img alt="Product-2" class="img-fluid" src="assets/images/vip/vip-club-slider-img-2.png">
+                          <img alt="Product-3" class="img-fluid" src="assets/images/vip/vip-club-slider-img-3.png">
+                          <img alt="Product-4" class="img-fluid" src="assets/images/vip/vip-club-slider-img-4.png">
+                          <img alt="Product-5" class="img-fluid" src="assets/images/vip/vip-club-slider-img-5.png">
+                          <!-- <img alt="Product-6" class="img-fluid" src="assets/images/vip/vip-club-slider-img-6.png">
+                          <img alt="Product-7" class="img-fluid" src="assets/images/vip/vip-club-slider-img-7.png">
+                          <img alt="Product-8" class="img-fluid" src="assets/images/vip/vip-club-slider-img-8.png">
+                          <img alt="Product-9" class="img-fluid" src="assets/images/vip/vip-club-slider-img-9.png">
+                          <img alt="Product-10" class="img-fluid" src="assets/images/vip/vip-club-slider-img-10.png"> -->
+                      </div>
+                      <p class="limited-btn">{{ "limited-edition-technology" | translate }}</p>
+                      <div class="limited-product-slider right-move" dir="rtl">
+                          <!-- <img alt="Product-1" class="img-fluid" src="assets/images/vip/vip-club-slider-img-1.png">
+                          <img alt="Product-2" class="img-fluid" src="assets/images/vip/vip-club-slider-img-2.png">
+                          <img alt="Product-3" class="img-fluid" src="assets/images/vip/vip-club-slider-img-3.png">
+                          <img alt="Product-4" class="img-fluid" src="assets/images/vip/vip-club-slider-img-4.png">
+                          <img alt="Product-5" class="img-fluid" src="assets/images/vip/vip-club-slider-img-5.png"> -->
+                          <img alt="Product-6" class="img-fluid" src="assets/images/vip/vip-club-slider-img-6.png">
+                          <img alt="Product-7" class="img-fluid" src="assets/images/vip/vip-club-slider-img-7.png">
+                          <img alt="Product-8" class="img-fluid" src="assets/images/vip/vip-club-slider-img-8.png">
+                          <img alt="Product-9" class="img-fluid" src="assets/images/vip/vip-club-slider-img-9.png">
+                          <img alt="Product-10" class="img-fluid" src="assets/images/vip/vip-club-slider-img-10.png">
+                      </div>
+                  </div>
+              </div>
+          </figure>
+          <figure class="row dollar-wrap-row" data-aos="fade-up">
+              <div class="col text-center">
+                  <div class="card enjoy-extra-card">
+                      <h3 class="color-black">{{ "enjoy-up-to" | translate }}</h3>
+                      <h1 class="color-black">50%</h1>
+                      <h2 class="color-black">{{ "off" | translate | uppercase }}</h2>
+                      
+                      <div class="off-wrap">
+                          <h6 class="percent p-15">15%</h6>
+                          <h6 class="percent p-25">25%</h6>
+                          <h6 class="percent p-50">50%</h6>
+                          <ul class="off-list">
+                          <li class="disclaimer-reg"><strong class="color-black">15% {{ "off" | translate | uppercase }}</strong> {{ "month" | translate }} 1-3</li>
+                          <li class="disclaimer-reg"><strong class="color-black">25% {{ "off" | translate | uppercase }}</strong> {{ "month" | translate }} 4+</li>
+                          <li class="disclaimer-reg"><strong class="color-black">{{ "up-to" | translate }} 50% {{ "off" | translate | uppercase }}</strong> {{ "using-your-points" | translate | lowercase }}</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="card nice-card">
+                      <h1>{{ "you-on-the-nice-list" | translate }}</h1>
+                      <h3 class="color-black"><i class="fa-light fa-badge-dollar mr-2"></i> $50 {{ "pruversary-gift" | translate }}</h3>
+                      <h3 class="color-black"><i class="fa-regular fa-cupcake mr-2"></i> {{ "surprise-birthday-gift" | translate }}</h3>
+                      <p class="color-gray disclaimer-reg">{{ "gifts-begins-after-order-processed" | translate }}</p>
+                  </div>
+              </div>
+          </figure>
+          <figure class="row dollar-wrap-row" data-aos="fade-up">
+              <div class="col">
+                  <div class="card sharing-earning-card">
+                      <div class="content">
+                          <i class="fas fa-solid fa-gift"></i>
+                          <h1 class="color-black">{{ "sharing-is-earning" | translate }}</h1>
+                          <h4 class="color-gray-1">{{ "give-friends-20-off-score-yourself" | translate }} </h4>
+                          <p class="disclaimer-reg color-gray-1">{{ "rewards-are-paid-next-order" | translate }}</p>
+                      </div>
+                  </div>
+              </div>
+          </figure>
+      </article>
+  </section>
+
+  <section class="vip-how-it-work">
+      <article class="container">
+          <figure class="row" data-aos="fade-up">
+              <div class="col-12 text-center">
+                  <h1 class="title color-black">{{ "how-it-works" | translate }}</h1>
+                  <p class="color-gray-1 mt-4">{{ "as-loyalty-grows-your-benefits" | translate }}</p>
+              </div>
+          </figure>
+          <figure class="row pricing-row" data-aos="fade-up">
+              <div class="col">
+                  <div class="card vip">
+                      <h2 class="color-green-light">{{ "vip" | translate }}</h2>
+                      <h4 class="color-black">{{ "setup-smart-ship" | translate }}</h4>
+                      <p class="color-green-light">{{ "includes" | translate }}</p>
+                      <ul>
+                          <li class="p-small">{{ "vip-vault-access" | translate }}</li>
+                          <li class="p-small">15% {{ "off" | translate | uppercase }} {{ "all-orders" | translate }}</li>
+                          <li class="p-small">{{ "use-points-for-up-to" | translate }} 50% {{ "off" | translate }}</li>
+                          <li class="p-small">{{ "earn-pt-for-every-dollar-spent" | translate }}</li>
+                          <li class="p-small">{{ "give-get-for-friends" | translate }}</li>
+                          <li class="p-small">{{ "unlimited-give-get" | translate }}</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col center-col text-center">
+                  <i class="fa-regular fa-arrow-right color-black"></i>
+                  <p class="color-gray disclaimer-reg">{{ "additional-benefits-unlock-after-save-order" | translate }}</p>
+              </div>
+              <div class="col">
+                  <div class="card vipPlus">
+                      <h2 class="color-green-light">{{ "vip" | translate }}<span class="color-white">+</span></h2>
+                      <h4 class="color-white">{{ "after-consecutive-months" | translate }}</h4>
+                      <p class="color-green-light">{{ "everything-in-vip" | translate }}, <strong class="color-white">{{ "plus" | translate | uppercase }}</strong></p>
+                      <ul>
+                          <li class="p-small">25% {{ "off" | translate | uppercase }} {{ "all-orders" | translate }}</li>
+                          <li class="p-small">{{ "extra-pts-every-dollar-spent" | translate }}</li>
+                          <li class="p-small">{{ "earn-pts-per-dollar-spent-on-referred" | translate }}</li>
+                          <li class="p-small">{{ "give-get-20 to-friends" | translate }} <span class="color-green-light">{{ "every-month" | translate }}</span></li>
+                          <li class="p-small">$50 {{ "annual" | translate }} {{ "pruversary-gift" | translate }}</li>
+                          <li class="p-small">{{ "annual-birthday-gift" | translate }}</li>
+                      </ul>
+                  </div>
+              </div>
+          </figure>
+
+          <figure class="row points-row">
+              <div class="col-sm-6 col-12 mb-sm-0 mb-4">
+                  <h4 class="color-gray-1 mb-2">{{ "using-your-points" | translate }}</h4>
+                  <p class="disclaimer-reg color-gray">{{ "10-points-1-usd" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "use-for-up-to-smartship-everyday-order-value" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "available-points-will-automatically-applied-smartship" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "monthly-limit-of-points-smartship-order" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "weekly-limit-of-points-on-everyday-orders" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "unused-points-expire-from-issue-date" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "some-product-restrictions-apply-change" | translate }}</p>
+              </div>
+              <div class="col-sm-6 col-12">
+                  <h4 class="color-gray-1 mb-2">{{ "conditions" | translate }}</h4>
+                  <p class="disclaimer-reg color-gray">{{ "points-per-dollar-spend-on-usd" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "gift-requires-minimum-month-anniversary" | translate }}</p>
+                  <p class="disclaimer-reg color-gray">{{ "first-birthday-gift-trigger-after-achieved" | translate }}</p>
+              </div>
+          </figure>
+      </article>
+  </section>
+
+  <section class="vip-today">
+      <article class="container">
+          <figure class="row">
+              <div class="col-md-12">
+                  <h1 class="color-white text-center">{{ "it-starts-today" | translate }}</h1>
+                  <p class="text-center sub-title">{{ "simply-setup" | translate }} <b>{{ "smartship" | translate }}</b> {{ "today" | translate }}.</p>
+                  <ul>
+                      <li>{{ "get" | translate }} <b>15% {{ "off" | translate | uppercase}}</b> {{ "today-order-every-order-ongoing" | translate }}</li>
+                      <li>{{ "immediately-start-earning-points-next-order" | translate }} </li>
+                      <li>{{ "access-the" | translate }} <b>{{ "vip-vault" | translate }}</b> {{ "with-exclusive-products" | translate }} </li>
+                      <li><b>{{ "edit-or-cancel" | translate }}</b> {{ "anytime" | translate }} </li>
+                      <li><b>{{ "save-time" | translate }}</b> {{ "with-automatic-monthly-processing" | translate }}</li>
+                  </ul>
+
+              </div>
+          </figure>
+          <figure class="row">
+              <div class="col-md-12">
+                  <div class="sk-category__title d-flex justify-content-between align-items-end">
+                      <h3 class="color-gray"> {{ "most-popular" | translate }} </h3>
+                  </div>
+              </div>
+          </figure>
+          <app-most-popular></app-most-popular>
+          <figure class="row">
+              <p class="save-pro">
+                  <a (click)="onSubscribeSavePage()" href="javascript:void(0)" class="color-white">{{ "shop-all-smartship-products" | translate }} 
+                      <i class="far fa-arrow-right ml-2"></i>
+                  </a>
+              </p>
+          </figure>
+      </article>
+  </section>
+
+  <section class="FAQ-wraper arrow-style">
+      <article class="container">
+          <figure class="row">
+              <div class="col-sm-12 title text-center">
+                  <h1 class="color-black"> {{ "questions" | translate }} </h1>
+                  <p class="color-gray-1 mt-4"> {{ "if-have-different-question-please-check" | translate }} <a href="{{ generalSettings?.help_center }}" class="color-gray-1 link-hover"><u>{{ "help-center" | translate }}</u></a></p>
+              </div>
+          </figure>
+  
+          <figure class="row FAQ-accordion">
+              <div id="accordion" class="col-sm-12">
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed"
+                              data-target="#exogenousKetones-collapse-0" aria- controls="exogenousKetones-collapse-0">{{ "do-points-expire" | translate }}<i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-0">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-1" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-1" aria-controls="exogenousKetones-collapse-1"> {{ "how-can-check-points-balance" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-1">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-2" | translate }} <a href="http://shopketo.com/cloud/wallet" target="_blank"  rel="noopener noreferrer">http://shopketo.com/cloud/wallet</a> {{ "vip-faq-ans-2-1" | translate }} </p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-2" aria-controls="exogenousKetones-collapse-2"> {{ "how-do-spend-points" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-2">
+                          <div class="card-body">
+                           <p class="color-black p-small">{{ "vip-faq-ans-3" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17"> 
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-3" aria-controls="exogenousKetones-collapse-3">
+                           {{ "can-use-points-towards-other-fees" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-3">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-4" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-4" aria-controls="exogenousKetones-collapse-4"> {{ "how-long-does-deposit-my-account" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-4">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-5" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-6" aria-controls="exogenousKetones-collapse-6"> {{ "when-do-start-getting-off" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-6">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-6" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-7" aria-controls="exogenousKetones-collapse-7"> {{ "how-do-refer-friend" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-7">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "login-to" | translate }} <a href="http://shopketo.com/cloud/dashboard"  target="_blank" rel="noopener noreferrer">http://shopketo.com/cloud/dashboard</a> {{ "vip-faq-ans-7" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="card gray-icon">
+                      <h4 id="exogenousKetones" class="card-header font-17">
+                          <button data-toggle="collapse" aria-expanded="false" class="btn btn-link color-black collapsed" data-target="#exogenousKetones-collapse-8" aria-controls="exogenousKetones-collapse-8"> {{ "can-personalize-referral-link" | translate }} <i class="fa-regular fa-angle-down"></i>
+                          </button>
+                      </h4>
+                      <div aria-labelledby="exogenousKetones" data-parent="#accordion" class="collapse" id="exogenousKetones-collapse-8">
+                          <div class="card-body">
+                              <p class="color-black p-small">{{ "vip-faq-ans-8-1" | translate }} <a href="http://shopketo.com/cloud/dashboard"  target="_blank" rel="noopener noreferrer">http://shopketo.com/cloud/dashboard</a>, {{ "vip-faq-ans-8-2" | translate }}</p>
+                              <p class="color-black p-small">{{ "vip-faq-ans-8-3" | translate }}</p>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+          </figure>
+      </article>
   </section>
 </main>

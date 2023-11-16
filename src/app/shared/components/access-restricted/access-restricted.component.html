@@ -12,7 +12,21 @@
           <p class="color-black disclaimer-bold">
             {{ "it-is-available-to" | translate }}
           </p>
-          <h3 class="color-black">{{ accessLevelTitle }}</h3>
+          <ng-container [ngSwitch]="true">
+            <h3 class="color-black">
+              <ng-container *ngSwitchCase="accessLevels.isVisitor.on">{{ "visitors" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isCustomer.on">{{ "customers" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isPromoter.on">{{ "pomoters" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isSmartship.on">{{ "vip-pruvers" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isLoggedSmartship.on">{{ "logged-in-vip-pruvers" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isLoyalSmartship.on">{{ "loyal-smartship-pruvers" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isRank6.on">{{ "champions-r6" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isRank7.on">{{ "100k-pro-champs-r7" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isRank8.on">{{ "250k-pro-champs-r8" | translate }}</ng-container>
+              <ng-container *ngSwitchCase="accessLevels.isVipPlus.on">{{ "vip-plus" | translate }}</ng-container>
+            </h3>
+          </ng-container>
+          <!-- <h3 class="color-black">{{ accessLevelTitle }}</h3> -->
         </div>
 
         <p class="color-black pt-2">

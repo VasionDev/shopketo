@@ -1,0 +1,834 @@
+<div class="ladyboss-5dayCake-header-top">
+  <p class="text-center color-white"><i class="fa-regular fa-calendar-days mr-1"></i> <b>LIVE!</b> 5-Day Cake
+      Challenge <b>With Kaelin Poulin!</b> {{ settings.eventDate }} @ 3PST/ 4MST/ 5CST/ 6EST
+  </p>
+</div>
+
+<section class="ladyboss-5dayCake-reg-header">
+  <article class="container mxwdt-1250">
+      <div class="row">
+          <div class="col-12">
+              <div class="d-flex justify-content-between">
+                  <img class="img-fluid header-logo"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/555085/file/3761f9a96ceb263ef6d89e2ca544be61.png">
+                  <div class="right-login-group d-flex">
+                      <button data-toggle="modal" data-target="#cakeday-sign"
+                          class="button lb5day-button-large button-primary mb-hide">
+                          JOIN TODAY
+                      </button>
+                      <a *ngIf="!isUserLoggedIn" class="nav-link sk-header__nav-link pointer" href="/dashboard">
+                          <i class="far fa-user sk-header__user-card color-black"></i>
+                          <span class="text-label color-black"> {{ "login" | translate }} </span>
+                      </a>
+                      <a *ngIf="isUserLoggedIn" class="nav-link sk-header__nav-link pointer"
+                          (click)="onClickAvatar()">
+                          <img src="{{ userAvatar }}" class="user-img img-fluid" />
+                          <span class="text-label color-black"> {{ "account" | translate }} </span>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="ladyboss-5daycake-challenge-wrap">
+  <article class="container-fluid">
+      <figure class="row mxwdt-1250">
+          <div class="col-12">
+              <h4 class="color-black text-center title mb-hide">🎂 Want To Enjoy Delicious Cake <u _ngcontent-serverapp-c184="">AND</u> Slim Down At The Same Time?!&nbsp;🎂</h4>
+              <div class="col-12 right-col text-center">
+                  <p class="color-black p-small font-bold my-3 mb-show">Want To Enjoy Delicious Cake <u>AND</u> Slim Down At The Same Time?! </p>
+                  <p class="color-black font-bold lettersp-04"><i>Achieve The Health &amp; Physique Of Your Dreams And Join...</i></p>
+                  <h1 class="color-brand my-1 lettersp-04">LadyBoss’ 5-Day CAKE CHALLENGE!</h1>
+                  <h4 class="color-black sub-title text-center">Jumpstart Your Weight Loss Journey And Begin To Shed Those Pesky Pounds <u>In Just 5 Days</u>... </h4>
+                  <h3 class="color-black text-center mt-1 mb-3">All While Enjoying <b><i>Delicious Cake!</i></b></h3>
+                  <div class="img-col video-wrap">
+                      <iframe frameborder="0"
+                          allowfullscreen="" wmode="opaque"
+                          src="https://embed.voomly.com/embed/assets/embed.html?videoId=x9V3nhUlS8SOnJGoCQxJDcCPG_aXASYZyl9TniLcPxhXbvUah&amp;videoRatio=1.777778&amp;type=v"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                      </iframe>
+                  </div>
+                  <div class="enroll-end d-flex align-items-center justify-content-center mb-hide">
+                      <div>
+                          <p>Challenge Starts In: </p>
+                      </div>
+                      <div class="invite-timer color-white" [innerHTML]="settings.countdownDate | inviteTimer | async"></div>
+                  </div>
+                  <p class="text-center my-3"><img
+                          src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                          width="150" class="img-fluid">
+                      </p><button data-toggle="modal" data-target="#cakeday-sign" class="button button-primary lb5day-button-large"> Join The 5-Day  Cake Challenge For Free! <i class="fas fa-caret-right ml-1"></i>
+                      <p>Click Or Tap Here To Save Your Seat Now</p>
+                  </button>
+              </div>
+          </div>
+      </figure>
+  </article>
+</section>
+
+<section class="ladyboss-5daycake-one-way-wrap">
+  <article class="container">
+      <figure class="row">
+          <div class="col-12 inner-text text-center">
+              <p><i>Tired Of Being Told There’s <b>Only ONE Way To Lose Weight </b> And Get In Shape?</i></p>
+              <div class="border-bottom-gray text-center">
+                  <img class="img-fluid"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/412616/file/52b05321d9b950fed157b85f264ffb11.png"
+                      width="50">
+              </div>
+              <h2 class="color-brand border-bottom-gray">How Would You Like To <u>Have Your Cake</u>🎂AND <u>Lose The
+                      Weight,</u> <i>Too?</i> </h2>
+              <h4>It’s Called <u>The 5-Day Cake Challenge</u> And It’s The Most Delicious Way To
+                  Kick-Start Your Slim Down, Feel Amazing, And Become The Sexy, Unstoppable LadyBoss You’ve Always
+                  Wanted!</h4>
+          </div>
+      </figure>
+  </article>
+</section>
+
+<section class="ladyboss-5daycake-challenge-card">
+  <article class="container">
+      <figure class="row challenge-card inner-content">
+          <div class="col-md-7 left-text">
+              <p class="text-center"><img class="img-fluid logo"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/555175/file/b45316e8dc0a9456e1899df07d619661.png"
+                      width="65"></p>
+              <h4 class="color-brand text-center border-top border-bottom">THIS CHALLENGE IS FOR YOU, <i>IF YOU...</i>
+              </h4>
+              <img class="img-fluid group-img mt-2 mb-show mx-auto"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563714/file/b58bafd7ad01148fce300cfdcc618a72.jpg"
+                  width="370">
+
+              <ul class="list">
+                  <li><b>Want to FINALLY free yourself from the clutches of bad food temptations, slim down, get
+                          stronger, and look amazing naked!</b></li>
+                  <li>Are a busy mom running around with kids with almost no time in the day to eat “healthy” and take
+                      time for yourself...</li>
+                  <li><b>Feel trapped in a cycle of “weight loss programs” that give some hope... but then fall apart
+                          when the cravings kick in <i>(...which is why you NEED cake!)</i></b></li>
+                  <li>Want to unleash the sexy, confident goddess inside of you WHILE still enjoying delicious treats
+                      and feeling awesome about your body!</li>
+                  <li><b>Would enjoy the opportunity to earn money that works around YOUR lifestyle, giving you a
+                          stronger feeling of independence and overall bad-assery</b></li>
+              </ul>
+
+              <img class="img-fluid group-img mb-show mx-auto"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563715/file/b31b445560e78968db3883c9b8db5caf.jpg"
+                  width="360">
+              <h3>If that’s you, then I urge you to join the 5-Day Cake Challenge for <u>FREE</u> today!</h3>
+              <p class="text-center my-3"><img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                      width="150"></p>
+              <button data-toggle="modal" data-target="#cakeday-sign"
+                  class="button button-primary lb5day-button-large"> Join The 5-Day Cake Challenge For
+                  Free! <i class="fas fa-caret-right ml-1"></i>
+                  <p>Click Or Tap Here To Save Your Seat Now</p>
+              </button>
+          </div>
+
+          <div class="col-md-5 right-img text-center">
+              <img class="img-fluid group-img mb-hide"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563713/file/f4aec2bfcb87dfea96ca0223d96d8ea3.jpg"
+                  width="370">
+
+              <img class="img-fluid group-img img-left mb-hide"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563715/file/b31b445560e78968db3883c9b8db5caf.jpg"
+                  width="360">
+
+              <img class="img-fluid group-img mb-hide"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563714/file/b58bafd7ad01148fce300cfdcc618a72.jpg"
+                  width="370">
+
+              <img class="img-fluid group-img img-left mb-hide"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563716/file/35992dfccf35460c3c156cf8441ffa5f.jpg"
+                  width="360">
+          </div>
+      </figure>
+  </article>
+</section>
+
+<section class="ladyboss-5daycake-founder-kaelin">
+  <article class="container mxwdt-995">
+      <div class="founder-profile">
+          <div class="prfile-info d-flex align-items-center">
+              <img class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/558754/file/0d1f78405e8c38a00f7ab08f77a3aaea.png">
+              <div class="details-info">
+                  <span>Message from</span>
+                  <p class="name">Kaelin Poulin</p>
+                  <p class="found-text"><i>Founder of Ladyboss</i></p>
+              </div>
+          </div>
+
+          <h3 class="color-black">Dear LadyBoss:</h3>
+          <div class="p-text">
+              <p class="color-black my-4">If you’re struggling to shed the excess pounds— either from baby weight,
+                  mid-40s “fluff”, or just from “life” in general—I want you to know you’re not alone, and my <b>5-Day
+                      Cake Challenge</b> was made with you in mind!</p>
+              <p class="color-black">Now, if you’re thinking, “there is NO way you can lose weight, get fit, unleash
+                  your sexy self while chowin’ down on mouth-watering cake...”</p>
+          </div>
+      </div>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-youcan-wrap">
+  <article class="container mxwdt-995">
+      <div class="row">
+          <div class="col-12 title text-center">
+              <p class="color-black">I’m here to tell you:</p>
+              <h4 class="color-brand you-title">You Can!</h4>
+              <h4 class="color-black stay-fit fw-800">As a matter of fact, that’s exactly how I’ve been able to stay
+                  fit...
+              </h4>
+          </div>
+
+          <div class="row running-company-row">
+              <div class="col-md-5 left-col">
+                  <p class="color-black mb-4">And trim while running a company, taking
+                      care of my kiddos, and without doing any of the “traditional” lame weight loss programs out
+                      there...</p>
+                  <p class="color-black">...And if you’re the type that doesn’t like being told what to do, and want
+                      to shed the excess weight YOUR way without saying “no” to delicious treats like cake, pizza,
+                      cheeseburgers... fettuccine alfredo... then sign up for my <b><i>5-Day Cake Challenge</i></b>
+                      for
+                      <u>FREE!!</u>
+                  </p>
+              </div>
+
+              <div class="col-md-7 img-col">
+                  <img class="img-fluid com-img" width="530"
+                      src="https://statics.myclickfunnels.com/image/559641/file/8a0019b89ff4c1ad564d66f9c08cae33.jpg">
+                  <img class="img-fluid cake-img"
+                      src="https://statics.myclickfunnels.com/image/559640/file/e2764636b08fc09defaf86e2be0f78c8.png"
+                      width="105">
+              </div>
+
+              <div class="col-12">
+                  <p class="color-black">During the 5-Day Challenge, my team and I will show you step-by-step on how
+                      to go
+                      from an unmotivated and “hopeless dieter”... to igniting your metabolism for a weight loss
+                      outcome
+                      you can begin to feel and see in a matter of days!
+                  </p>
+                  <p class="color-black my-4">As we do it together as a group you will find motivation, exercise and
+                      other
+                      nutrition tips to keep you inspired!</p>
+              </div>
+
+              <div class="col-12">
+                  <h4 class="text-center ingre-title">And the main weight loss ingredient is <u>CAKE!!!</u></h4>
+              </div>
+
+              <div class="col-md-6 text-right">
+                  <img class="img-fluid com-img" width="465"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/559571/file/be77d7f1d0eb44467c818f89251e5663.jpg">
+              </div>
+
+              <div class="col-md-6">
+                  <p class="mt-3">But don’t wait! <b>This challenge is going to fill up fast and we are capped on how
+                          many ladies
+                          we can accept.</b></p>
+                  <p class="mt-4">So if you’re here now and you’re ready to take back control of your health and begin
+                      to look and feel incredible again, then hit the button below and save your seat for my
+                      <b><i>5-Day Cake Challenge now!</i></b>
+                  </p>
+              </div>
+              <div class="col-12 mt-4">
+                  <p class=" text-center"><img class="img-fluid"
+                          src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                          width="180"></p>
+              </div>
+
+          </div>
+
+          <button data-toggle="modal" data-target="#cakeday-sign" class="button button-primary lb5day-button-large">
+              Join The 5-Day Cake Challenge For Free! <i class="fas fa-caret-right ml-1"></i>
+              <p>Click Or Tap Here To Save Your Seat Now</p>
+          </button>
+      </div>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-results-wrap">
+  <article class="container mxwdt-1050">
+      <figure class="row">
+          <div class="col-12 text-center">
+              <h2 class="color-brand">The Results Speak For Themselves</h2>
+              <h4 class="color-black take"><i>Take A Look...</i></h4>
+          </div>
+          <div class="row">
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564248/file/37c99c04345bdc42f75a9bbc2ef58565.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564247/file/9762f501e07c8fb700d44cc631e2e957.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564246/file/a8574f1bbcceeb5feebe6ff5251d3452.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564243/file/97cb8f1bfce110ebcf830a35be4f9238.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/576552/file/a613bf16ade96eeb014348939bc997e9.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564242/file/4d3e58a0a1a0bdf041e161d2c43c1019.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6 col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/564244/file/c4294c1fd5a93fae32ad0d1240daa2f6.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-md-6  col-12 item">
+                  <img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/576550/file/5737fab3ad0bf0aaedae5a0d6f06b319.jpg"
+                      alt="img">
+              </div>
+
+              <div class="col-12">
+                  <p class="alert text-center">
+                      <i>*These women kickstarted their weight loss by using LadyBoss LEAN. The results
+                          depicted in these testimonials are unique to the individual and achieved through dedication
+                          to a specific diet and exercise regimen. Results and time may vary.</i>
+                  </p>
+
+                  <p class=" text-center mb-3"><img class="img-fluid"
+                          src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                          width="150" alt="img">
+                  </p>
+
+                  <button data-toggle="modal" data-target="#cakeday-sign"
+                      class="button button-primary lb5day-button-large"> Join The 5-Day Cake Challenge For
+                      Free! <i class="fas fa-caret-right ml-1"></i>
+                      <p>Click Or Tap Here To Save Your Seat Now</p>
+                  </button>
+
+              </div>
+
+          </div>
+      </figure>
+
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-daywraper">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <h2 class="color-brand text-center title">Here’s What You Can Expect</h2>
+              <h4 class="color-black text-center">During The 5-Day Cake Challenge:</h4>
+          </div>
+          <div class="col-12 day-card">
+              <div class="card">
+                  <div class="row">
+                      <div class="col left-text">
+                          <h4 class="color-black"><i class="fa-regular fa-calendar-check color-brand mr-1"></i> DAY 1:
+                          </h4>
+                          <h2 class="color-black day-title">DRINK<img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/559668/file/e52f902746cc923e11ab85d1e4e74954.png">
+                          </h2>
+                          <p class="color-black mb-4">We’re going to kick off the first day by showing you how to
+                              jumpstart your metabolism within the first hour of waking up with a mouth-watering
+                              cake-like shake breakfast!!</p>
+                          <p class="color-black mb-2">We’ll reveal our MOST popular breakfast cake-shake recipes that
+                              you’ll swear you’re having a dessert for breakfast... <i>(but it’s all 100%
+                                  guilt-free!!)</i>
+                          </p>
+                          <div class="bonus-card"><img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/560022/file/19c6614b5601c31e4d7097c40e3d63bc.png">
+                              <span><strong>BONUS:</strong> you’ll learn how to score our prized ‘61 Shake Recipe
+                                  Book’ for FREE!!!</span>
+                          </div>
+                      </div>
+                      <div class="col img-right">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/569944/file/ad51702d2c73387dbb65e60f26737021.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 day-card">
+              <div class="card">
+                  <div class="row">
+                      <div class="col left-text">
+                          <h4 class="color-black"><i class="fa-regular fa-calendar-check color-brand mr-1"></i> DAY 2:
+                          </h4>
+                          <h2 class="color-black day-title">EAT <img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/559668/file/e52f902746cc923e11ab85d1e4e74954.png">
+                          </h2>
+                          <p class="color-black mb-4">The MOST difficult part of dropping weight and keeping it off
+                              for good...? Snack temptations.</p>
+                          <p class="color-black mb-2">That’s why on day two, we’ll show you how to make irresistible
+                              snacks that are 1.) tasty as heck and 2.) insanely good for you! It’s a weight
+                              loss/happy taste-buds win-win.</p>
+                          <div class="bonus-card"><img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/560022/file/19c6614b5601c31e4d7097c40e3d63bc.png">
+                              <span><strong>BONUS:</strong> you’ll learn how to score our ‘Snacks Recipe Book’ for
+                                  FREE!!!</span>
+                          </div>
+                      </div>
+                      <div class="col img-right">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/560865/file/08eaae000354fc3127617f004a73f723.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 day-card">
+              <div class="card">
+                  <div class="row">
+                      <div class="col left-text">
+                          <h4 class="color-black"><i class="fa-regular fa-calendar-check color-brand mr-1"></i> DAY 3:
+                          </h4>
+                          <h2 class="color-black day-title">BAKE<img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/559668/file/e52f902746cc923e11ab85d1e4e74954.png">
+                          </h2>
+                          <p class="color-black mb-4">If you’re always on-the-go, then you’ll love day three where
+                              we’ll show you how to bake nutritious, protein-rich meals you can take with you!</p>
+                          <p class="color-black mb-2">Even if you suck at cooking, don’t worry. We’ll show you
+                              step-by-step on how to bake your new favorite fat loss meal that’s so easy even your
+                              kids can follow the recipe!</p>
+                          <div class="bonus-card"><img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/560022/file/19c6614b5601c31e4d7097c40e3d63bc.png">
+                              <span><strong>BONUS:</strong> you’ll learn how to score our ‘Foods Recipe Book’ for
+                                  FREE!!!</span>
+                          </div>
+                      </div>
+                      <div class="col img-right">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/560870/file/cf0c978f2e8cf32c75c2d8dc7bb2d6cc.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 day-card">
+              <div class="card">
+                  <div class="row">
+                      <div class="col left-text">
+                          <h4 class="color-black"><i class="fa-regular fa-calendar-check color-brand mr-1"></i> DAY 4:
+                          </h4>
+                          <h2 class="color-black day-title">EARN<img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/559668/file/e52f902746cc923e11ab85d1e4e74954.png">
+                          </h2>
+                          <p class="color-black mb-4">On day four, we’ll reveal how you can earn “FREE Cake” every
+                              month, simply by enjoying cake yourself!</p>
+                          <p class="color-black mb-2">Additionally, this is your chance to give “cake” to your closest
+                              friends or family who may be looking to get back in shape and eat cake at the same time!
+                          </p>
+                      </div>
+                      <div class="col img-right">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/560873/file/aae24a9b3e444480db51fa2e3ef36ff9.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 day-card">
+              <div class="card">
+                  <div class="row">
+                      <div class="col left-text">
+                          <h4 class="color-black"><i class="fa-regular fa-calendar-check color-brand mr-1"></i> DAY 5:
+                          </h4>
+                          <h2 class="color-black day-title">MAKE<img class="img-fluid"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/559668/file/e52f902746cc923e11ab85d1e4e74954.png">
+                          </h2>
+                          <p class="color-black mb-4">If you’re already drinking cake, eating cake, baking cake, and
+                              losing weight... might as well have the opportunity to get paid to do it!</p>
+                          <p class="color-black mb-2">On day five we’ll show you how YOU can help others eat cake and
+                              lose weight and in turn, provide the tools for you to build your business from scratch!
+                          </p>
+                      </div>
+                      <div class="col img-right">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/569947/file/4737b3b48bccccd819387bd8812ef274.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="ladyboss-5daycake-nutritionalmeal">
+  <article class="container">
+      <figure class="row">
+          <div class="col-12">
+              <h4 class="text-center border-dash">Why Spend Upwards Of $297 For A Specialized (And Bland) Nutritional
+                  Meal Plan...
+              </h4>
+              <div class="details-wrap d-flex align-items-center">
+                  <p><img class="img-fluid cake-img"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563488/file/2f33679ebadf28f96567be55394eb106.png">
+                  </p>
+
+                  <div class="text">
+                      <h3 class="color-brand lettersp-04">...When You Can Eat CAKE For 5 Days Straight</h3>
+                      <h1 class="color-brand lettersp-04 border-dash text-center"> <u><i>AND</i></u> Lose Weight?</h1>
+                  </div>
+              </div>
+
+              <h4 class="text-center pt-4"><i>(The Answer Is A No Brainer)</i></h4>
+              <p class="text-center free-text">So Smack That Button Below Now And Join The 5-Day Cake Challenge Today
+                  For <u>FREE!</u></p>
+              <p class=" text-center my-3"><img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                      width="150" alt="img"></p>
+              <button data-toggle="modal" data-target="#cakeday-sign"
+                  class="button button-primary lb5day-button-large"> Join The 5-Day Cake Challenge For
+                  Free! <i class="fas fa-caret-right ml-1"></i>
+                  <p>Click Or Tap Here To Save Your Seat Now</p>
+              </button>
+          </div>
+      </figure>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-beforeafter-challenge">
+  <article class="container">
+      <figure class="row">
+          <div class="col-12 text-center">
+              <p class="ready-title"><i>Ready To Become The REAL YOU You’ve Always Wanted In Just 5 Days?</i></p>
+              <h2 class="color-black">What You Can ExpecT From The 5-Day Cake Challenge!</h2>
+          </div>
+
+          <div class="col-md-6 col-12">
+              <div class="card before-card">
+                  <h1 class="color-brand text-center lettersp-04">BEFORE</h1>
+                  <h3 class="color-brand text-center">The Challenge</h3>
+                  <img class="img-fluid"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563739/file/1fed81e5ee1bd2a0c6dd8e1d7387f30b.jpg"
+                      alt="img">
+                  <ul class="list">
+                      <li>Struggling to lose weight and have all-day energy...</li>
+                      <li>Overwhelmed with all of the “diet programs” out there...</li>
+                      <li>Feeling stuck in life, health, and looking for supplemental income</li>
+                      <li>Low motivation or drive to become someone you’re proud of...</li>
+                  </ul>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+              <div class="card after-card">
+                  <h1 class="color-brand text-center lettersp-04">AFTER</h1>
+                  <h3 class="color-brand text-center">The Challenge</h3>
+                  <img class="img-fluid"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/559549/file/cca6cf8a6e8c1184bc6375d0588e09d9.jpg"
+                      alt="img">
+                  <ul class="list">
+                      <li><b>Finally drop the excess weight... </b> while enjoying your favorite treats like cake!
+                      </li>
+                      <li><b>Feeling 10X more energy </b> that lasts throughout the day</li>
+                      <li><b>Boost in confidence... </b> feeling and looking slimmer (and everyone notices!)</li>
+                      <li><b>HUGE motivation </b> and drive to stay on your weight loss journey and help others do the
+                          same!</li>
+                  </ul>
+              </div>
+          </div>
+      </figure>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-speckers-for">
+  <article class="container">
+      <figure class="row">
+          <div class="col-12 speckers-details">
+              <div class="border-bottom-gray text-center">
+                  <img class="img-fluid"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/412616/file/52b05321d9b950fed157b85f264ffb11.png"
+                      width="50">
+              </div>
+
+              <h2 class="color-brand text-center border-bottom-gray">Speakers For The 5-Day Cake Challenge</h2>
+              <div class="row profile-row text-center">
+                <div class="col-12">
+                    <div class="profile-img">
+                        <img class="img-fluid"
+                            src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563449/file/53c764e8cf2d85af4b9802a1165ea9f0.jpg">
+                    </div>
+
+                    <div class="profile-info">
+                        <h4 class="color-white name">Kaelin Poulin</h4>
+                        <span><i>Original Founder Of LadyBoss</i></span>
+                        <p class="decp">Entrepreneur, author, business consultant to 7 and 8 figure companies, mom, and founder of LadyBoss. Kaelin is coming back for this special, 5-Day Cake Challenge— you don’t want to miss this once-in-a-lifetime opportunity!</p>
+                    </div>
+                </div>
+                  <div class="col-md-6 col-12">
+                      <div class="profile-img">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/951372/file/39e7d443c3360444826eb5d37f5bd383.png">
+                      </div>
+
+                      <div class="profile-info">
+                          <h4 class="color-white name">Stefanie Poulin</h4>
+                          <span><i>Independent LadyBoss Certified Coach</i></span>
+                      </div>
+                  </div>
+
+                  <div class="col-md-6 col-12">
+                      <div class="profile-img">
+                          <img class="img-fluid"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/951374/file/43f63cd79d533e6630d07f0d2acdbc94.png">
+                      </div>
+
+                      <div class="profile-info">
+                          <h4 class="color-white name">Molly Richards</h4>
+                          <span><i>Independent LadyBoss Certified Coach</i></span>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </figure>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-everything-card">
+  <article class="container">
+      <figure class="row">
+          <div class="heres-everything-card">
+              <h1 class="color-brand text-center">Here’s Everything You GET</h1>
+              <h4 class="text-center sub-title">When You Sign Up For The 5-Day Cake Challenge Today!</h4>
+              <img class="img-fluid group-img"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/564008/file/a17a91fb2f712ef7b191719a55a29f73.png">
+              <div class="free-list">
+                  <ul class="list">
+                      <li><u class="color-brand"><b>FREE!</b></u><u>5 days of learning</u> how to easily (and quickly)
+                          jumpstart your metabolism, lose excess weight, and have the happy, healthy life you deserve…
+                          all
+                          while enjoying delicious cake!
+                      </li>
+                      <li><u class="color-brand"><b>FREE!</b></u> TONS of amazing, <u>fat-melting (and scrumptious)
+                              recipes </u>that you can do at home with ingredients you already have in your pantry!
+                      </li>
+                      <li><u class="color-brand"><b>FREE!</b></u><u> Access to our private LadyBoss community</u>,
+                          where you can share wins, ask questions, and get inspired!</li>
+                  </ul>
+              </div>
+
+              <h4 class="text-center nor-price">Normally <span>$<del>297</del></span></h4>
+              <h2 class="text-center green-color">TODAY: <b>FREE!</b></h2>
+              <p class=" text-center my-3"><img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                      width="180" alt="img">
+              </p>
+              <button data-toggle="modal" data-target="#cakeday-sign"
+                  class="button button-primary lb5day-button-large"> Join The 5-Day Cake Challenge For Free! <i
+                      class="fas fa-caret-right ml-1"></i>
+                  <p>Click Or Tap Here To Save Your Seat Now</p>
+              </button>
+
+              <div class="row challenge-start-card">
+                  <div class="col-md-4">
+                      <div class="challenge-step-card">
+                          <h4 class="text-center title"><i class="fas fa-trophy color-brand"></i> What:</h4>
+                          <p class="text-center mt-3">5-Day Cake Challenge!</p>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <div class="challenge-step-card">
+                          <h4 class="text-center title"><i class="fas fa-calendar-alt color-brand"></i> When:</h4>
+                          <p class="text-center mt-3">{{ settings.eventDate }} @ TIME 3PST/ 4MST/ 5CST/ 6EST</p>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <div class="challenge-step-card">
+                          <h4 class="text-center title"><i class="fas fa-birthday-cake color-brand"></i> Why:</h4>
+                          <p class="mt-3 text-center">Because this YOUR time to take back control of your health and
+                              feel incredible in your body without saying “no” to delicious foods you love!</p>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+      </figure>
+
+  </article>
+
+</section>
+
+<section class="ladyboss-5daycake-think-over">
+  <article class="container">
+      <figure class="row">
+          <div class="col-12">
+              <h4 class="text-center title">DON’T WAIT AND “THINK” IT OVER!</h4>
+          </div>
+
+
+          <div class="col-md-5 col-12 left-col">
+              <img class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/563591/file/9e65c4bc48e6d2bf69dab275c19537de.png">
+          </div>
+
+          <div class="col-md-7 col-12 right-col text-center">
+              <h3 class="color-brand border-pink">Now’s The Time To <u>Eat Cake</u> And</h3>
+              <h1 class="color-brand lettersp-04">Lose The Weight!</h1>
+              <h4 class="color-black border-pink">Join The 5-Day Cake Challenge Today, Right Now, For FREE!</h4>
+              <p class="mt-2">(It’s The Most Delicious Way To Kick-Start Your Slim Down, Feel Amazing, And Become The
+                  Sexy, Unstoppable LadyBoss Of Your Dreams!)</p>
+              <p class=" text-center my-3"><img class="img-fluid"
+                      src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                      width="150" alt="img">
+              </p>
+              <button data-toggle="modal" data-target="#cakeday-sign"
+                  class="button button-primary lb5day-button-large"> Join The 5-Day Cake Challenge For Free! <i
+                      class="fas fa-caret-right ml-1"></i>
+                  <p>Click Or Tap Here To Save Your Seat Now</p>
+              </button>
+          </div>
+
+      </figure>
+
+  </article>
+</section>
+
+<div id="cakeday-sign" tabindex="-1" role="dialog" class="modal cakeday-modal animate fade" aria-modal="true">
+  <div role="document" class="modal-dialog modal-dialog-centered liOf__modal-dialog">
+      <div class="modal-content animate-top border-0 overflow-hidden liOf__modal-content">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+              <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+          </button>
+          <div class="modal-body">
+              <section>
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-6 col-12 p-0">
+                              <figure class="liOf__banner-left">
+                                  <div class="liOf__main-img">
+                                      <img class="img-fluid"
+                                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/555175/file/b45316e8dc0a9456e1899df07d619661.png"
+                                          width="265">
+                                      <img class="img-fluid ldy-img mb-hide"
+                                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/565183/file/65d52eafdcb3b3e95da822d49eeb3dba.png">
+                                  </div>
+                              </figure>
+                          </div>
+                          <div class="col-md-6 col-12 liOf-product__select">
+                              <figure class="liOf__banner-right text-center">
+                                  <h3 class="color-black border-pink">YES! Sign Me Up For The…</h3>
+                                  <h1 class="color-brand">5-Day cake challenge!</h1>
+                                  <p class="border-pink p-txt pt-3">Jumpstart Your Weight Loss Journey And Begin To
+                                      Shed Those Pesky Pounds In Just 5 Days...</p>
+                                  <h4>…All While Enjoying Delicious Cake!</h4>
+                                  <p class="mt-2 p-txt">Put in your best email address to save your seat for the FREE
+                                      training:</p>
+                                  <p class=" text-center my-3"><img class="img-fluid"
+                                          src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                                          width="180" alt="img">
+                                  </p>
+                                  <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+                                      <div class="row">
+                                          <div class="col-md-6 col-6 form-group">
+                                              <input type="text" placeholder="First Name" formControlName="firstName"
+                                                  [class.is-invalid]="firstNameControl.errors && firstNameControl.touched"
+                                                  class="form-control p-small">
+                                              <small *ngIf="firstNameControl.errors?.['required']"
+                                                  class="invalid-feedback">
+                                                  Please enter your first name
+                                              </small>
+                                          </div>
+                                          <div class="col-md-6 col-6 form-group">
+                                              <input type="text" placeholder="Last Name" formControlName="lastName"
+                                                  [class.is-invalid]="lastNameControl.errors && lastNameControl.touched"
+                                                  class="form-control p-small">
+                                              <small *ngIf="lastNameControl.errors?.['required']"
+                                                  class="invalid-feedback">
+                                                  Please enter your last name
+                                              </small>
+                                          </div>
+                                          <div class="col-12 form-group">
+                                            <input
+                                              type="text"
+                                              placeholder="Phone Number" 
+                                              formControlName="phone" 
+                                              class="form-control p-small"
+                                              [class.is-invalid]="phoneControl.errors && phoneControl.touched"
+                                            />
+                                            <small
+                                              *ngIf="phoneControl.errors?.['required']"
+                                              class="invalid-feedback"
+                                              >Please enter your Phone number</small
+                                            >
+                                            <small
+                                              *ngIf="phoneControl.errors?.['pattern']"
+                                              class="invalid-feedback"
+                                              >Please enter a valid Phone number</small
+                                            >
+                                          </div> 
+                                          <div class="col-12 form-group">
+                                              <input type="text" placeholder="Enter Email Address Here"
+                                                  formControlName="email" class="form-control p-small"
+                                                  [class.is-invalid]="emailControl.errors && emailControl.touched" />
+                                              <small *ngIf="emailControl.errors?.['required']"
+                                                  class="invalid-feedback">Please enter your Email</small>
+                                              <small *ngIf="emailControl.errors?.['pattern']"
+                                                  class="invalid-feedback">Please enter a valid Email address</small>
+                                          </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <button type="submit" [disabled]="leadForm.invalid || isLoading"
+                                              class="button button-primary lb5day-button-large save-button">
+                                              Save My Spot For The 5-Day Cake Challenge! <i
+                                                  class="fas fa-caret-right"></i>
+                                              <i class="fa fa-spinner fa-spin ml-2" *ngIf="isLoading"></i>
+                                          </button>
+                                      </div>
+                                      <p *ngIf="error" class="text-danger text-center mt-2">
+                                          {{ error }}
+                                      </p>
+                                  </form>
+                                  <p class="disclaimer-reg text-center">
+                                      <i>By clicking ‘Save My Spot For The 5-Day Cake Challenge’, I agree to the <a
+                                              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE"
+                                              target="_blank" class="color-black font-bold">Terms and Conditions</a>
+                                          and <a
+                                              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/12188684698253-Lady-Boss-Privacy-Policies"
+                                              target="_blank" class="color-black font-bold">Privacy Policy</a>, I
+                                          agree to receive emails and text reminders at the number email provided.</i>
+                                  </p>
+                              </figure>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </div>
+</div>

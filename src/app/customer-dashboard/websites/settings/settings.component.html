@@ -9,7 +9,9 @@
         </li>
         <span class="breadcrumb-greater-than">&#8250;</span>
         <li>
-          <a class="color-gray" routerLink="/dashboard/websites">Websites</a>
+          <a class="color-gray" routerLink="/cloud/websites">{{
+            "websites" | translate
+          }}</a>
         </li>
         <span class="breadcrumb-greater-than">&#8250;</span>
         <li>
@@ -20,18 +22,86 @@
   </figure>
   <!-- END of breadcrumbs -->
 
-  <figure class="row">
+  <figure class="row websites-row">
     <div class="col-md-3 col-12">
-      <h1 class="color-black mb-2">{{ site?.name }}</h1>
-      <p class="font-bold">
-        <a
-          [href]="'https://' + referrerCode + '.' + site?.url"
-          target="_blank"
-          class="color-black link-hover text-decoration-none"
-          >{{ referrerCode }}.{{ site?.url }}
-          <i class="fa fa-external-link-alt ml-1" aria-hidden="true"></i>
-        </a>
-      </p>
+      <div class="d-flex align-items-end justify-content-between">
+        <div>
+          <h1 class="color-black mb-2">{{ site?.name }}</h1>
+          <p class="font-bold">
+            <a 
+              target="_blank" 
+              class="color-black link-hover text-decoration-none" 
+              [href]="'https://' + referrerCode + '.' + site?.url"
+              >{{ referrerCode }}.{{ site?.url }} <i aria-hidden="true" class="fa fa-external-link-alt ml-1"></i>
+            </a>
+          </p>
+        </div>
+        <div class="dropdown ml-sm-auto mb-show">
+          <button
+            type="button"
+            class="share-btn disclaimer-bold button-primary"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="far fa-share-square" aria-hidden="true"></i>
+            {{ "share" | translate }}
+          </button>
+          <div
+            class="dropdown-menu dropdown-bg dropdown-menu-right"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <a
+              (click)="
+                redirectFacebook('https://' + user?.code + '.' + site?.url);
+                (false)
+              "
+              class="dropdown-item disclaimer-reg"
+              href="#"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-square" aria-hidden="true"></i
+              >{{ "share-on-facebook" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item disclaimer-reg"
+              (click)="
+                redirectTwitter('https://' + user?.code + '.' + site?.url);
+                (false)
+              "
+              href="#"
+            >
+              <i class="fab fa-twitter-square" aria-hidden="true"></i
+              >{{ "share-on-twitter" | translate }}
+            </a>
+            <a
+              class="dropdown-item disclaimer-reg"
+              href="mailto:https://{{ user?.code }}.{{ site?.url }}"
+            >
+              <i class="far fa-envelope" aria-hidden="true"></i
+              >{{ "send-a-link-by-email" | translate }}
+            </a>
+            <a
+              class="dropdown-item disclaimer-reg"
+              href="sms:?&body=https://{{ user?.code }}.{{ site?.url }}"
+            >
+              <i class="far fa-comment" aria-hidden="true"></i
+              >{{ "send-a-link-by-sms" | translate }}
+            </a>
+            <a
+              class="dropdown-item disclaimer-reg"
+              (click)="
+                copy('https://' + user?.code + '.' + site?.url); (false)
+              "
+              href="#"
+            >
+              <i class="far fa-clone" aria-hidden="true"></i
+              >{{ "copy-link" | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="side-nav">
         <ul class="nav nav-tabs flex-column" role="tablist">
           <li class="nav-item">
@@ -40,7 +110,7 @@
               data-toggle="tab"
               href="#tabCustomize"
               role="tab"
-              >Customize</a
+              >{{ "customize" | translate }}</a
             >
           </li>
           <li class="nav-item">
@@ -49,7 +119,7 @@
               data-toggle="tab"
               href="#tab3rdParty"
               role="tab"
-              >3rd party integrations</a
+              >{{ "3rd-party-integrations" | translate }}</a
             >
           </li>
         </ul>
@@ -59,9 +129,7 @@
     <div class="col-md-9 col-12 analytics-wraper">
       <div class="tab-content">
         <div class="tab-pane active" id="tabCustomize" role="tabpanel">
-          <div
-            class="d-flex align-items-center mb-4 pb-0 pb-sm-3 justify-content-between"
-          >
+          <div class="d-flex align-items-center mb-4 pb-0 pb-sm-3 justify-content-between mb-hide">
             <div class="dropdown ml-sm-auto">
               <button
                 type="button"
@@ -70,7 +138,8 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="far fa-share-square" aria-hidden="true"></i> Share
+                <i class="far fa-share-square" aria-hidden="true"></i>
+                {{ "share" | translate }}
               </button>
               <div
                 class="dropdown-menu dropdown-bg dropdown-menu-right"
@@ -85,8 +154,8 @@
                   href="#"
                   target="_blank"
                 >
-                  <i class="fab fa-facebook-square" aria-hidden="true"></i>Share
-                  on Facebook
+                  <i class="fab fa-facebook-square" aria-hidden="true"></i
+                  >{{ "share-on-facebook" | translate }}
                 </a>
 
                 <a
@@ -97,22 +166,22 @@
                   "
                   href="#"
                 >
-                  <i class="fab fa-twitter-square" aria-hidden="true"></i>Share
-                  on Twitter
+                  <i class="fab fa-twitter-square" aria-hidden="true"></i
+                  >{{ "share-on-twitter" | translate }}
                 </a>
                 <a
                   class="dropdown-item disclaimer-reg"
                   href="mailto:https://{{ user?.code }}.{{ site?.url }}"
                 >
-                  <i class="far fa-envelope" aria-hidden="true"></i>Send a link
-                  by Email
+                  <i class="far fa-envelope" aria-hidden="true"></i
+                  >{{ "send-a-link-by-email" | translate }}
                 </a>
                 <a
                   class="dropdown-item disclaimer-reg"
                   href="sms:?&body=https://{{ user?.code }}.{{ site?.url }}"
                 >
-                  <i class="far fa-comment" aria-hidden="true"></i>Send a link
-                  by SMS
+                  <i class="far fa-comment" aria-hidden="true"></i
+                  >{{ "send-a-link-by-sms" | translate }}
                 </a>
                 <a
                   class="dropdown-item disclaimer-reg"
@@ -121,7 +190,8 @@
                   "
                   href="#"
                 >
-                  <i class="far fa-clone" aria-hidden="true"></i>Copy link
+                  <i class="far fa-clone" aria-hidden="true"></i
+                  >{{ "copy-link" | translate }}
                 </a>
               </div>
             </div>
@@ -139,46 +209,37 @@
             </p>
           </div>
 
-          <div
-            *ngIf="customizeData?.status === 'pending'"
-            class="card card-default tab-card custom-note"
-          >
-            <p class="color-black font-bold mb-2">Compliance Approval Status</p>
-            <div class="d-flex align-items-center justify-content-between">
-              <h3 class="under-review-title">
-                <i class="fas fa-clock mr-2"></i> Under review
-              </h3>
-              <button
-                (click)="onCancelPendingRequest()"
-                class="btn btn-gray disclaimer-bold"
-              >
-                Cancel request
-                <i class="fa fa-spinner fa-spin" *ngIf="isCancelSubmitted"></i>
-              </button>
-            </div>
-          </div>
-
-          <div
-            *ngIf="customizeData?.status === 'approved'"
-            class="card card-default tab-card custom-note"
-          >
-            <p class="color-black font-bold mb-2">Compliance Approval Status</p>
-            <h3 class="approved-title">
-              <i class="fas fa-check-circle mr-2"></i> Approved
-            </h3>
-          </div>
-
-          <form
-            [formGroup]="customizeForm"
-            (ngSubmit)="onSubmitCustomizeForm()"
-          >
+          <form [formGroup]="customizeForm">
             <div
               class="{{
                 customizeData?.status === 'pending' ? 'disabled' : ''
               }}"
             >
               <div class="card card-default tab-card">
-                <h3 class="color-black mb-3 mb-sm-4 title">Theme</h3>
+                <div class="d-flex align-items-center justify-content-between mb-3 mb-sm-4 mb-fullwidth">
+                  <h3 class="color-black title">Theme</h3>
+                  <div class="btn-group-right mb-hide">
+                      <button 
+                        *ngIf="isThemeChanged" 
+                        (click)="resetThemeData()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset</button>
+                      <button 
+                        *ngIf="!isThemeSaved && (customizeData?.theme || isThemeChanged)"
+                        [disabled]="!isThemeChanged || isSavingTheme"
+                        (click)="onSaveTheme()" 
+                        type="button" 
+                        class="btn button-primary font-bold ml-2"
+                        >Save <i *ngIf="isSavingTheme" class="fa fa-spinner fa-spin" ></i></button>
+                      <button
+                        *ngIf="isThemeSaved" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        ><i class="fa-regular fa-check mr-2"></i>Saved
+                      </button>
+                  </div>
+                </div>
                 <div class="row theme-row">
                   <div class="col-sm-3 col-12">
                     <svg
@@ -194,30 +255,147 @@
                         width="164"
                         height="199"
                         rx="7.5"
-                        fill="#F2F2F7"
-                      ></rect>
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                        fill-opacity="0.3"
+                      />
+                      <rect y="170" width="165" height="30" fill="white" />
                       <rect
-                        x="13"
+                        x="35"
                         y="15"
-                        width="139"
-                        height="50"
+                        width="95"
+                        height="143"
                         rx="4"
                         fill="white"
-                      ></rect>
+                      />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13 19C13 16.7909 14.7909 15 17 15H148C150.209 15 152 16.7909 152 19V39H13V19ZM13 140C13 137.791 14.7909 136 17 136H148C150.209 136 152 137.791 152 140V182C152 184.209 150.209 186 148 186H17C14.7909 186 13 184.209 13 182V140ZM15 77C13.8954 77 13 77.8954 13 79C13 80.1046 13.8954 81 15 81H78C79.1046 81 80 80.1046 80 79C80 77.8954 79.1046 77 78 77H15ZM13 89C13 87.8954 13.8954 87 15 87H94C95.1046 87 96 87.8954 96 89C96 90.1046 95.1046 91 94 91H15C13.8954 91 13 90.1046 13 89ZM15 97C13.8954 97 13 97.8954 13 99C13 100.105 13.8954 101 15 101H62C63.1046 101 64 100.105 64 99C64 97.8954 63.1046 97 62 97H15ZM36 120C36 117.791 37.7909 116 40 116H75C77.2091 116 79 117.791 79 120V124C79 126.209 77.2091 128 75 128H40C37.7909 128 36 126.209 36 124V120ZM91 116C88.7909 116 87 117.791 87 120V124C87 126.209 88.7909 128 91 128H126C128.209 128 130 126.209 130 124V120C130 117.791 128.209 116 126 116H91Z"
-                        fill="#6B39E4"
-                      ></path>
+                        d="M35 19C35 16.7909 36.7909 15 39 15H126C128.209 15 130 16.7909 130 19V50H35V19Z"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="122.5"
+                        cy="184.5"
+                        r="7.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="42.5"
+                        cy="184.5"
+                        r="7.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="67.5"
+                        cy="90.5"
+                        r="3.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="77.5"
+                        cy="90.5"
+                        r="3.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="87.5"
+                        cy="90.5"
+                        r="3.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle
+                        cx="97.5"
+                        cy="90.5"
+                        r="3.5"
+                        [attr.fill]="customizeForm.get('theme')?.value.color"
+                      />
+                      <circle cx="82.5" cy="49.5" r="17.5" fill="#D9D9D9" />
+                      <rect
+                        x="62.5"
+                        y="180.5"
+                        width="40"
+                        height="9"
+                        rx="1.5"
+                        fill="#D9D9D9"
+                        stroke="#EEEEEE"
+                      />
+                      <rect
+                        x="62.5"
+                        y="179.5"
+                        width="40"
+                        height="11"
+                        rx="1.5"
+                        fill="white"
+                        stroke="#D9D9D9"
+                      />
+                      <path d="M98.5 186L96 183.5L93.5 186" stroke="#D9D9D9" />
+                      <path
+                        d="M121.25 186.75L123.75 184.25L121.25 181.75"
+                        stroke="white"
+                      />
+                      <path
+                        d="M43.5 186.75L41 184.25L43.5 181.75"
+                        stroke="white"
+                      />
+                      <rect
+                        x="61"
+                        y="77"
+                        width="44"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="50"
+                        y="103"
+                        width="64"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="50"
+                        y="113"
+                        width="59"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="50"
+                        y="123"
+                        width="64"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="50"
+                        y="133"
+                        width="59"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="50"
+                        y="143"
+                        width="64"
+                        height="2"
+                        fill="#D9D9D9"
+                      />
+                      <rect
+                        x="68"
+                        y="185"
+                        width="20"
+                        height="1"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        d="M82.3125 48.875C84.9102 48.875 87.0625 46.7598 87.0625 44.125C87.0625 41.5273 84.9102 39.375 82.3125 39.375C79.6777 39.375 77.5625 41.5273 77.5625 44.125C77.5625 46.7598 79.6777 48.875 82.3125 48.875ZM80.6055 50.6562C76.9316 50.6562 74 53.625 74 57.2988C74 57.8926 74.4824 58.375 75.0762 58.375H89.5117C90.1055 58.375 90.625 57.8926 90.625 57.2988C90.625 53.625 87.6562 50.6562 83.9824 50.6562H80.6055Z"
+                        fill="white"
+                      />
                       <rect
                         x="0.5"
                         y="0.5"
                         width="164"
                         height="199"
                         rx="7.5"
-                        stroke="#F2F2F7"
-                      ></rect>
+                        stroke="#DDDDDD"
+                      />
                     </svg>
                   </div>
                   <div formGroupName="theme" class="col-sm-9 col-12">
@@ -257,131 +435,65 @@
                     </div>
                   </div>
                 </div>
+                <div class="mb-fullwidth mb-show">
+                  <div class="btn-group-right">
+                      <button 
+                        *ngIf="isThemeChanged" 
+                        (click)="resetThemeData()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset</button>
+                      <button 
+                        *ngIf="!isThemeSaved && (customizeData?.theme || isThemeChanged)"
+                        [disabled]="!isThemeChanged || isSavingTheme"
+                        (click)="onSaveTheme()" 
+                        type="button" 
+                        class="btn button-primary font-bold ml-2"
+                        >Save <i *ngIf="isSavingTheme" class="fa fa-spinner fa-spin" ></i></button>
+                      <button
+                        *ngIf="isThemeSaved" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        ><i class="fa-regular fa-check mr-2"></i>Saved
+                      </button>
+                  </div>
+                </div>
               </div>
 
               <div class="card card-default tab-card">
-                <h3 class="color-black d-flex mb-4 title">About Me</h3>
-                <p class="color-black font-bold">Short bio</p>
-                <p class="disclaimer-reg color-black about-me-info mt-3">
-                  <i class="fas fa-question-circle mr-2"></i>Read our
-                  <strong>Social Media Guidelines</strong> and strictly avoid
-                  health claims
+                <div class="d-flex align-items-center justify-content-between mb-sm-3 mb-2 mb-fullwidth">
+                  <h3 class="color-black title">Links</h3>
+                  <div class="btn-group-right mb-hide">
+                      <button 
+                        *ngIf="isLinksChanged" 
+                        (click)="resetLinkData()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset
+                      </button>
+                      <button 
+                        *ngIf="!isLinksSaved && (customizeData?.links || isLinksChanged)"
+                        [disabled]="!isLinksChanged || !isAllValidLinks || isSavingLinks"
+                        (click)="onSaveLinks()"
+                        type="button" 
+                        class="btn button-primary font-bold ml-2"
+                        >Save <i *ngIf="isSavingLinks" class="fa fa-spinner fa-spin"></i>
+                      </button>
+                      <button 
+                        *ngIf="isLinksSaved" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        ><i class="fa-regular fa-check mr-2"></i>Saved
+                      </button>
+                  </div>
+                </div>
+                <p class="disclaimer-reg color-gray mb-sm-4 mb-3">
+                  Add links to your favorite approved Prüvit pages to help your visitors be a part of the Ketone Conversation™.
                 </p>
 
-                <div class="editor-wrap my-3 color-black">
-                  <quill-editor
-                    #quillEditor
-                    formControlName="shortBio"
-                    class="p-small"
-                    [modules]="editorModules"
-                    (onContentChanged)="getQuillEditorInstance($event)"
-                    (onEditorCreated)="getQuillEditorInstance($event)"
-                    [styles]="{ height: '200px' }"
-                    placeholder=""
-                  ></quill-editor>
-                </div>
-
-                <div formGroupName="socialMedia" class="social-media-list">
-                  <p class="color-black font-bold my-3">Social media</p>
-                  <div class="form-group">
-                    <i
-                      class="fab fa-facebook-square form-icon"
-                      style="color: #1d84ed"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="Facebook link"
-                      formControlName="facebook"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <i
-                      class="fab fa-twitter-square form-icon"
-                      style="color: #1e9bf0"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="Twitter link"
-                      formControlName="twitter"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <i
-                      class="fab fa-instagram form-icon"
-                      style="color: #121722"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="Instagram link"
-                      formControlName="instagram"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <i
-                      class="fab fa-youtube form-icon"
-                      style="color: #ff0300"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="Youtube link"
-                      formControlName="youtube"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <i
-                      class="fab fa-tiktok form-icon"
-                      style="color: #121722"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="TikTok link"
-                      formControlName="tiktok"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <i
-                      class="fab fa-linkedin form-icon"
-                      style="color: #1766c2"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="LinkedIn link"
-                      formControlName="linkedin"
-                    />
-                  </div>
-
-                  <div class="form-group mb-0">
-                    <i
-                      class="fab fa-pinterest form-icon"
-                      style="color: #e60222"
-                    ></i>
-                    <input
-                      type="text"
-                      class="form-control disclaimer-reg icon"
-                      placeholder="Pinterest link"
-                      formControlName="pinterest"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="card card-default tab-card">
-                <h3 class="color-black mb-sm-3 mb-2 title">Links</h3>
-                <p class="disclaimer-reg color-gray mb-sm-4 mb-3">
-                  Add links to your favorite pages from your site, Prüvit TV, or
-                  other compliant destinations to help your visitors be a part
-                  of the Ketone Conversation™.
+                <p class="disclaimer-reg color-white about-me-info mb-4">
+                  <i class="fas fa-question-circle mr-2"></i>
+                  Approved domains: shopketo.com, pruvitnow.com, pruvit.tv, pvt.ai, experienceketo.com
                 </p>
 
                 <div id="linksDynamicRow" class="row links-row">
@@ -389,11 +501,11 @@
                     formArrayName="links"
                     *ngFor="let item of links.controls; let i = index"
                   >
-                    <div [formGroupName]="i" class="row col-sm-12">
+                    <div [formGroupName]="i" class="row col-sm-12 link-space">
                       <div class="col-sm-6 col-12 links-col">
                         <div class="form-group d-flex align-items-center">
                           <span class="line-icon color-gray">
-                            <i class="fas fa-grip-lines-vertical"></i>
+                            <i class="fas fa-link form-icon color-gray"></i>
                           </span>
                           <input
                             type="text"
@@ -407,7 +519,7 @@
                       <div
                         class="col-sm-6 col-12 d-flex align-items-center justify-content-between links-col"
                       >
-                        <div class="form-group">
+                        <div class="form-group mar-left">
                           <i
                             class="fas fa-link form-icon color-gray"
                             aria-hidden="true"
@@ -444,24 +556,22 @@
                               ><i class="fas fa-arrow-down"></i>Move down</a
                             >
                             <a
+                              (click)="onLinkRemove(i)"
                               class="dropdown-item disclaimer-reg color-black"
                               href="#"
-                              ><i class="fas fa-eye-slash"></i>Hide</a
-                            >
-                            <a
-                              (click)="onClickLinkRemove(i)"
-                              class="dropdown-item disclaimer-reg color-black"
-                              href="#"
-                              ><i class="fas fa-trash"></i>Delete</a
+                              ><i class="fas fa-trash"></i
+                              >{{ "delete" | translate }}</a
                             >
                           </div>
                         </div>
                       </div>
+                      <p *ngIf="linkErrorAt === i" class="col-12 invalid-link-msg mb-2 ml-3 disclaimer-bold">Please enter a link from one of the approved Prüvit domains.</p>
                     </div>
                   </ng-container>
 
                   <div class="col-12 mt-2 mt-sm-3">
                     <button
+                      type="button"
                       (click)="onAddNewLink()"
                       class="btn disclaimer-bold color-black btn-new-link"
                     >
@@ -469,17 +579,140 @@
                     </button>
                   </div>
                 </div>
+                <div class="mb-fullwidth mb-show">
+                  <div class="btn-group-right">
+                      <button 
+                        *ngIf="isLinksChanged" 
+                        (click)="resetLinkData()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset
+                      </button>
+                      <button 
+                        *ngIf="!isLinksSaved && (customizeData?.links || isLinksChanged)"
+                        [disabled]="!isLinksChanged || !isAllValidLinks || isSavingLinks"
+                        (click)="onSaveLinks()"
+                        type="button" 
+                        class="btn button-primary font-bold ml-2"
+                        >Save <i *ngIf="isSavingLinks" class="fa fa-spinner fa-spin"></i>
+                      </button>
+                      <button 
+                        *ngIf="isLinksSaved" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        ><i class="fa-regular fa-check mr-2"></i>Saved
+                      </button>
+                  </div>
+                </div>
               </div>
 
               <div class="card card-default tab-card">
                 <div class="row">
-                  <div class="col-sm-6 col-12">
-                    <h3 class="color-black mb-sm-3 mb-2 title">
-                      Favorite products
+                  <div class="col-12 d-flex align-items-center justify-content-between mb-sm-3 mb-2 mb-fullwidth">
+                    <h3 class="color-black title">Favorite products
                     </h3>
+                    <div class="btn-group-right mb-hide">
+                        <button 
+                          *ngIf="isFavProductsChanged" 
+                          (click)="resetFavProductData()" 
+                          type="button" 
+                          class="btn btn-gray font-bold"
+                          >Reset
+                        </button>
+                        <button 
+                          *ngIf="!isFavProductsSaved && (customizeData?.favoriteProducts || isFavProductsChanged)"
+                          [disabled]="!isFavProductsChanged || isSavingFavProducts"
+                          (click)="onSaveFavProducts()"
+                          type="button" 
+                          class="btn button-primary font-bold ml-2"
+                          >Save <i *ngIf="isSavingFavProducts" class="fa fa-spinner fa-spin"></i>
+                        </button>
+                        <button 
+                          *ngIf="isFavProductsSaved"
+                          type="button" 
+                          class="btn btn-gray font-bold"
+                          ><i class="fa-regular fa-check mr-2"></i>Saved
+                        </button>
+                    </div>
                   </div>
-                  <div class="col-sm-6 col-12 hide">
-                    <div class="dropdown custom country ml-auto">
+                </div>
+
+                <app-loader
+                  *ngIf="!isProductLoaded; else productLoaded"
+                  class="payment--loader"
+                ></app-loader>
+                <ng-template #productLoaded>
+                  <div class="row mt-3 mt-sm-4 flex-column flex-sm-row">
+                    <div class="col px-sm-3 px-0">
+                      <div class="dropdown custom product-search">
+                        <div class="form-group mb-0">
+                          <i
+                            class="fal fa-search form-icon"
+                            aria-hidden="true"
+                          ></i>
+                          <input
+                            type="text"
+                            id="SearchProduct"
+                            class="form-control disclaimer-reg icon"
+                            placeholder="Enter product name"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            [formControl]="searchControl"
+                          />
+
+                          <div
+                            class="settings-product-dropdown dropdown-menu dropdown-bg"
+                          >
+                            <div
+                              *ngIf="
+                                searchProducts.length;
+                                else noSearchProduct
+                              "
+                            >
+                              <div
+                                *ngFor="
+                                  let product of searchProducts;
+                                  let i = index
+                                "
+                              >
+                                <div
+                                  *ngIf="!product.isFavorite"
+                                  class="dropdown-item d-flex"
+                                  (click)="onAddFavProduct(product, i)"
+                                >
+                                  <div class="img-left">
+                                    <img
+                                      [src]="product.image"
+                                      class="img-fluid"
+                                      alt="img"
+                                    />
+                                  </div>
+                                  <div class="text-area">
+                                    <p class="disclaimer-bold color-black">
+                                      {{ product.title }}
+                                    </p>
+                                    <p class="disclaimer-reg color-gray">
+                                      {{ product.flavor }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <ng-template #noSearchProduct>
+                              <div class="dropdown-item d-flex">
+                                <div class="text-area">
+                                  <p class="disclaimer-bold color-black">
+                                    No product found
+                                  </p>
+                                </div>
+                              </div>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pr-0 pr-sm-3 mt-3 mt-sm-0 dropdown custom country ml-auto">
                       <button
                         class="btn cont-btn disclaimer-bold"
                         type="button"
@@ -502,147 +735,256 @@
                             ></path>
                           </svg>
                         </span>
-                        United States
+                        {{
+                          productCountry
+                            ? productCountry.country
+                            : "United States"
+                        }}
                       </button>
                       <div
+                        *ngIf="countries.length"
                         class="dropdown-menu dropdown-bg"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">Australia</a>
-                        <a class="dropdown-item" href="#">Austria</a>
-                        <a class="dropdown-item" href="#">Belgium</a>
-                        <a class="dropdown-item" href="#">Canada</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row mt-3 mt-sm-4">
-                  <div class="col-12 px-sm-3 px-0">
-                    <div class="dropdown custom product-search">
-                      <div class="form-group mb-0">
-                        <i
-                          class="fal fa-search form-icon"
-                          aria-hidden="true"
-                        ></i>
-                        <input
-                          type="text"
-                          id="SearchProduct"
-                          class="form-control disclaimer-reg icon"
-                          placeholder="Enter product name"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          [formControl]="searchControl"
-                        />
-                        <div class="dropdown-menu dropdown-bg">
-                          <ng-container
-                            *ngIf="searchProducts.length; else noSearchProduct"
-                          >
-                            <div
-                              *ngFor="
-                                let product of searchProducts;
-                                let i = index
-                              "
-                            >
-                              <div
-                                *ngIf="!product.isFavorite"
-                                class="dropdown-item d-flex"
-                                (click)="onAddFavProduct(product, i)"
-                              >
-                                <div class="img-left">
-                                  <img
-                                    [src]="product.image"
-                                    class="img-fluid"
-                                    alt="img"
-                                  />
-                                </div>
-                                <div class="text-area">
-                                  <p class="disclaimer-bold color-black">
-                                    {{ product.title }}
-                                  </p>
-                                  <p class="disclaimer-reg color-gray">
-                                    {{ product.flavor }}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </ng-container>
-                          <ng-template #noSearchProduct>
-                            <div class="dropdown-item d-flex">
-                              <div class="text-area">
-                                <p class="disclaimer-bold color-black">
-                                  No product found
-                                </p>
-                              </div>
-                            </div>
-                          </ng-template>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  *ngIf="favProducts?.length; else noFavProducts"
-                  class="row favorite-products-row"
-                >
-                  <div
-                    *ngFor="let product of favProducts; let i = index"
-                    class="col-sm-3 col-6"
-                  >
-                    <div class="product-card text-center">
-                      <div class="product-img">
-                        <img
-                          [src]="product.image"
-                          class="img-fluid"
-                          alt="img"
-                        />
-                      </div>
-                      <div class="product-details">
-                        <p class="p-small color-black font-bold">
-                          {{ product.title }}
-                        </p>
-                        <p class="disclaimer-reg color-gray">
-                          {{ product.flavor }}
-                        </p>
-                      </div>
-                      <p>
                         <a
-                          href="javascript:void(0);"
-                          (click)="onRemoveFavProduct(product, i)"
-                          class="disclaimer-bold link-hover"
-                          ><i class="fas fa-trash mr-2" aria-hidden="true"></i
-                          >Remove</a
+                          *ngFor="let country of countries"
+                          class="dropdown-item pointer"
+                          (click)="onChangeProductCountry(country)"
+                          attr.data-countrycode="{{ country.country_code }}"
+                          >{{ country.country }}</a
                         >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <ng-template #noFavProducts>
-                  <div class="row favorite-products-row noProducts">
-                    <div class="col-12">
-                      <div class="product-card text-center">
-                        <div class="inner">
-                          <p class="color-black font-bold mb-sm-3 mb-2">
-                            No favorite products selected
-                          </p>
-                          <p class="p-small color-gray">
-                            Search for products above and add them to your
-                            favorites.
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
+
+                  <div
+                    *ngIf="
+                      favProducts[productCountryCode]?.length;
+                      else noFavProducts
+                    "
+                    class="row favorite-products-row"
+                  >
+                    <div
+                      *ngFor="
+                        let product of favProducts[productCountryCode];
+                        let i = index
+                      "
+                      class="col-sm-3 col-6"
+                    >
+                      <div class="product-card text-center">
+                        <div class="product-img">
+                          <img
+                            [src]="product.image"
+                            class="img-fluid"
+                            alt="img"
+                          />
+                        </div>
+                        <div class="product-details">
+                          <p class="p-small color-black font-bold">
+                            {{ product.title }}
+                          </p>
+                          <p class="disclaimer-reg color-gray">
+                            {{ product.flavor }}
+                          </p>
+                        </div>
+                        <p>
+                          <a
+                            href="javascript:void(0);"
+                            (click)="onRemoveFavProduct(product, i)"
+                            class="disclaimer-bold link-hover"
+                            ><i class="fas fa-trash mr-2" aria-hidden="true"></i
+                            >{{ "remove" | translate }}</a
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ng-template #noFavProducts>
+                    <div class="row favorite-products-row noProducts">
+                      <div class="col-12">
+                        <div class="product-card text-center">
+                          <div class="inner">
+                            <p class="color-black font-bold mb-sm-3 mb-2">
+                              No favorite products selected
+                            </p>
+                            <p class="p-small color-gray">
+                              Search for products above and add them to your
+                              favorites.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
                 </ng-template>
+                <div class="mb-fullwidth mb-show">
+                  <div class="btn-group-right">
+                      <button 
+                        *ngIf="isFavProductsChanged" 
+                        (click)="resetFavProductData()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset
+                      </button>
+                      <button 
+                        *ngIf="!isFavProductsSaved && (customizeData?.favoriteProducts || isFavProductsChanged)"
+                        [disabled]="!isFavProductsChanged || isSavingFavProducts"
+                        (click)="onSaveFavProducts()"
+                        type="button" 
+                        class="btn button-primary font-bold ml-2"
+                        >Save <i *ngIf="isSavingFavProducts" class="fa fa-spinner fa-spin"></i>
+                      </button>
+                      <button 
+                        *ngIf="isFavProductsSaved"
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        ><i class="fa-regular fa-check mr-2"></i>Saved
+                      </button>
+                  </div>
+                </div>
               </div>
 
+              <div class="d-flex align-items-center justify-content-between mb-sm-3 mb-2 mt-5 mb-fullwidth">
+                <h3 class="color-black title">Requires compliance approval</h3>
+                <div class="btn-group-right">
+                    <button (click)="onClickPreview()" type="button" class="btn button-primary font-bold"><i class="fa fa-external-link-alt mr-2"></i> Preview</button>
+                </div>
+              </div>
+              <p class="p-18 color-gray mb-sm-4 mb-3">We’re so excited to give you the ability to customize your site. Please note that, for the items below, when you Submit your changes they will be reviewed by Compliance before going live. You can click the ’Preview’ button above to see how the changes would look live before submitting them.</p>
+
               <div class="card card-default tab-card">
-                <h3 class="color-black title mb-sm-4 mb-3">
-                  Introduction Video
-                </h3>
+                <div class="d-flex flex-column flex-sm-row justify-content-between mb-sm-3 mb-2 mb-fullwidth">
+                  <h3 class="color-black title">About Me</h3>
+                    <div class="btn-group-right d-flex justify-content-between mt-2 mb-hide">
+                      <button 
+                        *ngIf="isShortBioChanged" 
+                        (click)="resetShortBioata()" 
+                        type="button" 
+                        class="btn btn-gray font-bold"
+                        >Reset
+                      </button>
+
+                      <button 
+                        *ngIf="customizeData?.shortBio?.status === 'approved' && !isShortBioChanged"
+                        type="button"
+                        class="btn button-primary font-bold ml-2 btn-green"
+                      >
+                        <i class="fa-regular fa-check mr-2"></i>Approved
+                      </button>
+          
+                      <button
+                        *ngIf="customizeData?.shortBio?.status === 'pending' && !isShortBioChanged"
+                        (click)="onCancelShortBio()"
+                        class="btn btn-gray disclaimer-bold ml-2"
+                        ><i class="fa-regular fa-xmark mr-2"></i>Cancel request <i *ngIf="isCancellingBio" class="fa fa-spinner fa-spin" ></i>
+                      </button>
+
+                      <button 
+                        *ngIf="customizeData?.shortBio?.status === 'pending' && !isShortBioChanged" 
+                        type="button" 
+                        class="btn btn-orange font-bold under-review-btn ml-2"
+                        ><i class="fas color-white fa-clock mr-2"></i><span class="color-white">Under review</span>
+                      </button>
+
+                      <button 
+                        *ngIf="isShortBioChanged"
+                        (click)="onSaveShortBio()"
+                        [disabled]="isSavingBio"
+                        type="button" 
+                        class="btn button-primary font-bold ml-0 ml-sm-2 ml-2"
+                        ><i class="fa-regular fa-clipboard-list mr-2"></i>Submit for review <i *ngIf="isSavingBio" class="fa fa-spinner fa-spin" ></i>
+                      </button>
+                    </div>
+                </div>
+                <p class="color-black font-bold">Short bio</p>
+                <p class="disclaimer-reg color-white about-me-info mt-3">
+                  <i class="fas fa-question-circle mr-2"></i>Read our <a href="https://support.justpruvit.com/hc/en-us/articles/360052144292" target="_blank"><strong>Social Media Guidelines</strong></a> and strictly avoid
+                  health claims
+                </p>
+
+                <div formGroupName="shortBio" class="editor-wrap my-3 color-black">
+                  <quill-editor
+                    #quillEditor
+                    formControlName="bioData"
+                    class="p-small"
+                    [modules]="editorModules"
+                    (onContentChanged)="getQuillEditorInstance($event)"
+                    (onEditorCreated)="getQuillEditorInstance($event)"
+                    [styles]="{ height: '200px' }"
+                    placeholder=""
+                  ></quill-editor>
+                </div>
+                <div class="mb-fullwidth mb-show">
+                  <div class="btn-group-right">
+                    <button 
+                      *ngIf="isShortBioChanged" 
+                      (click)="resetShortBioata()" 
+                      type="button" 
+                      class="btn btn-gray font-bold"
+                      >Reset
+                    </button>
+
+                    <button 
+                      *ngIf="customizeData?.shortBio?.status === 'approved' && !isShortBioChanged"
+                      type="button"
+                      class="btn button-primary font-bold ml-2 btn-green"
+                    >
+                      <i class="fa-regular fa-check mr-2"></i>Approved
+                    </button>
+        
+                    <button
+                      *ngIf="customizeData?.shortBio?.status === 'pending' && !isShortBioChanged"
+                      (click)="onCancelShortBio()"
+                      class="btn btn-gray disclaimer-bold ml-2"
+                      ><i class="fa-regular fa-xmark mr-2"></i>Cancel request <i *ngIf="isCancellingBio" class="fa fa-spinner fa-spin" ></i>
+                    </button>
+
+                    <button 
+                      *ngIf="customizeData?.shortBio?.status === 'pending' && !isShortBioChanged" 
+                      type="button" 
+                      class="btn btn-orange font-bold under-review-btn ml-2"
+                      ><i class="fas color-white fa-clock mr-2"></i><span class="color-white">Under review</span>
+                    </button>
+
+                    <button 
+                      *ngIf="isShortBioChanged"
+                      (click)="onSaveShortBio()"
+                      [disabled]="isSavingBio"
+                      type="button" 
+                      class="btn button-primary font-bold ml-0 ml-sm-2 ml-2"
+                      ><i class="fa-regular fa-clipboard-list mr-2"></i>Submit for review <i *ngIf="isSavingBio" class="fa fa-spinner fa-spin" ></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div formGroupName="introVideo" class="card card-default tab-card">
+                <div class="d-flex flex-column flex-sm-row justify-content-between mb-sm-3 mb-2 mb-fullwidth">
+                  <h3 class="color-black title">Introduction Video</h3>
+                  <div class="btn-group-right d-flex justify-content-between mt-2 mb-hide">
+                    <button 
+                      *ngIf="customizeData?.introVideo?.videoId"
+                      (click)="onRemoveIntroVideo()"
+                      [disabled]="isCancellingVideo"
+                      type="button" 
+                      class="btn btn-gray font-bold"
+                      ><i class="fa-regular fa-trash mr-2"></i>Remove <i *ngIf="isCancellingVideo" class="fa fa-spinner fa-spin"></i>
+                    </button>
+                    <button 
+                      *ngIf="customizeData?.introVideo?.status === 'approved'"
+                      type="button" 
+                      class="btn button-primary font-bold ml-2 btn-green"
+                      ><i class="fa-regular fa-check mr-2"></i>Approved
+                    </button>
+                    <button 
+                      *ngIf="customizeData?.introVideo?.status === 'pending'" 
+                      type="button" 
+                      class="btn btn-orange font-bold ml-2"
+                      ><i class="fas color-white fa-clock mr-2"></i><span class="color-white">Under review</span>
+                    </button>
+                  </div>
+                </div>
                 <p class="disclaimer-reg color-gray mb-sm-5 mb-4">
                   Upload a personalized video introduction for your website
                   visitors so they feel welcome and connected to you
@@ -664,8 +1006,10 @@
                   <div class="col-sm-6 col-12 px-sm-3 px-2">
                     <p class="color-black font-bold"><span>👎</span> DO NOT</p>
                     <ul class="guidelines-list disclaimer-reg">
-                      <li>Do not make direct health claims</li>
-                      <li>Do not make income claims</li>
+                      <li>
+                        {{ "do-not-make-direct-health-claims" | translate }}
+                      </li>
+                      <li>{{ "do-not-make-income-claims" | translate }}</li>
                       <li>Do not mention other products or brands</li>
                       <li>Watch out for bad lighting and sound quality</li>
                     </ul>
@@ -674,14 +1018,8 @@
 
                 <div class="dragbox-outer">
                   <div
-                    *ngIf="
-                      customizeData !== null &&
-                      customizeData?.introVideoId !== ''
-                    "
-                    class="wistia_embed wistia_async_{{
-                      customizeData?.introVideoId
-                    }}"
-                    popover="false"
+                    *ngIf="customizeData?.introVideo?.videoId"
+                    class="wistia_embed wistia_async_{{customizeData?.introVideo?.videoId}}"
                     popoverAnimateThumbnail="true"
                     videoFoam="true"
                     controlsVisibleOnLoad="false"
@@ -692,12 +1030,7 @@
 
                   <div
                     id="wistia_uploader"
-                    class="{{
-                      customizeData !== null &&
-                      customizeData?.introVideoId !== ''
-                        ? 'hide'
-                        : ''
-                    }}"
+                    class="{{customizeData?.introVideo?.videoId ? 'hide' : ''}}"
                     style="height: auto; width: 100%; padding-bottom: 50px"
                   >
                     <div
@@ -711,61 +1044,32 @@
                     type="text"
                     name="introVideoId"
                     style="visibility: hidden"
-                    [value]="customizeData?.introVideoId"
+                    [value]="customizeData?.introVideo?.videoId"
                   />
                 </div>
-                <p
-                  *ngIf="
-                    introVideoIdInput.value.length &&
-                    customizeData?.status !== 'pending'
-                  "
-                  class="disclaimer-reg text-center color-black"
-                >
-                  <a
-                    (click)="onClickRemoveVideo()"
-                    href="javascript:void(0);"
-                    class="color-hover mr-2"
-                    >Remove
-                    <i
-                      class="fa fa-spinner fa-spin"
-                      *ngIf="isVideoRemoveSubmitted"
-                    ></i></a
-                  ><span
-                    *ngIf="videoRemoveErrorMsg !== ''"
-                    class="font-bold d-block mt-2"
-                    style="color: #f35958; font-weight: 700"
-                  >
-                    {{ videoRemoveErrorMsg }}
-                  </span>
-                </p>
-              </div>
-              <div
-                *ngIf="customizeData?.status !== 'pending'"
-                class="footer-action-bar"
-              >
-                <div class="footer-card d-flex justify-content-between">
-                  <a
-                    (click)="onClickPreviewBtn()"
-                    type="button"
-                    class="btn disclaimer-bold color-black pre-btn"
-                  >
-                    <i
-                      class="fa fa-external-link-alt mr-2"
-                      aria-hidden="true"
-                    ></i
-                    >Preview
-                  </a>
-                  <button
-                    type="submit"
-                    [disabled]="customizeForm.invalid"
-                    class="btn disclaimer-bold button-primary"
-                  >
-                    Submit for review
-                    <i
-                      class="fa fa-spinner fa-spin"
-                      *ngIf="isFormSubmitted"
-                    ></i>
-                  </button>
+                <div class="mb-fullwidth mb-show">
+                  <div class="btn-group-right">
+                    <button 
+                      *ngIf="customizeData?.introVideo?.videoId"
+                      (click)="onRemoveIntroVideo()"
+                      [disabled]="isCancellingVideo"
+                      type="button" 
+                      class="btn btn-gray font-bold"
+                      ><i class="fa-regular fa-trash mr-2"></i>Remove <i *ngIf="isCancellingVideo" class="fa fa-spinner fa-spin"></i>
+                    </button>
+                    <button 
+                      *ngIf="customizeData?.introVideo?.status === 'approved'"
+                      type="button" 
+                      class="btn button-primary font-bold ml-2 btn-green"
+                      ><i class="fa-regular fa-check mr-2"></i>Approved
+                    </button>
+                    <button 
+                      *ngIf="customizeData?.introVideo?.status === 'pending'" 
+                      type="button" 
+                      class="btn btn-orange font-bold ml-2"
+                      ><i class="fas color-white fa-clock mr-2"></i><span class="color-white">Under review</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -774,41 +1078,41 @@
         <!-- END of tab-pane -->
 
         <div class="tab-pane" id="tab3rdParty" role="tabpanel">
-          <div
-            class="d-flex align-items-center mb-4 pb-0 pb-sm-3 justify-content-between"
-          >
+          <div class="d-flex align-items-center mb-4 pb-0 pb-sm-3 justify-content-between mb-hide">
             <div class="dropdown ml-sm-auto">
-              <a
+              <button
                 type="button"
                 class="share-btn disclaimer-bold button-primary"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i class="far fa-share-square" aria-hidden="true"></i> Share
-              </a>
+                <i class="far fa-share-square" aria-hidden="true"></i>
+                {{ "share" | translate }}
+              </button>
               <div
                 class="dropdown-menu dropdown-bg dropdown-menu-right"
                 aria-labelledby="dropdownMenuButton"
               >
                 <a class="dropdown-item disclaimer-reg" href="#">
-                  <i class="fab fa-facebook-square" aria-hidden="true"></i>Share
-                  on Facebook
+                  <i class="fab fa-facebook-square" aria-hidden="true"></i
+                  >{{ "share-on-facebook" | translate }}
                 </a>
                 <a class="dropdown-item disclaimer-reg" href="#">
-                  <i class="fab fa-twitter-square" aria-hidden="true"></i>Share
-                  on Twitter
+                  <i class="fab fa-twitter-square" aria-hidden="true"></i
+                  >{{ "share-on-twitter" | translate }}
                 </a>
                 <a class="dropdown-item disclaimer-reg" href="#">
-                  <i class="far fa-envelope" aria-hidden="true"></i>Send a link
-                  by Email
+                  <i class="far fa-envelope" aria-hidden="true"></i
+                  >{{ "send-a-link-by-email" | translate }}
                 </a>
                 <a class="dropdown-item disclaimer-reg" href="#">
-                  <i class="far fa-comment" aria-hidden="true"></i>Send a link
-                  by SMS
+                  <i class="far fa-comment" aria-hidden="true"></i
+                  >{{ "send-a-link-by-sms" | translate }}
                 </a>
                 <a class="dropdown-item disclaimer-reg" href="#">
-                  <i class="far fa-clone" aria-hidden="true"></i>Copy link
+                  <i class="far fa-clone" aria-hidden="true"></i
+                  >{{ "copy-link" | translate }}
                 </a>
               </div>
             </div>
@@ -816,13 +1120,13 @@
 
           <div class="card card-default tab-card integrations">
             <h3 class="color-black mb-3 mb-sm-4 title">
-              Integrate with Facebook Pixel Tracking
+              {{ "integrate-with-facebook-pixel-tracking" | translate }}
             </h3>
             <div class="row">
               <div class="col-sm-4 col-12">
                 <div class="img-wrap">
                   <img
-                    src="assets/images/inte-facebook-mess.png"
+                    src="assets/images/inte-facebook-img.svg"
                     class="img-fluid"
                     alt="img"
                   />
@@ -830,18 +1134,21 @@
               </div>
               <div class="col-sm-8 col-12">
                 <p class="color-gray text">
-                  Facebook is an excellent way to engage with your customers,
-                  but also an excellent place to advertise your business. If you
-                  have been thinking about Facebook advertising, or are simply
-                  searching for a way to gather in-depth new data points for
-                  your individual web pages—thenit’stime to install the Facebook
-                  pixel.
+                  {{
+                    "facebook-is-an-excellent-way-to-engage-with-your-customers" | translate
+                  }}
+                  <span class="d-block mb-4 mt-2">
+                    <a href="https://www.facebook.com/business/help/171689010314963" target="_blank" class="color-brand">
+                      {{ "get-your-facebook-pixel-id" | translate }}
+                      <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                  </span>
                 </p>
                 <div class="form-group-outer">
                   <div class="form-group mb-0 mr-3">
-                    <label class="color-black disclaimer-bold"
-                      >Facebook Pixel ID</label
-                    >
+                    <label class="color-black disclaimer-bold">
+                      {{ "facebook-pixel-id" | translate }}
+                    </label>
                     <input
                       [(ngModel)]="fbPixelId"
                       type="text"
@@ -852,59 +1159,32 @@
                     (click)="savePixelId()"
                     class="share-btn disclaimer-bold button-primary"
                   >
-                    Submit
+                    {{ "submit" | translate }}
                     <i
                       class="fa fa-spinner fa-spin"
                       *ngIf="isPixelIdSubmitted"
                     ></i>
                   </button>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card card-default tab-card integrations">
-            <h3 class="color-black mb-3 mb-sm-4 title">
-              Track your site with Google Analytics
-            </h3>
-            <div class="row">
-              <div class="col-sm-4 col-12">
-                <div class="img-wrap">
-                  <img
-                    src="assets/images/inte-google.png"
-                    class="img-fluid"
-                    alt="img"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-8 col-12">
-                <p class="color-gray text">
-                  Integrate your referral website with your own Google Analytics
-                  account. This will allow you to track visitor numbers, source,
-                  demographic and other valuable information. All you need is
-                  your Google Analytics ID after you create a new Property for
-                  your specific referral website, including your referrer code
-                  in the subdomain.
-                </p>
                 <div class="form-group-outer">
                   <div class="form-group mb-0 mr-3">
-                    <label class="color-black disclaimer-bold"
-                      >GA Tracking ID</label
-                    >
+                    <label class="color-black disclaimer-bold">{{
+                      "verify-domain-meta-tag" | translate
+                    }}</label>
                     <input
-                      [(ngModel)]="gaTrackId"
+                      [(ngModel)]="fbMetaTag"
                       type="text"
                       class="form-control color-black"
                     />
                   </div>
                   <button
-                    (click)="saveGAId()"
+                    (click)="saveFbMetaTag()"
                     class="share-btn disclaimer-bold button-primary"
                   >
-                    Submit
+                    {{ "submit" | translate }}
                     <i
                       class="fa fa-spinner fa-spin"
-                      *ngIf="isGAIdSubmitted"
+                      *ngIf="isfbMetaTagSubmitted"
                     ></i>
                   </button>
                 </div>
@@ -914,13 +1194,13 @@
 
           <div class="card card-default tab-card integrations">
             <h3 class="color-black mb-3 mb-sm-4 title">
-              Track your site with Google Ad Conversion
+              {{ "integrate-with-facebook-messenger" | translate }}
             </h3>
             <div class="row">
               <div class="col-sm-4 col-12">
                 <div class="img-wrap">
                   <img
-                    src="assets/images/inte-google1.png"
+                    src="assets/images/inte-facebook-messenger-img.svg"
                     class="img-fluid"
                     alt="img"
                   />
@@ -928,77 +1208,20 @@
               </div>
               <div class="col-sm-8 col-12">
                 <p class="color-gray text">
-                  Integrate your referral website with your own Google Analytics
-                  account. This will allow you to track visitor numbers, source,
-                  demographic and other valuable information. All you need is
-                  your Google Analytics ID after you create a new Property for
-                  your specific referral website, including your referrer code
-                  in the subdomain.
+                  {{ "integrate-your-facebook-page-with-your-referrer-website" | translate }} <br><br>
+                  {{ "You also need to add shopketo.com to the Whitelisted domains on Facebook" | translate }}
+                  <span class="d-block mt-2 mb-4">
+                    <a href="https://www.facebook.com/help/1503421039731588" target="_blank" class="color-brand">
+                      {{ "find-your-facebook-page-id" | translate }}
+                      <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                  </span>
                 </p>
                 <div class="form-group-outer">
                   <div class="form-group mb-0 mr-3">
-                    <label class="color-black disclaimer-bold"
-                      >Add Conversion ID</label
-                    >
-                    <input
-                      [(ngModel)]="gaAdConvId"
-                      type="text"
-                      class="form-control color-black"
-                    />
-                  </div>
-                  <div class="form-group mb-0 mr-3">
-                    <label class="color-black disclaimer-bold"
-                      >Add Conversion Label</label
-                    >
-                    <input
-                      [(ngModel)]="gaAdConvLbl"
-                      type="text"
-                      class="form-control color-black"
-                    />
-                  </div>
-                  <button
-                    (click)="saveAdConvId()"
-                    class="share-btn disclaimer-bold button-primary"
-                  >
-                    Submit
-                    <i
-                      class="fa fa-spinner fa-spin"
-                      *ngIf="isAdConvIdSubmitted"
-                    ></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card card-default tab-card integrations">
-            <h3 class="color-black mb-3 mb-sm-4 title">
-              Get stats from your Facebook page
-            </h3>
-            <div class="row">
-              <div class="col-sm-4 col-12">
-                <div class="img-wrap">
-                  <img
-                    src="assets/images/inte-facebook-mess.png"
-                    class="img-fluid"
-                    alt="img"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-8 col-12">
-                <p class="color-gray text">
-                  Integrate your referral website with your own Google Analytics
-                  account. This will allow you to track visitor numbers, source,
-                  demographic and other valuable information. All you need is
-                  your Google Analytics ID after you create a new Property for
-                  your specific referral website, including your referrer code
-                  in the subdomain.
-                </p>
-                <div class="form-group-outer">
-                  <div class="form-group mb-0 mr-3">
-                    <label class="color-black disclaimer-bold"
-                      >Facebook Page ID</label
-                    >
+                    <label class="color-black disclaimer-bold">
+                      {{ "facebook-page-id" | translate }}
+                    </label>
                     <input
                       [(ngModel)]="fbPageId"
                       type="text"
@@ -1009,10 +1232,119 @@
                     (click)="savePageId()"
                     class="share-btn disclaimer-bold button-primary"
                   >
-                    Submit
+                    {{ "submit" | translate }}
                     <i
                       class="fa fa-spinner fa-spin"
                       *ngIf="isPageIdSubmitted"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-default tab-card integrations">
+            <h3 class="color-black mb-3 mb-sm-4 title">
+              {{ "track-your-site-with-google-analytics" | translate }}
+            </h3>
+            <div class="row">
+              <div class="col-sm-4 col-12">
+                <div class="img-wrap">
+                  <img
+                    src="assets/images/inte-google-img.svg"
+                    class="img-fluid"
+                    alt="img"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-8 col-12">
+                <p class="color-gray text">
+                  {{ "integrate-your-referral-website-with-your-own-google-analytics" | translate }}
+                  <span class="d-block mb-4 mt-2">
+                    <a href="https://support.google.com/analytics/answer/9539598" target="_blank" class="color-brand">
+                      {{ "find-your-google-tag-id" | translate }}
+                      <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                  </span>
+                </p>
+                <div class="form-group-outer">
+                  <div class="form-group mb-0 mr-3">
+                    <label class="color-black disclaimer-bold">
+                      {{ "ga-tracking-id" | translate }}
+                    </label>
+                    <input
+                      [(ngModel)]="gaTrackId"
+                      type="text"
+                      class="form-control color-black"
+                    />
+                  </div>
+                  <button
+                    (click)="saveGAId()"
+                    class="share-btn disclaimer-bold button-primary"
+                  >
+                    {{ "submit" | translate }}
+                    <i
+                      class="fa fa-spinner fa-spin"
+                      *ngIf="isGAIdSubmitted"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-default tab-card integrations google-add">
+            <h3 class="color-black mb-3 mb-sm-4 title">
+              {{ "track-your-site-with-google-ad-conversion" | translate }}
+            </h3>
+            <div class="row">
+              <div class="col-sm-4 col-12">
+                <div class="img-wrap">
+                  <img
+                    src="assets/images/inte-google-add-img.svg"
+                    class="img-fluid"
+                    alt="img"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-8 col-12">
+                <p class="color-gray text">
+                  {{ "take-your-advertising-to-the-next-level-with-google-ad-conversion-tracking" | translate }}
+                  <span class="d-block mb-4 mt-2">
+                    <a href="https://support.google.com/tagmanager/answer/6105160" target="_blank" class="color-brand">
+                      {{ "google-ads-conversions" | translate }}
+                      <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                  </span>
+                </p>
+                <div class="form-group-outer">
+                  <div class="form-group mb-0 mr-3">
+                    <label class="color-black disclaimer-bold">
+                      {{ "add-conversion-id" | translate }}</label>
+                    <input
+                      [(ngModel)]="gaAdConvId"
+                      type="text"
+                      class="form-control color-black"
+                    />
+                  </div>
+                  <div class="form-group mb-0 mr-3">
+                    <label class="color-black disclaimer-bold">
+                      {{ "add-conversion-label" | translate }}
+                    </label>
+                    <input
+                      [(ngModel)]="gaAdConvLbl"
+                      type="text"
+                      class="form-control color-black"
+                    />
+                  </div>
+                  <button
+                    (click)="saveAdConvId()"
+                    class="share-btn disclaimer-bold button-primary"
+                  >
+                    {{ "submit" | translate }}
+                    <i
+                      class="fa fa-spinner fa-spin"
+                      *ngIf="isAdConvIdSubmitted"
                     ></i>
                   </button>
                 </div>
@@ -1027,6 +1359,10 @@
     <!-- END of analytics-wraper -->
   </figure>
 </article>
+
+<div *ngIf="showConfirmToaster" class="sk-dashboard-popupalrt">
+  <p class="p-small text-center font-bold">Customization saved</p>
+</div>
 
 <ng-template #loader>
   <app-loader></app-loader>

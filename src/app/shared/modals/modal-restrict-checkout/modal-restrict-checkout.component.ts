@@ -26,8 +26,8 @@ export class ModalRestrictCheckoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
     this.getAllCountries();
+    this.getUser();
   }
 
   getUser() {

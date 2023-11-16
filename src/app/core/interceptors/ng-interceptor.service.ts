@@ -32,25 +32,35 @@ export class NgInterceptorService implements HttpInterceptor {
     if (req.url.includes(environment.accountHost)) {
       return next.handle(requestToForward);
     }
+
+    if (req.url.includes('connect/token')) {
+      return next.handle(requestToForward);
+    }
+
+    if (req.url.includes(environment.unicomShortenUrlEndPoint)) {
+      return next.handle(requestToForward);
+    }
+
     if (this.oidcSecurityService === undefined) {
       this.oidcSecurityService = this.injector.get(OidcSecurityService);
     }
 
     if (this.oidcSecurityService !== undefined) {
-      const impersonationSession = sessionStorage.getItem('ImpersonationUser')
-      const impersonationData = impersonationSession !== null ? JSON.parse(impersonationSession) : null;
-      if(impersonationData && impersonationData.access_token !== '') {
+      const impersonationSession = sessionStorage.getItem('ImpersonationUser');
+      const impersonationData =
+        impersonationSession !== null ? JSON.parse(impersonationSession) : null;
+      if (impersonationData && impersonationData.access_token !== '') {
         let token = impersonationData.access_token;
         let tokenValue = 'Bearer ' + token;
         requestToForward = req.clone({
           setHeaders: { Authorization: tokenValue },
         });
-      }else {
+      } else {
         let token = this.oidcSecurityService.getToken();
         if (token !== '') {
           let tokenValue = 'Bearer ' + token;
           requestToForward = req.clone({
-            setHeaders: { Authorization: tokenValue }
+            setHeaders: { Authorization: tokenValue },
           });
         }
       }

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppDataService } from '../shared/services/app-data.service';
+import { AppSeoService } from '../shared/services/app-seo.service';
+import { AppUtilityService } from '../shared/services/app-utility.service';
 declare var $: any;
 declare var aboutSliderJs: any;
 declare var aosJS: any;
@@ -20,10 +24,15 @@ export class AboutComponent implements OnInit {
   isCountryAvailable = true;
   referrer: any = {};
   isLoaded = false;
+  allowedCountry = ['US', 'CA'];
 
   constructor(
     private dataService: AppDataService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private utilityService: AppUtilityService,
+    private router: Router,
+    private seoService: AppSeoService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -31,13 +40,18 @@ export class AboutComponent implements OnInit {
     this.getSelectedLanguage();
     this.getReferrer();
     this.getSelectedCountry();
-
+    this.setRedirectURL();
+    this.setSeo();
     $(document).ready(() => {
       aboutSliderJs();
       $('body').on('hidden.bs.modal', '#pruvitTVModal', function () {
         $('#pruvitTVModal').remove();
       });
     });
+  }
+
+  setRedirectURL() {
+    this.utilityService.setRedirectURL(this.router.url, this.selectedCountry);
   }
 
   getDiscountHeight() {
@@ -72,6 +86,8 @@ export class AboutComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((countryCode: string) => {
         this.selectedCountry = countryCode;
+        if (!this.allowedCountry.includes(countryCode))
+          this.isCountryAvailable = false;
       });
   }
 
@@ -81,6 +97,11 @@ export class AboutComponent implements OnInit {
     this.dataService.changePostName({ postName: 'pruvit-modal-utilities' });
     $('#pruvitTVModal').modal('show');
     return false;
+  }
+
+  setSeo() {
+    this.seoService.updateTitle('Our Story');
+    this.meta.updateTag( { property: 'og:title', content: 'Our Story' });
   }
 
   ngOnDestroy() {

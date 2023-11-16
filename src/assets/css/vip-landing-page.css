@@ -1,0 +1,657 @@
+/*-------- import VIP Club style --------*/
+.vip-club-hero {
+  background: #121722 url(../images/vip/vip-club-hero-bg.png) no-repeat top center/100% auto;
+  padding: 150px 20px;
+}
+.vip-club-hero .row .introducing {
+  /*color: rgba(255, 255, 255, 0.64);
+  padding: 8px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 24px;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: -0.05em;
+  margin-bottom: 20px;*/
+  padding: 8px 30px;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  background: linear-gradient(225deg,#0AD8E5 0%,#990CDB 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.vip-club-hero .row .title {
+  font-size: 200px;
+  line-height: 190px;
+  font-weight: 700;
+  background: linear-gradient(180deg, #FFFFFF 16%, rgba(255, 255, 255, 0) 110%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 40px;
+}
+.vip-club-hero .row .subscribe-btn {
+  background-color: #FFFFFF;
+  color: #121722;
+  font-family: acumin-pro, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  text-transform: initial;
+  max-width: fit-content;
+  padding: 16px 24px;
+  height: 60px;
+  margin-top: 55px;
+  white-space: initial;
+}
+.vip-club-hero .row .subscribe-btn i {
+  color: #121722;
+}
+.vip-club-hero .row .subscribe-btn:hover {
+  background-color: #e2e2e2;
+}
+
+.vip-club-so-simple {
+  padding: 110px 16px 80px;
+}
+.vip-club-so-simple .row .benefits-text {
+  max-width: 840px;
+  margin: 30px auto 95px;
+}
+.vip-club-so-simple .simple-items h3 {
+  margin-top: 16px;
+}
+.vip-club-so-simple .simple-items p {
+  max-width: 280px;
+  margin: 10px auto 30px;
+}
+
+.vip-club-dollar-wrap {
+  padding: 60px 16px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row {
+  margin: 0 -12px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .col {
+  padding: 12px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card {
+  border: none;
+  border-radius: 20px;
+  background-repeat: no-repeat;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card .title {
+  font-size: 120px;
+  line-height: 120px;
+  letter-spacing: -0.05em;
+  margin-bottom: 30px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card .title .text-gradient {
+  background: linear-gradient(225deg, #FE2E68 0%, #FFAF32 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card p.disclaimer-reg {
+  max-width: 370px;
+  margin: 20px auto 0;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.dollar-spent-card {
+  padding: 74px;
+  background-image: url(../images/vip/dollar-spent-bg.png);
+  background-size: 100% auto;
+  background-position: top center;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.vault-card {
+  background-color: #121722;
+  padding: 75px 65px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.vault-card .fa-lock-keyhole-open {
+  background: linear-gradient(225deg, #FFFFFF 40%, rgba(255, 255, 255, 0.35) 63%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 64px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.vault-card h1 {
+  color: #FFFFFF;
+  margin: 45px 0 32px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.vault-card h1 .gray {
+  color: rgba(255, 255, 255, 0.64);
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.limited-edition-card {
+  background-color: #e5e5e5;
+  min-height: 536px;
+  justify-content: center;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.limited-edition-card .limited-btn {
+  padding: 6px 30px 8px;
+  margin: 50px auto;
+  border: 1px solid #121722;
+  border-radius: 24px;
+  font-weight: 700;
+  letter-spacing: -.05em;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .limited-edition-card .limited-product-slider img {
+  max-width: 120px;
+  height: auto;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card {
+  background-color: #FFFFFF;
+  padding: 60px 60px 0;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card h1 {
+  font-size: 120px;
+  line-height: 118px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap {
+  position: relative;
+  background-image: url(../images/vip/off-round-bg.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: 220px;
+  max-width: 420px;
+  width: 100%;
+  margin: 50px auto 0;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent {
+  color: rgba(3, 12, 33, 0.721569);
+  background-color: #fff;
+  position: absolute;
+  height: 52px;
+  width: 52px;
+  text-align: center;
+  line-height: 48px;
+  border-radius: 50px;
+  border: 2px solid rgba(3, 12, 33, 0.121569);
+  box-shadow: 0px 11px 32px rgba(0, 0, 0, 0.12);
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-15 {
+  left: 16%;
+  top: 15%;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-25 {
+  left: 47%;
+  top: -6px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-50 {
+  left: 81%;
+  top: 34%;
+  background-color: #121722;
+  color: #FFFFFF;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .off-list {
+  max-width: 250px;
+  margin: 90px auto 0;
+  text-align: left;
+  list-style: none;
+  padding-left: 40px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .off-list li {
+  padding: 4px 0;
+  color: rgba(3, 12, 33, 0.721569);
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.nice-card {
+  background-image: url(../images/vip/you-nice-bg.png);
+  background-position: center center;
+  background-size: cover;
+  padding: 60px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.nice-card h1 {
+  color: #ffffff;
+  max-width: 260px;
+  margin-bottom: 43px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.nice-card h3 {
+  margin: 10px 0;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.nice-card .disclaimer-reg {
+  max-width: 100%;
+  margin: 20px 0 0;
+  color: rgba(3, 12, 33, 0.721569);
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card {
+  background: linear-gradient(0deg, rgba(129, 219, 232, 0.5), rgba(129, 219, 232, 0.5));
+  padding: 70px 50px;
+  position: relative;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url(../images/vip/sharing-earning-img.png);
+  background-position: center left -100px;
+  background-size: auto 120%;
+  background-repeat: no-repeat;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card .content {
+  max-width: 420px;
+  margin: 0 0 0 auto;
+  position: relative;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card .content .fa-gift {
+  color: #1ED1DC;
+  font-size: 64px;
+  margin-bottom: 25px;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card .content h4 {
+  margin: 20px 0 0;
+}
+.vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card .content .disclaimer-reg {
+  max-width: initial;
+  margin: 85px 0 0;
+}
+.vip-how-it-work {
+  padding: 30px 16px;
+}
+.vip-how-it-work .container {
+  max-width: 840px;
+}
+.vip-how-it-work .pricing-row .col {
+  margin-top: 45px;
+}
+.vip-how-it-work .pricing-row .col .card {
+  padding: 24px;
+  box-shadow: 0px 11px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+}
+.vip-how-it-work .pricing-row .col .card h4 {
+  margin: 20px 0 15px;
+}
+.vip-how-it-work .pricing-row .col .card ul {
+  padding: 0;
+  margin: 10px 0 0;
+}
+.vip-how-it-work .pricing-row .col .card ul li {
+  list-style: none;
+  position: relative;
+  padding-left: 24px;
+  margin: 10px 0;
+  color: rgba(3, 12, 33, 0.721569);
+}
+.vip-how-it-work .pricing-row .col .card ul li::before {
+  content: "\f058";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 600;
+  font-size: 16px;
+  color: #74CBB1;
+}
+.vip-how-it-work .pricing-row .col .card .color-green-light {
+  color: #74CBB1;
+}
+.vip-how-it-work .pricing-row .col .card.vipPlus .color-green-light {
+  color: #2BA07D;
+}
+.vip-how-it-work .pricing-row .col .card.vipPlus {
+  background-color: #121722 !important;
+}
+.vip-how-it-work .pricing-row .col .card.vipPlus ul li {
+  color: #ffffff;
+}
+.vip-how-it-work .pricing-row .col .card.vipPlus ul li::before {
+  content: "\f055";
+  color: #2BA07D;
+}
+.vip-how-it-work .pricing-row .col.center-col {
+  max-width: 130px;
+  padding-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.vip-how-it-work .pricing-row .col.center-col .fa-arrow-right {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.vip-how-it-work .points-row {
+  padding: 60px 0;
+}
+.vip-today {
+  background: #121722;
+  padding: 100px 0 120px;
+}
+.vip-today .sub-title {
+  color: rgba(255, 255, 255, 0.64);
+  margin-top: 34px;
+}
+.vip-today .sk-main__product .sk-category__title .color-gray {
+  color: rgba(255, 255, 255, 0.64);
+}
+.vip-today .sk-main__product .sk-main__product-btn .button-primary {
+  color: #FCFDFF;
+  background: #121722;
+}
+.vip-today .sk-main__product .sk-main__product-btn .button-primary:hover {
+  background: #2e3137;
+}
+.vip-today ul {
+  list-style: none;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 20px;
+  max-width: 570px;
+  margin: 48px auto 40px;
+  padding: 26px 24px;
+}
+.vip-today ul li {
+  position: relative;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  padding-left: 32px;
+  padding-bottom: 10px;
+}
+.vip-today ul li:before {
+  content: "\f058";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 700;
+  left: 0;
+  color: #2BA07D;
+}
+.vip-today ul li:last-child {
+  padding-bottom: 0;
+}
+.vip-today .save-pro {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 50px auto 0;
+}
+.vip-today .save-pro a:hover {
+  color: #2152ff;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header {
+  margin: 9px 0 13px;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn i {
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  font-size: 22px;
+  line-height: 22px;
+  transition: transform 0.3s ease-in-out;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn[aria-expanded=false] i {
+  transform: rotate(0);
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn[aria-expanded=true] {
+  color: #2152ff;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn[aria-expanded=true] i {
+  transform: rotate(180deg);
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn:hover i,
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header .btn[aria-expanded=true] i {
+  color: #2152ff !important;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card .card-header.font-17 .btn {
+  font-size: 17px;
+  letter-spacing: -0.015em;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card:last-child {
+  border-bottom: none;
+}
+.FAQ-wraper.arrow-style .FAQ-accordion .card.gray-icon .btn i {
+  color: rgba(3, 12, 33, 0.239216);
+}
+
+/*-------- Dark-theme style --------*/
+.dark-theme .color-gray-1,
+.dark-theme .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .off-list li, .dark-theme .vip-how-it-work .pricing-row .col .card ul li {
+  color: #f2f2f2;
+}
+.dark-theme .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card, .dark-theme .vip-how-it-work .pricing-row .col .card {
+  background-color: #1c1c1e;
+}
+
+.dark-theme .vip-club-dollar-wrap .dollar-wrap-row .card.dollar-spent-card {
+  background-color: #fff;
+}
+.dark-theme .FAQ-wraper.arrow-style .FAQ-accordion .card.gray-icon .btn i {
+  color: #47474a;
+}
+.dark-theme .vip-today .sk-main__product .sk-main__product-btn .button-primary {
+  background-color: #000;
+}
+.dark-theme .vip-today .sk-main__product .sk-main__product-btn .button-primary:hover {
+  background-color: #FCFDFF;
+  color: #121722;
+}
+  
+/*-------- Mobile style --------*/
+@media (max-width: 767px) {
+  .vip-club-hero {
+    padding: 60px 10px;
+  }
+  .vip-club-hero .row .title {
+    font-size: 80px;
+    line-height: 70px;
+    margin-bottom: 15px;
+  }
+  .vip-club-hero .row .subscribe-btn {
+    font-size: 16px;
+    padding: 10px 16px;
+    height: 48px;
+    margin-top: 30px;
+  }
+  .vip-club-so-simple {
+    padding: 40px 10px;
+  }
+  .vip-club-so-simple .row .benefits-text {
+    margin: 20px auto 35px;
+  }
+  .vip-club-dollar-wrap {
+    padding: 0 16px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row {
+    margin: 0 -6px;
+    flex-direction: column;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card .title {
+    font-size: 62px;
+    line-height: 60px;
+    margin-bottom: 15px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card p.disclaimer-reg {
+    margin: 15px auto 0;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.dollar-spent-card {
+    padding: 40px 12px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.vault-card {
+    padding: 50px 30px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.vault-card .fa-lock-keyhole-open {
+    font-size: 52px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.vault-card h1 {
+    margin: 25px 0 20px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.limited-edition-card {
+    padding: 40px 0;
+    min-height: 360px;
+    background-position: top 30px center;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.limited-edition-card::after {
+    background-position: bottom 30px center;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.limited-edition-card .limited-btn {
+    padding: 6px 20px 8px;
+    margin: 40px auto;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card h1 {
+    font-size: 68px;
+    line-height: 60px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap {
+    height: initial;
+    margin-top: 30px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-15 {
+    left: 13%;
+    top: 14%;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-25 {
+    left: 43%;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .percent.p-50 {
+    left: 77%;
+    top: 32%;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .off-list {
+    margin-top: 75px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap .off-list li {
+    padding: 2px 0;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.nice-card {
+    padding: 30px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.nice-card h1 {
+    max-width: 150px;
+    margin-bottom: 20px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.nice-card h3 {
+    margin: 3px 0;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.nice-card .disclaimer-reg {
+    margin: 15px 0 0;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card {
+    padding: 100px 35px 30px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card::before {
+    background-size: auto 290px;
+    background-position: top -30px right -50px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card .content .disclaimer-reg {
+    margin-top: 20px;
+  }
+  .vip-how-it-work .pricing-row .col {
+    margin-top: 30px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 6px;
+  }
+  .vip-how-it-work .pricing-row .col.center-col {
+    padding-top: 0;
+  }
+  .vip-how-it-work .points-row {
+    padding: 30px 0;
+  }
+  .vip-today {
+    padding: 50px 0 60px;
+  }
+  .vip-today .sub-title {
+    margin-top: 25px;
+  }
+  .vip-today .save-pro {
+    margin: 25px auto 0;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card {
+    padding: 40px 15px 0;
+  }
+  .vip-how-it-work .pricing-row .col.center-col .fa-arrow-right {
+    transform: rotate(90deg);
+  }
+  .vip-club-hero .row .introducing{
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.vip-today .sk-main__product {
+  margin-bottom: 0;
+}
+
+.vip-today.smartship ul {
+  border: 1px solid rgba(3, 12, 33, 0.121569);
+}
+.vip-today.smartship ul li {
+  color: rgba(3, 12, 33, 0.721569);
+}
+
+.smartship a.learn-more {
+  margin: 0 0 30px;
+}
+
+.sk-category__parent-title-wrap.smartship.vip-today {
+  background: transparent;
+  padding: 42px 0 8px;
+}
+
+.points-row p {
+  margin-bottom: 8px;
+}
+
+.dark-theme .vip-club-dollar-wrap .dollar-wrap-row .card h1.title{
+  color:#000;   
+}
+
+.dark-theme .vip-today.smartship ul li{
+  color: #fff;
+   
+}
+.dark-theme .vip-today.smartship ul {
+  border: 1px solid #fff;
+}
+.vip-club-hero .row .border-gradient-vip-style {
+  background: linear-gradient(#121722) padding-box, linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  background: -webkit-gradient(linear,left top,left bottom,from(#121722 )) padding-box,-webkit-gradient(linear,right top,left bottom,from(#0ad8e5),to(#990cdb)) border-box;
+  border-radius: 40px;
+  border: 1px solid transparent;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  text-align: center;
+  margin: 0 auto 20px;
+}
+
+@media (max-width: 1024px) {
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card .off-wrap {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 640px) {
+  .vip-club-dollar-wrap .dollar-wrap-row .card.enjoy-extra-card {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 390px) {
+  .vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card {
+      padding-top: 70px;
+  }
+  .vip-club-dollar-wrap .dollar-wrap-row .card.sharing-earning-card:before {
+      background-size: auto 250px;
+  }
+}

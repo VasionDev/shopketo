@@ -18,4 +18,5 @@ export interface ProductTagOrCategory {
   isUserCanAccess: boolean;
   isEveryoneCanAccess: boolean;
   accessLevelTitle: string;
+  english_unique_id: string;
 }

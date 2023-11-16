@@ -1,23 +1,16 @@
-import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, of, ReplaySubject } from 'rxjs';
 import {
-  catchError,
-  exhaustMap,
-  switchMap,
-  takeUntil,
-  tap,
-  timeout,
-} from 'rxjs/operators';
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { WebsiteService } from 'src/app/customer-dashboard/websites/service/websites-service';
-import { AppApiService } from '../../../shared/services/app-api.service';
 import { AppDataService } from '../../../shared/services/app-data.service';
 import { Product } from '../../models/product.model';
-declare var tagSliderJS: any;
 declare var $: any;
 
 @Component({
@@ -28,9 +21,7 @@ declare var $: any;
 export class ReferrerHomeComponent implements OnInit, OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   selectedLanguage = '';
-  selectedCountry = '';
   discountHeight = 0;
-  contactForm: FormGroup;
   referrer: any = {};
   referrerVideoId: string = '';
   customizeData: any = null;
@@ -38,141 +29,89 @@ export class ReferrerHomeComponent implements OnInit, OnDestroy {
   products: any = [];
   favProducts: any = [];
   isLoaded: boolean = false;
-  isFormSubmitted = false;
-  isApproveSubmitted = false;
-  isApproved: boolean = false;
-  apporveTokenFromUrl: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
-  userSelectedCountry = {
-    country_code: 'US',
-    phone_code: '+1',
-    name: 'United States',
-  };
-  contactToken: any;
   previewData: any = {};
-  isApprovalPage: boolean = false;
+  productCountryCode: string = 'US';
+  isReadMore: boolean = true;
+  shortBio: string = '';
 
   constructor(
     private dataService: AppDataService,
-    private apiService: AppApiService,
     private translate: TranslateService,
     private websiteService: WebsiteService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private formBuilder: FormBuilder,
-    private location: Location
+    private renderer: Renderer2
   ) {
-    this.contactForm = this.createContactForm();
     const data = localStorage.getItem('customizePreviewData');
     if (data) {
       this.customizeData = JSON.parse(data);
+      this.setCustomizePreviewData();
     }
-
-    this.route.queryParamMap
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((params) => {
-        const approveTokenFromURL = params.get('approve_token');
-        if (approveTokenFromURL !== null) {
-          this.isApprovalPage = true;
-          this.apporveTokenFromUrl = approveTokenFromURL;
-        }
-      });
   }
 
   ngOnInit(): void {
     this.getDiscountHeight();
-    this.getSelectedLanguage();
     this.getSelectedCountry();
-    this.getCountries();
+    this.getSelectedLanguage();
     this.getReferrer();
-    if (this.customizeData === null) {
-      this.getUserCustomizeData();
-    } else this.setCustomizePreviewData();
+    // if (this.customizeData === null) {
+    //   this.getUserCustomizeData();
+    // } else this.setCustomizePreviewData();
+  }
+
+  getSelectedCountry() {
+    this.dataService.currentSelectedCountry$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((country: string) => {
+        this.productCountryCode = country;
+      });
   }
 
   setCustomizePreviewData() {
-    if (this.customizeData.favoriteProducts.length) {
+    this.isLoaded = true;
+    if(this.customizeData?.introVideo && 
+      this.customizeData.introVideo?.videoId && 
+      this.customizeData.introVideo?.status === 'approved'
+    ) {
+      this.referrerVideoId = this.customizeData.introVideo?.videoId
+    }
+
+    if(this.customizeData?.shortBio && 
+      this.customizeData.shortBio?.bioData && 
+      this.customizeData.shortBio?.status === 'approved'
+    ) {
+      this.shortBio = this.customizeData.shortBio?.bioData;
+    } else if(this.customizeData?.oldShortBio && 
+      this.customizeData.oldShortBio?.bioData && 
+      this.customizeData.oldShortBio?.status === 'approved'
+    ) {
+      this.shortBio = this.customizeData.oldShortBio?.bioData;
+    }
+    
+    if (Object.entries(this.customizeData.favoriteProducts).length) {
       this.favProducts = this.products.filter((product: any) => {
-        return this.customizeData.favoriteProducts.includes(product.id);
+        return this.customizeData.favoriteProducts[this.productCountryCode].includes(product.uniqueId);
       });
+    }
+  
+    if(this.customizeData?.introVideo && 
+      this.customizeData.introVideo?.videoId && 
+      this.customizeData.introVideo?.status === 'approved'
+    ) {
+      this.referrerVideoId = this.customizeData.introVideo?.videoId
     }
 
     $(document).ready(() => {
       var styleSheet = document.styleSheets[0];
       if (this.customizeData.theme.color !== '') {
         styleSheet.insertRule(
-          `.ref-card::before, .buy-now, .button-icon, .get-in-touch { background-color: ${this.customizeData.theme.color} !important; }`,
+          `.referrer-profile .watch-now, .referrer-profile .buy-now { background-color: ${this.customizeData.theme.color} !important; }`,
           styleSheet.cssRules.length
         );
         styleSheet.insertRule(
-          `.get-in a, a.collapse-btn, .slick-next::before, .slick-prev::before, .sk-pruver__btn { color: ${this.customizeData.theme.color} !important; }`,
+          `.referrer-profile .my-link-list li a { color: ${this.customizeData.theme.color} !important; }`,
           styleSheet.cssRules.length
         );
       }
-
-      this.referrerVideoId = this.customizeData.introVideoId
-        ? this.customizeData.introVideoId
-        : '';
-
-      this.isLoaded = true;
-      if (this.favProducts.length > 3) {
-        setTimeout(() => {
-          tagSliderJS('favoritePrd-slider', this.favProducts.length);
-        }, 500);
-      }
     });
-  }
-
-  createContactForm() {
-    return this.formBuilder.group({
-      interested: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phone: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '(([(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})'
-          ),
-        ],
-      ],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        ],
-      ],
-      checkAgree: [true, Validators.requiredTrue],
-    });
-  }
-
-  get f() {
-    return this.contactForm.controls;
-  }
-
-  getSelectedCountry() {
-    this.dataService.currentSelectedCountry$.subscribe(
-      (countryCode: string) => {
-        this.selectedCountry = countryCode;
-      }
-    );
-  }
-
-  getCountries() {
-    this.http
-      .get('assets/countries.json')
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((data) => {
-        this.countries = data;
-      });
-  }
-
-  setUserSelectedCountryPhoneCode(country: any) {
-    this.userSelectedCountry = country;
   }
 
   getDiscountHeight() {
@@ -223,90 +162,72 @@ export class ReferrerHomeComponent implements OnInit, OnDestroy {
     this.dataService.currentReferrerData$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((referrer: any) => {
-        console.log('referrer', referrer);
         if (referrer) {
           this.referrer = referrer;
+          if (this.customizeData === null) this.getUserCustomizeData();
         }
       });
   }
 
   getUserCustomizeData() {
     this.websiteService
-      .getCustomizeData(this.referrer?.userId, this.isApprovalPage)
+      .getCustomizeData(this.referrer?.userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(
         (res) => {
-          console.log('customize-data', res);
+          this.isLoaded = true;
+          this.websiteService.setUserCustomizeData(res);
           if (typeof res.success && res.success === true) {
-            if (!this.isApprovalPage) {
-              if (res.data.status === 'approved') {
-                this.customizeData = res.data;
-              } else if (
-                res.data.status === 'pending' &&
-                res.data.hasOwnProperty('active_data')
-              ) {
-                this.customizeData = res.data.active_data;
-              } else {
-                this.router.navigate(['/']);
-              }
-            } else {
-              if (
-                res.data.status === 'pending' &&
-                this.apporveTokenFromUrl !== ''
-              ) {
-                const apporveToken = res?.approve_token;
-                console.log('apporveToken', apporveToken);
-                if (apporveToken === this.apporveTokenFromUrl) {
-                  this.customizeData = this.customizeData = res.data;
-                  const removedParamsUrl = this.router.url.substring(
-                    0,
-                    this.router.url.indexOf('?')
-                  );
-                  this.location.go(removedParamsUrl);
-                } else {
-                  this.router.navigate(['/']);
-                }
-              } else {
-                this.router.navigate(['/']);
-              }
+            this.customizeData = res.data; 
+          } 
+
+          if (this.customizeData !== null) {
+            
+            if(this.customizeData?.introVideo && 
+              this.customizeData.introVideo?.videoId && 
+              this.customizeData.introVideo?.status === 'approved'
+            ) {
+              this.referrerVideoId = this.customizeData.introVideo?.videoId
             }
 
-            if (this.customizeData !== null) {
-              this.referrerVideoId = this.customizeData.introVideoId
-                ? this.customizeData.introVideoId
-                : '';
-              if (this.customizeData.favoriteProducts.length) {
-                this.favProducts = this.products.filter((product: any) => {
-                  return this.customizeData.favoriteProducts.includes(
-                    product.id
-                  );
-                });
-              }
+            if(this.customizeData?.shortBio && 
+              this.customizeData.shortBio?.bioData && 
+              this.customizeData.shortBio?.status === 'approved'
+            ) {
+              this.shortBio = this.customizeData.shortBio?.bioData;
+            } else if(this.customizeData?.oldShortBio && 
+              this.customizeData.oldShortBio?.bioData && 
+              this.customizeData.oldShortBio?.status === 'approved'
+            ) {
+              this.shortBio = this.customizeData.oldShortBio?.bioData;
+            }
 
-              $(document).ready(() => {
-                var styleSheet = document.styleSheets[0];
-                if (this.customizeData.theme.color !== '') {
-                  styleSheet.insertRule(
-                    `.ref-card::before, .buy-now, .button-icon, .get-in-touch { background-color: ${this.customizeData.theme.color} !important; }`,
-                    styleSheet.cssRules.length
-                  );
-                  styleSheet.insertRule(
-                    `.get-in a, a.collapse-btn, .slick-next::before, .slick-prev::before, .sk-pruver__btn { color: ${this.customizeData.theme.color} !important; }`,
-                    styleSheet.cssRules.length
-                  );
-                }
-
-                this.isLoaded = true;
-                if (this.favProducts.length > 3) {
-                  setTimeout(() => {
-                    tagSliderJS('favoritePrd-slider', this.favProducts.length);
-                  }, 500);
-                }
+            if (
+              Object.entries(this.customizeData.favoriteProducts).length &&
+              this.customizeData.favoriteProducts[this.productCountryCode]
+            ) {
+              this.favProducts = this.products.filter((product: any) => {
+                return this.customizeData.favoriteProducts[
+                  this.productCountryCode
+                ].includes(product.uniqueId);
               });
             }
-          } else {
-            this.router.navigate(['/']);
+
+            $(document).ready(() => {
+              var styleSheet = document.styleSheets[0];
+              if (this.customizeData.theme.color !== '') {
+                styleSheet.insertRule(
+                  `.referrer-profile .watch-now, .referrer-profile .buy-now { background-color: ${this.customizeData.theme.color} !important; }`,
+                  styleSheet.cssRules.length
+                );
+                styleSheet.insertRule(
+                  `.referrer-profile .my-link-list li a { color: ${this.customizeData.theme.color} !important; }`,
+                  styleSheet.cssRules.length
+                );
+              }
+            });
           }
+         
         },
         (err) => {
           console.log(err);
@@ -314,125 +235,29 @@ export class ReferrerHomeComponent implements OnInit, OnDestroy {
       );
   }
 
-  onClickApproveBtn() {
-    this.isApproveSubmitted = true;
-    this.websiteService
-      .approveCustomizeData({ userId: this.referrer?.userId })
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.isApproveSubmitted = false;
-          if (res.success) {
-            this.isApproved = true;
-          } else {
-            $('#foorerApprovalbar button').attr('disabled', true);
-            $('#foorerApprovalbar button').text('Approve failed');
-          }
-        },
-        (err) => {
-          console.log(err);
-          this.isApproveSubmitted = false;
-          $('#foorerApprovalbar button').attr('disabled', true);
-          $('#foorerApprovalbar button').text(
-            'Something went wrong. Please try again later'
-          );
-        }
-      );
+  onClickMyLink(link: string) {
+    if (!link.match(/^https?:\/\//i)) {
+      link = 'https://' + link;
+    }
+    window.open(link);
   }
 
-  onSubmitContactForm() {
-    if (this.contactForm.invalid || this.isFormSubmitted) return;
-    this.isFormSubmitted = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-    this.apiService
-      .getContactToken()
-      .pipe(
-        takeUntil(this.destroyed$),
-        tap(
-          (contactTokenResponse: any) =>
-            (this.contactToken = contactTokenResponse)
-        ),
-        exhaustMap(() => {
-          return this.createContact().pipe(
-            switchMap((contactResponse: any) => {
-              const activity = this.createContactActivity(
-                contactResponse.result.contactId
-              ).pipe(catchError((error) => of(error)));
-              const sysAlert = this.apiService.getSystemAlertToken().pipe(
-                switchMap((alertTokenResponse: any) => {
-                  return this.websiteService
-                    .createSystemAlert(
-                      alertTokenResponse.token_type,
-                      alertTokenResponse.access_token,
-                      this.referrer?.userId,
-                      this.f['firstName'].value,
-                      this.f['lastName'].value,
-                      this.f['interested'].value
-                    )
-                    .pipe(
-                      timeout(30000),
-                      catchError((error) => of(error))
-                    );
-                })
-              );
-              return forkJoin([activity, sysAlert]);
-            })
-          );
-        })
-      )
-      .subscribe(
-        (response: any) => {
-          console.log('forkResponse', response);
-          const activiyResponse = response[0];
-          const alertResponse = response[1];
-          if (activiyResponse.isSuccess || alertResponse.isSuccess) {
-            this.successMessage = 'Contact submitted successfully.';
-            this.isFormSubmitted = false;
-          }
-        },
-        (err: any) => {
-          console.log(err);
-          this.errorMessage = 'Something went wrong. Please try again later.';
-          this.isFormSubmitted = false;
-        },
-        () => {
-          //this.errorMessage = 'Something went wrong. Please try again later.';
-          this.contactForm.reset({ interested: '', checkAgree: true });
-          this.isFormSubmitted = false;
-        }
-      );
+  sendSMS(number: string) {
+    window.open('sms:' + number);
   }
 
-  createContact() {
-    const phoneWithCode =
-      this.userSelectedCountry.phone_code + this.f['phone'].value;
-    const contactResponse = this.websiteService.createContactId(
-      this.contactToken.token_type,
-      this.contactToken.access_token,
-      this.referrer?.userId,
-      this.f['firstName'].value,
-      this.f['lastName'].value,
-      this.f['email'].value,
-      phoneWithCode,
-      this.selectedCountry
-    );
-
-    return contactResponse;
+  sendEmail(email: string) {
+    window.open('mailTo:' + email);
   }
 
-  createContactActivity(contactId: string) {
-    return this.websiteService.createContactActivity(
-      this.contactToken.token_type,
-      this.contactToken.access_token,
-      contactId,
-      this.f['interested'].value
-    );
+  sendCall(number: string) {
+    window.open('tel:' + number);
   }
 
-  onClickCloseVideo() {
-    this.referrerVideoId = '';
+  onClickReferrerImage() {
+    if (this.referrerVideoId && $('.watch-now').length) {
+      $('button.watch-now span').trigger('click');
+    }
   }
 
   ScrollIntoView() {
@@ -456,6 +281,7 @@ export class ReferrerHomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+    this.renderer.removeAttribute(document.body, 'style');
     localStorage.removeItem('customizePreviewData');
   }
 }

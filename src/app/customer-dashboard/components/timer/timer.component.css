@@ -1,0 +1,8 @@
+.cancel__timer {
+    color: #030C217A;
+    font-size: 14px;
+}
+
+.cancel__timer:hover {
+   cursor: pointer;
+}

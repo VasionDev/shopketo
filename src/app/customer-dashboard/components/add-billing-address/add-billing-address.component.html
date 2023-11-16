@@ -1,7 +1,148 @@
+<div *ngIf="!confirmShow" class="modal-body pb-0">
+    <div class="card modal-body-card">
+        <div class="row">
+            <div class="col-12 form-group">
+                <label class="color-black mb-1">{{
+                                "country" | translate
+                              }}</label>
+                <select (change)="onSelectCountry()" class="form-control custom-select" [(ngModel)]="country">
+                    <option value="0" disabled>
+                        {{ "select-country" | translate }}
+                    </option>
+                    <option value="us" selected="">
+                        {{ "united-states" | translate }}
+                    </option>
+                    <option value="ca" selected="">
+                        {{ "canada" | translate }}
+                    </option>
+                    <option value="au" selected="">
+                        {{ "australia" | translate }}
+                    </option>
+                    <option value="nz" selected="">
+                        {{ "New Zealand" | translate }}
+                    </option>
+                    <option value="mx" selected="">
+                        {{ "Mexico" | translate }}
+                    </option>
+                    <option value="cn" selected="">
+                        {{ "China" | translate }}
+                    </option>
+                    <option value="al" selected="">
+                        {{ "Albania" | translate }}
+                    </option>
+                    <option value="at" selected="">
+                        {{ "Austria" | translate }}
+                    </option>
+                    <option value="bg" selected="">
+                        {{ "Bulgaria" | translate }}
+                    </option>
+                    <option value="be" selected="">
+                        {{ "Belgium" | translate }}
+                    </option>
+                    <option value="ch" selected="">
+                        {{ "Switzerland" | translate }}
+                    </option>
+                    <option value="cy" selected="">
+                        {{ "Cyprus" | translate }}
+                    </option>
+                    <option value="cz" selected="">
+                        {{ "Czech republic" | translate }}
+                    </option>
+                    <option value="de" selected="">
+                        {{ "Germany" | translate }}
+                    </option>
+                    <option value="dk" selected="">
+                        {{ "Denmark" | translate }}
+                    </option>
+                    <option value="ee" selected="">
+                        {{ "Estonia" | translate }}
+                    </option>
+                    <option value="es" selected="">
+                        {{ "Spain" | translate }}
+                    </option>
+                    <option value="fi" selected="">
+                        {{ "Finland" | translate }}
+                    </option>
+                    <option value="fr" selected="">
+                        {{ "France" | translate }}
+                    </option>
+                    <option value="jp" selected="">
+                        {{ "Japan" | translate }}
+                    </option>
+                    <option value="gb" selected="">
+                        {{ "United kingdom" | translate }}
+                    </option>
+                    <option value="gr" selected="">
+                        {{ "Greece" | translate }}
+                    </option>
+                    <option value="hr" selected="">
+                        {{ "Croatia" | translate }}
+                    </option>
+                    <option value="hu" selected="">
+                        {{ "Hungary" | translate }}
+                    </option>
+                    <option value="lt" selected="">
+                        {{ "Lithuania" | translate }}
+                    </option>
+                    <option value="lu" selected="">
+                        {{ "Luxembourg" | translate }}
+                    </option>
+                    <option value="ro" selected="">
+                        {{ "Romania" | translate }}
+                    </option>
+                    <option value="si" selected="">
+                        {{ "Slovenia" | translate }}
+                    </option>
+                    <option value="sk" selected="">
+                        {{ "Slovakia" | translate }}
+                    </option>
+                    <option value="ie" selected="">
+                        {{ "Ireland" | translate }}
+                    </option>
+                    <option value="it" selected="">
+                        {{ "Italy" | translate }}
+                    </option>
+                    <option value="lv" selected="">
+                        {{ "Latvia" | translate }}
+                    </option>
+                    <option value="mt" selected="">
+                        {{ "Malta" | translate }}
+                    </option>
+                    <option value="nl" selected="">
+                        {{ "Netherlands" | translate }}
+                    </option>
+                    <option value="pl" selected="">
+                        {{ "Poland" | translate }}
+                    </option>
+                    <option value="pt" selected="">
+                        {{ "Portugal" | translate }}
+                    </option>
+                    <option value="se" selected="">
+                        {{ "Sweden" | translate }}
+                    </option>
+                    <option value="hk" selected="">
+                        {{ "Hong kong" | translate }}
+                    </option>
+                    <option value="mo" selected="">
+                        {{ "Macau" | translate }}
+                    </option>
+                    <option value="my" selected="">
+                        {{ "Malaysia" | translate }}
+                    </option>
+                    <option value="sg" selected="">
+                        {{ "Singapore" | translate }}
+                    </option>
+                    <option value="tw" selected="">
+                        {{ "Taiwan" | translate }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
 
-<app-us-address *ngIf="!confirmShow" [country]="country" (addressSent)="getAddress($event)"
-    (hideForm)="hideForm($event)">
-</app-us-address>
+<template #addresscontainerpayment> </template>
+
 <app-confirm-address *ngIf="confirmShow" (saveAddressId)="getNewAddressId($event)" (hideConfirm)="hideConfirm($event)"
     [address]="addressSent">
 </app-confirm-address>

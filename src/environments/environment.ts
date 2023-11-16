@@ -4,14 +4,18 @@
 
 export const environment = {
   production: false,
+  tenant: 'pruvit',
   isStaging: true,
   userURL: 'https://demo.justpruvit.com/',
   checkoutDomain: 'https://demo-opc.justpruvit.com/',
-  apiDomain: 'https://shopketo.marketvision.com', // https://api.shopketo.com  // https://shopketo.marketvision.com
+  apiDomain: 'https://api.mvdemo-pruvit.com', //https://api.shopketo.com //https://shopketo.marketvision.com
   shareCartDomain: `https://localhost:${location.port}/{country}/cart?ref={code}`,
   // shareCartDomain: 'https://{code}.pruvitnow.com/{country}/cart',
   redirectDomain: 'https://demo.justpruvit.com',
   clientID: 'pruvitdemoomicronclient',
+  inviteClientId: '',
+  inviteClientSecret: '',
+  inviteScopes: '',
   returningDomain: 'https://account-demo.justpruvit.com/',
   clientDomain: 'https://localhost:4200',
   phraseBase: 'https://api.phraseapp.com/api/v2/projects/',
@@ -21,12 +25,13 @@ export const environment = {
   shaSalt: 'QM=5LGFkAczk',
   foodCheckoutUrl: 'https://demo-opc.justpruvit.com/',
   contactHost: 'https://contacts-demo.marketvision.com',
-  accountHost: 'https://account-demo.marketvision.com',
+  contactTokenHost: 'https://account-demo.marketvision.com',
+  accountHost: 'https://account-demo-v5.justpruvit.com',
   accountClientId: 'pruvitdemoshopketoroclient',
   accountClientsecret: 'demosecret',
   vaptHost: 'https://api-vapt-int.onebigsplash.com',
   iaaConfig: {
-    stsServer: 'https://account-demo.justpruvit.com',
+    stsServer: 'https://account-demo-v5.justpruvit.com',
     redirectUrl: 'https://localhost:4200/implicit',
     // The Client MUST validate that the aud (audience) Claim contains its client_id value registered at the Issuer
     // identified by the iss (issuer) Claim as an audience.
@@ -54,10 +59,11 @@ export const environment = {
   },
   newgenUrl: 'https://demo.justpruvit.com/',
   bonusServiceIrl: 'https://bonus-gateway.integration.onebigsplash.com',
+  inviteApiUrl: 'https://invites.integration.onebigsplash.com',
   facebookAppId: '1555318601409164',
   unicomShortenUrlEndPoint: 'https://u.elde.rs/links/shorten',
   unicomAuthUserName: 'pruvit',
-  unicomAuthPassword: 'pruvitdemo'
+  unicomAuthPassword: 'pruvitdemo',
 };
 
 /*

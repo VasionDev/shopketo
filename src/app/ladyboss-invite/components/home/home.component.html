@@ -1,0 +1,440 @@
+<main
+  *ngIf="isLoaded; else loader"
+  class="sk-main"
+  [style.margin-top.px]="discountHeight"
+>
+  <ng-container *ngIf="!isRussellBrunson; else russellBrunsonTemplate">
+    <div class="invitation-event-alrt-wrap text-center">
+      👑 ‘LadyBoss Phoenix Rise-Up' LIVE VIRTUAL EVENT On Wednesday January 18th
+      @ 6:00 PM EST! 👑
+      <button id="addToCalenderBtn" *ngIf="0" (click)="addToCalender()">
+        Add to calender
+      </button>
+    </div>
+
+    <section
+      class="invitation-landing-wrap"
+      style="
+        background-image: 'url(/assets/ladyboss/images/invitation-landing-wrap-bg.png)';
+      "
+    >
+      <article class="container">
+        <figure class="row">
+          <div class="col-12 text-center">
+            <h4 class="color-black sub-title">Today We’re Announcing That:</h4>
+            <h1 class="color-brand my-2 title">
+              ‘LadyBoss’ Is Officially Back!!!
+            </h1>
+            <h6 class="color-black">
+              This Is Your Personal Invitation To Our LIVE RE-LAUNCH
+            </h6>
+            <p class="color-black text-center my-2">
+              "LadyBoss Phoenix Rise-Up Virtual Event" <br />
+              Happening Wednesday, January 18th @ 6:00 PM EST...
+            </p>
+            <button
+              (click)="ScrollIntoView('leadFormWrapper')"
+              class="button button-primary button-large"
+            >
+              Claim Your Ticket To The Re-Launch Event
+              <i class="fa-solid fa-ticket ml-2"></i>
+            </button>
+
+            <div class="img-wrap top-border pt-3 mt-3">
+              <img
+                class="img-fluid"
+                src="assets/ladyboss/images/ladyboss-group-img.jpg"
+                alt="ladyboss"
+              />
+            </div>
+
+            <p class="color-black p-small mt-3">
+              As You Know, April 12th, Kaelin Announced That She Was Closing
+              LadyBoss Forever… 3 Months Later, We As A Community Were Able To
+              SAVE The Company (And Community) We Love So Much!
+            </p>
+
+            <h6 class="color-black mt-4">
+              During the LIVE “Phoenix Rise-Up” event, you will get to:
+            </h6>
+
+            <ul class="text-left color-black">
+              <li>Hear the REAL LadyBoss story (for the first time!)…</li>
+              <li>Learn what’s happened over the last few months…</li>
+              <li>How you can reconnect with the community you LOVE…</li>
+              <li>How to FINALLY get some more LadyBoss LEAN! (WOOHOO!!!)</li>
+              <li>And last (but not least):</li>
+            </ul>
+
+            <h4 class="color-black mb-2 sub-title">
+              How We’re Going To Make LadyBoss YOUR Company <br />
+              <span>(More Details During The LIVE Event!!!)</span>
+            </h4>
+
+            <p class="color-black">
+              But This Event Is NOT For Everyone… You Have To Be Invited To
+              Come. You Should Have Been Given A Private Invite Link By A
+              LadyBoss 'Phoenix’.
+            </p>
+            <div id="leadFormWrapper" class="form-wraper text-left">
+              <h6 class="color-black mb-3">
+                Step 1: Complete Form Below To Register
+              </h6>
+
+              <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+                <div class="form-group">
+                  <label class="color-black disclaimer-bold mb-1"
+                    >First Name:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg border"
+                    placeholder="First Name Here..."
+                    formControlName="firstName"
+                    [class.is-invalid]="
+                      firstNameControl.errors && firstNameControl.touched
+                    "
+                  />
+                  <small
+                    *ngIf="firstNameControl.errors?.['required']"
+                    class="invalid-feedback"
+                    >Please enter your First name</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="color-black disclaimer-bold mb-1"
+                    >Last Name:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg border"
+                    placeholder="Last Name Here..."
+                    formControlName="lastName"
+                    [class.is-invalid]="
+                      lastNameControl.errors && lastNameControl.touched
+                    "
+                  />
+                  <small
+                    *ngIf="lastNameControl.errors?.['required']"
+                    class="invalid-feedback"
+                    >Please enter your Last name</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="color-black disclaimer-bold mb-1"
+                    >Best Email Address:</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control disclaimer-reg border"
+                    placeholder="Email"
+                    formControlName="email"
+                    [class.is-invalid]="
+                      emailControl.errors && emailControl.touched
+                    "
+                  />
+                  <small
+                    *ngIf="emailControl.errors?.['required']"
+                    class="invalid-feedback"
+                    >Please enter your Email</small
+                  >
+                  <small
+                    *ngIf="emailControl.errors?.['pattern']"
+                    class="invalid-feedback"
+                    >Please enter a valid Email address</small
+                  >
+                </div>
+
+                <button
+                  [disabled]="!leadForm.valid || isFormSubmitted"
+                  type="submit"
+                  class="button button-primary button-large mt-3"
+                >
+                  Register For The ‘Phoenix Rise-Up’ Virtual Event<i
+                    class="fa-solid fa-right-long ml-2"
+                  ></i>
+
+                  <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i>
+                </button>
+                <span
+                  class="disclaimer-reg error-text mt-2"
+                  *ngIf="errorMessage !== ''"
+                  >{{ errorMessage }}</span
+                >
+              </form>
+
+              <p class="color-black text-center mt-4 font-bold">
+                Your Invite Code Will Expire In
+              </p>
+              <div
+                *ngIf="offerExpiryTimeString"
+                class="invite-timer color-black"
+                [innerHTML]="offerExpiryTimeString | inviteTimer | async"
+              ></div>
+              <div
+                *ngIf="!offerExpiryTimeString"
+                class="invite-timer color-black"
+                [innerHTML]="'2023-01-18T18:00:00' | inviteTimer | async"
+              ></div>
+            </div>
+          </div>
+        </figure>
+      </article>
+    </section>
+  </ng-container>
+  <ng-template #russellBrunsonTemplate>
+    <section class="personal-invitation-wrap">
+      <article class="container">
+        <figure class="row virtual-event-title">
+          <div class="col-12">
+            <p class="text-center p-small color-white font-bold">
+              LadyBoss ‘Phoenix Rise-Up' LIVE VIRTUAL EVENT On Wednesday January
+              18th @ 6:00 PM EST!
+            </p>
+          </div>
+        </figure>
+
+        <figure class="row personal-body-content">
+          <div class="col-12">
+            <p class="text-center">
+              <img
+                class="img-fluid"
+                src="https://statics.myclickfunnels.com/image/287792/file/093ce3a67a31674faad8ccb0eef5b596.png"
+                alt="LadyBoss_cf_logo-min png"
+                width="426"
+              />
+            </p>
+
+            <p class="text-center title">
+              “Why Did Russell Brunson Buy LadyBoss?”
+            </p>
+          </div>
+        </figure>
+        <figure class="row successful-event-wraper">
+          <div class="col-12 col-sm-5">
+            <p class="text-center">
+              <img
+                class="img-fluid events-img"
+                src="https://statics.myclickfunnels.com/image/287621/file/2f093e7b35329869ef6eaf565cbf4291.png"
+                alt="russell_brandon_k-min png"
+              />
+            </p>
+
+            <div class="invite-timer">
+              <div
+                class="invite-timer color-red"
+                [innerHTML]="'2023-01-18T18:00:00' | inviteTimer | async"
+              ></div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-7 right-content">
+            <ul class="color-black successful-list">
+              <li>
+                <strong>Yes… </strong>
+                <span
+                  >it is one of the
+                  <strong>MOST successful businesses</strong>
+                  launched on ClickFunnels - EVER!
+                </span>
+              </li>
+              <li>
+                <strong>Yes… </strong>
+                <span
+                  >it is one of the it was built perfectly following everything
+                  taught about in DotComSecrets, Expert Secrets AND Traffic
+                  Secrets…</span
+                >
+              </li>
+              <li>
+                <strong
+                  >BUT, can we address the pink elephant in the room?
+                </strong>
+                <span
+                  >Russell’s NOT a Lady (or a boss)!!! Why would he have
+                  purchased LadyBoss?</span
+                >
+              </li>
+            </ul>
+            <div class="note-wrap">
+              <p class="p-small color-black">
+                <b>HINT: </b>
+                He did it so that YOU could jump start your own health and
+                fitness company (like Kaelin) overnight! If you’d like to have
+                your own health influencer brand practically overnight (or have
+                a spouse or friend who would…)
+              </p>
+              <p class="p-small color-black mt-3">
+                ...And Have It Run On Auto-Pilot, Even If You Don’t Have An
+                Audience Or A Product To Sell - then please register for the
+                “LadyBoss Phoenix Rise-Up” event right now!
+              </p>
+            </div>
+          </div>
+          <button
+            (click)="ScrollIntoView('leadFormWrapper')"
+            class="button button-large mt-3"
+          >
+            Click Here To Register For The ‘Phoenix Rise-Up’ Virtual Event<i
+              class="fas fa-long-arrow-alt-right ml-2"
+            ></i>
+          </button>
+          <div class="text-center event-date">
+            <p class="font-bold text-red">
+              LadyBoss ‘Phoenix Rise-Up' LIVE VIRTUAL EVENT
+            </p>
+            <p class="color-black">On Wednesday January 18th @ 6:00 PM EST!</p>
+          </div>
+          <p class="text-center">
+            <img
+              class="img-fluid live-event-img"
+              src="https://statics.myclickfunnels.com/image/276157/file/ef7e1eb540dcbb6cffd7252f521729c2.png"
+              alt="ladyboss png"
+            />
+            <img
+              class="img-fluid"
+              src="https://statics.myclickfunnels.com/image/222875/file/b1f01ae069f4f5da4fa05a23d4872f8c.svg"
+              alt="img"
+              width="100"
+            />
+          </p>
+
+          <div class="rise-up-event">
+            <p class="color-black text-center">
+              At the Phoenix Rise-Up event, you’ll discover...
+            </p>
+
+            <ul class="color-black successful-list">
+              <li>
+                <span>The TRUTH of why LadyBoss was “sold”... and </span>
+                <strong
+                  >why this change can become YOUR rare chance to make something
+                  BIG in 2023
+                </strong>
+                <u> create the life, freedom, and income you’ve always wanted</u
+                >!
+              </li>
+              <li>
+                <span
+                  >The never-before-seen footage of how LadyBoss came to be
+                  (...and the revolution that started practically overnight),
+                  and
+                </span>
+                <strong
+                  >how you can follow the SAME EXACT steps as Kaelin to become
+                  the owner of YOUR own brand and future!</strong
+                >
+              </li>
+              <li>
+                <strong>How to take advantage of the NEW LadyBoss</strong>
+                <span> that has the potential of </span
+                ><u
+                  >launching you, your health, and your entire life into new,
+                  remarkable territories in 2023 and beyond</u
+                >!!
+              </li>
+            </ul>
+          </div>
+
+          <div id="leadFormWrapper" class="form-wraper">
+            <h3 class="color-black text-center">
+              This Announcement Is So Awesome...
+            </h3>
+            <p class="color-black text-center mb-3">
+              and so “hush-hush”... we’ve chosen to share it through invite
+              only.
+            </p>
+
+            <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+              <div class="form-group">
+                <label class="color-black disclaimer-bold mb-1"
+                  >First Name:</label
+                >
+                <input
+                  type="text"
+                  class="form-control disclaimer-reg border"
+                  placeholder="First Name Here..."
+                  formControlName="firstName"
+                  [class.is-invalid]="
+                    firstNameControl.errors && firstNameControl.touched
+                  "
+                />
+                <small
+                  *ngIf="firstNameControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your First name</small
+                >
+              </div>
+              <div class="form-group">
+                <label class="color-black disclaimer-bold mb-1"
+                  >Last Name:</label
+                >
+                <input
+                  type="text"
+                  class="form-control disclaimer-reg border"
+                  placeholder="Last Name Here..."
+                  formControlName="lastName"
+                  [class.is-invalid]="
+                    lastNameControl.errors && lastNameControl.touched
+                  "
+                />
+                <small
+                  *ngIf="lastNameControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Last name</small
+                >
+              </div>
+              <div class="form-group">
+                <label class="color-black disclaimer-bold mb-1"
+                  >Best Email Address:</label
+                >
+                <input
+                  type="email"
+                  class="form-control disclaimer-reg border"
+                  placeholder="Email"
+                  formControlName="email"
+                  [class.is-invalid]="
+                    emailControl.errors && emailControl.touched
+                  "
+                />
+                <small
+                  *ngIf="emailControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Email</small
+                >
+                <small
+                  *ngIf="emailControl.errors?.['pattern']"
+                  class="invalid-feedback"
+                  >Please enter a valid Email address</small
+                >
+              </div>
+
+              <button
+                [disabled]="!leadForm.valid || isFormSubmitted"
+                type="submit"
+                class="button button-primary button-large mt-3"
+              >
+                Click Here To Register For The ‘Phoenix Rise-Up’ Virtual Event<i
+                  class="fa-solid fa-right-long ml-2"
+                ></i>
+                <i
+                  class="fa fa-spinner fa-spin ml-2"
+                  *ngIf="isFormSubmitted"
+                ></i>
+              </button>
+              <span
+                class="disclaimer-reg error-text mt-2"
+                *ngIf="errorMessage !== ''"
+                >{{ errorMessage }}</span
+              >
+            </form>
+          </div>
+        </figure>
+      </article>
+    </section>
+  </ng-template>
+</main>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

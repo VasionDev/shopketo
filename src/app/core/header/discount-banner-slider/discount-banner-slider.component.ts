@@ -3,6 +3,7 @@ import { DiscountBanner } from 'src/app/shared/models/discount-banner.model';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUserService } from 'src/app/shared/services/app-user.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 
 declare var headerSliderJS: any;
 declare var $: any;
@@ -13,6 +14,7 @@ declare var $: any;
   styleUrls: ['./discount-banner-slider.component.css'],
 })
 export class DiscountBannerSliderComponent implements OnInit {
+  tenant = '';
   selectedCountry = '';
   banners: DiscountBanner[] = [];
 
@@ -20,7 +22,9 @@ export class DiscountBannerSliderComponent implements OnInit {
     private utilityService: AppUtilityService,
     private userService: AppUserService,
     private dataService: AppDataService
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getSelectedLanguage();
@@ -82,20 +86,26 @@ export class DiscountBannerSliderComponent implements OnInit {
 
   onClickBanner(event: any) {
     if (event.srcElement) {
-      const link: string = event.srcElement.parentElement.dataset.link;
-
+      const link: string =
+        event.srcElement.parentElement.dataset.link ||
+        event.srcElement.dataset.link;
       if (link) {
-        const linkSplit = link.split('/');
-        let routeURL = '';
-
-        if (this.selectedCountry === 'US') {
-          routeURL = linkSplit[1] + '/' + linkSplit[2];
+        if (link.startsWith('https://')) {
+          window.open(link);
         } else {
-          routeURL = '/' + linkSplit[2] + '/' + linkSplit[3];
-        }
+          const linkSplit = link.split('/');
+          let routeURL = '';
 
-        this.utilityService.navigateToRoute(routeURL);
+          if (this.selectedCountry === 'US') {
+            routeURL = linkSplit[1] + '/' + linkSplit[2];
+          } else {
+            routeURL = '/' + linkSplit[2] + '/' + linkSplit[3];
+          }
+
+          this.utilityService.navigateToRoute(routeURL);
+        }
       }
     }
   }
+
 }

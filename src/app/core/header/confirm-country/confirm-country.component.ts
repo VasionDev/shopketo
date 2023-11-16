@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { isEuropeanCountry } from 'src/app/shared/utils/country-list';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-confirm-country',
@@ -19,11 +22,16 @@ export class ConfirmCountryComponent implements OnInit {
   isRedirectedCountry = false;
   redirectedCountryFlag = '';
   redirectedCountryName = '';
+  tenant: string = '';
 
   constructor(
     private dataService: AppDataService,
-    private utilityService: AppUtilityService
-  ) {}
+    private utilityService: AppUtilityService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getSelectedCountry();
@@ -70,7 +78,8 @@ export class ConfirmCountryComponent implements OnInit {
         country.country_code === 'MY' ||
         country.country_code === 'NZ' ||
         country.country_code === 'SG' ||
-        country.country_code === 'TW'
+        country.country_code === 'TW' ||
+        country.country_code === 'JP'
       ) {
         tempAsiaPacifics.push(country);
       }
@@ -90,7 +99,20 @@ export class ConfirmCountryComponent implements OnInit {
         country.country_code === 'SE' ||
         country.country_code === 'CH' ||
         country.country_code === 'RO' ||
-        country.country_code === 'GB'
+        country.country_code === 'GB' ||
+        country.country_code === 'BG' ||
+        country.country_code === 'HR' ||
+        country.country_code === 'CY' ||
+        country.country_code === 'CZ' ||
+        country.country_code === 'DK' ||
+        country.country_code === 'EE' ||
+        country.country_code === 'GR' ||
+        country.country_code === 'LV' ||
+        country.country_code === 'LT' ||
+        country.country_code === 'LU' ||
+        country.country_code === 'MT' ||
+        country.country_code === 'SK' ||
+        country.country_code === 'SI'
       ) {
         tempEuropes.push(country);
       }
@@ -106,7 +128,9 @@ export class ConfirmCountryComponent implements OnInit {
 
   getRedirectedCountry() {
     this.dataService.currentRedictedCountry$.subscribe((country) => {
-      if (country !== '') {
+      const localMVUser = sessionStorage.getItem('MVUser');
+      const MVUser = localMVUser ? JSON.parse(localMVUser) : null;
+      if (country !== '' && !MVUser) {
         this.isRedirectedCountry = true;
 
         this.redirectedCountryFlag = country;
@@ -127,15 +151,42 @@ export class ConfirmCountryComponent implements OnInit {
   }
 
   onClickContinueLocation() {
-    localStorage.setItem(
+    /*localStorage.setItem(
       'ConfirmedCountry',
       JSON.stringify(this.redirectedCountryFlag)
-    );
+    );*/
+    const localMVUser = sessionStorage.getItem('MVUser');
+    const MVUser = localMVUser ? JSON.parse(localMVUser) : null;
+    if(MVUser && this.tenant === 'pruvit') {
+      sessionStorage.setItem('mvuser_selected_country', this.redirectedCountryFlag);
+    }
+    const paramsObj = this.route.snapshot.queryParams;
 
     if (this.selectedCountry !== this.redirectedCountryFlag) {
-      this.utilityService.navigateToRoute('/', this.redirectedCountryFlag);
+      let relativeUrl = this.router.url.split('?')[0];
+      if(this.selectedCountry.toLowerCase() != 'us' && !relativeUrl.includes('cloud')) {
+        const splitedUrl = relativeUrl.split(`/${this.selectedCountry.toLowerCase()}/`);
+        relativeUrl = splitedUrl.length > 1 ? splitedUrl[1] : '';
+      }
+      relativeUrl = relativeUrl.replace(/^\/+/g, '');
 
+      if(
+        (relativeUrl === 'smartship' ||
+        relativeUrl === 'research' ||
+        relativeUrl === 'learn' ||
+        relativeUrl === 'team' ||
+        relativeUrl === 'about' ||
+        relativeUrl === 'vip' ||
+        relativeUrl === 'promoter') && isEuropeanCountry(this.redirectedCountryFlag)
+      ) {
+        this.utilityService.navigateToRoute('/', this.redirectedCountryFlag, paramsObj);
+      } else {
+        this.utilityService.navigateToRoute(`/${relativeUrl}`, this.redirectedCountryFlag, paramsObj);
+      }
       this.dataService.changeSelectedCountry(this.redirectedCountryFlag);
+
+      // this.utilityService.navigateToRoute('/', this.redirectedCountryFlag);
+      // this.dataService.changeSelectedCountry(this.redirectedCountryFlag);
     }
 
     this.onClickCloseLocation();

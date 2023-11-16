@@ -1,152 +1,99 @@
-<div class="sk-cart color-white-bg" [ngStyle]="{ 'touch-action': 'none' }">
-  <figure class="sk-cart__header d-flex justify-content-between">
-    <h4 class="color-black sk-cart__header-title">
-      {{ "high-five" | translate }}
-    </h4>
-    <a (click)="onClickCloseAddToCart()" class="sk-cart__close-btn pointer">
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 14 14"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1 1L13 13"
-          stroke="#131313"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M13 1L1 13"
-          stroke="#131313"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+<figure class="sk-cart sk-cart-new-ui color-white-bg" [ngStyle]="{ 'touch-action': 'none' }">
+  
+  <figure class="drawer-nav-header fixed-top d-flex justify-content-between">
+    <h4 class="color-black drawer-title">{{ "high-five" | translate }}</h4>
+    <a (click)="onClickCloseAddToCart()" class="drawer-close-btn pointer">
+      <i class="fa-regular fa-xmark"></i>
     </a>
   </figure>
 
-  <section class="sk-cart__content-width">
-    <figure class="sk-cart__added-product text-center">
-      <img
-        src="assets/images/high-five-cart.png"
-        alt="High five"
-        class="img-fluid sk-cart__cart-img"
-      />
+  <figure class="drawer-nav-body">
+    <div class="sk-cart__content-width">
+      <figure class="sk-cart__added-product text-center">
+        <img src="assets/images/high-five-cart.png" alt="High five" class="img-fluid sk-cart__cart-img" />
 
-      <h4
-        class="color-black sk-cart__header-title"
-        *ngIf="!isFromSmartship"
-        [innerHTML]="cartProduct.productName + ' ' + ('added-cart' | translate)"
-      ></h4>
+        <h4 class="color-black sk-cart__header-title" *ngIf="!isFromSmartship"
+          [innerHTML]="cartProduct.productName + ' ' + ('added-cart' | translate)"></h4>
 
-      <h4
-        class="color-black sk-cart__header-title"
-        *ngIf="isFromSmartship"
-        [innerHTML]="
-          cartProduct.productName +
-          ' ' +
-          ('was-added-to-your-smartship' | translate)
-        "
-      ></h4>
-    </figure>
+        <h4 class="color-black sk-cart__header-title" *ngIf="isFromSmartship" [innerHTML]="
+            cartProduct.productName +
+            ' ' +
+            ('was-added-to-your-smartship' | translate)
+          "></h4>
+      </figure>
 
-    <figure class="text-center">
-      <button
-        class="button button-primary buy-now sk-cart__cart-btn button-icon"
-        (click)="onClickGoToCart()"
-      >
-        {{ "go-to-cart" | translate }}
-      </button>
+      <figure class="text-center">
+        <button class="button button-primary buy-now sk-cart__cart-btn button-icon" (click)="onClickGoToCart()">
+          {{ "go-to-cart" | translate }}
+        </button>
 
-      <button
-        class="button link-hover"
-        *ngIf="!isFromSmartship"
-        (click)="onClickCloseAddToCart()"
-      >
-        {{ "continue-shopping" | translate }}
-      </button>
+        <button class="button link-hover" *ngIf="!isFromSmartship" (click)="onClickCloseAddToCart()">
+          {{ "continue-shopping" | translate }}
+        </button>
 
-      <p class="text-center" *ngIf="isFromSmartship">
-        <span (click)="onClickCloseAddToCart()" class="button">{{
-          "add-more-smartship-products" | translate
-        }}</span>
-      </p>
-    </figure>
+        <p class="text-center" *ngIf="isFromSmartship">
+          <span (click)="onClickCloseAddToCart()" class="button">{{
+            "add-more-smartship-products" | translate
+            }}</span>
+        </p>
+      </figure>
 
-    <figure
-      class="sk-cart__suggest-product-wrap text-center"
-      *ngIf="
-        product.showRelatedProducts &&
-        product.relatedProducts.length > 0 &&
-        !isFromSmartship
-      "
-    >
-      <h4 class="color-black sk-cart__header-title">
-        {{ "you-may-also-like" | translate }}
-      </h4>
+      <figure class="sk-cart__suggest-product-wrap text-center" *ngIf="
+          product.showRelatedProducts &&
+          product.relatedProducts.length > 0 &&
+          !isFromSmartship
+        ">
+        <h4 class="color-black sk-cart__header-title">
+          {{ "you-may-also-like" | translate }}
+        </h4>
 
-      <div class="row sk-cart__sug-product-all">
-        <ng-container *ngFor="let p of product.relatedProducts; let i = index">
-          <div
-            class="col-6"
-            [ngClass]="{
-              'sk-cart-sug__custom-pad-l': (i + 1) % 2 !== 0,
-              'sk-cart-sug__custom-pad-r': (i + 1) % 2 === 0
-            }"
-          >
-            <div class="sk-cart-sug__product text-center color-light-white-bg">
-              <figure class="sk-cart-sug__product-img">
-                <img src="{{ p.thumbUrl }}" class="img-fluid" alt="Product-1" />
-              </figure>
+        <div class="row sk-cart__sug-product-all">
+          <ng-container *ngFor="let p of product.relatedProducts; let i = index">
+            <div class="col-6" [ngClass]="{
+                'sk-cart-sug__custom-pad-l': (i + 1) % 2 !== 0,
+                'sk-cart-sug__custom-pad-r': (i + 1) % 2 === 0
+              }">
+              <div class="sk-cart-sug__product text-center color-light-white-bg">
+                <figure class="sk-cart-sug__product-img">
+                  <img src="{{ p.thumbUrl }}" class="img-fluid" alt="Product-1" />
+                </figure>
 
-              <div class="sk-cart-sug__product-details">
-                <h4
-                  class="color-black sk-cart-sug__product-title"
-                  [innerHTML]="p.title"
-                ></h4>
-                <ng-template #nonChinesePrice>
-                  <p class="p-small color-gray sk-cart-sug__product-from">
-                    {{ "from" | translate }}
+                <div class="sk-cart-sug__product-details">
+                  <h4 class="color-black sk-cart-sug__product-title" [innerHTML]="p.title"></h4>
+                  <ng-template #nonChinesePrice>
+                    <p class="p-small color-gray sk-cart-sug__product-from">
+                      {{ "from" | translate }}
+                      {{ productSettings.currencySymbol
+                      }}{{
+                      product.originalPrice | customCurrency: productSettings
+                      }}
+                    </p>
+                  </ng-template>
+                  <p class="p-small color-gray sk-cart-sug__product-from" *ngIf="
+                      selectedLanguage === 'zh-hans' ||
+                        selectedLanguage === 'zh-hant';
+                      else nonChinesePrice
+                    ">
                     {{ productSettings.currencySymbol
                     }}{{
-                      product.originalPrice | customCurrency: productSettings
-                    }}
-                  </p>
-                </ng-template>
-                <p
-                  class="p-small color-gray sk-cart-sug__product-from"
-                  *ngIf="
-                    selectedLanguage === 'zh-hans' ||
-                      selectedLanguage === 'zh-hant';
-                    else nonChinesePrice
-                  "
-                >
-                  {{ productSettings.currencySymbol
-                  }}{{
                     product.originalPrice | customCurrency: productSettings
-                  }}
-                  {{ "from" | translate }}
-                </p>
-              </div>
+                    }}
+                    {{ "from" | translate }}
+                  </p>
+                </div>
 
-              <div class="sk-cart-sug__product-btn">
-                <button
-                  class="button button-primary buy-now"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter"
-                  (click)="onClickBuyNow(p.name)"
-                >
-                  {{ "buy-now" | translate }}
-                </button>
+                <div class="sk-cart-sug__product-btn">
+                  <button class="button button-primary buy-now" data-toggle="modal" data-target="#exampleModalCenter"
+                    (click)="onClickBuyNow(p.name)">
+                    {{ "buy-now" | translate }}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </ng-container>
-      </div>
-    </figure>
-  </section>
-</div>
+          </ng-container>
+        </div>
+      </figure>
+    </div>
+  </figure>
+
+</figure>

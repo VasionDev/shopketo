@@ -22,103 +22,117 @@
       </button>
       <div class="modal-body text-center" [ngSwitch]="true">
         <ng-container *ngSwitchCase="accessLevels.isVisitor.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">Visitors</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "visitors" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Visitors.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "visitors" | translate }}.
           </p>
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isCustomer.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">Customers</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "customers" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Prüvers who have an existing account
-            with at least 1 purchase.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-an-existing-account-with-at-least-1-purchase" | translate }}
           </p>
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isPromoter.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">Pomoters</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "pomoters" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Prüvers who have registered as a
-            Pruvit Promoter to champion the Ketone Conversation™.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-registered-as-pruvit-promoter-to-champion-the-ketone-conversation" | translate }}
           </p>
           <a
             (click)="onClickPromoter()"
             data-dismiss="modal"
             class="button-link"
-            >Learn MORE</a
+            >{{ "learn-more" | translate }}</a
           >
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isSmartship.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">SmartShip Prüvers</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "vip-pruvers" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Prüvers who have setup an Active
-            Smartship.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-setup-an-active-smartship" | translate }}
           </p>
           <a
             (click)="onClickSmartship()"
             data-dismiss="modal"
             class="button-link"
-            >Learn MORE</a
+            >{{ "learn-more" | translate }}</a
           >
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isLoyalSmartship.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">Loyal SmartShip Prüvers</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "loyal-smartship-pruvers" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Prüvers who have had a SmartShip order
-            process in the last 31 days.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-had-a-smartship-order-process-in-the-last-31-days" | translate }}
           </p>
           <a
             (click)="onClickSmartship()"
             data-dismiss="modal"
             class="button-link"
-            >Learn MORE</a
+            >{{ "learn-more" | translate }}</a
           >
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isRank6.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">Champions (R6+)</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "champions-r6" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Promoters who have achieved Champion
-            status (Rank 6) or higher in the Prüvit Rewards Program.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-champion-status-6-or-higher-in-the-rewards-program" | translate }}
           </p>
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isRank7.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">100k Pro Champs (R7+)</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "100k-pro-champs-r7" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Promoters who have achieved 100k Pro
-            Champ status (Rank 7) or higher in the Prüvit Rewards Program.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-100k-pro-champ-status-7-or-higher-in-the-rewards-program" | translate }}
           </p>
         </ng-container>
 
         <ng-container *ngSwitchCase="accessLevels.isRank8.on">
-          <h4 class="color-black">Exclusively for</h4>
-          <h3 class="color-black">250k Pro Champs (R8+)</h3>
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "250k-pro-champs-r8" | translate }}</h3>
           <p class="p-small color-black des-text">
-            This product is exclusive for Promoters who have achieved 250k Pro
-            Champ status (Rank 7) or higher in the Prüvit Rewards Program.
+            {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-250k-pro-champ-status-7-or-higher-in-the-rewards-program" | translate }}
           </p>
         </ng-container>
 
-        <ng-container *ngSwitchCase="accessLevels.isVip.on">
-          <h4 class="color-black">Exclusively for</h4>
+        <!-- <ng-container *ngSwitchCase="accessLevels.isVip.on">
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
           <h3 class="color-black">VIP</h3>
           <p class="p-small color-black des-text">
             This product is exclusive for Very Inspired Prüvers (VIP) who have
             met VIP qualification in the current and/or prior month.
           </p>
           <a (click)="onClickVip()" data-dismiss="modal" class="button-link"
-            >Learn MORE</a
+            >{{ "learn-more" | translate }}</a
+          >
+        </ng-container> -->
+
+        <ng-container *ngSwitchCase="accessLevels.isVipPlus.on">
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "vip-plus" | translate }}</h3>
+          <p class="p-small color-black des-text">
+            {{ "this-product-is-exclusively-for" | translate }} {{ "vip-plus-pruvers-who-have-met-vip-qualification-the-last-30-days" | translate }}
+          </p>
+          <a (click)="onClickVip()" data-dismiss="modal" class="button-link"
+            >{{ "learn-more" | translate }}</a
+          >
+        </ng-container>
+        <ng-container *ngSwitchCase="accessLevels.isLoggedSmartship.on">
+          <h4 class="color-black">{{ "exclusively-for" | translate }}</h4>
+          <h3 class="color-black">{{ "logged-in-vip-pruvers" | translate }}</h3>
+          <p class="p-small color-black des-text">
+            {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-setup-an-active-smartship" | translate }}
+          </p>
+          <a (click)="onClickVip()" data-dismiss="modal" class="button-link"
+            >{{ "learn-more" | translate }}</a
           >
         </ng-container>
       </div>

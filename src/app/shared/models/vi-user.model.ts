@@ -8,5 +8,6 @@ export interface VIUser {
     lastName?: string;
     email?: string;
     createdTime: number;
-    expiryTime: number | null
+    expiryTime: number | null,
+    phone?: string;
 }

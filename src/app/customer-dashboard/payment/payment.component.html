@@ -1,97 +1,146 @@
 <div class="row mx--15">
   <div class="col-12 col-sm-8">
-    <h2>{{ title }}</h2>
+    <h2 class="page-title">{{ "payment-methods" | translate }}</h2>
   </div>
   <div class="col-12 col-sm-4 mt-3">
-    <button (click)="showCreatePayment()" class="button ml-auto addNew-btn" data-toggle="modal"
-      data-target="#paymentModal">
-      <i class="far fa-plus mr-2" aria-hidden="true"></i>Add new payment
+    <button
+      (click)="showCreatePayment()"
+      class="button ml-auto addNew-btn"
+      data-toggle="modal"
+      data-target="#paymentModal"
+    >
+      <i class="far fa-plus mr-2" aria-hidden="true"></i
+      >{{ "new-payment-method" | translate }}
     </button>
   </div>
+</div>
+
+<div *ngIf="paymentMethods.length == 0 && !loader" class="missing__payments">
+  <i class="fas fa-credit-card"></i>
+  <h3>{{ "add-a-payment-method" | translate }}</h3>
 </div>
 <div class="dashboard__wrapper payment--wrapper">
   <section>
     <div *ngIf="error" class="row">
       <div class="col-12">
         <p class="text-danger">
-          {{ error }}
+          {{ error | translate }}
         </p>
       </div>
     </div>
     <app-loader *ngIf="loader" class="payment--loader"></app-loader>
-    <div *ngIf="paymentMethods.length == 0 && !loader" class="missing__payments">
-      <i class="fas fa-credit-card"></i>
-      <h3>Add payment method</h3>
-    </div>
 
-    <div *ngFor="let payment of paymentMethods; let i = index" class="paymentMethod">
-      <div *ngIf="
+    <div
+      *ngFor="let payment of paymentMethods; let i = index"
+      class="paymentMethod"
+    >
+      <div
+        *ngIf="
           payment.paymentType == 'CreditCardProfile' ||
           payment.paymentType == 'TokenProfile'
-        ">
+        "
+      >
         <div class="payment__information">
           <span class="payment__number">
             <span>•••• ••••</span> {{ payment.last4Digits }}
           </span>
           <span class="payment__name">
-            Exp. {{ payment.expirationDate | date: "MM/yy" }}
+            {{ "exp" | translate }}
+            {{ payment.expirationDate | date : "MM/yy" }}
             {{ payment.cardHolderName }}
           </span>
         </div>
         <div class="payment__options">
           <span *ngIf="payment.isDefault" class="pill pill--fulfilment">
-            <span>Default</span>
+            <span>{{ "default" | translate }}</span>
           </span>
-          <button mat-icon-button [matMenuTriggerFor]="menuOrders" aria-label="Example icon-button with a menu"
-            class="button orders--button">
-            <span class="desktop__actions mb-hide">Actions <i class="fas fa-angle-down"></i></span>
-            <span class="mobile__actions mb-show"><i class="fas fa-ellipsis-v"></i></span>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menuOrders"
+            class="button orders--button"
+          >
+            <span class="desktop__actions mb-hide"
+              >{{ "actions" | translate }} <i class="fas fa-angle-down"></i
+            ></span>
+            <span class="mobile__actions mb-show"
+              ><i class="fas fa-ellipsis-v"></i
+            ></span>
           </button>
           <mat-menu #menuOrders="matMenu" xPosition="before">
             <button class="mat-menu-item--custom" mat-menu-item>
-              <span>Set as default</span>
+              <span>{{ "set-as-default" | translate }}</span>
             </button>
-            <button (click)="showEditPayment(payment)" data-toggle="modal" data-target="#paymentModal"
-              class="mat-menu-item--custom" mat-menu-item>
-              <span>Edit</span>
+            <button
+              (click)="showEditPayment(payment)"
+              data-toggle="modal"
+              data-target="#paymentModal"
+              class="mat-menu-item--custom"
+              mat-menu-item
+            >
+              <span>{{ "edit" | translate }}</span>
             </button>
-            <button (click)="deletePaymentProfile(payment.id)" class="mat-menu-item--custom" mat-menu-item>
-              <span>Delete</span>
+            <button
+              (click)="deletePaymentProfile(payment.id)"
+              class="mat-menu-item--custom"
+              mat-menu-item
+            >
+              <span>{{ "delete" | translate }}</span>
             </button>
           </mat-menu>
         </div>
       </div>
       <div *ngIf="payment.paymentType == 'ThreeDomainSecure'">
         <div class="payment__information payment__3ds">
-          <span class="payment__3ds__icon" *ngIf="
+          <span
+            class="payment__3ds__icon"
+            *ngIf="
               payment.paymentMethodAliasPrefix == 'Saved Sezzle Profile' ||
               payment.paymentMethodAliasPrefix == 'PayPal'
-            " [ngClass]="{
+            "
+            [ngClass]="{
               sezzle:
                 payment.paymentMethodAliasPrefix == 'Saved Sezzle Profile',
               paypal: payment.paymentMethodAliasPrefix == 'PayPal'
-            }"></span>
-          <span *ngIf="payment.paymentMethodAliasPrefix !== 'PayPal'" class="payment__number payment--3ds--name">{{
-            payment.email }}</span>
-          <span *ngIf="payment.paymentMethodAliasPrefix == 'PayPal'" class="payment__number payment--3ds--name">{{
-            payment.paymentAlias }}</span>
+            }"
+          ></span>
+          <span
+            *ngIf="payment.paymentMethodAliasPrefix !== 'PayPal'"
+            class="payment__number payment--3ds--name"
+            >{{ payment.email }}</span
+          >
+          <span
+            *ngIf="payment.paymentMethodAliasPrefix == 'PayPal'"
+            class="payment__number payment--3ds--name"
+            >{{ payment.paymentAlias }}</span
+          >
         </div>
         <div class="payment__options">
           <span *ngIf="payment.isDefault" class="pill pill--fulfilment">
-            <span>Default</span>
+            <span>{{ "default" | translate }}</span>
           </span>
-          <button mat-icon-button [matMenuTriggerFor]="menuOrders" aria-label="Example icon-button with a menu"
-            class="button orders--button">
-            <span class="desktop__actions mb-hide">Actions <i class="fas fa-angle-down"></i></span>
-            <span class="mobile__actions mb-show"><i class="fas fa-ellipsis-v"></i></span>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menuOrders"
+            class="button orders--button"
+          >
+            <span class="desktop__actions mb-hide"
+              >{{ "actions" | translate }} <i class="fas fa-angle-down"></i
+            ></span>
+            <span class="mobile__actions mb-show"
+              ><i class="fas fa-ellipsis-v"></i
+            ></span>
           </button>
           <mat-menu #menuOrders="matMenu" xPosition="before">
             <button class="mat-menu-item--custom" mat-menu-item>
-              <span>Set as default</span>
+              <span>{{ "set-as-default" | translate }}</span>
             </button>
 
-            <button (click)="deletePaymentProfile(payment.id)" class="mat-menu-item--custom" mat-menu-item>
-              <span>Delete</span>
+            <button
+              (click)="deletePaymentProfile(payment.id)"
+              class="mat-menu-item--custom"
+              mat-menu-item
+            >
+              <span>{{ "delete" | translate }}</span>
             </button>
           </mat-menu>
         </div>
@@ -102,20 +151,52 @@
 <!-- <button class="show__payment" data-toggle="modal" data-target="#paymentModal" (click)="showCreatePayment()">
   <span>+</span> Add new payment
 </button> -->
-<div class="modal fade animate right-mobile addresses-modal" id="paymentModal" tabindex="-1" aria-labelledby="paymentModal" aria-hidden="true">
+<div
+  class="modal fade animate right-mobile addresses-modal"
+  id="paymentModal"
+  tabindex="-1"
+  aria-labelledby="paymentModal"
+  aria-hidden="true"
+>
   <div class="dashboard--modal modal-dialog modal-dialog-centered">
     <div class="modal-content animate-bottom">
       <div class="modal-header gray-bg">
         <p class="w-100 d-flex justify-content-between align-items-center">
-          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-hide"><i class="far fa-times"></i></a>
-          <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mb-show">
-            <i class="fal fa-chevron-left font-weight-normal mr-2"aria-hidden="true"></i>Dashboard</a>
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-hide"
+            ><i class="far fa-times"></i
+          ></a>
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-show"
+          >
+            <i
+              class="fal fa-chevron-left font-weight-normal mr-2"
+              aria-hidden="true"
+            ></i
+            >{{ "dashboard" | translate }}</a
+          >
         </p>
-        <h3 class="title color-black" *ngIf="!isEdit">New payment method</h3>
-        <h3 class="title color-black" *ngIf="isEdit">Edit payment method</h3>
+        <h3 class="title color-black" *ngIf="!isEdit">
+          {{ "new-payment-method" | translate }}
+        </h3>
+        <h3 class="title color-black" *ngIf="isEdit">
+          {{ "edit-payment-method" | translate }}
+        </h3>
       </div>
       <div>
-        <payment-create [user]="user" [showCreateAddressEvent]="cancelConfirm" [editPayment]="editPayment" [isEdit]="isEdit" (hideCreate)="hideCreate($event)"></payment-create>
+        <payment-create
+          [user]="user"
+          [showCreateAddressEvent]="cancelConfirm"
+          [editPayment]="editPayment"
+          [isEdit]="isEdit"
+          (hideCreate)="hideCreate($event)"
+        ></payment-create>
       </div>
     </div>
   </div>

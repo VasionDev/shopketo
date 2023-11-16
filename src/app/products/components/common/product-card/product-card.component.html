@@ -8,7 +8,7 @@
       isLearnPage && product.learnPageTitle !== '' && product.learnPageSubTitle
     "
   >
-    <span class="p-small most-populer-text" *ngIf="product.isMostPopular">{{
+    <span class="p-small most-populer-text" *ngIf="product.isGeneralMostPopular">{{
       "most-popular" | translate
     }}</span>
     <div class="product-offer-title">
@@ -31,7 +31,7 @@
         product.isAllVariationOutOfStock ||
         !isUserCanAccess
       "
-      (click)="onClickProductImage(product.name)"
+      (click)="onClickProductImage(product)"
     />
   </figure>
 
@@ -40,6 +40,7 @@
       class="color-black sk-main__product-title"
       [innerHTML]="product.title"
     ></h4>
+    
     <ng-template #nonChinesePrice>
       <p class="p-small color-gray sk-main__product-from">
         {{ "from" | translate }}
@@ -64,6 +65,8 @@
         >
       </p>
     </ng-template>
+
+    <ng-template #chinesePrice>
     <p
       class="p-small color-gray sk-main__product-from"
       *ngIf="
@@ -91,7 +94,23 @@
         }}{{ product.finalPrice | customCurrency: productSettings }}</span
       >
       {{ "from" | translate }}
-    </p>
+    </p></ng-template>
+
+    <ng-template #waitList>
+      <p class="p-small color-gray sk-main__product-from">
+        {{
+        product.isSoldOut && product.sellingClosedText !== ""
+        ? product.sellingClosedText
+        : ("currently-sold-out" | translate)
+        }}
+      </p>
+    </ng-template>
+
+    <ng-container *ngIf="product.isSoldOut;
+      then waitList;
+      else chinesePrice;">
+    </ng-container>
+
   </div>
 
   <ng-container *ngTemplateOutlet="isUserCanAccess ? buy : availability">
@@ -114,6 +133,7 @@
 
 <ng-template #availabilityTooltip>
   <app-product-availability-tooltip
+    [accessLevels]="product.accessLevels"
     [accessLevelTitle]="accessLevelTitle"
     [isUserCanAccess]="isUserCanAccess"
   ></app-product-availability-tooltip>

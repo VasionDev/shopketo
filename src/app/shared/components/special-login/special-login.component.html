@@ -5,9 +5,103 @@
         <div class="img-wrap rounded-circle">
           <span class="icon">🤐</span>
         </div>
-        <h2 class="color-dark">
+        <!-- <h2 class="color-dark">
           {{ "this-page-is-for" | translate }} {{ accessLevelTitle }}
-        </h2>
+        </h2> -->
+        <ng-container [ngSwitch]="true">
+          <ng-container *ngSwitchCase="accessLevels.isVisitor.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "visitors" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "visitors" | translate }}.
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isCustomer.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "customers" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-an-existing-account-with-at-least-1-purchase" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isPromoter.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "pomoters" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-registered-as-pruvit-promoter-to-champion-the-ketone-conversation" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isSmartship.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "vip-pruvers" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-setup-an-active-smartship" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isLoggedSmartship.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "logged-in-vip-pruvers" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-setup-an-active-smartship" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isLoyalSmartship.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "loyal-smartship-pruvers" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "pruvers-who-have-had-a-smartship-order-process-in-the-last-31-days" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isRank6.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "champions-r6" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-champion-status-6-or-higher-in-the-rewards-program" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isRank7.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "100k-pro-champs-r7" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-100k-pro-champ-status-7-or-higher-in-the-rewards-program" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isRank8.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "250k-pro-champs-r8" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "promoters-who-have-achieved-250k-pro-champ-status-7-or-higher-in-the-rewards-program" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="accessLevels.isVipPlus.on">
+            <h2 class="color-dark">
+              {{ "this-page-is-for" | translate }} {{ "vip-plus" | translate }}
+            </h2>
+            <p class="color-black pt-2 availability-lock-details">
+              {{ "this-product-is-exclusively-for" | translate }} {{ "vip-plus-pruvers-who-have-met-vip-qualification-the-last-30-days" | translate }}
+            </p>
+          </ng-container>
+          <!-- <p class="color-black pt-2 availability-lock-details">
+            <ng-container *ngSwitchCase="accessLevels.isVisitor.on">This product is exclusive for Visitors.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isCustomer.on">This product is exclusive for Prüvers who have an existing account with at least 1 purchase.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isPromoter.on">This product is exclusive for Prüvers who have registered as a Pruvit Promoter to champion the Ketone Conversation™.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isSmartship.on">This product is exclusively for Prüvers who have setup an Active SmartShip.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isLoggedSmartship.on">This product is exclusively for Prüvers who have setup an Active SmartShip.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isLoyalSmartship.on">This product is exclusive for Prüvers who have had a SmartShip order process in the last 31 days.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isRank6.on">This product is exclusive for Promoters who have achieved Champion status (Rank 6) or higher in the Prüvit Rewards Program.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isRank7.on">This product is exclusive for Promoters who have achieved 100k Pro Champ status (Rank 7) or higher in the Prüvit Rewards Program.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isRank8.on">This product is exclusive for Promoters who have achieved 250k Pro Champ status (Rank 7) or higher in the Prüvit Rewards Program.</ng-container>
+            <ng-container *ngSwitchCase="accessLevels.isVipPlus.on">This product is exclusively for VIP+ Prüvers who have met VIP+ qualification the last 30 days.</ng-container>
+          </p> -->
+        </ng-container>
         <p class="color-black pt-2">
           👤 {{ "login-below-with-your-eligible-account" | translate }}
         </p>

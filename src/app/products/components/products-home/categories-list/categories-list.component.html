@@ -11,86 +11,90 @@
         </h3>
 
         <ul class="sk-category__list d-flex" *ngIf="!enableCategory()">
-          <li
-            class="sk-category__list-item"
-            [class]="
-              !category.isEveryoneCanAccess
-                ? category.isUserCanAccess
-                  ? 'category-btn-unlock'
-                  : 'category-btn-lock'
-                : ''
-            "
-            *ngFor="let category of categories$ | async"
-          >
-            <a
-              (click)="onClickCategory(category.slug)"
-              class="color-black border-0 sk-category__link sk-category__btn"
-              [innerHTML]="category.name"
-            ></a>
-            <span
-              (click)="onClickLockIcon(category)"
-              *ngIf="!category.isEveryoneCanAccess"
-              data-toggle="tooltip"
-              data-html="true"
-              data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
-              [class]="category.isUserCanAccess ? 'unlock' : 'lock'"
-              [title]="'Exclusively for: ' + category.accessLevelTitle"
-              ><i *ngIf="!category.isUserCanAccess" class="fas fa-lock"></i>
-              <i *ngIf="category.isUserCanAccess" class="fas fa-lock-open"></i
-            ></span>
-          </li>
+          <ng-container *ngFor="let category of categories$ | async">
+            <li
+              *ngIf="isProductExist(category)"
+              class="sk-category__list-item"
+              [class]="
+                !category.isEveryoneCanAccess
+                  ? category.isUserCanAccess
+                    ? 'category-btn-unlock'
+                    : 'category-btn-lock'
+                  : ''
+              "
+            >
+              <a
+                (click)="onClickCategory(category.slug)"
+                class="color-black border-0 sk-category__link sk-category__btn"
+                [innerHTML]="category.name"
+              ></a>
+              <span
+                (click)="onClickLockIcon(category)"
+                *ngIf="!category.isEveryoneCanAccess"
+                data-toggle="tooltip"
+                data-html="true"
+                data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                [class]="category.isUserCanAccess ? 'unlock' : 'lock'"
+                [title]="'Exclusively for: ' + category.accessLevelTitle"
+                ><i *ngIf="!category.isUserCanAccess" class="fas fa-lock"></i>
+                <i *ngIf="category.isUserCanAccess" class="fas fa-lock-open"></i
+              ></span>
+            </li>
+          </ng-container>
         </ul>
 
         <ul
           class="sk-category__list shopBy-category d-flex"
           *ngIf="enableCategory()"
         >
-          <li
-            class="sk-category__list-item"
-            [class]="
-              category.isUserCanAccess ? 'category-unlock' : 'category-lock'
-            "
-            *ngFor="let category of categories$ | async"
-          >
-            <span class="new-tag text-center" *ngIf="category.isNew">
-              {{ "new" | translate }}
-            </span>
-            <span
-              (click)="onClickLockIcon(category)"
-              *ngIf="!category.isEveryoneCanAccess"
-              data-toggle="tooltip"
-              data-html="true"
-              data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
-              class="new-tag lock"
-              [title]="'Exclusively for: ' + category.accessLevelTitle"
+          <ng-container *ngFor="let category of categories$ | async">
+            <li
+              *ngIf="isProductExist(category)"
+              class="sk-category__list-item"
+              [class]="
+                category.isUserCanAccess ? 'category-unlock' : 'category-lock'
+              "
             >
-              <i *ngIf="!category.isUserCanAccess" class="fas fa-lock"></i>
-              <i *ngIf="category.isUserCanAccess" class="fas fa-lock-open"></i>
-            </span>
-            <a
-              (click)="onClickCategory(category.slug)"
-              class="img-wrap rounded-circle text-center pointer"
-              [ngStyle]="{
-                backgroundImage:
-                  category.imageUrl !== ''
-                    ? 'url(' + category.imageUrl + ')'
-                    : category.slug.includes('shop-all')
-                    ? 'url()'
-                    : '',
-                backgroundColor:
-                  category.backgroundColor !== ''
-                    ? category.backgroundColor
-                    : ''
-              }"
-            >
-              <i
-                *ngIf="category.slug?.includes('shop-all')"
-                class="fa-solid fa-grid"
-              ></i>
-            </a>
+              <span class="new-tag text-center" *ngIf="category.isNew">
+                {{ "new" | translate }}
+              </span>
+              <span
+                (click)="onClickLockIcon(category)"
+                *ngIf="!category.isEveryoneCanAccess"
+                data-toggle="tooltip"
+                data-html="true"
+                data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+                class="new-tag lock"
+                [title]="'Exclusively for: ' + category.accessLevelTitle"
+              >
+                <i *ngIf="!category.isUserCanAccess" class="fas fa-lock"></i>
+                <i *ngIf="category.isUserCanAccess" class="fas fa-lock-open"></i>
+              </span>
+              <a
+                (click)="onClickCategory(category.slug)"
+                class="img-wrap rounded-circle text-center pointer"
+                [ngStyle]="{
+                  backgroundImage:
+                    category.imageUrl !== ''
+                      ? 'url(' + category.imageUrl + ')'
+                      : category.slug.includes('shop-all')
+                      ? 'url()'
+                      : '',
+                  backgroundColor:
+                    category.backgroundColor !== ''
+                      ? category.backgroundColor
+                      : ''
+                }"
+              >
+                <i
+                  *ngIf="category.slug?.includes('shop-all')"
+                  class="fa-solid fa-grid"
+                ></i>
+              </a>
 
-            <h4 class="color-black text-center">{{ category.name }}</h4>
-          </li>
+              <h4 class="color-black text-center">{{ category.name }}</h4>
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>

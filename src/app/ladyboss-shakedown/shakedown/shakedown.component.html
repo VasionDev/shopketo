@@ -1,0 +1,95 @@
+<section class="ladyboss-5servings-header">
+  <article class="container">
+    <figure class="row">
+      <div class="col-12">
+        <nav class="sk-header__navbar border-bottom-1 sk-header__nav-desktop">
+          <div class="container">
+            <div class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar sk-header__navbar-padding">
+              <div class="navbar-collapse">
+                <div class="navbar-nav flex-row mx-auto">
+                  <a class="navbar-brand" href="#">
+                    <img src="assets/ladyboss/images/ladyboss-logo.svg" class="img-fluid logo">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </figure>
+  </article>
+</section>
+
+<section class="ladyboss-burnit-wrap">
+  <article class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="shakedown-wrap">
+          <div class="card">
+            <img class="img-fluid shakedown-img"
+              src="https://statics.myclickfunnels.com/image/928401/file/25fdc31c3e8ed8cc3210031c38b8247d.png">
+
+            <h2 class="color-brand text-center"><u>FREE 30 Day Program</u></h2>
+            <p class="color-black text-center get-p">Get back on track after the lazy days of summer!</p>
+            <h3 class="text-center">Register now and get a month’s worth of:</h3>
+            <ul class="text-center">
+              <li><b class="color-brand"> <i class="fas fa-angle-double-right"></i> Simple, healthy recipes</b> your
+                whole family will love</li>
+              <li><b class="color-brand"> <i class="fas fa-angle-double-right"></i> Personal development</b> to help you
+                be the best version of yourself</li>
+              <li><b class="color-brand"> <i class="fas fa-angle-double-right"></i> Real-time inspiration</b> from the
+                one-of-a-kind LadyBoss community</li>
+              <li><b class="color-brand"> <i class="fas fa-angle-double-right"></i> Expert guidance</b> from top
+                LadyBoss Independent Champions</li>
+              <li><b class="color-brand"> <i class="fas fa-angle-double-right"></i> </b> Plus a handy <b
+                  class="color-brand">FREE printable workbook</b> to help you stick to your health &amp; fitness goals!
+              </li>
+              <img class="arrowdown-img" src="assets/ladyboss/images/arrows-down-icon.svg" />
+            </ul>
+
+            <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+              <div class="form-group">
+                <input type="text" placeholder="Your first name..." formControlName="firstName"
+                  [class.is-invalid]="firstNameControl.errors && firstNameControl.touched" class="form-control p-small">
+                <small *ngIf="firstNameControl.errors?.['required']" class="invalid-feedback">
+                  Please enter your first name
+                </small>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Your last name..." formControlName="lastName"
+                  [class.is-invalid]="lastNameControl.errors && lastNameControl.touched" class="form-control p-small">
+                <small *ngIf="lastNameControl.errors?.['required']" class="invalid-feedback">
+                  Please enter your last name
+                </small>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Your email address..." class="form-control p-small"
+                  formControlName="email" [class.is-invalid]="emailControl.errors && emailControl.touched">
+                <small *ngIf="emailControl.errors?.['required']" class="invalid-feedback">Please enter your
+                  Email</small>
+                <small *ngIf="emailControl.errors?.['pattern']" class="invalid-feedback">Please enter a valid Email
+                  address</small>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Phone Number" formControlName="phone" class="form-control p-small"
+                  [class.is-invalid]="phoneControl.errors && phoneControl.touched" />
+                <small *ngIf="phoneControl.errors?.['required']" class="invalid-feedback">Please enter your Phone
+                  number</small>
+                <small *ngIf="phoneControl.errors?.['pattern']" class="invalid-feedback">Please enter a valid Phone
+                  number</small>
+              </div>
+
+              <button type="submit" [disabled]="leadForm.invalid || isLoading"
+                class="button button-primary unlock-btn">Register Now <i class="fa fa-spinner fa-spin ml-2"
+                  *ngIf="isLoading"></i></button>
+              <p *ngIf="error" class="text-danger text-center mt-2">
+                {{ error }}
+              </p>
+            </form>
+            <p class="p-small text-center secure-text"><i class="fa-solid fa-lock"></i> Your information is secure</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

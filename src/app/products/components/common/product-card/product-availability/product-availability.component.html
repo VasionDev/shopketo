@@ -1,11 +1,20 @@
 <div class="locked-states-text">
   <h4>
-    <a (click)="onClickAccessLevel()" class="pointer">
-      {{ accessLevelTitle }} only
+    <a (click)="onClickAccessLevel()" class="pointer" [ngSwitch]="true">
+      <ng-container *ngSwitchCase="accessLevels.isVisitor.on"> {{ "visitors-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isCustomer.on"> {{ "customers-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isPromoter.on"> {{ "pomoters-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isSmartship.on"> {{ "vip-pruvers-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isLoggedSmartship.on"> {{ "logged-in-vip-pruvers-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isLoyalSmartship.on"> {{ "loyal-smartship-pruvers-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isRank6.on"> {{ "champions-r6-only" | translate }}</ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isRank7.on"> {{ "100k-pro-champs-r7-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isRank8.on"> {{ "250k-pro-champs-r8-only" | translate }} </ng-container>
+      <ng-container *ngSwitchCase="accessLevels.isVipPlus.on"> {{ "vip-plus-only" | translate }} </ng-container>
       <i class="fas fa-info-circle color-gray-dark"></i
     ></a>
   </h4>
   <p (click)="onLogin()" class="p-small color-gray underline pointer">
-    Login With Eligible Account
+    {{ "login-with-ligible-account" | translate }}
   </p>
 </div>

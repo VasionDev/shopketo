@@ -1,0 +1,395 @@
+<div class="giveGet-wraper rewards-wraper">
+  <h2 *ngIf="!isDashboard" class="color-black page-title">{{ "rewards" | translate }}</h2>
+  <h3 *ngIf="isDashboard"  class="color-black mt-4">{{ "rewards" | translate }}</h3>
+
+  <div *ngIf="isPromoter && !isDashboard" class="card alert-card mb-3">
+    <div class="alert-text d-flex align-items-center">
+      <i aria-hidden="true" class="fas fa-exclamation-circle circle-icon"></i>
+
+      <p class="p-small font-bold color-white">
+        {{ "attention-promoter-please-continue-using" | translate }}
+      </p>
+      <a
+        href="{{ userURL }}#/commission"
+        target="_blank"
+        class="mat-menu-trigger button button--default"
+      >
+        {{ "go-to-cloud-office-1-0" | translate
+        }}<i class="far fa-external-link ml-2"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="row mx--15 rewards-top-card">
+    <div class="col-sm-6 col-12">
+      <app-loader *ngIf="loader" class="payment--loader"></app-loader>
+      <div *ngIf="!loader">
+        <div *ngIf="userProgress.currentStatus === ''" class="card vip-card">
+          <p class="disclaimer-bold text-uppercase">
+            {{ "vip-loyalty-status" | translate }}
+          </p>
+          <div class="d-flex align-items-center mb-3">
+            <div class="img-left rounded-circle">
+              <i class="fas fa-medal"></i>
+            </div>
+            <div class="right-text">
+              <p class="text-uppercase color-black font-bold">
+                {{ "pruver" | translate }}
+              </p>
+              <p class="p-small color-red">
+                {{ "you-re-missing-out-on-points" | translate }}
+              </p>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-between align-items-center go-card"
+          >
+            <span class="p-small color-black font-bold go-vip"
+              ><i class="fas fa-medal"></i> {{ "go-vip" | translate }}</span
+            >
+            <a
+              href="javascript:void(0)"
+              (click)="updateProducts(null)"
+              class="p-small font-bold color-black setup-btn"
+              >{{ "setup-smartship" | translate }}
+              <i
+                class="fal fa-chevron-right font-weight-normal ml-1"
+                aria-hidden="true"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="userProgress.currentStatus === 'vip'"
+          class="card vip-card vip-pruver"
+        >
+          <p class="disclaimer-bold text-uppercase">
+            {{ "vip-loyalty-status" | translate }}
+          </p>
+          <div class="d-flex align-items-center mb-3">
+            <div class="img-left rounded-circle">
+              <i class="fas fa-medal"></i>
+            </div>
+            <div class="right-text">
+              <p class="text-uppercase color-black font-bold font-21">
+                {{ "vip-pruver" | translate }}
+              </p>
+              <p class="p-small color-gray">
+                {{ "you-earn-1-point-for-every-1-spent" | translate }}
+              </p>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-between align-items-center go-card"
+          >
+            <span class="p-small color-black font-bold go-vip"
+              ><i class="fas fa-medal"></i> {{ "go-vip+" | translate }}
+            </span>
+            <a
+              href="#"
+              data-toggle="modal"
+              data-target="#vipLoyaltyModal"
+              class="p-small font-bold color-black setup-btn"
+              >{{ "my-progress" | translate }}
+              <i
+                class="fal fa-chevron-right font-weight-normal ml-1"
+                aria-hidden="true"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="userProgress.currentStatus === 'vipPlus'"
+          class="card vip-card vip-vip-pruver"
+        >
+          <p class="disclaimer-bold text-uppercase">
+            {{ "vip-loyalty-status" | translate }}
+          </p>
+          <div class="d-flex align-items-center mb-3">
+            <div class="img-left rounded-circle">
+              <i class="fas fa-medal"></i>
+            </div>
+            <div class="right-text">
+              <p class="text-uppercase color-black font-bold">
+                {{ "vip+-pruver" | translate }}
+              </p>
+              <p class="p-small color-gray">
+                {{ "you-earn-up-to-1.5-points-for-every-1-spent" | translate }}
+              </p>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-between align-items-center go-card"
+          >
+            <span class="p-small color-black font-bold go-vip"
+              ><i class="fa-regular fa-shield-check"></i>
+              {{ "you-rock" | translate }}</span
+            >
+            <a
+              href="#"
+              data-toggle="modal"
+              (click)="onVipLoyaltyModalOpen()"
+              class="p-small font-bold color-black setup-btn"
+              >{{ "keep-it-up" | translate }}
+              <i
+                class="fal fa-chevron-right font-weight-normal ml-1"
+                aria-hidden="true"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-12">
+      <app-loader *ngIf="loader" class="payment--loader"></app-loader>
+      <div *ngIf="!loader">
+        <div class="card points-card">
+          <p class="disclaimer-bold text-uppercase">
+            {{ "points-available" | translate }}
+          </p>
+          <p class="p-small color-white font-bold shop-text">
+            <i class="fa-solid fa-coin color-yellow"></i>
+            <span class="numb">{{ walletAmount | number: '1.2-2' }}</span>
+            <a href="#" (click)="onClickShopnow();">{{ "shop-now" | translate }}
+              <i
+                class="fal fa-chevron-right font-weight-normal ml-1"
+                aria-hidden="true"
+              ></i
+            ></a>
+          </p>
+    
+          <p *ngIf="walletAmount > 0" class="p-small thats-text">{{ "thats-up-to" | translate }} {{ walletPoint | number: '1.2-2' }} {{ currencyCode }} {{ "off-your-next-order" | translate }}</p>
+          <p *ngIf="walletAmount === 0" class="p-small thats-text">{{ "your-points-balance-is-currently-empty" | translate }}</p>
+          <div
+            class="d-flex justify-content-between align-items-center wallet-btn-group"
+          >
+            <button 
+              class="btn btn-gray p-small font-bold"
+              routerLink="/cloud/wallet"
+            >
+              <i class="fa-regular fa-wallet"></i> {{ "open-wallet" | translate }}
+            </button>
+            <button 
+              *ngIf="expireWallet.length"
+              data-toggle="modal" 
+              data-target="#expiringPointsModal"
+              class="btn btn-expiring p-small font-bold"
+            >
+              <i class="fa-regular fa-circle-exclamation"></i>
+              {{ "expiring-points" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="color-black mt-3 mb-1">{{ "referral-offers" | translate }}</h3>
+
+  <app-refer-friend></app-refer-friend>
+</div>
+<!-- END of rewards-wraper -->
+
+<!-- vip loyalty modal -->
+
+<div
+  class="modal fade animate manage-modal vip-modal wdt-480"
+  id="vipLoyaltyModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="dashboard--modal modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg" #vipPruverModalHeader>
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-hide"
+          >
+            <i class="fal fa-times"></i>
+          </a>
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close mb-show"
+          >
+            <i
+              aria-hidden="true"
+              class="fal fa-chevron-left font-weight-normal mr-2"
+            >
+            </i
+            >{{ "vip+-pruver" | translate }}
+          </a>
+        </p>
+        <h3 class="title color-black">{{ "vip+-pruver" | translate }}</h3>
+        <p
+          *ngIf="userProgress.currentStatus === 'vipPlus'"
+          class="p-small color-gray"
+        >
+          {{
+            "keep-your-vip+-benefits-by-making-sure-your-smartship-order-processes-every-month"
+              | translate
+          }}
+        </p>
+      </div>
+      <div
+        class="modal-body"
+        [style.padding-top.px]="isMobileView ? modalHeaderHeight : 24"
+      >
+        <p class="p-small color-gray-dark font-bold mb-3">
+          {{ "requirements" | translate }}
+        </p>
+        <div class="card requirment-card">
+          <div class="friends-expander">
+            <div class="collapse-head no-pointer">
+              <div class="profile-cont d-flex align-items-center">
+                <i class="fas fa-check-circle color-green mr-3"></i>
+                <span class="name">{{ "active-smartship" | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="
+              userProgress.currentStatus === 'vipPlus' &&
+              userProgress.vipProgress.length
+            "
+            class="friends-expander"
+          >
+            <div class="collapse-head no-pointer">
+              <div class="profile-cont d-flex align-items-center">
+                <i class="far fa-circle mr-3"></i>
+                <span class="name"
+                  >{{ "next-smartship-order-processed-by" | translate }}
+                  {{
+                    getNextShipmentDate(userProgress.vipProgress[0].timestamp)
+                  }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="userProgress.currentStatus === 'vip'"
+            class="friends-expander"
+          >
+            <div
+              class="d-flex align-items-center justify-content-between collapse-head"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+              aria-expanded="false"
+              aria-controls="collapseOne"
+            >
+              <div class="profile-cont d-flex align-items-center">
+                <i
+                  *ngIf="userProgress.vipProgress.length < 3"
+                  class="far fa-circle color-gray mr-3"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  *ngIf="userProgress.vipProgress.length >= 3"
+                  class="fas fa-check-circle color-green mr-3"
+                ></i>
+                <span class="name">{{ "3-consecutive-monthly-smartship-orders" | translate }}</span>
+              </div>
+              <div class="right-cont"></div>
+            </div>
+            <div id="collapseOne" class="collapse-body collapse">
+              <ul class="order-progress-step">
+                <li
+                  *ngFor="let item of getRange(); let i = index"
+                  [ngClass]="{
+                    active: i == 0,
+                    complete: userProgress.vipProgress[i],
+                    orange: userProgress.vipProgress.length < 3,
+                    green: userProgress.vipProgress.length >= 3
+                  }"
+                >
+                  <div *ngIf="userProgress.vipProgress[i]; else noFoundBlock">
+                    <p class="font-bold title">
+                      {{ userProgress.vipProgress[i].orderId }}
+                    </p>
+                    <p class="p-small color-gray-dark">
+                      {{
+                        getDateWithFormat(userProgress.vipProgress[i].timestamp)
+                      }}
+                    </p>
+                  </div>
+                  <ng-template #noFoundBlock>
+                    <p class="font-bold title">
+                      {{ "no-order-found" | translate }}
+                    </p>
+                  </ng-template>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="p-small color-gray-dark font-bold mb-3 mt-4">
+          {{ "Benefits" | translate }}
+        </p>
+        <div class="card benefits">
+          <ul>
+            <li class="color-black p-small">
+              <strong>{{ "25%-off" | translate }}</strong>
+              {{ "everyday-and-smartship-orders" | translate }}
+            </li>
+            <li class="color-black p-small">
+              {{ "earn-an-extra-0.5-points-per-1-spent-on" | translate }}
+              <strong>{{ "personal" | translate }}</strong>
+              {{ "smartship-orders" | translate }}
+            </li>
+            <li class="color-black p-small">
+              {{ "earn-0.5-points-per-1-spent-on" | translate }}
+              <strong>{{ "referred" | translate }}</strong>
+              {{ "smartship-orders" | translate }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div 
+  id="expiringPointsModal"
+  tabindex="-1" 
+  class="modal animate fade right-mobile addresses-modal expiring-points-modal wdt-480"
+  aria-modal="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+          <p class="w-100 d-flex justify-content-between align-items-center mb-hide">
+              <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close"><i aria-hidden="true" class="fal fa-times"></i></a>
+          </p>
+          <h3 class="title color-black mb-show">
+              <a data-dismiss="modal" aria-label="Close" class="color-black pointer"><i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-3"></i>Expiring points</a>
+          </h3>
+          <h3 class="title color-black mb-hide">Expiring points</h3>
+          <p class="p-small color-gray">Funds in this wallet will expire over time if not used.</p>
+      </div>
+      <div class="modal-body p-0">
+          <div class="p-sm-4 p-3">
+              <ul>
+                  <li 
+                    *ngFor="let expWallet of expireWallet; let last = last" 
+                    class="d-flex justify-content-between align-items-center py-2"
+                    [ngClass]="{ 'border-bottom': !last }"
+                  >
+                      <h4 class="color-black font-18">{{expWallet.point}}</h4>
+                      <p class="disclaimer-reg color-gray">{{expWallet.expireTime}} (RTZ) <strong class="color-red ml-2 text-uppercase"><i class="fa-regular fa-clock mr-1"></i> {{expWallet.expireDate}}</strong> </p>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 .research-hero.shopketo101-hero {
-  padding: 80px 0 0px;
+  /* padding: 80px 0 0px; */
   border: none;
 }
 
@@ -113,9 +113,7 @@
   flex-direction: column;
 }
 
-.favorite-community-wraper
-  .favorite-community-slider
-  .testimonial-items::before {
+.favorite-community-wraper .favorite-community-slider .testimonial-items::before {
   content: "\f10d";
   position: absolute;
   font-family: "Font Awesome 6 Pro";
@@ -126,10 +124,7 @@
   font-size: 40px;
 }
 
-.favorite-community-wraper
-  .favorite-community-slider
-  .testimonial-items
-  .description {
+.favorite-community-wraper .favorite-community-slider .testimonial-items .description {
   max-width: 496px;
   width: 100%;
   margin: 0 auto;
@@ -137,10 +132,7 @@
   font-style: italic;
 }
 
-.favorite-community-wraper
-  .favorite-community-slider
-  .testimonial-items
-  .img-fluid {
+.favorite-community-wraper .favorite-community-slider .testimonial-items .img-fluid {
   width: 72px;
   height: 72px;
   -o-object-fit: cover;
@@ -175,10 +167,7 @@
   padding-bottom: 26px;
 }
 
-.before-better-slider
-  .before-better-marquee-slide
-  .slider-item:hover
-  .photo-bg {
+.before-better-slider .before-better-marquee-slide .slider-item:hover .photo-bg {
   -webkit-transform: scale(1.06);
   transform: scale(1.06);
 }
@@ -189,11 +178,7 @@
   border-radius: 30px;
 }
 
-.before-better-slider
-  .before-better-marquee-slide
-  .slider-item
-  .item-inner
-  .photo-bg {
+.before-better-slider .before-better-marquee-slide .slider-item .item-inner .photo-bg {
   width: 224px;
   height: 324px;
   background-position: center;
@@ -333,11 +318,7 @@
   margin: 32px 0;
 }
 
-.pruver-mission-wraper
-  .card
-  .card-col.here-help-card
-  .btns-group
-  .sk-pruver__btn {
+.pruver-mission-wraper .card .card-col.here-help-card .btns-group .sk-pruver__btn {
   color: #d816c3;
   margin: 0;
   text-decoration: none;
@@ -346,16 +327,12 @@
   box-shadow: none;
 }
 
-.pruver-mission-wraper
-  .card
-  .card-col.here-help-card
-  .btns-group
-  .sk-pruver__btn:hover {
+.pruver-mission-wraper .card .card-col.here-help-card .btns-group .sk-pruver__btn:hover {
   background-color: #f7f7f7;
 }
 
 .FAQ-wraper {
-  margin: 50px 0 150px;
+  margin: 50px 0 70px;
 }
 
 .FAQ-wraper .title h1 {
@@ -426,155 +403,468 @@
   padding: 0 0 35px 0;
 }
 
+/*-----Learn update css-----*/
+
+.shopketo101-hero .learn-title h3 {
+  margin-bottom: 10px;
+}
+
+.shopketo101-hero .learn-title h1 {
+  font-size: 120px;
+  line-height: 119px;
+  max-width: 1126px;
+  margin: 0 auto;
+}
+
+.shopketo101-hero .learn-title h1 .text-gradient-style {
+  background: linear-gradient(225deg, #ffdf34 0%, #ff4534 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shopketo101-hero .learn-title .pruvit-fast-p {
+  font-size: 30px;
+  line-height: 42px;
+  max-width: 995px;
+  margin: 45px auto 20px;
+  color: rgba(3, 12, 33, 0.721569);
+}
+
+.shopketo101-hero .learn-title .img-wrap img {
+  width: 196px;
+  height: 129px;
+  object-fit: cover;
+  margin-bottom: -20px;
+}
+
+.shopketo101-hero .learn-title .free-guide {
+  max-width: 422px;
+  font-family: acumin-pro, sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  line-height: 22px;
+  text-transform: capitalize;
+  margin: 0 auto 15px;
+  padding: 20px 21px 20px 28px;
+}
+
+.shopketo101-hero .learn-title .alert-bg {
+  background: #ffebd0;
+  color: rgba(3, 12, 33, 0.721569);
+  border-radius: 10px;
+  padding: 17px 20px 19px;
+  margin-top: 42px;
+  margin-bottom: 75px;
+  gap: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shopketo101-hero .learn-title .alert-bg span i {
+  font-size: 18px;
+  color: #ff9000;
+}
+
+.watch-the-keynote h2 {
+  font-size: 58px;
+  line-height: 58px;
+}
+
+.watch-the-keynote .pruvit-text {
+  max-width: 768px;
+  margin: 32px auto 50px;
+}
+
+.watch-the-keynote .trip-video {
+  width: 100%;
+  height: 0;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+}
+
+.watch-the-keynote .trip-video iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.learn-profile-wrpper {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.learn-profile-wrpper h4 {
+  font-size: 24px;
+  line-height: 34px;
+  margin: 7px 0 -4px;
+}
+
+.learn-profile-wrpper .profile-img img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.learn-profile-wrpper .btns-group {
+  margin: 20px 0 40px;
+}
+
+.learn-profile-wrpper .btns-group i {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.learn-profile-wrpper .btns-group .gray-bg {
+  background: rgba(3, 12, 33, 0.0588235);
+  border-radius: 5px;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.learn-profile-wrpper .btns-group a:hover {
+  background-color: rgba(3, 12, 33, 0.14);
+  color: initial;
+}
+
+.learn-profile-wrpper h4 {
+  font-size: 24px;
+  line-height: 34px;
+  margin: 7px 0 -4px;
+}
+
+.learn-profile-wrpper .profile-img img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.learn-profile-wrpper .btns-group {
+  margin: 20px 0 40px;
+}
+
+.learn-profile-wrpper .btns-group i {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.learn-profile-wrpper .btns-group .gray-bg {
+  background: rgba(3, 12, 33, 0.0588235);
+  border-radius: 5px;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.learn-profile-wrpper .btns-group a:hover {
+  background-color: rgba(3, 12, 33, 0.14);
+  color: initial;
+}
+
+.modal.get-the-free .modal-dialog {
+  max-width: 640px;
+}
+
+.modal.get-the-free .modal-dialog .modal-content {
+  border: none;
+  box-shadow: 0px 11px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-header {
+  padding: 24px 20px 12px 30px;
+  border-bottom: none;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-header .modal-close {
+  color: rgba(3, 12, 33, 0.721569);
+  font-size: 32px;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-header .modal-close:hover {
+  color: #030c21;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-body {
+  padding: 0 20px 0;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-body .img-wrap img {
+  max-width: 350px;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-body h3 {
+  font-size: 44px;
+  line-height: 52px;
+  max-width: 512px;
+  margin: 0 auto;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-body .sub-title {
+  letter-spacing: -0.015em;
+  margin-top: 18px;
+}
+
+.modal.get-the-free .modal-dialog .modal-content .modal-body .button.free-guide-btn {
+  font-size: 20px;
+  line-height: 24px;
+  padding: 14px 24px;
+  max-width: fit-content;
+  margin: 25px auto 35px;
+  display: block;
+  letter-spacing: 0.01em;
+}
+
+.research-hero.shopketo101-hero .free-guide i.fa-arrow-right {
+  position: relative;
+  top: 2px;
+}
+
+/*------End of learn update css------*/
+
 /*------------- Start of Mobile @media CSS -------------*/
 
 @media (max-width: 767px) {
   .research-hero.shopketo101-hero {
     padding: 40px 0 0px;
   }
+
   .research-hero.shopketo101-hero .sk-main__title {
     margin-bottom: 30px;
   }
+
   .choose-starter-pack {
     margin: 40px 0;
   }
+
   .choose-starter-pack .title-wrap {
     margin-bottom: 30px;
   }
+
   .choose-starter-pack .title-wrap h1 {
     margin-bottom: 15px;
   }
+
   .choose-starter-pack .sk-main__product {
     max-width: 340px;
   }
+
   .choose-starter-pack .sk-main__product .product-offer-title {
     margin: 5px 0 15px;
   }
+
   .choose-starter-pack .sk-main__product .product-offer-title h3 {
     margin-bottom: 6px;
   }
+
   .choose-starter-pack .sk-main__product .product-offer-title p {
     line-height: 18px;
     max-width: 260px;
   }
+
   .choose-starter-pack .sk-main__product .buy-now {
     max-width: 230px;
     margin-bottom: 10px;
   }
+
   .choose-starter-pack .most-populer .sk-main__product .most-populer-text {
     font-size: 14px;
     line-height: 14px;
   }
+
   .choose-starter-pack .slick-prev {
     left: 10px;
   }
+
   .choose-starter-pack .slick-next {
     right: 10px;
   }
+
   .choose-starter-pack .variety-pack-btn {
     margin-top: 12px;
   }
+
   .favorite-community-wraper .favorite-community-slider {
     margin: 25px auto;
   }
+
   .favorite-community-wraper .favorite-community-slider .testimonial-items {
     min-height: 260px;
     padding: 24px;
   }
-  .favorite-community-wraper
-    .favorite-community-slider
-    .testimonial-items::before {
+
+  .favorite-community-wraper .favorite-community-slider .testimonial-items::before {
     font-size: 26px;
     left: 8px;
   }
-  .favorite-community-wraper
-    .favorite-community-slider
-    .testimonial-items
-    .description {
+
+  .favorite-community-wraper .favorite-community-slider .testimonial-items .description {
     line-height: 22px;
   }
+
   .favorite-community-wraper .favorite-community-slider .slick-prev {
     left: -12px;
   }
+
   .favorite-community-wraper .favorite-community-slider .slick-next {
     right: -12px;
   }
+
   .before-better-slider {
     margin-top: -58px;
   }
+
   .before-better-slider .before-better-marquee-slide .slider-item {
     padding-bottom: 20px;
   }
-  .before-better-slider
-    .before-better-marquee-slide
-    .slider-item
-    .item-inner
-    .photo-bg {
+
+  .before-better-slider .before-better-marquee-slide .slider-item .item-inner .photo-bg {
     width: 190px;
     height: 290px;
   }
+
   .pruver-mission-wraper {
     margin: 50px 0;
   }
+
   .pruver-mission-wraper .card .card-col.pruvit-ceo-info {
     padding: 24px 20px;
   }
+
   .pruver-mission-wraper .card .card-col.pruvit-ceo-info .mission-btn {
     margin-bottom: 20px;
     padding: 8px 18px;
   }
+
   .pruver-mission-wraper .card .card-col.pruvit-ceo-info .title {
     max-width: 270px;
     margin-bottom: 24px;
   }
+
   .pruver-mission-wraper .card .card-col.pruvit-ceo-info .founder .founder-img {
     max-width: 130px;
     right: 15px;
   }
+
   .pruver-mission-wraper .card .card-col.pruvit-ceo-info .founder .founder-img {
     max-width: 120px;
     right: 10px;
   }
+
   .pruver-mission-wraper .card .card-col.independent-pruver-card {
     height: 310px;
   }
+
   .pruver-mission-wraper .card .card-col.independent-pruver-card .img-fluid {
     width: 100px;
     height: 100px;
   }
+
   .pruver-mission-wraper .card .card-col.independent-pruver-card h3 {
     font-size: 20px;
     margin: 15px 0 0;
   }
+
   .pruver-mission-wraper .card .card-col.here-help-card {
     height: 310px;
   }
+
   .pruver-mission-wraper .card .card-col.here-help-card .btns-group {
     margin: 20px 0;
   }
+
   .FAQ-wraper {
     margin: 30px 0 40px;
   }
+
   .FAQ-wraper .FAQ-accordion {
     margin: 25px auto 0;
   }
+
   .FAQ-wraper .FAQ-accordion .card .card-header .btn {
     font-size: 16px;
     padding: 0 28px 0 0;
     line-height: 20px;
   }
+
   .FAQ-wraper .FAQ-accordion .card .card-header .btn svg {
     top: 0px;
   }
+
   .research-hero.shopketo101-hero .slider .inner {
     padding: 20px;
   }
+
   .research-hero.shopketo101-hero .slider {
     margin: 0 auto 25px;
     max-width: 340px;
     width: 100%;
   }
+
+  .shopketo101-hero .learn-title {
+    padding: 0 20px;
+  }
+
+  .shopketo101-hero .learn-title h1 {
+    font-size: 60px;
+    line-height: 58px;
+  }
+
+  .shopketo101-hero .learn-title .pruvit-fast-p {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 19px 0;
+  }
+
+  .shopketo101-hero .learn-title .free-guide {
+    font-size: 15px;
+    padding: 15px 20px;
+  }
+
+  .shopketo101-hero .learn-title .alert-bg {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .watch-the-keynote h2 {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .watch-the-keynote .pruvit-text {
+    margin: 20px auto 30px;
+  }
+
+  .learn-profile-wrpper {
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+
+  .modal.get-the-free .modal-dialog .modal-content .modal-body h3 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .modal.get-the-free .modal-dialog .modal-content .modal-body .button.free-guide-btn {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 12px 18px;
+    margin: 16px auto 26px;
+  }
 }
+
 /*---- End of @media (max-width: 767px) ----*/
 
 /*-------- Dark theme css --------*/
@@ -583,36 +873,19 @@
   background: #1c1c1e;
 }
 
-.dark-theme
-  .favorite-community-wraper
-  .favorite-community-slider
-  .testimonial-items::before {
+.dark-theme .favorite-community-wraper .favorite-community-slider .testimonial-items::before {
   opacity: 0.2;
 }
 
-.dark-theme
-  .before-better-slider
-  .before-better-marquee-slide
-  .slider-item
-  .before-tag {
+.dark-theme .before-better-slider .before-better-marquee-slide .slider-item .before-tag {
   background: #000;
 }
 
-.dark-theme
-  .pruver-mission-wraper
-  .card
-  .card-col.here-help-card
-  .btns-group
-  .sk-pruver__btn {
+.dark-theme .pruver-mission-wraper .card .card-col.here-help-card .btns-group .sk-pruver__btn {
   background-color: #2a2a2c !important;
 }
 
-.dark-theme
-  .pruver-mission-wraper
-  .card
-  .card-col.here-help-card
-  .btns-group
-  .sk-pruver__btn:hover {
+.dark-theme .pruver-mission-wraper .card .card-col.here-help-card .btns-group .sk-pruver__btn:hover {
   background-color: #131313 !important;
 }
 
@@ -633,17 +906,30 @@
   background: #47474a;
 }
 
-.dark-theme
-  .favorite-community-wraper
-  .favorite-community-slider
-  .slick-prev:hover,
-.dark-theme
-  .favorite-community-wraper
-  .favorite-community-slider
-  .slick-next:hover {
+.dark-theme .favorite-community-wraper .favorite-community-slider .slick-prev:hover,
+.dark-theme .favorite-community-wraper .favorite-community-slider .slick-next:hover {
   background: #fff;
 }
 
 .dark-theme .FAQ-wraper .FAQ-accordion .card .card-header .btn:hover svg path {
   fill: #2152ff;
+}
+
+
+.dark-theme .shopketo101-hero .learn-title .pruvit-fast-p,
+.dark-theme .modal.get-the-free .modal-dialog .modal-content .modal-header .modal-close {
+  color: #919192;
+}
+
+.dark-theme .learn-profile-wrpper .btns-group .gray-bg {
+  background-color: #919192;
+  color: #111;
+}
+
+.dark-theme .learn-profile-wrpper .btns-group .gray-bg:hover {
+  background-color: #f2f2f2;
+}
+
+.dark-theme .modal.get-the-free .modal-dialog .modal-content .modal-header .modal-close:hover {
+  color: #ffffff;
 }

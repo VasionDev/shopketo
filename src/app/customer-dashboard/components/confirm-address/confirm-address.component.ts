@@ -41,6 +41,7 @@ export class ConfirmAddressComponent implements OnInit, OnDestroy {
 
   selectAddress(x: any, isSelected: boolean) {
     if (isSelected) {
+      this.address = x;
       return;
     }
     this.address = x;

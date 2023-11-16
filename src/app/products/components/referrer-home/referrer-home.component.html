@@ -1,391 +1,212 @@
-<main class="sk-main" [style.margin-top.px]="discountHeight">
-  <section *ngIf="isLoaded; else loader" class="sk-dashboard referrer-home">
-    <article class="container">
-      <figure class="row">
-        <div class="col-12 card ref-card">
-          <p class="text-center ref-img">
+<main
+  *ngIf="isLoaded; else loader"
+  class="sk-main referrer-home"
+  [style.margin-top.px]="discountHeight"
+>
+  <section
+    [ngClass]="{ 'non-pro': customizeData === null }"
+    class="referrer-profile"
+  >
+    <figure class="container">
+      <div class="row">
+        <div
+          [ngClass]="{ 'col-sm-4': customizeData !== null }"
+          class="col-12 referrer-me-leftside"
+        >
+          <div class="profile-img">
             <img
-              *ngIf="referrer?.imageUrl"
-              [src]="referrer?.imageUrl"
+              (click)="onClickReferrerImage()"
               alt="img"
               class="img-fluid"
-            />
-          </p>
-          <h3 class="color-black text-center">{{ referrer?.name }}</h3>
-          <p class="social-icon text-center">
-            <a
-              *ngIf="customizeData?.socialMedia?.facebook !== ''"
-              href="{{ customizeData?.socialMedia?.facebook }}"
-              ><img src="assets/images/facebook-icon.png" alt="icon"
-            /></a>
-            <a
-              *ngIf="customizeData?.socialMedia?.tiktok !== ''"
-              href="{{ customizeData?.socialMedia?.tiktok }}"
-              ><img src="assets/images/tik-tok-icon.png" alt="icon"
-            /></a>
-            <a
-              *ngIf="customizeData?.socialMedia?.youtube !== ''"
-              href="{{ customizeData?.socialMedia?.youtube }}"
-              ><img src="assets/images/youtube-icon.png" alt="icon"
-            /></a>
-            <a
-              *ngIf="customizeData?.socialMedia?.twitter !== ''"
-              href="{{ customizeData?.socialMedia?.twitter }}"
-              ><img src="assets/images/twitter-icon.png" alt="icon"
-            /></a>
-            <a
-              *ngIf="customizeData?.socialMedia?.instagram !== ''"
-              href="{{ customizeData?.socialMedia?.instagram }}"
-              ><img src="assets/images/instagram-icon.png" alt="icon"
-            /></a>
-          </p>
-          <h4
-            class="text-center color-gray details"
-            [innerHTML]="customizeData?.shortBio"
-          ></h4>
-          <h4 class="text-center get-in">
-            <a href="#" (click)="ScrollIntoView()"
-              >Get in touch <i class="far fa-long-arrow-alt-right ml-1"></i
-            ></a>
-          </h4>
-        </div>
-
-        <div
-          *ngIf="customizeData?.links?.length"
-          class="col-12 looking-accordion"
-        >
-          <h3 class="color-black title">What are you looking for?</h3>
-
-          <div class="accordion" id="lookingAccordion">
-            <div
-              *ngFor="let link of customizeData?.links"
-              class="accordion-wrap"
-            >
-              <h4 class="accordion-header">
-                <a href="{{ link.link }}" target="_blank" class="collapse-btn">
-                  {{ link.title }}
-                </a>
-              </h4>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="favProducts.length" class="col-12 favorite-products-wrap">
-          <div
-            class="sk-category__title d-flex justify-content-between align-items-end"
-          >
-            <h3 class="color-black">Favorite products</h3>
-            <a class="sk-category__link hide">Add all to cart</a>
-          </div>
-
-          <div class="row sk-category__products favoritePrd-slider">
-            <div
-              *ngFor="let product of favProducts"
-              class="col-sm-4 sk-category__custom-padd"
-            >
-              <app-product-card [product]="product" #child></app-product-card>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 request-more-info">
-          <h3
-            *ngIf="customizeData !== null && customizeData.theme?.contactForm"
-            class="color-black title"
-          >
-            Request more info
-          </h3>
-          <div class="row justify-content-center">
-            <form
-              *ngIf="customizeData !== null && customizeData.theme?.contactForm"
-              class="col-sm-6 col-12 mt-4"
-              [formGroup]="contactForm"
-              (ngSubmit)="onSubmitContactForm()"
-            >
-              <div class="card request-info-card">
-                <div class="card-inner-info">
-                  <div class="form-group">
-                    <select
-                      class="form-control custom-select color-black p-small"
-                      formControlName="interested"
-                    >
-                      <option value="" selected>I’m interested in...</option>
-                      <option value="Ketone Trials">Ketone Trials</option>
-                      <option value="Becoming a Promoter">
-                        Becoming a Promoter
-                      </option>
-                      <option value="Learning more about Prüvit">
-                        Learning more about Prüvit
-                      </option>
-                    </select>
-                    <small
-                      *ngIf="f['interested'].errors?.['required']"
-                      class="invalid-feedback"
-                      >Please select what you are looking for</small
-                    >
-                  </div>
-
-                  <div class="row">
-                    <div class="col-6 form-group p-right">
-                      <input
-                        type="text"
-                        class="form-control p-small"
-                        placeholder="First name"
-                        formControlName="firstName"
-                        [class.is-invalid]="
-                          f['firstName'].errors && f['firstName'].touched
-                        "
-                      />
-                      <small
-                        *ngIf="f['firstName'].errors?.['required']"
-                        class="invalid-feedback"
-                        >Please enter your First name</small
-                      >
-                    </div>
-                    <div class="col-6 form-group p-left">
-                      <input
-                        type="text"
-                        class="form-control p-small"
-                        placeholder="Last name"
-                        formControlName="lastName"
-                        [class.is-invalid]="
-                          f['lastName'].errors && f['lastName'].touched
-                        "
-                      />
-                      <small
-                        *ngIf="f['lastName'].errors?.['required']"
-                        class="invalid-feedback"
-                        >Please enter your Last name</small
-                      >
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control p-small"
-                      placeholder="Email address"
-                      formControlName="email"
-                      [class.is-invalid]="
-                        f['email'].errors && f['email'].touched
-                      "
-                    />
-                    <small
-                      *ngIf="f['email'].errors?.['required']"
-                      class="invalid-feedback"
-                      >Please enter your Email</small
-                    >
-                    <small
-                      *ngIf="f['email'].errors?.['pattern']"
-                      class="invalid-feedback"
-                      >Please enter a valid Email address</small
-                    >
-                  </div>
-
-                  <div class="form-group phone">
-                    <input
-                      type="text"
-                      class="form-control p-small"
-                      placeholder="Phone"
-                      formControlName="phone"
-                      [class.is-invalid]="
-                        f['phone'].errors && f['phone'].touched
-                      "
-                    />
-                    <small
-                      *ngIf="f['phone'].errors?.['required']"
-                      class="invalid-feedback"
-                      >Please enter your Phone number</small
-                    >
-                    <small
-                      *ngIf="f['phone'].errors?.['pattern']"
-                      class="invalid-feedback"
-                      >Please enter a valid Phone number</small
-                    >
-                    <div class="dropdown">
-                      <span
-                        class="dropdown-btn"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="assets/images/{{
-                            userSelectedCountry !== null
-                              ? userSelectedCountry.country_code
-                              : selectedCountry
-                          }}.svg"
-                          alt="flag"
-                        />
-                        <i class="fal fa-angle-down color-gray"></i>
-                      </span>
-                      <div
-                        class="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton"
-                      >
-                        <span
-                          *ngFor="let country of countries"
-                          class="dropdown-item"
-                          (click)="setUserSelectedCountryPhoneCode(country)"
-                          ><img
-                            src="assets/images/{{ country.country_code }}.svg"
-                            alt="flag"
-                          />
-                          {{ country.name }}</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group form-check color-gray">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                      formControlName="checkAgree"
-                    />
-                    <label
-                      class="form-check-label disclaimer-reg"
-                      for="exampleCheck1"
-                      >I want to receive info via email and phone</label
-                    >
-                    <small
-                      *ngIf="f['checkAgree'].errors?.['requiredTrue']"
-                      class="invalid-feedback"
-                      >Please agree to this disclaimer to continue</small
-                    >
-                  </div>
-                  <button
-                    type="submit"
-                    [disabled]="contactForm.invalid"
-                    class="button button-primary full-width button-icon"
-                  >
-                    Please contact me
-                    <i
-                      class="fa fa-spinner fa-spin"
-                      *ngIf="isFormSubmitted"
-                    ></i>
-                  </button>
-                  <p
-                    *ngIf="errorMessage !== ''"
-                    class="disclaimer-reg text-center mt-2"
-                    style="color: #f35958; font-weight: 700"
-                  >
-                    {{ errorMessage }}
-                  </p>
-                  <p
-                    *ngIf="successMessage !== ''"
-                    class="disclaimer-reg text-center mt-2"
-                    style="color: #219653; font-weight: 700"
-                  >
-                    {{ successMessage }}
-                  </p>
-                </div>
-              </div>
-            </form>
-            <div
-              *ngIf="
-                referrer.hasOwnProperty('code') &&
-                (referrer.hasOwnProperty('phoneNumber') ||
-                  referrer.hasOwnProperty('email'))
+              [ngClass]="{
+                'no-ref-video': referrerVideoId === '',
+                pointer: referrerVideoId !== ''
+              }"
+              [src]="
+                referrer?.imageUrl
+                  ? referrer?.imageUrl
+                  : 'assets/images/avatar2.png'
               "
-              class="col-sm-6 col-12 mt-4"
+            />
+            <div class="name">
+              <h3 class="color-black">{{ referrer?.name }}</h3>
+              <p class="p-small color-gray">
+                {{ "independent-pruver" | translate }}
+              </p>
+            </div>
+          </div>
+
+          <div class="profile-info mb-4">
+            <div class="mb-3" *ngIf="shortBio">
+              <p
+                class="color-black p-small"
+                [ngClass]="{ limitTextHeight: isReadMore }"
+                [innerHTML]="shortBio"
+              ></p>
+              <a
+                *ngIf="shortBio.length > 100"
+                class="p-small link-hover font-bold"
+                (click)="isReadMore = !isReadMore"
+                href="javascript:;"
+                >{{ (isReadMore ? "read-more" : "read-less") | translate }}</a
+              >
+            </div>
+
+            <button
+              *ngIf="referrerVideoId"
+              class="button button-primary full-width watch-now wistia_embed wistia_async_{{
+                referrerVideoId
+              }}
+              popover=true
+              popoverContent=link"
+              style="display: inline"
             >
-              <div id="getInTouch" class="card get-in-touch">
-                <h3 class="color-white text-center">Get in touch</h3>
+              <span class=""
+                ><i class="fa-regular fa-play mr-2"></i
+                >{{ "Watch now" | translate }}</span
+              >
+            </button>
 
-                <div class="btns-group d-flex flex-column">
-                  <a
+            <div class="d-flex align-items-center justify-content-between">
+              <button
+                class="btn btn-gray font-bold"
+                data-toggle="modal"
+                data-target="#independentPruver"
+              >
+                {{ "request-info" | translate }}
+              </button>
+
+              <div class="dropdown" *ngIf="referrer?.phoneNumber || referrer?.email">
+                <button
+                  class="btn btn-gray font-bold"
+                  [matMenuTriggerFor]="menuOrders"
+                >
+                  {{ "contact-me" | translate
+                  }}<i
+                    class="fa-regular fa-angle-down icon-size"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+                <mat-menu
+                  #menuOrders="matMenu"
+                  xPosition="after"
+                  class="mat-menu--full"
+                >
+                  <button
                     *ngIf="referrer?.phoneNumber"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                    href="tel:{{ referrer?.phoneNumber }}"
+                    (click)="sendCall(referrer?.phoneNumber)"
+                    class="mat-menu-item--custom"
+                    mat-menu-item
                   >
-                    {{ "call-me" | translate }} 📞
-                  </a>
-                  <a
+                    <i class="fa-regular fa-phone" aria-hidden="true"></i
+                    ><span>{{ "call" | translate }}</span>
+                  </button>
+                  <button
                     *ngIf="referrer?.phoneNumber"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                    [href]="
-                      'sms:' + referrer?.phoneNumber | textSanitizer: 'url'
-                    "
-                    >{{ "text-me" | translate }} 💬
-                  </a>
-                  <a
+                    (click)="sendSMS(referrer?.phoneNumber)"
+                    class="mat-menu-item--custom"
+                    mat-menu-item
+                  >
+                    <i class="fa-regular fa-comment" aria-hidden="true"></i
+                    ><span>{{ "sms" | translate }}</span>
+                  </button>
+                  <button
                     *ngIf="referrer?.email"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                    href="mailto:{{ referrer?.email }}"
-                    >{{ "email-me" | translate }} 📨
-                  </a>
-                </div>
-
-                <div class="social-icon text-center">
-                  <a
-                    *ngIf="customizeData?.socialMedia?.facebook !== ''"
-                    href="{{ customizeData?.socialMedia?.facebook }}"
-                    ><i class="fa fa-facebook-f"></i
-                  ></a>
-                  <a
-                    *ngIf="customizeData?.socialMedia?.twitter !== ''"
-                    href="{{ customizeData?.socialMedia?.twitter }}"
-                    ><i class="fa fa-twitter"></i
-                  ></a>
-                  <a
-                    *ngIf="customizeData?.socialMedia?.instagram !== ''"
-                    href="{{ customizeData?.socialMedia?.instagram }}"
-                    ><i class="fa fa-instagram"></i
-                  ></a>
-                </div>
+                    (click)="sendEmail(referrer?.email)"
+                    class="mat-menu-item--custom"
+                    mat-menu-item
+                  >
+                    <i class="far fa-envelope" aria-hidden="true"></i
+                    ><span>{{ "email" | translate }}</span>
+                  </button>
+                </mat-menu>
               </div>
             </div>
           </div>
         </div>
-      </figure>
 
-      <div
-        id="foorerApprovalbar"
-        *ngIf="isApprovalPage"
-        class="footer-action-bar"
-      >
-        <div class="footer-card d-flex">
-          <button
-            *ngIf="isApproved"
-            type="button"
-            class="btn disclaimer-bold button-primary ml-auto"
-          >
-            Approved
-          </button>
-          <button
-            *ngIf="!isApproved"
-            (click)="onClickApproveBtn()"
-            type="button"
-            class="btn disclaimer-bold button-primary ml-auto"
-          >
-            Approve
-            <i class="fa fa-spinner fa-spin" *ngIf="isApproveSubmitted"></i>
-          </button>
+        <div class="referrer-right-col col-sm-8 col-12">
+          <figcaption *ngIf="customizeData?.links?.length" class="me-item">
+            <h2 class="page-title">{{ "my-links" | translate }}</h2>
+            <div class="my-links-wrap">
+              <div class="card">
+                <ul class="my-link-list">
+                  <ng-container *ngFor="let link of customizeData?.links">
+                    <li
+                      class="pointer"
+                      *ngIf="link.link && link.title"
+                      (click)="onClickMyLink(link.link)"
+                    >
+                      <a
+                        >{{ link.title }}
+                        <i class="fa-regular fa-arrow-up-right right-icon"></i>
+                      </a>
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+          </figcaption>
+          <!-- END of me-item -->
+
+          <figcaption *ngIf="favProducts.length" class="me-item">
+            <h2 class="page-title mb-4">My favorites</h2>
+            <div class="my-favorite-products-wrap">
+              <div class="row sk-category__products favoritePrd-slider">
+                <div
+                  *ngFor="let product of favProducts"
+                  class="col-6 sk-category__custom-padd"
+                >
+                  <app-product-card
+                    [product]="product"
+                    #child
+                  ></app-product-card>
+                </div>
+              </div>
+            </div>
+          </figcaption>
+          <!-- END of me-item -->
         </div>
       </div>
-    </article>
+    </figure>
   </section>
-  <!-- END of referrer-home -->
-
-  <ng-template #loader>
-    <app-loader></app-loader>
-  </ng-template>
 </main>
 
-<div class="miniplayer-wrap" *ngIf="referrerVideoId !== ''">
-  <span
-    class="wistia_embed wistia_async_{{
-      referrerVideoId
-    }} popover=false popoverAnimateThumbnail=true videoFoam=true controlsVisibleOnLoad=false"
-    >&nbsp;</span
+<div
+  class="modal animate fade sk-pruver referrer-contact-modal"
+  id="independentPruver"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="independentPruverTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog sk-pruver__dialog modal-dialog-centered"
+    role="document"
   >
-
-  <button
-    type="button"
-    class="close position-absolute"
-    (click)="onClickCloseVideo()"
-  >
-    <i class="fas fa-times-circle"></i>
-  </button>
+    <div class="modal-content animate-bottom sk-pruver__content">
+      <div class="modal-header flex-column border-bottom-0">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close"
+            ><i class="far fa-times"></i
+          ></a>
+        </p>
+      </div>
+      <div class="modal-body sk-pruver__body">
+        <div class="row">
+          <div class="col-12 contact-me-wrap">
+            <app-contact-form [caller]="'me'"></app-contact-form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

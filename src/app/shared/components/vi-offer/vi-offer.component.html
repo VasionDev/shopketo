@@ -1,28 +1,66 @@
-<div *ngIf="isViOffer || isViTimerPresent" class="claim-discount-wrap my-4">
-  <div class="orange-card d-flex" *ngIf="isViTimerPresent; else claimDiscount">
-    <i class="fal fa-alarm-clock" aria-hidden="true"></i>
-    <span class="disclaimer-bold"
-      >$10 discount expires in {{ timerSeconds | formatTimer }}</span
-    >
+<ng-container *ngIf="isViOffer || isViTimerPresent">
+  <div
+    *ngIf="isViTimerPresent && isCart"
+    class="card extra-offer-card vip-offer-accept my-3"
+  >
+    <div class="px-3 py-2">
+      <div class="d-flex align-items-center">
+        <div class="user-img-wrap">
+          <img
+            class="img-fluid"
+            [src]="
+              offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'
+            "
+          />
+        </div>
+        <p *ngIf="bonusValue == 10" class="disclaimer-bold color-white ml-3">
+          {{"extra-10-off-apply-checkout" | translate}}
+        </p>
+        <p *ngIf="bonusValue == 20" class="disclaimer-bold color-white ml-3">
+          {{"extra-20-off-apply-checkout" | translate}}
+        </p>
+        <p *ngIf="bonusValue == 50" class="disclaimer-bold color-white ml-3">
+          {{"extra-50-off-apply-checkout" | translate}}
+        </p>
+        <p *ngIf="bonusValue == 100" class="disclaimer-bold color-white ml-3">
+          {{"extra-100-off-apply-checkout" | translate}}
+        </p>
+      </div>
+    </div>
   </div>
-
-  <ng-template #claimDiscount>
-    <a (click)="onClaimDiscount()" class="blue-card d-flex">
-      <img class="rounded-circle" [src]="offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'" />
-      <span class="disclaimer-bold">{{
-        offerorName + " sent you a $10 discount!"
-        }}</span>
-      <i class="fas fa-arrow-right"></i>
-    </a>
-    <!-- <div class="blue-card d-flex">
-      <img
-        class="rounded-circle"
-        [src]="offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'"
-      />
-      <span class="disclaimer-bold">{{
-        offerorName + " sent you a $10 discount!"
-      }}</span>
-      <a (click)="onClaimDiscount()" class="btn-claim">Claim discount</a>
-    </div> -->
-  </ng-template>
-</div>
+  <div *ngIf="!isViTimerPresent && !isCart">
+    <button
+      (click)="onClaimDiscount()"
+      class="button button-primary today-off col"
+    >
+      <i class="fa-solid fa-gift mr-2"></i>
+      <span *ngIf="bonusValue == 10">{{ "get-10-off-today" | translate }}</span>
+      <span *ngIf="bonusValue == 20">{{ "get-20-off-today" | translate }}</span>
+      <span *ngIf="bonusValue == 50">{{ "get-50-off-today" | translate }}</span>
+      <span *ngIf="bonusValue == 100">{{ "get-100-off-today" | translate }}</span>
+    </button>
+  </div>
+  <div
+    *ngIf="!isViTimerPresent && isCart"
+    (click)="onClaimDiscount()"
+    class="card extra-offer-card vip-offer-avail my-3 pointer"
+  >
+    <div class="px-3 py-2">
+      <div class="d-flex align-items-center">
+        <div class="user-img-wrap">
+          <img
+            class="img-fluid"
+            [src]="offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'"
+          />
+        </div>
+        <p class="disclaimer-bold color-white ml-3">
+          <i class="fa-solid fa-gift mr-2"></i>
+          <span *ngIf="bonusValue == 10">{{ "get-10-off-today" | translate }}</span>
+          <span *ngIf="bonusValue == 20">{{ "get-20-off-today" | translate }}</span>
+          <span *ngIf="bonusValue == 50">{{ "get-50-off-today" | translate }}</span>
+          <span *ngIf="bonusValue == 100">{{ "get-100-off-today" | translate }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>

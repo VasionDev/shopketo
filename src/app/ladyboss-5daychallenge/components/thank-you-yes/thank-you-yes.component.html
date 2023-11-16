@@ -1,0 +1,137 @@
+<section class="ladyboss-5dayCake-header">
+  <article class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <img class="img-fluid conf-logo logo" src="https://statics.myclickfunnels.com/image/555085/file/3761f9a96ceb263ef6d89e2ca544be61.png">
+          <div class="right-login-group d-flex">
+            <a
+              *ngIf="!isUserLoggedIn"
+              class="nav-link sk-header__nav-link pointer" 
+              href="/dashboard"
+            >
+              <i class="far fa-user sk-header__user-card color-black"></i>
+              <span class="text-label color-black"> {{ "login" | translate }} </span>
+            </a>
+            <a
+              *ngIf="isUserLoggedIn"
+              class="nav-link sk-header__nav-link pointer" 
+              (click)="onClickAvatar()"
+            >
+              <img src="{{ userAvatar }}" class="user-img img-fluid" />
+              <span class="text-label color-black"> {{ "account" | translate }} </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-congratsVideo-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+
+              <h2 class="text-center color-brand title mb-2">Congrats And Welcome To The <u>VIP Experience</u></h2>
+              <h3 class="text-center color-black">Of 5-Day Cake Challenge!</h3>
+
+              <!-- <p class="text-center color-black">Watch Below For The Next Steps...</p>
+              <div class="ladyboss-videoWrap">
+                  <iframe frameborder="0" allowfullscreen="true" wmode="opaque"
+                      src="//www.youtube.com/embed/xcJtL7QggTI?autoplay=0&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;hd=1&amp;wmode=transparent"
+                      onload="this.iframeLoaded = true" name="fitvid0"></iframe>
+              </div> -->
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-nextSteps-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+
+                  <h3 class="text-center color-black"><i class="fa-solid fa-triangle-exclamation color-brand"></i>
+                      <u class="ml-1">IMPORTANT:</u>
+                      Follow The Next Steps Below To Prepare For The 5-Day Cake Challenge!</h3>
+
+                  <p class="text-center color-black reminder-wrap"><u><strong>Reminder:</strong></u> 
+                    Make Sure To Check Your Email With All Of The Important VIP Details!</p>
+
+                  <div class="row step-info">
+                      <div class="col icon">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/564512/file/98ba1b3fd1ba2c490bb3c498970ba9f3.png">
+                      </div>
+                      <div class="col step-text">
+                          <h5 class="color-black mb-2"><i class="fa-solid fa-square-check color-brand mr-2"></i> Step
+                              1:</h5>
+                          <h2 class="color-brand mb-3">CHECK YOUR EMAIL!
+                          </h2>
+                          <p class="color-black mb-4">By now, you should have received a confirmation email, stating
+                              your
+                              seat is saved for the 5-Day Cake Challenge. You’ll also get a separate email with your
+                              receipt and tracking information for your order of LEAN!</p>
+
+                          <p class="color-black mb-4">(Please check your SPAM folder as well because email can be
+                              finicky
+                              and we want to make sure you’re getting emails from us.)</p>
+
+                          <p class="color-black">Additionally, you’ll want to keep an eye on your email inbox as we
+                              get closer to the 5-Day Cake Challenge because we’ll be sending you exclusive content to
+                              get
+                              you pumped and ready!!</p>
+                      </div>
+                  </div>
+                  <div class="row step-info">
+                      <div class="col icon">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/564514/file/de0e8f24e157a9cf637e824000974a9c.png">
+                      </div>
+                      <div class="col step-text">
+                          <h5 class="color-black mb-2"><i class="fa-solid fa-square-check color-brand mr-2"></i> Step
+                              2:</h5>
+                          <h2 class="color-brand mb-3">Put It On The Calendar!</h2>
+                          <p class="color-black mb-4">Take a second right now and put this date into your smartphone:
+                          </p>
+
+                          <div class="calendar-wrap">
+                              <h6 class="color-black text-center"><i
+                                      class="fa-solid fa-calendar-days color-brand mr-2"></i> {{ settings.eventDate }}
+                              </h6>
+                              <p class="color-black text-center">3pmPST/ 4pmMST/ 5pmCST/ 6pmEST</p>
+                          </div>
+                          <p class="color-black mb-4"><u>I want to encourage you to do everything in your power to
+                                  show up AT LEAST 5 minutes early before the start of each session....</u> so you
+                              don’t miss a single moment of this challenge and the VIP experience!
+                          </p>
+
+                          <p class="color-black">Each training session will last around 45 minutes, so make sure you
+                              block off at least a full hour and really commit to attending each session!</p>
+                      </div>
+                  </div>
+                  <div class="row step-info">
+                      <div class="col icon">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/564513/file/4f39be7244049c6e998b19cefb949e33.png">
+                      </div>
+                      <div class="col step-text">
+                          <h5 class="color-black mb-2"><i class="fa-solid fa-square-check color-brand mr-2"></i> Step
+                              3:</h5>
+                          <h2 class="color-brand mb-3">Join The LadyBoss Cake Challenge Facebook Group!</h2>
+                          <p class="color-black mb-4">Inside the private LadyBoss Facebook group is where we’ll be
+                              going LIVE each day for the 5-day Cake Challenge.</p>
+
+                          <p class="color-black">Plus, once inside you’ll be able to mingle and network with other
+                              amazing ladies who are on the same journey as you!</p>
+                          <a [href]="settings.vipFbGroup" target="_blank" class="button button-primary facebook-btn"><i
+                                  class="fa-brands fa-facebook mr-1"></i> Go Here To Join The Facebook Group!</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>

@@ -106,12 +106,25 @@
   >{{ "pruvit-product-guide" | translate }}</a
 >
 <a
-  href="https://support.justpruvit.com/"
+  routerLink="/ingredients"
   class="dropdown-item pointer"
   [class.active]="
     listIndex ===
     setQuickLinkActiveClass(
       4,
+      (products | search: searchFilter:'search-modal').length,
+      (blogs | searchBlog: searchFilter).length
+    )
+  "
+  >{{ "ingredients" | translate }}</a
+>
+<a
+  href="https://support.justpruvit.com/"
+  class="dropdown-item pointer"
+  [class.active]="
+    listIndex ===
+    setQuickLinkActiveClass(
+      5,
       (products | search: searchFilter:'search-modal').length,
       (blogs | searchBlog: searchFilter).length
     )

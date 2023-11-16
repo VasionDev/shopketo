@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { forkJoin, SubscriptionLike } from 'rxjs';
 import { AppDataService } from '../shared/services/app-data.service';
+import { AppUtilityService } from '../shared/services/app-utility.service';
 import { BlogApiService } from './services/blog-api.service';
-import * as BlogActions from './store/blogs-list.actions';
 import * as BlogAuthorsActions from './store/blog-author.actions';
 import * as BlogCategoriesActions from './store/blog-category.actions';
+import * as BlogActions from './store/blogs-list.actions';
 import { BlogState } from './store/blogs.reducer';
-import { Router } from '@angular/router';
-import { AppUtilityService } from '../shared/services/app-utility.service';
 
 @Component({
   selector: 'app-blogs',

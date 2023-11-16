@@ -77,12 +77,42 @@
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true,
-            "allowedCommonJsDependencies": ["crypto-js"],
+            "allowedCommonJsDependencies": ["crypto-js", "party-js", "moment-timezone"],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
+              "index": "src/template.html",
+              "assets": [
+                "src/index.php",
+                "src/favicon.png",
+                "src/robots.txt",
+                "src/sitemap.xml",
+                "src/sitemap-landingpage-en-au.xml",
+                "src/sitemap-landingpage-en-ca.xml",
+                "src/sitemap-landingpage-en-hk.xml",
+                "src/sitemap-landingpage-en-mo.xml",
+                "src/sitemap-landingpage-en-mx.xml",
+                "src/sitemap-landingpage-en-my.xml",
+                "src/sitemap-landingpage-en-nz.xml",
+                "src/sitemap-landingpage-en-sg.xml",
+                "src/sitemap-landingpage-en-us.xml",
+                "src/sitemap-landingpage-es-mx.xml",
+                "src/sitemap-landingpage-es-us.xml",
+                "src/sitemap-landingpage-zh-hans-hk.xml",
+                "src/sitemap-landingpage-zh-hans-mo.xml",
+                "src/sitemap-landingpage-zh-hans-my.xml",
+                "src/sitemap-landingpage-zh-hans-sg.xml",
+                "src/sitemap-landingpage-zh-hant-hk.xml",
+                "src/sitemap-landingpage-zh-hant-mo.xml",
+                "src/sitemap-landingpage-zh-hant-my.xml",
+                "src/sitemap-landingpage-zh-hant-sg.xml",
+                "src/sitemap-country-index.xml",
+                "src/sitemap-all-links-au-index.xml",
+                "src/assets",
+                "src/manifest.webmanifest"
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -99,8 +129,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -126,8 +156,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -153,8 +183,106 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "ladyboss_demo": {
+              "index": "src/ladyboss/demo/index.html",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ladyboss_demo.ts"
+                }
+              ],
+              "assets": ["src/assets", "src/ladyboss-manifest.webmanifest"],
+              "styles": [
+                "src/styles-ladyboss.scss",
+                "node_modules/slick-carousel/slick/slick.scss"
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "ladyboss_prod": {
+              "index": "src/ladyboss/prod/index.html",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ladyboss_prod.ts"
+                }
+              ],
+              "assets": ["src/assets", "src/ladyboss-manifest.webmanifest"],
+              "styles": [
+                "src/styles-ladyboss.scss",
+                "node_modules/slick-carousel/slick/slick.scss"
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "ladyboss": {
+              "index": "src/ladyboss/index.html",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ladyboss.ts"
+                }
+              ],
+              "assets": ["src/assets", "src/ladyboss-manifest.webmanifest"],
+              "styles": [
+                "src/styles-ladyboss.scss",
+                "node_modules/slick-carousel/slick/slick.scss"
+              ],
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -177,6 +305,15 @@
           "configurations": {
             "production": {
               "browserTarget": "ng-shopketo:build:production"
+            },
+            "ladyboss": {
+              "browserTarget": "ng-shopketo:build:ladyboss"
+            },
+            "ladyboss_demo": {
+              "browserTarget": "ng-shopketo:build:ladyboss_demo"
+            },
+            "ladyboss_prod": {
+              "browserTarget": "ng-shopketo:build:ladyboss_prod"
             }
           }
         },
@@ -261,6 +398,18 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.demo.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            },
+            "ladyboss": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ladyboss.ts"
                 }
               ],
               "optimization": true,

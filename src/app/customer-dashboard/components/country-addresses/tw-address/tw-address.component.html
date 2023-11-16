@@ -1,0 +1,66 @@
+<div [hidden]="citys.length == 0 || confirmShow" class="modal-body" [style.padding]="removePadding ? '0px': ''">
+    <div class="card modal-body-card" [style.padding]="removePadding ? '0px': ''">
+        <div class="row">
+            <div class="col-12 form-group">
+                <label for="cardname" class="col-form-label">{{
+            "address-line-1" | translate
+          }}</label>
+                <input (focusout)="sendAddress()" type="text" class="form-control"
+                    [(ngModel)]="billingAddress.addressLine1" maxlength="50" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 form-group">
+                <label for="year" class="col-form-label">{{
+                                    "city" | translate
+                                  }}</label>
+                <select (focusout)="sendAddress()" class="form-control" [(ngModel)]="selectedCityNumber"
+                    (change)="onSelectCity($event)">
+                    <option value="" disabled>{{ "city" | translate }}</option>
+                    <option *ngFor="let city of citys; let i = index" value="{{ city.id }}">
+                        {{ city.value }}
+                    </option>
+                </select>
+            </div>
+
+            <div *ngIf="districts.length > 0" class="col-4 form-group">
+                <label for="year" class="col-form-label">{{
+                                        "District" | translate
+                                      }}</label>
+                <select (focusout)="sendAddress()" class="form-control" [(ngModel)]="selectedDistrictNumber"
+                    (change)="onSelectDistrict($event)">
+                    <option value="" disabled>{{ "District" | translate }}</option>
+                    <option *ngFor="let district of districts; let i = index" value="{{ district.id }}">
+                        {{ district.value }}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="postals.length > 0" class="col-4 form-group">
+                <label for="year" class="col-form-label">{{
+                    "postal-code" | translate
+                  }}</label>
+                <select (focusout)="sendAddress()" class="form-control" [(ngModel)]="selectedPostal"
+                    (change)="onSelectPostal($event)">
+                    <option value="0" disabled>{{ "state" | translate }}</option>
+                    <option *ngFor="let x of postals; let i = index" value="{{ x.id }}">
+                        {{ x.value }}
+                    </option>
+                </select>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<app-loader *ngIf="citys.length == 0 || loader" class="payment--loader"></app-loader>
+<div *ngIf="showFooter && !confirmShow" class="modal-footer">
+    <button class="button button--default button--grey" (click)="cancel()">
+        {{ "cancel" | translate }}
+    </button>
+    <button class="button button--default" (click)="verifyAddress()"
+        [disabled]="!billingAddress.addressLine1 || !billingAddress.city || !billingAddress.region || !billingAddress.postalCode">
+        <span>{{ "save" | translate }}</span>
+    </button>
+</div>

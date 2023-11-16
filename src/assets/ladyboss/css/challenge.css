@@ -1,0 +1,1989 @@
+.ladyboss-challenge-header {
+  background: rgb(255, 0, 117);
+  padding: 14px 16px 12px;
+}
+
+.ladyboss-challenge-header p {
+  font-family: Poppins, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08rem;
+}
+
+.ladyboss-challenge-wrap {
+  padding-top: 76px;
+  overflow: auto;
+}
+
+.ladyboss-challenge-wrap .title-wrap {
+  max-width: 1449px;
+  width: 100%;
+  margin: 0 auto 18px;
+}
+
+.ladyboss-challenge-wrap .max-1170 {
+  /* max-width: 1170px; */
+}
+
+.ladyboss-challenge-wrap .title-wrap h1 {
+  font-size: 90px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+.ladyboss-challenge-wrap .title-wrap h4 {
+  font-family: Poppins, sans-serif;
+  font-size: 29px;
+  font-weight: 800;
+  line-height: 110%;
+}
+
+.ladyboss-challenge-wrap .title-wrap .col-img img {
+  max-width: 96%;
+  display: block;
+  margin: 0 auto;
+}
+
+.ladyboss-challenge-wrap .title-wrap .sub-text {
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -.03rem;
+  margin-top: 15px;
+  margin-bottom: 12px;
+}
+
+.ladyboss-challenge-wrap .title-wrap .enroll-end {
+  background: rgba(238, 26, 125, 0.07);
+  border-radius: 4px;
+  padding: 16px 40px;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.ladyboss-challenge-wrap .title-wrap .enroll-end p {
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ladyboss-challenge-wrap .button-large {
+  max-width: 778px;
+  width: 100%;
+  height: initial;
+  padding: 23px 40px;
+  margin: 0 auto;
+  display: block;
+  font-family: Bebas Neue;
+  font-size: 38px;
+  letter-spacing: 0;
+  line-height: 120%;
+  font-weight: 900;
+  white-space: initial;
+}
+
+.ladyboss-challenge-wrap .button-large p {
+  font-family: Poppins, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 155%;
+  letter-spacing: 0;
+  text-transform: capitalize;
+  opacity: 0.8;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap {
+  background: linear-gradient(180deg, rgb(255, 255, 255) 62.00%, rgba(255, 0, 117, 0.12) 95.00%);
+  padding: 30px 0 70px;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .women-img {
+  max-width: 1255px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .custo-card {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .custo-card .padd-0 {
+  padding: 0 9px;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .card {
+  background: #ffffff;
+  margin-top: -77px;
+  border-radius: 6px;
+  padding: 30px 16px 20px;
+  border: none;
+  box-shadow: 0px 22px 44px 0px rgb(0 0 0 / 10%);
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .card p {
+  font-family: Poppins, sans-serif;
+  letter-spacing: 0;
+  line-height: 140%;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .card .custo-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 36px;
+}
+
+.ladyboss-challenge-wrap .verified-custo-wrap .card .custo-info img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ladyboss-challenge-wrap .next-event {
+  max-width: 1170px;
+  border-radius: 12px;
+  background: url(https://statics.myclickfunnels.com/image/357389/file/a9ac05029d2cdccc0751f7fd1fa0ae82.png), rgb(255, 0, 117);
+  padding: 33px 19px 26px 0;
+  background-position: 50%;
+  background-size: cover;
+  position: relative;
+  margin: -50px auto 100px;
+}
+
+.ladyboss-challenge-wrap .next-event img {
+  max-width: 579px;
+  position: absolute;
+  left: -93px;
+  top: 7px;
+}
+
+.ladyboss-challenge-wrap .next-event h1 {
+  font-size: 75px;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0;
+  line-height: 125%;
+}
+
+.ladyboss-challenge-wrap .next-event h3 {
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.18rem;
+  max-width: 464px;
+  margin: 0 auto;
+}
+
+.ladyboss-challenge-wrap .next-event h4 {
+  letter-spacing: 0;
+  margin-bottom: 12px;
+}
+
+.ladyboss-challenge-wrap .next-event .button-large {
+  max-width: 610px;
+  height: 110px;
+  font-size: 38px;
+  padding: 21px 26px 25px;
+}
+
+.ladyboss-challenge-wrap .next-event .button-primary {
+  color: rgb(238, 26, 125);
+  background: rgb(255, 255, 255);
+}
+
+.ladyboss-challenge-wrap .next-event .button-large p {
+  font-size: 19px;
+  line-height: 130%;
+}
+
+.ladyboss-challenge-wrap .join-txt {
+  font-family: Poppins, sans-serif;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: 120%;
+  max-width: 900px;
+  margin: 10px auto 45px;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap {
+  background: #fff;
+  box-shadow: 0 0 16px 2px #00000014;
+  border-radius: 20px;
+  padding: 50px 60px;
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .signup-form {
+  padding-bottom: 20px;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .signup-form .sign-title {
+  font-size: 58px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 105%;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .signup-form .ent-txt {
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .signup-form h2 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .signup-form .right-img {
+  text-align: right;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .list {
+  gap: 30px;
+  border-top: 1px solid rgb(212, 212, 212);
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .list p {
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 105%;
+  font-weight: 800;
+  font-style: italic;
+  margin-top: 50px;
+}
+
+.ladyboss-challenge-wrap .signup-form-wrap .list p i {
+  color: rgb(255, 0, 117);
+  margin-right: 10px;
+}
+
+.ladyboss-challenge-wrap .custo-review {
+  padding: 49px 0;
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+
+.ladyboss-challenge-wrap .custo-review img {
+  width: 800px;
+}
+
+.ladyboss-challenge-wrap .breakdown-bg {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 13.00%, rgba(3, 3, 3, 0.47) 82.00%), url(https://statics.myclickfunnels.com/image/357373/file/ce566f17aa174da740db52e7b2d22ffe.png), rgb(20, 20, 20);
+  background-repeat: no-repeat;
+  padding: 53px 0 127px;
+}
+
+.ladyboss-challenge-wrap .breakdown-bg h2 {
+  font-family: Poppins, sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 125%;
+  letter-spacing: 0;
+}
+
+.ladyboss-challenge-wrap .breakdown-bg .challange-step {
+  background: #ffffff;
+  border-radius: 15px;
+  margin-top: 50px;
+  padding: 30px;
+  box-shadow: 0px 0px 16px 2px rgb(0 0 0 / 8%);
+}
+
+.ladyboss-challenge-wrap .breakdown-bg h4 {
+  font-family: Poppins, sans-serif;
+  font-size: 46px;
+  letter-spacing: 0;
+  line-height: 125%;
+  margin-top: 12px;
+}
+
+
+.ladyboss-challenge-wrap .step-by-card {
+  max-width: 1170px;
+  margin: -95px auto 140px;
+  box-shadow: 0 0 16px 2px #00000014;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 56px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col {
+  padding-top: 12px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col h4 {
+  font-family: Poppins, sans-serif;
+  font-size: 34px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col h3 {
+  font-family: Poppins, sans-serif;
+  margin-top: 10px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col ul li {
+  position: relative;
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+  padding-left: 36px;
+  margin-bottom: 16px;
+}
+
+.ladyboss-challenge-wrap .step-by-card .text-col ul li:before {
+  content: "\f058";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  left: 0;
+  color: rgb(238, 26, 125);
+}
+
+.ladyboss-challenge-wrap .step-by-card .img-col img {
+  max-width: 394px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.ladyboss-challenge-wrap .next-challenge {
+  max-width: 980px;
+  margin: -23px auto 0;
+  border: 4px rgb(231, 92, 140) dashed;
+  border-radius: 15px;
+  padding: 27px 15px;
+}
+
+.ladyboss-challenge-wrap .next-challenge .top-bg {
+  background: #ffffff;
+  box-shadow: 0px 0px 16px 2px rgb(0 0 0 / 8%);
+  border-radius: 15px;
+  padding: 40px 0 20px;
+  font-family: Poppins, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  margin: -64px 17px 0;
+  position: relative;
+}
+
+.ladyboss-challenge-wrap .next-challenge h1 {
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.ladyboss-challenge-wrap .champion-card {
+  max-width: 1170px;
+  margin: 64px auto 0;
+}
+
+.ladyboss-challenge-wrap .champion-card .card {
+  box-shadow: 0px 22px 44px 0px rgb(0 0 0 / 15%);
+  border-radius: 8px;
+  border: none;
+}
+
+.ladyboss-challenge-wrap .champion-card .card .pr-img {
+  padding: 20px;
+}
+
+.ladyboss-challenge-wrap .pr-img img {
+  margin-top: -42px;
+}
+
+.ladyboss-challenge-wrap .champion-card .card .price-img {
+  padding: 20px;
+}
+
+.ladyboss-challenge-wrap .champion-card .card p {
+  font-family: Poppins, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 11px 0;
+}
+
+.ladyboss-challenge-wrap .champion-card .card h3 {
+  font-size: 40px;
+  font-weight: 400;
+  color: rgb(53, 53, 53);
+}
+
+.ladyboss-challenge-wrap .total-val p {
+  font-family: Poppins, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+.ladyboss-challenge-wrap .total-val {
+  padding-top: 56px;
+}
+
+.ladyboss-challenge-wrap .total-val h4 {
+  font-family: Poppins, sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 100%;
+  color: rgb(47, 47, 47);
+  margin: 20px 0;
+}
+
+.ladyboss-challenge-wrap .total-val img {
+  margin-bottom: 20px;
+}
+
+.ladyboss-challenge-wrap .top-bg img {
+  position: absolute;
+  top: -23px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+
+.ladyboss-challenge-wrap .faq-wrap {
+  background: rgb(255, 245, 249);
+  padding: 30px 0;
+}
+
+.ladyboss-challenge-wrap .faq-wrap h3 {
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.ladyboss-challenge-wrap .faq-wrap h4 {
+  font-family: Poppins, sans-serif;
+  font-size: 60px;
+  letter-spacing: 0;
+  line-height: 80%;
+}
+
+.ladyboss-challenge-wrap .next-event .invite-timer span {
+  margin-top: 15px;
+}
+
+.faq-wrap button span {
+  line-height: 1em;
+  color: #FF0075;
+  font-family: sans-serif;
+  float: left;
+  font-weight: bolder;
+  padding-right: 0.3em;
+  font-size: 1.3em;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.faq-wrap button[aria-expanded="true"] span {
+  transform: rotate(90deg);
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+  -ms-transform: rotate(-45deg);
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform-origin: 50% 50%;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.challenge-video-wrap .video-title {
+  background: rgb(255, 0, 117);
+  padding: 14px 40px;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: rgb(255, 255, 255);
+  margin-top: 30px;
+}
+
+.challenge-video-wrap .video-wrap {
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.challenge-video-wrap .video-wrap iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg {
+  background: #fff;
+  box-shadow: 32px 10px 57px 0px rgb(0 0 0 / 18%);
+  margin-bottom: 10px;
+  border-radius: 5px;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #FF0075;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg h4 .btn {
+  font-size: 20px;
+  line-height: 25px;
+  padding: 8px 10px;
+}
+
+.ladyboss-challenge-wrap .faq-wrap {
+  background: rgb(255, 245, 249);
+  padding: 50px 0;
+  margin-top: 40px;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  background-color: #ff0075;
+}
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg h4 .btn {
+  font-size: 18px;
+  line-height: 25px;
+  padding: 0 0 0 5px;
+  width: 100%;
+  border-radius: 0;
+  outline: none;
+  text-align: initial;
+}
+
+
+.ladyboss-challenge-wrap .faq-wrap .FAQ-accordion .header-bg h4 .btn:hover {
+  color: initial;
+  text-decoration: none;
+}
+
+.ladyboss-challenge-wrap .title-wrap .enroll-end {
+  width: fit-content;
+}
+
+@media (max-width: 767px) {
+
+  .ladyboss-challenge-wrap .title-wrap .enroll-end {
+    flex-direction: column;
+    width: initial !important;
+  }
+
+  .ladyboss-challenge-wrap .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ladyboss-challenge-wrap .verified-custo-wrap .custo-card {
+    padding: 0 10px;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap h1 {
+    font-size: 50px;
+    text-align: center;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap h4 {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap .sub-text {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap .enroll-end {
+    flex-direction: column;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap .enroll-end p {
+    font-size: 20px;
+  }
+
+  .ladyboss-challenge-wrap .button-large {
+    padding: 23px 25px;
+    font-size: 23px;
+    height: auto;
+  }
+
+  .ladyboss-challenge-wrap .button-large p {
+    font-size: 12px;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap .col-img img {
+    margin: 22px auto 0;
+    padding-left: 0;
+  }
+
+
+  .ladyboss-challenge-wrap .verified-custo-wrap .item {
+    flex-direction: column;
+  }
+
+  .ladyboss-challenge-wrap .verified-custo-wrap .card {
+    margin-top: -48px;
+    margin-bottom: 67px;
+  }
+
+  .ladyboss-challenge-wrap .next-event {
+    padding: 30px 6px;
+    position: relative;
+    margin: 22px 15px 50px;
+  }
+
+  .ladyboss-challenge-wrap .next-event img {
+    max-width: 240px;
+    position: initial;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .ladyboss-challenge-wrap .next-event h1 {
+    font-size: 47px;
+    margin-top: 20px;
+  }
+
+  .ladyboss-challenge-wrap .next-event .button-large {
+    font-size: 23px;
+    padding: 20px;
+    margin-top: 23px;
+    height: auto;
+  }
+
+  .ladyboss-challenge-wrap .next-event .button-large p {
+    font-size: 12px;
+  }
+
+  .ladyboss-challenge-wrap .join-txt {
+    font-size: 20px;
+    padding: 0 15px
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .signup-form .sign-title {
+    font-size: 28px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap {
+    padding: 20px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .signup-form {
+    padding: 53px 20px 20px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .signup-form .ent-txt {
+    font-size: 13px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .list p {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .ladyboss-challenge-wrap .custo-review {
+    padding: 20px 15px;
+  }
+
+  .ladyboss-challenge-wrap .custo-review img {
+    margin-bottom: 20px;
+  }
+
+  .ladyboss-challenge-wrap .step-by-card {
+    margin: -103px 15px 140px;
+    padding: 17px;
+  }
+
+  .ladyboss-challenge-wrap .step-by-card .text-col h4 {
+    font-size: 20px;
+  }
+
+  .ladyboss-challenge-wrap .step-by-card .text-col h3 {
+
+    font-size: 22px;
+    margin-top: 10px;
+  }
+
+  .ladyboss-challenge-wrap .step-by-card .img-col img {
+    margin-top: 20px;
+  }
+
+  .ladyboss-challenge-wrap .step-by-card .text-col ul li {
+    font-size: 16px;
+  }
+
+  .ladyboss-challenge-wrap .breakdown-bg h4 {
+    font-size: 28px;
+    margin-top: 12px;
+  }
+
+  .ladyboss-challenge-wrap .next-challenge .top-bg {
+    font-size: 16px;
+    padding: 20px;
+  }
+
+  .ladyboss-challenge-wrap .champion-card .card {
+
+    margin-bottom: 30px;
+
+  }
+
+  .ladyboss-challenge-wrap .total-val {
+    padding-top: 22px;
+  }
+
+  .ladyboss-challenge-wrap .total-val p {
+    font-size: 34px;
+  }
+
+  .ladyboss-challenge-wrap .total-val h4 {
+    font-size: 22px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .signup-form {
+    padding: 26px 0px 20px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap {
+    padding: 10px;
+    margin: 0 15px;
+  }
+
+  .ladyboss-challenge-wrap .signup-form-wrap .list {
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start !important;
+  }
+
+  .ladyboss-challenge-wrap .container-fluid .col-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ladyboss-challenge-wrap .title-wrap {
+    padding: 0 15px;
+  }
+
+  .ladyboss-challenge-wrap .verified-custo-wrap {
+    padding: 0 15px 80px;
+  }
+
+  .ladyboss-challenge-wrap .next-challenge {
+    margin: -23px 15px 0;
+  }
+
+  .ladyboss-challenge-wrap .champion-card {
+    margin: 64px 15px 0;
+  }
+
+}
+
+/* end of ladyboss-challenge css */
+
+.challenge-vip-header {
+  background: rgb(238, 26, 125);
+}
+
+.challenge-vip-header .step {
+  gap: 200px;
+  color: rgb(255, 255, 255);
+}
+
+.challenge-vip-header .step h4 {
+  font-family: Bebas Neue, cursive;
+  font-weight: 400;
+  letter-spacing: 0.08rem;
+
+}
+
+.challenge-vip-header .step h3 {
+  letter-spacing: 0.025rem;
+  font-size: 28px;
+}
+
+.challenge-vip-header .step .step2 {
+  box-shadow: 0px 0px 39px 0px rgb(0 0 0 / 31%);
+  background: rgb(191, 0, 95);
+  padding: 8px 32px;
+}
+
+.challenge-vip-upgrade .container-fluid {
+  padding: 0;
+}
+
+.challenge-vip-upgrade .container-fluid>.row {
+  margin: 0;
+}
+
+.challenge-vip-upgrade .container-fluid>.row .col-12 {
+  padding: 0;
+}
+
+.challenge-vip-upgrade .title {
+  padding-top: 37px;
+}
+
+.challenge-vip-upgrade .title .alert-bg p {
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  max-width: 930px;
+  margin: 20px auto 22px;
+  background: rgb(72, 2, 201);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.challenge-vip-upgrade .title h1 {
+  max-width: 1068px;
+  margin: 0 auto;
+  font-size: 85px;
+  line-height: 110%;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: rgb(238, 26, 125);
+  text-transform: uppercase;
+}
+
+.challenge-vip-upgrade .title .watch-text {
+  font-size: 36px;
+  line-height: 100%;
+  letter-spacing: -0.05rem;
+}
+
+.challenge-vip-upgrade .button-large {
+  font-family: Bebas Neue, cursive;
+  font-size: 34px;
+  max-width: 815px;
+  height: auto;
+  margin: 48px auto 0;
+  display: block;
+  padding: 25px 40px;
+}
+
+.challenge-vip-upgrade a {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  color: rgb(20, 20, 20);
+  margin-top: 20px;
+}
+
+.challenge-vip-upgrade .get-title {
+  font-family: Poppins, sans-serif;
+  font-size: 70px;
+  letter-spacing: 0;
+  margin-top: 85px;
+}
+
+.challenge-vip-upgrade .inside-p {
+  font-family: Poppins, sans-serif;
+  font-size: 52px;
+  line-height: 110%;
+  font-weight: 900;
+  letter-spacing: 0;
+  margin-top: 20px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack {
+  max-width: 957px;
+  margin: 80px auto 0;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .img-bg {
+  background: url(https://statics.myclickfunnels.com/image/357389/file/a9ac05029d2cdccc0751f7fd1fa0ae82.png), rgb(255, 0, 117);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .img-bg img {
+  max-width: 728px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  top: -68px;
+  position: relative;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list {
+  padding: 10px 80px 35px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .border-color {
+  border: 5px solid rgb(255, 0, 117);
+
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list ul p {
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-top: 20px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list ul p i {
+  margin-right: 20px;
+  color: rgb(255, 0, 117);
+  font-size: 22px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list ul {
+  list-style: none;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list ul li {
+  position: relative;
+  padding-left: 51px;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 140%;
+  margin-top: 12px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list ul li:before {
+  content: "\f0da";
+  position: absolute;
+  font-weight: 700;
+  font-family: "Font Awesome 6 Pro";
+  font-style: normal;
+  color: rgb(238, 26, 125);
+  left: 24px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list .norm-price {
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-top: 20px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list .today-price {
+  font-family: Poppins, sans-serif;
+  font-size: 70px;
+  font-weight: 900;
+  color: rgb(1, 189, 58);
+  margin-top: 35px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .list .button-large {
+  font-family: "Poppins", sans-serif;
+  font-size: 32px;
+  letter-spacing: 0;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .secure-img .icon-img {
+  margin-top: 30px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach {
+  box-shadow: 0px 22px 44px 0px rgb(170 183 199 / 20%);
+  border-color: rgba(206, 206, 206, 0.5);
+  border-radius: 4px;
+  padding: 20px 53px 70px;
+  margin-top: 50px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details .right-img img {
+  max-width: 400px;
+  width: 100%;
+  margin: 33px auto 0;
+  display: block;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details .left-text {
+  padding-top: 15px;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details {
+  gap: 40px;
+
+}
+
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details .left-text p {
+  font-family: Poppins, sans-serif;
+  letter-spacing: 0;
+  line-height: 140%;
+}
+
+.challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details {
+  gap: 42px;
+}
+
+.challenge-vip-upgrade .details-card {
+  gap: 17px;
+  margin-top: 70px;
+}
+
+.challenge-vip-upgrade .details-card .inner-info {
+  height: 150px;
+  width: 248px;
+  padding: 26px 13px 30px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 90px 4px rgb(0 0 0 / 12%);
+}
+
+.challenge-vip-upgrade .details-card .inner-info p {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0;
+  line-height: 130%;
+  font-size: 19px;
+  font-weight: 700;
+  color: rgb(255, 0, 117);
+  margin-top: 5px;
+}
+
+.challenge-vip-upgrade .details-card .inner-info i {
+  font-size: 50px;
+}
+
+.challenge-vip-upgrade .packed-all {
+  font-family: "Poppins", sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.challenge-vip-upgrade .desc-p p {
+  font-family: "Poppins", sans-serif;
+  max-width: 1026px;
+  letter-spacing: 0;
+  margin: 0 auto 30px;
+}
+
+.challenge-vip-upgrade .upgrade-today {
+  background: rgb(243, 243, 243);
+  background-size: 100%;
+  padding: 55px 0 100px;
+}
+
+.challenge-vip-upgrade .upgrade-today h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 46px;
+  line-height: 130%;
+  color: rgb(255, 0, 117);
+}
+
+.challenge-vip-upgrade .upgrade-today p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: 0;
+}
+
+.challenge-vip-upgrade .rec-inside {
+  margin: -72px auto 0;
+  border-radius: 8px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background: #fff;
+  box-shadow: 0px 0px 16px 2px rgb(0 0 0 / 8%);
+}
+
+.challenge-vip-upgrade .rec-inside .header-bg {
+  background: rgb(255, 0, 117);
+  border-radius: 8px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 43px 0;
+}
+
+.challenge-vip-upgrade .rec-inside .header-bg h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 36px;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+.challenge-vip-upgrade .rec-inside .down-arrow img {
+  width: 60px;
+  object-fit: cover;
+  margin-top: -24px;
+}
+
+.challenge-vip-upgrade .rec-inside .lean-wrap {
+  padding: 20px 44px 40px;
+}
+
+.challenge-vip-upgrade .rec-inside .lean-wrap .lean-box {
+  padding-left: 32px;
+}
+
+.challenge-vip-upgrade .rec-inside .lean-wrap .lean-box img {
+  max-width: 92%;
+  width: 100%;
+  margin: -10px auto 0;
+  display: block;
+}
+
+.challenge-vip-upgrade .lean-text h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 110%;
+  letter-spacing: 0;
+  color: rgb(238, 26, 125);
+  margin-bottom: 7px;
+}
+
+.challenge-vip-upgrade .lean-text span {
+  font-family: "Poppins", sans-serif;
+  font-size: 21px;
+}
+
+.challenge-vip-upgrade .lean-wrap p {
+  font-family: "Poppins", sans-serif;
+  line-height: 140%;
+}
+
+.challenge-vip-upgrade .max-width {
+  max-width: 960px;
+}
+
+.challenge-vip-upgrade .challenge-book {
+  background: #fff;
+  box-shadow: 0px 0px 36px 4px rgb(0 0 0 / 12%);
+  margin: 20px auto;
+  padding: 30px 25px 30px;
+}
+
+.challenge-vip-upgrade .challenge-book ul {
+  list-style: none;
+  margin-top: 8px;
+}
+
+.challenge-vip-upgrade .challenge-book ul li {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  line-height: 130%;
+  padding-left: 47px;
+  margin-bottom: 10px;
+}
+
+.challenge-vip-upgrade .challenge-book ul li:before {
+  content: "\f0da";
+  position: absolute;
+  left: 18px;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 700;
+  color: rgb(238, 26, 125);
+}
+
+.challenge-vip-upgrade .challenge-book .book-img img {
+  max-width: 76%;
+  margin: 0 auto;
+  display: block;
+}
+
+
+.challenge-vip-upgrade .challenge-book .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.challenge-vip-upgrade .challenge-book .shaker-cup img {
+  max-width: 52%;
+  margin: 0 auto;
+}
+
+.challenge-vip-upgrade .challenge-book .reg-brands img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.challenge-vip-upgrade .and-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 130%;
+  max-width: 1044px;
+  margin: 40px auto 0;
+}
+
+.challenge-vip-upgrade .gorgeous-sutitle {
+  font-size: 80px;
+  line-height: 110%;
+  font-weight: 400;
+  color: rgb(255, 0, 117);
+  margin-top: 18px;
+}
+
+.challenge-vip-upgrade .our-vip-card {
+  box-shadow: 0px 0px 16px 2px rgb(0 0 0 / 8%);
+  border-radius: 20px;
+  margin: 20px auto 30px;
+  padding: 30px 35px;
+}
+
+.challenge-vip-upgrade .our-vip-card h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+}
+
+.challenge-vip-upgrade .our-vip-card .inner-des .guarnt-logo img {
+  max-width: 286px;
+}
+
+.challenge-vip-upgrade .inner-des .description {
+  padding-left: 47px;
+}
+
+.challenge-vip-upgrade .our-vip-card .inner-des {
+  margin-top: 40px;
+}
+
+.challenge-vip-upgrade .you-upgrade-wrap {
+  background: url(https://statics.myclickfunnels.com/image/357272/file/8f1f23f995402a294adca6d8299409c4.png), rgb(255, 255, 255);
+  background-repeat: repeat;
+  padding: 50px 0;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.challenge-vip-upgrade .you-upgrade-wrap h1 {
+  letter-spacing: 3px;
+}
+
+.challenge-vip-upgrade .you-upgrade-wrap .vip-challenge-pack {
+  background-color: #fff;
+  border: 5px solid rgb(255, 0, 117);
+}
+
+@media (max-width: 767px) {
+  .challenge-vip-header .step {
+    gap: 7px;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .challenge-vip-upgrade .title .alert-bg p {
+    font-size: 14px;
+  }
+
+  .challenge-vip-upgrade .title .alert-bg img {
+    display: flex;
+    margin: 0 auto;
+
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .img-bg img {
+    top: -45px;
+  }
+
+  .challenge-vip-upgrade .title h1 {
+    font-size: 35px;
+  }
+
+  .challenge-vip-upgrade .title .watch-text {
+    font-size: 19px;
+  }
+
+  .challenge-vip-upgrade .button-large {
+    font-size: 19px;
+  }
+
+  .challenge-vip-upgrade .get-title {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+
+  .challenge-vip-upgrade .get-title {
+    font-size: 24px;
+    margin-top: 50px;
+  }
+
+  .challenge-vip-upgrade .inside-p {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack {
+
+    margin: 40px auto 0;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list {
+    padding: 10px 22px 40px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list ul p {
+    font-size: 16px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list i {
+    margin-right: 13px;
+    font-size: 18px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list ul li {
+    padding-left: 43px;
+    font-size: 16px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list .today-price {
+    font-size: 38px;
+    margin-top: 16px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .list .button-large {
+    font-size: 12px;
+    margin-top: 30px;
+    height: 60px;
+    padding: 6px 12px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .from-desk-coach {
+    padding: 20px 39px;
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details .right-img img {
+    text-align: center;
+
+  }
+
+  .challenge-vip-upgrade .vip-challenge-pack .from-desk-coach .details {
+    gap: 10px;
+    flex-direction: column-reverse;
+  }
+
+  .challenge-vip-upgrade .details-card {
+    margin-top: 30px;
+    flex-direction: column;
+  }
+
+  .challenge-vip-upgrade .packed-all {
+    font-size: 18px;
+  }
+
+  .challenge-vip-upgrade .desc-p p {
+    margin: 0 auto 30px;
+    padding: 0 36px;
+  }
+
+  .challenge-vip-upgrade .rec-inside .header-bg h4 {
+    font-size: 31px;
+    line-height: 120%;
+  }
+
+  .challenge-vip-upgrade .upgrade-today h4 {
+    font-size: 27px;
+  }
+
+  .challenge-vip-upgrade .upgrade-today p {
+    font-size: 21px;
+    margin-top: 10px;
+  }
+
+  .challenge-vip-upgrade .rec-inside .lean-wrap {
+    padding: 20px 37px 40px;
+  }
+
+  .challenge-vip-upgrade .rec-inside .lean-wrap .lean-box {
+    padding-left: 0;
+  }
+
+  .challenge-vip-upgrade .lean-text h4 {
+    font-size: 26px;
+  }
+
+  .challenge-vip-upgrade .challenge-book {
+    margin: 20px auto;
+    padding: 30px;
+  }
+
+  .challenge-vip-upgrade .and-title {
+    font-size: 26px;
+  }
+
+  .challenge-vip-upgrade .gorgeous-sutitle {
+    font-size: 43px;
+  }
+
+  .challenge-vip-upgrade .our-vip-card h4 {
+    font-size: 23px;
+    line-height: 120%;
+  }
+
+  .challenge-vip-upgrade .our-vip-card .inner-des {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .challenge-vip-upgrade .inner-des .description {
+    padding-left: 0;
+    margin-top: 25px;
+  }
+
+  .challenge-vip-upgrade .our-vip-card {
+    padding: 30px;
+  }
+}
+
+
+
+/* end of vip-upgrade css */
+
+
+/* .promoter-wrapper {
+  background: #ffffff url(https://statics.myclickfunnels.com/image/178593/file/7ef5f2b….png) no-repeat;
+  background-size: 100% 450px;
+  background-position: top center;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 70px;
+} */
+
+.challenge-vip-upgrade,
+.thankyou-wrapper {
+  background: #ffffff url(https://statics.myclickfunnels.com/image/178593/file/7ef5f2b64c243879dcfad50b7ac60537.png);
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.thank-you-yes-wrap .title .logo {
+  max-width: 200px;
+  padding-top: 40px;
+}
+
+.thank-you-yes-wrap .title h1 {
+  font-size: 67px;
+  letter-spacing: 0;
+  font-weight: 800;
+  margin-top: 40px;
+}
+
+.thank-you-yes-wrap .title p {
+  font-family: Poppins, sans-serif;
+  font-size: 47px;
+  line-height: 120%;
+  font-weight: 700;
+  color: rgb(255, 0, 117);
+  margin: 6px 0;
+}
+
+.thank-you-yes-wrap .title .watch-text {
+  font-family: Poppins, sans-serif;
+  font-size: 28px;
+  font-style: italic;
+  letter-spacing: -0.25px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.thank-you-yes-wrap .card {
+  background: #ffffff;
+  box-shadow: 0px 0px 16px 2px rgb(0 0 0 / 8%);
+  border-radius: 10px;
+  border: none;
+}
+
+.thank-you-yes-wrap .important-card {
+  max-width: 877px;
+  margin: 28px auto 43px;
+  padding: 33px 45px 41px;
+}
+
+.thank-you-yes-wrap .important-card .imp-p {
+  font-family: Poppins, sans-serif;
+  font-size: 29px;
+  letter-spacing: 0;
+  line-height: 140%;
+}
+
+.thank-you-yes-wrap .important-card .remainder-bg {
+  background: rgba(255, 0, 117, 0.1);
+  border-radius: 50px;
+  font-family: Poppins, sans-serif;
+  letter-spacing: 0;
+  text-transform: capitalize;
+  padding: 11px;
+  border: 3px dotted rgb(255, 0, 117);
+  margin-top: 15px;
+}
+
+.thank-you-yes-wrap.important-card .remainder-bg i {
+  color: rgb(255, 0, 117);
+  margin-right: 8px;
+}
+
+.thank-you-yes-wrap .vip-challange-pack {
+  padding: 44px 48px 62px;
+  margin-bottom: 20px;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .vip-text {
+  font-family: Poppins, sans-serif;
+  font-size: 50px;
+  line-height: 140%;
+  font-weight: 700;
+  color: rgb(47, 47, 47);
+  margin-bottom: 30px;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .img-col {
+  margin-top: 40px;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .text-col p {
+  font-family: Poppins, sans-serif;
+  letter-spacing: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .text-col ul {
+  font-family: Poppins, sans-serif;
+  list-style: none;
+  margin: 26px 0;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .text-col ul li {
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.thank-you-yes-wrap .vip-challange-pack .text-col li i {
+  color: #FF0075;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.thank-you-yes-wrap .challenge-step {
+  padding: 44px 34px 37px;
+  margin-bottom: 24px;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .left-img img {
+  max-width: 200px;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content {
+  gap: 29px;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text h3 {
+  font-size: 42px;
+  letter-spacing: 0;
+  color: rgb(47, 47, 47);
+  margin-bottom: 25px;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text p {
+  font-family: Poppins, sans-serif;
+  letter-spacing: 0;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text .date {
+  font-family: Poppins, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 23px 0;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text .button-large {
+  font-family: Bebas Neue, cursive;
+  font-size: 28px;
+  font-weight: 600;
+  max-width: fit-content;
+  height: 60px;
+  border-radius: 8px;
+  padding: 16px 25px 20px;
+  margin-top: 10px;
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text .button-primary {
+  color: rgb(255, 255, 255);
+  background: rgb(255, 0, 117);
+
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text .button-primary:hover {
+  background-color: #e21477;
+
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text a {
+  color: rgb(20, 20, 20);
+}
+
+.thank-you-yes-wrap .challenge-step .inner-content .right-text .link {
+  font-size: 16px;
+}
+
+.thank-you-yes-wrap .challenge-step.view-wrap {
+  padding: 26px 20px 40px;
+}
+
+.thank-you-yes-wrap .challenge-step.view-wrap .view-text {
+  font-size: 32px;
+}
+
+.thank-you-yes-wrap .challenge-step.view-wrap .button-large {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .thank-you-yes-wrap .title h1 {
+    font-size: 40px;
+    margin-top: 22px;
+  }
+
+  .thank-you-yes-wrap .title p {
+    font-size: 27px;
+    margin: 10px 0;
+  }
+
+  .thank-you-yes-wrap .title .watch-text {
+    font-size: 18px;
+  }
+
+  .thank-you-yes-wrap .important-card {
+    max-width: 877px;
+    padding: 26px 20px 30px;
+    margin-top: 30px;
+  }
+
+  .thank-you-yes-wrap .important-card .imp-p {
+    font-size: 20px;
+  }
+
+  .thank-you-yes-wrap .vip-challange-pack {
+    padding: 23px;
+  }
+
+  .thank-you-yes-wrap .vip-challange-pack .vip-text {
+    font-size: 25px;
+    line-height: 120%;
+    margin-bottom: 10px;
+  }
+
+  .thank-you-yes-wrap .challenge-step .inner-content .left-img img {
+    max-width: 300px;
+  }
+
+  .thank-you-yes-wrap .vip-challange-pack .img-col {
+    margin-top: 20px;
+  }
+
+  .thank-you-yes-wrap .challenge-step {
+    padding: 24px;
+  }
+
+  .thank-you-yes-wrap .challenge-step .inner-content {
+    flex-direction: column;
+  }
+
+  .thank-you-yes-wrap .challenge-step .inner-content .right-text .date {
+    font-size: 20px;
+    line-height: 26px;
+    margin: 23px 0;
+  }
+
+  .thank-you-yes-wrap .challenge-step .inner-content .right-text h3 {
+    font-size: 22px;
+  }
+
+  .thank-you-yes-wrap .challenge-step .inner-content .right-text .button-large {
+    font-size: 24px;
+    padding: 18px;
+  }
+
+  .ladyboss-challenge-wrap {
+    padding-top: 30px;
+  }
+
+  .ladyboss-challenge-wrap .next-event {
+    padding: 30px 6px;
+    position: relative;
+    margin: -54px 15px 50px;
+  }
+
+  .ladyboss-challenge-wrap .verified-custo-wrap .card {
+    margin-top: -32px;
+    margin-bottom: 50px;
+  }
+
+  .ladyboss-challenge-wrap .champion-card .card h3 {
+    font-size: 30px;
+  }
+
+  .ladyboss-challenge-wrap .champion-card .card p {
+    font-size: 20px;
+  }
+
+  .ladyboss-challenge-wrap .faq-wrap h4 {
+    font-size: 30px;
+  }
+
+  .ladyboss-challenge-wrap .faq-wrap .FAQ-accordion {
+    margin: 0 15px;
+  }
+
+
+}
+
+/* end of yes css */
+
+.ladyboss-challenge-wrap {
+  background: #fff;
+}
+
+.challenge-vip-upgrade .challenge-video-wrap {
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.thank-you-no-wrap .container {
+  max-width: 1297px;
+  width: 100%;
+}
+
+.thank-you-no-wrap .card-width {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.thank-you-no-wrap .upgrade-vip {
+  margin-top: 55px;
+  margin-bottom: 20px;
+}
+
+.thank-you-no-wrap .upgrade-vip h1 {
+  font-family: Poppins, sans-serif;
+  font-size: 66px;
+  line-height: 130%;
+  letter-spacing: 0;
+}
+
+
+.thank-you-no-wrap .upgrade-vip .this-p {
+  font-family: Poppins, sans-serif;
+  font-size: 28px;
+  letter-spacing: 0;
+  font-style: italic;
+  margin: 20px 0;
+}
+
+.thank-you-no-wrap .upgrade-vip p {
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 140%;
+  margin-bottom: 15px;
+}
+
+.thank-you-no-wrap .vip-chall-pack {
+  max-width: 1297px;
+  border-radius: 8px;
+  box-shadow: 0px 22px 44px 0px rgb(0 0 0 / 15%);
+  padding: 42px;
+  margin-bottom: 52px;
+}
+
+.thank-you-no-wrap .vip-chall-pack h2 {
+  font-family: Poppins, sans-serif;
+  font-size: 34px;
+  line-height: 130%;
+  letter-spacing: 0;
+}
+
+.thank-you-no-wrap .vip-chall-pack h1 {
+  font-size: 72px;
+  line-height: 95%;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: rgb(255, 0, 117);
+  margin: 19px 0 40px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .img-col img {
+  margin-top: 27px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .text-col ul {
+  list-style: none;
+}
+
+.thank-you-no-wrap .vip-chall-pack .text-col ul li {
+  position: relative;
+  padding-left: 37px;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 140%;
+  margin-bottom: 12px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .text-col ul li:before {
+  content: "\f058";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  font-style: normal;
+  color: #ff0075;
+  left: 0;
+}
+
+
+.thank-you-no-wrap .vip-chall-pack .norm-price {
+  font-size: 50px;
+  font-weight: 400;
+  opacity: 0.65;
+  margin-top: 40px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .toda-price {
+  font-family: Poppins, sans-serif;
+  font-size: 68px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-top: 44px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .toda-price span {
+  color: #FF0075;
+
+}
+
+.thank-you-no-wrap .vip-chall-pack .button-large {
+  font-family: Bebas Neue, cursive;
+  font-size: 30px;
+  max-width: fit-content;
+  height: auto;
+  margin: 48px auto 0;
+  display: block;
+  padding: 20px 40px 20px;
+}
+
+.thank-you-no-wrap .vip-chall-pack .button-primary {
+  color: rgb(255, 255, 255);
+  background: rgb(255, 0, 117);
+}
+
+.thank-you-no-wrap .vip-chall-pack .button-primary:hover {
+  background-color: #e21477;
+
+}
+
+@media (max-width: 767px) {
+
+  .thank-you-no-wrap .upgrade-vip {
+    margin-top: 28px;
+    margin-bottom: 20px;
+  }
+
+  .thank-you-no-wrap .upgrade-vip h1 {
+    font-size: 27px;
+  }
+
+  .thank-you-no-wrap .upgrade-vip .this-p {
+    font-size: 19px;
+    margin: 11px 0;
+  }
+
+  .thank-you-no-wrap .upgrade-vip p {
+    font-size: 14px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack h2 {
+    font-size: 20px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack {
+    padding: 30px 17px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack h1 {
+    font-size: 42px;
+    margin: 19px 0 0;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack .text-col ul li {
+    font-size: 14px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack .norm-price {
+    font-size: 28px;
+    margin-top: 14px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack .toda-price {
+    font-size: 28px;
+    margin-top: 20px;
+  }
+
+  .thank-you-no-wrap .vip-chall-pack .button-large {
+    width: 100%;
+    font-size: 15px;
+    margin: 19px auto 0;
+    padding: 15px;
+  }
+
+
+}
+
+/* end of no css */
+
+.ch-font-width {
+  max-width: 500px;
+  width: 100%;
+}
+
+.ch-disclaimer-reg {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.ch-footer-disclaimer {
+  max-width: 790px;
+  margin: 0 auto;
+}

@@ -1,23 +1,97 @@
-<div class="mobile__navigation">
+<div *ngIf="this.tenant === 'pruvit'; else ladyboss" class="mobile__navigation">
   <div
-    routerLink="/dashboard"
+    routerLink="/cloud/dashboard"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
     class="mobile__navigation__item"
   >
     <i class="fa-solid fa-objects-column"></i>
-    <span>Dashboard</span>
+    <span>{{ "dashboard" | translate }}</span>
   </div>
 
-  <div class="mobile__navigation__item">
-    <i class="fas fa-repeat"></i><span>Smartship</span>
-  </div>
   <div
-    routerLink="/dashboard/order-history"
+    routerLink="/cloud/rewards"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
     class="mobile__navigation__item"
   >
-    <i class="fas fa-list"></i><span>My orders</span>
+    <i class="fa-solid fa-medal"></i><span>{{ "rewards" | translate }}</span>
+  </div>
+  <div
+    routerLink="/cloud/training-center"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="mobile__navigation__item"
+  >
+    <i class="fa-solid fa-graduation-cap"></i
+    ><span>{{ "training" | translate }}</span>
+  </div>
+  <div
+    routerLink="/cloud/subscriptions"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="mobile__navigation__item"
+  >
+    <i class="fas fa-repeat"></i><span>{{ "subscriptions" | translate }}</span>
+  </div>
+  <div
+    routerLink="/cloud/order-history"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="mobile__navigation__item"
+  >
+    <i class="fa-solid fa-list-ul"></i><span>{{ "orders" | translate }}</span>
   </div>
 </div>
+
+<ng-template #ladyboss>
+  <div class="mobile__navigation">
+    <div
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="mobile__navigation__item"
+    >
+      <i class="fa-solid fa-objects-column"></i>
+      <span>{{ "dashboard" | translate }}</span>
+    </div>
+
+    <div
+      routerLink="/dashboard/leads"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="mobile__navigation__item"
+    >
+      <i class="fa-solid fa-address-book"></i>
+      <span>{{ "leads" | translate }}</span>
+    </div>
+    <div
+      *ngIf="isChampion"
+      (click)="onClickChampionItem()"
+      class="mobile__navigation__item"
+    >
+      <i class="fa-solid fa-medal"></i>
+      <span class="champion-office-link-test">{{
+        "champion-office" | translate
+      }}</span>
+    </div>
+    <div
+      routerLink="/dashboard/order-history"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="mobile__navigation__item"
+    >
+      <i class="fa-solid fa-list-ul"></i>
+      <span>{{ "orders" | translate }}</span>
+    </div>
+    <div
+      routerLink="/dashboard/subscriptions"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="mobile__navigation__item"
+    >
+      <i class="fas fa-repeat"></i>
+      <span>{{ "subscriptions" | translate }}</span>
+    </div>
+  </div>
+</ng-template>

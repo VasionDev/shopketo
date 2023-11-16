@@ -1,28 +1,30 @@
-<li *ngFor="let category of categories">
-  <a
-    (click)="onClickCategory(category.slug)"
-    class="dropdown-item pointer"
-    [class]="category.isUserCanAccess ? 'unlock-menu' : 'lock-menu'"
-    >{{ category.name }}
-  </a>
-  <span
-    (click)="onClickLockIcon(category)"
-    *ngIf="!category.isUserCanAccess && !category.isEveryoneCanAccess"
-    data-toggle="tooltip"
-    data-html="true"
-    data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
-    class="newtag lock"
-    [title]="'Exclusively for: ' + category.accessLevelTitle"
-    ><i class="fas fa-lock"></i
-  ></span>
-  <span
-    (click)="onClickLockIcon(category)"
-    *ngIf="category.isUserCanAccess && !category.isEveryoneCanAccess"
-    data-toggle="tooltip"
-    data-html="true"
-    data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
-    [title]="'Exclusively for: ' + category.accessLevelTitle"
-    class="newtag unlock"
-    ><i class="fas fa-lock-open"></i
-  ></span>
-</li>
+<ng-container *ngFor="let category of categories">
+  <li *ngIf="isProductExist(category)">
+    <a
+      (click)="onClickCategory(category.slug)"
+      class="dropdown-item pointer"
+      [class]="category.isUserCanAccess ? 'unlock-menu' : 'lock-menu'"
+      >{{ category.name }}
+    </a>
+    <span
+      (click)="onClickLockIcon(category)"
+      *ngIf="!category.isUserCanAccess && !category.isEveryoneCanAccess"
+      data-toggle="tooltip"
+      data-html="true"
+      data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+      class="newtag lock"
+      [title]="'Exclusively for: ' + category.accessLevelTitle"
+      ><i class="fas fa-lock"></i
+    ></span>
+    <span
+      (click)="onClickLockIcon(category)"
+      *ngIf="category.isUserCanAccess && !category.isEveryoneCanAccess"
+      data-toggle="tooltip"
+      data-html="true"
+      data-template="<div class='tooltip' role='tooltip'><div class='arrow top'></div><div class='pulse-credit tooltip-inner'></div></div>"
+      [title]="'Exclusively for: ' + category.accessLevelTitle"
+      class="newtag unlock"
+      ><i class="fas fa-lock-open"></i
+    ></span>
+  </li>
+</ng-container>

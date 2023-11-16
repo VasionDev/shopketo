@@ -39,6 +39,10 @@ export interface ProductAccess {
     on: boolean;
     title: string;
   };
+  isLoggedSmartship: {
+    on: boolean;
+    title: string;
+  };
   isLoyalSmartship: {
     on: boolean;
     title: string;
@@ -47,7 +51,19 @@ export interface ProductAccess {
     on: boolean;
     title: string;
   };
+  isVipPlus: {
+    on: boolean;
+    title: string;
+  };
   isCustom: {
+    on: boolean;
+    title: string;
+  };
+  isSpromoter: {
+    on: boolean;
+    title: string;
+  };
+  isScustomer: {
     on: boolean;
     title: string;
   };

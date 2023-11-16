@@ -1,9 +1,4 @@
-<div
-  class="modal fade animate share-modal"
-  id="shareVIModal"
-  tabindex="-1"
-  aria-hidden="true"
->
+<div class="modal fade animate share-modal vip-offer-modal" id="shareVIModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content animate-bottom">
       <div class="modal-header flex-column">
@@ -16,20 +11,32 @@
             ><i class="fal fa-times"></i
           ></a>
           <span
-            *ngIf="offerSuccess && timerSeconds !== 0"
+            *ngIf="offerSuccess && timerSeconds !== 0 && 0"
             class="btn p-small exp"
-            ><i class="fal fa-alarm-clock mr-1" aria-hidden="true"></i> EXPIRES
-            IN {{ timerSeconds | formatTimer }}</span
+            ><i class="fal fa-alarm-clock mr-1" aria-hidden="true"></i> {{ 'expires-in' | translate }} {{ timerSeconds | formatTimer }}</span
           >
         </p>
       </div>
 
-      <div class="modal-body">
-        <div class="profile-wrap">
+      <div class="modal-body pt-0">
+        <p
+          *ngIf="offerorName && !offerSuccess"
+          class="mb-2 text-center vip-offer-greeting color-black"
+        >
+          <b>{{ offerorName }}</b> {{"has-a-special-offer-for-you" | translate}}
+        </p>
+        <div
+          #partyConfettiWrapper
+          id="partyConfettiWrapper"
+          (click)="onClickPartyConfetti()"
+          class="profile-wrap"
+        >
           <div class="img-wrap" *ngIf="!offerSuccess && !isOfferInvalid">
             <img
               [src]="
-                offerorImage !== '' ? offerorImage : 'assets/images/avatar2.png'
+                offerorImage && offerorImage !== ''
+                  ? offerorImage
+                  : 'assets/images/avatar2.png'
               "
               alt="img"
             />
@@ -49,107 +56,204 @@
             <i class="far fa-times" aria-hidden="true"></i>
           </div>
           <div class="price-mony">
-            <h3 class="color-white">$10</h3>
+            <h3 class="color-white">
+              {{ "$" + bonusValue }}
+            </h3>
           </div>
         </div>
 
-        <h3
+        <h1
           *ngIf="!offerSuccess && !isOfferInvalid && offerorName !== ''"
           class="title text-center color-black"
         >
-          {{ offerorName }} sent you a discount!
+          <span *ngIf="bonusValue == 10">{{ "get-10-off" | translate }}</span>
+          <span *ngIf="bonusValue == 20">{{ "get-20-off" | translate }}</span>
+          <span *ngIf="bonusValue == 50">{{ "get-50-off" | translate }}</span>
+          <span *ngIf="bonusValue == 100">{{ "get-100-off" | translate }}</span>    
+        </h1>
+
+        <h3
+          *ngIf="!offerSuccess && !isOfferInvalid && offerorName !== ''"
+          class="text-center font-24 color-black text-uppercase your-order-text"
+        >
+          {{ minOrderValue | translate }}
         </h3>
 
         <h3
           *ngIf="offerSuccess && !isOfferInvalid"
           class="title text-center color-black"
         >
-          It’s all yours!
+          {{"its-all-yours" | translate}}
         </h3>
         <p
           *ngIf="offerSuccess && !isOfferInvalid"
           class="color-gray mt-2 text-center"
         >
-          The discount will be automatically applied at the checkout
+          {{"the-discount-will-be-automatically-applied" | translate }}
+        </p>
+        <p
+          *ngIf="offerSuccess && !isOfferInvalid && timerSeconds !== 0"
+          class="font-24 color-black mt-5 text-center font-bold"
+        >
+          {{"hurry-offer-expires-in" | translate }}
+          <span style="color: #ff9000">{{ timerSeconds | formatTimer }}</span>
         </p>
 
         <h3 *ngIf="isOfferInvalid" class="title text-center color-black">
-          No longer available
+          {{"no-longer-available" | translate}}
         </h3>
         <p *ngIf="isOfferInvalid" class="color-gray mt-2 text-center">
-          The offer has expired, or has already been redeemed.
+          {{"the-offer-has-expired-or-has-already" | translate }}
         </p>
 
-        <form
-          *ngIf="!offerSuccess && !isOfferInvalid"
-          [formGroup]="discountForm"
-          (ngSubmit)="submitDiscountForm()"
-        >
-          <div class="row form-wraper mt-4">
-            <div class="form-group col-sm-6 col-6">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="First name"
-                formControlName="firstName"
-                [class.is-invalid]="
-                  firstNameControl.errors && firstNameControl.touched
-                "
+        <ng-container
+          *ngIf="!formDisable; then contactForm; else claimContent"
+        ></ng-container>
+        <ng-template #claimContent>
+          <div *ngIf="!offerSuccess" class="claim-user-info col-12 text-center">
+            <div class="profile rounded-circle">
+              <img
+                src="{{ userImage }}"
+                class="img-fluid"
+                alt="Redeem-sample"
               />
-              <small
-                *ngIf="firstNameControl.errors?.['required']"
-                class="invalid-feedback"
-                >Please enter your First name</small
-              >
             </div>
-            <div class="form-group col-sm-6 col-6">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Last name"
-                formControlName="lastName"
-                [class.is-invalid]="
-                  lastNameControl.errors && lastNameControl.touched
-                "
-              />
-              <small
-                *ngIf="lastNameControl.errors?.['required']"
-                class="invalid-feedback"
-                >Please enter your Last name</small
-              >
-            </div>
-            <div class="form-group col-12">
-              <input
-                type="email"
-                class="form-control"
-                placeholder="Email"
-                formControlName="email"
-                [class.is-invalid]="emailControl.errors && emailControl.touched"
-              />
-              <small
-                *ngIf="emailControl.errors?.['required']"
-                class="invalid-feedback"
-                >Please enter your Email</small
-              >
-              <small
-                *ngIf="emailControl.errors?.['pattern']"
-                class="invalid-feedback"
-                >Please enter a valid Email address</small
-              >
-            </div>
-            <div class="form-group col-12 submit-btn-group">
-              <button
-                [disabled]="!discountForm.valid || isFormSubmitted"
-                type="submit"
-                class="button button-primary button-large claim-disc-btn"
-              >
-                CLAIM DISCOUNT
-                <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i>
-              </button>
-              <span *ngIf="errorMessage !== ''">{{ errorMessage }}</span>
-            </div>
+            <p class="logged-text color-black">
+              👤 {{"you-are-logged-in-as" | translate}}
+              <strong>{{ userFirstName }} {{ userLastName }}</strong>
+            </p>
+            <button
+              [disabled]="isFormSubmitted"
+              (click)="onClaimDiscount()"
+              class="button button-primary button-large"
+            >
+              {{"claim-discount" | translate}}
+              <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i>
+            </button>
+            <span
+              class="disclaimer-reg error-text mt-2"
+              *ngIf="errorMessage !== ''"
+              >{{ errorMessage }}</span
+            >
           </div>
-        </form>
+        </ng-template>
+        <ng-template #contactForm>
+          <form
+            *ngIf="!offerSuccess && !isOfferInvalid"
+            [formGroup]="discountForm"
+            (ngSubmit)="onSubmitLeadForm()"
+          >
+            <div class="row form-wraper mt-4">
+              <div class="form-group col-sm-6 col-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="{{ 'first-name' | translate }}"
+                  formControlName="firstName"
+                  [class.is-invalid]="
+                    firstNameControl.errors && firstNameControl.touched
+                  "
+                />
+                <small
+                  *ngIf="firstNameControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >{{ "please-enter-your-first-name" | translate }}</small
+                >
+              </div>
+              <div class="form-group col-sm-6 col-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="{{ 'last-name' | translate }}"
+                  formControlName="lastName"
+                  [class.is-invalid]="
+                    lastNameControl.errors && lastNameControl.touched
+                  "
+                />
+                <small
+                  *ngIf="lastNameControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >{{ "please-enter-your-last-name" | translate }}</small
+                >
+              </div>
+              <div class="form-group col-12">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="{{ 'email' | translate }}"
+                  formControlName="email"
+                  [class.is-invalid]="
+                    emailControl.errors && emailControl.touched
+                  "
+                />
+                <small
+                  *ngIf="emailControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >{{ "please-enter-your-email" | translate }}</small
+                >
+                <small
+                  *ngIf="emailControl.errors?.['pattern']"
+                  class="invalid-feedback"
+                  >{{ "please-enter-a-valid-email-address" | translate }}</small
+                >
+              </div>
+              <div class="form-group col-12 form-check custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="contactFormCheckAgree"
+                  formControlName="checkAgree"
+                />
+                <label
+                  class="form-check-label disclaimer-reg pointer color-gray-darker"
+                  for="contactFormCheckAgree"
+                  >{{"by-entering-your-email-address-you-agree-to-receive" | translate }}
+                  <a
+                    href="https://support.justpruvit.com/hc/en-us/articles/360052642111"
+                    class="color-black"
+                    target="_blank"
+                    >{{"privacy-policy" | translate }}</a
+                  >
+                  &
+                  <a
+                    href="https://support.justpruvit.com/hc/en-us/articles/360052190452"
+                    class="color-black"
+                    target="_blank"
+                    >{{"terms-of-use" | translate }} </a
+                  >.</label
+                >
+              </div>
+              <div
+                class="form-group col-12 submit-btn-group d-flex justify-content-center"
+              >
+                <button
+                  [disabled]="!discountForm.valid || isFormSubmitted"
+                  type="submit"
+                  class="button button-primary button-large claim-disc-btn mx-w100"
+                >
+                  <span *ngIf="bonusValue == 10"><i class="fa-regular fa-money-bill mr-1"></i>
+                    {{ "get-10-off-now" | translate }}
+                  </span>
+                  <span *ngIf="bonusValue == 20"><i class="fa-regular fa-money-bill mr-1"></i>
+                    {{ "get-20-off-now" | translate }}
+                  </span>
+                  <span *ngIf="bonusValue == 50"><i class="fa-regular fa-money-bill mr-1"></i>
+                    {{ "get-50-off-now" | translate }}
+                  </span>
+                  <span *ngIf="bonusValue == 100"><i class="fa-regular fa-money-bill mr-1"></i>
+                    {{ "get-100-off-now" | translate }}
+                  </span>
+                  <i class="fa fa-spinner fa-spin" *ngIf="isFormSubmitted"></i>
+                </button>
+                <span
+                  class="disclaimer-reg error-text mt-2"
+                  *ngIf="errorMessage !== ''"
+                  >{{ errorMessage }}</span
+                >
+              </div>
+            </div>
+          </form>
+        </ng-template>
 
         <div
           *ngIf="offerSuccess && !isOfferInvalid"
@@ -157,12 +261,15 @@
         >
           <div class="col-12 d-flex justify-content-center">
             <button
+              (click)="onClickShopping()"
               data-dismiss="modal"
               aria-label="Close"
               type="submit"
               class="button button-primary button-large claim-disc-btn"
             >
-              ENJOY shopping!
+              {{
+                (isCheckoutBtnHit ? "continue-to-checkout" : "enjoy-shopping") | translate 
+              }}
             </button>
           </div>
         </div>
@@ -170,12 +277,13 @@
         <div *ngIf="isOfferInvalid" class="row form-wraper mt-4">
           <div class="col-12 d-flex justify-content-center">
             <button
+              (click)="onClickShopping()"
               data-dismiss="modal"
               aria-label="Close"
               type="submit"
               class="button button-primary button-large claim-disc-btn"
             >
-              Continue shopping!
+              {{ "continue-shopping" | translate }}
             </button>
           </div>
         </div>

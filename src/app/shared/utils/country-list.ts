@@ -15,6 +15,19 @@ export function isEuropeanCountry(countryCode: string) {
     countryCode === 'SE' ||
     countryCode === 'CH' ||
     countryCode === 'RO' ||
-    countryCode === 'GB'
+    countryCode === 'GB' ||
+    countryCode === 'BG' ||
+    countryCode === 'HR' ||
+    countryCode === 'CY' ||
+    countryCode === 'CZ' ||
+    countryCode === 'DK' ||
+    countryCode === 'EE' ||
+    countryCode === 'GR' ||
+    countryCode === 'LV' ||
+    countryCode === 'LT' ||
+    countryCode === 'LU' ||
+    countryCode === 'MT' ||
+    countryCode === 'SK' ||
+    countryCode === 'SI'
   );
 }

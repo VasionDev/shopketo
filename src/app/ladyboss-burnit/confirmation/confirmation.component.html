@@ -1,0 +1,64 @@
+<section class="ladyboss-5dayCake-header">
+  <article class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <img class="img-fluid burnit-logo logo" src="assets/ladyboss/images/burnit-logo.png">
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section [ngClass]="{ 'challenge-contact-success': isContactSuccess }" class="ladyboss-5dayCake-congratsVideo-wrap burnit">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <h2 class="text-center color-brand title mb-2">Congrats And Welcome To </h2>
+              <h3 class="text-center color-black">The BURNit Challenge!</h3>
+              <p class="text-center color-black">See Below For The Next Steps...</p>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="ladyboss-5dayCake-nextSteps-wrap">
+  <article class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <h3 class="text-center color-black"><i class="fa-solid fa-triangle-exclamation color-brand"></i><u class="ml-1">IMPORTANT:</u> Follow The Next Steps Below To Prepare For The BURNit Challenge!</h3>
+          <h5 class="reminder-box text-center"><strong><u>Reminder:</u></strong> Make Sure To Check Your Email With All Of The Important Details!</h5>
+          <div class="row step-info">
+            <div class="col icon">
+                <img class="img-fluid"
+                    src="https://statics.myclickfunnels.com/image/564512/file/98ba1b3fd1ba2c490bb3c498970ba9f3.png">
+            </div>
+            <div class="col step-text">
+                <h5 class="color-black mb-2"><i class="fa-solid fa-square-check color-brand mr-2"></i> Step
+                    1:</h5>
+                <h2 class="color-brand mb-3">CHECK YOUR EMAIL!
+                </h2>
+                <p class="color-black mb-4">By now, you should have received a confirmation email, stating your seat is saved for the 28-Day Cake Challenge. If you are a new customer, you’ll also get a separate email with your receipt and tracking information for your order of LEAN!</p>
+                <p class="color-black mb-4">(Please check your SPAM folder as well because email can be finicky and we want to make sure you’re getting emails from us.)</p>
+                <p class="color-black">Additionally, you’ll want to keep an eye on your email inbox as we get closer to the 28-Day BURNit Challenge because we’ll be sending you exclusive content to get you pumped and ready!!</p>
+            </div>
+          </div>
+          <div class="row step-info">
+            <div class="col icon">
+              <img class="img-fluid" src="https://statics.myclickfunnels.com/image/564513/file/4f39be7244049c6e998b19cefb949e33.png">
+            </div>
+            <div class="col step-text">
+              <h5 class="color-black mb-2"><i class="fa-solid fa-square-check color-brand mr-2"></i> Step 2:</h5>
+                <h2 class="color-brand mb-3">Join The LadyBoss BURNit Facebook Group!</h2>
+                <p class="color-black mb-4">Inside the private LadyBoss Facebook group is where we’ll be going LIVE each day for the 28-day BURNit Challenge.</p>
+                <p class="color-black">Plus, once inside you’ll be able to mingle and network with other amazing ladies who are on the same journey as you!</p>
+                <a [href]="settings.burnitFbGroup" target="_blank" class="button button-primary facebook-btn">
+                  <i class="fa-brands fa-facebook mr-1"></i> Go Here To Join The Facebook Group!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

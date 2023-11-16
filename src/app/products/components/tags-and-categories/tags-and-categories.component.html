@@ -45,8 +45,6 @@
                 ></span>
               </li>
             </ul>
-
-            <app-vi-offer></app-vi-offer>
           </div>
           <div class="col-md">
             <figure class="sk-category__parent-title-wrap text-center">
@@ -65,12 +63,75 @@
       </div>
     </section>
 
+    <section *ngIf="isShopAllPage && mostPopularProducts.length > 0" class="shop-all-most-popular">
+      <article class="container">
+        <figure class="row">
+          <div class="col-md-12">
+            <div class="sk-category__title d-flex justify-content-between align-items-end">
+                <h3 class="color-black"> {{ "most-popular" | translate }} </h3>
+            </div>
+          </div>
+        </figure>
+        <app-most-popular [isSmartshipOnly]="false"></app-most-popular>
+      </article>
+    </section>
+
+    <section *ngIf="isShopAllPage" class="sk-category allProducts">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="color-black">{{ "all-products" | translate }}</h3>
+    
+            <div class="sort-by-dropdown">
+              <select
+                class="form-select"
+                aria-label="example"
+                (change)="onChangeSort($event)"
+                [(ngModel)]="sortOrder"
+              >
+                <option value="price">{{ "sort-by-price" | translate }}</option>
+                <option value="alphabetic">
+                  {{ "sort-by-a-z" | translate }}
+                </option>
+              </select>
+              <svg
+                viewBox="0 0 10 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.62515 0.365234H8.66578C9.22202 0.365234 9.50015 1.03711 9.1064 1.43086L5.08765 5.45273C4.8439 5.69648 4.44703 5.69648 4.20328 5.45273L0.184525 1.43086C-0.209225 1.03711 0.0689002 0.365234 0.62515 0.365234Z"
+                  fill="#2152FF"
+                ></path>
+              </svg>
+            </div>
+            <ul class="sk-category__list d-flex">
+              
+              <li
+                class="sk-category__list-item"
+                *ngFor="let category of tagsOrCategories"
+              >
+                <a
+                  (click)="onClickChildCategory(category)"
+                  [class.active]="selectedChildCategory === category.slug"
+                  class="color-black border-0 sk-category__link sk-category__btn"
+                  [innerHTML]="
+                    category.name + ' (' + category.products.length + ')'
+                  "
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <section
       class="sk-category__parent-products ext-mrg"
       *ngIf="categoryOrTag.products.length > 0"
     >
       <div class="container">
-        <div class="row sk-category__wrap">
+        <div *ngIf="!isShopAllPage" class="row" [class.sk-category__wrap]="categoryOrTag.childs.length > 1">
           <div class="col-12">
             <ul
               class="sk-category__list d-flex"
@@ -84,18 +145,21 @@
                   >{{ "all" | translate }}</a
                 >
               </li>
-              <li
-                *ngFor="let child of categoryOrTag.childs"
-                class="sk-category__list-item"
-              >
-                <a
-                  (click)="onClickChildCategory(child)"
-                  [class.active]="selectedChildCategory === child.slug"
-                  class="color-black border-0 sk-category__link sk-category__btn"
-                  [innerHTML]="child.name"
-                ></a>
-              </li>
+              <ng-container *ngFor="let child of categoryOrTag.childs">
+                <li
+                  *ngIf="child.products.length"
+                  class="sk-category__list-item"
+                >
+                  <a
+                    (click)="onClickChildCategory(child)"
+                    [class.active]="selectedChildCategory === child.slug"
+                    class="color-black border-0 sk-category__link sk-category__btn"
+                    [innerHTML]="child.name"
+                  ></a>
+                </li>
+              </ng-container>
             </ul>
+            <!-- <h3 *ngIf="isShopAllPage" class="color-black mb-4">{{ "all-products" | translate }}</h3> -->
             <div class="sort-by-dropdown">
               <select
                 class="form-select"
@@ -103,7 +167,9 @@
                 (change)="onChangeSort($event)"
                 [(ngModel)]="sortOrder"
               >
-                <option value="price">{{ "sort-by-price" | translate }}</option>
+                <option value="price">
+                  {{ "sort-by-price" | translate }}
+                </option>
                 <option value="alphabetic">
                   {{ "sort-by-a-z" | translate }}
                 </option>
@@ -125,7 +191,7 @@
         <div class="row">
           <ng-container
             *ngFor="
-              let product of inSaleProducts | sort: sortOrder;
+              let product of inSaleProducts | sort : sortOrder;
               let i = index
             "
           >
@@ -144,7 +210,26 @@
           </ng-container>
           <ng-container
             *ngFor="
-              let product of outOfStockProducts | sort: sortOrder;
+              let product of restrictedProducts | sort : sortOrder;
+              let i = index
+            "
+          >
+            <div
+              class="col-md-4 col-6"
+              [ngClass]="{
+                'sk-main__custom-pad-l': (i + 1) % 2 !== 0,
+                'sk-main__custom-pad-r': (i + 1) % 2 === 0
+              }"
+            >
+              <app-product-card
+                [product]="product"
+                #childRestricted
+              ></app-product-card>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngFor="
+              let product of outOfStockProducts | sort : sortOrder;
               let i = index
             "
           >
@@ -195,6 +280,7 @@
   <ng-template #isRestricted>
     <app-access-restricted
       [accessLevelTitle]="categoryOrTag.accessLevelTitle"
+      [accessLevels]="categoryOrTag.accessLevels"
       *ngIf="
         (categoryOrTag | json) !== '{}' &&
           !isUserCanAccess &&
@@ -208,6 +294,7 @@
   <ng-template #noUser>
     <app-special-login
       [accessLevelTitle]="categoryOrTag.accessLevelTitle"
+      [accessLevels]="categoryOrTag.accessLevels"
       *ngIf="
         (categoryOrTag | json) !== '{}' &&
           !isUserCanAccess &&

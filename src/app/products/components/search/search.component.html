@@ -2,8 +2,6 @@
   <section class="enter-to-search-wrap">
     <figure class="row">
       <div class="col-sm-12">
-        <app-vi-offer></app-vi-offer>
-
         <div class="search-pruvit-nav">
           <a class="pointer" (click)="onClickSearch()"
             ><svg
@@ -97,7 +95,7 @@
       <div class="row">
         <ng-container
           *ngFor="
-            let product of categoryProducts
+            let product of inSaleProducts
               | search: searchFilter:'search-page'
               | sort: sortOrder;
             let i = index
@@ -110,7 +108,43 @@
               'sk-main__custom-pad-r': (i + 1) % 2 === 0
             }"
           >
-            <app-product-card [product]="product" #child></app-product-card>
+            <app-product-card [product]="product" #childInSale></app-product-card>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngFor="
+            let product of restrictedProducts
+              | search: searchFilter:'search-page'
+              | sort: sortOrder;
+            let i = index
+          "
+        >
+          <div
+            class="col-md-4 col-6"
+            [ngClass]="{
+              'sk-main__custom-pad-l': (i + 1) % 2 !== 0,
+              'sk-main__custom-pad-r': (i + 1) % 2 === 0
+            }"
+          >
+            <app-product-card [product]="product" #childRestricted></app-product-card>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngFor="
+            let product of outOfStockProducts
+              | search: searchFilter:'search-page'
+              | sort: sortOrder;
+            let i = index
+          "
+        >
+          <div
+            class="col-md-4 col-6"
+            [ngClass]="{
+              'sk-main__custom-pad-l': (i + 1) % 2 !== 0,
+              'sk-main__custom-pad-r': (i + 1) % 2 === 0
+            }"
+          >
+            <app-product-card [product]="product" #childOutOfStock></app-product-card>
           </div>
         </ng-container>
       </div>

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { setEveryMonth, setOneTime } from 'src/app/sidebar/store/cart.actions';
 import { AppState } from 'src/app/store/app.reducer';
+import { environment } from 'src/environments/environment';
 import { VIUser } from '../models';
 import { Cart } from '../models/cart.model';
 import { ProductAccess } from '../models/product-access.model';
@@ -34,7 +35,7 @@ export class AppUserService {
     });
   }
 
-  login() {
+  login(viParams?: string) {
     const langParam = this.activatedRoute.snapshot.queryParamMap.get('lang');
 
     const routerUrl = this.router.url.includes('?')
@@ -47,15 +48,17 @@ export class AppUserService {
 
     localStorage.setItem('redirectUrl', JSON.stringify(redirectedUrl));
 
-    this.oidcSecurityService.authorize();
+    window.location.href = environment.clientDomain + '/cloud/dashboard/'+(viParams ? viParams : '');
+    //this.oidcSecurityService.authorize();
   }
 
   isAdminUser(roles: string[]): boolean {
-    return roles.indexOf('user-admin') !== -1
+    return roles.indexOf('user-admin') !== -1;
   }
 
   logOut() {
     sessionStorage.removeItem('MVUser');
+    sessionStorage.removeItem('mvuser_selected_country');
     sessionStorage.removeItem('ImpersonationUser');
 
     this.dataService.setUserWithScopes(null);
@@ -72,35 +75,35 @@ export class AppUserService {
 
   checkValidUser() {
     // return this.user !== null && this.user !== undefined;
-    return this.user ? true : false
+    return this.user ? true : false;
   }
 
   validateVIUserSession(): VIUser | null {
     const LocalVIUser = localStorage.getItem('VIUser');
     const VIUser = LocalVIUser ? JSON.parse(LocalVIUser) : null;
 
-    if(VIUser !== null) {
+    if (VIUser !== null) {
       const currentTime = new Date().getTime();
       const timeDifference = (currentTime - VIUser.createdTime) / 1000;
-      if(VIUser.hasOwnProperty('guestPass') && VIUser.guestPass) {
+      if (VIUser.hasOwnProperty('guestPass') && VIUser.guestPass) {
         if (timeDifference >= 24 * 60 * 60) {
           localStorage.removeItem('VIUser');
-          return null
+          return null;
         }
-      }else {
-        if(VIUser.hasOwnProperty('viProductId')) {
+      } else {
+        if (VIUser.hasOwnProperty('viProductId')) {
           if (timeDifference >= 1 * 60 * 60) {
             localStorage.removeItem('VIUser');
             this.dataService.setViTimer('');
-            return null
-          }else {
+            return null;
+          } else {
             this.dataService.setViTimer(VIUser.expiryTime);
           }
         }
       }
-      return VIUser as VIUser
+      return VIUser as VIUser;
     }
-    return null
+    return null;
   }
 
   setVIUser(
@@ -113,18 +116,24 @@ export class AppUserService {
     lastName?: string,
     email?: string,
     expiryTime?: string,
+    inviteId?: string,
+    phone?: string
   ) {
-    const VIUser: any = {};
+    let expTime;
+    if(expiryTime) expTime = new Date(expiryTime).getTime() || expiryTime;
 
+    const VIUser: any = {};
     VIUser.referrer = referrer;
     VIUser.promptLogin = promptLogin;
     VIUser.viCode = viCode;
     VIUser.viProductId = viProductId ? viProductId : '';
+    VIUser.inviteId = inviteId ? inviteId : '';
     VIUser.email = email;
+    VIUser.phone = phone;
     VIUser.firstName = firstName;
     VIUser.lastName = lastName;
     VIUser.guestPass = guestPass ? guestPass : false;
-    VIUser.expiryTime = expiryTime ? new Date(expiryTime).getTime() : null;
+    VIUser.expiryTime = expTime ? expTime : null;
     VIUser.createdTime = new Date().getTime();
 
     localStorage.setItem('VIUser', JSON.stringify(VIUser));
@@ -147,7 +156,8 @@ export class AppUserService {
 
   checkUserAccess(
     productAccess: ProductAccess,
-    customUsers?: number[]
+    customUsers?: number[],
+    allowCartForAccess = true
   ): boolean {
     let isAccessible = false;
 
@@ -163,7 +173,9 @@ export class AppUserService {
     if (
       isNoAccessSelected ||
       productAccess.isEveryone.on ||
-      (productAccess.isSmartship.on && (this.everyMonthCart.length > 0 || (VIUser && VIUser.guestPass)))
+      (productAccess.isSmartship.on &&
+        allowCartForAccess &&
+        (this.everyMonthCart.length > 0 || (VIUser && VIUser.guestPass)))
     ) {
       isAccessible = true;
     } else {
@@ -182,7 +194,8 @@ export class AppUserService {
                 u === 'promoter' ||
                 u === 'rank_6' ||
                 u === 'rank_7' ||
-                u === 'rank_8')
+                u === 'rank_8' ||
+                u === 's_customer')
             ) {
               isAccessible = true;
             }
@@ -192,7 +205,8 @@ export class AppUserService {
               (u === 'promoter' ||
                 u === 'rank_6' ||
                 u === 'rank_7' ||
-                u === 'rank_8')
+                u === 'rank_8' ||
+                u === 's_promoter')
             ) {
               isAccessible = true;
             }
@@ -217,7 +231,14 @@ export class AppUserService {
 
             if (
               productAccess.isSmartship.on &&
-              (u === 'smartship' || u === 'loyal_smartship')
+              (u === 'smartship' || u === 'loyal_smartship' || u === 's_promoter' || u === 's_customer')
+            ) {
+              isAccessible = true;
+            }
+
+            if (
+              productAccess.isLoggedSmartship.on &&
+              (u === 'smartship' || u === 'loyal_smartship' || (allowCartForAccess && this.everyMonthCart.length > 0))
             ) {
               isAccessible = true;
             }
@@ -227,6 +248,18 @@ export class AppUserService {
             }
 
             if (productAccess.isVip.on && u === 'vip') {
+              isAccessible = true;
+            }
+
+            if (productAccess.isVipPlus.on && u === 'vipPlus') {
+              isAccessible = true;
+            }
+
+            if (productAccess.isSpromoter.on && u === 's_promoter' ) {
+              isAccessible = true;
+            }
+
+            if (productAccess.isScustomer.on && u === 's_customer' ) {
               isAccessible = true;
             }
 

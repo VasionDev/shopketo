@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppSeoService } from 'src/app/shared/services/app-seo.service';
+import { AppUserService } from 'src/app/shared/services/app-user.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
 import { AppState } from 'src/app/store/app.reducer';
 import { ProductTagOrCategory } from '../../models/product-tag-or-category.model';
@@ -30,7 +31,12 @@ import { ProductCardComponent } from '../common/product-card/product-card.compon
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('search') search!: ElementRef;
-  @ViewChildren('child') childComponents!: QueryList<ProductCardComponent>;
+  @ViewChildren('childInSale')
+  childInSaleComponents!: QueryList<ProductCardComponent>;
+  @ViewChildren('childOutOfStock')
+  childOutOfStockComponents!: QueryList<ProductCardComponent>;
+  @ViewChildren('childRestricted')
+  childRestrictedComponents!: QueryList<ProductCardComponent>;
   searchFilter = '';
   selectedLanguage = '';
   selectedCountry = '';
@@ -40,6 +46,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   productsData: any = {};
   categories: ProductTagOrCategory[] = [];
   categoryProducts: Product[] = [];
+  inSaleProducts: Product[] = [];
+  outOfStockProducts: Product[] = [];
+  restrictedProducts: Product[] = [];
   filteredCategories: ProductTagOrCategory[] = [];
   selectedCategory = '';
   defaultLanguage = '';
@@ -49,6 +58,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: AppDataService,
+    private userService: AppUserService,
     private translate: TranslateService,
     private utilityService: AppUtilityService,
     private route: ActivatedRoute,
@@ -170,14 +180,45 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.sortOrder = 'alphabetic';
         this.productsData = data.productsData;
         this.products = data.products.filter(
-          (p) => 
+          (p) =>
+            this.dataService.isProductHasOrderTypeOne(p) &&
             !p.accessLevels.isCustom.on && 
             (p.categories.length > 0 || p.tags.length > 0) && 
             (!p.accessLevels.isLoggedUser.on || (p.accessLevels.isLoggedUser.on && this.isLoggedUserExist))
         );
         this.categoryProducts = this.products;
+        this.splitProductsWithCriteria(this.categoryProducts);
       })
     );
+  }
+
+  private splitProductsWithCriteria(products: Product[]) {
+    const isSoldOutProducts: Product[] = [];
+    const inSaleProducts: Product[] = [];
+    const restrictedProducts: Product[] = [];
+
+    products.forEach((product) => {
+      if (
+        !product.accessLevels.isLoggedUser.on ||
+        (product.accessLevels.isLoggedUser.on && this.isLoggedUserExist)
+      ) {
+        const canAccess = this.userService.checkUserAccess(
+          product.accessLevels,
+          product.customUsers
+        );
+        if (this.isSoldOut(product)) {
+          isSoldOutProducts.push(product);
+        } else if(!canAccess) {
+          restrictedProducts.push(product);
+        } else {
+          inSaleProducts.push(product);
+        }
+      }
+    });
+
+    this.outOfStockProducts = isSoldOutProducts;
+    this.inSaleProducts = inSaleProducts;
+    this.restrictedProducts = restrictedProducts;
   }
 
   addKeyCodeToUrl() {
@@ -252,10 +293,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.selectedCategory = '';
 
       this.categoryProducts = this.products;
+      this.splitProductsWithCriteria(this.categoryProducts);
     } else {
       this.selectedCategory = category.slug;
-
       this.categoryProducts = category.products;
+      this.splitProductsWithCriteria(this.categoryProducts);
     }
   }
 
@@ -303,8 +345,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private setUserAccess() {
-    if (this.childComponents) {
-      this.childComponents.toArray().forEach((c) => c.manageUserAccess());
+    if (this.childInSaleComponents) {
+      this.childInSaleComponents.toArray().forEach((c) => c.manageUserAccess());
+    }
+
+    if (this.childOutOfStockComponents) {
+      this.childOutOfStockComponents.toArray().forEach((c) => c.manageUserAccess());
+    }
+
+    if (this.childRestrictedComponents) {
+      this.childRestrictedComponents.toArray().forEach((c) => c.manageUserAccess());
     }
   }
 

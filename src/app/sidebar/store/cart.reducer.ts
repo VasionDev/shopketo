@@ -8,6 +8,8 @@ import {
   setOneTime,
   UpdateEveryMonth,
   UpdateOneTime,
+  RemoveAllOneTime,
+  RemoveAllEveryMonth
 } from './cart.actions';
 
 export interface CartsState {
@@ -151,5 +153,24 @@ export const cartListReducer = createReducer(
       ...state,
       oneTime: filteredPromoters,
     };
+  }),
+
+  on(RemoveAllOneTime, (state) => {
+    const cartData: Cart[] = []
+
+    return {
+      ...state,
+      oneTime: cartData,
+    };
+  }),
+
+  on(RemoveAllEveryMonth, (state) => {
+    const cartData: Cart[] = []
+
+    return {
+      ...state,
+      everyMonth: cartData,
+    };
   })
+
 );

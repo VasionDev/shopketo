@@ -1,5 +1,6 @@
 export interface Person {
   name?: string;
+  publicName?: string;
   publicEmail?: string;
   publicPhoneNumber?: string;
   publicPreferredRecognitionName?: string;

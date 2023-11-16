@@ -5,30 +5,34 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { SubscriptionLike } from 'rxjs';
-import { CartTotal } from 'src/app/shared/models/cart-total.model';
-import { AppCartTotalService } from 'src/app/shared/services/app-cart-total.service';
-import { AppDataService } from 'src/app/shared/services/app-data.service';
-import { AppSeoService } from 'src/app/shared/services/app-seo.service';
-import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
-import { Product } from 'src/app/products/models/product.model';
-import { ProductVariationBase } from 'src/app/products/models/product-variation.model';
+import { ReplaySubject, SubscriptionLike } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   ProductServing,
   ProductServingAttribute,
 } from 'src/app/products/models/product-serving.model';
-import { ProductsTagAndCategoryService } from 'src/app/products/services/products-tag-and-category.service';
-import { ProductTagOrCategory } from 'src/app/products/models/product-tag-or-category.model';
 import { ProductSettings } from 'src/app/products/models/product-settings.model';
-import { AppUserService } from 'src/app/shared/services/app-user.service';
-import { Offer } from 'src/app/shared/models/offer.model';
-import { AppOfferService } from 'src/app/shared/services/app-offer.service';
-import { Cart } from 'src/app/shared/models/cart.model';
+import { ProductTagOrCategory } from 'src/app/products/models/product-tag-or-category.model';
+import { ProductVariationBase } from 'src/app/products/models/product-variation.model';
+import { Product } from 'src/app/products/models/product.model';
+import { ProductsTagAndCategoryService } from 'src/app/products/services/products-tag-and-category.service';
 import { PromoterService } from 'src/app/products/services/promoter.service';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducer';
+import { CartTotal } from 'src/app/shared/models/cart-total.model';
+import { Cart } from 'src/app/shared/models/cart.model';
+import { Offer } from 'src/app/shared/models/offer.model';
+import { AppCartTotalService } from 'src/app/shared/services/app-cart-total.service';
+import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppOfferService } from 'src/app/shared/services/app-offer.service';
+import { AppSeoService } from 'src/app/shared/services/app-seo.service';
+import { AppTagManagerService } from 'src/app/shared/services/app-tag-manager.service';
+import { AppUserService } from 'src/app/shared/services/app-user.service';
+import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
 import { getMaxRegularDiscount } from 'src/app/shared/utils/discount';
+import { AppState } from 'src/app/store/app.reducer';
+import { environment } from 'src/environments/environment';
 
 declare var $: any;
 declare var gallerySliderJS: any;
@@ -40,10 +44,12 @@ declare var tooltipJS: any;
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   language = '';
   country = '';
   user: any;
-
+  referrer: any = {};
+  tenant!: string;
   products = [] as Product[];
   product = {} as Product;
   servings: ProductServing[] = [];
@@ -53,6 +59,7 @@ export class FormComponent implements OnInit, OnDestroy {
   selectedOrdertype = '' as ProductVariationBase['orderType'];
   productVariation = {} as ProductVariationBase;
   productQuantity = 1;
+  promoterBenefits: string[] = [];
 
   categories: ProductTagOrCategory[] = [];
   offers: Offer[] = [];
@@ -62,6 +69,7 @@ export class FormComponent implements OnInit, OnDestroy {
   productSettings = {} as ProductSettings;
 
   cartTotalOneTime: CartTotal[] = [];
+  lowestCartTotalOneTime: CartTotal | null = null;
   oneTimeCart: Cart[] = [];
   everyMonthCart: Cart[] = [];
 
@@ -74,21 +82,35 @@ export class FormComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private productsTagAndCategoryService: ProductsTagAndCategoryService,
     private seoService: AppSeoService,
+    private meta: Meta,
     private cartTotalService: AppCartTotalService,
     private userService: AppUserService,
     private offerService: AppOfferService,
     private promoterService: PromoterService,
     private changeDetectionRef: ChangeDetectorRef,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private tagManager: AppTagManagerService
   ) {
+    this.tenant = environment.tenant;
+    this.getUser();
     this.getProducts();
   }
 
   ngOnInit(): void {
     this.getCountry();
     this.getLanguage();
-    this.getUser();
+    this.getReferrer();
     this.getCategories();
+  }
+
+  getReferrer() {
+    this.dataService.currentReferrerData$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((referrer: any) => {
+        if (referrer) {
+          this.referrer = referrer;
+        }
+      });
   }
 
   loadTooltip() {
@@ -175,6 +197,12 @@ export class FormComponent implements OnInit, OnDestroy {
     this.everyMonthCart = [];
     this.subscriptions = [];
 
+    if (product.promoterBtnUrl === '/startup' && this.tenant === 'ladyboss') {
+      this.promoterBenefits = this.product.bannerDiscription.includes('<br>')
+        ? this.product.bannerDiscription.split('<br>')
+        : this.product.bannerDiscription.split(',');
+    }
+
     this.getProductGallery();
 
     this.getServings();
@@ -238,24 +266,34 @@ export class FormComponent implements OnInit, OnDestroy {
         this.productVariation.discountPrice,
         this.productVariation.smartshipDiscountPrice
       );
+      let lowestPrice = Number.MAX_SAFE_INTEGER;
 
       if (cartTotalDiscountOneTime) {
         cartTotalDiscountOneTime.forEach((discount: any, index: number) => {
-          this.cartTotalOneTime[index] =
-            this.cartTotalService.getCartTotalObject(
-              true,
-              discount,
-              this.oneTimeCart,
-              this.everyMonthCart,
-              this.productSettings,
-              this.productVariation.hasOwnProperty('skuObj')
-                ? this.productVariation.skuObj.oneTime
-                : '',
-              this.productVariation.hasOwnProperty('priceObj')
-                ? this.productVariation.priceObj.oneTime
-                : 0,
-              maxRegularDiscount
-            );
+          const cartTObj = this.cartTotalService.getCartTotalObject(
+            true,
+            discount,
+            this.oneTimeCart,
+            this.everyMonthCart,
+            this.productSettings,
+            this.productVariation.hasOwnProperty('skuObj')
+              ? this.productVariation.skuObj.oneTime
+              : '',
+            this.productVariation.hasOwnProperty('priceObj')
+              ? this.productVariation.priceObj.oneTime
+              : 0,
+            maxRegularDiscount
+          );
+          if (cartTObj.priceAfterDiscount < lowestPrice) {
+            lowestPrice = cartTObj.priceAfterDiscount;
+            let onetimeObj = { ...cartTObj };
+            this.lowestCartTotalOneTime =
+              this.cartTotalService.updateShowItemStatusForCartTotal(
+                onetimeObj,
+                maxRegularDiscount
+              );
+          }
+          this.cartTotalOneTime[index] = cartTObj;
         });
       }
     }
@@ -350,7 +388,7 @@ export class FormComponent implements OnInit, OnDestroy {
       const notOutOfStockAttribute1 = this.servings[0].servingAttributes.find(
         (attribute) => !attribute.isOutOfStock
       );
-
+  
       if (notOutOfStockAttribute1) {
         this.selectedAttribute1 = notOutOfStockAttribute1;
       }
@@ -358,23 +396,26 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   makeAttribute1OutOfStock() {
-    this.servings = this.servings.map(
-      (serving: ProductServing, index: number) => {
-        serving.servingAttributes.map((item) => {
-          if (index === 0) {
-            item.isOutOfStock = this.checkAllAttr1OutOfStock(item.key);
-          }
-          return item;
-        });
+    if(this.servings.length > 1) {
+      this.servings = this.servings.map(
+        (serving: ProductServing, index: number) => {
+          serving.servingAttributes.map((item) => {
+            if (index === 0) {
+              item.isOutOfStock = this.checkAllAttr1OutOfStock(item.key);
+            }
+            return item;
+          });
 
-        return serving;
-      }
-    );
+          return serving;
+        }
+      );
+    }
   }
 
   private checkAllAttr1OutOfStock(attributeItem1: string) {
+    console.log(this.product.variations, attributeItem1)
     const isAllNotOutOfStock = this.product.variations.every(
-      (variation) =>
+      (variation) => 
         variation.attribute1 === attributeItem1 &&
         (variation.orderType === 'ordertype_1' ||
           variation.orderType === 'ordertype_3') &&
@@ -571,6 +612,7 @@ export class FormComponent implements OnInit, OnDestroy {
         }
       }
     });
+
   }
 
   getProductPrices() {
@@ -580,7 +622,6 @@ export class FormComponent implements OnInit, OnDestroy {
       this.productVariation.constructor === Object
     )
       return;
-
     let finalPrice = this.productVariation.priceObj.oneTime;
     let isCartTotalDiscountAvailable = false;
 
@@ -616,7 +657,6 @@ export class FormComponent implements OnInit, OnDestroy {
           this.cartTotalOneTime[index],
           everyMonthCart
         ).status;
-
       if (productStatus && productPrice < finalPrice) {
         finalPrice = productPrice;
         isCartTotalDiscountAvailable = productStatus;
@@ -648,6 +688,49 @@ export class FormComponent implements OnInit, OnDestroy {
       this.productVariation.finalPrice =
         this.productVariation.priceObj.oneTime * this.productQuantity;
     }
+
+    let activeSmartshipExist: boolean = false;
+    if (this.user) {
+      activeSmartshipExist = this.user?.mvuser_scopes.includes('smartship');
+    }
+    
+    if(
+      (
+        this.productVariation.skuObj.oneTime !== 'PRU-700-005' && 
+        this.productVariation.skuObj.oneTime !== 'PRU-700-006' &&
+        this.productVariation.skuObj.oneTime !== 'PRU-KOOZIE-001-ONCE'
+      ) &&
+      this.tenant === 'pruvit' &&
+      ((this.selectedOrdertype === 'ordertype_3' && this.productSettings.smartshipDiscountOnTodays) ||
+      ((this.everyMonthCart.length || activeSmartshipExist) && this.productSettings.smartshipDiscountOnTodays))
+    ) {
+      let isVipPlusExist: boolean = false;
+      if (this.user) {
+        isVipPlusExist = this.user?.mvuser_scopes.includes('vipPlus');
+      }
+      const viDiscount = isVipPlusExist ? 25 : 15;
+      const vipDiscountPrice = this.staticSmartshipDiscount(this.productVariation.priceObj.oneTime, viDiscount);
+      const vipDiscountFinalPrice = vipDiscountPrice * this.productQuantity;
+      finalPrice = this.productVariation.finalPrice * this.productQuantity;
+      if(vipDiscountFinalPrice < finalPrice) {
+        this.productVariation.finalPrice = vipDiscountFinalPrice;
+        this.productVariation.hasDiscount = true;
+      }
+    }
+    if(this.tenant === 'ladyboss' &&
+    (this.selectedOrdertype === 'ordertype_3' && this.productSettings.smartshipDiscountOnTodays)
+    ){
+      this.productVariation.finalPrice = this.productVariation.priceObj.everyMonth * this.productQuantity;
+      this.productVariation.hasDiscount = true;
+    }
+  }
+
+  private staticSmartshipDiscount(regularPrice: number, discountPercent: number) {
+    if(regularPrice > 0) {
+      const discountAmount = +((regularPrice * discountPercent) / 100).toFixed(2);
+      return regularPrice - discountAmount;
+    }
+    return 0;
   }
 
   /* --------- add to cart section ------------- */
@@ -665,11 +748,13 @@ export class FormComponent implements OnInit, OnDestroy {
       orderType: this.selectedOrdertype,
       isCurrent: true,
       isPromoter: false,
-      hasUserRestriction: this.userService.isProductForUSersOnly(this.product.accessLevels),
+      hasUserRestriction: this.userService.isProductForUSersOnly(
+        this.product.accessLevels
+      ),
       cart: {
         productID: this.product.id,
         productName: this.product.title,
-        productImageUrl: this.product.thumbUrl,
+        productImageUrl: this.productVariation.variationImage ? this.productVariation.variationImage : this.product.thumbUrl,
         servingsName: this.selectedAttribute1.name
           ? this.selectedAttribute1.name
           : '',
@@ -706,6 +791,9 @@ export class FormComponent implements OnInit, OnDestroy {
       this.utilityService.isIncompatibleCheckout(false);
 
     const cartDataWithLanguages: Cart[] = this.generateCartWithLanguages();
+    if(this.tenant === 'pruvit') {
+      this.tagManager.addToCartItemEvent(this.product, cartDataWithLanguages[0], this.country);
+    }
 
     if (isInvalidSupplement) {
       this.dataService.changePostName({ postName: 'purchase-modal' });
@@ -717,16 +805,32 @@ export class FormComponent implements OnInit, OnDestroy {
       const isProductHasSmartshipDiscount: boolean =
         this.productVariation.smartshipDiscountPrice !== 0 ? true : false;
 
-      if (this.product.isForPromoter) {
-        cartDataWithLanguages.forEach((cartData) => {
-          cartData.isPromoter = true;
-        });
-        const promoterFee: Cart = this.promoterService.getPromoterFeeCart(
-          this.country,
-          this.language,
-          this.productSettings
-        );
-        cartDataWithLanguages.push(promoterFee);
+      if (
+        this.product.isForPromoter &&
+        this.productSettings.isPromoterEnabled &&
+        this.productSettings.promoterSku
+      ) {
+        if (this.tenant === 'ladyboss' && this.product.promoterSku !== '') {
+          cartDataWithLanguages.forEach((cartData) => {
+            cartData.isPromoter = true;
+          });
+          const promoterFee: Cart =
+            this.promoterService.getPromoterFeeCartLadyboss(
+              this.country,
+              this.language,
+              this.productSettings,
+              this.product.promoterSku
+            );
+          cartDataWithLanguages.push(promoterFee);
+        }
+        if (this.tenant === 'pruvit' && this.country.toLowerCase() === 'jp') {
+          const promoterFee: Cart = this.promoterService.getPromoterFeeCart(
+            this.country,
+            this.language,
+            this.productSettings
+          );
+          cartDataWithLanguages.push(promoterFee);
+        }
       }
 
       const isUserCanAccess = this.userService.checkUserAccess(
@@ -740,7 +844,8 @@ export class FormComponent implements OnInit, OnDestroy {
         );
 
       if (
-        (this.product.isForPromoter || isProductHasSmartshipDiscount) &&
+        this.tenant !== 'ladyboss' &&
+        isProductHasSmartshipDiscount &&
         !(
           this.everyMonthCart.length > 0 ||
           (this.user !== null && this.user?.food_autoship) ||
@@ -951,6 +1056,7 @@ export class FormComponent implements OnInit, OnDestroy {
       )
     ) {
       this.seoService.updateTitle(this.product.title);
+      this.meta.updateTag( { property: 'og:title', content: this.product.title });
       this.seoService.updateDescription(this.product.bannerDiscription);
 
       this.subscriptions.push(
@@ -963,7 +1069,31 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
+  onWaitlistAdd() {
+    if (this.referrer.hasOwnProperty('code') && this.referrer.code !== '') {
+      this.dataService.changePostName({
+        postName: 'waitlist-modal',
+        payload: { key: 'product', value: this.product },
+      });
+      $('#waitlistModal').modal('show');
+    } else {
+      const referrerLoginModal = [];
+      referrerLoginModal.push({
+        modalName: 'referrerCode',
+        product: this.product,
+      });
+
+      this.dataService.changeCartOrCheckoutModal('waitList');
+      this.dataService.changePostName({
+        postName: 'referrer-modal',
+        payload: { key: 'modals', value: referrerLoginModal },
+      });
+    }
+  }
+
   ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });

@@ -5,9 +5,9 @@ import { SubscriptionLike } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
-import { BlogState } from '../../store/blogs.reducer';
 import { BlogCategory } from '../../models/blog-category.model';
 import { Blog } from '../../models/blog.model';
+import { BlogState } from '../../store/blogs.reducer';
 
 @Component({
   selector: 'app-blog-categories',

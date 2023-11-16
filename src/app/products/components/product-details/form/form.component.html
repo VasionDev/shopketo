@@ -10,9 +10,11 @@
           </li>
           <span class="breadcrumb-greater-than">&#8250;</span>
           <li>
-            <a class="color-gray" (click)="onClickShopAll()">{{
-              "shop-all" | translate
-            }}</a>
+            <a
+              class="color-gray"
+              (click)="tenant === 'ladyboss' ? onClickHome() : onClickShopAll()"
+              >{{ "shop-all" | translate }}</a
+            >
           </li>
           <ng-container *ngIf="(parentCategory | json) !== '{}'">
             <span class="breadcrumb-greater-than">&#8250;</span>
@@ -98,7 +100,7 @@
               }}
             </span>
             <ng-template #wistiaContainer>
-              <div [innerHTML]="wistiaHTML | textSanitizer: 'html'"></div>
+              <div [innerHTML]="wistiaHTML | textSanitizer : 'html'"></div>
             </ng-template>
           </div>
         </figure>
@@ -106,13 +108,31 @@
       <div class="col-md-6 col-12 sk-product__select">
         <figure class="sk-product__banner-right">
           <h2
-            class="sk-product__title color-black"
+            class="sk-product__title"
+            [ngClass]="{
+              'color-black': tenant === 'pruvit',
+              'color-brand': tenant === 'ladyboss'
+            }"
             [innerHTML]="product.title"
           ></h2>
+          <h3 *ngIf="product.promoterSubtitle" class="sub-title color-black">
+            {{ product.promoterSubtitle }}
+          </h3>
 
-          <div class="color-gray sk-product__short-details">
-            <p [innerHTML]="product.bannerDiscription"></p>
-          </div>
+          <p *ngIf="tenant === 'ladyboss'" class="color-black p-small mt-2" [innerHTML]="product.promoterTooltipNote"></p>
+
+          <ul
+            *ngIf="promoterBenefits.length; else noPromoterBenefits"
+            class="membership-list"
+          >
+            <li *ngFor="let benefit of promoterBenefits">{{ benefit }}</li>
+          </ul>
+
+          <ng-template #noPromoterBenefits>
+            <div class="color-gray sk-product__short-details">
+              <p [innerHTML]="product.bannerDiscription"></p>
+            </div>
+          </ng-template>
 
           <div class="sk-product__form">
             <figure
@@ -184,7 +204,11 @@
                     class="d-flex justify-content-between align-items-start"
                   >
                     <span>
-                      {{ getTranslatedText(orderType) }}
+                      {{
+                        tenant === "ladyboss" && orderType === "ordertype_3"
+                          ? "Subscribe & Save"
+                          : getTranslatedText(orderType)
+                      }}
                       <div
                         class="delivery-list-opt one-time"
                         *ngIf="
@@ -205,20 +229,36 @@
                           {{ productSettings.currencySymbol
                           }}{{
                             productVariation.onetimeAndSmartshipDifference
-                              | customCurrency: productSettings
+                              | customCurrency : productSettings
                           }}
-                          {{ "starting-next" | translate }}
+                          {{ productSettings.smartshipDiscountOnTodays ? ("on-today-order" | translate) : ("starting-next" | translate) }}
                         </div>
-                        <div class="option-item">
+                        <div *ngIf="tenant !== 'pruvit'" class="option-item">
                           <i class="fas fa-window-close"></i>
                           {{ "cancel-anytime" | translate }}
                         </div>
-                        <div class="option-item">
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-window-close"></i>
+                          {{ "edit-or-cancel-anytime" | translate }}
+                        </div>
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-window-close"></i>
+                          <div>
+                            {{ "earn" | translate }}
+                            <span class="underline" (click)="onClickLearnMore()">{{ "vip-points" | translate }}</span>
+                            {{ "for-every-dollar-spent" | translate }}
+                          </div>
+                        </div>
+                        <div *ngIf="tenant !== 'pruvit'" class="option-item">
                           <i class="fas fa-window-close"></i>
                           {{ "eligible-to-earn" | translate }}
                           <span class="underline" (click)="onClickLearnMore()">
                             {{ "free-product" | translate }}
                           </span>
+                        </div>
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-window-close"></i>
+                          {{ "access-exclusive-vip-vault" | translate }}
                         </div>
                       </div>
                       <div
@@ -240,29 +280,66 @@
                           {{ productSettings.currencySymbol
                           }}{{
                             productVariation.onetimeAndSmartshipDifference
-                              | customCurrency: productSettings
+                              | customCurrency : productSettings
                           }}
-                          {{ "starting-next" | translate }}
+                          {{ productSettings.smartshipDiscountOnTodays ? ("on-today-order" | translate) : ("starting-next" | translate) }}
                         </div>
-                        <div class="option-item">
+                        <div *ngIf="tenant !== 'pruvit'" class="option-item">
                           <i class="fas fa-check-square"></i>
                           {{ "cancel-anytime" | translate }}
                         </div>
-                        <div class="option-item">
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-check-square"></i>
+                          {{ "edit-or-cancel-anytime" | translate }}
+                        </div>
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-check-square"></i>
+                          <div>
+                            {{ "earn" | translate }}
+                            <span class="underline" (click)="onClickLearnMore()">{{ "vip-points" | translate }}</span>
+                            {{ "for-every-dollar-spent" | translate }}
+                          </div>
+                        </div>
+                        <div *ngIf="tenant !== 'pruvit'" class="option-item">
                           <i class="fas fa-check-square"></i>
                           {{ "eligible-to-earn" | translate }}
                           <span class="underline" (click)="onClickLearnMore()">
-                            {{ "free-product" | translate }}</span
-                          >
+                            {{ "free-product" | translate }}
+                          </span>
+                        </div>
+                        <div *ngIf="tenant === 'pruvit'" class="option-item">
+                          <i class="fas fa-check-square"></i>
+                          {{ "access-exclusive-vip-vault" | translate }}
                         </div>
                       </div>
                     </span>
-                    <span [class.font-bold]="orderType === selectedOrdertype">
+                    <ng-template #regPriceBlock>
+                      <span [class.font-bold]="orderType === selectedOrdertype">
+                        {{ productSettings.currencySymbol }}{{
+                          productVariation.hasOwnProperty("priceObj")
+                            ? (productVariation.priceObj.oneTime
+                              | customCurrency : productSettings)
+                            : 0
+                        }}
+                      </span>
+                    </ng-template>
+                    <span 
+                      *ngIf="orderType === 'ordertype_3' && 
+                      productSettings.smartshipDiscountOnTodays; else regPriceBlock" 
+                      [class.font-bold]="orderType === selectedOrdertype" 
+                      [class.color-green]="orderType === 'ordertype_3' && productSettings.smartshipDiscountOnTodays">
+                      <del 
+                        class="color-black font-reg mr-1">{{ productSettings.currencySymbol }}{{
+                          productVariation.hasOwnProperty("priceObj")
+                            ? (productVariation.priceObj.oneTime
+                              | customCurrency : productSettings)
+                            : 0
+                        }}</del>
                       {{ productSettings.currencySymbol
                       }}{{
                         productVariation.hasOwnProperty("priceObj")
-                          ? (productVariation.priceObj.oneTime
-                            | customCurrency: productSettings)
+                          ? (productVariation.priceObj.everyMonth
+                            | customCurrency : productSettings)
                           : 0
                       }}
                     </span>
@@ -279,119 +356,150 @@
               </ng-container>
             </figure>
 
-            <ng-container *ngFor="let cartTotal of cartTotalOneTime">
-              <ng-container *ngIf="cartTotal?.showItem">
-                <div
-                  class="cart-progress-bar sk-cart__padd"
-                  *ngIf="
-                    cartTotal.isDiscountableInCatalog && !cartTotal.isEnabled
-                  "
-                >
-                  <p
-                    class="p-small color-black"
-                    [innerHTML]="
-                      cartTotal.initialDiscountText !== ''
-                        ? cartTotal.initialDiscountText
-                        : cartTotal.bannerText
-                    "
-                    [style.color]="
-                      cartTotal.settings?.banner_info?.banner_bgcolor !== ''
-                        ? cartTotal.settings?.banner_info?.banner_bgcolor
-                        : '#FF9000'
-                    "
-                  ></p>
-                </div>
+            <div
+              class="card cart-progress-bar"
+              *ngIf="
+                lowestCartTotalOneTime &&
+                  lowestCartTotalOneTime.showItem &&
+                  lowestCartTotalOneTime.isDiscountableInCatalog &&
+                  !lowestCartTotalOneTime.isEnabled;
+                else allCartTotalBlock
+              "
+            >
+              <p
+                class="p-small color-black"
+                [innerHTML]="
+                  lowestCartTotalOneTime.initialDiscountText !== ''
+                    ? lowestCartTotalOneTime.initialDiscountText
+                    : lowestCartTotalOneTime.bannerText
+                "
+                [style.color]="
+                  lowestCartTotalOneTime.settings?.banner_info
+                    ?.banner_bgcolor !== ''
+                    ? lowestCartTotalOneTime.settings?.banner_info
+                        ?.banner_bgcolor
+                    : '#FF9000'
+                "
+              ></p>
+            </div>
 
-                <div
-                  class="cart-progress-bar sk-cart__padd"
-                  *ngIf="
-                    cartTotal.isEnabled && cartTotal.requiredPriceOrItems > 0
-                  "
-                >
-                  <p
-                    class="p-small color-black"
-                    [innerHTML]="cartTotal.bannerText"
-                  ></p>
-
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      [style.width.%]="cartTotal.progressPercent"
-                      [style.color]="
-                        cartTotal.settings?.banner_info?.banner_textcolor !== ''
-                          ? cartTotal.settings?.banner_info?.banner_textcolor
-                          : '#fff'
+            <ng-template #allCartTotalBlock>
+              <ng-container *ngFor="let cartTotal of cartTotalOneTime">
+                <ng-container *ngIf="cartTotal?.showItem">
+                  <div
+                    class="card cart-progress-bar"
+                    *ngIf="
+                      cartTotal.isDiscountableInCatalog && !cartTotal.isEnabled
+                    "
+                  >
+                    <p
+                      class="p-small color-black"
+                      [innerHTML]="
+                        cartTotal.initialDiscountText !== ''
+                          ? cartTotal.initialDiscountText
+                          : cartTotal.bannerText
                       "
-                      [style.backgroundColor]="
+                      [style.color]="
                         cartTotal.settings?.banner_info?.banner_bgcolor !== ''
                           ? cartTotal.settings?.banner_info?.banner_bgcolor
                           : '#FF9000'
                       "
-                      [attr.aria-valuenow]="cartTotal.progressPercent"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      {{ cartTotal.progressPercent }}%
-                    </div>
+                    ></p>
                   </div>
-                </div>
 
-                <div
-                  class="cart-success-bar sk-cart__padd"
-                  *ngIf="cartTotal.isUnlocked"
-                >
-                  <p
-                    class="p-small color-white text-center"
-                    [innerHTML]="
-                      cartTotal?.unlockedText !== ''
-                        ? cartTotal?.unlockedText
-                        : '🎉 ' +
-                          ('youve-unlocked-a-cart-total-discount-1'
-                            | translate) +
-                          ' <strong>' +
-                          ('youve-unlocked-a-cart-total-discount-2'
-                            | translate) +
-                          '</strong>'
+                  <div
+                    class="card cart-progress-bar"
+                    *ngIf="
+                      cartTotal.isEnabled && cartTotal.requiredPriceOrItems > 0
                     "
                   >
-                    <img
-                      draggable="false"
-                      role="img"
-                      class="emoji"
-                      alt="🎉"
-                      src="https://s.w.org/images/core/emoji/13.0.0/svg/1f389.svg"
-                    />
-                  </p>
-                </div>
+                    <p
+                      class="p-small color-black"
+                      [innerHTML]="cartTotal.bannerText"
+                    ></p>
 
-                <div
-                  class="almost-unlocked-wrap text-center"
-                  *ngIf="cartTotal.isAlmostUnlocked"
-                >
-                  <p>
-                    {{
-                      cartTotal?.almostUnlockedText !== ""
-                        ? cartTotal?.almostUnlockedText
-                        : "🎉 " +
-                          ("youve-almost-unlocked-a-cart-total-discount"
-                            | translate)
-                    }}
-                  </p>
-                  <p class="text-center eligible-text">
-                    {{
-                      cartTotal?.claimText !== ""
-                        ? cartTotal?.claimText
-                        : "👀 " +
-                          ("add-an-eligible-product-to-claim-offer" | translate)
-                    }}
-                    <a (click)="onClickShopNow()">{{
-                      "shop-now" | translate
-                    }}</a>
-                  </p>
-                </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        [style.width.%]="cartTotal.progressPercent"
+                        [style.color]="
+                          cartTotal.settings?.banner_info?.banner_textcolor !==
+                          ''
+                            ? cartTotal.settings?.banner_info?.banner_textcolor
+                            : '#fff'
+                        "
+                        [style.backgroundColor]="
+                          cartTotal.settings?.banner_info?.banner_bgcolor !== ''
+                            ? cartTotal.settings?.banner_info?.banner_bgcolor
+                            : '#FF9000'
+                        "
+                        [attr.aria-valuenow]="cartTotal.progressPercent"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      >
+                        {{ cartTotal.progressPercent }}%
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="cart-success-bar sk-cart__padd"
+                    *ngIf="cartTotal.isUnlocked"
+                  >
+                    <p
+                      class="p-small color-white text-center"
+                      [innerHTML]="
+                        cartTotal?.unlockedText !== ''
+                          ? cartTotal?.unlockedText
+                          : '🎉 ' +
+                            ('youve-unlocked-a-cart-total-discount-1'
+                              | translate) +
+                            ' <strong>' +
+                            ('youve-unlocked-a-cart-total-discount-2'
+                              | translate) +
+                            '</strong>'
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        role="img"
+                        class="emoji"
+                        alt="🎉"
+                        src="https://s.w.org/images/core/emoji/13.0.0/svg/1f389.svg"
+                      />
+                    </p>
+                  </div>
+
+                  <div
+                    class="almost-unlocked-wrap text-center"
+                    *ngIf="cartTotal.isAlmostUnlocked"
+                  >
+                    <p>
+                      {{
+                        cartTotal?.almostUnlockedText !== ""
+                          ? cartTotal?.almostUnlockedText
+                          : "🎉 " +
+                            ("youve-almost-unlocked-a-cart-total-discount"
+                              | translate)
+                      }}
+                    </p>
+                    <p class="text-center eligible-text">
+                      {{
+                        cartTotal?.claimText !== ""
+                          ? cartTotal?.claimText
+                          : "👀 " +
+                            ("add-an-eligible-product-to-claim-offer"
+                              | translate)
+                      }}
+                      <a *ngIf="tenant === 'pruvit'" (click)="onClickShopNow()">{{
+                        "shop-now" | translate
+                      }}</a>
+                    </p>
+                  </div>
+                </ng-container>
               </ng-container>
-            </ng-container>
+            </ng-template>
 
             <figure
               class="sk-product__user-amount d-flex justify-content-between align-items-center"
@@ -422,14 +530,14 @@
                     }}{{
                       productVariation.hasOwnProperty("priceObj")
                         ? (productQuantity * productVariation.priceObj.oneTime
-                          | customCurrency: productSettings)
+                          | customCurrency : productSettings)
                         : 0
                     }}</del
                   >
                   {{ productSettings.currencySymbol
                   }}{{
                     productVariation.finalPrice
-                      | customCurrency: productSettings
+                      | customCurrency : productSettings
                   }}
                   <p
                     class="p-small color-black"
@@ -448,7 +556,9 @@
             </figure>
 
             <figure
-              *ngIf="country === 'CA' || country === 'US'"
+              *ngIf="
+                tenant === 'pruvit' && (country === 'CA' || country === 'US')
+              "
               class="p-small color-black text-right sezzle-message"
             >
               <span>{{ "buy-now-pay-later-with" | translate }}</span>
@@ -465,21 +575,14 @@
               ></a>
             </figure>
 
-            <figure class="shipping-note" *ngIf="product.shippingNote !== ''">
-              <p class="p-small color-black font-bold">
-                🚚 {{ "shipping-note" | translate }}
-              </p>
-              <p class="expected">{{ product.shippingNote }}</p>
-            </figure>
-
             <div class="sold-out" *ngIf="product.isSoldOut">
-              <h4>{{ getSoldOutText(product) }}</h4>
+              <h4 class="color-black">{{ getSoldOutText(product) }}</h4>
             </div>
 
             <button
+              *ngIf="!product.isSoldOut; else waitListAction"
               [disabled]="
                 (productVariation | json) === '{}' ||
-                product.isSoldOut ||
                 productVariation.priceObj.oneTime === 0 ||
                 productVariation.isOutOfStock
               "
@@ -488,6 +591,47 @@
             >
               {{ "add-to-cart" | translate }}
             </button>
+
+            <figure
+              *ngIf="product.shippingNote !== ''"
+              class="shipping-notes d-flex align-items-baseline mt-4"
+            >
+              <i class="fa-solid fa-truck color-black"></i>
+              <div class="ml-3">
+                <p class="p-small color-black font-bold">
+                  {{ "shipping-note" | translate }}
+                </p>
+                <p class="disclaimer-reg color-gray">
+                  {{ product.shippingNote }}
+                </p>
+              </div>
+            </figure>
+
+            <figure
+              *ngIf="product.moneyBackNote !== ''"
+              class="shipping-notes d-flex align-items-baseline mt-4"
+            >
+              <i class="fa-solid fa-badge-check color-black"></i>
+              <div class="ml-3">
+                <p class="p-small color-black font-bold">
+                  {{ "money-back-note" | translate }}
+                </p>
+                <p
+                  class="disclaimer-reg color-gray"
+                  [innerHTML]="product.moneyBackNote"
+                ></p>
+              </div>
+            </figure>
+
+            <ng-template #waitListAction>
+              <button
+                (click)="onWaitlistAdd()"
+                *ngIf="product.isSoldOut"
+                class="button button-large button-primary button-icon full-width button-waitlist"
+              >
+                Notify me
+              </button>
+            </ng-template>
           </div>
         </figure>
       </div>

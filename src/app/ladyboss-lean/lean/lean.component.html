@@ -1,0 +1,500 @@
+<section class="lean-header">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="d-flex justify-content-between">
+                  <img class="img-fluid lean-logo"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354143/file/026718632d3f30f7b6994313cedfdd6c.png">
+                  <div class="right-login-group d-flex">            
+                    <a *ngIf="!isUserLoggedIn" class="nav-link sk-header__nav-link pointer" href="/dashboard">
+                        <i class="far fa-user sk-header__user-card color-black"></i>
+                        <span class="text-label color-black"> {{ "login" | translate }} </span>
+                    </a>
+                    <a *ngIf="isUserLoggedIn" class="nav-link sk-header__nav-link pointer"
+                        (click)="onClickAvatar()">
+                        <img src="{{ userAvatar }}" class="user-img img-fluid" />
+                        <span class="text-label color-black"> {{ "account" | translate }} </span>
+                    </a>
+                </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-video-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12 text-center col-padd">
+              <div class="lean-card card">
+                  <p class="text-center">
+                      <img class="img-fluid ldy-icon"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/479695/file/ff4d4106debe8c394a010d0af3809c3b.png"
+                          alt="img">
+                  </p>
+                  <h1 class="font-80 lett-spa17">Why Go LEAN?</h1>
+                  <p><b>POWERED BY SCIENCE. FORMULATED FOR WOMEN.</b></p>
+                  <p> A ridiculously delicious protein shake for women that supports fat loss and immune system health
+                      while also providing numerous essential vitamins and minerals!</p>
+                  <div class="ladyboss-videoWrap d-flex justify-content-center my-3">
+                    <iframe 
+                      frameborder="0"
+                      allowfullscreen="" 
+                      wmode="opaque"
+                      src="https://embed.voomly.com/embed/assets/embed.html?videoId=D1F0qsKbHSaUEpda3M4di6NoPm16cGvMk2USbWnHMwL_dRhgP&amp;videoRatio=1.777778&amp;type=v"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                    </iframe>
+                  </div>
+                  <p class="my-3">
+                    <img class="img-fluid"
+                        src="https://statics.myclickfunnels.com/image/350301/file/771c9d465ce078ee77a919cb6537beac.svg"
+                        width="143">
+                  </p>
+                  <a class="button button-primary button-large get-lean" routerLink="/product/lean-vanilla-cake">GET LADYBOSS LEAN!</a>
+              </div>
+
+              <div class="who-lean">
+                  <h1 class="color-brand font-80 lett-spa08">Who Is LEAN For?</h1>
+                  <h3 class="color-black">LEAN Is Formulated By Science For Women Who...</h3>
+                  <div class="row woman-who-row">
+                      <div class="col-md-3">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/473333/file/24089ab2b04038fd0e58cfad167b5e09.svg"
+                              alt="img">
+                          <p class="color-black font-bold">Have trouble eating healthy on the go</p>
+                      </div>
+
+                      <div class="col-md-3">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/473336/file/62d890841eaf6c71273caed2ec18e2a7.svg"
+                              alt="img">
+                          <p class="color-black font-bold">Don't eat enough throughout the day</p>
+                      </div>
+
+                      <div class="col-md-3">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/473335/file/0922f628b10f0b29fdbbce16f41cc8c2.svg"
+                              alt="img">
+                          <p class="color-black font-bold">Struggle with sweet cravings</p>
+                      </div>
+
+                      <div class="col-md-3">
+                          <img class="img-fluid"
+                              src="https://statics.myclickfunnels.com/image/473334/file/efbbea9db65f5b6c050a68588e91c653.svg"
+                              alt="img">
+                          <p class="color-black font-bold">Don't have time to cook six meals a day</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-recipe-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <p class="text-center">
+                  <img class="img-fluid text-img"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/473364/file/c8e7ebf1bf85265ac644dc4a50ab2127.png"
+                      alt="alen png">
+              </p>
+              <h2 class="color-brand text-center font-56">Made With Clean Ingredients You Can Trust</h2>
+              <div class="row recipe-details">
+                  <div class="col-md-3 col-12">
+                      <div class="lean-card text-center">
+                          <img class="img-fluid rec-img"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/777923/file/d8659097840acccdbe0a3e26b565895b.png"
+                              alt="img">
+                          <p class="color-black font-bold my-3">Prohydrolase™ Digestion Enzymes</p>
+                          <p class="p-small">Special blend of digestive enzymes <b>helps improve the absorption of
+                                  protein amino acids</b> so you can feel the benefits faster and without the bloat.
+                          </p>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <div class="lean-card text-center">
+                          <img class="img-fluid rec-img"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/777904/file/da1e9522c464cc36b7a539b7670d1a8e.png"
+                              alt="img">
+                          <p class="color-black font-bold my-3">Premium Grass-Fed Whey Protein</p>
+                          <p class="color-black p-small">Clean, grass-fed protein to help boost protein synthesis (for
+                              muscle growth), <b>cut down on sweet cravings, and help you feel fuller longer!</b></p>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <div class="lean-card text-center">
+                          <img class="img-fluid rec-img"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/777903/file/828c3735ed377ea202697453e6013513.png"
+                              alt="img">
+                          <p class="color-black font-bold my-3">Essential Vitamin &amp; Mineral Profile</p>
+                          <p class="color-black p-small"><b>Packed with all of the vitamins and minerals your body
+                                  craves</b> to keep you on top of your game. Whether at work, school, or running
+                              around with the kiddos!</p>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <div class="lean-card text-center">
+                          <img class="img-fluid rec-img"
+                              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/777906/file/1fdb7f0758c79bd3f4b2ac6685066ad3.png"
+                              alt="img">
+                          <p class="color-black font-bold my-3">Biotin</p>
+                          <p class="color-black p-small">Powerful B vitamin that, not only helps break down fats,
+                              carbs, and protein to be absorbed by the body, <b>but also supports hair, skin, and
+                                  nails for a luminous look!</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-benefits-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12 text-center">
+              <div>
+                  <img class="img-fluid"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/479695/file/ff4d4106debe8c394a010d0af3809c3b.png"
+                      alt="img" width="82">
+                  <p>
+                      <img class="img-fluid title-img"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/473550/file/3ee1f21f542f0dc17709358f7bfe0ca1.png"
+                          alt="img">
+                  </p>
+              </div>
+              <div class="benefits-list d-flex justify-content-between">
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/473515/file/10a9e3641d98eeaaa68aa45e953b527b.png"
+                          alt="heart png">
+                      <p>Prohydrolase™ Digestion Enzymes</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/779950/file/5e0b1687581b3bdf38e41cd7fb865853.png"
+                          alt="smile png">
+                      <p>IDEAL MEAL REPLACEMENT</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/779947/file/fe4b8b16750b2a42bb2c98e0279f392d.png"
+                          alt="secure png">
+                      <p>WEIGHT LOSS &amp; CRAVING SUPPORT*</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://statics.myclickfunnels.com/image/779959/file/61990718909592b4b3d543686946635d.svg"
+                          alt="heart png">
+                      <p>ESSENTIAL VITAMINS AND MINERAL PROFILE</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/473516/file/01a5e1064767f0c1c8f74d04e2dc27ea.png"
+                          alt="smile png">
+                      <p>FILLING, SATISFYING &amp; DELICIOUS</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/473517/file/f31640648851542ae9a1211b9e721244.png"
+                          alt="secure png">
+                      <p>SAVE MONEY &amp; TIME</p>
+                  </div>
+
+                  <div class="item">
+                      <img class="img-fluid"
+                          src="https://statics.myclickfunnels.com/image/779963/file/cbb6cfde788ac5c6ed94ea28f308954f.svg"
+                          alt="heart png">
+                      <p>VERSATILE, USE WITH MANY SNACKS &amp; TREATS</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-drik-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <h2 class="color-brand text-center font-56">When Should You Drink LEAN?</h2>
+          </div>
+      </div>
+      <div class="row drinklean">
+          <div class="col-md-3 col-12">
+              <div class="lean-card text-center">
+                  <img class="img-fluid rec-img"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/779978/file/083567a41840c168de99f2fa30f83929.png"
+                      alt="ladyboss7 jpg">
+                  <p class="color-black font-bold my-3">First Thing In The Morning</p>
+                  <p class="p-small">Protein first thing in the morning may support the body’s ability to boost
+                      energy, repair muscle tissue, and get you in the zone faster!</p>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-12">
+              <div class="lean-card text-center">
+                  <img class="img-fluid rec-img"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/780013/file/828bda7cb1753321c6ac7ed8b382fe16.png"
+                      alt="ladyboss7 jpg">
+                  <p class="color-black font-bold my-3">In Between Meals</p>
+                  <p class="p-small">Do you get “peckish” between meals? LEAN is the best snack to help curb those
+                      hunger cravings without giving in to sweets.</p>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-12">
+              <div class="lean-card text-center">
+                  <img class="img-fluid rec-img"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/780017/file/86cb56777a56c73996c97be2be8ffe9b.png"
+                      alt="ladyboss7 jpg">
+                  <p class="color-black font-bold my-3">Before &amp; After Workout</p>
+                  <p class="p-small">Fuel your workouts with LEAN! It’s easy on digestion and fast-absorbing so you
+                      can build, repair, and cut excess fat quickly and without bloating.</p>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-12">
+              <div class="lean-card text-center">
+                  <img class="img-fluid rec-img"
+                      src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/780021/file/c50b24f08712223a25f24be41c5d3801.png"
+                      alt="ladyboss7 jpg">
+                  <p class="color-black font-bold my-3">Late Night Snack</p>
+                  <p class="p-small">LEAN is the perfect “treat” to sip at night to help keep those pesky sweet
+                      cravings at bay.</p>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-saying-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12 text-center">
+              <h2 class="color-brand">WHAT LADYBOSS' ARE SAYING</h2>
+              <div class="row saying-reviw">
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                          <div class="rev-txt">
+                            <p class="p-small">I love Lean 💜 <b>Lean fits into my busy life style;</b> full time
+                                cosmetologist and college student! Allows me to get all my vitamins and a well balanced
+                                meal in the morning!!
+                            </p>
+                          </div>
+                          <div class="pro-info d-flex align-items-center justify-content-center">
+                              <img class="img-fluid pro-img"
+                                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/759979/file/c2255b813be6b392185c33af540aa6e4.jpeg"
+                                  alt="Slider-2 jpg">
+                              <h4 class="color-black name">bridget scobee</h4>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small">Really tasty protein drink. I have tried others and they have a chemical
+                              flavor in the background. Not Lady Boss Lean.<b> This stuff is so good. I'm sold.</b>
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/760099/file/8b0721807f13166f8ccb43c19ad43cc8.jpeg"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Retha Hatfield Lemon</h4>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small"><b>By far the best tasting protein powder I've had!!</b> I tried the
+                              waffle recipe and it's the best recipe for protein waffles me and my boyfriend have
+                              tried (and we've tried ALOT!) it's a breakfast staple now!
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/760030/file/715afa36774deb01a27130a8378bf08b.jpeg"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Kimberly Duyck</h4>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row saying-reviw">
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small">I WILL be ordering this again...<b>it is HONESTLY SOOO GOOD</b> you can't
+                              believe it's healthy...I only use a half a pack in my morning smoothie with my blend
+                              jet2...❤️❤️...keeps you full, satisfied and not bloated.. and did I mention DELICIOUS 😋
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/766932/file/2dabe258ea91008188d39775a3b333d3.png"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Faith Jones</h4>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small">Its the bomb. <b>I have literally love this stuff so much</b> that when i
+                              planned a cheat meal the other day i took like two bites and tossed it and made my fav
+                              shake frozen cherries unsweetened cocoa yum. Awesome ❣️
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/780109/file/61333be1d81371e05708cbe548e4581e.png"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Sharon Brewer Estep</h4>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small"><b>If you haven't tried the Peanut Butter Cup Shake then you are really
+                                  missing out!</b> I continue to be baffled at how yummy everything I make with
+                              LadyBoss Lean is. I'm so happy I took a chance on it because it has been nothing short
+                              of AMAZING! 🖤🎀💪
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/780071/file/6df5174d593eda13d9fb316272e4f018.png"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Ondreya Pylant</h4>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row saying-reviw">
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small"><b>I was shocked at how good it tasted.</b></p>
+                          <p class="p-small">After having that experience I told myself I should really take the
+                              challenge more seriously. I've tried what seems to be every protein powder or weight
+                              loss challenge. I've really struggled with my weight, I knew something was up when I
+                              gained 80 in under a year- yes your read that correctly 🤪. I've always struggled with
+                              my weight. I am getting married at the end of May and my goal is to lose 15 lbs by that
+                              point.
+                          </p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/767950/file/81779af448c04f77514f1c9edb408f3c.png"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Gabby A. Brown</h4>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small color-black"><b>I received mine the other day and they are delicious!</b>
+                          </p>
+                          <p class="p-small color-black my-4">I have tried many different kinds and these are by far
+                              the best. Great flavor, perfect consistency and not gritty at all! I got the free
+                              vanilla cake flavor and purchased more.</p>
+                          <p class="p-small color-black">It's delicious and definitely curbs that sweet craving.
+                              😊💕💪🏼</p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fluid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/760107/file/0897cceea0c0b1624ec5bf7cd460245e.jpeg"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Carmen Cashwell Lambert</h4>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 col-12">
+                      <div class="lean-card text-center">
+                        <div class="rev-txt">
+                          <p class="p-small color-black"><b>Words cannot describe how delicious the Ladyboss Lean
+                                  (Vanilla Cake Flavor) is! </b></p>
+                          <p class="p-small color-black mt-3">The Berry Blast and the Chocolate Covered Strawberries
+                              Shake (from the Ladyboss Shake Recipe Book) are my new go to's because I'm crazy about
+                              berries. Way better than sweets at the gas station! Good news: <b>I have not wanted to
+                                  eat any sweets since using this product.</b> I will
+                              be purchasing more!</p>
+                        </div>
+                        <div class="pro-info d-flex align-items-center justify-content-center">
+                            <img class="img-fulid pro-img"
+                                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/766936/file/4a508e584384e4dd283340abd22b4950.png"
+                                alt="Slider-2 jpg">
+                            <h4 class="color-black name">Veronica Jade Simmons</h4>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <p class="result-txt">The results depicted in the photo (or described in the testimonials) are unique to the individual and achieved only through dedication to a specific diet and exercise regimen in conjunction with LadyBoss’s dietary supplements. Results and time may vary.</p>
+          </div>
+      </div>
+  </article>
+</section>
+
+<section class="lean-reviews-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12 text-center">
+              <div class="rating d-flex align-items-center justify-content-between">
+                  <div class="left">
+                      <img  src="https://statics.myclickfunnels.com/image/796038/file/08d1f187117acaa24c26064a196391c1.svg" alt="ladyboss3 jpg" class="img-fluid icon">
+                      <h3 class="color-white">2942 +</h3>
+                      <p class="color-white review-text">5 Star Reviews</p>
+                  </div>
+                  <div class="middle">
+                      <img class="img-fluid icon"
+                          src="https://statics.myclickfunnels.com/image/779914/file/c25b5763a947e9436a19473c5f56b3e1.svg"
+                          alt="ladyboss3 jpg">
+                      <h3 class="color-white">715,000 +</h3>
+                      <p class="color-white review-text">Customers Trust LadyBoss</p>
+                  </div>
+                  <div class="right">
+                      <img class="img-fluid icon"
+                          src="https://statics.myclickfunnels.com/image/779927/file/9182452e51012cde5ff245ba08a98609.svg"
+                          alt="ladyboss3 jpg">
+                      <h3 class="color-white">400 +</h3>
+                      <p class="color-white review-text">Awards Won</p>
+                  </div>
+              </div>
+              <div class="lean-card alert-card">
+                  <div class="inner-content d-flex align-items-center ">
+                      <div class="img text-left">
+                        <img src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/796042/file/aa011dd32213af20444969c023fa5b84.png" alt="SEALpng-08 png" class="img-fluid bla-money">
+                      </div>
+                      <div class="text-left">
+                          <h2 class="color-brand">There's No Risk In Giving It A Try.</h2>
+                          <p class="color-black even-text">Even If You Don't Like The Flavor, <b>You Can Get Your
+                                  MONEY BACK!</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>

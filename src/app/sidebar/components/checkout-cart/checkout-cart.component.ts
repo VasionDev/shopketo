@@ -1,28 +1,34 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { SubscriptionLike } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { AppDataService } from 'src/app/shared/services/app-data.service';
-import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
-import { CartTotal } from '../../../shared/models/cart-total.model';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducer';
-import { SetCheckoutFoodsAction } from 'src/app/foods/store/foods-list.actions';
-import { AppCheckoutService } from 'src/app/shared/services/app-checkout.service';
-import { AppCartTotalService } from 'src/app/shared/services/app-cart-total.service';
-import { AppUserService } from 'src/app/shared/services/app-user.service';
-import { Offer } from 'src/app/shared/models/offer.model';
+import { TranslateService } from '@ngx-translate/core';
+import { SubscriptionLike } from 'rxjs';
+import { ProductSettings } from 'src/app/products/models/product-settings.model';
+import { ProductTagOrCategory } from 'src/app/products/models/product-tag-or-category.model';
+import { ProductVariationBase } from 'src/app/products/models/product-variation.model';
+import { ProductsUtilityService } from 'src/app/products/services/products-utility.service';
 import { Cart } from 'src/app/shared/models/cart.model';
+import { Offer } from 'src/app/shared/models/offer.model';
+import { AppCartTotalService } from 'src/app/shared/services/app-cart-total.service';
+import { AppCheckoutService } from 'src/app/shared/services/app-checkout.service';
+import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppOfferService } from 'src/app/shared/services/app-offer.service';
+import { AppUserService } from 'src/app/shared/services/app-user.service';
+import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { getMaxRegularDiscount } from 'src/app/shared/utils/discount';
+import { AppState } from 'src/app/store/app.reducer';
+import { environment } from 'src/environments/environment';
+import { CartTotal } from '../../../shared/models/cart-total.model';
 import {
   DeleteAllPromotersOneTime,
   DeleteEveryMonth,
   DeleteOneTime,
   UpdateEveryMonth,
   UpdateOneTime,
+  setEveryMonth,
 } from '../../store/cart.actions';
-import { AppOfferService } from 'src/app/shared/services/app-offer.service';
-import { ProductVariationBase } from 'src/app/products/models/product-variation.model';
-import { ProductSettings } from 'src/app/products/models/product-settings.model';
-import { getMaxRegularDiscount } from 'src/app/shared/utils/discount';
+import { AppTagManagerService } from 'src/app/shared/services/app-tag-manager.service';
+import { Product } from 'src/app/products/models/product.model';
 declare var $: any;
 
 @Component({
@@ -36,11 +42,12 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedLanguage = '';
   selectedCountry = '';
   productsData: any = {};
+  products: Product[] = [];
   currencySymbol = '$';
   shippingPolicyLink = '';
   referrer: any = {};
   user: any;
-
+  tenant!: string;
   productSettings = {} as ProductSettings;
   subscriptions: SubscriptionLike[] = [];
   defaultLanguage = '';
@@ -52,26 +59,33 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
   cartTotalOneTime: CartTotal[] = [];
   cartTotalEveryMonth: CartTotal[] = [];
   offers: Offer[] = [];
+  categories: ProductTagOrCategory[] = [];
 
   constructor(
     private dataService: AppDataService,
     public utilityService: AppUtilityService,
+    public productUtilityService: ProductsUtilityService,
     private translate: TranslateService,
     private appCheckoutService: AppCheckoutService,
     private cartTotalService: AppCartTotalService,
     private userService: AppUserService,
     private offerService: AppOfferService,
-    private store: Store<AppState>
-  ) {}
+    private router: Router,
+    private store: Store<AppState>,
+    private tagManager: AppTagManagerService
+  ) {
+    this.tenant = environment.tenant;
+    this.getUser();
+  }
 
   ngOnInit(): void {
     this.getSelectedLanguage();
     this.getSelectedCountry();
+    this.getCategories();
     this.getProducts();
     this.getCurrentCart();
     this.getReferrer();
     this.getCheckoutStatus();
-    this.getUser();
   }
 
   ngAfterViewInit() {
@@ -92,8 +106,16 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
         this.removeInitialFromSmartshipTiers();
 
         this.removeCartTotalOfferIfNotMet();
-
-        this.appCheckoutService.setModals();
+        this.removeSkuBasedOfferIfNotMet();
+        if(this.user) {
+          if(this.user) {
+            let refCode = 
+              this.user ? this.user.mvuser_refCode : this.referrer.hasOwnProperty('code') ? this.referrer.code : '';
+            this.appCheckoutService.setSupplementsCheckoutUrl(refCode, 'true', '');
+          }
+        }else {
+          this.appCheckoutService.setModals();
+        }
         this.dataService.setIsCheckoutStatus(false);
       }
     });
@@ -136,6 +158,19 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  getCategories() {
+    this.dataService.currentCategories$.subscribe((categories) => {
+      this.categories = categories
+        .filter(
+          (c) =>
+            c.slug !== 'food' &&
+            !c.accessLevels.isCustom.on &&
+            c.products.length !== 0
+        )
+        .sort((a, b) => a.order - b.order);
+    });
+  }
+
   getCurrentCart() {
     this.store.select('cartList').subscribe((res) => {
       const promoterFeeItem = res.oneTime.filter(
@@ -147,7 +182,9 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.oneTimeCart = [...promoterFeeItem, ...notPromoterFeeItems];
 
-      this.everyMonthCart = res.everyMonth;
+      this.everyMonthCart = res.everyMonth.filter(
+        (p) => p.country.toLowerCase() === this.selectedCountry.toLowerCase()
+      );
 
       this.setEveryMonthCartTotalDiscount();
       this.setEveryMonthPrice();
@@ -160,6 +197,7 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setCartTotalOfferPreviouslyShownStatus();
 
       this.removeCartTotalOfferIfNotMet();
+      this.removeSkuBasedOfferIfNotMet();
 
       if (this.oneTimeCart.length === 0 && this.everyMonthCart.length === 0) {
         this.dataService.changeCartStatus(false);
@@ -188,6 +226,7 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.productSettings = data.productSettings;
         this.productsData = data.productsData;
+        this.products = data.products;
         this.offers = data.offers;
         this.getCurrencySymbol();
         this.getShippingPolicy();
@@ -217,8 +256,19 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
   setOneTimeCartTotalDiscount() {
     if (this.productsData) {
       const cartTotalDiscount = this.productsData.cart_total_discount;
+      if(!cartTotalDiscount.hasOwnProperty('onetime')){
+        return;
+      }
 
-      const cartTotalDiscountOneTime: any[] = cartTotalDiscount?.onetime;
+      const cartTotalDiscountOneTime: any[] = cartTotalDiscount.onetime.map((discount: any) => {
+        const accessLevels = this.productUtilityService.getAccessLevels(
+          discount.hasOwnProperty('availability_for') ? discount.availability_for : ''
+        );
+        const customUsers = discount.hasOwnProperty('custom_users_list')
+        ? discount.custom_users_list?.map((user: string) => +user[0])
+        : [];
+        return {...discount, accessLevels, customUsers};
+      });
 
       const maxRegularDiscount =
         this.oneTimeCart.length === 1
@@ -240,17 +290,23 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
       if (cartTotalDiscountOneTime) {
         cartTotalDiscountOneTime.forEach((discount: any, index: number) => {
-          this.cartTotalOneTime[index] =
-            this.cartTotalService.getCartTotalObject(
-              true,
-              discount,
-              this.oneTimeCart,
-              this.everyMonthCart,
-              this.productSettings,
-              cartOneTimeSkuForLength1,
-              cartOneTimePriceForLength1,
-              maxRegularDiscount
-            );
+          const isUserCanAccess = this.userService.checkUserAccess(
+            discount.accessLevels,
+            discount.customUsers
+          );
+          if(isUserCanAccess) {
+            this.cartTotalOneTime[index] =
+              this.cartTotalService.getCartTotalObject(
+                true,
+                discount,
+                this.oneTimeCart,
+                this.everyMonthCart,
+                this.productSettings,
+                cartOneTimeSkuForLength1,
+                cartOneTimePriceForLength1,
+                maxRegularDiscount
+              );
+          }
         });
       }
     }
@@ -263,6 +319,17 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
     this.oneTimeCart = this.oneTimeCart.map((oneTimeItem) => {
       const tempOneTimeItem = Object.assign({}, oneTimeItem);
 
+      /*let price = 0;
+      if (
+        this.isEverymonthExist &&
+        this.productSettings.smartshipDiscountOnTodays &&
+        oneTimeItem.cart.price.everyMonth > 0 && 
+        oneTimeItem.cart.productID > 0
+      ) {
+        price = oneTimeItem.cart.price.everyMonth;
+      } else {
+        price = oneTimeItem.cart.price.oneTime;
+      }*/
       let price = oneTimeItem.cart.price.oneTime;
       let status = false;
 
@@ -332,6 +399,46 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
         tempOneTimeItem.isDiscountable = false;
       }
 
+      let activeSmartshipExist: boolean = false;
+      if (this.user) {
+        activeSmartshipExist = this.user?.mvuser_scopes.includes('smartship');
+      }
+
+      if (
+        ( 
+          tempOneTimeItem.cart.productSku.oneTime !== 'PRU-700-005' && 
+          tempOneTimeItem.cart.productSku.oneTime !== 'PRU-700-006' &&
+          tempOneTimeItem.cart.productSku.oneTime !== 'PRU-KOOZIE-001-ONCE'
+        ) && 
+        this.tenant === 'pruvit' &&
+        (this.isEverymonthExist || activeSmartshipExist) &&
+        this.productSettings.smartshipDiscountOnTodays &&
+        oneTimeItem.cart.productID > 0
+      ) {
+        let isVipPlusExist: boolean = false;
+        if (this.user) {
+          isVipPlusExist = this.user?.mvuser_scopes.includes('vipPlus');
+        }
+        const viDiscount = isVipPlusExist ? 25 : 15;
+        const vipDiscountPrice = this.staticSmartshipDiscount(oneTimeItem.cart.price.oneTime, viDiscount);
+        if(vipDiscountPrice < tempOneTimeItem.finalPrice) {
+          tempOneTimeItem.finalPrice = vipDiscountPrice;
+          tempOneTimeItem.isDiscountable = true;
+        }
+      }
+
+      if(
+        this.tenant === 'ladyboss' &&
+        this.isEverymonthExist &&
+        this.productSettings.smartshipDiscountOnTodays &&
+        oneTimeItem.cart.productID > 0
+      ){
+        if(oneTimeItem.cart.price.everyMonth > 0 && oneTimeItem.cart.price.everyMonth <= tempOneTimeItem.finalPrice) {
+          tempOneTimeItem.finalPrice = oneTimeItem.cart.price.everyMonth;
+          tempOneTimeItem.isDiscountable = true;
+        }
+      }
+
       tempDiscountSumPrice +=
         tempOneTimeItem.cart.quantity * tempOneTimeItem.finalPrice;
       tempSumPrice +=
@@ -342,6 +449,14 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.oneTimeCartTotalSumPrice = tempSumPrice;
     this.oneTimeCartTotalDiscountSumPrice = tempDiscountSumPrice;
+  }
+
+  private staticSmartshipDiscount(regularPrice: number, discountPercent: number) {
+    if(regularPrice > 0) {
+      const discountAmount = +((regularPrice * discountPercent) / 100).toFixed(2);
+      return regularPrice - discountAmount;
+    }
+    return 0;
   }
 
   removeInitialFromOneTimeTiers() {
@@ -355,8 +470,19 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
   setEveryMonthCartTotalDiscount() {
     if (this.productsData) {
       const cartTotalDiscount = this.productsData.cart_total_discount;
+      if(!cartTotalDiscount.hasOwnProperty('smartship')){
+        return;
+      }
 
-      const cartTotalDiscountSmartship: any[] = cartTotalDiscount?.smartship;
+      const cartTotalDiscountSmartship: any[] = cartTotalDiscount.smartship.map((discount: any) => {
+        const accessLevels = this.productUtilityService.getAccessLevels(
+          discount.hasOwnProperty('availability_for') ? discount.availability_for : ''
+        );
+        const customUsers = discount.hasOwnProperty('custom_users_list')
+        ? discount.custom_users_list?.map((user: string) => +user[0])
+        : [];
+        return {...discount, accessLevels, customUsers};
+      });
 
       const maxRegularDiscount =
         this.everyMonthCart.length === 1
@@ -378,17 +504,23 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
       if (cartTotalDiscountSmartship) {
         cartTotalDiscountSmartship.forEach((discount: any, index: number) => {
-          this.cartTotalEveryMonth[index] =
-            this.cartTotalService.getCartTotalObject(
-              false,
-              discount,
-              this.oneTimeCart,
-              this.everyMonthCart,
-              this.productSettings,
-              cartEveryMonthSkuForLength1,
-              cartEveryMonthPriceForLength1,
-              maxRegularDiscount
-            );
+          const isUserCanAccess = this.userService.checkUserAccess(
+            discount.accessLevels,
+            discount.customUsers
+          );
+          if(isUserCanAccess) {
+            this.cartTotalEveryMonth[index] =
+              this.cartTotalService.getCartTotalObject(
+                false,
+                discount,
+                this.oneTimeCart,
+                this.everyMonthCart,
+                this.productSettings,
+                cartEveryMonthSkuForLength1,
+                cartEveryMonthPriceForLength1,
+                maxRegularDiscount
+              );
+          }
         });
       }
     }
@@ -464,7 +596,6 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       }
-
       if (everyMonthItem.cart.isUserCanAccess) {
         tempEveryMonth.finalPrice = everyMonthItem.cart.quantity * productPrice;
       } else {
@@ -493,12 +624,7 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   removeCartTotalOfferIfNotMet() {
     const oneTimeCart = this.getLocalStorageCart().oneTime;
-
-    const oneTimeCartOfferItem = oneTimeCart.find(
-      (oneTime: any) =>
-        this.selectedCountry.toLowerCase() === oneTime.country &&
-        oneTime.cart.discountType === 'CART_TOTAL'
-    );
+    const oneTimeCartOfferItem = this.getOfferItemFromCart(oneTimeCart, 'CART_TOTAL');
 
     if (oneTimeCartOfferItem) {
       this.offers.forEach((offer) => {
@@ -514,6 +640,74 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     }
+  }
+
+  removeSkuBasedOfferIfNotMet() {
+    const {oneTime, everyMonth} = this.getLocalStorageCart();
+    const oneTimeSkuBasedOfferItem = this.getOfferItemFromCart(oneTime, 'SKU_PURCHASE');
+    const everyMonthSkuBasedOfferItem = this.getOfferItemFromCart(everyMonth, 'SKU_PURCHASE');
+
+    if (oneTimeSkuBasedOfferItem) {
+      this.offers.forEach((offer) => {
+        if (
+          offer.type === 'SKU_PURCHASE' &&
+          offer.product.id === oneTimeSkuBasedOfferItem.cart.productID
+        ) {
+          
+          const isSkuFound = this.isOfferQualifiedSkusExist(oneTime, everyMonth, offer);
+          if (!isSkuFound) {
+            this.removeCartItem('OneTimeCart', oneTimeSkuBasedOfferItem);
+          }
+        }
+      });
+    }
+
+    if (everyMonthSkuBasedOfferItem) {
+      this.offers.forEach((offer) => {
+        if (
+          offer.type === 'SKU_PURCHASE' &&
+          offer.product.id === everyMonthSkuBasedOfferItem.cart.productID
+        ) {
+          
+          const isSkuFound = this.isOfferQualifiedSkusExist(oneTime, everyMonth, offer);
+          if (!isSkuFound) {
+            this.removeCartItem('EveryMonthCart', everyMonthSkuBasedOfferItem);
+          }
+        }
+      });
+    }
+  }
+
+  private isOfferQualifiedSkusExist(cartOneTime: Cart[], cartEveryMonth: Cart[], offer: Offer) {
+    let skuBasedOfferFound = false;
+    cartOneTime.forEach((cartOneTime) => {
+      offer.qualifiedSkus.oneTime.forEach((qualifiedOneTime) => {
+        if (cartOneTime.cart.productSku.oneTime === qualifiedOneTime) {
+          skuBasedOfferFound = true;
+        }
+      });
+    });
+
+    cartEveryMonth.forEach((cartEveryMonth) => {
+      offer.qualifiedSkus.everyMonth.forEach((qualifiedSmartship) => {
+        if (
+          cartEveryMonth.cart.productSku.everyMonth === qualifiedSmartship
+        ) {
+          skuBasedOfferFound = true;
+        }
+      });
+    });
+    return skuBasedOfferFound;
+  }
+
+  private getOfferItemFromCart(list: Cart[], offerType: Offer["type"]) {
+    const offerItem = list.find(
+      (item: any) =>
+        this.selectedCountry.toLowerCase() === item.country &&
+        item.cart.discountType === offerType &&
+        item.cart.isOfferProduct
+    );
+    return offerItem;
   }
 
   getCurrencySymbol() {
@@ -860,7 +1054,9 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onClickCartMinus(cart: 'OneTimeCart' | 'EveryMonthCart', item: Cart) {
     if (item.cart.quantity === 1) {
-      this.onClickCartRemove(cart, item);
+      if(confirm("Are you sure you want to remove this item?")) {
+        this.onClickCartRemove(cart, item);
+      }
     } else {
       if (cart === 'OneTimeCart') {
         const oneTimeCart = this.getLocalStorageCart().oneTime;
@@ -946,14 +1142,13 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
       if (item.isPromoter && item.cart.productID === -1) {
         newOneTimeCart = newOneTimeCart.filter((item) => !item.isPromoter);
-
+        localStorage.setItem('OneTime', JSON.stringify(newOneTimeCart));
         this.store.dispatch(DeleteAllPromotersOneTime());
       } else {
+        localStorage.setItem('OneTime', JSON.stringify(newOneTimeCart));
         this.store.dispatch(DeleteOneTime({ oneTimeCart: item }));
       }
-
-      localStorage.setItem('OneTime', JSON.stringify(newOneTimeCart));
-
+      this.setCartAccessability();
       const currentTime = new Date().getTime();
       localStorage.setItem('CartTime', JSON.stringify(currentTime));
     } else {
@@ -970,7 +1165,7 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
 
       localStorage.setItem('EveryMonth', JSON.stringify(newEveryMonthCart));
       this.store.dispatch(DeleteEveryMonth({ everyMonthCart: item }));
-
+      this.setCartAccessability();
       const currentTime = new Date().getTime();
       localStorage.setItem('CartTime', JSON.stringify(currentTime));
     }
@@ -985,104 +1180,192 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  setCartAccessability() {
+    const oneTimeCart = this.getLocalStorageCart().oneTime;
+    const everyMonthCart = this.getLocalStorageCart().everyMonth;
+
+    const newOneTimeCart = oneTimeCart.filter(oneTime => {
+      const isCountryVarified = this.selectedCountry.toLowerCase() === oneTime.country;
+      const prod = this.products.find(p=> p.id === oneTime.cart.productID);
+      if(isCountryVarified && prod) {
+        const isAccess = this.userService.checkUserAccess(prod.accessLevels, prod.customUsers);
+        if(!isAccess) {
+          this.store.dispatch(DeleteOneTime({ oneTimeCart: oneTime }));
+        }
+        return isAccess;
+      }
+      return isCountryVarified;
+    });
+
+    const newEveryMonthCart = everyMonthCart.filter(everyMonth => {
+      const isCountryVarified = this.selectedCountry.toLowerCase() === everyMonth.country;
+      const prod = this.products.find(p=> p.id === everyMonth.cart.productID);
+      if(isCountryVarified && prod) {
+        const isAccess = this.userService.checkUserAccess(prod.accessLevels, prod.customUsers);
+        if(!isAccess) {
+          this.store.dispatch(DeleteOneTime({ oneTimeCart: everyMonth }));
+        }
+        return isAccess;
+      }
+      return isCountryVarified;
+    });
+
+    localStorage.setItem('OneTime', JSON.stringify(newOneTimeCart));
+    localStorage.setItem('EveryMonth', JSON.stringify(newEveryMonthCart));
+  }
+
   onClickCloseCart() {
     $('.drawer').drawer('close');
   }
 
   onClickCheckout() {
-    this.dataService.setIsCheckoutFromFoodStatus(false);
-
-    if (this.oneTimeCart.length === 0) {
-      this.dataService.changePostName({ postName: 'pruvit-modal-utilities' });
-      $('#smartshipWarningModal').modal('show');
+    let canCheckout: boolean = true;
+    if (this.tenant === 'pruvit') {
+      canCheckout = this.appCheckoutService.canCheckoutFromCurrentCountry();
+    }
+    if (!canCheckout) {
+      this.dataService.changePostName({ postName: 'restrict-checkout-modal' });
+      $('#RestrictCheckoutModal').modal('show');
     } else {
-      let isCartTotalOfferSkuFound = false;
-      const offerArray: Offer[] = [];
-
-      this.offers.forEach((offer) => {
-        const isUserCanAccess = this.userService.checkUserAccess(
-          offer.accessLevels,
-          offer.customUsers
-        );
-
-        if (offer.type === 'CART_TOTAL') {
-          let isCartTotalOfferFound = false;
-          let cartTotalPrice = this.getCartTotalPrice(offer);
-          if (
-            cartTotalPrice >= offer.priceOver &&
-            cartTotalPrice <= offer.priceUnder
-          ) {
-            isCartTotalOfferFound = true;
-          }
-          if (isCartTotalOfferFound && isUserCanAccess) {
-            offerArray.push(offer);
-            isCartTotalOfferSkuFound = this.getOfferSkuFoundStatus(offer);
-          }
-        }
-      });
-
+      if(this.tenant === 'pruvit') {
+        this.tagManager.onCheckoutEvent(this.products, this.oneTimeCart, this.everyMonthCart, this.oneTimeCartTotalDiscountSumPrice, this.productSettings);
+      }
+      let contact = null;
       if (
-        offerArray.length > 0 &&
-        !isCartTotalOfferSkuFound &&
-        !this.isCartTotalOfferShown &&
-        !this.isCartTotalOfferPreviouslyShown
+        this.tenant === 'ladyboss' &&
+        (this.router.url.startsWith('/challenge/') || this.router.url.startsWith('/5daycakechallenge/'))
       ) {
-        localStorage.setItem('DirectCheckout', JSON.stringify(true));
+        const localContact = sessionStorage.getItem('Contact');
+        contact = localContact ? JSON.parse(localContact) : null;
+      }
 
-        this.isCartTotalOfferShown = true;
-        this.dataService.setOfferArray(offerArray, 0);
+      this.dataService.setIsCheckoutFromFoodStatus(false);
+      let showSmartshipWarningModal = false;
+      if (this.oneTimeCart.length === 1) {
+        this.oneTimeCart.forEach((cartItem) => {
+          if (
+            cartItem.cart.productSku.oneTime.startsWith('PROMOTER-ENROLL') ||
+            cartItem.cart.productSku.oneTime.startsWith('CHAMPION-ENROLL')
+          )
+            showSmartshipWarningModal = true;
+        });
+      } else if (this.oneTimeCart.length === 0) {
+        showSmartshipWarningModal = true;
+      }
 
-        this.dataService.changePostName({
-          postName: 'pruvit-modal-utilities',
+      if (showSmartshipWarningModal) {
+        this.dataService.changePostName({ postName: 'pruvit-modal-utilities' });
+        $('#smartshipWarningModal').modal('show');
+      } else {
+        let isCartTotalOfferSkuFound = false;
+        const offerArray: Offer[] = [];
+
+        this.offers.forEach((offer) => {
+          const isUserCanAccess = this.userService.checkUserAccess(
+            offer.accessLevels,
+            offer.customUsers
+          );
+
+          if (offer.type === 'CART_TOTAL') {
+            let isCartTotalOfferFound = false;
+            let cartTotalPrice = this.getCartTotalPrice(offer);
+            if (
+              cartTotalPrice >= offer.priceOver &&
+              cartTotalPrice <= offer.priceUnder
+            ) {
+              isCartTotalOfferFound = true;
+            }
+            if (isCartTotalOfferFound && isUserCanAccess) {
+              offerArray.push(offer);
+              isCartTotalOfferSkuFound = this.getOfferSkuFoundStatus(offer);
+            }
+          }
         });
 
-        setTimeout(() => {
-          $('#special-offer').modal('show');
-        }, 0);
-      } else {
-        const VIUser = this.userService.validateVIUserSession();
-        if (VIUser !== null) {
-          if (VIUser.hasOwnProperty('viProductId') && VIUser.viProductId !== '') {
-            this.appCheckoutService.setSupplementsCheckoutUrl(
-              VIUser.referrer,
-              VIUser.promptLogin,
-              VIUser.viCode,
-              VIUser.viProductId,
-              VIUser.firstName,
-              VIUser.lastName,
-              VIUser.email
-            );
-          } else {
-            this.appCheckoutService.setSupplementsCheckoutUrl(
-              VIUser.referrer,
-              VIUser.promptLogin,
-              VIUser.viCode
-            );
-          }
+        if (
+          offerArray.length > 0 &&
+          !isCartTotalOfferSkuFound &&
+          !this.isCartTotalOfferShown &&
+          !this.isCartTotalOfferPreviouslyShown
+        ) {
+          localStorage.setItem('DirectCheckout', JSON.stringify(true));
+
+          this.isCartTotalOfferShown = true;
+          this.dataService.setOfferArray(offerArray, 0);
+
+          this.dataService.changePostName({
+            postName: 'pruvit-modal-utilities',
+          });
+
+          setTimeout(() => {
+            $('#special-offer').modal('show');
+          }, 0);
         } else {
-          if (!this.user) {
-            this.appCheckoutService.setModals();
-          } else {
+          const VIUser = this.userService.validateVIUserSession();
+          if (VIUser !== null) {
+            if (
+              VIUser.hasOwnProperty('viProductId') &&
+              VIUser.viProductId !== ''
+            ) {
+              this.appCheckoutService.setSupplementsCheckoutUrl(
+                VIUser.referrer,
+                VIUser.promptLogin,
+                VIUser.viCode,
+                VIUser.viProductId,
+                VIUser.firstName,
+                VIUser.lastName,
+                VIUser.email
+              );
+            } else {
+              this.appCheckoutService.setSupplementsCheckoutUrl(
+                VIUser.referrer,
+                VIUser.promptLogin,
+                VIUser.viCode
+              );
+            }
+          } else if (contact !== null) {
             let refCode = this.user
               ? this.user.mvuser_refCode
               : this.referrer.hasOwnProperty('code')
               ? this.referrer.code
-              : '';
-
+              : contact.referrer;
             this.appCheckoutService.setSupplementsCheckoutUrl(
               refCode,
-              'true',
-              ''
+              'false',
+              '',
+              '',
+              contact.firstName,
+              contact.lastName,
+              contact.email,
+              '',
+              '',
+              contact.phone
             );
+          } else {
+            if (!this.user) {
+              this.appCheckoutService.setModals();
+            } else {
+              let refCode = this.user
+                ? this.user.mvuser_refCode
+                : this.referrer.hasOwnProperty('code')
+                ? this.referrer.code
+                : '';
+
+              this.appCheckoutService.setSupplementsCheckoutUrl(
+                refCode,
+                'true',
+                ''
+              );
+            }
           }
         }
       }
     }
   }
-
   onClickShareMyCart() {
     this.utilityService.setTinyUrl();
-    if (this.referrer.hasOwnProperty('code') && this.referrer.code !== '') {
+    if ((this.referrer.hasOwnProperty('code') && this.referrer.code !== '') || 
+      (this.user && this.user.mvuser_refCode !== '')) {
       const isLocked = this.utilityService.cartHasLockedProduct();
       if (isLocked) {
         this.dataService.changePostName({
@@ -1119,6 +1402,87 @@ export class CheckoutCartComponent implements OnInit, AfterViewInit, OnDestroy {
       everyMonthItem.cart.quantity * everyMonthItem.cart.price.oneTime;
 
     return discountPrice === originalPrice;
+  }
+
+  addSmartshipVariation(item: Cart) {
+    if (this.hasSmartshipVariation(item)) {
+      this.removeCartItem('EveryMonthCart', item);
+    } else {
+      const everyMonthCart = this.getLocalStorageCart().everyMonth;
+      const cartObj: any = Object.assign({}, item);
+      const tempCart = Object.assign({}, cartObj.cart);
+      tempCart.quantity = 1;
+      cartObj.cart = tempCart;
+      cartObj.orderType = 'ordertype_2';
+      everyMonthCart.push(cartObj);
+      localStorage.setItem('EveryMonth', JSON.stringify(everyMonthCart));
+      this.store.dispatch(setEveryMonth({ everyMonthCart: everyMonthCart }));
+      const currentTime = new Date().getTime();
+      localStorage.setItem('CartTime', JSON.stringify(currentTime));
+    }
+  }
+
+  hasSmartshipVariation(item: Cart) {
+    const everyMonthCart = this.getLocalStorageCart().everyMonth;
+    const findEveryMonthCart = everyMonthCart.find(
+      (everyMonth) =>
+        this.selectedCountry.toLowerCase() === everyMonth.country &&
+        item.cart.productSku.everyMonth ===
+          everyMonth.cart.productSku.everyMonth
+    );
+    return findEveryMonthCart ? true : false;
+  }
+
+  get isEverymonthExist() {
+    const everyMonthCart = [...this.everyMonthCart];
+    return everyMonthCart.length ? true : false;
+  }
+
+  getAttributeList(item: Cart) {
+    let servingName: string[] = [];
+    if (item.cart.caffeineState !== '') {
+      servingName.push(item.cart.caffeineState);
+    }
+    if (item.cart.servingsName !== '') {
+      servingName.push(item.cart.servingsName);
+    }
+    return servingName.join(', ');
+  }
+
+  scrollIntoView(id: string) {
+    const scrollToElement = document.getElementById(id);
+    if(scrollToElement) {
+      scrollToElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+    }else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  get isVipLoyaltyExist() {
+    /*return this.user && 
+      (
+        this.user.hasOwnProperty('vip_loyalty_status') && 
+        this.user.vip_loyalty_status !== ''
+      ) ? true : false*/
+      return this.user && (this.user?.mvuser_scopes.includes('vip') || this.user?.mvuser_scopes.includes('vipPlus')) ? true : false;
+  }
+
+  onClickShopAll() {
+    $('.drawer').drawer('close');
+    /*let shopAllSlug = 'shop-all';
+    if(this.selectedLanguage != '' && this.selectedLanguage.toLowerCase() != 'en') {
+      shopAllSlug = shopAllSlug + '-' + this.selectedLanguage.toLowerCase();
+    }
+    this.utilityService.navigateToRoute('/category/' + shopAllSlug);*/
+    let shopAllSlug = '';
+    this.categories.forEach((category) => {
+      if (category.slug.includes('shop-all')) {
+        shopAllSlug = category.slug;
+      }
+    });
+    shopAllSlug = shopAllSlug === '' ? 'shop-all' : shopAllSlug;
+    const routeURL = '/category/' + shopAllSlug;
+    this.utilityService.navigateToRoute(routeURL);
   }
 
   ngOnDestroy() {

@@ -5,27 +5,51 @@
 >
   <section class="research-hero shopketo101-hero">
     <article class="container">
-      <figure class="sk-main__title text-center" data-aos="fade-up">
-        <h4
-          *ngIf="referrer.hasOwnProperty('code')"
-          class="color-black sk-main__title-b"
-        >
+      <figure
+        data-aos="fade-up"
+        class="learn-title text-center aos-init aos-animate"
+      >
+        <h3 class="color-black">What do you know about</h3>
+        <h1 class="color-black">
+          <span class="text-gradient-style">Ketones</span> + intermittent
+          fasting?
+        </h1>
+        <p class="pruvit-fast-p">
+          Prüvit’s I-Fast is a scientifically proven Lifestyle Transformation
+          System designed to help you make fasting easier and more sustainable.
+        </p>
+        <div class="img-wrap">
           <img
-            class="referr-img"
-            [src]="
-              referrer?.imageUrl
-                ? referrer?.imageUrl
-                : 'assets/images/avatar2.png'
-            "
+            alt="img"
+            class="img-fluid"
+            src="assets/images/fast-guide-mockup.png"
           />
-          {{ "invited-by" | translate }}
+        </div>
+        <button
+          (click)="onClickFreeGuideModal()"
+          class="button button-primary free-guide"
+        >
+          Get your FREE Transformation Guide
+          <i class="fa-regular fa-arrow-right ml-2"></i>
+        </button>
+
+        <p class="disclaimer-bold color-gray">
+          Printer friendly<span class="mx-2">•</span>Emailed immediately
+        </p>
+        <h4 class="alert-bg">
           <span
-            class="color-brand link-hover"
-            (click)="onClickReferrerName()"
-            >{{ referrer?.name }}</span
+            ><i class="fas fa-check-circle mr-2"></i>Encourages cellular
+            detoxification<sup>†</sup></span
+          >
+          <span
+            ><i class="fas fa-check-circle mr-2"></i>Balances digestion and
+            metabolism<sup>†</sup></span
+          >
+          <span
+            ><i class="fas fa-check-circle mr-2"></i>Promotes appetite and
+            cravings control<sup>†</sup></span
           >
         </h4>
-        <h1 class="color-black">{{ "your-superpower-along" | translate }}</h1>
       </figure>
 
       <figure class="row research-slider" data-aos="fade-up">
@@ -136,7 +160,7 @@
       >
         <div
           class="col-sm-4 sk-category__custom-padd {{
-            product.isMostPopular ? 'most-populer' : ''
+            product.isGeneralMostPopular ? 'most-populer' : ''
           }}"
           *ngFor="let product of tags[0].products"
         >
@@ -168,7 +192,7 @@
 
   <section class="favorite-community-wraper">
     <article class="container">
-      <figure class="row" data-aos="fade-up">
+      <figure class="row">
         <div class="col-12">
           <h1 class="color-black title text-center">
             {{ "your-new-favorite-community" | translate }}
@@ -277,7 +301,7 @@
   </section>
   <!-- end of favorite-community-wraper -->
 
-  <section class="before-better-slider">
+  <section #beforeBetter class="before-better-slider">
     <article class="container-fluid">
       <figure class="before-better-marquee-slide" data-aos="fade-up">
         <div class="slider-item">
@@ -368,72 +392,6 @@
               </div>
             </div>
           </div>
-          <div
-            *ngIf="referrer.hasOwnProperty('code')"
-            class="card flex-sm-row mb-0"
-          >
-            <div class="card-col independent-pruver-card">
-              <div class="inner-cont">
-                <img
-                  [src]="
-                    referrer?.imageUrl
-                      ? referrer?.imageUrl
-                      : 'assets/images/avatar2.png'
-                  "
-                  alt="img"
-                  class="img-fluid rounded-circle"
-                />
-                <h3 class="prf-name">{{ referrer?.name }}</h3>
-                <p class="disclaimer-reg">
-                  {{ "your" | translate }}
-                  {{ "independent-pruver" | translate }}
-                </p>
-              </div>
-            </div>
-            <div class="card-col here-help-card">
-              <div class="inner-cont">
-                <h3 class="text-center color-black">
-                  {{ "here-to-help" | translate }}
-                </h3>
-                <div class="btns-group d-flex flex-column">
-                  <button
-                    *ngIf="referrer?.phoneNumber"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                  >
-                    <a
-                      href="tel:{{ referrer?.phoneNumber }}"
-                      class="not-underline"
-                    >
-                      {{ "call-me" | translate }} 📞
-                    </a>
-                  </button>
-
-                  <button
-                    *ngIf="referrer?.phoneNumber"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                  >
-                    <a
-                      [href]="
-                        'sms:' + referrer?.phoneNumber | textSanitizer: 'url'
-                      "
-                      class="not-underline"
-                    >
-                      {{ "text-me" | translate }} 💬
-                    </a>
-                  </button>
-
-                  <button
-                    *ngIf="referrer?.email"
-                    class="sk-pruver__btn color-brand color-white-bg"
-                  >
-                    <a href="mailto:{{ referrer?.email }}" class="not-underline"
-                      >{{ "email-me" | translate }} 📨
-                    </a>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </figure>
     </article>
@@ -486,7 +444,7 @@
               <div class="card-body">
                 <p
                   class="color-black"
-                  [innerHtml]="faq.content | textSanitizer: 'html'"
+                  [innerHtml]="faq.content | textSanitizer : 'html'"
                 ></p>
               </div>
             </div>
@@ -497,7 +455,81 @@
   </section>
   <!-- END of FAQ-wraper -->
 
-  <section class="disclaimer-wrap">
+  <section class="watch-the-keynote">
+    <article class="container">
+      <figure class="row text-center">
+        <div class="col-12">
+          <h2 class="color-black">Watch the keynote</h2>
+          <p class="color-gray pruvit-text">
+            Prüvit scientist, Dr. Ryan Lowery, breaks everything down for you in
+            regards to how ketones and intermittent fasting work
+            synergistically.
+          </p>
+          <div class="trip-video">
+            <iframe
+              src="https://pruvit.tv/stream?embed=735"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of watch-the-keynote -->
+
+  <section *ngIf="referrer.hasOwnProperty('code')" class="learn-profile-wrpper">
+    <article class="container">
+      <figure class="row text-center">
+        <div class="col-12">
+          <div class="profile-img">
+            <img
+              [src]="
+                referrer?.imageUrl
+                  ? referrer?.imageUrl
+                  : 'assets/images/avatar2.png'
+              "
+              alt="img"
+              class="img-fluid"
+            />
+          </div>
+
+          <h4 class="color-black">{{ referrer?.name }}</h4>
+          <span class="color-black disclaimer-reg"
+            >{{ "your" | translate }}
+            {{ "independent-pruver" | translate }}</span
+          >
+          <div class="btns-group">
+            <a
+              *ngIf="referrer?.phoneNumber"
+              class="gray-bg p-small font-bold color-black"
+              href="tel:{{ referrer?.phoneNumber }}"
+              ><i class="fal fa-phone-alt"></i> Call Me</a
+            >
+            <a
+              *ngIf="referrer?.phoneNumber"
+              class="gray-bg p-small font-bold color-black mx-2"
+              [href]="'sms:' + referrer?.phoneNumber | textSanitizer : 'url'"
+              ><i class="fal fa-comments-alt"></i>Text Me</a
+            >
+            <a
+              *ngIf="referrer?.email"
+              class="gray-bg p-small font-bold color-black"
+              href="mailto:{{ referrer?.email }}"
+              ><i class="fal fa-envelope"></i> Email Me</a
+            >
+          </div>
+          <div class="contact-me-wrap">
+            <app-contact-form [caller]="'learn'"></app-contact-form>
+          </div>
+        </div>
+      </figure>
+    </article>
+  </section>
+  <!-- END of profile-wrpper -->
+
+  <section class="disclaimer-wrap mt-3 mt-sm-4">
     <article class="container">
       <div class="row disclaimer-row">
         <div class="col">
@@ -513,6 +545,234 @@
   </section>
   <!-- END of disclaimer-wrap -->
 </main>
+
+<div
+  class="modal animate fade get-the-free share-modal"
+  id="getTheFreeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="GetTheFreeGuide"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom no-bg">
+      <div class="modal-header flex-column">
+        <p class="w-100 d-flex justify-content-between align-items-center">
+          <a
+            href="#"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="modal-close"
+            ><i class="fal fa-times" aria-hidden="true"></i
+          ></a>
+        </p>
+      </div>
+
+      <div *ngIf="!isContactSuccess" class="modal-body">
+        <div class="img-wrap text-center">
+          <img
+            alt="img"
+            class="img-fluid"
+            src="assets/images/fast-guide-mockup.png"
+          />
+        </div>
+        <h3 class="color-black text-center">
+          Get the FREE Transformation Guide!
+        </h3>
+        <P class="color-black p-small text-center sub-title"
+          >Delivered by email immediately</P
+        >
+        <div class="contact-me-wrap mxd-100 mt-3">
+          <div class="card request-info-card no-bg px-3 pb-1">
+            <form
+              [formGroup]="contactForm"
+              (ngSubmit)="onSubmitContactForm()"
+              class="card-inner-info contact-form-wrap"
+            >
+              <div class="row mx--15">
+                <div class="col-6 form-group p-right">
+                  <input
+                    type="text"
+                    class="form-control p-small"
+                    placeholder="First name"
+                    formControlName="firstName"
+                    [class.is-invalid]="
+                      f['firstName'].errors && f['firstName'].touched
+                    "
+                  />
+                  <small
+                    *ngIf="f['firstName'].errors?.['required']"
+                    class="invalid-feedback"
+                    >Please enter your First name</small
+                  >
+                </div>
+                <div class="col-6 form-group p-left">
+                  <input
+                    type="text"
+                    class="form-control p-small"
+                    placeholder="Last name"
+                    formControlName="lastName"
+                    [class.is-invalid]="
+                      f['lastName'].errors && f['lastName'].touched
+                    "
+                  />
+                  <small
+                    *ngIf="f['lastName'].errors?.['required']"
+                    class="invalid-feedback"
+                    >Please enter your Last name</small
+                  >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control p-small"
+                  placeholder="Email address"
+                  formControlName="email"
+                  [class.is-invalid]="f['email'].errors && f['email'].touched"
+                />
+                <small
+                  *ngIf="f['email'].errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Email</small
+                >
+                <small
+                  *ngIf="f['email'].errors?.['pattern']"
+                  class="invalid-feedback"
+                  >Please enter a valid Email address</small
+                >
+              </div>
+
+              <div class="form-group phone">
+                <input
+                  type="text"
+                  class="form-control p-small"
+                  placeholder="Phone (optional)"
+                  formControlName="phone"
+                  [class.is-invalid]="f['phone'].errors && f['phone'].touched"
+                />
+                <small
+                  *ngIf="f['phone'].errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Phone number</small
+                >
+                <small
+                  *ngIf="f['phone'].errors?.['pattern']"
+                  class="invalid-feedback"
+                  >Please enter a valid Phone number</small
+                >
+                <div class="dropdown">
+                  <span
+                    class="dropdown-btn"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="assets/images/{{
+                        userSelectedCountry !== null
+                          ? userSelectedCountry.country_code
+                          : selectedCountry
+                      }}.svg"
+                      alt="flag"
+                    />
+                    <i class="fal fa-angle-down color-gray"></i>
+                  </span>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <span
+                      *ngFor="let country of countries"
+                      class="dropdown-item"
+                      (click)="setUserSelectedCountryPhoneCode(country)"
+                      ><img
+                        src="assets/images/{{ country.country_code }}.svg"
+                        alt="flag"
+                      />
+                      {{ country.name }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-check color-gray">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="guidecontactFormCheckAgree"
+                  formControlName="checkAgree"
+                />
+                <label
+                  class="form-check-label disclaimer-reg pointer"
+                  for="guidecontactFormCheckAgree"
+                  >Send me more information about Prüvit’s Transformation System
+                  and products.</label
+                >
+                <small
+                  *ngIf="f['checkAgree'].errors?.['requiredTrue']"
+                  class="invalid-feedback"
+                  >Please agree to this disclaimer to continue</small
+                >
+              </div>
+              <button
+                type="submit"
+                [disabled]="contactForm.invalid || isFormSubmitted"
+                class="button button-primary free-guide-btn"
+              >
+                <i class="fa-light fa-paper-plane-top mr-2"></i>Send me the free
+                guide
+                <i
+                  class="fa fa-spinner fa-spin ml-2"
+                  *ngIf="isFormSubmitted"
+                ></i>
+              </button>
+              <p
+                *ngIf="errorMessage !== ''"
+                class="disclaimer-reg text-center mb-2"
+                style="color: #f35958; font-weight: 700"
+              >
+                {{ errorMessage }}
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isContactSuccess" class="modal-body">
+        <div *ngIf="referrer?.imageUrl" class="profile-wrap mb-3">
+          <div class="img-wrap">
+            <img
+              src="{{
+                referrer?.imageUrl ? referrer.imageUrl : referrer.imageUrl
+              }}"
+              alt="img"
+            />
+          </div>
+        </div>
+
+        <h3 class="text-center color-black mb-3 font-44">
+          Thanks, {{ firstName }}!<br />
+          I’ll be in touch soon.
+        </h3>
+        <p class="color-gray mt-2 text-center p-small">
+          Check your email for the FREE Transformation Guide.
+        </p>
+        <div class="row form-wraper mt-4">
+          <div class="col-12 d-flex justify-content-center">
+            <button
+              data-dismiss="modal"
+              aria-label="Close"
+              type="button"
+              class="button button-primary button-large claim-disc-btn"
+            >
+              Continue browsing!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <ng-template #notFound>
   <app-error404></app-error404>

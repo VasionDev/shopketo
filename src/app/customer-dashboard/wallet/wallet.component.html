@@ -1,0 +1,522 @@
+<div class="row mx--15">
+	<div class="col-sm-6 col-12">
+		<h2 class="color-black page-title wallet">{{ "wallet" | translate }}</h2>
+	</div>
+</div>
+
+<app-loader *ngIf="loader" class="payment--loader"></app-loader>
+<ng-container *ngIf="!loader">
+  <div class="row mx--15 mb-4 align-items-center">
+    <div class="col-sm-6 col-12">
+      <ul class="nav wallet-nav-tab">
+        <li (click)="isPointWallet = true;">
+          <a href="#points" data-toggle="tab" class="active"> {{ "points" | translate }} 
+            <span class="count-num">{{ pointWalletAmount | number: '1.2-2' }}</span>
+          </a>
+        </li>
+        <li *ngIf="!showLegalInfo && cashWalletId" (click)="isPointWallet = false;">
+          <a href="#cash" data-toggle="tab" class="">{{ "cash" | translate }} 
+            <span class="count-num">{{ currencySymbol}} {{ cashWalletAmount | number: '1.2-2' }}</span>
+          </a>
+        </li>
+        <li *ngIf="showLegalInfo && cashWalletId" data-target="#legalInformationRequiredModal" data-toggle="modal">
+          <a class="pointer">{{ "cash" | translate }}
+            <span class="count-num">{{ currencySymbol }} {{ cashWalletAmount | number: '1.2-2' }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-6 col-12">
+      <button 
+        *ngIf="isPointWallet && pointWalletAmount > 0"
+        (click)="getWalletCouponStatus()"
+        data-toggle="modal" 
+        data-target="#CreateCouponModal" 
+        class="button ml-auto addNew-btn create-coupon"
+        ><i class="fa-regular fa-gift mr-2"></i>{{ "create-coupon" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard__subscriptions">
+    <div class="tab-content wallet-tab-content">
+
+      <div class="tab-pane active" id="points">
+
+        <div class="wallet-points-available-col">
+          <div class="card mb-3 mb-sm-4">
+            <p class="disclaimer-bold text-uppercase"> {{ "points-available" | translate }} </p>
+            <div class="vip-num d-flex align-items-center">
+              <i class="fa-solid fa-coin color-yellow"></i>
+              <h3>{{ pointWalletAmount | number: '1.2-2' }}</h3>
+              <a href="#" (click)="onClickShopnow();">{{ "shop-now" | translate }} <i class="fa-regular fa-chevron-right ml-1"></i></a>
+            </div>
+            <p *ngIf="pointWalletAmount > 0" class="disclaimer-reg color-gray">{{ "thats-up-to" | translate }} {{ walletPoint | number: '1.2-2' }} {{ currencyCode }} {{ "off-your-next-order" | translate }}</p>
+            <p *ngIf="pointWalletAmount === 0" class="disclaimer-reg color-gray">{{ "your-points-balance-is-currently-empty" | translate }}</p>
+          </div>
+        </div>
+
+        <div *ngIf="expiringPoints.length" class="d-flex align-items-center wallet-expiring-card mb-3 mb-sm-4">
+          <p class="p-small color-white d-flex"><i class="fa-solid fa-circle-exclamation mr-3"></i> {{ "you-have-points-that-are-expiring-soon" | translate }}</p>
+          <button data-toggle="modal" data-target="#expiringPointsModal" class="ml-auto button button--default">{{ "view-details" | translate }}</button>
+        </div>
+
+        <!-- <div class="wallet-summary-card mb-3 mb-sm-4">
+          <h4 class="title">Summary</h4>
+          <div class="d-flex align-items-center summary-items">
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Total earned</p>
+                <h4 class="color-black">295</h4>
+              </div>
+            </div>
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Total redeemed</p>
+                <h4 class="color-black">145</h4>
+              </div>
+            </div>
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Pending</p>
+                <h4 class="color-black">25</h4>
+              </div>
+            </div>
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Expired</p>
+                <h4 class="color-black">-</h4>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="dashboard__subscription">
+          <div data-toggle="collapse" data-target="#collapseWalletPending" aria-controls="collapseWalletPending"
+            class="dahsboard__subscription__header collapsed" aria-expanded="false">
+            <h4> {{ "pending" | translate }}<span class="dahsboard__subscription__header__number">{{pendingPointTransactions.length}}</span></h4><i
+              class="fas fa-angle-down"></i>
+          </div>
+          <div id="collapseWalletPending" class="wallet-collapse-body collapse">
+            <div 
+              *ngFor="let transaction of pendingPointTransactions; let i = index;" 
+              class="wallet-history-item d-flex justify-content-between border-btm"
+            >
+              <div class="item-left">
+                <p class="p-small">{{transaction.title}}</p>
+                <p class="disclaimer-reg color-gray">{{transaction.date}} (CT)</p>
+              </div>
+              <div class="item-right text-right d-flex align-items-center">
+                <div>
+                  <h4 *ngIf="transaction.amount < 0" class="font-bold color-red">{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount > 0" class="font-bold color-green">+{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount == 0" class="font-bold">{{transaction.amount}}</h4>
+                  <!-- <p class="disclaimer-reg color-gray">Balance {{(transaction.balance+transaction.amount).toFixed(2)}}</p> -->
+                </div>
+              </div>
+            </div>
+            <div 
+              *ngIf="totalRecordsPending > pendingPointTransactions.length" 
+              class="btn-groups" style="padding-bottom: 27px"
+            >
+              <button 
+                [disabled]="loadingTransaction" 
+                (click)="onLoadMorePendingTransaction()"
+                class="button button-primary older-olders"
+              >{{ 'Load more' | translate }}
+              </button>
+            </div>
+          
+          </div>
+        </div>
+
+        <div class="dashboard__subscription">
+          <div data-toggle="collapse" data-target="#collapseWalletHistory" aria-expanded="false"
+            aria-controls="collapseWalletHistory" class="dahsboard__subscription__header collapsed">
+            <h4>{{ "history" | translate }} </h4><i class="fas fa-angle-down"></i>
+          </div>
+          <div id="collapseWalletHistory" class="wallet-collapse-body collapse">
+            <div *ngFor="let transaction of completeTransactions; let i = index;" class="wallet-history-item d-flex justify-content-between border-btm">
+              <div class="item-left">
+                <p class="p-small">{{transaction.title}}</p>
+                <p class="disclaimer-reg color-gray">{{transaction.date}} (CT)</p>
+              </div>
+              <div class="item-right text-right d-flex align-items-center">
+                <div>
+                  <h4 *ngIf="transaction.amount < 0" class="font-bold color-red">{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount > 0" class="font-bold color-green">+{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount == 0" class="font-bold">{{transaction.amount}}</h4>
+                  <!-- <p class="disclaimer-reg color-gray">Balance {{(transaction.balance+transaction.amount).toFixed(2)}}</p> -->
+                </div>
+              </div>
+            </div>
+            <div 
+              *ngIf="totalRecords > completeTransactions.length" 
+              class="btn-groups" style="padding-bottom: 27px"
+            >
+              <button 
+                [disabled]="loadingTransaction" 
+                (click)="onLoadMoreTransaction()"
+                class="button button-primary older-olders"
+              >{{ 'Load more' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="cash">
+        <div class="wallet-points-available-col">
+          <div class="card mb-3 mb-sm-4">
+            <p class="disclaimer-bold text-uppercase">{{ "cash-available" | translate }}</p>
+            <div class="vip-num d-flex align-items-center">
+
+              <span class="color-yellow p-small">{{ cashCurrencyCode }}</span>
+              <h3>{{ currencySymbol }} {{ cashWalletAmount | number: '1.2-2'}}</h3>
+              <a href="{{userURL + '#/wallet'}}" target="_blank">{{ "withdraw-funds" | translate }}<i class="fa-regular fa-chevron-right ml-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center wallet-expiring-card cash mb-3 mb-sm-4">
+          <p class="p-small color-white"><i class="fa-solid fa-circle-exclamation mr-3"></i> {{ "your-cash-wallet-settings-withdrawals" | translate }}</p>
+          <a href="{{userURL + '#/wallet'}}" target="_blank" class="ml-auto button button--default">{{ "go-to-cloud-office-1-0" | translate }} <i class="fa-regular fa-arrow-up-right-from-square ml-2"></i></a>
+        </div>
+        <!-- <div class="wallet-summary-card mb-3 mb-sm-4">
+          <h4 class="title">Summary</h4>
+          <div class="d-flex align-items-center summary-items">
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Total earned</p>
+                <h4 class="color-black">$134.50</h4>
+              </div>
+            </div>
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Total Withdrawn</p>
+                <h4 class="color-black">$0</h4>
+              </div>
+            </div>
+            <div class="item-col">
+              <div class="card">
+                <p class="disclaimer-reg text-uppercase">Pending</p>
+                <h4 class="color-black">-</h4>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="dashboard__subscription">
+          <div data-toggle="collapse" data-target="#collapseWalletPending" aria-controls="collapseWalletPending"
+            class="dahsboard__subscription__header collapsed" aria-expanded="false">
+            <h4> {{ "pending" | translate }}<span class="dahsboard__subscription__header__number">{{pendingCashTransactions.length}}</span></h4><i
+              class="fas fa-angle-down"></i>
+          </div>
+          <div id="collapseWalletPending" class="wallet-collapse-body collapse">
+            <div 
+              *ngFor="let transaction of pendingCashTransactions" 
+              class="wallet-history-item d-flex justify-content-between border-btm"
+            >
+              <div class="item-left">
+                <p class="p-small">{{transaction.title}}</p>
+                <p class="disclaimer-reg color-gray">{{transaction.date}} (CT)</p>
+              </div>
+              <div class="item-right text-right d-flex align-items-center">
+                <div>
+                  <h4 *ngIf="transaction.amount < 0" class="font-bold color-red">-{{transaction.currency}}{{transaction.amount*-1 | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount > 0" class="font-bold color-green">+{{transaction.amount}}{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount == 0" class="font-bold">{{transaction.currency}}{{transaction.amount}}</h4>
+                  <!-- <p class="disclaimer-reg color-gray">Balance {{(transaction.balance+transaction.amount).toFixed(2)}}</p> -->
+                </div>
+              </div>
+            </div>
+            <div 
+              *ngIf="totalPendingCashRecords > pendingCashTransactions.length" 
+              class="btn-groups" style="padding-bottom: 27px"
+            >
+              <button 
+                [disabled]="loadingTransaction" 
+                (click)="onLoadMorePendingCWTransaction()"
+                class="button button-primary older-olders"
+              >{{ 'Load more' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard__subscription">
+          <div data-toggle="collapse" data-target="#collapseWalletHistory" aria-expanded="false"
+            aria-controls="collapseWalletHistory" class="dahsboard__subscription__header collapsed">
+            <h4>{{ "history" | translate }} </h4><i class="fas fa-angle-down"></i>
+          </div>
+          <div id="collapseWalletHistory" class="wallet-collapse-body collapse">
+            <div *ngFor="let transaction of completeCashTransactions" class="wallet-history-item d-flex justify-content-between border-btm">
+              <div class="item-left">
+                <p class="p-small">{{transaction.title}}</p>
+                <p class="disclaimer-reg color-gray">{{transaction.date}} (CT)</p>
+              </div>
+              <div class="item-right text-right d-flex align-items-center">
+                <a 
+                  *ngIf="transaction.details !== ''"
+                  target="_blank"
+                  [href]="transaction.details" 
+                  class="btn-details">{{ "details" | translate }} <i class="fa-regular fa-arrow-up-right-from-square ml-2"></i>
+                </a>
+                <div>
+                  <h4 *ngIf="transaction.amount < 0" class="font-bold color-red">-{{transaction.currency}}{{transaction.amount*-1 | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount > 0" class="font-bold color-green">+{{transaction.currency}}{{transaction.amount | number: '1.2-2'}}</h4>
+                  <h4 *ngIf="transaction.amount == 0" class="font-bold">{{transaction.currency}}{{transaction.amount}}</h4>
+                  <!-- <p class="disclaimer-reg color-gray">Balance {{transaction.currency}}{{(transaction.balance+transaction.amount).toFixed(2)}}</p> -->
+                </div>
+              </div>
+            </div>
+            <div 
+              *ngIf="totalCashRecords > completeCashTransactions.length + pendingCashTransactions.length" 
+              class="btn-groups" style="padding-bottom: 27px"
+            >
+              <button 
+                [disabled]="loadingTransaction" 
+                (click)="onLoadMoreCashTransaction()"
+                class="button button-primary older-olders"
+              >{{ 'Load more' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+
+<div
+  id="CreateCouponModal" 
+  tabindex="-1" 
+  class="modal animate fade right-mobile addresses-modal create-coupon-modal update-products-modal1 wdt-480" 
+  aria-modal="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+        <p class="w-100 d-flex justify-content-between align-items-center mb-hide">
+            <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close"><i aria-hidden="true" class="fal fa-times"></i></a>
+        </p>
+        <h3 class="title color-black mb-show">
+            <a data-dismiss="modal" aria-label="Close" class="color-black pointer"><i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-3"></i>{{ "create-coupon" | translate }}</a>
+        </h3>
+        <h3 class="title color-black mb-hide">{{ "create-coupon" | translate }}</h3>
+      </div>
+      <app-loader *ngIf="!isCouponLoaded" class="payment--loader"></app-loader>
+      <ng-container *ngIf="isCouponLoaded">
+        <div class="modal-body p-0">
+          <div class="p-sm-4 p-3">
+            <p class="disclaimer-reg color-black mb-2">{{ "please-enter-the-amount-that-you-would-like" | translate }}</p>
+            <p class="disclaimer-reg color-black">
+              {{ "note-once-you-create-coupon" | translate }}</p>
+        
+            <div *ngIf="weeklyCoupon?.isSuccess" class="row limit-row">
+              <div class="cont col">
+                <p class="p-small font-bold color-gray-dark mb-1">
+                  {{ "available-to-use" | translate }}
+                </p>
+                <h4 class="font-18 color-black">
+                  P {{ (weeklyCoupon.weeklyLimit - weeklyCoupon.weeklySpendings) | number: '1.2-2' }}
+                </h4>
+              </div>
+              <div class="cont col prog-limit">
+                <p class="p-small font-bold color-gray-dark mb-1">
+                  {{ "weekly-limit" | translate }}
+                </p>
+                <div class="progress">
+                  <div 
+                    class="progress-bar" 
+                    role="progressbar" 
+                    [ngStyle]="{'width': (weeklyCoupon.weeklySpendings/weeklyCoupon.weeklyLimit * 100) + '%' }" 
+                    aria-valuenow="60" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <p class="disclaimer-reg color-gray">P {{weeklyCoupon.weeklySpendings}} of P {{weeklyCoupon.weeklyLimit}} used</p>
+              </div>
+            </div>
+            <div class="form-group p-0">
+              <ng-container 
+                *ngIf="weeklyCoupon.weeklyLimit > weeklyCoupon.weeklySpendings"
+              >
+                <label class="color-black mb-2">{{ "amount" | translate }}</label>
+                <input 
+                  [disabled]="10 > pointWalletAmount"
+                  (keyup)="onChangeCouponAmount($event)"
+                  type="text" 
+                  placeholder="0.00"
+                  class="form-control bg-color"
+                >
+              </ng-container>
+              <p
+                *ngIf="weeklyCoupon.weeklySpendings >= weeklyCoupon.weeklyLimit"
+                class="error-text disclaimer-reg"
+              >
+              {{ "you-exceeded-weekly-limit" | translate }}
+              </p>
+              <p 
+                *ngIf="10 > couponAmount && couponAmount != 0" 
+                class="error-text disclaimer-reg"
+              >
+              {{ "amount-should-be-greater-than" | translate }}
+              </p>
+              <p 
+                *ngIf="couponAmount+weeklyCoupon.weeklySpendings > weeklyCoupon.weeklyLimit" 
+                class="error-text disclaimer-reg"
+              >
+              {{ "amount-exceeds-available-amount-value" | translate }}
+              </p>
+              <p
+                *ngIf="weeklyCoupon.weeklyLimit > weeklyCoupon.weeklySpendings
+                && couponAmount >= 0 
+                && weeklyCoupon.weeklyLimit >= couponAmount+weeklyCoupon.weeklySpendings"
+                class="disclaimer-reg color-gray mt-2"
+              >
+                P {{ (pointWalletAmount - couponAmount > 0 ? pointWalletAmount - couponAmount : 0) | number: '1.2-2' }} {{ "will-remain-after-use" | translate }}
+              </p>
+            </div>
+          </div>
+          <div *ngIf="pendingCoupons.length" class="dashboard__subscription">
+            <div 
+              data-toggle="collapse" 
+              data-target="#collapseWalletPendingCoupons" 
+              aria-controls="collapseWalletPendingCoupons" 
+              class="dahsboard__subscription__header collapsed" 
+              aria-expanded="false"
+            >
+              <h4 class="color-black">{{ "pending-coupons" | translate }}<span class="dahsboard__subscription__header__number">{{pendingCoupons.length}}</span></h4><i class="fas fa-angle-down"></i>
+            </div>
+            <div id="collapseWalletPendingCoupons" class="wallet-collapse-body collapse">
+              <div 
+                *ngFor="let coupon of pendingCoupons; let last = last" 
+                class="wallet-history-item d-flex justify-content-between"
+                [ngClass]="{'border-btm': !last}"
+              >
+                <div class="item-left">
+                  <ng-container>
+                    <h4 class="color-black">{{coupon.name}}</h4>
+                    <p 
+                      #container 
+                      class="disclaimer-reg color-gray"
+                    >
+                      {{coupon.code}} 
+                      <i 
+                        (click)="copy($event)"
+                        ngxClipboard
+                        [cbContent]="coupon.code"
+                        [container]="container"
+                        data-toggle="tooltip"
+                        title="{{ (isMobile ? 'coupon-copied' : 'copy-coupon') | translate }}"
+                        data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                        class="fa-light fa-clone ml-2 color-gray-dark pointer"
+                      ></i>
+                      <i
+                        data-toggle="tooltip"
+                        title="{{ 'coupon-copied' | translate }}"
+                        data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                        class="color-green ml-2 fa-check fa-regular hide"
+                      ></i>
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="item-right text-right d-flex align-items-center">
+                  <button 
+                    (click)="onRecycleCoupon(coupon.code, $event)"
+                    [disabled]="recycleCouponLoader"
+                    type="button" 
+                    class="btn button-primary font-bold btn-red"
+                  > 
+                  {{ "recycle" | translate }} <i class="fa fa-spinner hide fa-spin ml-1"></i>
+                  </button>
+                  <button 
+                    (click)="downloadPdf(coupon.code, $event)"
+                    [disabled]="couponDownloader"
+                    type="button" 
+                    class="btn btn-gray"
+                  >
+                    <i class="fa-regular fa-print"></i>
+                    <i class="fa fa-spinner fa-spin hide"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button 
+            [disabled]="createCouponLoader 
+            || couponAmount > pointWalletAmount 
+            || couponAmount+weeklyCoupon.weeklySpendings > weeklyCoupon.weeklyLimit || 10 > couponAmount"
+            (click)="onCreateCoupon()"
+            class="btn button-primary confirm-btn font-bold ml-auto px-3 m-0">{{ "create-coupon" | translate }} 
+            <i
+            class="fa fa-spinner fa-spin ml-1"
+            *ngIf="createCouponLoader"
+            ></i>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div 
+  id="expiringPointsModal"
+  tabindex="-1" 
+  class="modal animate fade right-mobile addresses-modal expiring-points-modal wdt-480"
+  aria-modal="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column gray-bg">
+          <p class="w-100 d-flex justify-content-between align-items-center mb-hide">
+              <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close"><i aria-hidden="true" class="fal fa-times"></i></a>
+          </p>
+          <h3 class="title color-black mb-show">
+              <a data-dismiss="modal" aria-label="Close" class="color-black pointer"><i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-3"></i>{{ "expiring-points" | translate }}</a>
+          </h3>
+          <h3 class="title color-black mb-hide">{{ "expiring-points" | translate }}</h3>
+          <p class="p-small color-gray">{{ "funds-in-this-wallet-will-expire" | translate }}</p>
+      </div>
+      <div class="modal-body p-0">
+          <div class="p-sm-4 p-3">
+              <ul>
+                  <li 
+                    *ngFor="let expWallet of expiringPoints; let last = last" 
+                    class="d-flex justify-content-between align-items-center py-2"
+                    [ngClass]="{ 'border-bottom': !last }"
+                  >
+                      <h4 class="color-black font-18">{{expWallet.point}}</h4>
+                      <p class="disclaimer-reg color-gray">{{expWallet.expireTime}} (RTZ) <strong class="color-red ml-2 text-uppercase"><i class="fa-regular fa-clock mr-1"></i> {{expWallet.expireDate}}</strong> </p>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="legalInformationRequiredModal" tabindex="-1" class="modal animate fade right-mobile addresses-modal legal-info-req-modal wdt-480" aria-modal="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content animate-bottom">
+            <div class="modal-header flex-column gray-bg">
+                <h3 class="title color-black">{{ "legal-information-required" | translate }}</h3>
+            </div>
+            <div class="modal-body p-0">
+                <div class="p-sm-4 p-3">
+                    <h1 class="text-center"><i class="fa-solid fa-triangle-exclamation"></i></h1>
+                    <p class="color-black p-small">{{ "in-conjunction-with-your-promoter-membership" | translate }}</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between pl-4">
+              <div class="d-flex justify-content-between align-items-center w-100 m-0">
+                <a href="{{userURL + '#/wallet'}}" target="_blank" class="btn button-primary pointer font-bold px-3">{{ "review-legal-information" | translate }}</a>
+                <span (click)="onLogOut()" class="btn color-black p-small font-bold ml-auto"> <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i> {{ "log-out" | translate }}</span>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

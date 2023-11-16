@@ -1,0 +1,141 @@
+<h4 *ngIf="!isOrderSuccess" [hidden]="orderHistory.length == 0">{{ "recent" | translate }}</h4>
+<app-loader *ngIf="loaderHistory" class="payment--loader"></app-loader>
+<div class="dashboard__wrapper orders--wrapper mb-4">
+  <div *ngIf="orderHistory && !loaderHistory">
+    <ng-container *ngFor="let order of orderHistory; let i = index">
+      <div class="order__history__item shipped" [ngClass]="{
+          fulfilment: order.shipStatus == 2,
+          shipped: order.shipStatus == 10,
+          canceled: order.shipStatus == 27,
+          shipment: order.shipStatus == 19 || order.shipStatus == 14,
+          delivered: order.shipStatus == 23,
+          'not-paid': order.shipStatus == 12 || order.shipStatus == 22
+        }">
+        <div class="order__information">
+          <div>
+            <span *ngIf="order.shipStatus == 2" class="order__name">{{
+              "fulfillment" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 12" class="order__name">{{
+              "returned-initial" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 23" class="order__name">{{
+              "delivered" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 18" class="order__name">{{
+              "returned-undelivered" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 19" class="order__name">{{
+              "automated-hold" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 10" class="order__name">{{
+              "shipped" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 14" class="order__name">{{
+              "returned-refund" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 22" class="order__name">{{
+              "returned-before-shipment" | translate
+            }}</span>
+            <span *ngIf="order.shipStatus == 27" class="order__name">{{
+              "canceled" | translate
+            }}</span>
+          </div>
+          <span class="order__date">
+            #{{ order.orderId
+            }}<i *ngIf="order.orderName == 'smartOrder'" class="far fa-repeat"></i></span>
+          <span class="order__date">
+            {{ order.dateCreated | date : "MMM d" }}
+          </span>
+        </div>
+
+        <div class="order__options">
+
+          <div>
+            <span class="cancelation__request">
+              <app-timer *ngIf="order.cancellationAvailableUntil || order.cancellationStatus"
+                [cancelStatus]="order.cancellationStatus" [cancelUntil]="order.cancellationAvailableUntil"
+                (click)="showCancelationPop(order.orderId, order.cancellationStatus)">
+              </app-timer>
+            </span>
+            <span
+              *ngIf="order.shipStatus == 19 && tenant == 'pruvit' && !order.cancellationAvailableUntil && !order.cancellationStatus"
+              class="order__view__updates mr-2">
+              <a class="color-gray" href="https://support.justpruvit.com/hc/en-us/articles/360060948311--Shipping-Updates-"
+                target="_blank">{{ "view-shipping-updates" | translate }} <i
+                  class="fal fa-chevron-right font-weight-normal ml-1" aria-hidden="true"></i></a></span>
+            <span *ngFor="
+                let product of order.orderItems.slice(0, 3);
+                let i = index
+              " class="order__history__item__product">
+              <img *ngIf="!product.imageUrl" src="assets/images/no-product-image.png" data-toggle="tooltip"
+                title="{{ product.quantity }} x {{ product.name }}" />
+              <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" data-toggle="tooltip" data-placement="top"
+                title="{{ product.quantity }} x {{ product.name }}" />
+              <span class="order__history__item__product__quantity">{{
+                product.quantity
+              }}</span>
+            </span>
+            <span *ngIf="order.orderItems.length > 3"
+              class="more__products__indicator">+{{ order.orderItems.length - 3 }}</span>
+          </div>
+          <div class="order__options__menus">
+            <span class="cancelation__request cancelation__request--mobile">
+              <app-timer *ngIf="order.cancellationAvailableUntil || order.cancellationStatus"
+                [cancelStatus]="order.cancellationStatus" [cancelUntil]="order.cancellationAvailableUntil"
+                (click)="showCancelationPop(order.orderId, order.cancellationStatus)">
+              </app-timer>
+            </span>
+            <span
+              *ngIf="order.shipStatus == 19 && tenant == 'pruvit' && !order.cancellationAvailableUntil && !order.cancellationStatus"
+              class="order__view__updates mr-2 view__updates--mobile">
+              <a class="color-gray" href="https://support.justpruvit.com/hc/en-us/articles/360060948311--Shipping-Updates-"
+                target="_blank">{{ "view-shipping-updates" | translate }} <i
+                  class="fal fa-chevron-right font-weight-normal ml-1" aria-hidden="true"></i></a></span>
+            <button mat-icon-button [matMenuTriggerFor]="menuOrders" class="button orders--button">
+              <span class="desktop__actions">{{ "actions" | translate }} <i class="fas fa-angle-down"></i></span>
+            </button>
+            <mat-menu #menuOrders="matMenu" xPosition="before">
+              <button class="mat-menu-item--custom" mat-menu-item (click)="printReceipt(order.invoiceId)">
+                <i class="far fa-print"></i><span>{{ "print-receipt" | translate }}</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="modal animate fade right-mobile addresses-modal change-referrer-code-modal" id="cancelationModal"
+  tabindex="-1" aria-labelledby="cancelationModal" aria-hidden="true" data-backdrop="static">
+  <div class="dashboard--modal modal-dialog modal-dialog-centered">
+    <div class="modal-content animate-bottom">
+      <div class="modal-header flex-column">
+
+        <h3 class="title color-black">
+          {{ 'cancel_order_title' | translate }}
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex pl-3 pr-3 mb-3">
+          <p>
+            {{ 'cancelation_message' | translate : {orderId:orderId} }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pl-3 pr-3 justify-content-start d-flex" style="width: 100%;">
+          <button type="button" class="button  button--default button--grey" data-dismiss="modal" aria-label="Close">
+            <span>{{ "close" | translate }}</span>
+          </button>
+          <button [disabled]="loading" type="button" class="button button--default button--danger ml-3"
+            (click)="requestCancel()">
+            {{ 'request_cancellation' | translate}}
+
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

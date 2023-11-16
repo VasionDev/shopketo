@@ -1,0 +1,63 @@
+<div *ngIf="isVisible">
+    <div *ngIf=" statusInfo?.numberOfCartsInQueue> 0"
+        class="modal-body-card invoice--card px-0 mt-sm-3 mt-2 mb-3 dashbooard--invoice">
+        <div class="card alert-card pending--card cart--status--card">
+            <span class="mr-3"> <i class="fa-solid fa-rotate-right"></i></span>
+            <div>
+                <p class="p-small pr-sm-5 font-weight-bold">
+                    {{ "cart-status-pending" | translate: {numberOrders: statusInfo?.numberOfCartsInQueue} }}
+
+                </p>
+                <p class="p-small pr-sm-5">
+                    {{ "total-proccessing" | translate}}
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div *ngIf="!statusInfo?.numberOfCartsInQueue && !statusInfo?.lastErrorMessage"
+        class="modal-body-card invoice--card px-0 mt-sm-3 mt-2 mb-3 dashbooard--invoice">
+        <div class="card alert-card success--card cart--status--card">
+            <span class="mr-3"> <i class="fa-solid fa-circle-check"></i></span>
+            <div>
+                <p class="p-small pr-sm-5 font-weight-bold">
+
+                    {{ "cart-order-success" | translate: {currency:'$',total: statusInfo?.lastTotal} }}
+                </p>
+                <p class="p-small pr-sm-5">
+                    {{ "cart-message-success" | translate}}
+                </p>
+            </div>
+            <div class="btn-groups">
+                <button class="btn button-primary" [disabled]="loading" (click)="dismiss()">
+                    {{ "dismiss" | translate }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="!statusInfo?.numberOfCartsInQueue && statusInfo?.lastErrorMessage"
+        class="modal-body-card invoice--card px-0 mt-sm-3 mt-2 mb-3 dashbooard--invoice">
+        <div class="card alert-card cart--status--card error--card">
+            <span class="mr-3"> <i class="fas fa-exclamation-circle"></i></span>
+            <div>
+                <p class="p-small pr-sm-5 font-weight-bold">
+                    {{ "cart-status-error" | translate: {currency:'$',total: statusInfo?.lastTotal} }}
+                </p>
+                <p class="p-small pr-sm-5">
+                    {{statusInfo?.lastErrorMessage}}
+                </p>
+            </div>
+            <div class="btn-groups">
+                <button class="btn button-primary" [disabled]="loading" (click)="dismiss()">
+                    {{ "dismiss" | translate }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,31 +1,44 @@
 <div class="row websites-dashborad">
   <div class="col-12 websites-wraper">
-    <div class="row mt-3 mx--15">
+    <div class="row mx--15">
       <div class="col-sm-8 col-12">
-        <h2 class="color-black title">My websites</h2>
+        <h2 class="color-black page-title">{{ "my-websites" | translate }}</h2>
       </div>
     </div>
 
-    <div class="row mt-3 mx--15">
+    <div class="row mx--15">
       <div
         class="col-sm-6 col-12"
-        *ngFor="let site of sites | keyvalue: returnZero"
+        *ngFor="let site of sites | keyvalue : returnZero"
       >
         <div class="card card-default web-card">
           <h3 class="color-black">{{ site.value.name }}</h3>
-          <p class="disclaimer-reg refr-link">Referral link</p>
+          <p class="disclaimer-reg refr-link">
+            {{ "referral-link" | translate }}
+          </p>
           <p class="p-small font-bold mt-1">
-            <a
+            <span class="color-black">{{ user?.code }}.{{ site.key }}</span>
+            <i
               (click)="copy()"
-              href="#"
-              class="link-hover color-black clone-icon-hover"
-              >{{ user?.code }}.{{ site.key }}</a
-            >
+              data-toggle="tooltip"
+              title="Copy link"
+              data-template="<div class='websites-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+              class="fa-clone fa-regular {{ linkCopied ? 'hide' : '' }}"
+            ></i>
+            <i
+              data-toggle="tooltip"
+              title="Link copied"
+              data-template="<div class='websites-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+              class="color-green fa-check fa-regular {{
+                !linkCopied ? 'hide' : ''
+              }}"
+            ></i>
           </p>
           <div class="row sk-web-button align-items-center mt-4">
             <div class="col">
               <button class="btn button-primary" (click)="onClickSettings()">
-                <i class="fa-regular fa-palette"></i>Personalize
+                <i class="fa-regular fa-palette"></i
+                >{{ "personalize" | translate }}
               </button>
             </div>
             <div class="col">
@@ -58,64 +71,90 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="pro-text text-center"><span class="btn">PRO</span></p>
+        <p class="pro-text text-center">
+          <span class="btn">{{ "pro" | translate }}</span>
+        </p>
 
-        <h3 class="color-black text-center title">You found a PRØ feature!</h3>
+        <h3 class="color-black text-center title">
+          {{ "you-found-a-pro-feature" | translate }}
+        </h3>
         <p class="color-black details">
-          Upgrade with a Pulse Pro subscription today to enjoy upgraded features
-          both here, and in the Prüvit Pulse app.
+          {{
+            "upgrade-with-a-pulse-pro-subscription-today-to-enjoy-upgraded-features"
+              | translate
+          }}
         </p>
 
         <ul>
           <li class="color-black">
-            Welcome your website visitors with a personal video
+            {{
+              "welcome-your-website-visitors-with-a-personal-video" | translate
+            }}
           </li>
           <li class="color-black">
-            Personalized links, bio, social buttons, and color theme
+            {{
+              "personalized-links-bio-social-buttons-and-color-theme"
+                | translate
+            }}
           </li>
           <li class="color-black">
-            Pick your favorite products for visitors to easily add to cart
+            {{
+              "pick-your-favorite-products-for-visitors-to-easily-add-to-cart"
+                | translate
+            }}
           </li>
           <li class="color-black">
-            Access detailed visitor stats with Google Analytics
+            {{
+              "access-detailed-visitor-stats-with-google-analytics" | translate
+            }}
           </li>
         </ul>
 
         <div class="row">
           <div class="col-sm-6 col-12">
             <div class="card text-center most">
-              <span class="most-taq">Most popular</span>
+              <span class="most-taq">{{ "most-popular" | translate }}</span>
               <h3 class="color-black">$8.25 /mth</h3>
               <p class="color-black font-bold price">
-                Annual <span class="color-green">Save $140</span>
+                {{ "annual" | translate }}
+                <span class="color-green">{{ "save" | translate }} $140</span>
               </p>
-              <p class="color-gray p-small">Billed at $99 per year</p>
+              <p class="color-gray p-small">
+                {{ "billed-at-99-per-year" | translate }}
+              </p>
               <button
                 (click)="onClickProSubscription('annual')"
                 class="btn button-primary"
               >
-                Start 14 day FREE trial
+                {{ "start-14-day-free-trial" | translate }}
               </button>
             </div>
           </div>
           <div class="col-sm-6 col-12">
             <div class="card text-center">
               <h3 class="color-black">$19.99 /mth</h3>
-              <p class="color-black font-bold price">Monthly</p>
-              <p class="color-gray p-small">Billed at $19.99 per month</p>
+              <p class="color-black font-bold price">
+                {{ "monthly" | translate }}
+              </p>
+              <p class="color-gray p-small">
+                {{ "billed-at-19.99-per-month" | translate }}
+              </p>
               <button
                 (click)="onClickProSubscription('monthly')"
                 class="btn button-primary"
               >
-                Start 14 day FREE trial
+                {{ "start-14-day-free-trial" | translate }}
               </button>
             </div>
           </div>
         </div>
 
         <p class="note-text p-small color-white font-bold">
-          <i class="fa-solid fa-circle-info mr-2"></i> First charge will process
-          in 14 days after free access expires
+          <i class="fa-solid fa-circle-info mr-2"></i>
+          {{
+            "first-charge-will-process-in-14-days-after-free-access-expires"
+              | translate
+          }}
         </p>
       </div>
     </div>

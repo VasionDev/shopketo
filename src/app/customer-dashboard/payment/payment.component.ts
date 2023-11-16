@@ -23,7 +23,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   constructor(
     private newgenService: NewgenApiService,
     private userEmitterService: UserEmitterService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userEmitterService.getProfileObs().subscribe((x) => {

@@ -1,0 +1,3730 @@
+{
+  "result": {
+    "skippedRecords": 0,
+    "pageSize": 100,
+    "records": [
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MTJlOTVhZWYtYmY4MC00MTM4LWJmZDAtODYyZjczYjkxMGJi0",
+        "trackingCode": "PJTNBY",
+        "givenName": "TestG",
+        "familyName": "TestY",
+        "email": "galina.yaneva@eldersoss.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-18T08:46:09.4846128Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:12e95aef-bf80-4138-bfd0-862f73b910bb"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "PJTNBY"
+          }
+        ],
+        "dateCreated": "2023-01-18T08:46:09.7903853Z",
+        "updatedAt": "2023-01-18T08:46:09.946617Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OTA1ODQ4NjItOGM1OC00YThjLWIzZDEtOTEyZmYzYzlhYTdk0",
+        "trackingCode": "AQWSGB",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz+regemail1@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-14T14:53:58.1068337Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:90584862-8c58-4a8c-b3d1-912ff3c9aa7d"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "AQWSGB"
+          }
+        ],
+        "dateCreated": "2023-01-14T14:53:58.6995833Z",
+        "updatedAt": "2023-01-14T14:53:58.7340896Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YWI3OGU2OGUtMzI1NC00ZmE5LWExN2EtNzc2MjAxYmM5NjRk0",
+        "trackingCode": "N7KTYN",
+        "givenName": "test12341234@test.com",
+        "familyName": "test12341234@test.com",
+        "email": "test12341234@test.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-13T15:39:41.5519575Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:ab78e68e-3254-4fa9-a17a-776201bc964d"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "N7KTYN"
+          }
+        ],
+        "dateCreated": "2023-01-13T15:38:26.3786881Z",
+        "updatedAt": "2023-01-13T15:39:41.567599Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDg0ZThhNmYtZjZhNC00MTUyLTgwM2ItOWVlMDIyODBjODQw0",
+        "trackingCode": "FA7R5U",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz+112233@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-12T01:55:16.233246Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d84e8a6f-f6a4-4152-803b-9ee02280c840"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "FA7R5U"
+          }
+        ],
+        "dateCreated": "2023-01-12T01:55:01.4351517Z",
+        "updatedAt": "2023-01-12T01:55:16.2660959Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MTk3MmM2MzItZWQ4ZS00YzI5LTljZjYtNTRhZmEwMjRlZTI00",
+        "trackingCode": "D4WHYB",
+        "givenName": "Inna",
+        "familyName": "Test",
+        "email": "innessa.test@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-11T14:13:22.3032957Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:1972c632-ed8e-4c29-9cf6-54afa024ee24"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "D4WHYB"
+          }
+        ],
+        "dateCreated": "2023-01-11T14:12:32.2117735Z",
+        "updatedAt": "2023-01-11T14:13:22.3345562Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZjhiMDFjNTItZjI3MC00NzNkLWFhMTgtMzNiN2Q0ZGE4NmM40",
+        "trackingCode": "UDHAG8",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-11T14:04:41.9239378Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:f8b01c52-f270-473d-aa18-33b7d4da86c8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "UDHAG8"
+          }
+        ],
+        "dateCreated": "2023-01-11T14:04:42.0567609Z",
+        "updatedAt": "2023-01-11T14:04:42.0872118Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZTNkNzdjYjMtZmQyYi00ZWNlLThmMDctMzU4YjU0MDQxNjRi0",
+        "trackingCode": "C3CFWP",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-11T14:02:47.5623634Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:e3d77cb3-fd2b-4ece-8f07-358b5404164b"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "C3CFWP"
+          }
+        ],
+        "dateCreated": "2023-01-11T14:02:17.556943Z",
+        "updatedAt": "2023-01-11T14:02:47.577883Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MWQ2NzQ1OGItOGU5NS00ODEzLTkyOWMtNzc3OGQyODkyZjRm0",
+        "trackingCode": "M9HPWC",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-11T14:00:30.3028382Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:1d67458b-8e95-4813-929c-7778d2892f4f"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "M9HPWC"
+          }
+        ],
+        "dateCreated": "2023-01-11T14:00:30.4088425Z",
+        "updatedAt": "2023-01-11T14:00:30.4088425Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OGZiZDdhYjktNDQ0NC00MmQ0LTlmMjAtYzA5ODdjYjY3YmVi0",
+        "trackingCode": "NP3K7E",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz+pppqqq@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-11T13:55:28.8841044Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:8fbd7ab9-4444-42d4-9f20-c0987cb67beb"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "NP3K7E"
+          }
+        ],
+        "dateCreated": "2023-01-11T13:54:29.5958077Z",
+        "updatedAt": "2023-01-11T13:55:28.9379965Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZmM3ZWM3MDktNmIyZi00NTkzLTg4ODgtYjQ0N2FjYzU4OGYz0",
+        "trackingCode": "TBYQAN",
+        "givenName": "Josh",
+        "familyName": "Test 11",
+        "email": "johstest11@test.cc",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-11T10:58:33.0045829Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:fc7ec709-6b2f-4593-8888-b447acc588f3"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "TBYQAN"
+          }
+        ],
+        "dateCreated": "2023-01-11T10:56:53.0162699Z",
+        "updatedAt": "2023-01-11T10:58:33.0671409Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6M2Y2OWMxZGEtNjhkYy00NzY4LTk1YWItY2FmY2UyM2I0ZTFl0",
+        "trackingCode": "FWHGTY",
+        "givenName": "Josh",
+        "familyName": "Test",
+        "email": "joshtes@test.cc",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-11T05:45:54.1055596Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:3f69c1da-68dc-4768-95ab-cafce23b4e1e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "FWHGTY"
+          }
+        ],
+        "dateCreated": "2023-01-11T05:44:49.1410281Z",
+        "updatedAt": "2023-01-11T05:45:54.1524491Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MzAzNGRhMmYtMjdhOS00ZDY0LWFiNGQtM2YzYTAyMjg1ZGQ40",
+        "trackingCode": "65G2PU",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T20:28:23.8258059Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:3034da2f-27a9-4d64-ab4d-3f3a02285dd8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "65G2PU"
+          }
+        ],
+        "dateCreated": "2023-01-10T20:28:23.9521745Z",
+        "updatedAt": "2023-01-10T20:28:23.9677535Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZjVlN2MzMTktMmE3ZC00ZmIyLWFmZGUtM2Q1NjQ2YzIzMDU40",
+        "trackingCode": "3FBJAH",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T20:26:55.1136048Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:f5e7c319-2a7d-4fb2-afde-3d5646c23058"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "3FBJAH"
+          }
+        ],
+        "dateCreated": "2023-01-10T20:26:55.2243129Z",
+        "updatedAt": "2023-01-10T20:26:55.2555697Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YmM1M2U1MjctZTEyMy00YTZkLWIxZDItZjBmZDEwYjA3NTJl0",
+        "trackingCode": "QGTGEY",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-10T20:20:31.2183661Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:bc53e527-e123-4a6d-b1d2-f0fd10b0752e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "QGTGEY"
+          }
+        ],
+        "dateCreated": "2023-01-10T20:20:05.8565976Z",
+        "updatedAt": "2023-01-10T20:20:31.2339872Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YTEwNmU3MzEtYTI1ZC00NTAwLTkyYjctNzUyYWI4ODNlZjUx0",
+        "trackingCode": "N2ND7M",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T16:26:49.088308Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:a106e731-a25d-4500-92b7-752ab883ef51"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "N2ND7M"
+          }
+        ],
+        "dateCreated": "2023-01-10T16:26:49.8388507Z",
+        "updatedAt": "2023-01-10T16:26:49.8856532Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OGNhZGE3M2EtNjc1Yi00YTYwLWI1YWYtODAwZGIxNGJhNmVk0",
+        "trackingCode": "D5XX2P",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T15:39:44.7430077Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:8cada73a-675b-4a60-b5af-800db14ba6ed"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "D5XX2P"
+          }
+        ],
+        "dateCreated": "2023-01-10T15:39:45.1558541Z",
+        "updatedAt": "2023-01-10T15:39:45.3013413Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ODI0NDNkYjEtNzc1OS00NjBhLThkMjQtZDQ4NjFlZWY2YzQw0",
+        "trackingCode": "9DQC5S",
+        "givenName": "Craig",
+        "familyName": "Testing",
+        "email": "craig.jorgensen@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T14:21:51.9997038Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:82443db1-7759-460a-8d24-d4861eef6c40"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "9DQC5S"
+          }
+        ],
+        "dateCreated": "2023-01-10T14:21:52.1407739Z",
+        "updatedAt": "2023-01-10T14:21:52.2043521Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NzNlNzliYmMtNzE1Ni00YzFmLThmYjYtNzE5NTI5MWE3Yjk40",
+        "trackingCode": "MX9D99",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz+44@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T14:19:20.7528159Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:73e79bbc-7156-4c1f-8fb6-7195291a7b98"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "MX9D99"
+          }
+        ],
+        "dateCreated": "2023-01-10T14:19:20.9456093Z",
+        "updatedAt": "2023-01-10T14:19:20.9456093Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6Njg4NDdlZTEtODg2Ny00OWM3LWE5MWMtY2YwM2M2ODNhOTk20",
+        "trackingCode": "5H4M64",
+        "givenName": "Preston",
+        "familyName": "Schwartz",
+        "email": "preston.schwartz505@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T14:15:33.2089102Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:68847ee1-8867-49c7-a91c-cf03c683a996"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "5H4M64"
+          }
+        ],
+        "dateCreated": "2023-01-10T14:15:33.4096327Z",
+        "updatedAt": "2023-01-10T14:15:33.4096327Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjIzNmY5YzgtNzc5YS00NTVjLWIxYWEtNjhhMDUzYzkzNDEx0",
+        "trackingCode": "6CWDUT",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-10T14:12:04.6479293Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:2236f9c8-779a-455c-b1aa-68a053c93411"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "6CWDUT"
+          }
+        ],
+        "dateCreated": "2023-01-10T14:10:53.8477171Z",
+        "updatedAt": "2023-01-10T14:12:04.6636693Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OTdhMjExMTEtMmU1Ni00YzRhLWFlMmQtYzFiODlkMDU3ZGY00",
+        "givenName": "gggkv",
+        "familyName": "gg",
+        "email": "kalin.venkov@eldersoss.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "\n\n\nUS",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "Manual entry",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-10T13:27:19.5632265Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:97a21111-2e56-4c4a-ae2d-c1b89d057df4"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          }
+        ],
+        "dateCreated": "2023-01-10T13:27:19.5788509Z",
+        "updatedAt": "2023-01-10T13:27:19.7219988Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjNiZjhhYmItYzZiNi00OWE4LTkyYTMtMDExY2RlZDU0YmI40",
+        "trackingCode": "QPV47B",
+        "givenName": "Koki",
+        "familyName": "Poki",
+        "email": "testautomation@abv.bg",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-10T11:48:29.7876602Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:23bf8abb-c6b6-49a8-92a3-011cded54bb8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "QPV47B"
+          }
+        ],
+        "dateCreated": "2023-01-10T09:49:01.1542341Z",
+        "updatedAt": "2023-01-10T11:48:29.9625265Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6N2IzYjk5ZTAtZTA5Yi00YjE5LTkzNWUtOTJjYzQyNmJjZDVl0",
+        "trackingCode": "P2ARFF",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-09T13:57:16.8190031Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:7b3b99e0-e09b-4b19-935e-92cc426bcd5e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "P2ARFF"
+          }
+        ],
+        "dateCreated": "2023-01-09T13:56:54.5280109Z",
+        "updatedAt": "2023-01-09T13:57:16.8814466Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZGI1N2Y4YjgtNWQyNi00NDkwLWFiZDctM2FjMTlkNWU1Zjc10",
+        "trackingCode": "693C2X",
+        "givenName": "Innessa ",
+        "familyName": "VideoTest",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-09T13:20:20.1208639Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:db57f8b8-5d26-4490-abd7-3ac19d5e5f75"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "693C2X"
+          }
+        ],
+        "dateCreated": "2023-01-09T13:19:55.0069056Z",
+        "updatedAt": "2023-01-09T13:20:20.1364327Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MGQ3OTQ1OGYtY2RmMi00NTYxLWJkOTYtODhhMjJlMDU5YmEx0",
+        "trackingCode": "NY75R9",
+        "givenName": "CraigLoom2",
+        "familyName": "Test1",
+        "email": "craig.jorgensen@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-07T12:57:33.5999647Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:0d79458f-cdf2-4561-bd96-88a22e059ba1"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "NY75R9"
+          }
+        ],
+        "dateCreated": "2023-01-07T12:57:33.6938168Z",
+        "updatedAt": "2023-01-07T16:02:32.3957259Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MmExMTkxNjYtYTg5MC00YjBjLWI4MWQtOTliOTA0MWEyOWM10",
+        "trackingCode": "A3N422",
+        "givenName": "CraigLoom2",
+        "familyName": "Testing",
+        "email": "craig.jorgensen@me.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "PersonalInvite",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-07T12:56:26.1859881Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:2a119166-a890-4b0c-b81d-99b9041a29c5"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "A3N422"
+          }
+        ],
+        "dateCreated": "2023-01-07T12:56:26.2969119Z",
+        "updatedAt": "2023-01-07T12:56:26.3125508Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YWQ0YzFiMTMtMDExNy00NzRhLTk1MjgtMWZlY2YxZjVlYzVi0",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "16195 Creekwood Circle",
+          "country": "US",
+          "formatted": "16195 Creekwood Circle\n\nPrior Lake AK 55372\nUS",
+          "postalCode": "55372",
+          "locality": "Prior Lake",
+          "region": "AK"
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-07T10:11:35.3581108Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:ad4c1b13-0117-474a-9528-1fecf1f5ec5b"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          }
+        ],
+        "dateCreated": "2023-01-04T17:18:38.6372006Z",
+        "updatedAt": "2023-01-07T16:20:05.3194118Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MGEwZDRiYjUtZjExYi00NTMxLWE3OGItODYyYjFlNWQ3YTY20",
+        "trackingCode": "JY6B95",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-06T20:20:49.4364393Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:0a0d4bb5-f11b-4531-a78b-862b1e5d7a66"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "JY6B95"
+          }
+        ],
+        "dateCreated": "2023-01-06T20:19:29.8180599Z",
+        "updatedAt": "2023-01-06T20:20:49.5146018Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NmY5YWFjOGEtN2U1ZS00NzMyLWFlMjktNmU3ZmFkNmYzZmE50",
+        "trackingCode": "AQU7RT",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-06T15:44:01.5266853Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:6f9aac8a-7e5e-4732-ae29-6e7fad6f3fa9"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "AQU7RT"
+          }
+        ],
+        "dateCreated": "2023-01-06T15:43:00.610381Z",
+        "updatedAt": "2023-01-06T15:44:01.5893276Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NmI0Yzc3NGItNTE2OC00NTYxLWI3MjgtMWM0YWRkOThmMjJk0",
+        "trackingCode": "3J3EVP",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-06T01:53:26.2031178Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:6b4c774b-5168-4561-b728-1c4add98f22d"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "3J3EVP"
+          }
+        ],
+        "dateCreated": "2023-01-06T01:53:26.3390712Z",
+        "updatedAt": "2023-01-06T01:53:26.3390712Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZmE1ZmIyMWYtMWY1ZS00OWYzLWIwMzYtM2JlYzI4MTgzMjZi0",
+        "trackingCode": "R9VWJW",
+        "givenName": "MVPersonalInvite",
+        "familyName": "Test",
+        "email": "preston.schwartz505@gmail.com",
+        "phoneNumber": "+19187207672",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "PersonalInvite",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T22:50:59.7779146Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:fa5fb21f-1f5e-49f3-b036-3bec2818326b"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "R9VWJW"
+          }
+        ],
+        "dateCreated": "2023-01-05T22:50:59.8891744Z",
+        "updatedAt": "2023-01-05T22:50:59.9359967Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OGZhYjIyYWItZmQzNy00Y2QxLTg5ZTItNGIxOTc0Yjc3N2E20",
+        "trackingCode": "87Y4E3",
+        "givenName": "Vlad",
+        "familyName": "Test",
+        "email": "vlad@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T22:30:17.7155991Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:8fab22ab-fd37-4cd1-89e2-4b1974b777a6"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "87Y4E3"
+          }
+        ],
+        "dateCreated": "2023-01-05T22:30:17.8725387Z",
+        "updatedAt": "2023-01-05T22:30:17.8881598Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6N2YxMjRlMmItZDMyNi00N2MzLWE2YTctNmE4YWUyNWQ0ZjI20",
+        "trackingCode": "YYHKU2",
+        "givenName": "MarketVision Personal Link",
+        "familyName": "Lead Test",
+        "email": "innessa.schwartz@marketvision.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "PersonalInvite",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T20:41:54.8654421Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:7f124e2b-d326-47c3-a6a7-6a8ae25d4f26"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "YYHKU2"
+          }
+        ],
+        "dateCreated": "2023-01-05T20:41:54.9592692Z",
+        "updatedAt": "2023-01-05T20:41:55.0061605Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OWMyNjdlYTktMzI4Yi00OWI0LThjZGMtYWY0MGFjOWRlZmRl0",
+        "trackingCode": "UJP5F9",
+        "givenName": "MarketVision Generic Blitz",
+        "familyName": "InviteFunnel",
+        "email": "innessa.schwartz@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T20:40:55.7970218Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:9c267ea9-328b-49b4-8cdc-af40ac9defde"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "UJP5F9"
+          }
+        ],
+        "dateCreated": "2023-01-05T20:40:56.0438996Z",
+        "updatedAt": "2023-01-05T20:40:56.0438996Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YzhjMTM5MmUtY2E1YS00YmE0LTg1MmEtZGE1YWNkNDhhZmZl0",
+        "trackingCode": "6XQ6EF",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T17:04:58.2637769Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:c8c1392e-ca5a-4ba4-852a-da5acd48affe"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "6XQ6EF"
+          }
+        ],
+        "dateCreated": "2023-01-05T17:04:58.3626963Z",
+        "updatedAt": "2023-01-05T17:04:58.4103364Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MDE5MzE1MzctNWQ5NS00NjI5LThhMmQtNDUzMjE0NzMxNzJm0",
+        "trackingCode": "G89VNN",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T17:03:55.0175179Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:01931537-5d95-4629-8a2d-45321473172f"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "G89VNN"
+          }
+        ],
+        "dateCreated": "2023-01-05T17:03:55.1581403Z",
+        "updatedAt": "2023-01-05T17:03:55.1893916Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjRhYjlkMmMtNzk2OS00ZjdhLWEwMjctOTcwMzM5NTc2M2Rm0",
+        "trackingCode": "CEHSYU",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-05T16:56:42.001372Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b4ab9d2c-7969-4f7a-a027-9703395763df"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "CEHSYU"
+          }
+        ],
+        "dateCreated": "2023-01-05T16:56:23.0987334Z",
+        "updatedAt": "2023-01-05T16:56:42.0170111Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZmJkYzM4N2ItYmFjZC00MzU0LWE2ZDItYzNhNjVmNjA5NWUy0",
+        "trackingCode": "PD9DE5",
+        "givenName": "InnessaPersonal",
+        "familyName": "Invitetest",
+        "email": "preston.schwartz505@gmail.com",
+        "phoneNumber": "+19187207672",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "PersonalInvite",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T16:11:34.7638409Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:fbdc387b-bacd-4354-a6d2-c3a65f6095e2"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "PD9DE5"
+          }
+        ],
+        "dateCreated": "2023-01-05T16:11:34.9147742Z",
+        "updatedAt": "2023-01-05T16:11:37.0409728Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZTNlYTU0ZDUtYzE0OS00ZTY4LTg5YWYtODEyYmZiOGExYWIx0",
+        "trackingCode": "2GADYS",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T14:38:37.183539Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:e3ea54d5-c149-4e68-89af-812bfb8a1ab1"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "2GADYS"
+          }
+        ],
+        "dateCreated": "2023-01-05T14:38:37.4169933Z",
+        "updatedAt": "2023-01-05T14:38:37.4659882Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjZlMjUxZGItNzRiNi00YWIxLWE4ZWUtNzhiOGYzZTZiMWI00",
+        "trackingCode": "49T85X",
+        "givenName": "Contact11",
+        "familyName": "InviteFunnelTest",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T13:52:04.6376835Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:26e251db-74b6-4ab1-a8ee-78b8f3e6b1b4"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "49T85X"
+          }
+        ],
+        "dateCreated": "2023-01-05T13:52:04.8251818Z",
+        "updatedAt": "2023-01-05T13:52:04.8671781Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NWFkMzhhYmMtNDdjNC00MmE1LWEwN2MtYTQ3MmY0MjY0Y2Mw0",
+        "trackingCode": "YTS788",
+        "givenName": "Contact1",
+        "familyName": "DemoDashboard",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-05T13:38:57.3628973Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:5ad38abc-47c4-42a5-a07c-a472f4264cc0"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "YTS788"
+          }
+        ],
+        "dateCreated": "2023-01-05T13:38:57.5877166Z",
+        "updatedAt": "2023-01-05T13:38:57.626006Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjM0OGU5NWMtYjU4NS00ZDVjLTk2MTAtMzVhMzRmZmFkMjI30",
+        "trackingCode": "MFTB5G",
+        "givenName": "Vlad",
+        "familyName": "Test4",
+        "email": "vlad.kurdesov@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T22:20:14.7778085Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b348e95c-b585-4d5c-9610-35a34ffad227"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "MFTB5G"
+          }
+        ],
+        "dateCreated": "2023-01-04T22:20:14.9194142Z",
+        "updatedAt": "2023-01-04T22:20:14.9854441Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MDVkZTNlMzYtZTc5My00NjcwLTgxNjQtMjYwZGQ2MWVmM2Fh0",
+        "trackingCode": "2CQFJE",
+        "givenName": "Vlad",
+        "familyName": "Test3",
+        "email": "vlad@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T22:19:19.378987Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:05de3e36-e793-4670-8164-260dd61ef3aa"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "2CQFJE"
+          }
+        ],
+        "dateCreated": "2023-01-04T21:34:23.0273471Z",
+        "updatedAt": "2023-01-04T22:19:19.3945465Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MGNmZDUzNTAtMzc3My00ODVmLWJkNjQtZjlkNzAyYWFjZWVh0",
+        "trackingCode": "RDEH5X",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T21:44:51.9928515Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:0cfd5350-3773-485f-bd64-f9d702aaceea"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "RDEH5X"
+          }
+        ],
+        "dateCreated": "2023-01-04T21:38:21.4144011Z",
+        "updatedAt": "2023-01-04T21:44:52.0397108Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjNlOGFlNjMtOTI4ZC00MWEzLWE4ZjgtZDgzN2YxMGQxZTg00",
+        "trackingCode": "7326HR",
+        "givenName": "Jessica",
+        "familyName": "Peart",
+        "email": "jessica@ladyboss.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T19:20:51.1401001Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b3e8ae63-928d-41a3-a8f8-d837f10d1e84"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "7326HR"
+          }
+        ],
+        "dateCreated": "2023-01-04T19:11:23.9678343Z",
+        "updatedAt": "2023-01-04T19:20:51.1951563Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZTc2OWM1OTEtMjVjMC00OGM4LWIwNjQtYjRlMWZjNWU3NWVk0",
+        "trackingCode": "T9PPQH",
+        "givenName": "Contact5",
+        "familyName": "DemoDashboard",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T17:10:42.0658991Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:e769c591-25c0-48c8-b064-b4e1fc5e75ed"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "T9PPQH"
+          }
+        ],
+        "dateCreated": "2023-01-04T17:10:42.1893327Z",
+        "updatedAt": "2023-01-04T17:10:42.1893327Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjZmZjBiMDMtYTZlNi00NmQwLWJhNzQtMTQ2MTBlMzkwYjY10",
+        "trackingCode": "JTYBBM",
+        "givenName": "Contact4",
+        "familyName": "DemoDashboardTest",
+        "email": "preston.schwartz505@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T17:01:42.6566021Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b6ff0b03-a6e6-46d0-ba74-14610e390b65"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "JTYBBM"
+          }
+        ],
+        "dateCreated": "2023-01-04T17:01:42.7658428Z",
+        "updatedAt": "2023-01-04T17:01:42.7658428Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDYwMDM1NDMtODE5NS00MTg1LThiZDctZjNjYmRhNTM5NjFl0",
+        "trackingCode": "7VBHPH",
+        "givenName": "Contact3",
+        "familyName": "DemoDashboard",
+        "email": "golimbievsky.o@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T16:49:58.9545989Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d6003543-8195-4185-8bd7-f3cbda53961e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "7VBHPH"
+          }
+        ],
+        "dateCreated": "2023-01-04T16:49:59.0964242Z",
+        "updatedAt": "2023-01-04T16:49:59.1433832Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjIxODRiODMtNDNlMi00ZmJjLWJmNTAtOTk5M2UwZDhiYjc50",
+        "trackingCode": "J47JJM",
+        "givenName": "Contact3",
+        "familyName": "DemoDashboard",
+        "email": "innessa.schwartz+contact3@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T16:44:51.8547625Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b2184b83-43e2-4fbc-bf50-9993e0d8bb79"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "J47JJM"
+          }
+        ],
+        "dateCreated": "2023-01-04T16:44:52.1861211Z",
+        "updatedAt": "2023-01-04T16:44:52.1861211Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NDBmMTYxNmEtNmE0OC00OWVlLTg4ZjUtOGM4ZWM2MTFiOGJi0",
+        "trackingCode": "SFTX28",
+        "givenName": "ContactTest2",
+        "familyName": "DemoDashboard",
+        "email": "innessa.schwartz+contact2@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T16:39:37.5681412Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:40f1616a-6a48-49ee-88f5-8c8ec611b8bb"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "SFTX28"
+          }
+        ],
+        "dateCreated": "2023-01-04T16:39:37.964483Z",
+        "updatedAt": "2023-01-04T16:39:37.964483Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MTZkNjUzZGUtOTY4Ni00NmJmLTgxMzYtMjJiNTYwNjg5OWQ40",
+        "trackingCode": "EGEAW5",
+        "givenName": "ContactTest",
+        "familyName": "DemoDashboard",
+        "email": "innessa.schwartz+contacttest@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T16:37:43.7011627Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:16d653de-9686-46bf-8136-22b5606899d8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "EGEAW5"
+          }
+        ],
+        "dateCreated": "2023-01-04T16:37:44.0481531Z",
+        "updatedAt": "2023-01-04T16:37:44.063709Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MDYyNDk2ZDctZmExYS00ZDRkLTlkY2EtYTMzZTUxMDZmNzYx0",
+        "trackingCode": "H3SA9G",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T15:20:56.9269476Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:062496d7-fa1a-4d4d-9dca-a33e5106f761"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "H3SA9G"
+          }
+        ],
+        "dateCreated": "2023-01-04T15:20:57.0311437Z",
+        "updatedAt": "2023-01-04T15:20:57.0951974Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MmMxNmM0NjMtM2QxMi00YjE2LTljNTMtZGYyMzE3ODI5Y2Yx0",
+        "trackingCode": "AU3W7G",
+        "givenName": "Test",
+        "familyName": "Innessa",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T15:20:06.3542902Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:2c16c463-3d12-4b16-9c53-df2317829cf1"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "AU3W7G"
+          }
+        ],
+        "dateCreated": "2023-01-04T15:20:06.4494102Z",
+        "updatedAt": "2023-01-04T15:20:06.5135061Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6N2I2OGZhNzItNDQ5Yi00OWRmLThhZGUtYWY5MTcwN2U0OGM40",
+        "trackingCode": "FCSTUX",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T15:19:11.3959853Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:7b68fa72-449b-49df-8ade-af91707e48c8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "FCSTUX"
+          }
+        ],
+        "dateCreated": "2023-01-04T15:19:11.5341417Z",
+        "updatedAt": "2023-01-04T15:19:11.5810304Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YzJkNzc5YzctYjlmYy00NDFmLWE5MjQtODhhNDRjNDU1MzIx0",
+        "trackingCode": "Q5G246",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T15:13:40.3047547Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:c2d779c7-b9fc-441f-a924-88a44c455321"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "Q5G246"
+          }
+        ],
+        "dateCreated": "2023-01-04T15:13:00.0386636Z",
+        "updatedAt": "2023-01-04T15:13:40.3047547Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OTIyODQ2ZjItOTdmMi00MjFjLTkxMTAtMDNhNDYwYzY1Zjg40",
+        "trackingCode": "HMQNPB",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T15:01:43.1042433Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:922846f2-97f2-421c-9110-03a460c65f88"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "HMQNPB"
+          }
+        ],
+        "dateCreated": "2023-01-04T15:01:43.5263709Z",
+        "updatedAt": "2023-01-04T15:01:43.5888179Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OWY3NjlkMTYtZmRiYS00MmFmLWE1OTMtZjQyZWJhNWUzNzQw0",
+        "givenName": "Innessa Contact",
+        "familyName": "Test Schwartz",
+        "email": "innessa.schwartz+contacttest@gmail.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "16195 Creekwood Circle",
+          "country": "US",
+          "formatted": "16195 Creekwood Circle\n\nPrior Lake MN 55372\nUS",
+          "postalCode": "55372",
+          "locality": "Prior Lake",
+          "region": "MN"
+        },
+        "source": "Manual entry",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T14:23:22.7863941Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:9f769d16-fdba-42af-a593-f42eba5e3740"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          }
+        ],
+        "dateCreated": "2023-01-04T14:23:22.7863941Z",
+        "updatedAt": "2023-01-04T14:23:22.7863941Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZjU1NDNhZjMtYWQ3Ni00ZjA1LWFlMGQtOWZkM2E5MWQ2NWEx0",
+        "givenName": "Innessa",
+        "familyName": "ContactCreatedTest",
+        "email": "innessa.schwartz@marketvision.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "16195 Creekwood Circle",
+          "country": "US",
+          "formatted": "16195 Creekwood Circle\n\nPrior Lake MN 55372\nUS",
+          "postalCode": "55372",
+          "locality": "Prior Lake",
+          "region": "MN"
+        },
+        "source": "Manual entry",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2023-01-04T14:13:02.8156703Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:f5543af3-ad76-4f05-ae0d-9fd3a91d65a1"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          }
+        ],
+        "dateCreated": "2023-01-04T14:13:02.8156703Z",
+        "updatedAt": "2023-01-04T14:13:02.8156703Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YmEzOWIyMWQtYWUyYi00MWRhLThiNjEtNmFlNjZkN2M4MjI40",
+        "trackingCode": "VU52D7",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T14:05:41.3164769Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:ba39b21d-ae2b-41da-8b61-6ae66d7c8228"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "VU52D7"
+          }
+        ],
+        "dateCreated": "2023-01-04T14:04:12.5466124Z",
+        "updatedAt": "2023-01-04T14:05:41.3694699Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NTQzMjgzNjItNzhlNS00OWEwLWIxMDEtMDZhOWQyZTA2OTQy0",
+        "trackingCode": "JEQA4M",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2023-01-04T13:54:19.4495565Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:54328362-78e5-49a0-b101-06a9d2e06942"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "JEQA4M"
+          }
+        ],
+        "dateCreated": "2023-01-04T13:35:22.9025096Z",
+        "updatedAt": "2023-01-04T13:54:19.5134894Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6Njk5OWZiYjUtNmFjMS00NzM3LWIxZGItODgxMjA3YzYwZjll0",
+        "trackingCode": "WDT92K",
+        "givenName": "Craig",
+        "familyName": "Testing",
+        "email": "craig.jorgensen@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-26T10:02:38.123048Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:6999fbb5-6ac1-4737-b1db-881207c60f9e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "WDT92K"
+          }
+        ],
+        "dateCreated": "2022-12-26T09:58:54.8369293Z",
+        "updatedAt": "2022-12-26T10:02:38.1698684Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NGIxNDA4OGQtNWQ3Zi00YzAxLTk4MGMtYWRhYjMzMDdkYzNm0",
+        "trackingCode": "DM8GNX",
+        "givenName": "SAA",
+        "familyName": "AA 2",
+        "email": "aas+1@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-23T09:18:30.9851839Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:4b14088d-5d7f-4c01-980c-adab3307dc3f"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "DM8GNX"
+          }
+        ],
+        "dateCreated": "2022-12-23T09:18:31.1481484Z",
+        "updatedAt": "2022-12-23T09:18:31.1637585Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NDJlNzEyZjgtOGY2ZS00ODdkLWIyYTMtYzIzMjg1ZTI5Mzc50",
+        "trackingCode": "XNNKFE",
+        "givenName": "SAA",
+        "familyName": "AA",
+        "email": "aas@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-23T09:17:55.1093081Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:42e712f8-8f6e-487d-b2a3-c23285e29379"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "XNNKFE"
+          }
+        ],
+        "dateCreated": "2022-12-23T09:17:55.3810963Z",
+        "updatedAt": "2022-12-23T09:17:55.4168251Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDQ1OTkyMmEtODJjNi00MDliLWIyZDEtNDQ0NGUxNDE3MjQ40",
+        "trackingCode": "KSUKKA",
+        "givenName": "DTest2",
+        "familyName": "DTest2",
+        "email": "innessa.schwartz+dtest2@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T18:15:57.9598983Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d459922a-82c6-409b-b2d1-4444e1417248"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "KSUKKA"
+          }
+        ],
+        "dateCreated": "2022-12-22T18:15:58.0857468Z",
+        "updatedAt": "2022-12-22T18:15:58.0857468Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ODRmMDMzMTAtMGY4Zi00M2ExLTllZDctNDBlMjRiOWRlMTgz0",
+        "trackingCode": "44KKJR",
+        "givenName": "DTest1",
+        "familyName": "Dtest1",
+        "email": "innessa.schwartz+dest1@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T18:15:33.6350118Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:84f03310-0f8f-43a1-9ed7-40e24b9de183"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "44KKJR"
+          }
+        ],
+        "dateCreated": "2022-12-22T18:15:33.7465387Z",
+        "updatedAt": "2022-12-22T18:15:33.8091102Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OWJjNGE2NjMtMjA3ZS00YjNkLTk5ZjItNTdjMjYxNTYwYzU20",
+        "trackingCode": "GNTMF9",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T18:12:50.0185023Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:9bc4a663-207e-4b3d-99f2-57c261560c56"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "GNTMF9"
+          }
+        ],
+        "dateCreated": "2022-12-22T18:12:50.5330013Z",
+        "updatedAt": "2022-12-22T18:12:50.6832383Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjRiNWQzN2UtOTRlYS00NWRmLWJmZDYtOTc0YTUyMzY4NmEz0",
+        "trackingCode": "6RV4WP",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz@gmail.com",
+        "phoneNumber": "+19524050286",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T15:33:59.0763298Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:24b5d37e-94ea-45df-bfd6-974a523686a3"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "6RV4WP"
+          }
+        ],
+        "dateCreated": "2022-12-22T15:33:59.2182158Z",
+        "updatedAt": "2022-12-22T15:33:59.2182158Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NGU0NmMzODktNmViZS00N2ZhLWFhMDAtY2Y4MDdlOWExMWFm0",
+        "trackingCode": "CSDGRX",
+        "givenName": "Recycle1",
+        "familyName": "Recycle1",
+        "email": "innessa.schwartz+recycle1@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T14:26:01.5237123Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:4e46c389-6ebe-47fa-aa00-cf807e9a11af"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "CSDGRX"
+          }
+        ],
+        "dateCreated": "2022-12-22T14:26:01.6262139Z",
+        "updatedAt": "2022-12-22T14:26:01.7042632Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NWE2OWUwYTQtNTU0NC00MTc4LWJlMWEtMGNhOTQ3ZjQ0ZTg40",
+        "trackingCode": "TUX9V3",
+        "givenName": "Thora",
+        "familyName": "J",
+        "email": "craig.jorgensen@me.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-22T12:09:18.7741525Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:5a69e0a4-5544-4178-be1a-0ca947f44e88"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "TUX9V3"
+          }
+        ],
+        "dateCreated": "2022-12-22T12:09:19.0979875Z",
+        "updatedAt": "2022-12-22T12:09:19.0979875Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjVkOTcwNzEtZGIxYy00MGE1LWFjNWUtYTBiYmYwYTkxNTA00",
+        "trackingCode": "WR8QNG",
+        "givenName": "Tikvenik",
+        "familyName": "Orehov",
+        "email": "testautomation@abv.bg",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "InviteFunnel",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-21T14:27:32.5255121Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:25d97071-db1c-40a5-ac5e-a0bbf0a91504"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "WR8QNG"
+          }
+        ],
+        "dateCreated": "2022-12-21T14:25:05.6700491Z",
+        "updatedAt": "2023-01-10T12:06:44.0816989Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NGEzYTYwNWMtYmExNC00YjMyLTllY2QtZDE1N2FjNzMyMTAz0",
+        "trackingCode": "987GBW",
+        "givenName": "test",
+        "familyName": "test",
+        "email": "testtest@test.comm",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-19T22:09:07.263228Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:4a3a605c-ba14-4b32-9ecd-d157ac732103"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "987GBW"
+          }
+        ],
+        "dateCreated": "2022-12-19T22:09:07.3962446Z",
+        "updatedAt": "2022-12-19T22:09:07.3962446Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjQ0ZGI3ZGEtY2Y0NS00M2RjLWIyNTktM2RkZGExM2VjZmEz0",
+        "trackingCode": "9X4486",
+        "givenName": "test",
+        "familyName": "test",
+        "email": "testtesttest@test.co",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-19T22:07:22.3346075Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:244db7da-cf45-43dc-b259-3ddda13ecfa3"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "9X4486"
+          }
+        ],
+        "dateCreated": "2022-12-19T22:06:48.6804237Z",
+        "updatedAt": "2022-12-19T22:07:22.3568887Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NDFhODk0ZGItOTMyMS00MTdlLWE5NzMtZWE0NjY1OTQyZTMz0",
+        "trackingCode": "EDWP62",
+        "givenName": "test",
+        "familyName": "test",
+        "email": "asdfasdf@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-19T22:05:44.9677097Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:41a894db-9321-417e-a973-ea4665942e33"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "EDWP62"
+          }
+        ],
+        "dateCreated": "2022-12-19T22:05:01.5776135Z",
+        "updatedAt": "2022-12-19T22:05:45.103788Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MzRhYzgxMGMtOTYwZS00YTE5LTg1OGItNzZkMThjYTU0YTFl0",
+        "trackingCode": "W65NWF",
+        "givenName": "Paul",
+        "familyName": "Giamatti",
+        "email": "craig.jorgensen@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-19T22:02:25.1565786Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:34ac810c-960e-4a19-858b-76d18ca54a1e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "W65NWF"
+          }
+        ],
+        "dateCreated": "2022-12-19T22:01:32.6703714Z",
+        "updatedAt": "2022-12-19T22:02:25.1722667Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OGQ3NjlhNzYtOGY5YS00NDFhLTk0YTgtMzYyMGVlMTg5MTNj0",
+        "trackingCode": "HX9P5G",
+        "givenName": "Mr",
+        "familyName": "Anderson",
+        "email": "craig.jorgensen@me.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-19T15:56:59.6676796Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:8d769a76-8f9a-441a-94a8-3620ee18913c"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "HX9P5G"
+          }
+        ],
+        "dateCreated": "2022-12-19T15:56:59.9739414Z",
+        "updatedAt": "2022-12-19T15:57:00.1068307Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MzY5OWNlN2YtNDAxNC00MzdiLWI2MDMtM2ZkMDJkYzM0ZDlj0",
+        "trackingCode": "T6RWY2",
+        "givenName": "Paul",
+        "familyName": "Walker",
+        "email": "craig.jorgensen@me.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-18T23:31:40.9571606Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:3699ce7f-4014-437b-b603-3fd02dc34d9c"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "T6RWY2"
+          }
+        ],
+        "dateCreated": "2022-12-18T23:31:42.754213Z",
+        "updatedAt": "2022-12-18T23:31:42.9218338Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NDhmMGJlZGItYjZiMS00NzU4LWIyY2YtMmRjYjYwMWJlNzdm0",
+        "trackingCode": "BRXR9K",
+        "givenName": "Innessa",
+        "familyName": "Test",
+        "email": "craig.jorgensen@marketvision.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-16T21:31:49.4258955Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:48f0bedb-b6b1-4758-b2cf-2dcb601be77f"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "BRXR9K"
+          }
+        ],
+        "dateCreated": "2022-12-16T21:31:49.9090371Z",
+        "updatedAt": "2022-12-16T21:31:50.0817495Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MmE4ZWNmNjItNjg2MS00N2RlLWI0ZjQtYjUwOWI5ZDQ3MTVl0",
+        "trackingCode": "8JFK4A",
+        "givenName": "Josh",
+        "familyName": "Test",
+        "email": "josh.omcit@gmail.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-15T10:02:23.8365056Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:2a8ecf62-6861-47de-b4f4-b509b9d4715e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "8JFK4A"
+          }
+        ],
+        "dateCreated": "2022-12-15T10:02:24.0900702Z",
+        "updatedAt": "2022-12-15T10:02:24.13702Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OTljYWRjYTYtZTMyZS00MGYzLTg4ODMtOTE2MzgwNGQ0NDJi0",
+        "trackingCode": "V22BDB",
+        "givenName": "vankata",
+        "familyName": "palqk",
+        "email": "iuoahw@iuhawd.com",
+        "address": {
+          "streetAddress": "",
+          "country": "US",
+          "formatted": "",
+          "postalCode": "",
+          "locality": "",
+          "region": ""
+        },
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-14T12:19:10.0189356Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:99cadca6-e32e-40f3-8883-9163804d442b"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "V22BDB"
+          }
+        ],
+        "dateCreated": "2022-12-14T12:18:34.8564695Z",
+        "updatedAt": "2022-12-14T12:19:10.0345631Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YmRhZDM5YTctODRmMC00M2RiLTlkNWQtYmQ1YTZjNDlhMTQz0",
+        "trackingCode": "AVESMA",
+        "givenName": "Bob",
+        "familyName": "Vance",
+        "email": "craig.jorgensen@me.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-11T17:28:13.6648416Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:bdad39a7-84f0-43db-9d5d-bd5a6c49a143"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "AVESMA"
+          }
+        ],
+        "dateCreated": "2022-12-11T17:28:14.117891Z",
+        "updatedAt": "2022-12-11T17:28:14.3066883Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NWQ2N2ZmZDMtMjI4YS00MTJjLTk0OTQtNzlhOWViNWI2YTk10",
+        "trackingCode": "2X523R",
+        "givenName": "Craig10updated",
+        "familyName": "Jorgensen",
+        "email": "craigmjorgensen@gmail.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-09T23:14:18.787686Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:5d67ffd3-228a-412c-9494-79a9eb5b6a95"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "2X523R"
+          }
+        ],
+        "dateCreated": "2022-12-09T23:14:19.3195904Z",
+        "updatedAt": "2023-01-07T12:48:12.7098686Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6OTg5NTY2MDgtZjQ4YS00NTcxLWFiY2ItMDI2ZDgwMTk0YjUy0",
+        "trackingCode": "AEUBCA",
+        "givenName": "Innessa",
+        "familyName": "Schwartz",
+        "email": "innessa.schwartz+unique@gmail.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-09T19:58:42.3924618Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:98956608-f48a-4571-abcb-026d80194b52"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "AEUBCA"
+          }
+        ],
+        "dateCreated": "2022-12-09T19:58:25.2701222Z",
+        "updatedAt": "2022-12-09T19:58:42.4548962Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NjU0ZDU4MDAtYmI1NC00NTdmLWI3YjAtZjhmOWRjMjVjMjMw0",
+        "trackingCode": "E4REMK",
+        "givenName": "Test",
+        "familyName": "Steph",
+        "email": "test@usertest.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-12-09T19:57:01.5961938Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:654d5800-bb54-457f-b7b0-f8f9dc25c230"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "E4REMK"
+          }
+        ],
+        "dateCreated": "2022-12-09T19:56:25.9230236Z",
+        "updatedAt": "2022-12-09T19:57:01.611814Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YjM2ZWVlODUtNGQxMi00NmU2LTk1MDEtMjhmMGY0MmY1NDZj0",
+        "trackingCode": "F7RP3T",
+        "givenName": "Josh",
+        "familyName": "Test 2.1",
+        "email": "josh@test.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-09T09:20:00.5187781Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b36eee85-4d12-46e6-9501-28f0f42f546c"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "F7RP3T"
+          }
+        ],
+        "dateCreated": "2022-12-09T09:20:00.8650182Z",
+        "updatedAt": "2022-12-09T09:20:00.8650182Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6Y2Q0ZWNhNGEtYzg2My00MmFlLThlZTItNmEwNjY4YmFmMGVj0",
+        "trackingCode": "J58DGG",
+        "givenName": "Josh",
+        "familyName": "Test 2",
+        "email": "josh@test.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-09T09:10:58.8678891Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:cd4eca4a-c863-42ae-8ee2-6a0668baf0ec"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "J58DGG"
+          }
+        ],
+        "dateCreated": "2022-12-09T09:11:00.9956137Z",
+        "updatedAt": "2022-12-09T09:11:01.1883272Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NzQ1ZjJiMmUtY2EyYi00MzgyLWE3ZTYtMjYxY2M1MjIzNTVl0",
+        "trackingCode": "SVCTS2",
+        "givenName": "Test",
+        "familyName": "Tester",
+        "email": "innessa.schwartz+test@gmail.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-08T19:22:47.8762814Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:745f2b2e-ca2b-4382-a7e6-261cc522355e"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "SVCTS2"
+          }
+        ],
+        "dateCreated": "2022-12-08T19:22:48.2782398Z",
+        "updatedAt": "2022-12-08T19:22:48.4188685Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDRlZDkyMzMtMmUzOC00ODBkLWFhNjctNDgxZmFiMjcxODc40",
+        "trackingCode": "52C54U",
+        "givenName": "Craig",
+        "familyName": "Test",
+        "email": "craig.jorgensen@me.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-07T20:26:02.0005433Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d4ed9233-2e38-480d-aa67-481fab271878"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "52C54U"
+          }
+        ],
+        "dateCreated": "2022-12-07T20:26:02.5121626Z",
+        "updatedAt": "2022-12-07T20:26:02.6697531Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NjUwZmY5N2QtYzgxNi00NTllLWJlNjItNmUxNDNjOGJmMzRi0",
+        "trackingCode": "B2VSWC",
+        "givenName": "ttth",
+        "familyName": "hhhh",
+        "email": "gggg@vvv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-12-05T13:14:07.608519Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:650ff97d-c816-459e-be62-6e143c8bf34b"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "B2VSWC"
+          }
+        ],
+        "dateCreated": "2022-12-05T13:14:08.6418098Z",
+        "updatedAt": "2022-12-05T13:14:08.8149023Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NTA4NGFjOTktZmE0OS00OTg3LWEyNDEtNWI0ZDNkYzhmMTc40",
+        "trackingCode": "XBJ9H7",
+        "givenName": "Test",
+        "familyName": "Dsfd",
+        "email": "dsf@gmail.com",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-11-29T11:03:33.8129987Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:5084ac99-fa49-4987-a241-5b4d3dc8f178"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "XBJ9H7"
+          }
+        ],
+        "dateCreated": "2022-11-29T11:03:36.466942Z",
+        "updatedAt": "2022-11-29T11:03:36.640214Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6YTM2ZGJjY2ItNzViZS00NDYyLTk0MDUtNGY4ODA0NTEyNWVk0",
+        "trackingCode": "2AYDY2",
+        "givenName": "Fhhfh",
+        "familyName": "Hfjvvv JG",
+        "email": "hfjgjg@cbcjf.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-11-28T15:02:16.9312827Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:a36dbccb-75be-4462-9405-4f88045125ed"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "2AYDY2"
+          }
+        ],
+        "dateCreated": "2022-11-28T15:02:17.2093314Z",
+        "updatedAt": "2022-11-28T15:02:17.2249781Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6NGRlYzczZmQtOGM3Mi00ZTc2LTgxM2EtY2M2ZDZkNTNhMWQx0",
+        "trackingCode": "GKYW6X",
+        "givenName": "Fht",
+        "familyName": "Ggg",
+        "email": "rh@fhfhn.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Not Contacted",
+          "value": "Not Contacted",
+          "color": "#FF3B33",
+          "updatedAt": "2022-11-28T14:59:57.6425291Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:4dec73fd-8c72-4e76-813a-cc6d6d53a1d1"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "GKYW6X"
+          }
+        ],
+        "dateCreated": "2022-11-28T14:59:57.7922362Z",
+        "updatedAt": "2022-11-28T14:59:57.8344715Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6Y2Y2Mzc2YzctM2MwNi00NjU1LWEzNjctNjU1ZDNiOTU4Nzc20",
+        "trackingCode": "J99X5N",
+        "givenName": "Last",
+        "familyName": "Attempt",
+        "email": "testautomation@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-28T08:05:24.1557383Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:cf6376c7-3c06-4655-a367-655d3b958776"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "J99X5N"
+          }
+        ],
+        "dateCreated": "2022-11-28T08:04:37.7830314Z",
+        "updatedAt": "2022-11-28T08:05:24.1870448Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MGE0YTllZTUtZTMwMC00NTlhLTg1NTEtMTQ1ZTM0Y2MzNDQz0",
+        "trackingCode": "S2BTB9",
+        "givenName": "Duplicate",
+        "familyName": "Kirov",
+        "email": "testautomation@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T09:23:19.8179799Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:0a4a9ee5-e300-459a-8551-145e34cc3443"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "S2BTB9"
+          }
+        ],
+        "dateCreated": "2022-11-25T09:19:11.6908528Z",
+        "updatedAt": "2022-11-25T09:23:19.849212Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ODBhMTU1ZmYtY2E4Yi00YzQzLThiZGYtYzRjY2JmZmFjYzIy0",
+        "trackingCode": "VWYRPA",
+        "givenName": "Kir",
+        "familyName": "Kirov",
+        "email": "testautomation+12434522254656@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T09:09:45.2979167Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:80a155ff-ca8b-4c43-8bdf-c4ccbffacc22"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "VWYRPA"
+          }
+        ],
+        "dateCreated": "2022-11-25T09:08:45.9969963Z",
+        "updatedAt": "2022-11-25T09:09:45.2979167Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6Yjc0NTI3MzUtZTJhNC00MGI3LTliYTEtYjI2NDBkMWU3Y2E50",
+        "trackingCode": "X6HYCV",
+        "givenName": "Kir",
+        "familyName": "Kirov",
+        "email": "testautomation+12434522254656@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T09:04:38.920124Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:b7452735-e2a4-40b7-9ba1-b2640d1e7ca9"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "X6HYCV"
+          }
+        ],
+        "dateCreated": "2022-11-25T09:04:19.7008708Z",
+        "updatedAt": "2022-11-25T09:04:39.0607587Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MjhkNzQ0MjgtOGJhYy00ZWE5LWI2OTItNzRiYmFiNGI4YzBh0",
+        "trackingCode": "87CEW6",
+        "givenName": "Stoni",
+        "familyName": "Toni",
+        "email": "testautomation+12334554656@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T08:51:46.3297361Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:28d74428-8bac-4ea9-b692-74bbab4b8c0a"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "87CEW6"
+          }
+        ],
+        "dateCreated": "2022-11-25T08:51:29.2122044Z",
+        "updatedAt": "2022-11-25T08:51:46.3610603Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDllM2VlMGEtNzk2Ni00ZDg5LThhOGQtNmU2OWVlYTk1ZWQ40",
+        "trackingCode": "MME9PU",
+        "givenName": "Luka",
+        "familyName": "Bratsi",
+        "email": "testautomation+123@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T08:46:42.2555702Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d9e3ee0a-7966-4d89-8a8d-6e69eea95ed8"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "MME9PU"
+          }
+        ],
+        "dateCreated": "2022-11-25T08:46:09.8837246Z",
+        "updatedAt": "2022-11-25T08:46:42.3024398Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZTE5M2U2YTgtNzM3Ni00OGQ1LThiMDYtNzBmZjE1NGJmODg10",
+        "trackingCode": "44GWUD",
+        "givenName": "Nov",
+        "familyName": "User",
+        "email": "testautomation+1234@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-25T08:42:38.9625026Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:e193e6a8-7376-48d5-8b06-70ff154bf885"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "44GWUD"
+          }
+        ],
+        "dateCreated": "2022-11-25T08:42:03.3177965Z",
+        "updatedAt": "2022-11-25T08:42:38.9781259Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6ZDM5Nzk3ZTctMmY3YS00MTllLThiZTEtMTM0ZTYxZTA5NTk40",
+        "trackingCode": "22J8W3",
+        "givenName": "Tito",
+        "familyName": "Fifi",
+        "email": "testautomation@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-23T12:39:38.9977757Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:d39797e7-2f7a-419e-8be1-134e61e09598"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "22J8W3"
+          }
+        ],
+        "dateCreated": "2022-11-23T12:39:09.158922Z",
+        "updatedAt": "2022-11-23T12:39:39.0145244Z"
+      },
+      {
+        "contactId": "dXJuOmxhZHlib3NzOmNvbnRhY3Q6MmQxYmQyZmUtZmYxZC00MTc3LWIzMDMtNTQ2YmY3MTRhOWIy0",
+        "trackingCode": "A428VD",
+        "givenName": "KKK",
+        "familyName": "ZZZ",
+        "email": "testautomation+523@abv.bg",
+        "source": "https://demodashboard.ladyboss.io",
+        "status": {
+          "translation": "Joined",
+          "value": "Joined",
+          "color": "#4CDA64",
+          "updatedAt": "2022-11-18T12:11:18.8276847Z"
+        },
+        "sponsorId": "dXJuOmxhZHlib3NzOnNwb25zb3I6MTA1",
+        "customClaims": [
+          {
+            "type": "contactid",
+            "value": "urn:ladyboss:contact:2d1bd2fe-ff1d-4177-b303-546bf714a9b2"
+          },
+          {
+            "type": "tenant",
+            "value": "ladyboss"
+          },
+          {
+            "type": "urn:ladyboss:claim:trackingcode",
+            "value": "A428VD"
+          }
+        ],
+        "dateCreated": "2022-11-18T12:10:16.6855796Z",
+        "updatedAt": "2022-11-18T12:11:18.8624334Z"
+      }
+    ],
+    "total": 141
+  },
+  "isSuccess": true
+}

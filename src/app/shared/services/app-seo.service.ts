@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 import { ProductsApiService } from '../../products/services/products-api.service';
 
 @Injectable({
@@ -17,66 +18,100 @@ export class AppSeoService {
 
   updateTitle(title: string) {
     let updatedTitle = '';
+    if (environment.tenant === 'pruvit') {
+      if (title === '') {
+        updatedTitle = 'Keto Supplements From Prüvit';
+      } else {
+        updatedTitle = title;
+      }
+      const country = this.document.location.pathname.split('/')[1];
 
-    if (title === '') {
-      updatedTitle = 'Keto Supplements From Prüvit';
+      if (country === 'ca' || country === 'CA') {
+        updatedTitle = updatedTitle + ' | Shopketo Canada';
+      } else if (country === 'au' || country === 'AU') {
+        updatedTitle = updatedTitle + ' | Shopketo Australia';
+      } else if (country === 'mo' || country === 'MO') {
+        updatedTitle = updatedTitle + ' | Shopketo Macao';
+      } else if (country === 'hk' || country === 'HK') {
+        updatedTitle = updatedTitle + ' | Shopketo Hong Kong';
+      } else if (country === 'sg' || country === 'SG') {
+        updatedTitle = updatedTitle + ' | Shopketo Singapore';
+      } else if (country === 'my' || country === 'MY') {
+        updatedTitle = updatedTitle + ' | Shopketo Malaysia';
+      } else if (country === 'tw' || country === 'TW') {
+        updatedTitle = updatedTitle + ' | Shopketo Taiwan';
+      } else if (country === 'jp' || country === 'JP') {
+        updatedTitle = updatedTitle + ' | Shopketo Japan';
+      } else if (country === 'mx' || country === 'MX') {
+        updatedTitle = updatedTitle + ' | Shopketo Mexico';
+      } else if (country === 'nz' || country === 'NZ') {
+        updatedTitle = updatedTitle + ' | Shopketo New Zealand';
+      } else if (country === 'de' || country === 'DE') {
+        updatedTitle = updatedTitle + ' | Shopketo Germany';
+      } else if (country === 'gb' || country === 'GB') {
+        updatedTitle = updatedTitle + ' | Shopketo United Kingdom';
+      } else if (country === 'it' || country === 'IT') {
+        updatedTitle = updatedTitle + ' | Shopketo Italy';
+      } else if (country === 'es' || country === 'ES') {
+        updatedTitle = updatedTitle + ' | Shopketo Spain';
+      } else if (country === 'nl' || country === 'NL') {
+        updatedTitle = updatedTitle + ' | Shopketo Netherlands';
+      } else if (country === 'at' || country === 'AT') {
+        updatedTitle = updatedTitle + ' | Shopketo Austria';
+      } else if (country === 'pl' || country === 'PL') {
+        updatedTitle = updatedTitle + ' | Shopketo Poland';
+      } else if (country === 'ie' || country === 'IE') {
+        updatedTitle = updatedTitle + ' | Shopketo Ireland';
+      } else if (country === 'se' || country === 'SE') {
+        updatedTitle = updatedTitle + ' | Shopketo Sweden';
+      } else if (country === 'hu' || country === 'HU') {
+        updatedTitle = updatedTitle + ' | Shopketo Hungary';
+      } else if (country === 'fr' || country === 'FR') {
+        updatedTitle = updatedTitle + ' | Shopketo France';
+      } else if (country === 'pt' || country === 'PT') {
+        updatedTitle = updatedTitle + ' | Shopketo Portugal';
+      } else if (country === 'fi' || country === 'FI') {
+        updatedTitle = updatedTitle + ' | Shopketo Finland';
+      } else if (country === 'be' || country === 'BE') {
+        updatedTitle = updatedTitle + ' | Shopketo Belgium';
+      } else if (country === 'ro' || country === 'RO') {
+        updatedTitle = updatedTitle + ' | Shopketo Romania';
+      } else if (country === 'bg' || country === 'BG') {
+        updatedTitle = updatedTitle + ' | Shopketo Bulgaria';
+      } else if (country === 'hr' || country === 'HR') {
+        updatedTitle = updatedTitle + ' | Shopketo Croatia';
+      } else if (country === 'cy' || country === 'CY') {
+        updatedTitle = updatedTitle + ' | Shopketo Republic of Cyprus';
+      } else if (country === 'cz' || country === 'CZ') {
+        updatedTitle = updatedTitle + ' | Shopketo Czech Republic';
+      } else if (country === 'ch' || country === 'CH') {
+        updatedTitle = updatedTitle + ' | Shopketo Switzerland';
+      } else if (country === 'dk' || country === 'DK') {
+        updatedTitle = updatedTitle + ' | Shopketo Denmark';
+      } else if (country === 'ee' || country === 'EE') {
+        updatedTitle = updatedTitle + ' | Shopketo Estonia';
+      } else if (country === 'gr' || country === 'GR') {
+        updatedTitle = updatedTitle + ' | Shopketo Greece';
+      } else if (country === 'lv' || country === 'LV') {
+        updatedTitle = updatedTitle + ' | Shopketo Latvia';
+      } else if (country === 'lt' || country === 'LT') {
+        updatedTitle = updatedTitle + ' | Shopketo Lithuania';
+      } else if (country === 'lu' || country === 'LU') {
+        updatedTitle = updatedTitle + ' | Shopketo Luxembourg';
+      } else if (country === 'mt' || country === 'MT') {
+        updatedTitle = updatedTitle + ' | Shopketo Malta';
+      } else if (country === 'sk' || country === 'SK') {
+        updatedTitle = updatedTitle + ' | Shopketo Slovakia';
+      } else if (country === 'si' || country === 'SI') {
+        updatedTitle = updatedTitle + ' | Shopketo Slovenia';
+      } else {
+        updatedTitle = updatedTitle + ' | Shopketo';
+      }
+
+      this.titleService.setTitle(updatedTitle);
     } else {
-      updatedTitle = title;
+      if (title !== '') this.titleService.setTitle(title);
     }
-
-    const country = this.document.location.pathname.split('/')[1];
-
-    if (country === 'ca' || country === 'CA') {
-      updatedTitle = updatedTitle + ' | Shopketo Canada';
-    } else if (country === 'au' || country === 'AU') {
-      updatedTitle = updatedTitle + ' | Shopketo Australia';
-    } else if (country === 'mo' || country === 'MO') {
-      updatedTitle = updatedTitle + ' | Shopketo Macao';
-    } else if (country === 'hk' || country === 'HK') {
-      updatedTitle = updatedTitle + ' | Shopketo Hong Kong';
-    } else if (country === 'sg' || country === 'SG') {
-      updatedTitle = updatedTitle + ' | Shopketo Singapore';
-    } else if (country === 'my' || country === 'MY') {
-      updatedTitle = updatedTitle + ' | Shopketo Malaysia';
-    } else if (country === 'mx' || country === 'MX') {
-      updatedTitle = updatedTitle + ' | Shopketo Mexico';
-    } else if (country === 'nz' || country === 'NZ') {
-      updatedTitle = updatedTitle + ' | Shopketo New Zealand';
-    } else if (country === 'de' || country === 'DE') {
-      updatedTitle = updatedTitle + ' | Shopketo Germany';
-    } else if (country === 'gb' || country === 'GB') {
-      updatedTitle = updatedTitle + ' | Shopketo United Kingdom';
-    } else if (country === 'it' || country === 'IT') {
-      updatedTitle = updatedTitle + ' | Shopketo Italy';
-    } else if (country === 'es' || country === 'ES') {
-      updatedTitle = updatedTitle + ' | Shopketo Spain';
-    } else if (country === 'nl' || country === 'NL') {
-      updatedTitle = updatedTitle + ' | Shopketo Netherlands';
-    } else if (country === 'at' || country === 'AT') {
-      updatedTitle = updatedTitle + ' | Shopketo Austria';
-    } else if (country === 'pl' || country === 'PL') {
-      updatedTitle = updatedTitle + ' | Shopketo Poland';
-    } else if (country === 'ie' || country === 'IE') {
-      updatedTitle = updatedTitle + ' | Shopketo Ireland';
-    } else if (country === 'se' || country === 'SE') {
-      updatedTitle = updatedTitle + ' | Shopketo Sweden';
-    } else if (country === 'hu' || country === 'HU') {
-      updatedTitle = updatedTitle + ' | Shopketo Hungary';
-    } else if (country === 'fr' || country === 'FR') {
-      updatedTitle = updatedTitle + ' | Shopketo France';
-    } else if (country === 'pt' || country === 'PT') {
-      updatedTitle = updatedTitle + ' | Shopketo Portugal';
-    } else if (country === 'fi' || country === 'FI') {
-      updatedTitle = updatedTitle + ' | Shopketo Finland';
-    } else if (country === 'be' || country === 'BE') {
-      updatedTitle = updatedTitle + ' | Shopketo Belgium';
-    } else if (country === 'ro' || country === 'RO') {
-      updatedTitle = updatedTitle + ' | Shopketo Romania';
-    } else {
-      updatedTitle = updatedTitle + ' | Shopketo';
-    }
-
-    this.titleService.setTitle(updatedTitle);
   }
 
   updateDocumentLanguageAndCountry() {
@@ -96,6 +131,10 @@ export class AppSeoService {
       updatedDocsName = 'en' + '-' + 'SG';
     } else if (country === 'my' || country === 'MY') {
       updatedDocsName = 'en' + '-' + 'MY';
+    } else if (country === 'tw' || country === 'TW') {
+      updatedDocsName = 'en' + '-' + 'TW';
+    } else if (country === 'jp' || country === 'JP') {
+      updatedDocsName = 'en' + '-' + 'JP';
     } else if (country === 'mx' || country === 'MX') {
       updatedDocsName = 'es' + '-' + 'MX';
     } else if (country === 'nz' || country === 'NZ') {
@@ -168,8 +207,12 @@ export class AppSeoService {
     let tagDescription = '';
 
     if (description === '') {
-      tagDescription =
-        'The Official Prüvit Store. Keto Supplements put your body into ketosis in 30 minutes or less. Keto Products include: Keto Drinks, MCT, Keto Reboot, KETO//UP and more!';
+      if(environment.tenant === 'pruvit') {
+        tagDescription = 'The Official Prüvit Store. Keto Supplements put your body into ketosis in 30 minutes or less. Keto Products include: Keto Drinks, MCT, Keto Reboot, KETO//UP and more!';
+      }
+      if(environment.tenant === 'ladyboss') {
+        tagDescription = 'Having helped over 700,000 women, LadyBoss is on a mission to support the health goals of the busy women who support everyone else.';
+      }
     } else {
       tagDescription = description;
     }
@@ -206,6 +249,11 @@ export class AppSeoService {
 
     element.setAttribute('rel', 'canonical');
     element.setAttribute('href', this.dom.URL.split('?')[0]);
+
+    var fbMeta = this.dom.querySelector(`meta[property='og:url']`) || null; 
+    if(fbMeta) {
+      fbMeta.setAttribute('content', this.dom.URL.split('?')[0]);
+    }
   }
 
   generateSitemapForDynamic(currentCountry: string, selectedLanguage: string) {

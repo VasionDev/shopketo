@@ -37,8 +37,8 @@ export class ProductsFormService {
       availableAttributesObj,
       productServings,
     } = this.getProductFormInfo(productMap);
-
     const { price, discount } = this.getProductPrice(productVariations);
+    const enInfo = this.getProductEnglishTitle(productMap);
 
     const product: Product = {
       id: productMap.ID,
@@ -60,6 +60,12 @@ export class ProductsFormService {
       sellingClosedText: productMap.mvproduct_selling_closed_text,
       finalPrice: discount,
       originalPrice: price,
+      englishTitle: enInfo.title,
+      englishName: enInfo.name,
+
+      uniqueId: productMap.hasOwnProperty('mvproduct_unique_id')
+        ? productMap.mvproduct_unique_id
+        : '',
 
       isAllVariationOutOfStock:
         this.checkAllVariationOutOfStock(productVariations),
@@ -81,6 +87,16 @@ export class ProductsFormService {
         productMap.hasOwnProperty('mvproduct_flavor') &&
         productMap.mvproduct_flavor !== ''
           ? productMap.mvproduct_flavor
+          : '',
+      themeColor:
+        productMap.hasOwnProperty('mvproduct_theme_color') &&
+        productMap.mvproduct_theme_color !== ''
+          ? productMap.mvproduct_theme_color.trim()
+          : '',
+      productCallOut:
+        productMap.hasOwnProperty('mvproduct_call_out') &&
+        productMap.mvproduct_call_out !== ''
+          ? productMap.mvproduct_call_out
           : '',
       promoterTitle:
         productMap.hasOwnProperty('mvproduct_banner_title') &&
@@ -118,9 +134,17 @@ export class ProductsFormService {
       shippingNote: responseData
         ? this.getShippingNote(productMap, productSettings)
         : '',
-      isForPromoter: responseData
-        ? this.checkPromoterProduct(productMap, productSettings)
+      moneyBackNote: responseData
+        ? this.getMonyeBackNote(productMap, productSettings)
         : '',
+      /*isForPromoter: responseData
+        ? this.checkPromoterProduct(productMap, productSettings)
+        : '',*/
+      isForPromoter:
+        productMap.hasOwnProperty('mvproduct_forpromoter') &&
+        productMap.mvproduct_forpromoter === 'on'
+          ? true
+          : false,
       showRelatedProducts:
         productMap.hasOwnProperty('mvproduct_related_products_show') &&
         productMap.mvproduct_related_products_show === 'on',
@@ -130,9 +154,23 @@ export class ProductsFormService {
       isForLimitedPromoter:
         productMap.hasOwnProperty('promoter_limited_offer') &&
         productMap.promoter_limited_offer === 'on',
+      isPromoterMembershipProduct:
+        productMap.hasOwnProperty('is_promoter_membership_prod') &&
+        productMap.is_promoter_membership_prod === 'on',
       promoterOrder: productMap.hasOwnProperty('mvproduct_promoter_seq')
         ? +productMap.mvproduct_promoter_seq
         : 0,
+      promoterSku: productMap.mvproduct_promoter_sku
+        ? productMap.mvproduct_promoter_sku
+        : '',
+      promoterBtnLabel: productMap.hasOwnProperty(
+        'mvproduct_promoter_btn_label'
+      )
+        ? productMap.mvproduct_promoter_btn_label
+        : '',
+      promoterBtnUrl: productMap.hasOwnProperty('mvproduct_promoter_btn_link')
+        ? productMap.mvproduct_promoter_btn_link
+        : '',
       promoterPageImageUrl: productMap.hasOwnProperty(
         'mvproduct_benefits_image'
       )
@@ -144,6 +182,9 @@ export class ProductsFormService {
       isMostPopular:
         productMap.hasOwnProperty('mvproduct_most_popular') &&
         productMap.mvproduct_most_popular === 'on',
+      isGeneralMostPopular:
+        productMap.hasOwnProperty('general_most_popular') &&
+        productMap.general_most_popular === 'on',
       learnPageTitle: productMap.hasOwnProperty('mvproduct_learn_title')
         ? productMap.mvproduct_learn_title
         : '',
@@ -160,6 +201,12 @@ export class ProductsFormService {
         ? productMap.banner_link_label
         : '',
       bannerLink: productMap.banner_link_url ? productMap.banner_link_url : '',
+      bannerCtaBtnTitle: productMap.hasOwnProperty('banner_cta_link_label')
+        ? productMap.banner_cta_link_label
+        : '',
+      bannerCtaBtnLink: productMap.hasOwnProperty('banner_cta_link_url')
+        ? productMap.banner_cta_link_url
+        : '',
       wistiaVideoLink: productMap.mvproduct_wistia_video_link
         ? productMap.mvproduct_wistia_video_link
         : '',
@@ -201,9 +248,28 @@ export class ProductsFormService {
       bannerEndUnixTime: productMap.hasOwnProperty('mvp_slider_endtime_unix')
         ? +productMap.mvp_slider_endtime_unix
         : 0,
+      headerBgImage: productMap.hasOwnProperty('mvproduct_banner_image')
+        ? productMap.mvproduct_banner_image
+        : '',
+      headerImage: productMap.hasOwnProperty('mvproduct_banner_title_image')
+        ? productMap.mvproduct_banner_title_image
+        : '',
     };
 
     return product;
+  }
+
+  private getProductEnglishTitle(product: any) {
+    let title: string = product.post_title as string;
+    let name: string = product.post_name as string;
+    if(product.hasOwnProperty('translated_data')) {
+      if(product.translated_data['en']) {
+        const englishProd = product.translated_data['en'];
+        title = englishProd.post_title as string;
+        name = englishProd.post_name as string;
+      }
+    }
+    return { title , name }
   }
 
   private getProductFormInfo(product: any): {
@@ -239,6 +305,14 @@ export class ProductsFormService {
 
     productVariationEntries.forEach((item: any[]) => {
       const varItem = item[1];
+
+      productServings.forEach((serv: any) => {
+        serv.servingAttributes.forEach((servAttr: any) => {
+          if(servAttr.key === varItem.attr_1 && varItem.mvproduct_outof_stock === 'on') {
+            servAttr.isOutOfStock = true;
+          }
+        });
+      });
 
       const attribute1 = varItem[servingKeys.attribute1Key];
       const attribute2 = varItem[servingKeys.attribute2Key]
@@ -308,9 +382,14 @@ export class ProductsFormService {
   getProductPrice(variations: ProductVariation[]) {
     let minPrice = Number.MAX_SAFE_INTEGER;
     let discountPrice = 0;
+    let oneTimeVariation = {} as ProductVariation;
+
+    const isOrderTypeOneExist = variations.some(varEl => varEl.orderType === 'ordertype_1');
+    const checkedOrderType = isOrderTypeOneExist ? 'ordertype_1' : 'ordertype_2';
 
     variations.forEach((variation) => {
-      if (variation.orderType === 'ordertype_1' && variation.price < minPrice) {
+      if (variation.orderType === checkedOrderType && variation.price < minPrice) {
+        oneTimeVariation = variation;
         minPrice = variation.price;
 
         const isUserCanAccess = this.userService.checkUserAccess(
@@ -343,7 +422,7 @@ export class ProductsFormService {
       minPrice = 0;
     }
 
-    return { price: minPrice, discount: discountPrice };
+    return { price: minPrice, discount: discountPrice, variation: oneTimeVariation };
   }
 
   getProductSettings(productSettingsData: any) {
@@ -354,6 +433,11 @@ export class ProductsFormService {
       isPromoterEnabled:
         productSettingsData.product_settings.hasOwnProperty('promoter_open') &&
         productSettingsData.product_settings.promoter_open === 'on',
+      smartshipDiscountOnTodays:
+        productSettingsData.product_settings.hasOwnProperty(
+          'offer_smartship_disc_open'
+        ) &&
+        productSettingsData.product_settings.offer_smartship_disc_open === 'on',
 
       isDefaultShippingNoteEnabled:
         productSettingsData.general_settings.hasOwnProperty(
@@ -364,6 +448,17 @@ export class ProductsFormService {
       )
         ? productSettingsData.general_settings.default_shipping_note_text
         : '',
+      isMoneyBackGuaranteeNoteEnabled:
+        productSettingsData.general_settings.hasOwnProperty(
+          'money_back_guarantee_note'
+        ) &&
+        productSettingsData.general_settings.money_back_guarantee_note === 1,
+      moneyBackGuaranteeNote:
+        productSettingsData.general_settings.hasOwnProperty(
+          'money_back_guarantee_note_text'
+        )
+          ? productSettingsData.general_settings.money_back_guarantee_note_text
+          : '',
       exchangeRate:
         productSettingsData.product_settings.hasOwnProperty('exchange_rate') &&
         productSettingsData.product_settings.exchange_rate !== ''
@@ -409,6 +504,12 @@ export class ProductsFormService {
       : '';
   }
 
+  private getMonyeBackNote(product: any, productSettings: ProductSettings) {
+    return productSettings.isMoneyBackGuaranteeNoteEnabled
+      ? productSettings.moneyBackGuaranteeNote
+      : '';
+  }
+
   private checkPromoterProduct(product: any, productSettings: ProductSettings) {
     return (
       productSettings.isPromoterEnabled &&
@@ -417,18 +518,27 @@ export class ProductsFormService {
     );
   }
 
-  getRelatedProducts(product: any, products: Product[]) {
-    const relatedProducts: Product[] = [];
+  populateWithRelatedProducts(products: Product[]) {
+    return products.map((product) => {
+      const relatedProducts = product.relatedProducts;
+      const reletedProdIds = relatedProducts.filter(
+        (prod: any) => prod
+      ) as Array<any>;
+      if (reletedProdIds.length) {
+        const prodIntIds = reletedProdIds.map((id) => +id);
+        const relatedProd = products
+          .filter((prod) => prodIntIds.includes(prod.id) && !prod.isSoldOut)
+          .map((prodEl) => ({ ...prodEl, relatedProducts: [] })) as Product[];
+        return { ...product, relatedProducts: relatedProd };
+      } else {
+        return { ...product, relatedProducts: [] };
+      }
+    }) as Product[];
+  }
 
-    product.relatedProducts.forEach((productID: string) => {
-      products.forEach((p) => {
-        if (p.id === +productID) {
-          p.relatedProducts = [];
-          relatedProducts.push(p);
-        }
-      });
-    });
-
-    return relatedProducts;
+  getPromoterMembershipProduct(products: Product[]) {
+    return products.find(
+      (product) => product.isPromoterMembershipProduct === true
+    );
   }
 }

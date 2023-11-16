@@ -1,60 +1,300 @@
-<div class="dashboard__side__navigation">
-  <ul>
-    <li *ngIf="isDashboard" routerLink="/dashboard" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fa-solid fa-objects-column"></i>Dashboard
-    </li>
-    <li *ngIf="!isDashboard" routerLink="/dashboard" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M7.25 0.5H2.75C1.48438 0.5 0.5 1.53125 0.5 2.75V10.25C0.5 11.5156 1.48438 12.5 2.75 12.5H7.25C8.46875 12.5 9.5 11.5156 9.5 10.25V2.75C9.5 1.53125 8.46875 0.5 7.25 0.5ZM7.25 15.5H2.75C1.48438 15.5 0.5 16.5312 0.5 17.75V19.25C0.5 20.5156 1.48438 21.5 2.75 21.5H7.25C8.46875 21.5 9.5 20.5156 9.5 19.25V17.75C9.5 16.5312 8.46875 15.5 7.25 15.5ZM19.25 9.5H14.75C13.4844 9.5 12.5 10.5312 12.5 11.75V19.25C12.5 20.5156 13.4844 21.5 14.75 21.5H19.25C20.4688 21.5 21.5 20.5156 21.5 19.25V11.75C21.5 10.5312 20.4688 9.5 19.25 9.5ZM19.25 0.5H14.75C13.4844 0.5 12.5 1.53125 12.5 2.75V4.25C12.5 5.51562 13.4844 6.5 14.75 6.5H19.25C20.4688 6.5 21.5 5.51562 21.5 4.25V2.75C21.5 1.53125 20.4688 0.5 19.25 0.5Z"
-          fill="#2752FF" />
-      </svg>
-      Dashboard
-    </li>
-    <li><i class="fas fa-repeat"></i>Smartship</li>
-    <li routerLink="/dashboard/order-history" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-history"></i>Orders
-    </li>
-    <li routerLink="/dashboard/addresses" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-map-marker-alt"></i>Addresses
-    </li>
-    <li routerLink="/dashboard/payment" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-credit-card-front"></i>Payment Methods
-    </li>
-    <li routerLink="/dashboard/profile" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-user"></i>Prüvit Profile
-    </li>
-    <li routerLink="/dashboard/settings" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      <i class="far fa-sliders-h"></i>Account settings
-    </li>
-    <li routerLink="/dashboard/notifications" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-bell"></i>Notifications
-    </li>
-  </ul>
-  <ul class="learning__center__menu">
-    <li routerLink="/dashboard/websites" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      <i class="fas fa-globe"></i>My websites
-    </li>
-    <li routerLink="/dashboard/training-center" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="fas fa-toolbox"></i>Training center</li>
-  </ul>
-  <ul class="help__menu">
-    <li *ngIf="isAdmin" (click)="onManageImpersonationAccount()">
-      <i class="fas fa-eye"></i>{{ isImpersonationPresent ? "Exit Account" : "View Account"
-      }}<span class="menu-tag ml-3">Admin</span>
-    </li>
-    <li><i class="fas fa-question-circle"></i>Get help</li>
-    <li (click)="logout()"><i class="fas fa-sign-out"></i>Logout</li>
-  </ul>
-</div>
-<ngx-slick-carousel *ngIf="imageCollection.length > 0 && !hideNav" class="carousel mb-3" [config]="slideConfig">
-  <div ngxSlickItem *ngFor="let x of imageCollection; let i = index" class="slide">
-    <a target="_blank" href="{{ x.link }}">
-      <img src="{{ x.content.uri }}" />
-    </a>
-    <h5>{{ x.name }}</h5>
+<ng-container *ngIf="this.tenant === 'pruvit'; else ladyboss">
+  <div class="dashboard__side__navigation">
+    <ul class="border-bottom pb-2">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/dashboard"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-objects-column"></i>{{ "dashboard" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/rewards"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-medal color-brand"></i>{{ "rewards" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/training-center"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-graduation-cap"></i
+        >{{ "training-center" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/subscriptions"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-repeat"></i>{{ "subscriptions" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/order-history"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-list-ul"></i>{{ "orders" | translate }}
+      </li>
+    </ul>
+    <ul [ngClass]="{'border-bottom mb-2': userCountry === 'JP'}" class="py-2">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/wallet"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+      <i class="fa-solid fa-wallet"></i>{{ "wallet" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/addresses"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-map-marker-alt"></i>{{ "addresses" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/payment"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-credit-card-front"></i
+        >{{ "payment-methods" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/profile"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM16.3128 10.0767C16.3611 10.4617 16.6886 10.7429 17.0668 10.7429C17.0982 10.7429 17.1303 10.7409 17.1625 10.7369C17.5793 10.6846 17.8746 10.3044 17.8223 9.88757C17.4442 6.86683 15.1851 4.42506 12.2011 3.8119C11.0283 3.5713 9.80724 3.63045 8.66987 3.98329C8.26835 4.10802 8.04425 4.53409 8.16897 4.93562C8.29329 5.33675 8.71895 5.56166 9.12087 5.43653C10.0136 5.15972 10.9728 5.11305 11.8949 5.30255C14.24 5.78455 16.0155 7.70289 16.3128 10.0767ZM4.70678 13.3994C4.3817 13.3994 4.08116 13.1898 3.98018 12.8631C3.62976 11.7285 3.57182 10.5111 3.81201 9.34149C4.02283 8.31553 4.44446 7.37125 5.06525 6.536C5.3159 6.19844 5.79265 6.12843 6.1298 6.37909C6.46695 6.62974 6.53695 7.10651 6.2863 7.44367C5.79949 8.09907 5.46838 8.84058 5.30262 9.64807C5.11353 10.5674 5.15899 11.5238 5.43378 12.4141C5.55809 12.8153 5.33279 13.2413 4.93127 13.3652C4.85684 13.3882 4.78121 13.3994 4.70678 13.3994ZM11.2381 17.1461C11.3089 17.5094 11.6275 17.7612 11.984 17.7612C12.0323 17.7612 12.0814 17.7564 12.1305 17.7468C14.2068 17.3416 15.9807 16.0473 16.9982 14.1962C17.2005 13.828 17.0662 13.3653 16.6976 13.163C16.3295 12.961 15.8672 13.0954 15.6649 13.4635C14.8651 14.9179 13.471 15.935 11.8392 16.2537C11.4268 16.3342 11.1576 16.7337 11.2381 17.1461ZM10.9183 9.8699C11.4047 9.96968 11.7177 10.4452 11.6179 10.9313C11.5181 11.4177 11.0426 11.7307 10.5566 11.6309C10.0702 11.5307 9.75674 11.056 9.85692 10.5696C9.9567 10.0831 10.4318 9.77012 10.9183 9.8699ZM7.39937 20.2643C6.85542 20.2643 6.41488 19.8233 6.41488 19.2797V11.1839C6.39235 10.7188 6.42212 10.2968 6.5046 9.89446C6.73875 8.75464 7.40259 7.77455 8.3742 7.13403C9.34581 6.49392 10.5085 6.27062 11.6483 6.50438C12.7881 6.73813 13.7686 7.40239 14.4087 8.37403C15.0492 9.34567 15.2729 10.5084 15.0387 11.6482C14.5555 14.0011 12.2474 15.5219 9.89498 15.0387C9.36231 14.9293 9.01953 14.4087 9.12856 13.876C9.23799 13.3433 9.7586 13.0009 10.2913 13.1099C11.5807 13.3755 12.8452 12.541 13.11 11.2519C13.2383 10.6271 13.1156 9.98981 12.7648 9.45752C12.4139 8.92523 11.8768 8.56152 11.252 8.43317C10.6272 8.30483 9.99033 8.42754 9.45806 8.77838C8.92538 9.12921 8.56168 9.66633 8.43334 10.2908C8.38345 10.5346 8.36655 10.8021 8.38265 11.1083L8.38385 11.1594V19.2797C8.38385 19.8233 7.94331 20.2643 7.39937 20.2643Z"
+            fill="#2752FF"
+          ></path>
+        </svg>
+        {{ "pruvit-profile" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/account"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-user"></i>{{ "account" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/notifications"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-bell"></i>{{ "notifications" | translate }}
+      </li>
+    </ul>
+    <ul *ngIf="userCountry !== 'JP'" class="learning__center__menu">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/cloud/websites"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-globe"></i>{{ "my-websites" | translate }}
+      </li>
+    </ul>
+    
+    <ul class="help__menu">
+      <li *ngIf="isAdmin" (click)="onManageImpersonationAccount()">
+        <i class="fas fa-eye"></i
+        >{{
+          (isImpersonationPresent ? "exit-account" : "view-account")
+            | translate
+        }}<span class="menu-tag ml-3">{{ "admin" | translate }}</span>
+      </li>
+      <li>
+        <a class="color-black help-link" href="https://{{isStaging ? 'demo' : 'cloud'}}.justpruvit.com" target="_blank"> <i class="fas fa-arrow-up-right-from-square"></i>{{ "cloud-office-1-0" | translate }}</a>
+      </li>
+      <li>
+        <a class="color-black help-link" href="https://pruvit.zendesk.com/hc/en-us/" target="_blank"> <i class="fas fa-question-circle"></i>{{ "help-center" | translate }}
+        </a>
+        </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out"></i>{{ "logout" | translate }}
+      </li>
+    </ul>
   </div>
-</ngx-slick-carousel>
+  <ngx-slick-carousel
+    *ngIf="imageCollection.length > 0 && !sideBar && showCarousel"
+    class="carousel mb-3"
+    [config]="slideConfig"
+  >
+    <div
+      ngxSlickItem
+      *ngFor="let x of imageCollection; let i = index"
+      class="slide"
+    >
+      <a target="_blank" href="{{ x.link }}">
+        <img src="{{ x.content.uri }}" />
+      </a>
+      <h5>{{ x.name }}</h5>
+    </div>
+  </ngx-slick-carousel>
+</ng-container>
+
+<ng-template #ladyboss>
+  <div class="dashboard__side__navigation">
+    <ul class="border-bottom">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-objects-column color-brand"></i>
+        {{ "dashboard" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/leads"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-address-book color-brand"></i>
+        {{ "leads" | translate }}
+      </li>
+      <li *ngIf="isChampion" (click)="onClickChampionItem()">
+        <i class="fa-solid fa-medal color-brand"></i>
+        {{ "champion-office" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/order-history"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-list-ul color-brand"></i
+        >{{ "orders" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/subscriptions"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-repeat color-brand"></i
+        >{{ "subscriptions" | translate }}
+      </li>
+    </ul>
+    <ul class="border-bottom">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/profile"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <svg
+          width="22"
+          height="16"
+          viewBox="0 0 22 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 0.000820344V14.4726L6.91529 5.04978L0 0.000820344Z"
+            fill="#F0006F"
+          />
+          <path d="M22 0L0.00598054 16L22 10.2538V0Z" fill="#F0006F" />
+          <path
+            d="M11.1567 0.0483979L0.00478443 15.3306L14.1422 5.02845L11.1567 0.0483979Z"
+            fill="#F0006F"
+          />
+          <path
+            d="M22 10.7968L17.4357 11.9822L22 15.2773V10.7968Z"
+            fill="#F0006F"
+          />
+        </svg>
+        {{ "boss-profile" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/addresses"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-map-marker-alt color-brand"></i
+        >{{ "addresses" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/payment"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-credit-card-front color-brand"></i
+        >{{ "payment-methods" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/notifications"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fas fa-bell color-brand" aria-hidden="true"></i>
+        {{ "notifications" | translate }}
+      </li>
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/account"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-user color-brand"></i>
+        {{ "account" | translate }}
+      </li>
+    </ul>
+    <ul class="resource__center__menu border-bottom">
+      <li
+        (click)="onClickSideNavigationItem()"
+        routerLink="/dashboard/training-center"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-briefcase"></i>{{ "resource-center" | translate }}
+      </li>
+    </ul>
+    <ul class="help__menu">
+      <li *ngIf="isAdmin" (click)="onManageImpersonationAccount()">
+        <i class="fas fa-eye"></i
+        >{{
+          (isImpersonationPresent ? "exit-account" : "view-account")
+            | translate
+        }}<span class="menu-tag ml-3">{{ "admin" | translate }}</span>
+      </li>
+      <li>
+        <a class="color-black help-link" href="mailto:help@ladyboss.com"
+          ><i class="fas fa-question-circle"></i
+          >{{ "help-center" | translate }}</a
+        >
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out"></i>{{ "logout" | translate }}
+      </li>
+    </ul>
+  </div>
+</ng-template>

@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { SubscriptionLike } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
-import { Blog } from '../../models/blog.model';
+import { AppSeoService } from 'src/app/shared/services/app-seo.service';
 import { BlogAuthor } from '../../models/blog-author.model';
 import { BlogCategory } from '../../models/blog-category.model';
-import { SubscriptionLike } from 'rxjs';
-import { AppSeoService } from 'src/app/shared/services/app-seo.service';
+import { Blog } from '../../models/blog.model';
 import { BlogState } from '../../store/blogs.reducer';
 declare var blogSliderJS: any;
 declare var bannerSliderJS: any;

@@ -2,8 +2,8 @@ import {
   APP_INITIALIZER,
   Inject,
   NgModule,
-  PlatformRef,
   PLATFORM_ID,
+  PlatformRef,
 } from '@angular/core';
 import { BrowserModule, TransferState } from '@angular/platform-browser';
 
@@ -28,13 +28,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { FacebookModule } from 'ngx-facebook';
 import { ToastrModule } from 'ngx-toastr';
 import { PhraseAppCompiler } from 'ngx-translate-phraseapp';
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { WildcartRoutingModule } from './app-wildcart-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard.module';
 import { FoodsListEffects } from './foods/store/foods-list.effects';
 import { GraphQLModule } from './graphql.module';
 import { ImplicitModule } from './implicit/implicit.module';
@@ -140,7 +138,7 @@ const dynamicUrlAuthConfig = {
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () => {
-    return window.location.hostname === 'shopketo.mypruvit.com' &&
+    return window.location.hostname === 'mvdemo-pruvit.com' &&
       environment.isStaging
       ? oidcConfigService.withConfig(demoMyPruvitAuthConfig)
       : oidcConfigService.withConfig(dynamicUrlAuthConfig);
@@ -157,8 +155,6 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     AppRoutingModule,
     ProductsModule,
     ImplicitModule,
-    CustomerDashboardModule,
-    WildcartRoutingModule,
     SharedModule,
     CoreModule,
     SidebarModule,

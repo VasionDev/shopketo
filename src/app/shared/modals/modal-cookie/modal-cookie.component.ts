@@ -110,6 +110,14 @@ export class ModalCookieComponent implements OnInit, OnDestroy {
   onRejectCookies() {
     this.dataService.setCookieDialogStatus(true);
 
+    // const localVIOffer = localStorage.getItem('VIOffer');
+    // const VIOffer = localVIOffer ? JSON.parse(localVIOffer) : null;
+    // const localVIUser = localStorage.getItem('VIUser');
+    // const VIUser = localVIUser ? JSON.parse(localVIUser) : null;
+    // if (VIOffer && VIUser === null) {
+    //   localStorage.removeItem('VIOffer');
+    // }
+
     const expiredDate = new Date();
     expiredDate.setDate(expiredDate.getDate() + 365);
 

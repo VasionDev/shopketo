@@ -1,239 +1,2448 @@
-<div class="refer__friend__component dashboard--component">
-    <div>
-        <div *ngIf="isLoaded; else loader">
-            <h3 class="d-flex color-black mb-2 refer-title">Refer a friend <a (click)="false" href="#"
-                    class="ml-auto info-icon"><i class="fas fa-info-circle" aria-hidden="true"></i>
-                </a></h3>
-            <p class="p-small color-gray-dark mb-4">Earn Prüvit Bucks to spend on products by sharing discount offers
-                with
-                friends
-            </p>
-            <div *ngIf="hideWidget">
-                <div class="refer-card mb-4 disabled--card" [class]="cardClasses[0]">
-                    <p class="d-flex justify-content-end align-items-center redeemed-btn-grp">
-                        <span class="btn"><i class="fal fa-check"></i> 0 Friends</span>
-                        <span class="btn">0 CREDITS to use </span>
-                    </p>
-                    <h4 class="color-white mb-1">Not available yet</h4>
-                    <p class="color-white p-small mb-3">Please check back later</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="dropdown">
-                            <a href="#" class="color-black p-small font-bold share-btn" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i
-                                    class="fal fa-external-link font-weight-normal"></i> Share</a>
-
-                        </div>
-                        <a href="#" (click)="false" class="color-white p-small font-bold manage-btn" data-toggle="modal"
-                            data-target="#manageModal">Manage <i
-                                class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="!hideWidget">
-                <ng-container *ngFor="let n of bonuses; let i = index">
-                    <div class="refer-card mb-4" [class]="cardClasses[i%cardClasses.length]">
-                        <p *ngIf="n.info" class="d-flex justify-content-end align-items-center redeemed-btn-grp">
-                            <span class="btn"><i class="fal fa-check"></i> {{n.info.redeemedDiscounts}} Friends</span>
-                            <span class="btn">{{ n.info.availableCredits }} CREDITS to use </span>
-                        </p>
-                        <h4 class="color-white mb-1">{{ n.title }}</h4>
-                        <p class="color-white p-small mb-3">{{ n.description }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div *ngIf="n.info" class="dropdown">
-                                <a href="#" class="color-black p-small font-bold share-btn" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><i
-                                        class="fal fa-external-link font-weight-normal"></i> Share</a>
-                                <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item disclaimer-reg" href="#" (click)="copy(n.info.link); false">
-                                        <i class="far fa-clone mr-2"></i>Copy link
-                                    </a>
-                                    <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out!{{n.info.link}}">
-                                        <i class="far fa-envelope mr-2"></i>Email
-                                    </a>
-                                    <a class="dropdown-item disclaimer-reg" href="sms:?&body={{n.info.link}}">
-                                        <i class="far fa-comment mr-2"></i>SMS
-                                    </a>
-                                    <a (click)="redirectFacebook(n.info.link); false"
-                                        class="dropdown-item disclaimer-reg" href="#" data-toggle="modal"
-                                        data-target="#shareModal">
-                                        <i class="fab fa-facebook-square mr-2" style="color:#1777F2;"></i>Facebook
-                                    </a>
-                                    <a (click)="redirectTwitter(n.info.link); false"
-                                        class="dropdown-item disclaimer-reg" href="#" data-toggle="modal"
-                                        data-target="#shareModal">
-                                        <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;"></i>Twitter
-                                    </a>
-                                </div>
-                            </div>
-                            <a href="#" (click)="manage(n); false" class="color-white p-small font-bold manage-btn"
-                                data-toggle="modal" data-target="#manageModal">Manage <i
-                                    class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
-                        </div>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-        <ng-template #loader>
-            <app-loader class="payment--loader"></app-loader>
-        </ng-template>
-    </div>
-</div>
-<!-- modal -->
-
-<div class="modal fade animate manage-modal" id="manageModal" aria-hidden="true">
-    <div class="dashboard--modal modal-dialog modal-dialog-centered">
-        <div class="modal-content animate-bottom">
-
-            <div class="modal-header flex-column gray-bg">
-                <p class="w-100 d-flex justify-content-between align-items-center">
-                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close desktop__modal--close"><i
-                            class="far fa-times"></i></a>
-                    <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mobile__modal--close"><i
-                            class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>Dashboard </a>
-                    <a href="#" class="p-small font-bold how-it"><i class="far fa-play-circle"></i> How it works</a>
+<ng-container>
+  <div class="refer__friend__component dashboard--component">
+    <p *ngIf="isAutologin">{{ "fetching-your-offers" | translate }}</p>
+    <div *ngIf="isLoaded; else loader" class="refer__friend__component referral-offers-tab-slider">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" data-toggle="tab" href="#tabAvailable" role="tab" aria-selected="true">{{
+            "available" | translate }}</a>
+        </li>
+        <li (click)="loadExpiredBonus()" class="nav-item" role="presentation">
+          <a class="nav-link" data-toggle="tab" href="#tabExpired" role="tab" aria-selected="false">{{ "expired" |
+            translate }}</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tabAvailable" role="tabpanel" aria-labelledby="available-tab">
+          <div *ngIf="activeBonuses.length; else noBonuses" class="row dashboard-offer-slider">
+            <div *ngFor="let n of activeBonuses; let i = index" class="col-sm-6 col-12">
+              <div *ngIf="n.isAvailable" [ngClass]="{ 'disabled--card': n.isAvailable == false }" [class]="n.cardClass"
+                class="refer-card mb-4 pink-card">
+                <p class="d-flex justify-content-between align-items-center redeemed-btn-grp">
+                  <span *ngIf="n.expiresIn" class="color-white disclaimer-reg text-uppercase opacity-70">
+                    {{ "expires-in" | translate }} {{ n.expiresIn | timer | async }}
+                  </span>
+                  <span *ngIf="n.expCredits !== undefined && n.expCredits; else noExpPoint"
+                    class="btn color-red ml-auto cursor-pointer" data-toggle="modal"
+                    data-target="#expiringCreditsModal"
+                    (click)="expCreditIndex = i"
+                  >
+                    <i class="color-red fa-solid fa-circle-exclamation"></i>
+                    {{
+                      n.info.availableCredits > 999
+                    ? ("unlimited-use" | translate)
+                    : (n.info.availableCredits + " " + (n.info.availableCredits === 1 ? ("credit-to-use" | translate) : ("credits-to-use" | translate)))
+                    }}
+                    <i class="fal fa-chevron-right ml-1 color-gray"></i>
+                  </span>
+                  <ng-template #noExpPoint>
+                    <span class="btn ml-auto cursor-none">
+                      {{
+                      (n.info.availableCredits > 999
+                      ? ("unlimited-use" | translate)
+                      : (n.info.availableCredits + " " + (n.info.availableCredits === 1 ? ("credit-to-use" | translate) : ("credits-to-use"
+                      | translate))))
+                      }}
+                    </span>
+                  </ng-template>
                 </p>
-                <h3 class="title color-black">{{activeBonus.title}}</h3>
-            </div>
-
-            <div class="modal-body">
-
-                <div class="row referral-row mb-4">
-                    <div class="col share-col">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <p class="color-gray disclaimer-reg">Your unique referral link</p>
-                                <p class="color-black p-small font-bold overflow--p">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM17.3128 11.0767C17.3611 11.4617 17.6886 11.7429 18.0668 11.7429C18.0982 11.7429 18.1303 11.7409 18.1625 11.7369C18.5793 11.6846 18.8746 11.3044 18.8223 10.8876C18.4442 7.86684 16.1851 5.42506 13.2011 4.8119C12.0283 4.57131 10.8072 4.63045 9.66987 4.9833C9.26835 5.10802 9.04425 5.53409 9.16897 5.93563C9.29329 6.33675 9.71895 6.56166 10.1209 6.43653C11.0136 6.15973 11.9728 6.11306 12.8949 6.30256C15.24 6.78455 17.0155 8.70289 17.3128 11.0767ZM5.70678 14.3994C5.3817 14.3994 5.08116 14.1898 4.98018 13.8631C4.62976 12.7285 4.57182 11.5111 4.81201 10.3415C5.02283 9.31553 5.44446 8.37125 6.06525 7.536C6.3159 7.19844 6.79265 7.12844 7.1298 7.37909C7.46695 7.62975 7.53695 8.10651 7.2863 8.44367C6.79949 9.09908 6.46838 9.84058 6.30262 10.6481C6.11353 11.5674 6.15899 12.5238 6.43378 13.4141C6.55809 13.8153 6.33279 14.2413 5.93127 14.3652C5.85684 14.3882 5.78121 14.3994 5.70678 14.3994ZM12.2381 18.1461C12.3089 18.5094 12.6275 18.7613 12.984 18.7613C13.0323 18.7613 13.0814 18.7564 13.1305 18.7468C15.2068 18.3416 16.9807 17.0473 17.9982 15.1962C18.2005 14.828 18.0662 14.3653 17.6976 14.163C17.3295 13.961 16.8672 14.0954 16.6649 14.4635C15.8651 15.9179 14.471 16.9351 12.8392 17.2537C12.4268 17.3342 12.1576 17.7337 12.2381 18.1461ZM11.9183 10.8699C12.4047 10.9697 12.7177 11.4452 12.6179 11.9313C12.5181 12.4177 12.0426 12.7307 11.5566 12.6309C11.0702 12.5307 10.7567 12.056 10.8569 11.5696C10.9567 11.0831 11.4318 10.7701 11.9183 10.8699ZM8.39937 21.2643C7.85542 21.2643 7.41488 20.8233 7.41488 20.2797V12.1839C7.39235 11.7188 7.42212 11.2968 7.5046 10.8945C7.73875 9.75464 8.40259 8.77455 9.3742 8.13403C10.3458 7.49392 11.5085 7.27062 12.6483 7.50438C13.7881 7.73814 14.7686 8.40239 15.4087 9.37403C16.0492 10.3457 16.2729 11.5084 16.0387 12.6482C15.5555 15.0011 13.2474 16.5219 10.895 16.0387C10.3623 15.9293 10.0195 15.4087 10.1286 14.876C10.238 14.3433 10.7586 14.0009 11.2913 14.1099C12.5807 14.3755 13.8452 13.541 14.11 12.2519C14.2383 11.6271 14.1156 10.9898 13.7648 10.4575C13.4139 9.92523 12.8768 9.56152 12.252 9.43318C11.6272 9.30483 10.9903 9.42754 10.4581 9.77838C9.92538 10.1292 9.56168 10.6663 9.43334 11.2908C9.38345 11.5346 9.36655 11.8021 9.38265 12.1083L9.38385 12.1594V20.2797C9.38385 20.8233 8.94331 21.2643 8.39937 21.2643Z"
-                                            fill="#2752FF" />
-                                    </svg>
-                                    {{activeBonus.info.link.replace('https://','')}}
-                                </p>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="color-black p-small font-bold btn share-btn" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><i
-                                        class="fal fa-external-link font-weight-normal" aria-hidden="true"></i>
-                                    Share</a>
-                                <div class="dropdown-menu dropdown-bg" aria-labelledby="dropdownMenuButton">
-                                    <a (click)="copy(activeBonus.info.link); false" class="dropdown-item disclaimer-reg"
-                                        href="#">
-                                        <i class="far fa-clone mr-2" aria-hidden="true"></i>Copy link
-                                    </a>
-                                    <a class="dropdown-item disclaimer-reg" href="mailto:?&body=Check this out! {{activeBonus.info.link}}">
-                                        <i class="far fa-envelope mr-2" aria-hidden="true"></i>Email
-                                    </a>
-                                    <a class="dropdown-item disclaimer-reg" href="sms:?&body={{activeBonus.info.link}}">
-                                        <i class="far fa-comment mr-2" aria-hidden="true"></i>SMS
-                                    </a>
-                                    <a (click)="redirectFacebook(activeBonus.info.link); false"
-                                        class="dropdown-item disclaimer-reg" href="#">
-                                        <i class="fab fa-facebook-square mr-2" style="color:#1777F2;"
-                                            aria-hidden="true"></i>Facebook
-                                    </a>
-                                    <a (click)="redirectTwitter(activeBonus.info.link); false"
-                                        class="dropdown-item disclaimer-reg" href="#">
-                                        <i class="fab fa-twitter-square mr-2" style="color:#1D9BF0;"
-                                            aria-hidden="true"></i>Twitter
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <p class="color-gray disclaimer-reg">Available to use</p>
-                        <p class="color-black p-small font-bold">{{activeBonus.info.availableCredits}} credits</p>
-                    </div>
-                    <div class="col">
-                        <p class="color-gray disclaimer-reg">Total rewards</p>
-                        <p class="color-black p-small font-bold">{{activeBonus.info.totalMoneyAwarded}}</p>
-                    </div>
+                <h4 class="color-white mb-1">{{ n.title | translate }}</h4>
+                <p class="color-white p-small mb-3">{{ n.description | translate }}</p>
+                <div class="d-flex justify-content-between align-items-center mb-3 benefits-group">
+                  <div class="benefit-card card">
+                    <span class="disclaimer-reg text-uppercase color-white opacity-70 mb-2">{{ "your-benefit" |
+                      translate }}</span>
+                    <p class="p-small color-white">
+                      <i class="fa-solid fa-coin color-yellow"></i>
+                      {{ n.getValue | translate }}
+                    </p>
+                  </div>
+                  <div class="benefit-card card">
+                    <span class="disclaimer-reg text-uppercase color-white opacity-70 mb-2">{{ "friends-benefit" |
+                      translate }}</span>
+                    <p class="p-small color-white">
+                      <i class="fa-solid fa-money-bill-simple-wave color-yellow"></i>
+                      {{ n.giveValue | translate }}
+                    </p>
+                  </div>
                 </div>
-                <ng-template #loaderFriends>
-                    <app-loader class="payment--loader"></app-loader>
-                </ng-template>
-                <div class="row friends-row" *ngIf="isLoadedFriend; else loaderFriends">
-                    <div class="col-12">
-                        <h3 class="color-black mb-2 d-flex align-items-center">Friends <span
-                                class="count-taq">{{friendInfo.friendsInvited}}</span>
-                        </h3>
-                        <p class="p-small color-gray-dark mb-4">After a friend completes their purchase, your $10
-                            kickback
-                            will be activated in approximately 48 hours</p>
-                        <ng-container *ngFor="let x of friendInfo.friends; let i = index">
-                            <div class="friends-expander mb-4">
-                                <div class="d-flex align-items-center justify-content-between collapse-head collapsed"
-                                    data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false"
-                                    [attr.aria-controls]="'collapse' + i">
-                                    <div class="profile-cont d-flex align-items-center">
-                                        <span *ngIf="!x.profile.avatar" class="prof-name mr-3"
-                                            [class]="cardClasses[i%cardClasses.length]">{{x.profile.abrv[0] + x.profile.abrv[1]}}</span>
-                                        <span *ngIf="x.profile.avatar" class="prof-name mr-3"><img
-                                                src="{{x.profile.avatar}}" alt="img"></span>
-                                        <span class="name">{{x.profile.name}}</span>
-                                    </div>
-                                    <div class="right-cont">
-                                        <span class="btn" *ngIf="x.currentStep.status == 'kickbackAvailable'"
-                                            [class]="x.currentStep.class"><i class="fal fa-alarm-clock mr-1"></i>
-                                            {{ x.currentStep.availableTo | timer | async}}</span>
-                                        <span *ngIf="x.currentStep.status == 'kickbackExpired'" class="btn"
-                                            style="background-color:#EB4747;"><i class="fal fa-alarm-clock mr-1"></i>
-                                            Expired</span>
-                                        <i *ngIf="x.currentStep.status == 'kickbackRefunded'"
-                                            class="fas fa-times-circle font-24" style="color:#EB4747;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="dropdown">
+                    <a href="javascript:void(0)" [matMenuTriggerFor]="menuOrders"
+                      class="color-black p-small font-bold share-btn">
+                      <i class="fal fa-external-link font-weight-normal"></i>
+                      {{ "give" | translate }} {{ n.giveValue | translate }}
+                    </a>
 
-                                        <i *ngIf="x.currentStep.status == 'orderPlaced'" class="fas fa-clock font-24"
-                                            style="color:#FF9000;"></i>
-                                        <i *ngIf="x.currentStep.status == 'kickbackRedeemed'"
-                                            class="fas fa-check-circle font-24" style="color:#41BF4E;"></i>
-                                    </div>
-                                </div>
-                                <div id="collapse{{i}}" class="collapse collapse-body">
-                                    <ul class="order-progress-step">
-                                        <ng-container *ngFor="let s of x.steps; let i = index">
-                                            <li
-                                                [ngClass]="{'complete': x.currentStep.stepOrder  >= s.stepOrder,'active': x.currentStep.stepOrder  == s.stepOrder, 'red': x.currentStep.status == 'kickbackExpired' || x.currentStep.status == 'kickbackRefunded' || x.currentStep.class == 'red', 'orange': x.currentStep.status == 'orderPlaced' || x.currentStep.class == 'orange', 'green': x.currentStep.status == 'kickbackRedeemed' || x.currentStep.class == 'green'}">
-                                                <p class="font-bold title">{{s.displayName}}</p>
-                                                <p *ngIf="s.status == 'orderPlaced'" class="p-small">
-                                                    {{s.availableFrom | date: 'MMM d, h:mm a'}}</p>
-                                                <p *ngIf="x.currentStep.status == 'kickbackRedeemed'" class="p-small">
-                                                    {{s.redeemDate | date: 'MMM d, h:mm a'}}</p>
-                                                <p [hidden]="x.currentStep.status !== 'kickbackAvailable'"
-                                                    class="p-small">
-                                                    <span
-                                                        *ngIf="x.currentStep.status == 'kickbackAvailable' && s.status == 'kickbackAvailable'">Expires
-                                                        in</span>
-                                                    {{s.availableTo | timer | async}}
-                                                </p>
-
-                                                <p [hidden]="x.currentStep.status !== 'orderPlaced' && s.status !== 'kickbackAvailable'"
-                                                    class="p-small">
-
-                                                    {{s.availableFrom| timer | async}}
-                                                </p>
-                                                <p *ngIf="x.currentStep.status == 'kickbackRefunded' && x.currentStep.stepOrder  ==  s.stepOrder"
-                                                    class="p-small">The
-                                                    order was refunded</p>
-                                                <p *ngIf="x.currentStep.status == 'orderPlaced' && s.status == 'kickbackRedeemed'"
-                                                    class="p-small">
-                                                    Use the bonus within 4 days after it’s unlocked
-                                                </p>
-                                            </li>
-                                        </ng-container>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </ng-container>
-
-
-                    </div>
+                    <mat-menu #menuOrders="matMenu" xPosition="after" class="mat-menu--full">
+                      <button (click)="copy(n.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                        <i class="far fa-clone mr-2" aria-hidden="true"></i><span>{{ "copy-link" | translate }}</span>
+                      </button>
+                      <button (click)="sendEmail(n.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                        <i class="far fa-envelope mr-2" aria-hidden="true"></i><span>{{ "email" | translate }}</span>
+                      </button>
+                      <button (click)="sendSMS(n.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                        <i class="far fa-comment mr-2" aria-hidden="true"></i><span>{{ "sms" | translate }}</span>
+                      </button>
+                      <button (click)="redirectFacebook(n.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                        <i class="fab fa-facebook-square mr-2" [style.color]="
+                            tenant === 'ladyboss' ? '#f0006f' : '#1777f2'
+                          " aria-hidden="true"></i><span>{{ "facebook" | translate }}</span>
+                      </button>
+                      <button (click)="redirectTwitter(n.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                        <i class="fab fa-twitter-square mr-2" [style.color]="
+                            tenant === 'ladyboss'
+                              ? '#f0006f'
+                              : 'rgb(0, 172, 238)'
+                          " aria-hidden="true"></i><span>{{ "twitter" | translate }}</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                  <a 
+                    href="#" 
+                    data-toggle="modal" 
+                    data-target="#manageModal"
+                    class="color-white p-small font-bold manage-btn" 
+                    (click)="manage(n); expCreditIndex = i; (false);"
+                  >
+                    {{ "manage" | translate }}
+                    <i class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
                 </div>
-
+              </div>
             </div>
+          </div>
+          <ng-template #noBonuses>
+            <p class="p-small color-gray font-bold text-center no-offers-show">
+              {{ "no-offers-to-show" | translate }}
+            </p>
+          </ng-template>
+        </div>
+        <div class="tab-pane fade" id="tabExpired" role="tabpanel" aria-labelledby="expired-tab">
+          <ng-container *ngIf="expBonusLoaded">
+            <div *ngIf="expiredBonuses.length; else noExpiredBonuses" class="row dashboard-expired-offer-slider">
+              <div *ngFor="let n of expiredBonuses; let i = index" class="col-sm-6 col-12">
+                <div *ngIf="n.isAvailable" [ngClass]="{ 'disabled--card': n.isAvailable == false }"
+                  [class]="n.cardClass" class="refer-card mb-4 pink-card">
+                  <p class="d-flex justify-content-between align-items-center redeemed-btn-grp">
+                    <span class="btn ml-auto">
+                      {{
+                      n.info.availableCredits > 999
+                      ? ("unlimited-use" | translate)
+                      : n.info.availableCredits +
+                      " " +
+                      ("credits-to-use" | translate)
+                      }}
+                    </span>
+                  </p>
+                  <h4 class="color-white mb-1">{{ n.title | translate }}</h4>
+                  <p class="color-white p-small mb-3">{{ n.shortDescription | translate}}</p>
+                  <div class="d-flex justify-content-between align-items-center mb-3 benefits-group">
+                    <div class="benefit-card card">
+                      <span class="disclaimer-reg text-uppercase color-white opacity-70 mb-2">{{ "your-benefit" |
+                        translate }}</span>
+                      <p class="p-small color-white">
+                        <i class="fa-solid fa-coin color-yellow"></i>
+                        {{ n.getValue | translate }}
+                      </p>
+                    </div>
+                    <div class="benefit-card card">
+                      <span class="disclaimer-reg text-uppercase color-white opacity-70 mb-2">{{ "friends-benefit" |
+                        translate }}</span>
+                      <p class="p-small color-white">
+                        <i class="fa-solid fa-money-bill-simple-wave color-yellow"></i>
+                        {{ n.giveValue | translate }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="dropdown">
+                      <a href="javascript:void(0)" class="color-black p-small font-bold share-btn">
+                        <i class="fal fa-external-link font-weight-normal"></i>
+                        {{ "give" | translate }} {{ n.giveValue | translate }}
+                      </a>
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#manageModal"
+                      class="color-white p-small font-bold manage-btn" (click)="manage(n); (false)">{{ "manage" |
+                      translate }}
+                      <i class="fal fa-chevron-right font-weight-normal ml-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #noExpiredBonuses>
+              <p class="p-small color-gray font-bold text-center no-offers-show">
+                {{ "no-offers-to-show" | translate }}
+              </p>
+            </ng-template>
+          </ng-container>
+
+          <app-loader *ngIf="!expBonusLoaded" class="payment--loader"></app-loader>
 
         </div>
+      </div>
     </div>
-</div>
+
+    <ng-template #loader>
+      <app-loader class="payment--loader"></app-loader>
+    </ng-template>
+  </div>
+
+  <!-- manage modal -->
+  <div class="modal fade animate manage-modal addresses-modal" id="manageModal" aria-hidden="true">
+    <div class="dashboard--modal modal-dialog modal-dialog-centered"
+      [ngClass]="{ 'lead-create-modal': activeModal !== 'manage' }">
+      <div class="modal-content animate-bottom">
+        <ng-container *ngIf="activeModal === 'manage'">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close desktop__modal--close"><i
+                  class="far fa-times"></i></a>
+              <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close mobile__modal--close"><i
+                  class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>{{ "dashboard" | translate
+                }}
+              </a>
+
+              <span *ngIf="
+                  isPruvitTVPresent(activeBonus.videoLink);
+                  else wistiaContainer
+                " class="p-small font-bold link-hover color-brand how-it"
+                (click)="onClickPruvitTvVideo(activeBonus.videoLink)">
+                <i class="far fa-play-circle mr-2"></i>
+                {{ "how-it-works" | translate }}
+              </span>
+              <ng-template #wistiaContainer>
+                <div [innerHTML]="wistiaHTML | textSanitizer : 'html'"></div>
+              </ng-template>
+            </p>
+            <h3 class="title color-black">{{ activeBonus.title | translate }}</h3>
+            <p class="p-small color-gray-dark mb-2">
+              {{ activeBonus.longDescription }}
+            </p>
+          </div>
+
+          <div class="modal-body">
+            <div class="row referral-row mb-4">
+              <div class="col share-col">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="color-gray disclaimer-reg">
+                      {{ "your-unique-referral-link" | translate }}
+                    </p>
+                    <p *ngIf="
+                        activeBonus?.id &&
+                        activeBonus.id.includes('give-n-get-pb-02')
+                      " class="color-black p-small font-bold overflow--p">
+                      {{
+                      isStaging
+                      ? user.code + ".mvdemo-pruvit.com"
+                      : user.code + ".shopketo.com"
+                      }}
+                    </p>
+
+                    <p *ngIf="
+                        activeBonus?.id &&
+                        !activeBonus.id.includes('give-n-get-pb-02')
+                      " class="color-black p-small font-bold overflow--p">
+                      {{ activeBonus.info.link.replace("https://", "") }}
+                    </p>
+                  </div>
+
+                  <button (click)="personalize()" class="color-black p-small font-bold btn share-btn" *ngIf="
+                      activeBonus?.id &&
+                        activeBonus.id.includes('give-n-get-pb-02');
+                      else otherOffer
+                    ">
+                    {{ "personalize" | translate }}
+                  </button>
+                  <ng-template #otherOffer>
+                    <ng-container *ngIf="!activeBonus.isExpired; else expBonus">
+                      <button mat-icon-button [matMenuTriggerFor]="menuOrders" class="button button--default"
+                        [disabled]="activeBonus.isExpired">
+                        <i class="far fa-external-link mr-2"></i>{{ "share" | translate }}
+                      </button>
+                      <mat-menu #menuOrders="matMenu" xPosition="after" class="mat-menu--full">
+                        <button (click)="copy(activeBonus.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                          <i class="far fa-clone mr-2" aria-hidden="true"></i><span>{{ "copy-link" | translate }}</span>
+                        </button>
+                        <button (click)="sendEmail(activeBonus.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                          <i class="far fa-envelope mr-2" aria-hidden="true"></i><span>{{ "email" | translate }}</span>
+                        </button>
+                        <button (click)="sendSMS(activeBonus.info.link)" class="mat-menu-item--custom" mat-menu-item>
+                          <i class="far fa-comment mr-2" aria-hidden="true"></i><span>{{ "sms" | translate }}</span>
+                        </button>
+                        <button (click)="redirectFacebook(activeBonus.info.link)" class="mat-menu-item--custom"
+                          mat-menu-item>
+                          <i class="fab fa-facebook-square mr-2" [style.color]="
+                              tenant === 'ladyboss' ? '#f0006f' : '#1777f2'
+                            " aria-hidden="true"></i><span>{{ "facebook" | translate }}</span>
+                        </button>
+                        <button (click)="redirectTwitter(activeBonus.info.link)" class="mat-menu-item--custom"
+                          mat-menu-item>
+                          <i class="fab fa-twitter-square mr-2" [style.color]="
+                              tenant === 'ladyboss'
+                                ? '#f0006f'
+                                : 'rgb(0, 172, 238)'
+                            " aria-hidden="true"></i><span>{{ "twitter" | translate }}</span>
+                        </button>
+                      </mat-menu>
+                    </ng-container>
+                    <ng-template #expBonus>
+                      <button mat-icon-button class="button button--default" disabled>
+                        <i class="far fa-external-link mr-2"></i>{{ "share" | translate }}
+                      </button>
+                    </ng-template>
+                  </ng-template>
+                </div>
+              </div>
+              <div 
+                *ngIf="activeBonus.expCredits; else noExpCredPoint" 
+                class="col cursor-pointer" data-toggle="modal"
+                data-target="#expiringCreditsModal"
+              >
+                <p class="color-gray disclaimer-reg">
+                  {{ "available-to-use" | translate }}
+                </p>
+                <p 
+                  class="color-black p-small font-bold"
+                  [ngClass]="{'color-red': activeBonus.expCredits}"
+                ><u>
+                  {{
+                  activeBonus.info.availableCredits > 1000
+                  ? "unlimited"
+                  : activeBonus.info.availableCredits + " " + (activeBonus.expCredits > 1 ? ("credits" | translate) : ("credit" |
+                    translate)) }}</u></p>
+              </div>
+              <ng-template #noExpCredPoint>
+                <div class="col">
+                  <p class="color-gray disclaimer-reg">
+                    {{ "available-to-use" | translate }}
+                  </p>
+                  <p class="color-black p-small font-bold">
+                    {{
+                    activeBonus.info.availableCredits > 1000
+                    ? "unlimited"
+                    : activeBonus.info.availableCredits + " " + (activeBonus.expCredits === 1 ? ("credit" | translate)  : ("credits" | translate))
+                    }}
+                  </p>
+                </div>
+              </ng-template>
+              <div class="col">
+                <p class="color-gray disclaimer-reg">
+                  {{ "used-by" | translate }}
+                </p>
+                <p *ngIf="activeBonus.info.totalMoneyAwarded" class="color-black p-small font-bold">
+                  {{
+                  activeBonus.info.totalMoneyAwarded
+                  .split("(")[1]
+                  .split(")")[0].split(" ")[0] + " " + ("friends" | translate)
+                  }}
+                </p>
+              </div>
+            </div>
+            <ng-template #loaderFriends>
+              <app-loader class="payment--loader"></app-loader>
+            </ng-template>
+            <div *ngIf="tenant === 'pruvit'; else ladybossLoadedFriend">
+              <ng-container *ngIf="isLoadedFriend; else loaderFriends">
+                <div class="row friends-row ng-star-inserted mb-4 mb-sm-0">
+                  <div class="col-12">
+                    <div class="pending-wrap mb-4">
+                      <h4 class="color-black font-24 mt-sm-3 mb-2 d-flex align-items-center">
+                        {{ "active-leads" | translate }}
+                      </h4>
+                      <p class="p-small color-gray mb-4">
+                        {{
+                        "people-who-clicked-your-unique-referral-link-and-started-the-purchase-process"
+                        | translate
+                        }}
+                      </p>
+                      <div *ngFor="
+                          let pendingUser of pendingLeads.pendingLeads;
+                          let i = index
+                        " class="friends-expander mb-3">
+                        <div
+                          class="d-flex pending-lead-user-list border-bottom pb-2 align-items-center justify-content-between collapse-head no-collapse"
+                          (click)="onClickPendingLead(pendingUser)">
+                          <div class="profile-cont d-flex align-items-center">
+                            <span *ngIf="pendingUser.avatar === null && pendingUser?.abrv" class="prof-name mr-3"
+                              [class]="cardClasses[i % cardClasses.length]">{{
+                              pendingUser.abrv[0] + pendingUser.abrv[1]
+                              }}</span>
+                            <span *ngIf="pendingUser.avatar !== null" class="prof-name mr-3">
+                              <img [src]="pendingUser.avatar" alt="img" />
+                            </span>
+                            <div class="prof-text">
+                              <span class="name d-block">{{
+                                pendingUser.name
+                                }}</span>
+                            </div>
+                          </div>
+                          <div class="right-cont">
+                            <span class="btn" [class]="
+                                pendingUser.availability ? 'orange' : 'red'
+                              "><i class="fal fa-alarm-clock mr-1"></i>{{
+                              pendingUser.availability
+                              ? (pendingUser.expiresAt | timer | async)
+                              : ("expired" | translate)
+                              }}</span>
+                            <i class="fa-regular fa-chevron-right color-gray ml-4"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <a *ngIf="activeBonus.info.availableCredits > 0 && !activeBonus.id.includes('give-n-get-pb-02')"
+                        href="#" (click)="activeModal = 'leadCreate'; (false)" class="p-small font-bold color-brand">
+                        {{ "send-personal-invite" | translate }} ({{ activeBonus.info.availableCredits }})
+                        <i class="fa-regular fa-chevron-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-12 hide">
+                    <h4 class="color-black font-24 mb-2 d-flex align-items-center">
+                      {{ "friends" | translate }}
+                    </h4>
+                    <p class="p-small color-gray-dark mb-4">
+                      {{ (activeBonus.rewardPayoutCriteria | translate) }}
+                    </p>
+                    <ng-container *ngFor="let x of friendInfo.friends; let i = index">
+                      <div class="friends-expander mb-4">
+                        <div class="d-flex align-items-center justify-content-between collapse-head collapsed"
+                          data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false"
+                          [attr.aria-controls]="'collapse' + i">
+                          <div class="profile-cont d-flex align-items-center">
+                            <span *ngIf="!x.profile.avatar" class="prof-name mr-3"
+                              [class]="cardClasses[i % cardClasses.length]">{{ x.profile.abrv[0] + x.profile.abrv[1]
+                              }}</span>
+                            <span *ngIf="x.profile.avatar" class="prof-name mr-3"><img src="{{ x.profile.avatar }}"
+                                alt="img" /></span>
+                            <span class="name">{{ x.profile.name }}</span>
+                          </div>
+                          <div class="right-cont">
+                            <span class="btn" *ngIf="
+                                x.currentStep.status == 'kickbackAvailable'
+                              " [class]="x.currentStep.class"><i class="fal fa-alarm-clock mr-1"></i>
+                              {{
+                              x.currentStep.availableTo | timer | async
+                              }}</span>
+                            <span *ngIf="x.currentStep.status == 'kickbackExpired'" class="btn"
+                              style="background-color: #eb4747"><i class="fal fa-alarm-clock mr-1"></i>
+                              {{ "expired" | translate }}</span>
+                            <i *ngIf="x.currentStep.status == 'kickbackRefunded' || x.currentStep.status == 'noPointsAwarded'"
+                              class="fas fa-times-circle font-24" style="color: #eb4747"></i>
+
+                            <i *ngIf="x.currentStep.status == 'orderPlaced'" class="fas fa-clock font-24"
+                              style="color: #ff9000"></i>
+                            <i *ngIf="x.currentStep.status == 'kickbackRedeemed'" class="fas fa-check-circle font-24"
+                              style="color: #41bf4e"></i>
+                          </div>
+                        </div>
+                        <div id="collapse{{ i }}" class="collapse collapse-body">
+                          <ul class="order-progress-step">
+                            <ng-container *ngFor="let s of x.steps; let i = index">
+                              <li [ngClass]="{
+                                  complete:
+                                    x.currentStep.stepOrder >= s.stepOrder,
+                                  active:
+                                    x.currentStep.stepOrder == s.stepOrder,
+                                  red:
+                                    x.currentStep.status == 'kickbackExpired' ||
+                                    x.currentStep.status ==
+                                      'kickbackRefunded' ||
+                                    x.currentStep.class == 'red',
+                                  orange:
+                                    x.currentStep.status == 'orderPlaced' ||
+                                    x.currentStep.class == 'orange',
+                                  green:
+                                    x.currentStep.status ==
+                                      'kickbackRedeemed' ||
+                                    x.currentStep.class == 'green'
+                                }">
+                                <p class="font-bold title">
+                                  {{ s.displayName }}
+                                </p>
+                                <p *ngIf="s.status == 'orderPlaced'" class="p-small">
+                                  {{ s.availableFrom | date : "MMM d, h:mm a" }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status == 'kickbackRedeemed'
+                                  " class="p-small">
+                                  {{ s.redeemDate | date : "MMM d, h:mm a" }}
+                                </p>
+                                <p [hidden]="
+                                    x.currentStep.status !== 'kickbackAvailable'
+                                  " class="p-small">
+                                  <span *ngIf="
+                                      x.currentStep.status ==
+                                        'kickbackAvailable' &&
+                                      s.status == 'kickbackAvailable'
+                                    ">{{ "expires-in" | translate }}</span>
+                                  {{ s.availableTo | timer | async }}
+                                </p>
+                                <p [hidden]="
+                                    x.currentStep.status !== 'orderPlaced' &&
+                                    s.status !== 'kickbackAvailable'
+                                  " class="p-small">
+                                  {{ s.availableFrom | timer | async }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status ==
+                                      'kickbackRefunded' &&
+                                    x.currentStep.stepOrder == s.stepOrder
+                                  " class="p-small">
+                                  {{ "the-order-was-refunded" | translate }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status == 'orderPlaced' &&
+                                    s.status == 'kickbackRedeemed'
+                                  " class="p-small">
+                                  {{ "use-the-bonus-within-4-days-after-its-unlocked" | translate }}
+                                </p>
+                              </li>
+                            </ng-container>
+                          </ul>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="row friends-row">
+                  <div class="col-12">
+                    <h4 class="color-black mb-2 d-flex align-items-center font-24">
+                      {{ "friends" | translate }}
+                    </h4>
+                    <p class="p-small color-gray-dark mb-4">
+                      {{ activeBonus.rewardPayoutCriteria | translate }}
+                    </p>
+                    <ng-container *ngFor="let x of friendInfo.friends; let i = index">
+                      <div class="friends-expander mb-4">
+                        <div class="d-flex align-items-center justify-content-between collapse-head collapsed"
+                          data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false"
+                          [attr.aria-controls]="'collapse' + i">
+                          <div class="profile-cont d-flex align-items-center">
+                            <span *ngIf="!x.profile.avatar" class="prof-name mr-3"
+                              [class]="cardClasses[i % cardClasses.length]">{{ x.profile.abrv[0] + x.profile.abrv[1]
+                              }}</span>
+                            <span *ngIf="x.profile.avatar" class="prof-name mr-3"><img src="{{ x.profile.avatar }}"
+                                alt="img" /></span>
+                            <span class="name">{{ x.profile.name }}</span>
+                          </div>
+                          <div class="right-cont mr-5">
+                            <i *ngIf="x.currentStep.status == 'orderRefunded' || x.currentStep.status == 'noPointsAwarded'"
+                              class="fas fa-times-circle font-24" style="color: #eb4747"></i>
+                            <i *ngIf="x.currentStep.status == 'orderPlaced'" class="fas fa-clock font-24"
+                              style="color: #ff9000"></i>
+                            <i *ngIf="
+                                x.currentStep.status == 'referralPointsAdded'
+                              " class="fas fa-check-circle font-24" style="color: #41bf4e"></i>
+                          </div>
+                        </div>
+                        <div id="collapse{{ i }}" class="collapse collapse-body">
+                          <ul class="order-progress-step">
+                            <ng-container *ngFor="let s of x.steps; let i = index">
+                              <li [ngClass]="{
+                                  complete:
+                                    x.currentStep.stepOrder >= s.stepOrder,
+                                  active:
+                                    s.isActive ||
+                                    (x.currentStep.isActive &&
+                                      x.currentStep.status ===
+                                        'referralPointsAdded'),
+                                  red: x.currentStep.status == 'orderRefunded' || x.currentStep.status == 'noPointsAwarded',
+                                  orange:
+                                    x.currentStep.status === 'orderPlaced',
+                                  green:
+                                    x.currentStep.status ==
+                                      'referralPointsAdded' &&
+                                    x.currentStep.isActive
+                                }">
+                                <p class="font-bold title">
+                                  {{ s.displayName }} <a *ngIf="s?.learnMoreUrl"
+                                    class="color-gray font-reg underline ml-1" [href]="s?.learnMoreUrl"
+                                    target="_blank">{{ "learn-more" | translate }}</a>
+                                </p>
+                                <p *ngIf="s.status == 'orderPlaced'" class="p-small">
+                                  {{ s.availableFrom | date : "MMM d, h:mm a" }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status ==
+                                      'referralPointsAdded' ||
+                                    s.status == 'referralPointsAdded'
+                                  " class="p-small">
+                                  {{ s.redeemDate | date : "MMM d, h:mm a" }}
+                                </p>
+                                <p [hidden]="
+                                    x.currentStep.status !==
+                                    'referralPointsAdded'
+                                  " class="p-small">
+                                  <span *ngIf="
+                                      s.status == 'referralPointsAdded' &&
+                                      !x.currentStep.isActive
+                                    ">{{ "added-in" | translate }}</span>
+                                  {{ s.availableTo | timer | async }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status == 'orderRefunded' &&
+                                    x.currentStep.stepOrder == s.stepOrder
+                                  " class="p-small">
+                                  {{ s.refundDate | date : "MMM d, h:mm a" }}
+                                </p>
+                                <p *ngIf="
+                                    x.currentStep.status == 'noPointsAwarded' &&
+                                    x.currentStep.stepOrder == s.stepOrder
+                                  " class="p-small">
+                                  {{ s.completionDate | date : "MMM d, h:mm a" }}
+                                </p>
+                              </li>
+                            </ng-container>
+                          </ul>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <ng-template #ladybossLoadedFriend>
+              <div class="row friends-row" *ngIf="isLoadedFriend; else loaderFriends">
+                <div class="col-12">
+                  <div class="pending-wrap">
+                    <h3 class="color-black mt-sm-3 mb-2 d-flex align-items-center">
+                      {{ "pending" | translate }}
+                    </h3>
+                    <p class="p-small color-gray mb-4">
+                      {{
+                      "these-leads-have-not-finished-their-account-registration"
+                      | translate
+                      }}
+                    </p>
+                    <div *ngFor="
+                        let pendingUser of invitedFriendsInfo.pendingContacts;
+                        let i = index
+                      " class="friends-expander mb-3">
+                      <div
+                        class="d-flex pending-lead-user-list border-bottom pb-2 align-items-center justify-content-between collapse-head no-collapse"
+                        (click)="onClickPendingLead(pendingUser)">
+                        <div class="profile-cont d-flex align-items-center">
+                          <span *ngIf="pendingUser.avatar === null" class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]">{{
+                            pendingUser.abrv[0] + pendingUser.abrv[1]
+                            }}</span>
+                          <span *ngIf="pendingUser.avatar !== null" class="prof-name mr-3">
+                            <img [src]="pendingUser.avatar" alt="img" />
+                          </span>
+                          <div class="prof-text">
+                            <span class="name d-block">{{
+                              pendingUser.name
+                              }}</span>
+                          </div>
+                        </div>
+                        <div class="right-cont">
+                          <span class="btn" [class]="
+                              pendingUser.availability ? 'orange' : 'red'
+                            "><i class="fal fa-alarm-clock mr-1"></i>{{
+                            pendingUser.availability
+                            ? (pendingUser.expiresAt | timer | async)
+                            : ("expired" | translate)
+                            }}</span>
+                          <i class="fa-regular fa-chevron-right color-gray ml-4"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <a *ngIf="activeBonus.info.availableCredits === 0" href="#" (click)="(false)"
+                      class="p-small font-bold disabled">
+                      {{ "send-personal-invite" | translate }} (0)
+                      <i class="fa-regular fa-chevron-right"></i>
+                    </a>
+                    <a *ngIf="activeBonus.info.availableCredits > 0" href="#"
+                      (click)="activeModal = 'leadCreate'; (false)" class="p-small font-bold">
+                      {{ "send-personal-invite" | translate }} ({{ activeBonus.info.availableCredits }})
+                      <i class="fa-regular fa-chevron-right"></i>
+                    </a>
+                  </div>
+                  <div class="registered-wrap">
+                    <h3 class="color-black mt-sm-5 mt-3 mb-2 d-flex align-items-center">
+                      {{ "registered" | translate }}
+                    </h3>
+                    <p class="p-small color-gray mb-4">
+                      {{ "after-a-boss-registers" | translate }}
+                    </p>
+                    <div *ngFor="
+                        let registeredUser of invitedFriendsInfo.registeredFriends;
+                        let i = index;
+                        let last = last
+                      " class="friends-expander">
+                      <div class="d-flex align-items-center py-3 justify-content-between collapse-head no-collapse"
+                        [ngClass]="{ 'border-bottom': !last }">
+                        <div class="profile-cont d-flex align-items-center">
+                          <span *ngIf="!registeredUser.avatar" class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]">{{
+                            registeredUser.abrv[0] + registeredUser.abrv[1]
+                            }}</span>
+                          <span *ngIf="registeredUser.avatar" class="prof-name mr-3">
+                            <img [src]="registeredUser.avatar" alt="img" />
+                          </span>
+                          <span class="name">{{ registeredUser.name }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+
+        <!--lead-create-modal-->
+
+        <ng-container *ngIf="activeModal === 'leadCreate'">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" (click)="
+                  activeModal = 'manage';
+                  getLeads(user.id, activeBonus.id);
+                  (false)
+                " aria-label="Close" class="modal-close mb-hide">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a href="#" (click)="
+                  activeModal = 'manage';
+                  getLeads(user.id, activeBonus.id);
+                  (false)
+                " aria-label="Close" class="modal-close mb-show">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+            </p>
+
+            <h3 class="title color-black">{{ "create-lead" | translate }}</h3>
+            <p class="p-small color-gray">
+              {{
+              "a-credit-will-be-reserved-and-the-recipient-will-have"
+              | translate
+              }}
+            </p>
+          </div>
+
+          <div class="modal-body" [style.margin-top.px]="isMobile ? 70 : 0">
+            <div [formGroup]="leadForm" class="card modal-body-card ref-modal-card">
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "first-name" | translate
+                    }}</label>
+                  <input type="text" class="form-control disclaimer-reg bg-color" [class.is-invalids]="
+                      firstNameControl.errors && firstNameControl.touched
+                    " placeholder="{{'first-name' | translate}}" formControlName="firstName" />
+                </div>
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "last-name" | translate
+                    }}</label>
+                  <input type="text" class="form-control disclaimer-reg bg-color" [class.is-invalids]="
+                      lastNameControl.errors && lastNameControl.touched
+                    " placeholder="{{'last-name' | translate}}" formControlName="lastName" />
+                </div>
+              </div>
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-12 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "email-address" | translate
+                    }}</label>
+                  <input type="text" class="form-control disclaimer-reg bg-color" [class.is-invalids]="
+                      emailControl.errors && emailControl.touched
+                    " placeholder="{{'email-address' | translate}}" formControlName="email" />
+                </div>
+              </div>
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "phone-country-code" | translate
+                    }}</label>
+
+                  <select (change)="onChangePhoneCountry($event)" class="form-control disclaimer-bold custom-select">
+                    <option *ngFor="let country of phoneCountries; let i = index" [value]="i"
+                      [selected]="country.country_code === 'US'">
+                      {{ country.phone_code }} {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1 optional">{{ "phone-number" | translate }}
+                    <span class="text copyright-text">{{
+                      "optional" | translate
+                      }}</span>
+                  </label>
+                  <div class="phone-control">
+                    <input type="text" class="form-control disclaimer-reg bg-color"
+                      [class.is-invalids]="phoneControl.errors" placeholder="{{'phone-number' | translate}}"
+                      formControlName="phone" />
+                    <span class="color-black p-small font-bold">{{
+                      selectedCountry.phone_code
+                      }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="button button--default button--grey ml-auto">
+              {{ "cancel" | translate }}
+            </button>
+            <div class="dropdown">
+              <button type="button" class="button button--default" [disabled]="leadForm.invalid || isLeadFormSubmitted"
+                (click)="onSubmitLeadForm()">
+                <span>{{ "create-offer-link" | translate }}</span>
+                <i class="fa fa-spinner fa-spin ml-1" *ngIf="isLeadFormSubmitted"></i>
+              </button>
+            </div>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">{{
+              "ooops-something-happened" | translate }}</small>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'leadSend' && leadUser">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" (click)="
+                  activeModal = 'manage';
+                  getLeads(user.id, activeBonus.id);
+                  (false)
+                " aria-label="Close" class="modal-close mb-hide">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a href="#" (click)="
+                  activeModal = 'manage';
+                  getLeads(user.id, activeBonus.id);
+                  (false)
+                " aria-label="Close" class="modal-close mb-show">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a class="btn valid-timer" *ngIf="leadUser">
+                <i class="fal fa-alarm-clock mr-1"></i>
+                {{ leadUser.expiresAt | timer | async }}
+              </a>
+            </p>
+            <h3 class="title color-black">{{ "ready-to-send" | translate }}</h3>
+            <p class="p-small color-gray">
+              {{ "remember-to-follow-up-before-it-expires" | translate }}
+            </p>
+          </div>
+          <div class="modal-body" [style.margin-top.px]="isMobile ? 70 : 0">
+            <div class="card modal-body-card ref-modal-card">
+              <p class="p-small font-bold color-gray">
+                {{ activeBonus.title | translate }} {{ "offer-link-for" | translate }}
+                {{ leadUser.name }}
+              </p>
+              <p class="font-bold color-black">
+                {{ leadUser.linkUrl }}
+                <i (click)="copy(leadUser.linkUrl)" data-toggle="tooltip" title="Copy link"
+                  data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                  class="fa-clone pointer ml-2 color-gray fa-regular {{
+                    linkCopied ? 'hide' : ''
+                  }}"></i>
+                <i data-toggle="tooltip" title="Link copied"
+                  data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                  class="color-green ml-2 fa-check fa-regular {{
+                    !linkCopied ? 'hide' : ''
+                  }}"></i>
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="button button--default button--grey ml-auto">
+              {{ "close" | translate }}
+            </button>
+            <div class="dropdown">
+              <button type="button" class="button button--default" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span>{{ "send-offer-link" | translate }}</span><i class="fa-regular fa-chevron-down ml-1"></i>
+              </button>
+
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-bg">
+                <a href="#" (click)="copy(leadUser.linkUrl); (false)" class="dropdown-item disclaimer-reg"><i
+                    class="far fa-clone mr-2"></i>{{ "copy-link" | translate }}</a>
+                <a href="mailto:{{ leadUser.email }}?&body={{
+                    leadUser.linkUrl
+                  }}" class="dropdown-item disclaimer-reg"><i class="far fa-envelope mr-2"></i>{{ "email" | translate
+                  }}</a>
+                <a *ngIf="leadUser?.phoneNumber" href="sms:{{ leadUser.phoneNumber }}?&body={{
+                    leadUser.linkUrl
+                  }}" class="dropdown-item disclaimer-reg"><i class="far fa-comment mr-2"></i>{{ "sms" | translate
+                  }}</a>
+                <a href="#" (click)="redirectFacebook(leadUser.linkUrl); (false)"
+                  class="dropdown-item disclaimer-reg"><i class="fab fa-facebook-square mr-2"
+                    style="color: #1777f2"></i>{{ "facebook" | translate }}</a>
+                <a href="#" (click)="redirectTwitter(leadUser.linkUrl); (false)" class="dropdown-item disclaimer-reg"><i
+                    class="fab fa-twitter-square mr-2" style="color: #1d9bf0"></i>{{ "twitter" | translate }}</a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'pendingLead' && pendingLeadUser">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" (click)="activeModal = 'manage'; (false)" aria-label="Close" class="modal-close mb-hide">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a href="#" (click)="activeModal = 'manage'; (false)" aria-label="Close" class="modal-close mb-show">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a class="btn valid-timer">
+                <i class="fal fa-alarm-clock mr-1"></i>
+                {{ pendingLeadUser.expiresAt | timer | async }}
+              </a>
+            </p>
+            <h3 class="title color-black">{{ pendingLeadUser.name }}</h3>
+          </div>
+          <div class="modal-body">
+            <div class="card modal-body-card ref-modal-card">
+              <span class="pending-lead-user-info" *ngIf="pendingLeadUser?.phoneNumber">
+                <p class="p-small font-bold color-gray">
+                  {{ "phone-number" | translate }}
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser?.phoneNumber }}
+                </p>
+              </span>
+              <span class="pending-lead-user-info" *ngIf="pendingLeadUser.email">
+                <p class="p-small font-bold color-gray">
+                  {{ "email-address" | translate }}
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser.email }}
+                </p>
+              </span>
+              <span class="pending-lead-user-info" *ngIf="pendingLeadUser.link">
+                <p class="p-small font-bold color-gray">
+                  {{ activeBonus.title | translate }} {{ "offer-link" | translate }}
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser.link }}
+                  <i (click)="copy(pendingLeadUser.link)" data-toggle="tooltip" title="Copy link"
+                    data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                    class="fa-clone pointer ml-2 color-gray fa-regular {{
+                      linkCopied ? 'hide' : ''
+                    }}"></i>
+                  <i data-toggle="tooltip" title="Link copied"
+                    data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                    class="color-green ml-2 fa-check fa-regular {{
+                      !linkCopied ? 'hide' : ''
+                    }}"></i>
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button button--default button--grey"
+              (click)="activeModal = 'recycleCredit'; errorReset()">
+              <i class="fa-regular fa-recycle"></i>
+            </button>
+            <button type="button" data-dismiss="modal" class="button button--default button--grey ml-auto">
+              {{ "close" | translate }}
+            </button>
+            <div class="dropdown">
+              <button type="button" class="button button--default" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span>{{ "send-offer-link" | translate }}</span><i class="fa-regular fa-chevron-down ml-1"></i>
+              </button>
+
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-bg">
+                <a href="#" (click)="copy(pendingLeadUser.link); (false)" class="dropdown-item disclaimer-reg"><i
+                    class="far fa-clone mr-2"></i>{{ "copy-link" | translate }}</a>
+                <a href="mailto:{{ pendingLeadUser.email }}?&body={{
+                    pendingLeadUser.link
+                  }}" class="dropdown-item disclaimer-reg"><i class="far fa-envelope mr-2"></i>{{ "email" | translate
+                  }}</a>
+                <a *ngIf="pendingLeadUser?.phoneNumber" href="sms:{{ pendingLeadUser?.phoneNumber }}?&body={{
+                    pendingLeadUser.link
+                  }}" class="dropdown-item disclaimer-reg"><i class="far fa-comment mr-2"></i>{{ "sms" | translate
+                  }}</a>
+                <a href="#" (click)="redirectFacebook(pendingLeadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"><i class="fab fa-facebook-square mr-2"
+                    style="color: #1777f2"></i>{{ "facebook" | translate }}</a>
+                <a href="#" (click)="redirectTwitter(pendingLeadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"><i class="fab fa-twitter-square mr-2"
+                    style="color: #1d9bf0"></i>{{ "twitter" | translate }}</a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'recycleCredit' && pendingLeadUser">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" (click)="activeModal = 'pendingLead'; loadTooltip(); (false)" aria-label="Close"
+                class="modal-close mb-hide">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+              <a href="#" (click)="activeModal = 'pendingLead'; loadTooltip(); (false)" aria-label="Close"
+                class="modal-close mb-show">
+                <i aria-hidden="true" class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}
+              </a>
+            </p>
+            <h3 class="title color-black">
+              {{ "recycle-credit" | translate }}
+            </h3>
+          </div>
+          <div class="modal-body">
+            <div class="card modal-body-card ref-modal-card">
+              <p class="p-small color-black mb-2">
+                {{
+                "the-current-offer-link-associated-with-this-credit-will-stop"
+                | translate
+                }}
+              </p>
+              <p class="font-bold color-black">
+                {{ "this-action-cannot-be-undone" | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="activeModal = 'pendingLead'; loadTooltip(); (false)"
+              class="button button--default button--grey ml-auto">
+              {{ "cancel" | translate }}
+            </button>
+            <div class="dropdown">
+              <button type="button" (click)="onSubmitRecycleCredit(pendingLeadUser)" class="button button--default">
+                <span>{{ "yes-recycle-credit" | translate }}</span>
+                <i class="fa fa-spinner fa-spin ml-1" *ngIf="isLeadFormSubmitted"></i>
+              </button>
+            </div>
+            <small *ngIf="genericError" class="d-block copyright-text font-bold mt-1 error-text">{{
+              "ooops-something-happened" | translate }}</small>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="activeModal === 'changeReferrer'">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a href="#" (click)="activeModal = 'manage'; (false)" class="modal-close mb-hide"><i aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"></i>{{ "back" | translate }}</a>
+              <a href="#" (click)="activeModal = 'manage'; (false)" class="modal-close mb-show"><i
+                  class="fal fa-chevron-left font-weight-normal mr-2" aria-hidden="true"></i>{{ "back" | translate
+                }}</a>
+            </p>
+            <h3 class="title color-black">
+              {{ "change-referral-link" | translate }}
+            </h3>
+          </div>
+          <div class="modal-body change-referrer-code-modal">
+            <div class="form-group mb-3">
+              <input type="text" class="form-control referrer--edit--input" #referrerInput="ngModel"
+                pattern="^[0-9a-zA-Z]*$" [(ngModel)]="referrerCode" />
+              <span class="input__pill">{{ siteName }}.<span *ngIf="this.tenant === 'pruvit'">com</span><span
+                  *ngIf="this.tenant === 'ladyboss'">io</span></span>
+              <p *ngIf="errorMessage" class="text-danger referrer--alert">
+                {{ errorMessage }}
+              </p>
+              <p *ngIf="referrerInput.errors?.['pattern']" class="text-danger text--15">
+                {{
+                "referrer-code-should-only-contain-digits-and-english-characters"
+                | translate
+                }}
+              </p>
+              <p *ngIf="referrerCode && referrerCode.length > 128" class="text-danger text--15">
+                {{
+                "referrer-code-should-not-be-more-than-128-characters"
+                | translate
+                }}
+              </p>
+              <p *ngIf="successMessage" class="text-success referrer--alert">
+                {{ successMessage }}
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button button--default button--grey" data-dismiss="modal">
+              {{ "cancel" | translate }}
+            </button>
+            <button type="button" class="button button--default" (click)="checkReferrerCode()"
+              [disabled]="loading || !referrerCode || referrerInput.errors?.['pattern'] || referrerCode.length > 128">
+              <span *ngIf="!loading">{{ "save" | translate }}</span>
+              <span *ngIf="loading">{{ "saving" | translate }}</span>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- ExpiringCreditsModal -->
+  <div id="expiringCreditsModal" tabindex="-1"
+    class="modal animate fade right-mobile addresses-modal expiring-points-modal wdt-480" aria-modal="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content animate-bottom">
+        <div class="modal-header flex-column gray-bg">
+          <p class="w-100 d-flex justify-content-between align-items-center mb-hide">
+            <a href="#" data-dismiss="modal" aria-label="Close" class="modal-close"><i aria-hidden="true"
+                class="fal fa-times"></i></a>
+          </p>
+          <h3 class="title color-black mb-show">
+            <a data-dismiss="modal" aria-label="Close" class="color-black pointer"><i aria-hidden="true"
+                class="fal fa-chevron-left font-weight-normal mr-3"></i>{{ "expiring-credits" | translate }}</a>
+          </h3>
+          <h3 class="title color-black mb-hide">{{ "expiring-credits" | translate }}</h3>
+          <p class="p-small color-gray">{{ "credits-will-expire-over-time" | translate }}</p>
+        </div>
+        <div class="modal-body p-0">
+          <div class="p-sm-4 p-3">
+            <ul>
+              <li *ngFor="let credit of expCredits[expCreditIndex]"
+                class="d-flex justify-content-between align-items-center py-2">
+                <h4 class="color-black font-18">{{ credit.credits }} {{ credit.credits === 1 ? ("credit" | translate) : ("credits" | translate) }}</h4>
+                <p class="disclaimer-reg color-gray">{{credit.expireTime}} (RTZ) <strong
+                    class="color-red ml-2 text-uppercase"><i class="fa-regular fa-clock mr-1"></i>
+                    {{credit.expireDate}}</strong> </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!--<ng-template #other>
+  <div class="refer__friend__component dashboard--component">
+    <div>
+      <p *ngIf="isAutologin">{{ "fetching-your-invites" | translate }}</p>
+      <div *ngIf="isLoaded; else loader">
+        <h3 class="d-flex color-black mb-2 refer-title">
+          {{ "refer-a-friend" | translate }}
+          <a
+            *ngIf="tenant === 'pruvit'"
+            (click)="(false)"
+            href="#"
+            class="ml-auto info-icon"
+            ><i class="fas fa-info-circle" aria-hidden="true"></i>
+          </a>
+          <a
+            *ngIf="tenant === 'ladyboss'"
+            (click)="(false)"
+            data-toggle="modal"
+            data-target="#inviteVideoModal"
+            href="#"
+            class="ml-auto info-icon"
+            ><i class="fas fa-info-circle" aria-hidden="true"></i>
+          </a>
+        </h3>
+        <p class="p-small color-gray-dark mb-4">
+          {{
+            "earn-prüvit-bucks-to-spend-on-products-by-sharing-discount-offers-with-friends"
+              | translate
+          }}
+        </p>
+        <div *ngIf="hideWidget">
+          <div class="refer-card mb-4 disabled--card" [class]="cardClasses[0]">
+            <p
+              class="d-flex justify-content-end align-items-center redeemed-btn-grp"
+            >
+              <span class="btn"
+                ><i class="fal fa-check"></i> 0
+                {{ "friends" | translate }}</span
+              >
+              <span class="btn">0 {{ "credits-to-use" | translate }} </span>
+            </p>
+            <h4 class="color-white mb-1">
+              {{ "not-available-yet" | translate }}
+            </h4>
+            <p class="color-white p-small mb-3">
+              {{ "please-check-back-later" | translate }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="dropdown">
+                <a
+                  href="#"
+                  class="color-black p-small font-bold share-btn"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><i class="fal fa-external-link font-weight-normal"></i>
+                  {{ "share" | translate }}</a
+                >
+              </div>
+              <a
+                href="#"
+                (click)="(false)"
+                class="color-white p-small font-bold manage-btn"
+                data-toggle="modal"
+                data-target="#manageModal"
+                >{{ "manage" | translate }}
+                <i class="fal fa-chevron-right font-weight-normal ml-1"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!hideWidget">
+          <ng-container *ngFor="let n of activeBonuses; let i = index">
+            <div
+              *ngIf="n.isAvailable"
+              [ngClass]="{ 'disabled--card': n.isAvailable == false }"
+              class="refer-card mb-4"
+              [class]="n.cardClass"
+            >
+              <p
+                *ngIf="n.info"
+                class="d-flex justify-content-end align-items-center redeemed-btn-grp"
+              >
+                <span class="btn"
+                  ><i class="fal fa-check"></i> {{ n.info.redeemedDiscounts }}
+                  {{ "friends" | translate }}</span
+                >
+                <span class="btn"
+                  >{{
+                    n.info.availableCredits > 999
+                      ? ("unlimited-use" | translate)
+                      : n.info.availableCredits +
+                        " " +
+                        ("credits-to-use" | translate)
+                  }}
+                </span>
+              </p>
+              <h4 class="color-white mb-1">{{ n.title | translate }}</h4>
+              <p class="color-white p-small mb-3">{{ n.description | translate }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div *ngIf="n.info" class="dropdown">
+                  <a
+                    href="#"
+                    class="color-black p-small font-bold share-btn"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ><i class="fal fa-external-link font-weight-normal"></i>
+                    {{ "share" | translate }}</a
+                  >
+                  <div
+                    class="dropdown-menu dropdown-bg"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a
+                      class="dropdown-item disclaimer-reg"
+                      href="#"
+                      (click)="copy(n.info.link); (false)"
+                    >
+                      <i class="far fa-clone mr-2"></i
+                      >{{ "copy-link" | translate }}
+                    </a>
+                    <a
+                      class="dropdown-item disclaimer-reg"
+                      href="mailto:?&body=Check this out!{{ n.info.link }}"
+                    >
+                      <i class="far fa-envelope mr-2"></i
+                      >{{ "email" | translate }}
+                    </a>
+                    <a
+                      class="dropdown-item disclaimer-reg"
+                      href="sms:?&body={{ n.info.link }}"
+                    >
+                      <i class="far fa-comment mr-2"></i>{{ "sms" | translate }}
+                    </a>
+                    <a
+                      (click)="redirectFacebook(n.info.link); (false)"
+                      class="dropdown-item disclaimer-reg"
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#shareModal"
+                    >
+                      <i
+                        class="fab fa-facebook-square mr-2"
+                        style="color: #1777f2"
+                      ></i
+                      >{{ "facebook" | translate }}
+                    </a>
+                    <a
+                      (click)="redirectTwitter(n.info.link); (false)"
+                      class="dropdown-item disclaimer-reg"
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#shareModal"
+                    >
+                      <i
+                        class="fab fa-twitter-square mr-2"
+                        style="color: #1d9bf0"
+                      ></i
+                      >{{ "twitter" | translate }}
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href="#"
+                  (click)="manage(n); (false)"
+                  class="color-white p-small font-bold manage-btn"
+                  data-toggle="modal"
+                  data-target="#manageModal"
+                  >{{ "manage" | translate }}
+                  <i class="fal fa-chevron-right font-weight-normal ml-1"></i
+                ></a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <ng-template #loader>
+        <app-loader class="payment--loader"></app-loader>
+      </ng-template>
+    </div>
+  </div>
+
+  <div
+    class="modal fade animate manage-modal addresses-modal"
+    id="manageModal"
+    aria-hidden="true"
+  >
+    <div
+      class="dashboard--modal modal-dialog modal-dialog-centered"
+      [ngClass]="{ 'lead-create-modal': activeModal !== 'manage' }"
+    >
+      <div class="modal-content animate-bottom">
+        <ng-container *ngIf="activeModal === 'manage'">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a
+                href="#"
+                data-dismiss="modal"
+                aria-label="Close"
+                class="modal-close desktop__modal--close"
+                ><i class="far fa-times"></i
+              ></a>
+              <a
+                href="#"
+                data-dismiss="modal"
+                aria-label="Close"
+                class="modal-close mobile__modal--close"
+                ><i
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                  aria-hidden="true"
+                ></i
+                >{{ "dashboard" | translate }}
+              </a>
+              <a href="#" class="p-small font-bold how-it"
+                ><i class="far fa-play-circle"></i>
+                {{ "how-it-works" | translate }}</a
+              >
+            </p>
+            <h3 class="title color-black">{{ activeBonus.title | translate }}</h3>
+          </div>
+
+          <div class="modal-body">
+            <div class="row referral-row mb-4">
+              <div class="col share-col">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="color-gray disclaimer-reg">
+                      {{ "your-unique-referral-link" | translate }}
+                    </p>
+                    <p class="color-black p-small font-bold overflow--p">
+                      <svg
+                        *ngIf="tenant === 'pruvit'"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM17.3128 11.0767C17.3611 11.4617 17.6886 11.7429 18.0668 11.7429C18.0982 11.7429 18.1303 11.7409 18.1625 11.7369C18.5793 11.6846 18.8746 11.3044 18.8223 10.8876C18.4442 7.86684 16.1851 5.42506 13.2011 4.8119C12.0283 4.57131 10.8072 4.63045 9.66987 4.9833C9.26835 5.10802 9.04425 5.53409 9.16897 5.93563C9.29329 6.33675 9.71895 6.56166 10.1209 6.43653C11.0136 6.15973 11.9728 6.11306 12.8949 6.30256C15.24 6.78455 17.0155 8.70289 17.3128 11.0767ZM5.70678 14.3994C5.3817 14.3994 5.08116 14.1898 4.98018 13.8631C4.62976 12.7285 4.57182 11.5111 4.81201 10.3415C5.02283 9.31553 5.44446 8.37125 6.06525 7.536C6.3159 7.19844 6.79265 7.12844 7.1298 7.37909C7.46695 7.62975 7.53695 8.10651 7.2863 8.44367C6.79949 9.09908 6.46838 9.84058 6.30262 10.6481C6.11353 11.5674 6.15899 12.5238 6.43378 13.4141C6.55809 13.8153 6.33279 14.2413 5.93127 14.3652C5.85684 14.3882 5.78121 14.3994 5.70678 14.3994ZM12.2381 18.1461C12.3089 18.5094 12.6275 18.7613 12.984 18.7613C13.0323 18.7613 13.0814 18.7564 13.1305 18.7468C15.2068 18.3416 16.9807 17.0473 17.9982 15.1962C18.2005 14.828 18.0662 14.3653 17.6976 14.163C17.3295 13.961 16.8672 14.0954 16.6649 14.4635C15.8651 15.9179 14.471 16.9351 12.8392 17.2537C12.4268 17.3342 12.1576 17.7337 12.2381 18.1461ZM11.9183 10.8699C12.4047 10.9697 12.7177 11.4452 12.6179 11.9313C12.5181 12.4177 12.0426 12.7307 11.5566 12.6309C11.0702 12.5307 10.7567 12.056 10.8569 11.5696C10.9567 11.0831 11.4318 10.7701 11.9183 10.8699ZM8.39937 21.2643C7.85542 21.2643 7.41488 20.8233 7.41488 20.2797V12.1839C7.39235 11.7188 7.42212 11.2968 7.5046 10.8945C7.73875 9.75464 8.40259 8.77455 9.3742 8.13403C10.3458 7.49392 11.5085 7.27062 12.6483 7.50438C13.7881 7.73814 14.7686 8.40239 15.4087 9.37403C16.0492 10.3457 16.2729 11.5084 16.0387 12.6482C15.5555 15.0011 13.2474 16.5219 10.895 16.0387C10.3623 15.9293 10.0195 15.4087 10.1286 14.876C10.238 14.3433 10.7586 14.0009 11.2913 14.1099C12.5807 14.3755 13.8452 13.541 14.11 12.2519C14.2383 11.6271 14.1156 10.9898 13.7648 10.4575C13.4139 9.92523 12.8768 9.56152 12.252 9.43318C11.6272 9.30483 10.9903 9.42754 10.4581 9.77838C9.92538 10.1292 9.56168 10.6663 9.43334 11.2908C9.38345 11.5346 9.36655 11.8021 9.38265 12.1083L9.38385 12.1594V20.2797C9.38385 20.8233 8.94331 21.2643 8.39937 21.2643Z"
+                          fill="#2752FF"
+                        />
+                      </svg>
+                      {{ activeBonus.info.link.replace("https://", "") }}
+                    </p>
+                  </div>
+                  <div class="dropdown">
+                    <a
+                      href="#"
+                      class="color-black p-small font-bold btn share-btn"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      ><i
+                        class="fal fa-external-link font-weight-normal"
+                        aria-hidden="true"
+                      ></i>
+                      {{ "share" | translate }}</a
+                    >
+                    <div
+                      class="dropdown-menu dropdown-bg"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a
+                        (click)="copy(activeBonus.info.link); (false)"
+                        class="dropdown-item disclaimer-reg"
+                        href="#"
+                      >
+                        <i class="far fa-clone mr-2" aria-hidden="true"></i
+                        >{{ "copy-link" | translate }}
+                      </a>
+                      <a
+                        class="dropdown-item disclaimer-reg"
+                        href="mailto:?&body=Check this out! {{
+                          activeBonus.info.link
+                        }}"
+                      >
+                        <i class="far fa-envelope mr-2" aria-hidden="true"></i
+                        >{{ "email" | translate }}
+                      </a>
+                      <a
+                        class="dropdown-item disclaimer-reg"
+                        href="sms:?&body={{ activeBonus.info.link }}"
+                      >
+                        <i class="far fa-comment mr-2" aria-hidden="true"></i
+                        >{{ "sms" | translate }}
+                      </a>
+                      <a
+                        (click)="
+                          redirectFacebook(activeBonus.info.link); (false)
+                        "
+                        class="dropdown-item disclaimer-reg"
+                        href="#"
+                      >
+                        <i
+                          class="fab fa-facebook-square mr-2"
+                          style="color: #1777f2"
+                          aria-hidden="true"
+                        ></i
+                        >{{ "facebook" | translate }}
+                      </a>
+                      <a
+                        (click)="
+                          redirectTwitter(activeBonus.info.link); (false)
+                        "
+                        class="dropdown-item disclaimer-reg"
+                        href="#"
+                      >
+                        <i
+                          class="fab fa-twitter-square mr-2"
+                          style="color: #1d9bf0"
+                          aria-hidden="true"
+                        ></i
+                        >{{ "twitter" | translate }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <p class="color-gray disclaimer-reg">
+                  {{ "available-to-use" | translate }}
+                </p>
+                <p class="color-black p-small font-bold">
+                  {{
+                    activeBonus.info.availableCredits > 1000
+                      ? ("unlimited" | translate)
+                      : activeBonus.info.availableCredits
+                  }}
+                  {{ "credits" | translate }}
+                </p>
+              </div>
+              <div class="col">
+                <p class="color-gray disclaimer-reg">
+                  {{ "redeemed-by" | translate }}
+                </p>
+                <p class="color-black p-small font-bold">
+                  {{ activeBonus.info.totalMoneyAwarded }}
+                </p>
+              </div>
+            </div>
+            <ng-template #loaderFriends>
+              <app-loader class="payment--loader"></app-loader>
+            </ng-template>
+            <div *ngIf="tenant === 'pruvit'; else ladybossLoadedFriend">
+              <div
+                class="row friends-row"
+                *ngIf="isLoadedFriend; else loaderFriends"
+              >
+                <div
+                  *ngIf="activeBonus?.id.includes('give-n-get-01')"
+                  class="col-12"
+                >
+                  <h3 class="color-black mb-2 d-flex align-items-center">
+                    {{ "friends" | translate }}
+                    <span class="count-taq">{{
+                      friendInfo.friendsInvited
+                    }}</span>
+                  </h3>
+                  <p class="p-small color-gray-dark mb-4">
+                    {{
+                      "after-a-friend-completes-their-purchase,-your-10-kickback-will-be-activated-in-approximately-48-hours"
+                        | translate
+                    }}
+                  </p>
+                  <ng-container
+                    *ngFor="let x of friendInfo.friends; let i = index"
+                  >
+                    <div class="friends-expander mb-4">
+                      <div
+                        class="d-flex align-items-center justify-content-between collapse-head collapsed"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#collapse' + i"
+                        aria-expanded="false"
+                        [attr.aria-controls]="'collapse' + i"
+                      >
+                        <div class="profile-cont d-flex align-items-center">
+                          <span
+                            *ngIf="!x.profile.avatar"
+                            class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]"
+                            >{{ x.profile.abrv[0] + x.profile.abrv[1] }}</span
+                          >
+                          <span *ngIf="x.profile.avatar" class="prof-name mr-3"
+                            ><img src="{{ x.profile.avatar }}" alt="img"
+                          /></span>
+                          <span class="name">{{ x.profile.name }}</span>
+                        </div>
+                        <div class="right-cont">
+                          <span
+                            class="btn"
+                            *ngIf="x.currentStep.status == 'kickbackAvailable'"
+                            [class]="x.currentStep.class"
+                            ><i class="fal fa-alarm-clock mr-1"></i>
+                            {{
+                              x.currentStep.availableTo | timer | async
+                            }}</span
+                          >
+                          <span
+                            *ngIf="x.currentStep.status == 'kickbackExpired'"
+                            class="btn"
+                            style="background-color: #eb4747"
+                            ><i class="fal fa-alarm-clock mr-1"></i>
+                            {{ "expired" | translate }}</span
+                          >
+                          <i
+                            *ngIf="x.currentStep.status == 'kickbackRefunded'"
+                            class="fas fa-times-circle font-24"
+                            style="color: #eb4747"
+                          ></i>
+
+                          <i
+                            *ngIf="x.currentStep.status == 'orderPlaced'"
+                            class="fas fa-clock font-24"
+                            style="color: #ff9000"
+                          ></i>
+                          <i
+                            *ngIf="x.currentStep.status == 'kickbackRedeemed'"
+                            class="fas fa-check-circle font-24"
+                            style="color: #41bf4e"
+                          ></i>
+                        </div>
+                      </div>
+                      <div id="collapse{{ i }}" class="collapse collapse-body">
+                        <ul class="order-progress-step">
+                          <ng-container
+                            *ngFor="let s of x.steps; let i = index"
+                          >
+                            <li
+                              [ngClass]="{
+                                complete:
+                                  x.currentStep.stepOrder >= s.stepOrder,
+                                active: x.currentStep.stepOrder == s.stepOrder,
+                                red:
+                                  x.currentStep.status == 'kickbackExpired' ||
+                                  x.currentStep.status == 'kickbackRefunded' ||
+                                  x.currentStep.class == 'red',
+                                orange:
+                                  x.currentStep.status == 'orderPlaced' ||
+                                  x.currentStep.class == 'orange',
+                                green:
+                                  x.currentStep.status == 'kickbackRedeemed' ||
+                                  x.currentStep.class == 'green'
+                              }"
+                            >
+                              <p class="font-bold title">{{ s.displayName }}</p>
+                              <p
+                                *ngIf="s.status == 'orderPlaced'"
+                                class="p-small"
+                              >
+                                {{ s.availableFrom | date : "MMM d, h:mm a" }}
+                              </p>
+                              <p
+                                *ngIf="
+                                  x.currentStep.status == 'kickbackRedeemed'
+                                "
+                                class="p-small"
+                              >
+                                {{ s.redeemDate | date : "MMM d, h:mm a" }}
+                              </p>
+                              <p
+                                [hidden]="
+                                  x.currentStep.status !== 'kickbackAvailable'
+                                "
+                                class="p-small"
+                              >
+                                <span
+                                  *ngIf="
+                                    x.currentStep.status ==
+                                      'kickbackAvailable' &&
+                                    s.status == 'kickbackAvailable'
+                                  "
+                                  >{{ "expires-in" | translate }}</span
+                                >
+                                {{ s.availableTo | timer | async }}
+                              </p>
+                              <p
+                                [hidden]="
+                                  x.currentStep.status !== 'orderPlaced' &&
+                                  s.status !== 'kickbackAvailable'
+                                "
+                                class="p-small"
+                              >
+                                {{ s.availableFrom | timer | async }}
+                              </p>
+                              <p
+                                *ngIf="
+                                  x.currentStep.status == 'kickbackRefunded' &&
+                                  x.currentStep.stepOrder == s.stepOrder
+                                "
+                                class="p-small"
+                              >
+                                {{ "the-order-was-refunded" | translate }}
+                              </p>
+                              <p
+                                *ngIf="
+                                  x.currentStep.status == 'orderPlaced' &&
+                                  s.status == 'kickbackRedeemed'
+                                "
+                                class="p-small"
+                              >
+                                {{
+                                  "use-the-bonus-within-4-days-after-its-unlocked"
+                                    | translate
+                                }}
+                              </p>
+                            </li>
+                          </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+                <div
+                  *ngIf="activeBonus?.id.includes('give-n-get-pb')"
+                  class="col-12"
+                >
+                  <h3 class="color-black mb-2 d-flex align-items-center">
+                    {{ "friends" | translate }} 1
+                    <span class="count-taq">{{
+                      friendInfo.friendsInvited
+                    }}</span>
+                  </h3>
+                  <p class="p-small color-gray-dark mb-4">
+                    {{
+                      "after-a-friend-completes-their-purchase,-your-20-pb-will-be-added-in-approximately-48-hours"
+                        | translate
+                    }}
+                  </p>
+                  <ng-container
+                    *ngFor="let x of friendInfo.friends; let i = index"
+                  >
+                    <div class="friends-expander mb-4">
+                      <div
+                        class="d-flex align-items-center justify-content-between collapse-head collapsed"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#collapse' + i"
+                        aria-expanded="false"
+                        [attr.aria-controls]="'collapse' + i"
+                      >
+                        <div class="profile-cont d-flex align-items-center">
+                          <span
+                            *ngIf="!x.profile.avatar"
+                            class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]"
+                            >{{ x.profile.abrv[0] + x.profile.abrv[1] }}</span
+                          >
+                          <span *ngIf="x.profile.avatar" class="prof-name mr-3"
+                            ><img src="{{ x.profile.avatar }}" alt="img"
+                          /></span>
+                          <span class="name">{{ x.profile.name }}</span>
+                        </div>
+                        <div class="right-cont">
+                          <i
+                            *ngIf="x.currentStep.status == 'orderRefunded' || x.currentStep.status == 'noPointsAwarded'"
+                            class="fas fa-times-circle font-24"
+                            style="color: #eb4747"
+                          ></i>
+                          <i
+                            *ngIf="x.currentStep.status == 'orderPlaced'"
+                            class="fas fa-clock font-24"
+                            style="color: #ff9000"
+                          ></i>
+                          <i
+                            *ngIf="
+                              x.currentStep.status == 'referralPointsAdded'
+                            "
+                            class="fas fa-check-circle font-24"
+                            style="color: #41bf4e"
+                          ></i>
+                        </div>
+                      </div>
+                      <div id="collapse{{ i }}" class="collapse collapse-body">
+                        <ul class="order-progress-step">
+                          <ng-container
+                            *ngFor="let s of x.steps; let i = index"
+                          >
+                            <li
+                              [ngClass]="{
+                                complete:
+                                  x.currentStep.stepOrder >= s.stepOrder,
+                                active:
+                                  s.isActive ||
+                                  (x.currentStep.isActive &&
+                                    x.currentStep.status ===
+                                      'referralPointsAdded'),
+                                red: x.currentStep.status == 'orderRefunded' || x.currentStep.status == 'noPointsAwarded',
+                                orange: x.currentStep.status === 'orderPlaced',
+                                green:
+                                  x.currentStep.status ==
+                                    'referralPointsAdded' &&
+                                  x.currentStep.isActive
+                              }"
+                            >
+                              <p class="font-bold title">{{ s.displayName }} <a *ngIf="s?.learnMoreUrl" class="color-gray font-reg underline ml-1" [href]="s?.learnMoreUrl" target="_blank">{{ "learn-more" | translate }}</a></p>
+                              <p
+                                *ngIf="s.status == 'orderPlaced'"
+                                class="p-small"
+                              >
+                                {{ s.availableFrom | date : "MMM d, h:mm a" }}
+                              </p>
+                              <p
+                                *ngIf="
+                                  x.currentStep.status ==
+                                    'referralPointsAdded' ||
+                                  s.status == 'referralPointsAdded'
+                                "
+                                class="p-small"
+                              >
+                                {{ s.redeemDate | date : "MMM d, h:mm a" }}
+                              </p>
+                              <p
+                                [hidden]="
+                                  x.currentStep.status !== 'referralPointsAdded'
+                                "
+                                class="p-small"
+                              >
+                                <span
+                                  *ngIf="
+                                    s.status == 'referralPointsAdded' &&
+                                    !x.currentStep.isActive
+                                  "
+                                  >{{ "added-in" | translate }}</span
+                                >
+                                {{ s.availableTo | timer | async }}
+                              </p>
+                              <p
+                                *ngIf="
+                                  x.currentStep.status == 'orderRefunded' &&
+                                  x.currentStep.stepOrder == s.stepOrder
+                                "
+                                class="p-small"
+                              >
+                                {{ s.refundDate | date : "MMM d, h:mm a" }}
+                              </p>
+                              <p
+                                  *ngIf="
+                                    x.currentStep.status == 'noPointsAwarded' &&
+                                    x.currentStep.stepOrder == s.stepOrder
+                                  "
+                                  class="p-small"
+                                >
+                                  {{ s.completionDate | date : "MMM d, h:mm a" }}
+                                </p>
+                            </li>
+                          </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #ladybossLoadedFriend>
+              <div
+                class="row friends-row"
+                *ngIf="isLoadedFriend; else loaderFriends"
+              >
+                <div class="col-12">
+                  <div class="pending-wrap">
+                    <h3
+                      class="color-black mt-sm-3 mb-2 d-flex align-items-center"
+                    >
+                      {{ "pending" | translate }}
+                    </h3>
+                    <p class="p-small color-gray mb-4">
+                      {{
+                        "these-leads-have-not-finished-their-account-registration"
+                          | translate
+                      }}
+                    </p>
+                    <div
+                      *ngFor="
+                        let pendingUser of invitedFriendsInfo.pendingContacts;
+                        let i = index
+                      "
+                      class="friends-expander mb-3"
+                    >
+                      <div
+                        class="d-flex pending-lead-user-list border-bottom pb-2 align-items-center justify-content-between collapse-head no-collapse"
+                        (click)="onClickPendingLead(pendingUser)"
+                      >
+                        <div class="profile-cont d-flex align-items-center">
+                          <span
+                            *ngIf="pendingUser.avatar === null"
+                            class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]"
+                            >{{
+                              pendingUser.abrv[0] + pendingUser.abrv[1]
+                            }}</span
+                          >
+                          <span
+                            *ngIf="pendingUser.avatar !== null"
+                            class="prof-name mr-3"
+                          >
+                            <img [src]="pendingUser.avatar" alt="img" />
+                          </span>
+                          <div class="prof-text">
+                            <span class="name d-block">{{
+                              pendingUser.name
+                            }}</span>
+                          </div>
+                        </div>
+                        <div class="right-cont">
+                          <span
+                            class="btn"
+                            [class]="
+                              pendingUser.availability ? 'orange' : 'red'
+                            "
+                            ><i class="fal fa-alarm-clock mr-1"></i
+                            >{{
+                              pendingUser.availability
+                                ? (pendingUser.expiresAt | timer | async)
+                                : ("expired" | translate)
+                            }}</span
+                          >
+                          <i
+                            class="fa-regular fa-chevron-right color-gray ml-4"
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
+                    <a
+                      *ngIf="activeBonus.info.availableCredits === 0"
+                      href="#"
+                      (click)="(false)"
+                      class="p-small font-bold disabled"
+                    >
+                      {{ "send-personal-invite" | translate }} (0)
+                      <i class="fa-regular fa-chevron-right"></i>
+                    </a>
+                    <a
+                      *ngIf="activeBonus.info.availableCredits > 0"
+                      href="#"
+                      (click)="activeModal = 'leadCreate'; (false)"
+                      class="p-small font-bold"
+                    >
+                      {{ "send-personal-invite" | translate }} ({{ activeBonus.info.availableCredits }})
+                      <i class="fa-regular fa-chevron-right"></i>
+                    </a>
+                  </div>
+                  <div class="registered-wrap">
+                    <h3
+                      class="color-black mt-sm-5 mt-3 mb-2 d-flex align-items-center"
+                    >
+                      {{ "registered" | translate }}
+                    </h3>
+                    <p class="p-small color-gray mb-4">
+                      {{
+                        "after-a-boss-registers,-your-replacement-invite-credit-will-activate-in-approximately-24-hours"
+                          | translate
+                      }}
+                    </p>
+                    <div
+                      *ngFor="
+                        let registeredUser of invitedFriendsInfo.registeredFriends;
+                        let i = index;
+                        let last = last
+                      "
+                      class="friends-expander"
+                    >
+                      <div
+                        class="d-flex align-items-center py-3 justify-content-between collapse-head no-collapse"
+                        [ngClass]="{ 'border-bottom': !last }"
+                      >
+                        <div class="profile-cont d-flex align-items-center">
+                          <span
+                            *ngIf="!registeredUser.avatar"
+                            class="prof-name mr-3"
+                            [class]="cardClasses[i % cardClasses.length]"
+                            >{{
+                              registeredUser.abrv[0] + registeredUser.abrv[1]
+                            }}</span
+                          >
+                          <span
+                            *ngIf="registeredUser.avatar"
+                            class="prof-name mr-3"
+                          >
+                            <img [src]="registeredUser.avatar" alt="img" />
+                          </span>
+                          <span class="name">{{ registeredUser.name }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'leadCreate'">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a
+                href="#"
+                (click)="
+                  activeModal = 'manage';
+                  getInvitationStatusInfo(user.id, activeBonus.id);
+                  (false)
+                "
+                aria-label="Close"
+                class="modal-close mb-hide"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a
+                href="#"
+                (click)="
+                  activeModal = 'manage';
+                  getInvitationStatusInfo(user.id, activeBonus.id);
+                  (false)
+                "
+                aria-label="Close"
+                class="modal-close mb-show"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+            </p>
+
+            <h3 class="title color-black">{{ "create-lead" | translate }}</h3>
+            <p class="p-small color-gray">
+              {{
+                "a-credit-will-be-reserved-and-the-recipient-will-have"
+                  | translate
+              }}
+            </p>
+          </div>
+
+          <div class="modal-body" [style.margin-top.px]="isMobile ? 150 : 0">
+            <div
+              [formGroup]="leadForm"
+              class="card modal-body-card ref-modal-card"
+            >
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "first-name" | translate
+                  }}</label>
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg bg-color"
+                    [class.is-invalids]="
+                      firstNameControl.errors && firstNameControl.touched
+                    "
+                    placeholder="First name"
+                    formControlName="firstName"
+                  />
+                </div>
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "last-name" | translate
+                  }}</label>
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg bg-color"
+                    [class.is-invalids]="
+                      lastNameControl.errors && lastNameControl.touched
+                    "
+                    placeholder="Last name"
+                    formControlName="lastName"
+                  />
+                </div>
+              </div>
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-12 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "email-address" | translate
+                  }}</label>
+                  <input
+                    type="text"
+                    class="form-control disclaimer-reg bg-color"
+                    [class.is-invalids]="
+                      emailControl.errors && emailControl.touched
+                    "
+                    placeholder="{{'email-address' | translate}}"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <div class="row mx--15">
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1">{{
+                    "phone-country-code" | translate
+                  }}</label>
+                 
+                  <select
+                    (change)="onChangePhoneCountry($event)"
+                    class="form-control disclaimer-bold custom-select"
+                  >
+                    <option
+                      *ngFor="let country of phoneCountries; let i = index"
+                      [value]="i"
+                      [selected]="country.country_code === 'US'"
+                    >
+                      {{ country.phone_code }} {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-12 col-sm-6 mt-0">
+                  <label class="disclaimer-bold color-gray mb-1 optional"
+                    >{{ "phone-number" | translate }}
+                    <span class="text copyright-text">{{
+                      "optional" | translate
+                    }}</span>
+                  </label>
+                  <div class="phone-control">
+                    <input
+                      type="text"
+                      class="form-control disclaimer-reg bg-color"
+                      [class.is-invalids]="phoneControl.errors"
+                      placeholder="Phone number"
+                      formControlName="phone"
+                    />
+                    <span class="color-black p-small font-bold">{{
+                      selectedCountry.phone_code
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              data-dismiss="modal"
+              class="button button--default button--grey ml-auto"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <div class="dropdown">
+              <button
+                type="button"
+                class="button button--default"
+                [disabled]="leadForm.invalid || isLeadFormSubmitted"
+                (click)="onSubmitLeadForm()"
+              >
+                <span>{{ "create-invite-link" | translate }}</span>
+                <i
+                  class="fa fa-spinner fa-spin ml-1"
+                  *ngIf="isLeadFormSubmitted"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="genericError"
+              class="d-block copyright-text font-bold mt-1 error-text"
+              >{{ "ooops-something-happened" | translate }}</small
+            >
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'leadSend' && leadUser">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a
+                href="#"
+                (click)="
+                  activeModal = 'manage';
+                  getInvitationStatusInfo(user.id, activeBonus.id);
+                  (false)
+                "
+                aria-label="Close"
+                class="modal-close mb-hide"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a
+                href="#"
+                (click)="
+                  activeModal = 'manage';
+                  getInvitationStatusInfo(user.id, activeBonus.id);
+                  (false)
+                "
+                aria-label="Close"
+                class="modal-close mb-show"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a class="btn valid-timer" *ngIf="leadUser">
+                <i class="fal fa-alarm-clock mr-1"></i>
+                {{ leadUser.expiresAt | timer | async }}
+              </a>
+            </p>
+            <h3 class="title color-black">{{ "ready-to-send" | translate }}</h3>
+            <p class="p-small color-gray">
+              {{ "remember-to-follow-up-before-it-expires" | translate }}
+            </p>
+          </div>
+          <div class="modal-body" [style.margin-top.px]="isMobile ? 120 : 0">
+            <div class="card modal-body-card ref-modal-card">
+              <p class="p-small font-bold color-gray">
+                {{ activeBonus.title | translate }} {{ "invite-link-for" | translate }}
+                {{ leadUser.name }}
+              </p>
+              <p class="font-bold color-black">
+                {{ leadUser.link }}
+                <i
+                  (click)="copy(leadUser.link)"
+                  data-toggle="tooltip"
+                  title="Copy link"
+                  data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                  class="fa-clone pointer ml-2 color-gray fa-regular {{
+                    linkCopied ? 'hide' : ''
+                  }}"
+                ></i>
+                <i
+                  data-toggle="tooltip"
+                  title="Link copied"
+                  data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                  class="color-green ml-2 fa-check fa-regular {{
+                    !linkCopied ? 'hide' : ''
+                  }}"
+                ></i>
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              data-dismiss="modal"
+              class="button button--default button--grey ml-auto"
+            >
+              {{ "close" | translate }}
+            </button>
+            <div class="dropdown">
+              <button
+                type="button"
+                class="button button--default"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span>{{ "send-invite-link" | translate }}</span
+                >&nbsp;
+              </button>
+
+              <div
+                aria-labelledby="dropdownMenuButton"
+                class="dropdown-menu dropdown-bg"
+              >
+                <a
+                  href="#"
+                  (click)="copy(leadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-clone mr-2"></i
+                  >{{ "copy-link" | translate }}</a
+                >
+                <a
+                  href="mailto:{{ leadUser.email }}?&body={{ leadUser.link }}"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-envelope mr-2"></i
+                  >{{ "email" | translate }}</a
+                >
+                <a
+                  *ngIf="leadUser?.phoneNumber"
+                  href="sms:{{ leadUser.phoneNumber }}?&body={{
+                    leadUser.link
+                  }}"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-comment mr-2"></i>{{ "sms" | translate }}</a
+                >
+                <a
+                  href="#"
+                  (click)="redirectFacebook(leadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i
+                    class="fab fa-facebook-square mr-2"
+                    style="color: #1777f2"
+                  ></i
+                  >{{ "facebook" | translate }}</a
+                >
+                <a
+                  href="#"
+                  (click)="redirectTwitter(leadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i
+                    class="fab fa-twitter-square mr-2"
+                    style="color: #1d9bf0"
+                  ></i
+                  >{{ "twitter" | translate }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeModal === 'pendingLead' && pendingLeadUser">
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a
+                href="#"
+                (click)="activeModal = 'manage'; (false)"
+                aria-label="Close"
+                class="modal-close mb-hide"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a
+                href="#"
+                (click)="activeModal = 'manage'; (false)"
+                aria-label="Close"
+                class="modal-close mb-show"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a class="btn valid-timer">
+                <i class="fal fa-alarm-clock mr-1"></i>
+                {{ pendingLeadUser.expiresAt | timer | async }}
+              </a>
+            </p>
+            <h3 class="title color-black">{{ pendingLeadUser.name }}</h3>
+          </div>
+          <div class="modal-body">
+            <div class="card modal-body-card ref-modal-card">
+              <span
+                class="pending-lead-user-info"
+                *ngIf="pendingLeadUser?.phoneNumber"
+              >
+                <p class="p-small font-bold color-gray">
+                  {{ "phone-number" | translate }}
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser?.phoneNumber }}
+                </p>
+              </span>
+              <span
+                class="pending-lead-user-info"
+                *ngIf="pendingLeadUser.email"
+              >
+                <p class="p-small font-bold color-gray">
+                  {{ "email-address" | translate }}
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser.email }}
+                </p>
+              </span>
+              <span class="pending-lead-user-info" *ngIf="pendingLeadUser.link">
+                <p class="p-small font-bold color-gray">
+                  {{ activeBonus.title | translate }} invite link
+                </p>
+                <p class="font-bold color-black">
+                  {{ pendingLeadUser.link }}
+                  <i
+                    (click)="copy(pendingLeadUser.link)"
+                    data-toggle="tooltip"
+                    title="Copy link"
+                    data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                    class="fa-clone pointer ml-2 color-gray fa-regular {{
+                      linkCopied ? 'hide' : ''
+                    }}"
+                  ></i>
+                  <i
+                    data-toggle="tooltip"
+                    title="Link copied"
+                    data-template="<div class='dashboard-tooltip training-center tooltip' role='tooltip'><div class='arrow top'></div><div class='tooltip-inner'></div></div>"
+                    class="color-green ml-2 fa-check fa-regular {{
+                      !linkCopied ? 'hide' : ''
+                    }}"
+                  ></i>
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="button button--default button--grey"
+              (click)="activeModal = 'recycleCredit'; errorReset()"
+            >
+              <i class="fa-regular fa-recycle"></i>
+            </button>
+            <button
+              type="button"
+              data-dismiss="modal"
+              class="button button--default button--grey ml-auto"
+            >
+              {{ "close" | translate }}
+            </button>
+            <div class="dropdown">
+              <button
+                type="button"
+                class="button button--default"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span>{{ "send-invite-link" | translate }}</span
+                ><i class="fa-regular fa-chevron-down ml-1"></i>
+              </button>
+
+              <div
+                aria-labelledby="dropdownMenuButton"
+                class="dropdown-menu dropdown-bg"
+              >
+                <a
+                  href="#"
+                  (click)="copy(pendingLeadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-clone mr-2"></i
+                  >{{ "copy-link" | translate }}</a
+                >
+                <a
+                  href="mailto:{{ pendingLeadUser.email }}?&body={{
+                    pendingLeadUser.link
+                  }}"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-envelope mr-2"></i
+                  >{{ "email" | translate }}</a
+                >
+                <a
+                  *ngIf="pendingLeadUser?.phoneNumber"
+                  href="sms:{{ pendingLeadUser?.phoneNumber }}?&body={{
+                    pendingLeadUser.link
+                  }}"
+                  class="dropdown-item disclaimer-reg"
+                  ><i class="far fa-comment mr-2"></i>{{ "sms" | translate }}</a
+                >
+                <a
+                  href="#"
+                  (click)="redirectFacebook(pendingLeadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i
+                    class="fab fa-facebook-square mr-2"
+                    style="color: #1777f2"
+                  ></i
+                  >{{ "facebook" | translate }}</a
+                >
+                <a
+                  href="#"
+                  (click)="redirectTwitter(pendingLeadUser.link); (false)"
+                  class="dropdown-item disclaimer-reg"
+                  ><i
+                    class="fab fa-twitter-square mr-2"
+                    style="color: #1d9bf0"
+                  ></i
+                  >{{ "twitter" | translate }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="activeModal === 'recycleCredit' && pendingLeadUser"
+        >
+          <div class="modal-header flex-column gray-bg">
+            <p class="w-100 d-flex justify-content-between align-items-center">
+              <a
+                href="#"
+                (click)="activeModal = 'pendingLead'; loadTooltip(); (false)"
+                aria-label="Close"
+                class="modal-close mb-hide"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+              <a
+                href="#"
+                (click)="activeModal = 'pendingLead'; loadTooltip(); (false)"
+                aria-label="Close"
+                class="modal-close mb-show"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fal fa-chevron-left font-weight-normal mr-2"
+                ></i
+                >{{ "back" | translate }}
+              </a>
+            </p>
+            <h3 class="title color-black">
+              {{ "recycle-credit" | translate }}
+            </h3>
+          </div>
+          <div class="modal-body">
+            <div class="card modal-body-card ref-modal-card">
+              <p class="p-small color-black mb-2">
+                The current invite link associated with this credit will stop
+                working and the credit will become available to use.
+              </p>
+              <p class="font-bold color-black">This action cannot be undone.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              (click)="activeModal = 'pendingLead'; loadTooltip(); (false)"
+              class="button button--default button--grey ml-auto"
+            >
+              {{ "cancel" | translate }}
+            </button>
+            <div class="dropdown">
+              <button
+                type="button"
+                (click)="onSubmitRecycleCredit(pendingLeadUser)"
+                class="button button--default"
+              >
+                <span>{{ "yes-recycle-credit" | translate }}</span>
+                <i
+                  class="fa fa-spinner fa-spin ml-1"
+                  *ngIf="isLeadFormSubmitted"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="genericError"
+              class="d-block copyright-text font-bold mt-1 error-text"
+              >{{ "ooops-something-happened" | translate }}</small
+            >
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>-->

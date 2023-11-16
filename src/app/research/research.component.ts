@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, SubscriptionLike } from 'rxjs';
+import { SubscriptionLike, combineLatest } from 'rxjs';
 import { AppDataService } from '../shared/services/app-data.service';
+import { AppSeoService } from '../shared/services/app-seo.service';
+import { AppUtilityService } from '../shared/services/app-utility.service';
 import { Research } from './models/research.model';
 import { ResearchApiService } from './services/research-api.service';
 import * as researchActions from './store/research-videos.actions';
 import { ResearchState } from './store/research.reducer';
-import { AppUtilityService } from '../shared/services/app-utility.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-research',
@@ -24,11 +26,14 @@ export class ResearchComponent implements OnInit, OnDestroy {
     private researchApiService: ResearchApiService,
     private store: Store<ResearchState>,
     private utilityService: AppUtilityService,
-    private router: Router
+    private router: Router,
+    private seoService: AppSeoService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
     this.getResearchVideos();
+    this.setSeo();
   }
 
   getResearchVideos() {
@@ -65,6 +70,12 @@ export class ResearchComponent implements OnInit, OnDestroy {
 
   setRedirectURL() {
     this.utilityService.setRedirectURL(this.router.url, this.selectedCountry);
+  }
+
+  
+  setSeo() {
+    this.seoService.updateTitle('Research');
+    this.meta.updateTag( { property: 'og:title', content: 'Research' });
   }
 
   ngOnDestroy() {

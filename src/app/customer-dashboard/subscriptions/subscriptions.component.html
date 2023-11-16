@@ -1,0 +1,324 @@
+<div class="row mx--15">
+  <div class="col-sm-6 col-12">
+    <h2 class="color-black page-title">{{ "subscriptions" | translate }}</h2>
+  </div>
+  <div class="col-sm-6 col-12 mt-3">
+    <button (click)="updateProducts(null)" class="button ml-auto addNew-btn">
+      <i aria-hidden="true" class="far fa-plus mr-2"></i>{{ "new" | translate }}
+      {{
+        (tenant === "ladyboss" ? "subscribe-save" : "SmartShip") | translate
+      }}
+    </button>
+  </div>
+</div>
+<app-loader *ngIf="!scheduleLoaded" class="payment--loader"></app-loader>
+
+<div class="dashboard__subscriptions">
+  <div *ngIf="pendingPaymentOrders.length > 0" class="dashboard__subscription">
+    <div
+      data-toggle="collapse"
+      data-target="#collapseAttnetion"
+      aria-expanded="true"
+      aria-controls="collapseAttnetion"
+      class="dahsboard__subscription__header"
+    >
+      <h4>
+        {{ "needs-attention" | translate }}
+        <span
+          *ngIf="pendingPaymentOrders.length > 0"
+          class="dahsboard__subscription__header__number"
+          >{{ pendingPaymentOrders.length }}</span
+        >
+      </h4>
+      <i class="fas fa-angle-down"></i>
+    </div>
+    <div
+      [ngClass]="{ show: pendingPaymentOrders.length > 0 }"
+      id="collapseAttnetion"
+      class="dahsboard__subscription__body collapse"
+    >
+      <div *ngIf="pendingPaymentOrders" class="">
+        <ng-container *ngFor="let order of pendingPaymentOrders; let i = index">
+          <div class="order__history__item not-paid">
+            <div class="order__information">
+              <div>
+                <span class="order__name">{{ "not-paid" | translate }}</span>
+              </div>
+              <span class="order__date">
+                ${{ order.total | number : "1.2-2" }}
+              </span>
+              <span class="order__date"> #{{ order.cartId }} </span>
+              <span class="order__date">
+                {{ order.date | date : "MMM d" }}
+              </span>
+            </div>
+
+            <div class="order__options">
+              <span
+                *ngIf="order.orderName == 'smartOrder'"
+                class="order__smartship"
+              >
+                <i class="far fa-repeat"></i
+                >{{
+                  (tenant === "ladyboss" ? "subscribe -save" : "smartShip")
+                    | translate
+                }}</span
+              >{{ "subscriptions" | translate }}
+              <div>
+                <span
+                  *ngFor="
+                    let product of order.orderItems?.slice(0, 3);
+                    let i = index
+                  "
+                  class="order__history__item__product"
+                >
+                  <img
+                    *ngIf="!product.imageUrl"
+                    src="assets/images/no-product-image.png"
+                    data-toggle="tooltip"
+                    title="{{ product.quantity }} x {{ product.name }}"
+                  />
+                  <img
+                    *ngIf="product.imageUrl"
+                    src="{{ product.imageUrl }}"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ product.quantity }} x {{ product.name }}"
+                  />
+                  <span class="order__history__item__product__quantity">{{
+                    product.quantity
+                  }}</span>
+                </span>
+                <span
+                  *ngIf="order.orderItems?.length > 3"
+                  class="more__products__indicator"
+                  >+{{ order.products.length - 3 }}</span
+                >
+              </div>
+              <div class="order__options__menus">
+                <span
+                  (click)="pay(order.cartId)"
+                  class="order__track pay--now mb-show"
+                  >{{ "pay-now" | translate }}
+                  <i class="fal fa-chevron-right" style="margin-left: 10px"></i
+                ></span>
+
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuOrders"
+                  class="button orders--button"
+                >
+                  <span class="desktop__actions"
+                    >{{ "actions" | translate }}
+                    <i class="fas fa-angle-down"></i
+                  ></span>
+                </button>
+                <mat-menu #menuOrders="matMenu" xPosition="before">
+                  <button
+                    class="mat-menu-item--custom"
+                    mat-menu-item
+                    (click)="pay(order.cartId)"
+                  >
+                    <i class="fa-regular fa-credit-card"></i
+                    ><span>{{ "pay-now" | translate }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div
+  *ngIf="tenant == 'pruvit' && !scheduleCount && scheduleLoaded"
+  class="dashboard__nosubscriptions__screen"
+>
+  <span class="nosubscriptions__screen__logo"
+    ><i class="fa-solid fa-arrows-repeat"></i
+  ></span>
+  <h3>
+    {{ "setup-smartship" | translate }}<br />
+    {{ "and-never-pay-full-price" | translate }}
+  </h3>
+  <p class="sub-title mt-3">
+    {{ "smartship-rewards-our-loyal-customers" | translate }}
+  </p>
+  <button (click)="updateProducts(null)" class="btn button-primary mt-4 mb-3">
+    {{ "setup-smartship" | translate }}
+  </button>
+  <button (click)="onClickLearnMore()" class="btn">
+    {{ "learn-more" | translate }}
+    <i class="fal fa-chevron-right" style="margin-left: 10px"></i>
+  </button>
+  <img class="mt-4" src="assets/images/image-setup-smartship.png" />
+  </div>
+  <div class="dashboard__subscription">
+    <div
+      *ngIf="scheduleCount && scheduleCount > 0"
+      data-toggle="collapse"
+      data-target="#collapseScheduled"
+      [attr.aria-expanded]="
+        scheduleCount > 0 && pendingPaymentOrders.length === 0
+      "
+      aria-controls="collapseScheduled"
+      class="dahsboard__subscription__header"
+    >
+      <h4>
+        {{ "scheduled" | translate
+        }}<span class="dahsboard__subscription__header__number">{{
+          scheduleCount
+        }}</span>
+      </h4>
+      <i class="fas fa-angle-down"></i>
+    </div>
+    <div
+      id="collapseScheduled"
+      [ngClass]="{
+        show: scheduleCount > 0 && pendingPaymentOrders.length === 0
+      }"
+      class="dahsboard__subscription__body collapse"
+    >
+      <upcoming-smartships
+        [hideTitle]="hideTitle"
+        [user]="user"
+        (scheduledCount)="getScheduleCount($event)"
+      >
+      </upcoming-smartships>
+    </div>
+  </div>
+  <div *ngIf="orderHistory.length > 0" class="dashboard__subscription">
+    <div
+      data-toggle="collapse"
+      data-target="#collapseHistory"
+      aria-expanded="false"
+      aria-controls="collapseHistory"
+      class="dahsboard__subscription__header"
+    >
+      <h4>
+        {{ "history" | translate }}
+        <span
+          *ngIf="orderHistory.length > 0"
+          class="dahsboard__subscription__header__number"
+          >{{ orderHistory.length }}</span
+        >
+      </h4>
+      <i class="fas fa-angle-down"></i>
+    </div>
+    <div id="collapseHistory" class="dahsboard__subscription__body collapse">
+      <div *ngIf="orderHistory" class="">
+        <ng-container *ngFor="let order of orderHistory; let i = index">
+          <div class="order__history__item shipped canceled">
+            <div class="order__information">
+              <div>
+                <span class="order__name">{{ "canceled" | translate }}</span>
+              </div>
+              <span class="order__date"> #{{ order.autoshipId }} </span>
+              <span class="order__date">
+                {{ order.lastRun | date : "MMM d" }}
+              </span>
+            </div>
+
+            <div class="order__options">
+              <span
+                *ngIf="order.autoshipType == 'smartOrder'"
+                class="order__smartship"
+              >
+                <i class="far fa-repeat"></i
+                >{{
+                  (tenant === "ladyboss" ? "subscribe -save" : "smartShip")
+                    | translate
+                }}</span
+              >
+              <span
+                *ngIf="
+                  order.autoshipType == 'ketolifeMembershipAnnual' ||
+                  order.autoshipType == 'ketolifeMembershipMonthly'
+                "
+                class="order__smartship order--membership"
+                ><i class="fa-solid fa-shield-check"></i
+                >{{ "membership" | translate }}</span
+              >
+              <!-- <div>
+                <span
+                  *ngFor="
+                    let product of order.orderItems?.slice(0, 3);
+                    let i = index
+                  "
+                  class="order__history__item__product"
+                >
+                  <img
+                    *ngIf="!product.imageUrl"
+                    src="assets/images/no-product-image.png"
+                    data-toggle="tooltip"
+                    title="{{ product.quantity }} x {{ product.name }}"
+                  />
+                  <img
+                    *ngIf="product.imageUrl"
+                    src="{{ product.imageUrl }}"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ product.quantity }} x {{ product.name }}"
+                  />
+                  <span class="order__history__item__product__quantity">{{
+                    product.quantity
+                  }}</span>
+                </span>
+                <span
+                  *ngIf="order.orderItems?.length > 3"
+                  class="more__products__indicator"
+                  >+{{ order.orderItems.length - 3 }}</span
+                >
+              </div> -->
+              <div class="order__options__menus">
+                <span class="order__track mb-show"
+                  ><i class="fa-regular fa-circle-info"></i
+                  >{{ "view-details" | translate }}</span
+                >
+
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="menuOrders"
+                  class="button orders--button"
+                >
+                  <span class="desktop__actions"
+                    >{{ "actions" | translate }}
+                    <i class="fas fa-angle-down"></i
+                  ></span>
+                </button>
+                <mat-menu #menuOrders="matMenu" xPosition="before">
+                  <button
+                    class="mat-menu-item--custom"
+                    mat-menu-item
+                    (click)="printReceipt(order.invoiceId)"
+                  >
+                    <i class="far fa-print"></i
+                    ><span>{{ "print-receipt" | translate }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="
+    tenant == 'ladyboss' &&
+    pendingPaymentOrders.length == 0 &&
+    !scheduleCount &&
+    orderHistory.length == 0 &&
+    !loaderHistory &&
+    !loaderPending
+  "
+  class="missing__payments"
+>
+  <i class="fa-solid fa-list-ul"></i>
+  <h3>{{ "no-order-history-can-be-found" | translate }}</h3>
+</div>
+
+<app-loader *ngIf="loaderHistory || loaderPending" class="payment--loader">
+</app-loader>

@@ -1,0 +1,582 @@
+<section id="ga4-lead-success" *ngIf="!isRussellBrunson">
+  <div class="invitation-event-alrt-wrap text-center">
+    <i class="fa-fw fa_prepended fas fa-exclamation-circle"></i>
+    <strong>BUT WAIT…</strong> Before You Go This Is An Annoucment You Are NOT
+    Going To Want To Miss
+  </div>
+
+  <div class="congrats-alrt-wrap text-center">
+    <h1 class="color-brand mb-2">🎉 CONGRATs {{ firstName }}!</h1>
+    <h6 class="color-black">
+      <strong>You’ve Registered</strong> For The “LadyBoss Phoenix Rise-Up”
+      Event!
+    </h6>
+  </div>
+
+  <div class="learn-alrt-wrap">
+    <div _ngcontent-serverapp-c96="" class="inner-cont">
+      <p class="img-full">
+        <img
+          src="assets/ladyboss/images/f1a674dfff03eb288069ffdfcaecc70a.png"
+          alt="img"
+          class="img-fluid"
+        />
+      </p>
+    </div>
+  </div>
+
+  <section class="invitation-landing-wrap upgrade-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 short-video-wrap">
+          <p class="video-title text-center">
+            <i class="fa-solid fa-video"></i> Watch This Short Video To Find Out
+            How:
+          </p>
+          <div class="video">
+            <iframe
+              src="https://embed.voomly.com/embed/assets/embed.html?videoId=7m1Tgz4M2cFEh1SCFwxBx9zUWu3dEToUwtBP6tpYgKGUP1QS9&videoRatio=1.7777&type=v"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              width="560"
+              height="315"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="col-12 p-0">
+          <h3 class="color-brand mb-2">Yes, you heard that right.</h3>
+          <p class="color-black">
+            With the <u>re-launch of LadyBoss,</u> we have created a referral
+            program where
+            <strong
+              >YOU can actually get paid for telling others about
+              LadyBoss!</strong
+            >
+          </p>
+          <p class="color-black my-4 my-sm-5">It’s Pretty Simple…</p>
+          <p class="color-black">
+            At the end of the “Phoenix Rise-Up” event, we will give people a
+            chance to order LadyBoss LEAN (for the first time in almost 6
+            months!)
+          </p>
+
+          <div class="you-get-row my-3">
+            <img
+              class="img-fluid"
+              src="assets/ladyboss/images/dancing_sample.png"
+            />
+
+            <div class="get-text ml-0 ml-sm-3">
+              <h4 class="color-black">If You Get Just 3 People To Buy LEAN…</h4>
+              <h4 class="color-brand">Then Your LEAN Becomes FREE!</h4>
+            </div>
+          </div>
+          <p class="color-black">
+            If you refer more than 3… well, then it becomes BETTER THAN FREE,
+            and
+            <strong>you’ll actually get a check in the mail each month!</strong>
+          </p>
+          <p class="color-black my-4 my-sm-5">
+            It’s not required to be part of the LIVE “LadyBoss Phoenix Rise-Up”
+            EVENT but as long as you’re coming to it, you might as well refer
+            your friends (and get paid when they start this weight loss journey
+            with you!)
+          </p>
+          <p class="color-black extr-btm-mrg">
+            <strong
+              >If you’d like to refer others to the event, then you need to
+              upgrade (for FREE) and become a “LadyBoss Phoenix.”</strong
+            >
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section class="invitation-landing-wrap upgrade-register-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <h1 class="color-brand title text-center">Register Below</h1>
+          <p class="color-black text-center mb-3">
+            To <strong>Create Your Free Referral Account</strong> And Log You
+            Into Your LadyBoss Dashboard!
+          </p>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1"
+                >First Name:</label
+              >
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="First Name Here..."
+                [class.is-invalid]="
+                  firstNameControl.errors && firstNameControl.touched
+                "
+                formControlName="firstName"
+              />
+              <small
+                *ngIf="firstNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your First name</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Last Name:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Last Name Here..."
+                [class.is-invalid]="
+                  lastNameControl.errors && lastNameControl.touched
+                "
+                formControlName="lastName"
+              />
+              <small
+                *ngIf="lastNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Last name</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1"
+                >Best Email Address:</label
+              >
+              <input
+                type="email"
+                class="form-control disclaimer-reg border"
+                placeholder="Email Address Here..."
+                [class.is-invalid]="emailControl.errors && emailControl.touched"
+                formControlName="email"
+                (focus)="isEmailFocused = true"
+                (blur)="isEmailFocused = false"
+              />
+              <p *ngIf="!isEmailAvailable" class="p-small text-danger mt-2">
+                Uh oh! Email already taken.
+              </p>
+              <small
+                *ngIf="emailControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Email</small
+              >
+              <small
+                *ngIf="emailControl.errors?.['pattern']"
+                class="invalid-feedback"
+                >Please enter a valid Email address</small
+              >
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Password:</label>
+              <div class="password-icon">
+                <div class="p-relative">
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control disclaimer-reg border"
+                    placeholder="Enter Password Here..."
+                    [class.is-invalid]="
+                      passwordControl.touched && passwordControl.errors
+                    "
+                    formControlName="password"
+                    (focus)="isPasswordFocused = true"
+                    (blur)="isPasswordFocused = false"
+                  />
+                  <span
+                    toggle="#password"
+                    class="fa fa-fw fa-eye-slash toggle-password-btn"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+                <small
+                  *ngIf="passwordControl.touched && passwordControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Password</small
+                >
+                <small *ngIf="password.charLengthError" class="invalid-feedback"
+                  >Password must contain 6 to 14 characters</small
+                >
+                <small *ngIf="password.upperCaseError" class="invalid-feedback"
+                  >Password must contain 1 capital letter</small
+                >
+                <small
+                  *ngIf="password.symbolNumberError"
+                  class="invalid-feedback"
+                  >Password must contain 1 number or symbol</small
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Phone:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Phone Number Here..."
+                [class.is-invalid]="phoneControl.errors && phoneControl.touched"
+                formControlName="phone"
+              />
+              <p *ngIf="!isPhoneAvailable" class="p-small text-danger mt-2">
+                Uh oh! Phone already taken.
+              </p>
+              <small
+                *ngIf="phoneControl.touched && phoneControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Phone</small
+              >
+              <small
+                *ngIf="phoneControl.touched && phoneControl.errors?.['pattern']"
+                class="invalid-feedback"
+                >Please enter a valid Phone number</small
+              >
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Country:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Country Here..."
+                value="United States"
+                readonly
+              />
+            </div>
+            <div class="form-group form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="agreeCheck"
+                formControlName="checkAgree"
+              />
+              <label class="form-check-label color-black" for="agreeCheck">
+                I agree to the
+                <a
+                  href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE"
+                  target="_blank"
+                  class="font-bold"
+                  >Terms of Service</a
+                >
+              </label>
+            </div>
+
+            <div class="form-group text-center mt-4">
+              <button
+                class="button button-primary button-large"
+                [disabled]="
+                  registerForm.invalid || !isEmailAvailable || isFormSubmitted
+                "
+                type="submit"
+              >
+                Upgrade Me To ‘LadyBoss Phoenix
+                <i class="fa-solid fa-right-long ml-2"></i>
+                <i
+                  class="fa fa-spinner fa-spin ml-2"
+                  *ngIf="isFormSubmitted"
+                ></i>
+              </button>
+              <p *ngIf="error" class="text-danger text-center mt-2">
+                {{ error }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </figure>
+    </article>
+  </section>
+</section>
+
+<section id="ga4-lead-success" *ngIf="isRussellBrunson" class="russell-theme">
+  <div class="invitation-event-alrt-wrap text-center">
+    <i class="fa-fw fa_prepended fas fa-exclamation-circle"></i>
+    <strong>BUT WAIT…</strong> Before You Go This Is An Annoucment You Are NOT
+    Going To Want To Miss
+  </div>
+
+  <div class="congrats-alrt-wrap text-center">
+    <h1 class="color-brand mb-2">🎉 CONGRATs {{ firstName }}!</h1>
+    <h6 class="color-black">
+      <strong>You’ve Registered</strong> For The “LadyBoss Phoenix Rise-Up”
+      Event!
+    </h6>
+  </div>
+
+  <div class="learn-alrt-wrap">
+    <div _ngcontent-serverapp-c96="" class="inner-cont">
+      <p class="img-full">
+        <img
+          src="assets/ladyboss/images/image_2023_01_06T11_48_13_848Z.png"
+          alt="img"
+          class="img-fluid"
+        />
+      </p>
+    </div>
+  </div>
+
+  <section class="invitation-landing-wrap upgrade-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12 short-video-wrap">
+          <p class="video-title text-center">
+            <i class="fa-solid fa-video"></i> Watch This Short Video To Find Out
+            How:
+          </p>
+          <div class="video">
+            <iframe
+              src="https://embed.voomly.com/embed/assets/embed.html?videoId=XUKXBgJAnNeAQMR-DxvN_86TgSgOA5R37q8cXAH6AykSzxB8l&videoRatio=1.7777&type=v"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              width="560"
+              height="315"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="col-12 p-0">
+          <h3 class="color-brand mb-2">Yes, you heard that right.</h3>
+          <p class="color-black">
+            With the <u>re-launch of LadyBoss,</u> we have created a referral
+            program where
+            <strong
+              >YOU can actually get paid for telling others about
+              LadyBoss!</strong
+            >
+          </p>
+          <p class="color-black my-4 my-sm-5">It’s Pretty Simple…</p>
+          <p class="color-black">
+            At the end of the “Phoenix Rise-Up” event, we will give people a
+            chance to order LadyBoss LEAN (for the first time in almost 6
+            months!)
+          </p>
+
+          <div class="you-get-row my-3">
+            <img
+              class="img-fluid"
+              src="assets/ladyboss/images/product_supplements_lean-sample-x3-2048x1778.png"
+            />
+
+            <div class="get-text ml-0 ml-sm-3">
+              <h4 class="color-black">If You Get Just 3 People To Buy LEAN…</h4>
+              <h4 class="color-brand">Then Your LEAN Becomes FREE!</h4>
+              <p class="color-black">
+                If you refer more than 3… well, then it becomes BETTER THAN
+                FREE, and
+                <strong
+                  >you’ll actually get a check in the mail each month!</strong
+                >
+              </p>
+            </div>
+          </div>
+
+          <p class="color-black my-4 my-sm-5">
+            It’s not required to be part of the LIVE “LadyBoss Phoenix Rise-Up”
+            EVENT but as long as you’re coming to it, you might as well refer
+            your friends (and get paid when they start this weight loss journey
+            with you!)
+          </p>
+          <p class="color-black extr-btm-mrg">
+            <strong
+              >If you’d like to refer others to the event, then you need to
+              upgrade (for FREE) and become a “LadyBoss Phoenix.”</strong
+            >
+          </p>
+        </div>
+      </figure>
+    </article>
+  </section>
+
+  <section class="invitation-landing-wrap upgrade-register-wrap">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <h1 class="color-brand title text-center">Register Below</h1>
+          <p class="color-black text-center mb-3">
+            To <strong>Create Your Free Referral Account</strong> And Log You
+            Into Your LadyBoss Dashboard!
+          </p>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1"
+                >First Name:</label
+              >
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="First Name Here..."
+                [class.is-invalid]="
+                  firstNameControl.errors && firstNameControl.touched
+                "
+                formControlName="firstName"
+              />
+              <small
+                *ngIf="firstNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your First name</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Last Name:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Last Name Here..."
+                [class.is-invalid]="
+                  lastNameControl.errors && lastNameControl.touched
+                "
+                formControlName="lastName"
+              />
+              <small
+                *ngIf="lastNameControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Last name</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1"
+                >Best Email Address:</label
+              >
+              <input
+                type="email"
+                class="form-control disclaimer-reg border"
+                placeholder="Email Address Here..."
+                [class.is-invalid]="emailControl.errors && emailControl.touched"
+                formControlName="email"
+                (focus)="isEmailFocused = true"
+                (blur)="isEmailFocused = false"
+              />
+              <p *ngIf="!isEmailAvailable" class="p-small text-danger mt-2">
+                Uh oh! Email already taken.
+              </p>
+              <small
+                *ngIf="emailControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Email</small
+              >
+              <small
+                *ngIf="emailControl.errors?.['pattern']"
+                class="invalid-feedback"
+                >Please enter a valid Email address</small
+              >
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Password:</label>
+              <div class="password-icon">
+                <div class="p-relative">
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control disclaimer-reg border"
+                    placeholder="Enter Password Here..."
+                    [class.is-invalid]="
+                      passwordControl.touched && passwordControl.errors
+                    "
+                    formControlName="password"
+                    (focus)="isPasswordFocused = true"
+                    (blur)="isPasswordFocused = false"
+                  />
+                  <span
+                    toggle="#password"
+                    class="fa fa-fw fa-eye-slash toggle-password-btn"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+                <small
+                  *ngIf="passwordControl.touched && passwordControl.errors?.['required']"
+                  class="invalid-feedback"
+                  >Please enter your Password</small
+                >
+                <small *ngIf="password.charLengthError" class="invalid-feedback"
+                  >Password must contain 6 to 14 characters</small
+                >
+                <small *ngIf="password.upperCaseError" class="invalid-feedback"
+                  >Password must contain 1 capital letter</small
+                >
+                <small
+                  *ngIf="password.symbolNumberError"
+                  class="invalid-feedback"
+                  >Password must contain 1 number or symbol</small
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Phone:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Phone Number Here..."
+                [class.is-invalid]="phoneControl.errors && phoneControl.touched"
+                formControlName="phone"
+              />
+              <p *ngIf="!isPhoneAvailable" class="p-small text-danger mt-2">
+                Uh oh! Phone already taken.
+              </p>
+              <small
+                *ngIf="phoneControl.touched && phoneControl.errors?.['required']"
+                class="invalid-feedback"
+                >Please enter your Phone</small
+              >
+              <small
+                *ngIf="phoneControl.touched && phoneControl.errors?.['pattern']"
+                class="invalid-feedback"
+                >Please enter a valid Phone number</small
+              >
+            </div>
+            <div class="form-group">
+              <label class="color-black disclaimer-bold mb-1">Country:</label>
+              <input
+                type="text"
+                class="form-control disclaimer-reg border"
+                placeholder="Country Here..."
+                value="United States"
+                readonly
+              />
+            </div>
+            <div class="form-group form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="agreeCheck"
+                formControlName="checkAgree"
+              />
+              <label class="form-check-label color-black" for="agreeCheck">
+                I agree to the
+                <a
+                  href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE"
+                  target="_blank"
+                  class="font-bold"
+                  >Terms of Service</a
+                >
+              </label>
+            </div>
+
+            <div class="form-group text-center mt-4">
+              <button
+                class="button button-primary button-large"
+                [disabled]="
+                  registerForm.invalid || !isEmailAvailable || isFormSubmitted
+                "
+                type="submit"
+              >
+                Upgrade Me To ‘LadyBoss Phoenix
+                <i class="fa-solid fa-right-long ml-2"></i>
+                <i
+                  class="fa fa-spinner fa-spin ml-2"
+                  *ngIf="isFormSubmitted"
+                ></i>
+              </button>
+              <p *ngIf="error" class="text-danger text-center mt-2">
+                {{ error }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </figure>
+    </article>
+  </section>
+</section>

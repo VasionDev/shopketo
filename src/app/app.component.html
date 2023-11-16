@@ -1,6 +1,6 @@
 <template #modalcontainer> </template>
 
-<div class="drawer-nav">
+<div id="root-drawer-wrapper" class="drawer-nav">
   <div>
     <app-country-bar *ngIf="sidebarName === 'country-bar'"> </app-country-bar>
 
@@ -12,8 +12,13 @@
     <app-delivery-options *ngIf="sidebarName === 'delivery-options'">
     </app-delivery-options>
 
-    <app-sidebar-container *ngIf="sidebarName === 'dashboard'">
-      <side-navigation [isDashboard]="false"></side-navigation>
+    <!-- <side-navigation
+      [sideBar]="true"
+      *ngIf="sidebarName === 'account-menu'"
+    ></side-navigation> -->
+
+    <app-sidebar-container *ngIf="sidebarName === 'account'">
+      <side-navigation [sideBar]="true"></side-navigation>
     </app-sidebar-container>
 
     <div *ngIf="sidebarName === ''"></div>
@@ -23,12 +28,53 @@
 <app-cookie-dialog *ngIf="isEuropeanCountry" [show]="showCookieDialog">
 </app-cookie-dialog>
 
-<app-header (messageEvent)="receiveSidebarName($event)"></app-header>
-<!-- <mobile-navigation *ngIf="isAuthenticated"></mobile-navigation> -->
+<app-header
+  [referrer]="referrer"
+  (messageEvent)="receiveSidebarName($event)"
+></app-header>
+
+<mobile-navigation *ngIf="isAuthenticated"></mobile-navigation>
 <router-outlet
   (activate)="onActivate()"
-  *ngIf="isLoaded; else loader"
+  *ngIf="isLoaded && !dashboardLoader; else loader"
 ></router-outlet>
+
+<div
+*ngIf="isLoaded && !isAuthenticated && routePath !== '/cart'"
+  class="referrer-floating-bar"
+>
+  <div class="inner-content row align-items-center justify-content-between">
+    <div class="left-content col">
+      <div class="row align-items-center">
+        <button
+          *ngIf="routePath === '/me'"
+          routerLink="/"
+          class="button button-primary button-bg floating-btn col"
+        >
+          <i class="fa-regular fa-house icon-size"></i>
+        </button>
+        <div
+          *ngIf="routePath !== '/me' && referrer?.code"
+          (click)="onClickReferrerImage()"
+          class="login-img col pointer"
+          [ngStyle]="{
+            'background-image': referrer?.imageUrl
+              ? 'url(' + referrer?.imageUrl + ')'
+              : 'url(' + 'assets/images/avatar2.png' + ')'
+          }"
+        >
+          <span *ngIf="referrer?.isPro && !clickedOnRefBtn" class="count">1</span>
+        </div>
+
+        <app-vi-offer></app-vi-offer>
+      </div>
+    </div>
+    <div *ngIf="fbPageID !== ''" class="right-content test-1 col mxwdt-64">
+      <div class="fb-customerchat" [attr.page_id]="fbPageID"></div>
+    </div>
+  </div>
+</div>
+
 <app-footer></app-footer>
 
 <ng-template #loader>
@@ -36,12 +82,6 @@
 </ng-template>
 
 <div class="navbar-overlay"></div>
-
-<div
-  *ngIf="fbPageID !== ''"
-  class="fb-customerchat"
-  [attr.page_id]="fbPageID"
-></div>
 
 <div
   class="miniplayer-wrap"

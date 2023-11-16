@@ -8,6 +8,7 @@ export interface CartTotal {
   qualifiedSkus: Array<string>;
   discountedSkus: Array<{ sku: string; percent: number }>;
   isEnabled: boolean;
+  priceAfterDiscount: number;
   isDiscountableInCart?: boolean;
   isDiscountableInCatalog?: boolean;
   isUnlocked: boolean;

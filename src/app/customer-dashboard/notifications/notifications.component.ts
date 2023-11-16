@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewgenApiService } from 'src/app/shared/services/newgen-api.service';
 import { NotificationSettingUpdate } from '../models/notificationSettingUpdate';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -15,8 +16,14 @@ export class NotificationsComponent implements OnInit {
   public emailAll: boolean = false;
   public smsAll: boolean = false;
   public appAll: boolean = false;
+  public emailDisabled: boolean = false;
+  public smsDisabled: boolean = false;
+  public appDisabled: boolean = false;
   public loading: boolean = false;
-  constructor(private newgenSvc: NewgenApiService) { }
+  public tenant!: string;
+  constructor(private newgenSvc: NewgenApiService) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getNotificationsSettings();
@@ -33,6 +40,15 @@ export class NotificationsComponent implements OnInit {
       }
       if (collection.some((y: any) => y.web == "on")) {
         this.appAll = true;
+      }
+      if (collection.some((y: any) => y.email == "disabled")) {
+        this.emailDisabled = true;
+      }
+      if (collection.some((y: any) => y.sms == "disabled")) {
+        this.smsDisabled = true;
+      }
+      if (collection.some((y: any) => y.web == "disabled")) {
+        this.appDisabled = true;
       }
       collection.forEach((element: any) => {
         element.email = this.stringToBoolean(element.email);

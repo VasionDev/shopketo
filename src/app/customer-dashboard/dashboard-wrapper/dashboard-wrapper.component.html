@@ -1,15 +1,14 @@
-<main class="sk-main">
-    <section class="sk-dashboard">
-        <div class="container dashboard--container">
-            <div class="row">
-                <div *ngIf="!hideNav" class="col-lg-3">
-                    <side-navigation></side-navigation>
-
-                </div>
-                <div [class]="hideNav ? 'col-lg-12' : ''" class="col-lg-9">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
+<main class="sk-main" [style.margin-top.px]="discountHeight">
+  <section class="sk-dashboard">
+    <div class="container dashboard--container">
+      <div class="row">
+        <div *ngIf="!hideNav" class="col-lg-3">
+          <side-navigation *ngIf="isLoaded"></side-navigation>
         </div>
-    </section>
+        <div [class]="hideNav ? 'col-lg-12' : ''" class="col-lg-9">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>

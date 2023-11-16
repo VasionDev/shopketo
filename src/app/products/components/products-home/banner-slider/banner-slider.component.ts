@@ -1,11 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { SubscriptionLike } from 'rxjs';
-import { WebsiteService } from 'src/app/customer-dashboard/websites/service/websites-service';
+import { ReplaySubject } from 'rxjs';
+import { skip, takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/products/models/product.model';
+import { AppApiService } from 'src/app/shared/services/app-api.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppTagManagerService } from 'src/app/shared/services/app-tag-manager.service';
+import { AppUserService } from 'src/app/shared/services/app-user.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { AppState } from 'src/app/store/app.reducer';
 import { environment } from 'src/environments/environment';
 declare var bannerSliderJS: any;
 declare var $: any;
@@ -16,25 +22,32 @@ declare var $: any;
   styleUrls: ['./banner-slider.component.css'],
 })
 export class BannerSliderComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  tenant!: string;
   selectedLanguage = '';
   selectedCountry = '';
   isLoggedUserExist: boolean = false;
   featureProducts: Product[] = [];
+  products: Product[] = [];
   referrer: any = {};
   defaultLanguage = '';
-  subscriptions: SubscriptionLike[] = [];
   isStaging: boolean;
   isSubDomain = false;
-  hasCustomizeData = false;
 
   constructor(
     private dataService: AppDataService,
     private utilityService: AppUtilityService,
-    private websiteService: WebsiteService,
+    private apiService: AppApiService,
     private router: Router,
-    private translate: TranslateService
+    private activatedRoute: ActivatedRoute,
+    private userService: AppUserService,
+    private translate: TranslateService,
+    private tagManager: AppTagManagerService,
+    private store: Store<AppState>,
+    @Inject(DOCUMENT) private document: Document,
   ) {
     this.isStaging = environment.isStaging;
+    this.tenant = environment.tenant;
   }
 
   ngOnInit(): void {
@@ -42,47 +55,52 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
     this.getSelectedLanguage();
     this.getReferrer();
     this.getSelectedCountry();
-    this.getBaseUrlStatus();
-    this.getUserCustomizeData();
+    this.getCartList();
+    //this.getBaseUrlStatus();
+  }
+
+  getCartList() {
+    this.store.select('cartList')
+    .pipe(
+      takeUntil(this.destroyed$),
+      skip(1)
+    )
+    .subscribe(res => {
+      if(this.products.length) {
+        this.getFeatureProducts(this.products);
+      }
+    });
   }
 
   getBaseUrlStatus() {
-    this.subscriptions.push(
-      this.dataService.currentIsSubdomain$.subscribe((status: boolean) => {
-        this.isSubDomain = status;
-      })
-    );
+    this.dataService.currentIsSubdomain$.pipe(takeUntil(this.destroyed$)).subscribe((status: boolean) => {
+      this.isSubDomain = status;
+    });
   }
 
   getSelectedLanguage() {
-    this.subscriptions.push(
-      this.dataService.currentSelectedLanguage$.subscribe(
-        (language: string) => {
-          this.selectedLanguage = language;
-          this.translate.use(this.selectedLanguage);
+    this.dataService.currentSelectedLanguage$.pipe(takeUntil(this.destroyed$)).subscribe(
+      (language: string) => {
+        this.selectedLanguage = language;
+        this.translate.use(this.selectedLanguage);
 
-          this.getProducts();
-        }
-      )
+        this.getProducts();
+      }
     );
   }
 
   getSelectedCountry() {
-    this.subscriptions.push(
-      this.dataService.currentSelectedCountry$.subscribe((country: string) => {
-        this.selectedCountry = country;
-      })
-    );
+    this.dataService.currentSelectedCountry$.pipe(takeUntil(this.destroyed$)).subscribe((country: string) => {
+      this.selectedCountry = country;
+    });
   }
 
   getReferrer() {
-    this.subscriptions.push(
-      this.dataService.currentReferrerData$.subscribe((referrer: any) => {
-        if (referrer) {
-          this.referrer = referrer;
-        }
-      })
-    );
+    this.dataService.currentReferrerData$.pipe(takeUntil(this.destroyed$)).subscribe((referrer: any) => {
+      if (referrer) {
+        this.referrer = referrer;
+      }
+    });
   }
 
   getUser() {
@@ -94,28 +112,27 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    this.subscriptions.push(
-      this.dataService.currentProductsData$.subscribe((data) => {
-        if (
-          data &&
-          Object.keys(data).length === 0 &&
-          data.constructor === Object
-        ) {
-          return;
-        }
+    this.dataService.currentProductsData$.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
+      if (
+        data &&
+        Object.keys(data).length === 0 &&
+        data.constructor === Object
+      ) {
+        return;
+      }
 
-        this.defaultLanguage = data.productsData.default_lang;
+      this.defaultLanguage = data.productsData.default_lang;
 
-        const products = data.products.filter(
-          (p) =>
-            !p.accessLevels.isCustom.on &&
-            (p.categories.length > 0 || p.tags.length > 0) &&
-            (!p.accessLevels.isLoggedUser.on ||
-              (p.accessLevels.isLoggedUser.on && this.isLoggedUserExist))
-        );
-        this.getFeatureProducts(products);
-      })
-    );
+      const products = data.products.filter(
+        (p) =>
+          !p.accessLevels.isCustom.on &&
+          (p.categories.length > 0 || p.tags.length > 0) &&
+          (!p.accessLevels.isLoggedUser.on ||
+            (p.accessLevels.isLoggedUser.on && this.isLoggedUserExist))
+      );
+      this.products = products;
+      this.getFeatureProducts(products);
+    });
   }
 
   getTranslatedText() {
@@ -162,22 +179,23 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.featureProducts = tempFeatureProducts;
+    this.featureProducts = tempFeatureProducts.filter(p => {
+      return this.userService.checkUserAccess(
+        p.accessLevels,
+        p.customUsers
+      );
+    });
     this.loadBannerSlider(this.featureProducts.length);
   }
 
   loadBannerSlider(productsLength: number) {
-    if (productsLength === 1) {
-      bannerSliderJS(false);
+    const bannerSlick = $(
+      '.sk-main__banner-slider.slick-initialized'
+    );
+    if(bannerSlick.length) {
+      $('.sk-main__banner-slider').slick('unslick');
     }
-    if (productsLength > 1) {
-      const bannerSlick = $(
-        '.sk-main__banner-slider.slick-initialized.slick-slider.slick-dotted'
-      );
-
-      if (bannerSlick.length > 0) {
-        $('.sk-main__banner-slider').slick('unslick');
-      }
+    if(productsLength > 1) {
       setTimeout(() => {
         bannerSliderJS(true);
       });
@@ -211,14 +229,34 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
     $('#pruvitTVModal').modal('show');
   }
 
-  onClickBuyNow(postName: string) {
+  onClickBuyNow(product: Product) {
     localStorage.setItem('DirectCheckout', JSON.stringify(false));
     this.dataService.setIsFromSmartshipStatus(false);
 
     this.dataService.changePostName({
       postName: 'product-modal',
-      payload: { key: 'postName', value: postName },
+      payload: { key: 'postName', value: product.name },
     });
+    if(this.tenant === 'pruvit') {
+      this.tagManager.selectItemEvent(product, this.selectedCountry);
+    }
+  }
+
+  onClickCutomCtaBtn(customLink: string) {
+    let isValidUrl = this.isValidUrl(customLink);
+    if (!isValidUrl) {
+      this.router.navigate([`${customLink}`]);
+    } else {
+      window.location.href = customLink;
+    }
+  }
+
+  isValidUrl(url: string) {
+    try {
+      return Boolean(new URL(url));
+    } catch (e) {
+      return false;
+    }
   }
 
   getBackgroundColor(bgImage?: string, rgb1?: string, rgb2?: string) {
@@ -231,38 +269,21 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickProductImage(postName: string) {
-    if (postName) {
-      const routeURL = '/product/' + postName;
+  onClickProductImage(product: Product) {
+    if (product) {
+      if(this.tenant === 'pruvit') {
+        this.tagManager.viewItemEvent(product, this.selectedCountry, 'Product Banner');
+      }
+      const routeURL = '/product/' + product.name;
       this.utilityService.navigateToRoute(routeURL);
     }
   }
 
   onClickReferrerName() {
-    if (this.hasCustomizeData) {
-      const path = this.isStaging ? '/me?ref=' + this.referrer.code : '/me';
-      this.router.navigateByUrl(path);
-    } else {
-      this.dataService.changePostName({
-        postName: 'referrer-modal',
-        payload: { key: 'modals', value: [{ modalName: 'independentPruver' }] },
-      });
-    }
-  }
-
-  getUserCustomizeData() {
-    if (this.referrer?.userId && this.selectedCountry === 'US') {
-      this.subscriptions.push(
-        this.websiteService
-          .getCustomizeData(this.referrer?.userId, false)
-          .subscribe((res) => {
-            if (typeof res.success && res.success === true) {
-              this.hasCustomizeData =
-                res.data.status === 'approved' ? true : false;
-            }
-          })
-      );
-    }
+    this.dataService.changePostName({
+      postName: 'referrer-modal',
+      payload: { key: 'modals', value: [{ modalName: 'independentPruver' }] },
+    });
   }
 
   isEuropeCountryShown() {
@@ -282,7 +303,20 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
       this.selectedCountry === 'SE' ||
       this.selectedCountry === 'CH' ||
       this.selectedCountry === 'RO' ||
-      this.selectedCountry === 'GB'
+      this.selectedCountry === 'GB' ||
+      this.selectedCountry === 'BG' ||
+      this.selectedCountry === 'HR' ||
+      this.selectedCountry === 'CY' ||
+      this.selectedCountry === 'CZ' ||
+      this.selectedCountry === 'DK' ||
+      this.selectedCountry === 'EE' ||
+      this.selectedCountry === 'GR' ||
+      this.selectedCountry === 'LV' ||
+      this.selectedCountry === 'LT' ||
+      this.selectedCountry === 'LU' ||
+      this.selectedCountry === 'MT' ||
+      this.selectedCountry === 'SK' ||
+      this.selectedCountry === 'SI'
     ) {
       return true;
     } else {
@@ -296,15 +330,36 @@ export class BannerSliderComponent implements OnInit, OnDestroy {
     if (this.selectedLanguage === 'es') langCode = 'es-mx';
     else if (this.selectedLanguage === 'pt-pt') langCode = 'pt';
     else langCode = this.selectedLanguage;
-
-    const newAccountLink = `http://cloud.justpruvit.com/#/register/${this.referrer.code}?country=${this.selectedCountry}&language=${langCode}`;
+    
+    const viParams = this.getVIParams();
+    const langParam = this.activatedRoute.snapshot.queryParamMap.get('lang');
+    const routerUrl = this.router.url.includes('?') ? this.router.url.split('?')[0] : this.router.url;
+    const redirectUrl = langParam ? environment.clientDomain + `${routerUrl}?lang=${langParam}` + (viParams ? '&' + viParams : '') : environment.clientDomain + routerUrl + (viParams ? '?' + viParams : '');
+    
+    const newAccountLink = `${environment.newgenUrl}#/register/${this.referrer.code}?country=${this.selectedCountry}&language=${langCode}&no_order=true&redirect_url=${encodeURIComponent(redirectUrl)}`;
 
     window.location.href = newAccountLink;
   }
 
+  getVIParams() {
+    const VIUser = this.userService.validateVIUserSession();
+    if (VIUser !== null) {
+      if (
+        VIUser.hasOwnProperty('viProductId') &&
+        VIUser.viProductId !== ''
+      ) {
+        // var localDateUtc = moment.utc(VIUser.expiryTime);
+        // var localDate = moment(localDateUtc).utcOffset(10 * 60);
+        // const offerExpiryTimeString = localDate.format();
+        const viParams = 'userId='+this.referrer.userId+'&firstName='+VIUser.firstName+'&lastName='+VIUser.lastName+'&email='+VIUser.email+'&offererCode='+VIUser.referrer+'&viProductId='+VIUser.viProductId +'&viCode='+VIUser.viCode+'&offerExpiryTime='+VIUser.expiryTime;
+        return viParams;
+      }
+    }
+    return '';
+  }
+
   ngOnDestroy() {
-    this.subscriptions.forEach((element) => {
-      element.unsubscribe();
-    });
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

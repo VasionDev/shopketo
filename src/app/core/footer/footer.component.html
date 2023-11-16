@@ -1,4 +1,8 @@
-<footer class="footer color-black-bg">
+<footer 
+  *ngIf="tenant === 'pruvit' && showPruvitFooter && isLoaded" 
+  class="footer color-black-bg"
+  [ngStyle]="{'padding-bottom': checkoutBtnHeight ? checkoutBtnHeight + 'px' : ''}"
+>
   <div class="footer__top border-bottom-2">
     <div class="container">
       <div class="footer__logo-box">
@@ -15,61 +19,46 @@
                 {{ "company" | translate }}
               </p>
               <ul class="footer__links-list">
-                <li *ngIf="selectedCountry === 'US'">
-                  <a
-                    routerLink="about"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "about" | translate }}</a
-                  >
+                <li *ngIf="selectedCountry === 'US' || selectedCountry === 'CA'">
+                  <a routerLink="about" class="footer__link disclaimer-reg color-gray">{{ "about" | translate }}</a>
                 </li>
-                <li>
-                  <a
-                    routerLink="team"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "team" | translate }}</a
-                  >
+                <li *ngIf="selectedCountry === 'US' || selectedCountry === 'CA'">
+                  <a routerLink="team" class="footer__link disclaimer-reg color-gray">{{ "team" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.shipping_policy !== ''">
-                  <a
-                    href="{{ generalSettings?.shipping_policy }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "shipping-policy" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.shipping_policy }}" class="footer__link disclaimer-reg color-gray">{{
+                    "shipping-policy" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.refund_policy !== ''">
-                  <a
-                    href="{{ generalSettings?.refund_policy }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "refund-policy" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.refund_policy }}" class="footer__link disclaimer-reg color-gray">{{
+                    "refund-policy" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.privacy !== ''">
-                  <a
-                    href="{{ generalSettings?.privacy }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "privacy-policy" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.privacy }}" class="footer__link disclaimer-reg color-gray">{{
+                    "privacy-policy" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.terms !== ''">
-                  <a
-                    href="{{ generalSettings?.terms }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "terms" | translate }}</a
-                  >
+                  <!-- <a href="{{ generalSettings?.terms }}" class="footer__link disclaimer-reg color-gray">{{ "terms" |
+                    translate }}
+                  </a> -->
+                  <a *ngIf="selectedCountry.toLowerCase() !== 'au' && selectedCountry.toLowerCase() !== 'nz'; else explicitTermContainer" href="https://support.justpruvit.com/hc/articles/360052190452-Terms" class="footer__link disclaimer-reg color-gray">{{ "terms" | translate }}
+                  </a>
+                  <ng-template #explicitTermContainer>
+                    <a *ngIf="selectedCountry.toLowerCase() === 'au'" href="https://support.justpruvit.com/hc/articles/4427525130381-Terms-Australia" class="footer__link disclaimer-reg color-gray">{{ "terms" |
+                      translate }}
+                    </a>
+                    <a *ngIf="selectedCountry.toLowerCase() === 'nz'" href="https://support.justpruvit.com/hc/articles/4427981556749-Terms-New-Zealand" class="footer__link disclaimer-reg color-gray">{{ "terms" |
+                      translate }}
+                    </a>
+                  </ng-template>
                 </li>
                 <li *ngIf="generalSettings?.policies !== ''">
-                  <a
-                    href="{{ generalSettings?.policies }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "policies-and-procedures" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.policies }}" class="footer__link disclaimer-reg color-gray">{{
+                    "policies-and-procedures" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.income_disclaimer !== ''">
-                  <a
-                    href="{{ generalSettings?.income_disclaimer }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "income-disclaimer" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.income_disclaimer }}" class="footer__link disclaimer-reg color-gray">{{
+                    "income-disclaimer" | translate }}</a>
                 </li>
               </ul>
             </figure>
@@ -79,80 +68,43 @@
           <div class="accordion footer__nav-item-m" id="accordionExample">
             <div>
               <div class="" id="headingOne">
-                <p
-                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
-                  data-toggle="collapse"
-                  data-target="#collapseOne"
-                  aria-expanded="false"
-                  aria-controls="collapseOne"
-                  role="button"
-                >
+                <p class="mb-0 disclaimer-bold color-white-dsrk expend-icon" data-toggle="collapse"
+                  data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" role="button">
                   {{ "company" | translate }}
                 </p>
               </div>
 
-              <div
-                id="collapseOne"
-                class="collapse"
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample"
-              >
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <ul class="footer__links-list-m">
-                  <li *ngIf="selectedCountry === 'US'">
-                    <a
-                      routerLink="about"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "about" | translate }}</a
-                    >
+                  <li *ngIf="selectedCountry === 'US' || selectedCountry === 'CA'">
+                    <a routerLink="about" class="footer__link disclaimer-reg color-gray">{{ "about" | translate }}</a>
                   </li>
-                  <li>
-                    <a
-                      routerLink="team"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "team" | translate }}</a
-                    >
+                  <li *ngIf="selectedCountry === 'US' || selectedCountry === 'CA'">
+                    <a routerLink="team" class="footer__link disclaimer-reg color-gray">{{ "team" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.shipping_policy !== ''">
-                    <a
-                      href="{{ generalSettings?.shipping_policy }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "shipping-policy" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.shipping_policy }}" class="footer__link disclaimer-reg color-gray">{{
+                      "shipping-policy" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.refund_policy !== ''">
-                    <a
-                      href="{{ generalSettings?.refund_policy }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "refund-policy" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.refund_policy }}" class="footer__link disclaimer-reg color-gray">{{
+                      "refund-policy" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.privacy !== ''">
-                    <a
-                      href="{{ generalSettings?.privacy }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "privacy-policy" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.privacy }}" class="footer__link disclaimer-reg color-gray">{{
+                      "privacy-policy" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.terms !== ''">
-                    <a
-                      href="{{ generalSettings?.terms }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "terms" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.terms }}" class="footer__link disclaimer-reg color-gray">{{ "terms" |
+                      translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.policies !== ''">
-                    <a
-                      href="{{ generalSettings?.policies }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "policies-and-procedures" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.policies }}" class="footer__link disclaimer-reg color-gray">{{
+                      "policies-and-procedures" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.income_disclaimer !== ''">
-                    <a
-                      href="{{ generalSettings?.income_disclaimer }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "income-disclaimer" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.income_disclaimer }}" class="footer__link disclaimer-reg color-gray">{{
+                      "income-disclaimer" | translate }}</a>
                   </li>
                 </ul>
               </div>
@@ -162,183 +114,110 @@
           <div class="accordion footer__nav-item-m" id="accordionExample1">
             <div>
               <div class="" id="headingTwo">
-                <p
-                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
-                  data-toggle="collapse"
-                  data-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                  role="button"
-                >
+                <p class="mb-0 disclaimer-bold color-white-dsrk expend-icon" data-toggle="collapse"
+                  data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" role="button">
                   {{ "resources" | translate }}
                 </p>
               </div>
 
-              <div
-                id="collapseTwo"
-                class="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionExample1"
-              >
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample1">
                 <ul class="footer__links-list-m">
                   <li *ngIf="generalSettings?.help_center !== ''">
-                    <a
-                      href="{{ generalSettings?.help_center }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "help-center" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.help_center }}" class="footer__link disclaimer-reg color-gray">{{
+                      "help-center" | translate }}</a>
                   </li>
-                  <li *ngIf="generalSettings?.cloud_url !== ''">
-                    <a
-                      href="{{ generalSettings?.cloud_url }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "cloud-login" | translate }}</a
-                    >
+                  <!-- <li *ngIf="generalSettings?.cloud_url !== ''">
+                    <a href="{{ generalSettings?.cloud_url }}" class="footer__link disclaimer-reg color-gray">{{
+                      "cloud-login" | translate }}</a>
+                  </li> -->
+                  <li *ngIf="cloudUrl !== ''">
+                    <a href="{{ cloudUrl }}" class="footer__link disclaimer-reg color-gray">{{
+                      "cloud-login" | translate }}</a>
                   </li>
                   <li (click)="onClickPromoter()">
                     <a class="footer__link disclaimer-reg color-gray">{{
                       "become-a-promoter" | translate
-                    }}</a>
+                      }}</a>
                   </li>
                   <li (click)="onClickBlog()" *ngIf="selectedCountry === 'US'">
                     <a class="footer__link disclaimer-reg color-gray">{{
                       "blog" | translate
-                    }}</a>
+                      }}</a>
                   </li>
-                  <li
-                    (click)="onClickResearch()"
-                    *ngIf="selectedCountry === 'US'"
-                  >
+                  <li (click)="onClickResearch()" *ngIf="selectedCountry === 'US'">
                     <a class="footer__link disclaimer-reg color-gray">{{
                       "research" | translate
-                    }}</a>
+                      }}</a>
                   </li>
                   <li (click)="onClickPress()" *ngIf="selectedCountry === 'US'">
                     <a class="footer__link disclaimer-reg color-gray">{{
                       "in-the-press" | translate
-                    }}</a>
+                      }}</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div
-            class="accordion footer__nav-item-m"
-            id="accordionExample2"
-            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
-          >
+          <div class="accordion footer__nav-item-m" id="accordionExample2"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')">
             <div>
               <div class="" id="headingThree">
-                <p
-                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
-                  data-toggle="collapse"
-                  data-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                  role="button"
-                >
+                <p class="mb-0 disclaimer-bold color-white-dsrk expend-icon" data-toggle="collapse"
+                  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" role="button">
                   {{ "apps" | translate }}
                 </p>
               </div>
 
-              <div
-                id="collapseThree"
-                class="collapse"
-                aria-labelledby="headingThree"
-                data-parent="#accordionExample1"
-              >
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample1">
                 <ul class="footer__links-list-m">
-                  <li>
-                    <a
-                      href="http://pruvitnow.com/pulse"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "pruvit-pulse" | translate }}</a
-                    >
+                  <li *ngIf="selectedCountry !== 'JP'">
+                    <a href="http://pruvitnow.com/pulse" class="footer__link disclaimer-reg color-gray">{{
+                      "pruvit-pulse" | translate }}</a>
                   </li>
-                  <li>
-                    <a
-                      href="https://pruvitnow.com/ped-app"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "ped-pruviteveryday" | translate }}</a
-                    >
+                  <li *ngIf="selectedCountry !== 'JP'">
+                    <a href="https://pruvitnow.com/ped-app" class="footer__link disclaimer-reg color-gray">{{
+                      "ped-pruviteveryday" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.pruvit_tv !== ''">
-                    <a
-                      href="{{ generalSettings?.pruvit_tv }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      >{{ "pruvit-tv" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.pruvit_tv }}" class="footer__link disclaimer-reg color-gray">{{
+                      "pruvit-tv" | translate }}</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div
-            class="accordion footer__nav-item-m"
-            id="accordionExample3"
-            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
-          >
+          <div class="accordion footer__nav-item-m" id="accordionExample3"
+            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')">
             <div>
               <div class="" id="headingFour">
-                <p
-                  class="mb-0 disclaimer-bold color-white-dsrk expend-icon"
-                  data-toggle="collapse"
-                  data-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
-                  role="button"
-                >
+                <p class="mb-0 disclaimer-bold color-white-dsrk expend-icon" data-toggle="collapse"
+                  data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" role="button">
                   {{ "follow" | translate }}
                 </p>
               </div>
-              <div
-                id="collapseFour"
-                class="collapse"
-                aria-labelledby="headingFour"
-                data-parent="#accordionExample3"
-              >
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample3">
                 <ul class="footer__links-list-m">
                   <li *ngIf="generalSettings?.facebook !== ''">
-                    <a
-                      href="{{ generalSettings?.facebook }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      ><i class="fab fa-facebook-f"></i
-                      >{{ "facebook" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.facebook }}" class="footer__link disclaimer-reg color-gray"><i
+                        class="fab fa-facebook-f"></i>{{ "facebook" | translate }}</a>
                   </li>
 
                   <li *ngIf="generalSettings?.twitter !== ''">
-                    <a
-                      href="{{ generalSettings?.twitter }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      ><i class="fab fa-twitter"></i
-                      >{{ "twitter" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.twitter }}" class="footer__link disclaimer-reg color-gray"><i
+                        class="fab fa-twitter"></i>{{ "twitter" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.instagram !== ''">
-                    <a
-                      href="{{ generalSettings?.instagram }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      ><i class="fab fa-instagram"></i
-                      >{{ "instagram" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.instagram }}" class="footer__link disclaimer-reg color-gray"><i
+                        class="fab fa-instagram"></i>{{ "instagram" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.youtube !== ''">
-                    <a
-                      href="{{ generalSettings?.youtube }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      ><i class="fab fa-youtube"></i
-                      >{{ "youtube" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.youtube }}" class="footer__link disclaimer-reg color-gray"><i
+                        class="fab fa-youtube"></i>{{ "youtube" | translate }}</a>
                   </li>
                   <li *ngIf="generalSettings?.tiktok !== ''">
-                    <a
-                      href="{{ generalSettings?.tiktok }}"
-                      class="footer__link disclaimer-reg color-gray"
-                      ><i class="fab fa-tiktok"></i
-                      >{{ "tiktok" | translate }}</a
-                    >
+                    <a href="{{ generalSettings?.tiktok }}" class="footer__link disclaimer-reg color-gray"><i
+                        class="fab fa-tiktok"></i>{{ "tiktok" | translate }}</a>
                   </li>
                 </ul>
               </div>
@@ -353,241 +232,186 @@
               </p>
               <ul class="footer__links-list">
                 <li *ngIf="generalSettings?.help_center !== ''">
-                  <a
-                    href="{{ generalSettings?.help_center }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "help-center" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.help_center }}" class="footer__link disclaimer-reg color-gray">{{
+                    "help-center" | translate }}</a>
                 </li>
-                <li *ngIf="generalSettings?.cloud_url !== ''">
-                  <a
-                    href="{{ generalSettings?.cloud_url }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "cloud-login" | translate }}</a
-                  >
+                <!-- <li *ngIf="generalSettings?.cloud_url !== ''">
+                  <a href="{{ generalSettings?.cloud_url }}" class="footer__link disclaimer-reg color-gray">{{
+                    "cloud-login" | translate }}</a>
+                </li> -->
+                <li *ngIf="cloudUrl !== ''">
+                  <a href="{{ cloudUrl }}" class="footer__link disclaimer-reg color-gray">{{
+                    "cloud-login" | translate }}</a>
                 </li>
                 <li (click)="onClickPromoter()">
                   <a class="footer__link disclaimer-reg color-gray">{{
                     "become-a-promoter" | translate
-                  }}</a>
+                    }}</a>
                 </li>
                 <li (click)="onClickBlog()" *ngIf="selectedCountry === 'US'">
                   <a class="footer__link disclaimer-reg color-gray">{{
                     "blog" | translate
-                  }}</a>
+                    }}</a>
                 </li>
-                <li
-                  (click)="onClickResearch()"
-                  *ngIf="selectedCountry === 'US'"
-                >
+                <li (click)="onClickResearch()" *ngIf="selectedCountry === 'US'">
                   <a class="footer__link disclaimer-reg color-gray">{{
                     "research" | translate
-                  }}</a>
+                    }}</a>
                 </li>
                 <li (click)="onClickPress()" *ngIf="selectedCountry === 'US'">
                   <a class="footer__link disclaimer-reg color-gray">{{
                     "in-the-press" | translate
-                  }}</a>
+                    }}</a>
                 </li>
               </ul>
             </figure>
           </div>
 
-          <div
-            class="footer__nav-item footer__nav-item-d"
-            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
-          >
+          <div class="footer__nav-item footer__nav-item-d" *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')">
             <figure class="footer__links">
               <p class="disclaimer-bold color-white-dsrk">
                 {{ "apps" | translate }}
               </p>
               <ul class="footer__links-list">
-                <li>
-                  <a
-                    href="http://pruvitnow.com/pulse"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "pruvit-pulse" | translate }}</a
-                  >
+                <li *ngIf="selectedCountry !== 'JP'">
+                  <a href="http://pruvitnow.com/pulse" class="footer__link disclaimer-reg color-gray">{{ "pruvit-pulse"
+                    | translate }}</a>
                 </li>
-                <li>
-                  <a
-                    href="https://pruvitnow.com/ped-app"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "ped-pruviteveryday" | translate }}</a
-                  >
+                <li *ngIf="selectedCountry !== 'JP'">
+                  <a href="https://pruvitnow.com/ped-app" class="footer__link disclaimer-reg color-gray">{{
+                    "ped-pruviteveryday" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.pruvit_tv !== ''">
-                  <a
-                    href="{{ generalSettings?.pruvit_tv }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    >{{ "pruvit-tv" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.pruvit_tv }}" class="footer__link disclaimer-reg color-gray">{{
+                    "pruvit-tv" | translate }}</a>
                 </li>
               </ul>
             </figure>
           </div>
 
-          <div
-            class="footer__nav-item footer__nav-item-d"
-            *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')"
-          >
+          <div class="footer__nav-item footer__nav-item-d" *ngIf="!(isEUCountryExceptGB || selectedCountry === 'GB')">
             <figure class="footer__links">
               <p class="disclaimer-bold color-white-dsrk">
                 {{ "follow" | translate }}
               </p>
               <ul class="footer__links-list">
                 <li *ngIf="generalSettings?.facebook !== ''">
-                  <a
-                    href="{{ generalSettings?.facebook }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    ><i class="fab fa-facebook-f"></i
-                    >{{ "facebook" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.facebook }}" class="footer__link disclaimer-reg color-gray"><i
+                      class="fab fa-facebook-f"></i>{{ "facebook" | translate }}</a>
                 </li>
 
                 <li *ngIf="generalSettings?.twitter !== ''">
-                  <a
-                    href="{{ generalSettings?.twitter }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    ><i class="fab fa-twitter"></i
-                    >{{ "twitter" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.twitter }}" class="footer__link disclaimer-reg color-gray"><i
+                      class="fab fa-twitter"></i>{{ "twitter" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.instagram !== ''">
-                  <a
-                    href="{{ generalSettings?.instagram }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    ><i class="fab fa-instagram"></i
-                    >{{ "instagram" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.instagram }}" class="footer__link disclaimer-reg color-gray"><i
+                      class="fab fa-instagram"></i>{{ "instagram" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.youtube !== ''">
-                  <a
-                    href="{{ generalSettings?.youtube }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    ><i class="fab fa-youtube"></i
-                    >{{ "youtube" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.youtube }}" class="footer__link disclaimer-reg color-gray"><i
+                      class="fab fa-youtube"></i>{{ "youtube" | translate }}</a>
                 </li>
                 <li *ngIf="generalSettings?.tiktok !== ''">
-                  <a
-                    href="{{ generalSettings?.tiktok }}"
-                    class="footer__link disclaimer-reg color-gray"
-                    ><i class="fab fa-tiktok"></i>{{ "tiktok" | translate }}</a
-                  >
+                  <a href="{{ generalSettings?.tiktok }}" class="footer__link disclaimer-reg color-gray"><i
+                      class="fab fa-tiktok"></i>{{ "tiktok" | translate }}</a>
                 </li>
               </ul>
             </figure>
           </div>
           <div class="footer__nav-item payments-nav">
             <figure class="footer__links text-right">
-              <p
-                class="disclaimer-bold color-white-dsrk footer__payments-title"
-              >
+              <p class="disclaimer-bold color-white-dsrk footer__payments-title">
                 🔒 {{ "secure-payments" | translate }}
               </p>
               <div class="footer__payments">
                 <p class="verified-trust-logo">
                   <a
-                    href="https://seal.godaddy.com/verifySeal?sealID=3yKVEmpS4DcxZvCif5EIPMWgq9VtV87T8i1xgMwbHkti2VZC9xb3wDT52JZM"
-                    ><img
-                      src="assets/images/verified-and-secured-logo.svg"
-                      alt="verified"
-                      class="img-fluid footer__verified"
-                  /></a>
-                  <a
-                    href="https://sealserver.trustwave.com/cert.php?customerId=89f7b095117b4cc193bafffd7d000c39"
-                  >
-                    <img
-                      src="assets/images/secure-trust-seal.png"
-                      alt="Trust logo"
-                      class="img-fluid secure-trust"
-                    />
+                    href="https://seal.godaddy.com/verifySeal?sealID=3yKVEmpS4DcxZvCif5EIPMWgq9VtV87T8i1xgMwbHkti2VZC9xb3wDT52JZM"><img
+                      src="assets/images/verified-and-secured-logo.svg" alt="verified"
+                      class="img-fluid footer__verified" /></a>
+                  <a href="https://sealserver.trustwave.com/cert.php?customerId=89f7b095117b4cc193bafffd7d000c39">
+                    <img src="assets/images/secure-trust-seal.png" alt="Trust logo" class="img-fluid secure-trust" />
                   </a>
                 </p>
 
-                <ul
-                  class="footer__payments-icons"
-                  [class.icons4]="selectedCountry !== 'MX'"
-                >
+                <ul class="footer__payments-icons" [class.icons4]="selectedCountry !== 'MX'">
                   <li>
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/visa.png"
-                        alt="visa"
-                        class="img-fluid"
-                    /></a>
+                    <a class="footer__payments-img"><img src="assets/images/visa.png" alt="visa"
+                        class="img-fluid" /></a>
                   </li>
                   <li>
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/mastercard.png"
-                        alt="mastercard"
-                        class="img-fluid"
-                    /></a>
+                    <a class="footer__payments-img"><img src="assets/images/mastercard.png" alt="mastercard"
+                        class="img-fluid" /></a>
                   </li>
                   <li>
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/americanexpress.png"
-                        alt="americanexpress"
-                        class="img-fluid"
-                    /></a>
+                    <a class="footer__payments-img"><img src="assets/images/americanexpress.png" alt="americanexpress"
+                        class="img-fluid" /></a>
                   </li>
                   <li>
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/PayPal.png"
-                        alt="paypal"
-                        class="img-fluid"
-                    /></a>
+                    <a class="footer__payments-img"><img src="assets/images/PayPal.png" alt="paypal"
+                        class="img-fluid" /></a>
                   </li>
                   <li *ngIf="selectedCountry === 'MX'">
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/oxxo.png"
-                        alt="oxxo"
-                        class="img-fluid"
-                    /></a>
+                    <a class="footer__payments-img"><img src="assets/images/oxxo.png" alt="oxxo"
+                        class="img-fluid" /></a>
                   </li>
-                  <li
-                    *ngIf="selectedCountry === 'CA' || selectedCountry === 'US'"
-                  >
-                    <a class="footer__payments-img"
-                      ><img
-                        src="assets/images/sezzle-logo.png"
-                        alt="sezzle"
-                        class="img-fluid"
-                    /></a>
+                  <li *ngIf="selectedCountry === 'CA' || selectedCountry === 'US'">
+                    <a class="footer__payments-img"><img src="assets/images/sezzle-logo.png" alt="sezzle"
+                        class="img-fluid" /></a>
                   </li>
                 </ul>
               </div>
             </figure>
 
-            <p
-              class="copyright-text footer__bottom-copy color-gray"
-              *ngIf="selectedCountry === 'AU'; else nz"
-            >
+            <ng-container *ngIf="isEUCountry">
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'IT'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }} {{ "pruvit-it-all-rights-reserved" | translate }}
+              </p>
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'GB'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "Ketones EU, LLC. All rights reserved." }}
+              </p>
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry !== 'IT' && selectedCountry !== 'GB'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }} {{ "pruvit-eu-all-rights-reserved" | translate }}
+              </p>
+            </ng-container>
+
+            <ng-container *ngIf="!isEUCountry">
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'AU'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "pruvit-au-all-rights-reserved" | translate }}
+              </p>
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'NZ'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "pruvit-nz-all-rights-reserved" | translate }}
+              </p>
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry !== 'AU' && selectedCountry !== 'NZ'">
+                {{ "copyright" | translate }} © {{ getCurrentYear() }}
+                {{ "pruvit-all-rights-reserved" | translate }}
+              </p>
+            </ng-container>
+
+            <p class="copyright-text footer__bottom-copy mt-1 color-gray" *ngIf="selectedCountry === 'TW'">
+              {{ "company-name-pruvit-ventures-inc-taiwan-branch" | translate }}<br />
+              {{ "tax-id" | translate }}: 59048352
+            </p>
+
+            <!-- <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'AU'; else nz">
               {{ "copyright" | translate }} © {{ getCurrentYear() }}
               {{ "Ketones AU, LLC. All rights reserved." }}
             </p>
             <ng-template #nz>
-              <p
-                class="copyright-text footer__bottom-copy color-gray"
-                *ngIf="selectedCountry === 'NZ'; else eu"
-              >
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="selectedCountry === 'NZ'; else eu">
                 {{ "copyright" | translate }} © {{ getCurrentYear() }}
                 {{ "Ketones NZ, LLC. All rights reserved." }}
               </p>
             </ng-template>
             <ng-template #eu>
-              <p
-                class="copyright-text footer__bottom-copy color-gray"
-                *ngIf="
+              <p class="copyright-text footer__bottom-copy color-gray" *ngIf="
                   isEUCountryExceptGB || selectedCountry === 'GB';
                   else default
-                "
-              >
+                ">
                 {{ "copyright" | translate }} © {{ getCurrentYear() }}
                 {{ "Ketones EU, LLC. All rights reserved." }}
               </p>
@@ -598,7 +422,13 @@
 
                 {{ "pruvit-all-rights-reserved" | translate }}
               </p>
-            </ng-template>
+
+              <p class="copyright-text footer__bottom-copy mt-1 color-gray" *ngIf="selectedCountry === 'TW'">
+                {{ "company-name-pruvit-ventures-inc-taiwan-branch" | translate }}<br />
+                {{ "tax-id" | translate }}: 59048352
+              </p>
+
+            </ng-template> -->
           </div>
         </div>
       </div>
@@ -620,3 +450,368 @@
     </div>
   </div>
 </footer>
+
+<ng-container *ngIf="tenant === 'ladyboss'">
+  <footer *ngIf="ladybossFooter === 'minimal'" class="footer footer-dashboard color-black-bg mt-5">
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p class="copyright-text color-gray text-center">
+              Lady Boss Holdings LLC dba LadyBoss • 3443 West BAVARIA Street
+              EAGLE, ID 83616 •
+              <a href="mailto:help@ladyboss.com">help@ladyboss.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === '5daycakechallenge'" class="ladyBoss-footer">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <p class="text-center footer-logo">
+            <img src="assets/ladyboss/images/footer-invite-log.webp" alt="ladyBoss Footer Logo" class="img-fluid">
+          </p>
+          <h5 class="text-center color-white mail-address"> We're Here For You!
+            <a href="mailto:help@ladyboss.com" class="color-brand">Help@Ladyboss.Com</a>
+          </h5>
+          <p class="text-center p-small color-white llc-text"> LADYBOSS HOLDINGS LLC ©{{ getCurrentYear() }} -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/12188684698253-Lady-Boss-Privacy-Policies">Privacy</a>
+            -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms</a>
+            -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+              &amp; Procedures</a>
+          </p>
+          <p class="text-center p-small mt-5 mb-3 llc-text">
+            <a href="https://ladyboss.com/IDS" target="_blank">Income Disclosure Statement</a>
+          </p>
+          <p class="text-center p-small color-white mxwdt-740">
+            *FDA Disclaimer: These statements have not been evaluated by the Food and Drug Administration. This
+            product is not intended to diagnose, treat, cure, or prevent any disease.
+          </p>
+        </div>
+      </figure>
+    </article>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === 'makecake'" class="ladyBoss-footer">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <p class="text-center footer-logo">
+            <img src="assets/ladyboss/images/footer-invite-log.webp" alt="ladyBoss Footer Logo" class="img-fluid">
+          </p>
+          <h5 class="text-center color-white mail-address"> We're Here For You!
+            <a href="mailto:help@ladyboss.com" class="color-brand">Help@Ladyboss.Com</a>
+          </h5>
+          <p class="text-center p-small color-white llc-text"> LADYBOSS HOLDINGS LLC ©{{ getCurrentYear() }} -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/12188684698253-Lady-Boss-Privacy-Policies">Privacy</a>
+            -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms</a>
+            -
+            <a target="_blank"
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+              &amp; Procedures</a>
+          </p>
+          <p class="text-center p-small mt-5 mb-3 llc-text">
+            <a href="https://ladyboss.com/IDS" target="_blank">Income Disclosure Statement</a>
+          </p>
+          <p class="text-center p-small color-white mxwdt-740">
+            *FDA Disclaimer: These statements have not been evaluated by the Food and Drug Administration. This
+            product is not intended to diagnose, treat, cure, or prevent any disease.
+          </p>
+          <p class="disclaimer-reg text-center color-gray mt-4">
+            LadyBoss income earnings are based solely on the sale of products. Success is dependent upon on the applied
+            commitment, skill and leadership of each participant. Since the <br> Compensation Plan has recently
+            launched, it lacks enough statistical data to prepare reliable income disclosures. Some participants will
+            earn less while others will earn <br> much more. As with all endeavors, hard work and the time you dedicate
+            impacts outcomes. Results may vary due to hard work and determination.
+          </p>
+        </div>
+      </figure>
+    </article>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === 'invite' && !isRussellBrunson" class="ladyBoss-footer">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <p class="text-center footer-logo">
+            <img class="img-fluid" src="assets/ladyboss/images/footer-invite-log.webp" alt="ladyBoss Footer Logo" />
+          </p>
+          <h5 class="text-center color-white mail-address">
+            We're Here For You!
+            <a class="color-brand" href="mailto:help@Ladyboss.Com">Help@Ladyboss.Com</a>
+          </h5>
+          <p class="text-center p-small color-white llc-text">
+            LADYBOSS HOLDINGS LLC ©{{ getCurrentYear() }} -
+            <a href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms</a>
+            -
+            <a
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+              & Procedures</a>
+          </p>
+        </div>
+      </figure>
+    </article>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === 'replay'" class="ladyBoss-footer">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <p class="text-center footer-logo">
+            <img class="img-fluid" src="assets/ladyboss/images/footer-invite-log.webp" alt="ladyBoss Footer Logo" />
+          </p>
+          <h5 class="text-center color-white mail-address">
+            We're Here For You!
+            <a class="color-brand" href="mailto:help@Ladyboss.Com">Help@Ladyboss.Com</a>
+          </h5>
+          <p class="p-small text-center color-white mxw-800 mb-4">
+            LadyBoss income earnings are based solely on the sale of products.
+            As with all endeavors, hard work and the time you dedicate impacts
+            outcomes. Actual earnings will vary significantly. No income
+            guaranteed. Complete earnings disclaimers can be found
+            <a href="https://ladyboss.com/policies" target="_blank"
+              class="color-brand">https://ladyboss.com/policies</a>
+          </p>
+          <p class="text-center p-small color-white llc-text">
+            LADYBOSS HOLDINGS LLC ©{{ getCurrentYear() }} -
+            <a href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms</a>
+            -
+            <a
+              href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+              & Procedures</a>
+          </p>
+        </div>
+      </figure>
+    </article>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === 'invite' && isRussellBrunson" class="ladyBoss-footer personal-invit-footer">
+    <article class="container">
+      <figure class="row">
+        <div class="col-12">
+          <p class="text-center p-small color-gray mb-3">
+            ClickFunnels is a website and funnel builder company that helps
+            existing businesses sell their products and services online. We make
+            no claims or representation that by using ClickFunnels you will earn
+            money or make your money back. This video presentation and the
+            testimonials and are hereby used for educational and exemplary
+            purposes only, they are not intended to incite sales. While they may
+            show real experiences from paying users of ClickFunnels, their
+            business’s results are not typical, and your business’s experience
+            will vary based upon the effort and education of your business’s
+            employees and management, the business model that is implemented,
+            and market forces beyond anyone’s control.
+          </p>
+          <p class="text-center p-small color-gray mb-3">
+            California residents can obtain information about the categories of
+            personal information collected, and the business purposes for which
+            the information is collected, by <a href="#">clicking here.</a>
+          </p>
+
+          <p class="text-center p-small color-gray mb-4">
+            While these testimonials are real, participants were incentivized.
+            These results are not typical and we make no earnings or return on
+            investment claims. Funnel Hacking Secrets is not a business
+            opportunity, it’s a training to help existing business owners.
+          </p>
+          <p class="text-center p-small all-right">
+            Etison LLC - ©2023 - All Rights Reserved | 3443 W Bavaria St Eagle,
+            ID 83616
+          </p>
+          <p class="text-center p-small color-gray">
+            <a href="https://clickfunnels.com/terms">Terms</a> -
+            <a href="https://support.clickfunnels.com/">Support</a> -
+            <a href="https://clickfunnels.com/privacy">Privacy</a> -
+            <a href="https://goto.clickfunnels.com/careers">Careers</a> -
+            <a href="#cookie-preferences">Cookie Preferences</a>
+          </p>
+        </div>
+      </figure>
+    </article>
+  </footer>
+
+  <footer *ngIf="ladybossFooter === 'main'" class="footer color-black-bg">
+    <div class="footer__top border-bottom-2">
+      <div class="container">
+        <div class="footer__nav">
+          <div class="footer__nav-content">
+            <div class="footer__nav-item footer__nav-item-d">
+              <figure class="footer__links">
+                <p class="disclaimer-bold color-white-dsrk">Company</p>
+                <ul class="footer__links-list">
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray" target="_blank"
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11432501062157-LadyBoss-Compensation-Plan">Champion
+                      Rewards</a>
+                  </li>
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray" target="_blank"
+                      href="https://s3content.s3.amazonaws.com/LadyBoss/LadyBoss%20IDS%20and%20additional%20disclaimers.pdf">Income Disclosure</a>
+                  </li>
+                </ul>
+              </figure>
+            </div>
+
+            <div id="accordionExample" class="accordion footer__nav-item-m">
+              <div>
+                <div id="headingOne">
+                  <p data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+                    role="button" class="mb-0 disclaimer-bold color-white-dsrk expend-icon">
+                    Company
+                  </p>
+                </div>
+                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse">
+                  <ul class="footer__links-list-m">
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray" target="_blank"
+                        href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11432501062157-LadyBoss-Compensation-Plan">Champion
+                        Rewards</a>
+                    </li>
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray" target="_blank"
+                      href="https://s3content.s3.amazonaws.com/LadyBoss/LadyBoss%20IDS%20and%20additional%20disclaimers.pdf">Income Disclosure</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer__nav-item footer__nav-item-d">
+              <figure class="footer__links">
+                <p class="disclaimer-bold color-white-dsrk">Policies</p>
+                <ul class="footer__links-list">
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray" href="https://ladyboss3844.zendesk.com/">Help
+                      Center</a>
+                  </li>
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray"
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300574893837-CUSTOMER-REFUND-RETURN-POLICY">Refund
+                      Policy</a>
+                  </li>
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray"
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300601431053-SHIPPING-POLICY">Shipping
+                      Policy</a>
+                  </li>
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray"
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms of
+                      Service</a>
+                  </li>
+                  <li>
+                    <a class="footer__link disclaimer-reg color-gray"
+                      href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+                      & Procedures</a>
+                  </li>
+                </ul>
+              </figure>
+            </div>
+
+            <div id="accordionExample1" class="accordion footer__nav-item-m">
+              <div>
+                <div id="headingTwo">
+                  <p data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                    role="button" class="mb-0 disclaimer-bold color-white-dsrk expend-icon">
+                    Policies
+                  </p>
+                </div>
+                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample1" class="collapse">
+                  <ul class="footer__links-list-m">
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray" href="https://ladyboss3844.zendesk.com/">Help
+                        Center</a>
+                    </li>
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray"
+                        href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300574893837-CUSTOMER-REFUND-RETURN-POLICY">Refund
+                        Policy</a>
+                    </li>
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray"
+                        href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300601431053-SHIPPING-POLICY">Shipping
+                        Policy</a>
+                    </li>
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray"
+                        href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300548017805-TERMS-OF-SERVICE">Terms
+                        of Service</a>
+                    </li>
+                    <li>
+                      <a class="footer__link disclaimer-reg color-gray"
+                        href="https://ladyboss3844.zendesk.com/hc/en-us/articles/11300472189837-Statement-of-Policies-Procedures">Policies
+                        & Procedures</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer__nav-item payments-nav">
+              <figure class="footer__links text-right">
+                <p class="disclaimer-bold color-white-dsrk footer__payments-title">
+                  🔒 Secure Payments
+                </p>
+                <div class="footer__payments">
+                  <p class="verified-trust-logo">
+                    <a
+                      href="https://seal.godaddy.com/verifySeal?sealID=PU1LaCGu92kNIi71KxW9cuDRqsdvbzGcOP90i9vxVRZFYfRzmAu3vbDFvBms">
+                      <img src="assets/images/verified-and-secured-logo.svg" alt="verified"
+                        class="img-fluid footer__verified" />
+                    </a>
+                  </p>
+                  <ul class="footer__payments-icons icons4">
+                    <li>
+                      <a class="footer__payments-img"><img src="assets/images/visa.png" alt="visa"
+                          class="img-fluid" /></a>
+                    </li>
+                    <li>
+                      <a class="footer__payments-img"><img src="assets/images/mastercard.png" alt="mastercard"
+                          class="img-fluid" /></a>
+                    </li>
+                    <li>
+                      <a class="footer__payments-img"><img src="assets/images/americanexpress.png" alt="americanexpress"
+                          class="img-fluid" /></a>
+                    </li>
+                  </ul>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-12 footer__bottom-content color-white">
+            <p class="copyright-text">
+              Lady Boss Holdings LLC © {{ getCurrentYear() }} All rights
+              reserved •
+              <a href="mailto:help@ladyboss.com" class="color-link">help@ladyboss.com</a>
+            </p>
+          </div>
+          <div class="col-sm-6 col-12 footer__bottom-content color-white text-right">
+            <p class="copyright-text">
+              † These statements have not been evaluated by the FDA. This
+              product is not intended to diagnose, treat, cure, or prevent any
+              disease.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</ng-container>

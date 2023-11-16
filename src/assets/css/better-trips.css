@@ -1,5 +1,5 @@
 .better-trips-hero {
-  background-color: #00a1d9;
+  background-color: #10A689;
   padding: 83px 0 0;
   border: none;
 }
@@ -18,15 +18,15 @@
 }
 
 .better-trips-hero .qualify-button {
-  background: #f2d03b;
-  color: #131313;
+  background: #731B2B;
+  color: #fff;
   font-size: 24px;
   line-height: 23px;
   margin-bottom: 40px;
 }
 
 .better-trips-hero .qualify-button:hover {
-  background: #ebc313;
+  background: #8D192E;
 }
 
 .better-trips-hero .qualify-button.next-trip,
@@ -39,6 +39,7 @@
 .better-trips-hero .leaderboard-link,
 .better-trips-packed .leaderboard-link {
   text-decoration: underline;
+  color: #fff;
 }
 
 .better-trips-hero .link-hover:hover {
@@ -49,6 +50,8 @@
   position: relative;
   margin-top: 90px;
   margin-bottom: -310px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .better-trips-hero .trip-video img {
@@ -79,24 +82,27 @@
 }
 
 .better-trips-bahamas {
-  background: #f2d03b;
+  background: #BF6735;
   border: none;
   padding: 310px 0 140px;
 }
 
 .better-trips-bahamas .feb-border {
   background: transparent;
-  border: 1px solid #131313;
+  border: 1px solid #fff;
   border-radius: 24px;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   text-align: center;
   margin: 96px auto 26px;
   padding: 6px 24px 7px;
+  color: #fff;
 }
 
 .better-trips-bahamas h1 {
   font-size: 120px;
   line-height: 120px;
+  color: #fff;
 }
 
 .better-trips-bahamas .atlantis-logo {
@@ -116,7 +122,7 @@
 }
 
 .better-trips-slider {
-  background: #f2d03b;
+  background: #BF6735;
 }
 
 .better-trips-slider .container-fluid {
@@ -148,13 +154,14 @@
 }
 
 .better-trips-you-yes {
-  background: #f2d03b;
+  background: #BF6735;
   padding-top: 100px;
   padding-bottom: 140px;
 }
 
 .better-trips-you-yes h2 {
   margin-bottom: 50px;
+  color: #fff;
 }
 
 .better-trips-you-yes .need-card {
@@ -200,6 +207,8 @@
   position: relative;
   margin-bottom: 80px;
   margin-top: 75px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .better-trips-last .trip-video img {
@@ -345,7 +354,7 @@
 }
 
 .better-trips-packed {
-  background: #00a1d9;
+  background: #10A689;
   padding: 180px 0 220px;
 }
 
@@ -359,8 +368,8 @@
 }
 
 .better-trips-packed .qualify-button {
-  background: #f2d03b;
-  color: #131313;
+  background: #731B2B;
+  color: #fff;
   font-size: 24px;
   line-height: 23px;
   text-decoration: none;
@@ -368,11 +377,15 @@
 }
 
 .better-trips-packed .qualify-button:hover {
-  background: #ebc313;
+  background: #8D192E;
 }
 
 .better-trips-packed .link-hover:hover {
   color: #131313;
+}
+
+.better-trips-you-yes .need-card .need-img svg path {
+  fill: #10A689;
 }
 
 /*---- End of better-trips css ----*/
@@ -484,7 +497,7 @@
   }
 
   .better-trips-last .last-border {
-    max-width: 120px;
+    max-width: 150px;
     margin: 60px auto 20px;
   }
 

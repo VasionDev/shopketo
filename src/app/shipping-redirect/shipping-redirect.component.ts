@@ -120,6 +120,58 @@ export class ShippingRedirectComponent implements OnInit {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360059692491-Shipping-Policy-Romania';
+        } else if (this.selectedCountry.toLowerCase() === 'si') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415762421645-Shipping-Policy-Slovenia';
+        } else if (this.selectedCountry.toLowerCase() === 'sk') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415664144909-Shipping-Policy-Slovakia';
+        } else if (this.selectedCountry.toLowerCase() === 'mt') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415610371853-Shipping-Policy-Malta';
+        } else if (this.selectedCountry.toLowerCase() === 'lu') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415548585997-Shipping-Policy-Luxembourg';
+        } else if (this.selectedCountry.toLowerCase() === 'lt') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415518885261-Shipping-Policy-Lithuania';
+        } else if (this.selectedCountry.toLowerCase() === 'lv') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415453636493-Shipping-Policy-Latvia';
+        } else if (this.selectedCountry.toLowerCase() === 'gr') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415372654477-Shipping-Policy-Greece';
+        } else if (this.selectedCountry.toLowerCase() === 'ee') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415350554765-Shipping-Policy-Estonia';
+        } else if (this.selectedCountry.toLowerCase() === 'dk') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16415327976973-Shipping-Policy-Denmark';
+        } else if (this.selectedCountry.toLowerCase() === 'cz') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16414408436621-Shipping-Policy-Czech-Republic';
+        } else if (this.selectedCountry.toLowerCase() === 'cy') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16414092011021-Shipping-Policy-Cyprus';
+        } else if (this.selectedCountry.toLowerCase() === 'hr') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16414049737869-Shipping-Policy-Croatia';
+        } else if (this.selectedCountry.toLowerCase() === 'bg') {
+          this.isPageFound = true;
+          window.location.href =
+            'https://support.justpruvit.com/hc/en-us/articles/16413922677517-Shipping-Policy-Bulgaria';
         } else {
           this.isPageFound = true;
           window.location.href =

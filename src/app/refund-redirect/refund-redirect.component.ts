@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppDataService } from '../shared/services/app-data.service';
 import { AppSeoService } from '../shared/services/app-seo.service';
+import { isEuropeanCountry } from '../shared/utils/country-list';
 
 @Component({
   selector: 'app-refund-redirect',
@@ -52,11 +53,11 @@ export class RefundRedirectComponent implements OnInit {
         } else if (this.selectedCountry.toLowerCase() === 'nz') {
           // window.location.href =
           //   'https://support.justpruvit.com/hc/en-us/articles/360052118492';
-        } else if (this.selectedCountry.toLowerCase() === 'de') {
+        } else if (isEuropeanCountry(this.selectedCountry.toUpperCase())) {
           this.isPageFound = true;
           window.location.href =
-            'https://support.justpruvit.com/hc/de/articles/360051608992';
-        } else if (this.selectedCountry.toLowerCase() === 'gb') {
+            'https://support.justpruvit.com/hc/articles/360051608992';
+        } /*else if (this.selectedCountry.toLowerCase() === 'gb') {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360051608992';
@@ -112,7 +113,7 @@ export class RefundRedirectComponent implements OnInit {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360051608992';
-        } else {
+        }*/ else {
           this.isPageFound = true;
           window.location.href =
             'https://support.justpruvit.com/hc/en-us/articles/360051608992';

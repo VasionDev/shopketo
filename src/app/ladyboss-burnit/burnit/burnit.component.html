@@ -1,0 +1,67 @@
+<section class="ladyboss-burnit-wrap">
+  <article class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <img class="img-fluid burnit-img" src="assets/ladyboss/images/burnit-logo.png">
+                  <h3 class="text-center color-black">Existing Subscribe &amp; Save Members ONLY!</h3>
+                  <p class="text-center color-black">Enter your details below to access the BURNit Challenge...</p>
+                  <img class="arrowdown-img" src="assets/ladyboss/images/arrows-down-icon.svg" />
+                  <form [formGroup]="leadForm" (ngSubmit)="submitLeadForm()">
+                    <div class="form-group">
+                      <input 
+                        type="text" 
+                        placeholder="Your first name..." 
+                        formControlName="firstName"
+                        [class.is-invalid]="firstNameControl.errors && firstNameControl.touched"
+                        class="form-control p-small">
+                      <small 
+                        *ngIf="firstNameControl.errors?.['required']"
+                        class="invalid-feedback">
+                        Please enter your first name
+                      </small>
+                    </div>
+                    <div class="form-group">
+                      <input 
+                      type="text" 
+                      placeholder="Your last name..." 
+                      formControlName="lastName"
+                      [class.is-invalid]="lastNameControl.errors && lastNameControl.touched"
+                      class="form-control p-small">
+                      <small 
+                        *ngIf="lastNameControl.errors?.['required']"
+                        class="invalid-feedback">
+                        Please enter your last name
+                      </small>
+                    </div>
+                    <div class="form-group">
+                      <input 
+                        type="text" 
+                        placeholder="Your email address..." 
+                        class="form-control p-small"
+                        formControlName="email" 
+                        [class.is-invalid]="emailControl.errors && emailControl.touched"
+                      >
+                      <small
+                        *ngIf="emailControl.errors?.['required']"
+                        class="invalid-feedback"
+                        >Please enter your Email</small
+                      >
+                      <small
+                        *ngIf="emailControl.errors?.['pattern']"
+                        class="invalid-feedback"
+                        >Please enter a valid Email address</small
+                      >
+                    </div>
+
+                    <button type="submit" [disabled]="leadForm.invalid || isLoading" class="button button-primary unlock-btn">Unlock Access <i class="fa fa-spinner fa-spin ml-2" *ngIf="isLoading"></i></button>
+                    <p *ngIf="error" class="text-danger text-center mt-2">
+                      {{ error }}
+                    </p>
+                  </form>
+                  <p class="p-small text-center secure-text"><i class="fa-solid fa-lock"></i> Your information is secure</p>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>

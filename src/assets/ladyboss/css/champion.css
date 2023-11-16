@@ -1,0 +1,389 @@
+.ladyboss-earnit-reg-header-bg p,
+.ladyboss-earnit-reg-championwrap .right-col p,
+.ladyboss-earnit-reg-hereswrap .card .today-text,
+.ladyboss-earnit-reg-hereswrap .card .when-text,
+.ladyboss-earnit-reg-becomechampion p,
+.ladyboss-earnit-reg-becomechampion h4,
+.ladyboss-earnit-reg-becomechampion .package-choose .card h2,
+.ladyboss-earnit-reg-becomechampion .package-choose .card .button,
+.ladyboss-earnit-reg-hereswrap .card .cham-list ul li {
+  font-family: 'Poppins', sans-serif;
+}
+
+.ladyboss-earnit-reg-header {
+  padding: 14px 0 20px;
+}
+
+.ladyboss-earnit-reg-header .champion_logo {
+  max-width: 327px;
+  height: 34px;
+}
+
+.ladyboss-earnit-reg-header .button-large {
+  font-family: "bebas-neue-pro";
+  font-size: 22px;
+  letter-spacing: .08rem;
+  max-width: 316px;
+  height: 45px;
+  padding: 12px 15px;
+}
+
+.ladyboss-earnit-reg-header-bg {
+  background: url(https://statics.myclickfunnels.com/image/357272/file/8f1f23f995402a294adca6d8299409c4.png), #ffffff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 30px 0;
+}
+
+.ladyboss-earnit-reg-header-bg h4 {
+  font-family: "bebas-neue-pro";
+  font-size: 38px;
+  letter-spacing: 0;
+}
+
+.ladyboss-earnit-reg-header-bg p {
+  font-size: 22px;
+  letter-spacing: 0;
+  margin-top: 15px;
+}
+
+.ladyboss-earnit-reg-championwrap {
+  background: url(https://statics.myclickfunnels.com/image/559139/file/29de2207a73bdc575d75e447f397fbe7.png), rgb(252, 229, 242);
+  background-size: 100%;
+  background-repeat: repeat-y;
+  padding: 21px 0 32px;
+}
+
+.ladyboss-earnit-reg-championwrap .right-col .title {
+  font-family: "bebas-neue-pro";
+  font-size: 42px;
+  line-height: 120%;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: rgb(0, 0, 0);
+  margin: 15px 0 0;
+  max-width: 600px;
+}
+
+.ladyboss-earnit-reg-championwrap .right-col .ladyboss-logo {
+  max-width: 550px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ladyboss-earnit-reg-championwrap .right-col h1 {
+  line-height: 102%;
+  letter-spacing: 0.71rem;
+  padding-bottom: 12px;
+}
+
+.ladyboss-earnit-reg-championwrap .right-col .details-text {
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0;
+  max-width: 600px;
+  text-align: left;
+  margin: 20px 0;
+}
+
+.ladyboss-earnit-reg-championwrap .right-col .button-large {
+  font-family: "bebas-neue-pro";
+  font-size: 35px;
+  letter-spacing: 0;
+  font-weight: 400;
+  max-width: 467px;
+  height: auto;
+
+}
+
+.ladyboss-earnit-reg-championwrap .border-bottom-pink {
+  border-bottom: 1px solid rgb(238, 26, 125);
+}
+
+.ladyboss-earnit-reg-championwrap .border-bottom-pink .ldy-logo {
+  margin-bottom: -28px;
+}
+
+.ladyboss-earnit-reg-hereswrap .container {
+  max-width: 970px;
+  width: 100%;
+}
+
+.ladyboss-earnit-reg-hereswrap .card {
+  background: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%), url(https://statics.myclickfunnels.com/image/559658/file/a91d1b695afe9149748450fbe4ea3095.png), rgb(255, 255, 255);
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.17);
+  padding: 50px 40px 30px;
+  margin-top: -48px;
+}
+
+.ladyboss-earnit-reg-hereswrap .card h2 {
+  font-size: 64px;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .today-text {
+  font-size: 34px;
+  line-height: 120%;
+  font-weight: 800;
+  letter-spacing: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .cham-img {
+  max-width: 872px;
+  width: 100%;
+  margin: 0 auto
+}
+
+.ladyboss-earnit-reg-hereswrap .card .cham-list ul {
+  list-style: none;
+  max-width: fit-content;
+  margin: 25px auto;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .cham-list ul li {
+  position: relative;
+  font-size: 22px;
+  line-height: 130%;
+  letter-spacing: 0;
+  padding-left: 36px;
+  margin-bottom: 12px;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .cham-list ul li:before {
+  content: "\f0da";
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  left: 7px;
+  color: #ee1a7d;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .color-green {
+  color: rgb(0, 177, 127) !important;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .nor-price {
+  font-family: "bebas-neue-pro";
+  font-size: 40px;
+  letter-spacing: .04rem;
+  line-height: 130%;
+  margin-top: 12px;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .today-free {
+  font-size: 107px;
+  line-height: 110%;
+  letter-spacing: .04rem;
+  font-weight: 400;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .when-text {
+  font-size: 28px;
+  line-height: 120%;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.ladyboss-earnit-reg-hereswrap .card .bonus-img {
+  padding-left: 29px;
+}
+
+.ladyboss-earnit-reg-becomechampion h1 {
+  font-size: 64px;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.ladyboss-earnit-reg-becomechampion p {
+  font-size: 22px;
+  line-height: 140%;
+}
+
+.ladyboss-earnit-reg-becomechampion h4 {
+  font-size: 33px;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
+  line-height: 130%;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card {
+  border-radius: 8px;
+  border: 4px solid #f0006f;
+  background-color: #fef1f6;
+  padding: 35px 22px 35px;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card.box-shaw {
+  box-shadow: 0px 10px 29px 3px rgba(0, 0, 0, 0.22);
+}
+
+.ladyboss-earnit-reg-becomechampion {
+  padding: 80px 0 60px;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose {
+  padding: 23px 16px 0;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card h3 {
+  letter-spacing: .04rem;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card .img-fluid {
+  height: 220px;
+  margin: 30px auto 17px;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card h2 {
+  font-size: 22px;
+  line-height: 130%;
+  font-weight: 800;
+  letter-spacing: .04rem;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card .button {
+  padding: 24px 25px;
+  font-size: 24px;
+  height: auto;
+  height: initial;
+  letter-spacing: 0;
+  text-transform: none;
+  text-transform: initial;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: 20px auto 0;
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card .button.button-green {
+  background: rgb(69, 170, 68);
+}
+
+.ladyboss-earnit-reg-becomechampion .package-choose .card .button.button-green:hover {
+  background: rgb(42, 121, 41);
+}
+
+
+@media (max-width: 767px) {
+  .ladyboss-earnit-reg-header .champion_logo {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .ladyboss-earnit-reg-header-bg h4 {
+    font-size: 25px;
+    line-height: 120%;
+  }
+
+  .ladyboss-earnit-reg-championwrap {
+    background: rgb(252, 229, 242);
+    padding: 32px 12px;
+  }
+
+  .ladyboss-earnit-reg-header-bg p {
+    font-size: 20px;
+  }
+
+  .ladyboss-earnit-reg-championwrap .row {
+    text-align: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ladyboss-earnit-reg-championwrap .right-col .title {
+    font-size: 23px;
+    line-height: 140%;
+    margin-bottom: 10px;
+  }
+
+  .ladyboss-earnit-reg-championwrap .right-col h1 {
+    font-size: 50px;
+    line-height: 140%;
+    letter-spacing: 0;
+  }
+
+  .ladyboss-earnit-reg-championwrap .right-col .ladyboss-logo {
+    max-width: 328px;
+    margin-top: 10px;
+  }
+
+  .ladyboss-earnit-reg-championwrap .right-col p {
+    font-size: 16px;
+  }
+
+  .ladyboss-earnit-reg-championwrap .right-col .button-large {
+    font-size: 20px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card {
+    padding: 40px 20px;
+    margin-top: -33px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card h2 {
+    font-size: 32px;
+    line-height: 100%;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .col-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .today-text {
+    font-size: 18px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .cham-list ul {
+    text-align: left;
+    padding: 0 16px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .cham-list ul li {
+    font-size: 16px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .nor-price {
+    font-size: 28px;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .bonus-img {
+    padding-left: 0;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .today-free {
+    font-size: 60px;
+  }
+
+  .ladyboss-earnit-reg-becomechampion .package-choose {
+    padding: 23px 16px 0;
+  }
+
+  .ladyboss-earnit-reg-hereswrap .card .when-text {
+    font-size: 16px;
+  }
+
+  .ladyboss-earnit-reg-becomechampion h1 {
+    font-size: 33px;
+  }
+
+  .ladyboss-earnit-reg-becomechampion p {
+    font-size: 16px;
+  }
+
+  .ladyboss-earnit-reg-becomechampion h4 {
+    font-size: 22px;
+  }
+
+  .ladyboss-earnit-reg-becomechampion .package-choose .card {
+    margin-bottom: 30px;
+  }
+}

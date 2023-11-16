@@ -1,6 +1,7 @@
 import { ProductAccess } from 'src/app/shared/models/product-access.model';
 import { ProductsUtilityService } from '../services/products-utility.service';
 import { ProductServingObj } from './product-serving.model';
+import { environment } from 'src/environments/environment';
 
 export class ProductVariationBase {
   constructor(
@@ -23,10 +24,14 @@ export class ProductVariationBase {
     public discountPercent: number,
     public smartshipDiscountPrice: number,
     public smartshipDiscountPercent: number,
+    public regularSSDiscountPercent: number,
+    public regularSSDiscountPrice: number,
     public finalPrice: number,
     public hasDiscount: boolean,
     public accessLevels: ProductAccess,
     public customUsers: number[],
+    public ssDiscountAccessLevels: ProductAccess,
+    public ssDiscountCustomUsers: number[],
     public isOutOfStock?: boolean,
     public bonusValue?: number,
     public variationImage?: string,
@@ -69,6 +74,13 @@ export class ProductVariation extends ProductVariationBase {
       varItem.hasOwnProperty('availability_for') ? varItem.availability_for : ''
     );
 
+    const ssDiscountCustomUsers = varItem.hasOwnProperty('custom_users_list')
+    ? varItem.custom_users_list.map((user: string) => +user[0])
+    : [];
+  const ssDiscountAccessLevels = productUtilityService.getAccessLevels(
+    varItem.hasOwnProperty('availability_for') ? varItem.availability_for : ''
+  );
+
     const finalPrice = 0;
     const hasDiscount = false;
 
@@ -87,6 +99,9 @@ export class ProductVariation extends ProductVariationBase {
 
     const initialDiscountPercent = 0;
     const initialSmartshipDiscountPercent = 0;
+
+    const initialSSDiscountPercent = 0;
+    const initialSSDiscountPrice = 0;
 
     const initialOnetimeAndSmartshipDifference = 0;
 
@@ -117,10 +132,14 @@ export class ProductVariation extends ProductVariationBase {
       initialDiscountPercent,
       initialSmartshipDiscountPrice,
       initialSmartshipDiscountPercent,
+      initialSSDiscountPrice,
+      initialSSDiscountPercent,
       finalPrice,
       hasDiscount,
       accessLevels,
       customUsers,
+      ssDiscountAccessLevels,
+      ssDiscountCustomUsers,
       initialIsOutOfStock,
       bonusValue,
       variationImage,
@@ -137,14 +156,21 @@ export class ProductVariation extends ProductVariationBase {
       discountPercent,
       smartshipDiscountPrice,
       smartshipDiscountPercent,
+      regularSSDiscountPercent,
+      regularSSDiscountPrice,
       onetimeAndSmartshipDifference,
       isOutOfStock,
+      modifiedAccessLevels,
+      ssAccessLevels
     } = this.getProductPricesAndSkus(
       variationResponse,
       attribute1,
       attribute2,
-      variationsArrayResponse
+      variationsArrayResponse,
+      productUtilityService
     );
+
+    if(orderType == 'ordertype_2') this.price = priceObj.everyMonth
 
     this.skuObj = skuObj;
     this.priceObj = priceObj;
@@ -152,15 +178,20 @@ export class ProductVariation extends ProductVariationBase {
     this.discountPercent = discountPercent;
     this.smartshipDiscountPrice = smartshipDiscountPrice;
     this.smartshipDiscountPercent = smartshipDiscountPercent;
+    this.regularSSDiscountPercent = regularSSDiscountPercent;
+    this.regularSSDiscountPrice = regularSSDiscountPrice;
     this.onetimeAndSmartshipDifference = onetimeAndSmartshipDifference;
     this.isOutOfStock = isOutOfStock;
+    this.accessLevels = modifiedAccessLevels;
+    this.ssDiscountAccessLevels = ssAccessLevels;
   }
 
   private getProductPricesAndSkus(
     variation: any,
     attribute1: string,
     attribute2: string,
-    variationsArray: any
+    variationsArray: any,
+    productUtilityService: ProductsUtilityService
   ): {
     skuObj: ProductVariationBase['skuObj'];
     priceObj: ProductVariationBase['priceObj'];
@@ -168,8 +199,12 @@ export class ProductVariation extends ProductVariationBase {
     discountPercent: number;
     smartshipDiscountPrice: number;
     smartshipDiscountPercent: number;
+    regularSSDiscountPercent: number;
+    regularSSDiscountPrice: number;
     onetimeAndSmartshipDifference: number;
     isOutOfStock: boolean;
+    modifiedAccessLevels: ProductAccess;
+    ssAccessLevels: ProductAccess;
   } {
     let skuObj = {} as ProductVariationBase['skuObj'];
     let priceObj = {} as ProductVariationBase['priceObj'];
@@ -177,8 +212,90 @@ export class ProductVariation extends ProductVariationBase {
     let discountPercent = 0;
     let smartshipDiscountPrice = 0;
     let smartshipDiscountPercent = 0;
+    let regularSSDiscountPercent = 0;
+    let regularSSDiscountPrice = 0;
     let onetimeAndSmartshipDifference = 0;
     let isOutOfStock = false;
+    let modifiedAccessLevels: ProductAccess = {
+      isHidden: {
+        on: false,
+        title: 'Hidden',
+      },
+      isEveryone: {
+        on: false,
+        title: 'Everyone',
+      },
+      isVisitor: {
+        on: false,
+        title: 'Visitors',
+      },
+      isLoggedUser: {
+        on: false,
+        title: 'Logged in Users',
+      },
+      isCustomer: {
+        on: false,
+        title: 'Customers',
+      },
+      isPromoter: {
+        on: false,
+        title: 'Promoters',
+      },
+      isRank6: {
+        on: false,
+        title: 'Rank 6',
+      },
+      isRank7: {
+        on: false,
+        title: 'Rank 7',
+      },
+      isRank8: {
+        on: false,
+        title: 'Rank 8',
+      },
+      isSmartship: {
+        on: false,
+        title: 'VIP Prüvers',
+      },
+      isLoggedSmartship: {
+        on: false,
+        title: 'Logged In VIP Prüvers',
+      },
+      isLoyalSmartship: {
+        on: false,
+        title: 'Loyal Active Smartship',
+      },
+      isVip: {
+        on: false,
+        title: 'VIP',
+      },
+      isVipPlus: {
+        on: false,
+        title: 'VIP+',
+      },
+      isCustom: {
+        on: false,
+        title: 'Custom users',
+      },
+      isSpromoter: {
+        on: false,
+        title: 'S&SPromoters'
+      },
+      isScustomer: {
+        on: false,
+        title: 'S&SCustomers'
+      }
+    };
+
+    let ssAccessLevels: ProductAccess;
+
+    let isVipPlusExist: boolean = false;
+    const LocalMVUser = sessionStorage.getItem('MVUser');
+    const user = LocalMVUser ? JSON.parse(LocalMVUser) : null;
+    if (user) {
+      isVipPlusExist = user?.mvuser_scopes.includes('vipPlus');
+    }
+    const viDiscount = isVipPlusExist ? 25 : 15;
 
     const varItem = variation[1];
 
@@ -201,10 +318,17 @@ export class ProductVariation extends ProductVariationBase {
         everyMonth: orderType2Obj.sku,
       };
 
-      priceObj = {
-        oneTime: orderType1Obj.price,
-        everyMonth: orderType2Obj.price,
-      };
+      if(environment.tenant === 'pruvit') {
+        priceObj = {
+          oneTime: orderType1Obj.price,
+          everyMonth: orderType2Obj.price > 0 ? (orderType1Obj.price > 0 ? this.staticSmartshipDiscount(orderType1Obj.price, viDiscount) : orderType2Obj.price) : 0,
+        };
+      }else {
+        priceObj = {
+          oneTime: orderType1Obj.price,
+          everyMonth: orderType2Obj.price,
+        };
+      }
 
       discountPrice = orderType1Obj.discountPrice;
       discountPercent = orderType1Obj.discountPercent;
@@ -215,16 +339,25 @@ export class ProductVariation extends ProductVariationBase {
         (varItem.hasOwnProperty('mvproduct_outof_stock') &&
           varItem.mvproduct_outof_stock === 'on') ||
         orderType1Obj.isOutOfStock;
+      modifiedAccessLevels = productUtilityService.getAccessLevels(orderType1Obj.availabilityFor);
+      ssAccessLevels = productUtilityService.getAccessLevels(orderType2Obj.availabilityFor);
     } else if (varItem.mvproduct_ordertype === 'ordertype_2') {
       skuObj = {
         oneTime: orderType1Obj.sku,
         everyMonth: varItem.mvproduct_sku,
       };
 
-      priceObj = {
-        oneTime: orderType1Obj.price,
-        everyMonth: +varItem.mvproduct_price,
-      };
+      if(environment.tenant === 'pruvit') {
+        priceObj = {
+          oneTime: orderType1Obj.price,
+          everyMonth: +varItem.mvproduct_price > 0 ? (orderType1Obj.price > 0 ? this.staticSmartshipDiscount(orderType1Obj.price, viDiscount) : +varItem.mvproduct_price) : 0,
+        };
+      }else {
+        priceObj = {
+          oneTime: orderType1Obj.price,
+          everyMonth: +varItem.mvproduct_price,
+        };
+      }
 
       discountPrice = 0;
       discountPercent = 0;
@@ -234,16 +367,25 @@ export class ProductVariation extends ProductVariationBase {
       isOutOfStock =
         varItem.hasOwnProperty('mvproduct_outof_stock') &&
         varItem.mvproduct_outof_stock === 'on';
+      modifiedAccessLevels = productUtilityService.getAccessLevels(orderType2Obj.availabilityFor);
+      ssAccessLevels = productUtilityService.getAccessLevels(orderType2Obj.availabilityFor);
     } else {
       skuObj = {
         oneTime: varItem.mvproduct_sku,
         everyMonth: orderType2Obj.sku,
       };
 
-      priceObj = {
-        oneTime: +varItem.mvproduct_price,
-        everyMonth: orderType2Obj.price,
-      };
+      if(environment.tenant === 'pruvit') {
+        priceObj = {
+          oneTime: +varItem.mvproduct_price,
+          everyMonth: orderType2Obj.price > 0 ? (+varItem.mvproduct_price > 0 ? this.staticSmartshipDiscount(+varItem.mvproduct_price, viDiscount) : orderType2Obj.price) : 0,
+        };
+      }else {
+        priceObj = {
+          oneTime: +varItem.mvproduct_price,
+          everyMonth: orderType2Obj.price,
+        };
+      }
 
       discountPercent = varItem.hasOwnProperty('percent_of_discount')
         ? +varItem.percent_of_discount
@@ -266,11 +408,19 @@ export class ProductVariation extends ProductVariationBase {
       isOutOfStock =
         varItem.hasOwnProperty('mvproduct_outof_stock') &&
         varItem.mvproduct_outof_stock === 'on';
+      modifiedAccessLevels = productUtilityService.getAccessLevels(orderType1Obj.availabilityFor);
+      ssAccessLevels = productUtilityService.getAccessLevels(orderType2Obj.availabilityFor);
     }
+
+    regularSSDiscountPercent = orderType2Obj.ssDiscountPercent;
+    regularSSDiscountPrice = this.staticSmartshipDiscount(
+      priceObj.oneTime > 0 ? priceObj.oneTime : priceObj.everyMonth,
+      regularSSDiscountPercent
+    );
 
     onetimeAndSmartshipDifference =
       priceObj.oneTime - priceObj.everyMonth > 0
-        ? priceObj.oneTime - priceObj.everyMonth
+        ? +(priceObj.oneTime - priceObj.everyMonth).toFixed(2)
         : 0;
 
     return {
@@ -280,8 +430,12 @@ export class ProductVariation extends ProductVariationBase {
       discountPercent,
       smartshipDiscountPrice,
       smartshipDiscountPercent,
+      regularSSDiscountPercent,
+      regularSSDiscountPrice,
       onetimeAndSmartshipDifference,
       isOutOfStock,
+      modifiedAccessLevels,
+      ssAccessLevels
     };
   }
 
@@ -297,7 +451,9 @@ export class ProductVariation extends ProductVariationBase {
     discountPercent: number;
     smartshipDiscountPrice: number;
     smartshipDiscountPercent: number;
+    ssDiscountPercent: number;
     isOutOfStock: boolean;
+    availabilityFor: string
   } {
     let sku = '';
     let price = 0;
@@ -305,7 +461,9 @@ export class ProductVariation extends ProductVariationBase {
     let discountPercent = 0;
     let smartshipDiscountPrice = 0;
     let smartshipDiscountPercent = 0;
+    let ssDiscountPercent = 0;
     let isOutOfStock = false;
+    let availabilityFor = '';
 
     variationsArray.forEach((variation: any) => {
       const varItem = variation[1];
@@ -335,9 +493,17 @@ export class ProductVariation extends ProductVariationBase {
                 smartshipDiscountPercent
               );
 
+              ssDiscountPercent = varItem.hasOwnProperty(
+                'ss_discount'
+              )
+                ? +varItem.ss_discount
+                : 0;
+
               isOutOfStock =
                 varItem.hasOwnProperty('mvproduct_outof_stock') &&
                 varItem.mvproduct_outof_stock === 'on';
+              availabilityFor = 
+                varItem.hasOwnProperty('availability_for') ? varItem.availability_for : '';
             }
           }
         } else {
@@ -360,9 +526,17 @@ export class ProductVariation extends ProductVariationBase {
               smartshipDiscountPercent
             );
 
+            ssDiscountPercent = varItem.hasOwnProperty(
+              'ss_discount'
+            )
+              ? +varItem.ss_discount
+              : 0;
+
             isOutOfStock =
               varItem.hasOwnProperty('mvproduct_outof_stock') &&
               varItem.mvproduct_outof_stock === 'on';
+            availabilityFor = 
+              varItem.hasOwnProperty('availability_for') ? varItem.availability_for : '';
           }
         }
       }
@@ -375,11 +549,21 @@ export class ProductVariation extends ProductVariationBase {
       discountPercent,
       smartshipDiscountPrice,
       smartshipDiscountPercent,
+      ssDiscountPercent,
       isOutOfStock,
+      availabilityFor
     };
   }
 
   private calculateDiscountPrice(oneTimePrice: number, percent: number) {
     return percent > 0 ? oneTimePrice - (percent / 100) * oneTimePrice : 0;
+  }
+
+  private staticSmartshipDiscount(regularPrice: number, discountPercent: number) {
+    if(regularPrice > 0 && discountPercent > 0) {
+      const discountAmount = +((regularPrice * discountPercent) / 100).toFixed(2);
+      return regularPrice - discountAmount;
+    }
+    return 0;
   }
 }

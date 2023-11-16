@@ -28,6 +28,11 @@ export class HeaderCategoriesComponent {
     this.renderer.removeClass(document.body, 'navbar-show');
   }
 
+  isProductExist(category: ProductTagOrCategory) {
+    const prodList = category.products.filter(prod => this.dataService.isProductHasOrderTypeOne(prod));
+    return prodList.length ? true : false;
+  }
+
   onClickLockIcon(category: ProductTagOrCategory) {
     this.dataService.changePostName({
       postName: 'access-level-modal',

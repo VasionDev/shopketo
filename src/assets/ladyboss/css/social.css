@@ -1,0 +1,81 @@
+.pruvit-social-media-wrap {
+  margin-bottom: 40px;
+}
+
+.pruvit-social-media-wrap .container {
+  max-width: 960px;
+}
+
+.pruvit-social-media-wrap .social-media-title {
+  margin-top: 48px;
+}
+
+.pruvit-social-media-wrap .social-media-row {
+  margin-top: 62px;
+}
+
+.pruvit-social-media-wrap .social-media-row .inner-cont {
+  padding: 48px 10px 30px;
+  border-radius: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 64px #00000014;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+
+.pruvit-social-media-wrap .social-media-row .inner-cont:hover {
+  box-shadow: 0 4px 32px #00000024;
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+}
+
+.pruvit-social-media-wrap .social-media-row .social-img {
+  height: 128px;
+  width: 128px;
+  margin: 0 auto 15px;
+}
+
+.pruvit-social-media-wrap .social-media-row .icon-details {
+  min-height: 75px;
+}
+
+.pruvit-social-media-wrap .social-media-row a:hover {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .pruvit-social-media-wrap .social-media-row .social-img {
+    width: 64px;
+    height: 64px;
+    margin: 0;
+  }
+
+  .pruvit-social-media-wrap .social-media-row .inner-cont {
+    display: flex;
+    align-items: center;
+    padding: 14px 10px;
+    gap: 15px;
+    margin-bottom: 8px;
+    border-radius: 18px;
+  }
+
+  .pruvit-social-media-wrap .social-media-row {
+    margin-top: 30px;
+  }
+
+  .pruvit-social-media-wrap .social-media-title h1 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .pruvit-social-media-wrap .social-media-row .icon-details {
+    text-align: left !important;
+    min-height: initial;
+  }
+
+  .pruvit-social-media-wrap .social-media-title {
+    margin-top: 28px;
+  }
+
+}

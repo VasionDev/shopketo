@@ -1,18 +1,23 @@
 import {
   Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
   ElementRef,
   Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
-import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { SubscriptionLike } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { AppComponent } from 'src/app/app.component';
+import { Product } from 'src/app/products/models/product.model';
 import { AppApiService } from 'src/app/shared/services/app-api.service';
+import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 import { AppCheckoutService } from '../../services/app-checkout.service';
+import { AppUserService } from '../../services/app-user.service';
 declare var $: any;
 
 @Component({
@@ -23,6 +28,8 @@ declare var $: any;
 export class ModalCheckoutComponent implements OnInit, OnDestroy {
   @ViewChild('input', { static: false }) input!: ElementRef;
   @Input() modals!: any[];
+  @Input() product = {} as Product;
+  tenant!: string;
   selectedLanguage = '';
   selectedCountry = '';
   productsData: any = {};
@@ -40,6 +47,8 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
   referrerVideoId = '';
   isCheckoutFromFood = false;
   subscriptions: SubscriptionLike[] = [];
+  isEmailValid = false;
+  isStaging = false;
 
   constructor(
     private dataService: AppDataService,
@@ -47,8 +56,12 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private utilityService: AppUtilityService,
     private translate: TranslateService,
-    private checkoutService: AppCheckoutService
+    private checkoutService: AppCheckoutService,
+    private appComponent: AppComponent,
+    private userService: AppUserService
   ) {
+    this.tenant = environment.tenant;
+    this.isStaging = environment.isStaging;
     $(document).on('shown.bs.modal', '#referrerCode', () => {
       if (this.input) {
         this.input.nativeElement.focus();
@@ -63,6 +76,14 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
     this.getModals();
     this.getCartOrCheckoutModal();
     this.checkIsCheckoutFromFood();
+
+    $(document).on('shown.bs.modal', '#waitlistModal', () => {
+      $('body').addClass('modal-open');
+    });
+
+    $(document).on('shown.bs.modal', '#getTheFreeModal', () => {
+      $('body').addClass('modal-open');
+    });
   }
 
   checkIsCheckoutFromFood() {
@@ -158,6 +179,9 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
     if (this.modals.length === 1) {
       this.modals.forEach((singleModal: any) => {
         if (singleModal.modalName === 'referrerCode') {
+          if (singleModal.hasOwnProperty('product') && singleModal.product) {
+            this.product = singleModal.product;
+          }
           $('#referrerCode').modal('show');
         }
         if (singleModal.modalName === 'referrerBy') {
@@ -177,7 +201,6 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
       ? this.router.url.split('?')[0]
       : this.router.url;
     this.isSubmittable = true;
-
     if (this.selectedCountry !== 'US') {
       redirectRoute = redirectRoute.replace(
         '/' + this.selectedCountry.toLowerCase(),
@@ -185,19 +208,37 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
       );
     }
     redirectRoute = redirectRoute.trim();
-
+    
     if (this.refCode !== '') {
       this.subscriptions.push(
         this.apiService.getReferrer(this.refCode).subscribe((referrer: any) => {
           if (referrer.length === 0) {
             this.isReferrerPresent = false;
           } else {
+            console.log(this.referrerRedirectModal);
             if (this.referrerRedirectModal === 'checkout') {
               this.isReferrerPresent = true;
               this.dataService.setReferrer(referrer);
-              $('#referrerCode').modal('hide');
-              $('#referrerBy').modal('show');
+              if (referrer?.productId) {
+                //if (!this.isStaging)
+                  this.appComponent.checkGnGOffer(referrer, true);
+              } else {
+                $('#referrerCode').modal('hide');
+                $('#referrerBy').modal('show');
+              }
               this.utilityService.navigateToRoute(redirectRoute);
+            }
+            if (this.referrerRedirectModal === 'waitList') {
+              this.isReferrerPresent = true;
+              this.dataService.setReferrer(referrer);
+              $('#referrerCode').modal('hide');
+              this.utilityService.navigateToRoute(redirectRoute);
+              this.dataService.changePostName({
+                postName: 'waitlist-modal',
+                payload: { key: 'product', value: this.product },
+              });
+              $('#waitlistModal').modal('show');
+              this.isSubmittable = false;
             }
             if (this.referrerRedirectModal === 'shareCart') {
               this.isReferrerPresent = true;
@@ -206,21 +247,111 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
               this.utilityService.navigateToRoute(redirectRoute);
 
               const isLocked = this.utilityService.cartHasLockedProduct();
-              if(isLocked) {
+              if (isLocked) {
                 this.dataService.changePostName({
                   postName: 'restrict-share-cart-modal',
                 });
                 $('#restrictShareCartModal').modal('show');
-              }else {
+              } else {
                 this.dataService.changePostName({
                   postName: 'pruvit-modal-utilities',
                 });
                 $('#shareCartModal').modal('show');
               }
+              this.isSubmittable = false;
+            }
+            if (this.referrerRedirectModal === 'freeGuideModal') {
+              this.isReferrerPresent = true;
+              this.dataService.setReferrer(referrer);
+              $('#referrerCode').modal('hide');
+
+              $('#getTheFreeModal').modal('show');
+
+              this.utilityService.navigateToRoute(redirectRoute);
+              this.isSubmittable = false;
             }
           }
-          this.isSubmittable = false;
         })
+      );
+    }
+  }
+
+  onEmailChange() {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    this.isEmailValid = pattern.test(this.refCode);
+  }
+
+  onSubmitForLadyboss() {
+    console.log('object');
+    this.isSubmittable = true;
+    if (this.refCode !== '') {
+      const email = this.refCode.replace('+', '%2B');
+      const height = 760;
+      const width = 500;
+      const leftPosition = window.innerWidth / 2 - width / 2;
+      const topPosition =
+        window.innerHeight / 2 -
+        height / 2 +
+        (window.outerHeight - window.innerHeight);
+      const windowReference = window.open(
+        '',
+        'checkoutWindowRef',
+        'status=no,height=' +
+          height +
+          ',width=' +
+          width +
+          ',resizable=yes,left=' +
+          leftPosition +
+          ',top=' +
+          topPosition +
+          ',screenX=' +
+          leftPosition +
+          ',screenY=' +
+          topPosition +
+          ',toolbar=no,menubar=no,scrollbars=no,location=no,directories=no'
+      );
+      //.pipe(catchError((error) => of(error)));
+      this.subscriptions.push(
+        this.apiService
+        .getSponsorIdByEmail(email)
+        .pipe(
+          switchMap((sponsorId: any) => {
+            const id = sponsorId || 668;
+            return this.apiService.getReferrerByUserId(id);
+          })
+        )
+        .subscribe(
+          (refCode: any) => {
+            this.isSubmittable = false;
+            let sponsorId = '';
+            if (refCode !== null && refCode !== '') {
+              sponsorId = refCode;
+            } else {
+              sponsorId = this.isStaging ? 'FT34Q7' : '76H3PT';
+            }
+            const checkoutLink =
+              this.checkoutService.setLadyboosSupplementsCheckoutUrl(
+                sponsorId,
+                'false',
+                ''
+              );
+            if (checkoutLink !== '') windowReference!.location = checkoutLink;
+            else windowReference!.close();
+          },
+          (err) => {
+            console.log('err', err);
+            this.isSubmittable = false;
+            const sponsorId = this.isStaging ? 'FT34Q7' : '76H3PT';
+            const checkoutLink =
+              this.checkoutService.setLadyboosSupplementsCheckoutUrl(
+                sponsorId,
+                'false',
+                ''
+              );
+            if (checkoutLink !== '') windowReference!.location = checkoutLink;
+            else windowReference!.close();
+          }
+        )
       );
     }
   }
@@ -279,6 +410,11 @@ export class ModalCheckoutComponent implements OnInit, OnDestroy {
     }
 
     return contactFormLink;
+  }
+
+  onCheckoutLogin() {
+    localStorage.setItem('isCheckoutLogin', 'true');
+    this.userService.login();
   }
 
   ngOnDestroy() {

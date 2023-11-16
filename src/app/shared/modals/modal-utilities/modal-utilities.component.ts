@@ -1,24 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { SubscriptionLike } from 'rxjs';
+import moment from 'moment';
+import { ReplaySubject, SubscriptionLike, forkJoin } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { WebsiteService } from 'src/app/customer-dashboard/websites/service/websites-service';
+import { ProductVariation } from 'src/app/products/models/product-variation.model';
+import { PromoterService } from 'src/app/products/services/promoter.service';
 import { SearchPipe } from 'src/app/shared/pipes/search.pipe';
-import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
-import { Offer } from '../../models/offer.model';
-import { Product } from '../../../products/models/product.model';
+import { AppOfferService } from 'src/app/shared/services/app-offer.service';
+import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 import {
   ProductServing,
   ProductServingAttribute,
 } from '../../../products/models/product-serving.model';
-import { ProductVariationBase } from '../../../products/models/product-variation.model';
 import { ProductSettings } from '../../../products/models/product-settings.model';
-import { AppOfferService } from 'src/app/shared/services/app-offer.service';
-import { ProductVariation } from 'src/app/products/models/product-variation.model';
+import { ProductVariationBase } from '../../../products/models/product-variation.model';
+import { Product } from '../../../products/models/product.model';
 import { Cart } from '../../models/cart.model';
-import { PromoterService } from 'src/app/products/services/promoter.service';
+import { Offer } from '../../models/offer.model';
 import { AppCheckoutService } from '../../services/app-checkout.service';
 import { AppUserService } from '../../services/app-user.service';
+import { BonusService } from '../../services/bonus.service';
+import { UserEmitterService } from '../../services/user-emitter.service';
 declare var $: any;
+declare var tooltipJS: any;
 
 @Component({
   selector: 'app-modal-utilities',
@@ -27,6 +36,8 @@ declare var $: any;
   providers: [SearchPipe],
 })
 export class ModalUtilitiesComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  tenant: string = '';
   selectedLanguage = '';
   selectedCountry = '';
   productsData: any = {};
@@ -65,6 +76,45 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
 
   subscriptions: SubscriptionLike[] = [];
 
+  leadForm!: FormGroup;
+  isLeadFormSubmitted: boolean = false;
+  genericError: boolean = false;
+  phoneCountries: Array<any> = [];
+  bonuses: Array<any> = [];
+  requestMade: number = 0;
+  isLoaded: boolean = false;
+  user: any;
+  loggedUser: any;
+  activeBonus: any = {
+    title: '',
+    info: {
+      link: '',
+      availableCredits: 0,
+      totalMoneyAwarded: '',
+    },
+  };
+  selectedCountryObj: any = {
+    country_code: 'US',
+    phone_code: '+1',
+    name: 'United States',
+  };
+  linkCopied: boolean = false;
+  leadUser: any;
+  activeModal: string = '';
+  cardClasses: Array<string> = [
+    'pink-card',
+    'family-card',
+    'orange-card',
+    'blue-gradient-light',
+    'green-gradient',
+    'purple-gradient',
+  ];
+  isMobile = false;
+  clientDomain: string = '';
+  checkoutDomain: string = '';
+  currentCartItem: Cart[] = [];
+  @Input() isBundleBuilderCheckout: boolean = false;
+
   constructor(
     private dataService: AppDataService,
     private translate: TranslateService,
@@ -73,8 +123,21 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
     private offerService: AppOfferService,
     private promoterService: PromoterService,
     private appCheckoutService: AppCheckoutService,
-    private userService: AppUserService
+    private userService: AppUserService,
+    private userEmitterService: UserEmitterService,
+    private bonusSvc: BonusService,
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private websiteSvc: WebsiteService,
   ) {
+    this.tenant = environment.tenant;
+    this.clientDomain = environment.clientDomain;
+    this.checkoutDomain = environment.checkoutDomain;
+    this.isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
+        navigator.userAgent
+      );
+
     $(document).on('shown.bs.modal', '#joinAsPromoterModal', () => {
       $('body').addClass('modal-open');
     });
@@ -85,14 +148,41 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getUser();
+    this.getGngOffer();
     this.getSelectedLanguage();
     this.getSelectedCountry();
     this.getPromoterCartData();
     this.getProducts();
+    this.getBundleBuilderCartData();
     this.getPruvitTvLink();
     this.getTinyUrl();
     this.getOffer();
     this.getPulseProProduct();
+    this.getPhoneCountries();
+    this.updateBBCheckoutStatus();
+  }
+
+  getUser() {
+    this.subscriptions.push(
+      this.dataService.currentUserWithScopes$.subscribe((user) => {
+        if (user !== null) {
+          this.loggedUser = user;
+        }
+      })
+    );
+  }
+
+  updateBBCheckoutStatus() {
+    this.isBundleBuilderCheckout = (this.isBundleBuilderCheckout || this.dataService.getBBCheckoutStatus()) ? true : false;
+  }
+
+  getBundleBuilderCartData() {
+    this.dataService.bundleBuilderCartList$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((x) => {
+        this.currentCartItem = x;
+      });
   }
 
   getPulseProProduct() {
@@ -195,6 +285,7 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
         this.bitlyLink = tinyUrl.url;
         this.isTinyConversionStarted = tinyUrl.isConversionStarted;
         this.copyLinkText = this.translate.instant('copy-link');
+        this.loadTooltip();
       })
     );
   }
@@ -332,22 +423,24 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
   }
 
   makeAttribute1OutOfStock() {
-    this.servings = this.servings.map(
-      (serving: ProductServing, index: number) => {
-        serving.servingAttributes.map((item) => {
-          const tempServingAttribute = Object.assign({}, item);
+    if(this.servings.length > 1) {
+      this.servings = this.servings.map(
+        (serving: ProductServing, index: number) => {
+          serving.servingAttributes.map((item) => {
+            const tempServingAttribute = Object.assign({}, item);
 
-          if (index === 0) {
-            tempServingAttribute.isOutOfStock = this.checkAllAttr1OutOfStock(
-              item.key
-            );
-          }
-          return tempServingAttribute;
-        });
+            if (index === 0) {
+              tempServingAttribute.isOutOfStock = this.checkAllAttr1OutOfStock(
+                item.key
+              );
+            }
+            return tempServingAttribute;
+          });
 
-        return serving;
-      }
-    );
+          return serving;
+        }
+      );
+    }
   }
 
   private checkAllAttr1OutOfStock(attributeItem1: string) {
@@ -696,7 +789,46 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
           : false;
     }
 
+    let activeSmartshipExist: boolean = false;
+    if (this.loggedUser) {
+      activeSmartshipExist = this.loggedUser?.mvuser_scopes.includes('smartship');
+    }
+
+    const everyMonthCartList = this.utilityService.getEveryMonthStorage(
+      this.selectedCountry.toLowerCase(),
+      this.selectedLanguage
+    );
+
+    if(
+      (
+        tempProductVariation.skuObj.oneTime !== 'PRU-700-005' && 
+        tempProductVariation.skuObj.oneTime !== 'PRU-700-006' &&
+        tempProductVariation.skuObj.oneTime !== 'PRU-KOOZIE-001-ONCE'
+      ) && 
+      this.tenant === 'pruvit' &&
+      ((this.selectedOrdertype === 'ordertype_3' && this.productSettings.smartshipDiscountOnTodays) ||
+      ((everyMonthCartList.length || activeSmartshipExist) && this.productSettings.smartshipDiscountOnTodays))
+    ) {
+      let isVipPlusExist: boolean = false;
+      if (this.loggedUser) {
+        isVipPlusExist = this.loggedUser?.mvuser_scopes.includes('vipPlus');
+      }
+      const viDiscount = isVipPlusExist ? 25 : 15;
+      const vipDiscountPrice = this.staticSmartshipDiscount(tempProductVariation.priceObj.oneTime, viDiscount);
+      if((vipDiscountPrice * this.offerQuantity) < tempProductVariation.finalPrice) {
+        tempProductVariation.finalPrice = vipDiscountPrice * this.offerQuantity;
+        tempProductVariation.hasDiscount = true;
+      }
+    }
     this.productVariation = tempProductVariation;
+  }
+
+  private staticSmartshipDiscount(regularPrice: number, discountPercent: number) {
+    if(regularPrice > 0) {
+      const discountAmount = +((regularPrice * discountPercent) / 100).toFixed(2);
+      return regularPrice - discountAmount;
+    }
+    return 0;
   }
 
   private generateCartWithLanguages() {
@@ -716,7 +848,7 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
       cart: {
         productID: this.offerProduct.id,
         productName: this.offerProduct.title,
-        productImageUrl: this.offerProduct.thumbUrl,
+        productImageUrl: this.productVariation.variationImage ? this.productVariation.variationImage : this.offerProduct.thumbUrl,
         servingsName: this.selectedAttribute1.name
           ? this.selectedAttribute1.name
           : '',
@@ -734,6 +866,7 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
           this.productVariation.smartshipDiscountPercent,
         isUserCanAccess: isUserCanAccess,
         discountType: this.offer.type,
+        isOfferProduct: this.offer && Object.keys(this.offer).length ? true : false,
         offerDiscountPrice: 0,
         isSmartshipDiscountOn:
           this.productVariation.smartshipDiscountPrice !== 0,
@@ -756,7 +889,7 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
       cart: {
         productID: this.offerProduct.id,
         productName: this.offerProduct.title,
-        productImageUrl: this.offerProduct.thumbUrl,
+        productImageUrl: this.productVariation.variationImage ? this.productVariation.variationImage : this.offerProduct.thumbUrl,
         servingsName: this.selectedAttribute1.name
           ? this.selectedAttribute1.name
           : '',
@@ -873,13 +1006,14 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
         ? this.generateSmartshipCartWithLanguages()
         : this.generateCartWithLanguages();
 
-    this.utilityService.setCarts(
-      cartDataWithLanguages,
-      this.selectedCountry,
-      this.selectedLanguage
-    );
-
-    this.dataService.changeSidebarName('add-to-cart');
+    if(!this.isBundleBuilderCheckout) {
+      this.utilityService.setCarts(
+        cartDataWithLanguages,
+        this.selectedCountry,
+        this.selectedLanguage
+      );
+      this.dataService.changeSidebarName('add-to-cart');
+    }
 
     const cartOneTime = this.utilityService.getCartIfAdded(
       cartDataWithLanguages
@@ -887,6 +1021,16 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
     const cartEveryMonth = this.utilityService.getCartIfAdded(
       cartDataWithLanguages
     ).everyMonth;
+
+    if(this.isBundleBuilderCheckout) {
+      cartDataWithLanguages.forEach(el => {
+        if(el.orderType === 'ordertype_1' || el.orderType === 'ordertype_3') {
+          this.currentCartItem.push(...cartOneTime);
+        }else {
+          this.currentCartItem.push(...cartEveryMonth);
+        }
+      })
+    }
 
     const availableOffers: Offer[] = [];
 
@@ -943,17 +1087,29 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
         $('#special-offer').modal('show');
       }, 0);
     } else {
-      const LocalDirectCheckout = localStorage.getItem('DirectCheckout');
-      const isDirectCheckout = LocalDirectCheckout
-        ? JSON.parse(LocalDirectCheckout)
-        : null;
+      if(this.isBundleBuilderCheckout) {
+        const refCode = this.user.code;
+        const redirectUrl = this.clientDomain + '/cloud/dashboard';
+        this.appCheckoutService.setBundleBuilderCheckoutUrl(
+          refCode, 
+          redirectUrl, 
+          this.selectedCountry,
+          this.selectedLanguage, 
+          this.currentCartItem
+        );
+      }else {
+        const LocalDirectCheckout = localStorage.getItem('DirectCheckout');
+        const isDirectCheckout = LocalDirectCheckout
+          ? JSON.parse(LocalDirectCheckout)
+          : null;
 
-      if (isDirectCheckout) {
-        this.dataService.setIsCheckoutStatus(true);
+        if (isDirectCheckout) {
+          this.dataService.setIsCheckoutStatus(true);
+        }
+
+        this.dataService.changeSidebarName('checkout-cart');
+        $('.drawer').drawer('open');
       }
-
-      this.dataService.changeSidebarName('checkout-cart');
-      $('.drawer').drawer('open');
     }
   }
 
@@ -984,7 +1140,6 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
 
   onClickProductOfferNoThanks() {
     $('body').removeClass('modal-open');
-
     this.offerIndex = this.offerIndex + 1;
 
     if (this.offerIndex < this.offerArray.length) {
@@ -996,16 +1151,28 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
         $('#special-offer').modal('show');
       }, 0);
     } else {
-      const LocalDirectCheckout = localStorage.getItem('DirectCheckout');
-      const isDirectCheckout = LocalDirectCheckout
-        ? JSON.parse(LocalDirectCheckout)
-        : null;
+      if(this.isBundleBuilderCheckout) {
+        const refCode = this.user.code;
+        const redirectUrl = this.clientDomain + '/cloud/dashboard';
+        this.appCheckoutService.setBundleBuilderCheckoutUrl(
+          refCode, 
+          redirectUrl, 
+          this.selectedCountry,
+          this.selectedLanguage, 
+          this.currentCartItem
+        );
+      }else {
+        const LocalDirectCheckout = localStorage.getItem('DirectCheckout');
+        const isDirectCheckout = LocalDirectCheckout
+          ? JSON.parse(LocalDirectCheckout)
+          : null;
 
-      if (isDirectCheckout) {
-        this.dataService.setIsCheckoutStatus(true);
-      } else {
-        this.dataService.changeSidebarName('checkout-cart');
-        $('.drawer').drawer('open');
+        if (isDirectCheckout) {
+          this.dataService.setIsCheckoutStatus(true);
+        } else {
+          this.dataService.changeSidebarName('checkout-cart');
+          $('.drawer').drawer('open');
+        }
       }
     }
   }
@@ -1177,9 +1344,315 @@ export class ModalUtilitiesComponent implements OnInit, OnDestroy {
     return translatedText;
   }
 
+  getGngOffer() {
+    this.userEmitterService
+      .getProfileObs()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((x) => {
+        this.user = x;
+        if (x) {
+          this.createLeadForm();
+          //this.referrerCode = this.user.code;
+          this.getBonusMeta(this.user.id);
+        }
+      });
+  }
+
+  getBonusMeta(userId: string) {
+    this.bonusSvc.getBonusMeta(userId, 'en').pipe(takeUntil(this.destroyed$)).subscribe(
+      (x) => {
+        const bonuses = x.result.records.filter((r:any) => r.isExpired === false);
+        for (let index = 0; index < bonuses.length; index++) {
+          this.getBonusInfo(
+            this.user.id,
+            bonuses[index],
+            index,
+            bonuses.length
+          );
+        }
+      },
+      (err) => {
+        // if (err.error.error.detail) {
+        //   this.error = err.error.error.detail;
+        // }
+      }
+    );
+  }
+
+  getBonusInfo(userId: string, bonus: any, index: number, totalBonus: number) {
+    const productId = bonus.id;
+    this.bonusSvc
+      .getBonusInfo(userId, productId, 'en')
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
+      (x) => {
+        this.requestMade++;
+        const bonusRes = x;
+        if (bonusRes?.isSuccess && bonusRes?.result !== null) {
+          const diffTime = Math.floor(new Date(bonus.expirationDate).getTime() / 1000) - Math.floor(Date.now() / 1000);
+          if (diffTime < 90 * 86400) {
+            bonus.expiresIn = bonus.expirationDate;
+          }
+          if (diffTime > 0) {
+            bonus.info = bonusRes.result;
+            this.bonuses[index] = bonus;
+          }
+
+          if (totalBonus === this.requestMade) {
+            this.bonuses = this.bonuses.filter((elm) => elm);
+            this.isLoaded = true;
+          }
+        }
+      });
+  }
+
+  getPhoneCountries() {
+    this.http.get('assets/countries.json').pipe(takeUntil(this.destroyed$)).subscribe((data: any) => {
+      this.phoneCountries = data;
+    });
+  }
+
+  createLeadForm() {
+    this.leadForm = this.formBuilder.group({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'
+        ),
+      ]),
+      phone: new FormControl('', [
+        Validators.pattern(
+          '(([(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s]?[(]?[0-9]{1,3}[)]?([-s]?[0-9]{3})([-s]?[0-9]{1,4})'
+        ),
+      ])
+    });
+  }
+
+  onSubmitLeadForm() {
+    this.genericError = false;
+    let { firstName, lastName, email, phone } = this.leadForm.value;
+    const phoneWithCountry = phone !== '' ? this.selectedCountryObj.phone_code + phone : '';
+    
+    let contactId = '';
+    if (this.leadForm.valid) {
+      this.isLeadFormSubmitted = true;
+
+      this.websiteSvc
+        .getContactByUserEmail(this.user.id, email)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(
+          (x: any) => {
+            let contactReqArr: any = [];
+            contactId = x != '' ? x : '';
+            if (contactId !== '') {
+              contactReqArr.push(
+                this.websiteSvc.updateContactName(contactId, firstName, lastName)
+              );
+              contactReqArr.push(
+                this.websiteSvc.updateContactSource(contactId, 'PersonalInvite')
+              );
+              if(phoneWithCountry) {
+                contactReqArr.push(
+                  this.websiteSvc.updateContactPhone(contactId, phoneWithCountry)
+                );
+              }
+            } else {
+              contactReqArr.push(
+                this.websiteSvc
+                  .createContact(
+                    this.user.id,
+                    firstName,
+                    lastName,
+                    email,
+                    phoneWithCountry,
+                    this.selectedCountryObj.country_code,
+                    'PersonalInvite'
+                  )
+              );
+            }
+            forkJoin(contactReqArr)
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(
+              (x: any) => {
+                const isSuccess = x.every(
+                  (el: { isSuccess: boolean }) => el.isSuccess === true
+                );
+                if (isSuccess) {
+            
+                  if (x.length === 1 && contactId === '' && x[0]?.result?.contactId) {
+                    contactId = x[0].result.contactId;
+                  }
+               
+                  this.bonusSvc
+                    .createPersonalInvite(
+                      {
+                        composer: btoa(
+                          'urn:' + this.tenant + ':profile:' + this.user.id
+                        ),
+                        productId: this.activeBonus.info.productId,
+                        recipient: contactId,
+                      },
+                      'en'
+                    )
+                    .pipe(takeUntil(this.destroyed$))
+                    .subscribe(
+                      (inviteResponse: any) => {
+                        this.isLeadFormSubmitted = false;
+
+                        if (inviteResponse.isSuccess) {
+                          var localDateUtc = moment.utc(inviteResponse.result.expiresAt);
+                          var localDate = moment(localDateUtc).utcOffset(10 * 60);
+                          const offerExpiryTimeString = localDate.format();
+                          const VI = {
+                            offererCode: this.user.code,
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email.replace('+', '%2B'),
+                            phone: phoneWithCountry ? phoneWithCountry.replace('+', '%2B') + phone : '',
+                            viProductId: this.activeBonus.info.productId.split('urn:'+this.tenant+':product:')[1],
+                            viCode: btoa(inviteResponse.result.proposalId), 
+                            offerExpiryTime: offerExpiryTimeString.replace('+', '%2B')
+                          }
+                          this.appUtilityService.setTinyUrl(VI)
+                          this.activeBonus.info.availableCredits--;
+                          this.activeModal = 'lead-send';
+                          this.leadUser = inviteResponse.result;
+                          this.loadTooltip();
+                        } else {
+                          this.genericError = true;
+                        }
+                      },
+                      (err: any) => {
+                        this.genericError = true;
+                        this.isLeadFormSubmitted = false;
+                      },
+                      () => {
+                        this.leadForm.reset({ phone: '' });
+                        this.selectedCountryObj = {
+                          country_code: 'US',
+                          phone_code: '+1',
+                          name: 'United States',
+                        };
+                        console.log('contat and proposal completed');
+                      }
+                    );
+                } else {
+                  this.genericError = true;
+                  this.isLeadFormSubmitted = false;
+                }
+              },
+              (err) => {
+                this.leadForm.reset({ phone: '' });
+                this.selectedCountryObj = {
+                  country_code: 'US',
+                  phone_code: '+1',
+                  name: 'United States',
+                };
+                this.genericError = true;
+                this.isLeadFormSubmitted = false;
+              }
+            )
+          } 
+        );
+    }
+  }
+
+  get firstNameControl() {
+    return this.leadForm.controls['firstName'];
+  }
+
+  get lastNameControl() {
+    return this.leadForm.controls['lastName'];
+  }
+
+  get emailControl() {
+    return this.leadForm.controls['email'];
+  }
+
+  get phoneControl() {
+    return this.leadForm.controls['phone'];
+  }
+
+  onClickGngOffer(n:any) {
+    if(n.info.availableCredits > 0) {
+      this.activeBonus = n;
+      this.activeModal = 'lead-create'; 
+    }
+  }
+
+  onChangePhoneCountry(event: any) {
+    const index = event.target.value;
+    this.selectedCountryObj = this.phoneCountries[index];
+  }
+
+  copy(event:any) {
+    if(this.isMobile && $("div[role='tooltip']").length && $("div[role='tooltip']").hasClass('hide')) {
+      $("div[role='tooltip']").removeClass('hide');
+    }
+    if (event.isSuccess) {
+      this.linkCopied = true;
+      setTimeout(() => {
+        this.linkCopied = false;
+        if(this.isMobile) $("div[role='tooltip']").addClass('hide');
+        this.loadTooltip();
+      }, 1500);
+    }
+  }
+
+  loadTooltip() {
+    $(document).ready(() => {
+      tooltipJS();
+    });
+  }
+
+  sendEmail() {
+    window.location.href = `mailto:?&body=Check this out! ${this.bitlyLink}`;
+  }
+
+  sendSMS() {
+    window.location.href = `sms:?&body=${this.bitlyLink}`;
+  }
+
+  redirectFacebook() {
+    window.open(
+      'https://www.facebook.com/dialog/share?' +
+        'app_id=' +
+        environment.facebookAppId +
+        '&display=popup' +
+        '&href=' +
+        encodeURIComponent(this.bitlyLink) +
+        '&redirect_uri=' +
+        encodeURIComponent('https://' + window.location.host + '/close.html'),
+      'mywin',
+      'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'
+    );
+  }
+
+  redirectTwitter() {
+    window.open(
+      'https://twitter.com/intent/tweet' +
+        '?url=' +
+        encodeURIComponent(this.bitlyLink) +
+        '&text=' +
+        encodeURIComponent(
+          `I just wanted to share with you ${
+            this.tenant === 'pruvit' ? 'PruvIt!' : '.'
+          } Please take a look ;) `
+        ),
+      'mywin',
+      'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'
+    );
+  }
+
   ngOnDestroy() {
+    this.dataService.setBundleBuilderCart(this.currentCartItem);
+    this.dataService.setBBCheckoutStatus(this.isBundleBuilderCheckout);
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

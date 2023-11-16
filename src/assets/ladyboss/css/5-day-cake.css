@@ -1,0 +1,842 @@
+.mxwdt-740 {
+  max-width: 740px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mxwdt-1130 {
+  max-width: 1130px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fw-800 {
+  font-weight: 800;
+}
+
+.ladyboss-videoWrap {
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.ladyboss-videoWrap iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ladyboss-5dayCake-welvideo-wrap .title,
+.ladyboss-5dayCake-welvideo-wrap h3,
+.ladyboss-5dayCake-VIPOffer .title,
+.ladyboss-5dayCake-VIPOffer h3 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 120%;
+}
+
+.ladyboss-5dayCake-welvideo-wrap h4 {
+  padding-top: 32px;
+}
+
+.ladyboss-5dayCake-welvideo-wrap h4,
+.ladyboss-5dayCake-welvideo-wrap .video-title {
+  font-family: "Questrial", sans-serif;
+}
+
+.ladyboss-5dayCake-header .logo {
+  max-width: 141px;
+  margin: 20px auto;
+  display: block;
+}
+
+.ladyboss-5dayCake-header .conf-logo {
+  max-width: 160px;
+}
+
+.ladyboss-5dayCake-congratsVideo-wrap .title {
+  letter-spacing: 0.04rem;
+}
+
+.ladyboss-5dayCake-welvideo-wrap {
+  padding-bottom: 30px;
+  background-image: url(https://statics.myclickfunnels.com/image/559139/file/29de2207a73bdc575d75e447f397fbe7.png);
+  background-repeat: no-repeat !important;
+  background-position: top right !important;
+  background-size: 100% auto;
+  background-color: #fff;
+}
+
+.ladyboss-5dayCake-welvideo-wrap .title {
+  font-weight: 800;
+  font-size: 50px;
+  letter-spacing: 0.04rem;
+  line-height: 130%;
+}
+
+.ladyboss-5dayCake-welvideo-wrap h3 {
+  font-weight: 800;
+  font-size: 38px;
+}
+
+.ladyboss-5dayCake-welvideo-wrap h4 {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.ladyboss-5dayCake-welvideo-wrap .video-title {
+  background-color: rgb(255, 0, 117);
+  padding: 14px 40px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.ladyboss-5dayCake-VIPOffer .title {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.ladyboss-5dayCake-VIPOffer .title {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.ladyboss-5dayCake-VIPOffer .sub-title {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+
+.ladyboss-5dayCake-VIPOffer .row>.card {
+  background-image: url(https://statics.myclickfunnels.com/image/559658/file/a91d1b695afe9149748450fbe4ea3095.png);
+  background-repeat: repeat-y;
+  background-size: 110% auto;
+  background-position: center center;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0px 0px 70px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 35px;
+  margin-bottom: 100px;
+}
+
+.ladyboss-5dayCake-VIPOffer .nav-tabs {
+  border: none;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.ladyboss-5dayCake-VIPOffer .nav-tabs .button {
+  border-radius: 0;
+  font-family: "Bebas Neue", display;
+  font-size: 22px;
+  letter-spacing: 0.17rem;
+  padding: 10px 25px;
+  background: rgba(255, 0, 117, 0.15);
+  color: #f0006f;
+  height: initial;
+}
+
+.ladyboss-5dayCake-VIPOffer .nav-tabs .button.active {
+  color: #fff;
+  background: #f0006f;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card {
+  border-radius: 8px;
+  border: 3px solid #f0006f;
+  background-color: rgb(254, 241, 246);
+  padding: 20px 15px 35px;
+  box-shadow: 0px 10px 29px 3px rgba(0, 0, 0, 0.22);
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card h3 {
+  letter-spacing: 0.04rem;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card h6 {
+  font-size: 22px;
+  letter-spacing: 0.04rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card .img-fluid {
+  height: 220px;
+  margin: 30px auto;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card h4.color-black {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04rem;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px;
+  line-height: 130%;
+  letter-spacing: 0.04rem;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card .button {
+  padding: 20px 25px;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  height: initial;
+  letter-spacing: 0;
+  text-transform: initial;
+  max-width: fit-content;
+  margin: 20px auto 0;
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card .button.button-green {
+  background: rgb(69, 170, 68);
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card .button.button-green:hover {
+  background: rgba(69, 170, 68, 0.9);
+}
+
+.ladyboss-5dayCake-VIPOffer .tab-pane .card p.p-small {
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.04rem;
+  margin-top: 20px;
+}
+
+.ladyboss-5dayCake-VIPOffer #OneTimePurchase.tab-pane .card {
+  border-color: transparent;
+}
+
+
+
+.ladyboss-5dayCake-VIPOffer .attention-row .attention-topbar .img-fluid {
+  max-width: 50px;
+  margin: -16px auto 0;
+  display: block;
+}
+
+
+.ladyboss-5dayCake-secureOrder {
+  background-image: url(https://statics.myclickfunnels.com/image/559139/file/29de2207a73bdc575d75e447f397fbe7.png);
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 30px 0 100px;
+}
+
+.ladyboss-5dayCake-secureOrder .attention-text {
+  background: rgb(255, 236, 248);
+  border: 4px dashed rgb(255, 0, 117);
+  padding: 18px 10px;
+  margin-top: -64px;
+}
+
+.ladyboss-5dayCake-secureOrder .attention-text h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  line-height: 100%;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
+}
+
+.ladyboss-5dayCake-secureOrder .attention-text h2 span {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 130%;
+  margin-left: 20px;
+}
+
+.ladyboss-5dayCake-secureOrder h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 58px;
+  line-height: 130%;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
+  margin-top: 20px;
+}
+
+
+.ladyboss-5dayCake-secureOrder .one-time {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
+  line-height: 130%;
+}
+
+.ladyboss-5dayCake-upgradevip .lean-img {
+  max-width: 776px;
+  width: 100%;
+  margin: -62px auto 0;
+}
+
+.ladyboss-5dayCake-upgradevip h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 34px;
+  letter-spacing: 0;
+  line-height: 150%;
+  margin-bottom: 20px;
+}
+
+.ladyboss-5dayCake-upgradevip .card {
+  max-width: 1020px;
+  margin: 0 auto;
+  border: none;
+  background: #fff;
+  box-shadow: 0px 10px 100px 5px rgba(0, 0, 0, 0.16);
+  border-radius: 20px;
+  padding: 20px 50px;
+  margin-bottom: 30px;
+}
+
+.ladyboss-5dayCake-upgradevip .card .img-left {
+  padding: 20px 30px;
+}
+
+.ladyboss-5dayCake-upgradevip .card .right-text .title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  line-height: 100%;
+  letter-spacing: 0.04rem;
+  margin-top: 12px;
+}
+
+.ladyboss-5dayCake-upgradevip .card .right-text {
+  padding-left: 29px;
+}
+
+.ladyboss-5dayCake-upgradevip .card .right-text h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  padding: 12px 0 16px;
+}
+
+.ladyboss-5dayCake-upgradevip .card .right-text h4.border-bottom {
+  border-bottom: 1px solid #f0006f !important;
+}
+
+.ladyboss-5dayCake-upgradevip .card .right-text .desp p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+.ladyboss-challenge-wrap .faq-wrap.faq5DayCake {
+  background: url(https://statics.myclickfunnels.com/image/559658/file/a91d1b695afe9149748450fbe4ea3095.png), rgb(243, 243, 243);
+  background-size: 100%;
+  background-repeat: repeat-y;
+  padding-top: 80px;
+}
+
+.ladyboss-challenge-wrap  .attention-row {
+  padding: 0 15px;
+}
+
+.ladyboss-challenge-wrap  .attention-row .card {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 100px 5px #00000029;
+  border: none;
+  padding: 40px;
+}
+
+.ladyboss-challenge-wrap  .attention-row .card .img-fluid {
+  margin: 0 auto;
+  width: 100%
+}
+
+
+.ladyboss-challenge-wrap  .attention-row .card p {
+  font-family: Poppins,sans-serif;
+  font-size: 16px
+}
+
+.ladyboss-challenge-wrap .attention-row .card .money-back-img {
+  max-width: 150px;
+  margin-top: -69px;
+}
+.ladyboss-challenge-wrap .attention-row .card .fw-800 {
+  font-family: Poppins,sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
+  line-height: 130%;
+
+}
+
+.ladyboss-challenge-wrap .faq-wrap.faq5DayCake h4 {
+  font-size: 48px;
+  line-height: 100%;
+}
+
+.ladyboss-5dayCake-congratsVideo-wrap {
+  background: url(https://statics.myclickfunnels.com/image/559139/file/29de2207a73bdc575d75e447f397fbe7.png), #ffffff;
+  background-attachment: fixed;
+  padding: 43px 0 100px;
+  background-size: 100% auto;
+}
+
+.ladyboss-5dayCake-congratsVideo-wrap h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px;
+  line-height: 120%;
+}
+
+.ladyboss-5dayCake-congratsVideo-wrap p {
+  font-family: "Questrial", sans-serif;
+  font-size: 26px;
+  line-height: 120%;
+  margin: 15px 0 25px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap {
+  padding-bottom: 50px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .card {
+  border-radius: 12px;
+  background: #ffffff;
+  margin-top: -50px;
+  box-shadow: 0px 10px 100px 5px rgba(0, 0, 0, 0.16);
+  padding: 40px 60px;
+  border: none;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .card>h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 120%;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .card .reminder-wrap {
+  padding: 15px;
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 120%;
+  background: rgb(253, 235, 242);
+  border: 1px dashed #f00;
+  margin: 15px 0;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info {
+  border-bottom: 1px solid rgb(220, 220, 220);
+  padding-bottom: 35px;
+  max-width: 990px;
+  margin: 20px auto;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info:last-child {
+  border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .icon {
+  max-width: 210px;
+  padding-right: 30px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .icon .img-fluid {
+  max-width: 95px;
+  margin-left: auto;
+  display: block;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text {
+  padding-right: 50px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text h5 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text h2 {
+  font-size: 46px;
+  line-height: 110%;
+  letter-spacing: 0.04rem;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text p {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap {
+  background-color: rgb(253, 235, 242);
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap h6,
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap p {
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 120%;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap p {
+  font-weight: 300;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .facebook-btn {
+  background-color: #364ba2;
+  padding: 30px 20px;
+  max-width: 610px;
+  width: 100%;
+  font-family: bebas-neue-pro;
+  border-radius: 5px;
+  border: 1px solid #123acb;
+  margin: 20px auto 0;
+  display: block;
+  font-size: 35px;
+  letter-spacing: 0;
+  text-transform: initial;
+  font-weight: 400;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .facebook-btn:hover {
+  background-color: #123acb;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info.top-border {
+  border-top: 1px solid rgb(220, 220, 220);
+  padding-top: 35px;
+  margin-top: 25px;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .lean-img {
+  max-width: 380px;
+  margin: 20px auto 5px;
+  display: block;
+  width: 100%;
+}
+
+.ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .yes-want {
+  max-width: 100%;
+  font-family: "Bebas Neue", display;
+  font-size: 20px;
+  letter-spacing: 0.17rem;
+}
+
+@media (max-width:767px) {
+
+  .ladyboss-5dayCake-header .logo {
+    margin: 10px auto;
+  }
+
+  .ladyboss-5dayCake-welvideo-wrap .title {
+    font-size: 36px;
+    line-height: 110%;
+    margin: 10px 0;
+  }
+
+  .ladyboss-5dayCake-welvideo-wrap h3 {
+    font-size: 26px;
+  }
+
+  .ladyboss-5dayCake-welvideo-wrap .video-title {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .ladyboss-5dayCake-welvideo-wrap {
+    background-size: 100% 460px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .title {
+    font-size: 32px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .row>.card {
+    padding: 25px 20px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .nav-tabs .button {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .tab-pane .card {
+    margin-bottom: 20px;
+    padding: 15px 10px 25px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .tab-pane .card .button {
+    padding: 18px;
+    font-size: 20px;
+  }
+
+  .ladyboss-5dayCake-VIPOffer .attention-row .card {
+    padding: 20px;
+  }
+
+  .ladyboss-challenge-wrap .faq-wrap.faq5DayCake h4 {
+    font-size: 32px;
+  }
+
+  .ladyboss-5dayCake-congratsVideo-wrap h3 {
+    font-size: 30px;
+  }
+
+  .ladyboss-5dayCake-congratsVideo-wrap p {
+    font-size: 20px;
+  }
+
+  .ladyboss-5dayCake-congratsVideo-wrap {
+    padding: 30px 0 80px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .card {
+    padding: 25px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .card>h3 {
+    font-size: 19px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .card .reminder-wrap {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info {
+    padding: 10px 10px 25px 10px;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .icon {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .icon .img-fluid {
+    margin: 0 auto 20px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text {
+    padding: 0;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text h2 {
+    letter-spacing: 0;
+    font-size: 32px;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .facebook-btn {
+    font-size: 24px;
+    white-space: initial;
+    line-height: 110%;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap h6,
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .calendar-wrap p {
+    font-size: 15px;
+  }
+
+  .ladyboss-5dayCake-congratsVideo-wrap .title {
+    letter-spacing: 0;
+  }
+
+  .ladyboss-5dayCake-nextSteps-wrap .step-info .step-text .lean-img {
+    max-width: 157px;
+  }
+
+  .ladyboss-5dayCake-secureOrder h3 {
+    font-size: 34px;
+    letter-spacing: 0;
+  }
+
+  .ladyboss-5dayCake-secureOrder .one-time {
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  .ladyboss-5dayCake-upgradevip h2 {
+    font-size: 16px;
+  }
+
+  .ladyboss-5dayCake-upgradevip .card .row {
+    flex-direction: column;
+
+  }
+
+  .ladyboss-5dayCake-upgradevip .card {
+    padding: 8px;
+  }
+
+  .ladyboss-5dayCake-upgradevip .card .right-text .title {
+    font-size: 36px;
+  }
+
+  .ladyboss-5dayCake-upgradevip .card .right-text h4 {
+    font-size: 16px;
+  }
+
+
+}
+
+
+.modal.vip-upgrade-modal .modal-dialog.liOf__modal-dialog {
+  max-width: 975px;
+}
+
+.modal.vip-upgrade-modal .modal-content.liOf__modal-content {
+  border-radius: 0;
+
+}
+
+.modal.vip-upgrade-modal .modal-body {
+  padding: 50px;
+}
+
+.modal.vip-upgrade-modal .modal-body .title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 73px;
+  line-height: 130%;
+  font-weight: 900;
+}
+
+.modal.vip-upgrade-modal .modal-body .subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 31px;
+  line-height: 150%;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 10px 0;
+}
+
+.modal.vip-upgrade-modal .modal-body .lean-img {
+  max-width: 81%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modal.vip-upgrade-modal .modal-body .pro-des {
+  padding: 16px 35px 0;
+}
+
+.modal.vip-upgrade-modal .modal-body .pro-des p {
+  font-family: 'Poppins', sans-serif;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+.modal.vip-upgrade-modal .modal-body .form-group label {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.modal.vip-upgrade-modal .modal-body .form-group .form-check-input {
+  margin-top: 2px;
+}
+
+.modal.vip-upgrade-modal .modal-body .form-border {
+  border: 1px solid #DBDBDB;
+  padding: 20px 20px 0;
+  margin: 20px 0;
+}
+
+.modal.vip-upgrade-modal .modal-body .button-large {
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  line-height: 100%;
+  font-weight: 800;
+  text-transform: capitalize;
+  max-width: 394px;
+  height: 75px;
+  padding: 21px 23px;
+}
+
+.modal.vip-upgrade-modal .modal-body .forget-wrap {
+  background: rgba(238, 26, 125, 0.07);
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.modal.vip-upgrade-modal .modal-body .forget-wrap h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.modal.vip-upgrade-modal .modal-body .forget-wrap p {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0;
+  line-height: 150%;
+}
+
+@media (max-width: 767px) {
+  .modal.vip-upgrade-modal .modal-body {
+    padding: 20px;
+  }
+
+  .modal.vip-upgrade-modal .modal-body .title {
+    font-size: 33px;
+  }
+
+  .modal.vip-upgrade-modal .modal-body .subtitle {
+    font-size: 22px;
+  }
+
+  .modal.vip-upgrade-modal .modal-body .pro-des {
+    padding: 12px;
+  }
+
+  .modal.vip-upgrade-modal .modal-body .button-large {
+    font-size: 27px;
+  }
+
+  .modal.vip-upgrade-modal .modal-body .forget-wrap h4 {
+    font-size: 30px;
+  }
+}
+
+
+.modal.vip-upgrade-modal .form-check.custom-checkbox {
+  padding-left: 0;
+}
+
+.modal.vip-upgrade-modal .form-check.custom-checkbox input:checked~.form-check-label:before {
+  content: "\f14a";
+  font-weight: 600;
+  color: #2152ff;
+}
+
+.modal.vip-upgrade-modal .form-check.custom-checkbox .form-check-label:before {
+  content: "\f0c8";
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 300;
+  font-size: 20px;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  color: #030c213d;
+}
+
+
+.modal.vip-upgrade-modal .form-check.custom-checkbox .form-check-label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+}
+
+.modal.vip-upgrade-modal .custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}

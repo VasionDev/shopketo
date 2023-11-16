@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewgenApiService } from 'src/app/shared/services/newgen-api.service';
 import { ReplaySubject, forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 @Component({
   selector: 'invoice-verification',
@@ -21,11 +22,14 @@ export class InvoiceVerificationComponent implements OnInit {
   public genericError: boolean = false;
   public changesSaved: boolean = false;
   public hideInvoice: boolean = false;
+  public tenant!: string;
   @Input('invoiceInformation')
   public invoiceInformation: any;
   @Input('user')
   public user: any;
-  constructor(private newgenSvc: NewgenApiService) { }
+  constructor(private newgenSvc: NewgenApiService) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
   }

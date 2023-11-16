@@ -1,0 +1,424 @@
+.modal.wdt-800 .modal-dialog {
+  max-width: 800px;
+}
+
+
+.modal.bundle-builder-modal .modal-dialog .modal-content {
+  border-radius: 12px;
+  border: 1px solid rgba(3, 12, 33, 0.121569);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body {
+  padding: 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-header.gray-bg {
+  background: rgba(3, 12, 33, .0588235);
+  padding: 12px 20px 12px 24px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-header .modal-close {
+  color: #030c21b8;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-header .modal-close:hover {
+  color: #030c21;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-header .title {
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav {
+  padding: 14px;
+  background-color: #ffffff;
+  gap: 12px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check {
+  padding: 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check input {
+  display: none;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label {
+  position: relative;
+  font-size: 17px;
+  font-family: century-gothic, sans-serif;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  background: rgba(3, 12, 33, 0.0588235);
+  padding: 12px 12px 12px 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: rgba(3, 12, 33, 0.478431);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label:before {
+  content: "\f111";
+  position: absolute;
+  left: 12px;
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(3, 12, 33, 0.121569);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label span {
+  display: block;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check input:checked~.form-check-label {
+  color: #121722;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check input:checked~.form-check-label:before {
+  content: "\f058";
+  font-weight: 900;
+  color: #f0006f;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs {
+  padding: 16px 8px 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion {
+  margin: 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card-wrapper {
+  padding: 0 8px;
+  margin-bottom: 16px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .col-12 {
+  margin: 0;
+  padding: 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card {
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card {
+  padding: 16px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .card-inner {
+  position: relative;
+  cursor: pointer;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .card-inner.left-bar {
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .card-inner.left-bar .left-bar-bg {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 7px;
+  height: 100%;
+  border-radius: 15px;
+  background-color: #919192;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .card-inner .left-text .title {
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  color: #121722;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .collapse-head {
+  position: relative;
+  cursor: pointer;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .collapse-head[aria-expanded=false]::before,
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .collapse-head[aria-expanded=true]::before {
+  content: "\f078";
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(3, 12, 33, 0.721569);
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-50%) rotate(0);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .collapse-head[aria-expanded=true]::before {
+  -webkit-transform: rotate(-180deg);
+  transform: translateY(-50%) rotate(-180deg);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item {
+  padding: 8px 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .image-wraper .prev-img-wrap {
+  height: 56px;
+  width: 40px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .image-wraper .prev-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .brdr-left {
+  border-left: 2px solid rgba(3, 12, 33, 0.478431);
+  padding-left: 10px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-info {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-info p {
+  font-size: 17px;
+  line-height: 17px;
+  letter-spacing: -0.015em;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-info .disclaimer-reg {
+  line-height: 16px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400;
+  text-align: center;
+  background: #f5f5f5;
+  color: #131313;
+  padding: initial;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .btn:hover,
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .btn:focus {
+  background: #e1e1e1;
+  box-shadow: none;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .number-field {
+  width: 38px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item:first-child {
+  padding-top: 0;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item:last-child {
+  padding-bottom: 0px;
+  border-bottom: none;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .summaryPrd-title a {
+  letter-spacing: -0.015em;
+  font-size: 15px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .summaryPrd-title a:hover,
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .summaryPrd-title a:focus {
+  color: #f0006f;
+  text-decoration: none;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .no-border {
+  border: none;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-footer .btn-groups {
+  margin: 0;
+  display: flex;
+  gap: 12px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .price-text,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .price-text {
+  font-size: 21px;
+  letter-spacing: -.05em;
+  line-height: 32px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .price-text em,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .price-text em {
+  font-size: 18px;
+  font-style: normal;
+  text-decoration: line-through;
+  color: rgba(3, 12, 33, 0.721569);
+  margin-right: 6px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn {
+  padding-left: 12px;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.shopping-btn,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.shopping-btn {
+  background-color: rgba(3, 12, 33, 0.72);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.shopping-btn:hover,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.shopping-btn:hover {
+  background-color: rgba(3, 12, 33, 0.82);
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.summary-btn:hover,
+.modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.summary-btn:hover {
+  color: #f0006f;
+}
+
+.bundle-builder-modal .bundle-builder--loader div.loader-wrap {
+  height: auto;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .btn.disabled {
+  cursor: initial;
+}
+
+.modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .products-item .prd-btn-count .btn:disabled {
+  cursor: initial;
+}
+
+
+@media (max-width: 767px) {
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body {
+    padding-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .modal.addresses-modal.bundle-builder-modal .modal-dialog .modal-content .modal-header .title {
+    margin-top: 0;
+  }
+
+  .modal.addresses-modal.bundle-builder-modal .modal-dialog .modal-content .modal-header {
+    position: fixed;
+    z-index: 1;
+    top: -1px;
+    width: 100%;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content #update-smartship {
+    position: fixed;
+    z-index: 1;
+    top: 62px;
+    width: 100%;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .tab-content.update-products-tabs {
+    margin-top: 184px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body.summary-modal-body .tab-content.update-products-tabs,
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body.final-step-modal-body .products-card {
+    margin-top: 60px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs {
+    padding: 0;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion {
+    padding-bottom: 110px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body.summary-modal-body .update-products-tabs .products-accordion {
+    margin-top: -12px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card-wrapper {
+    padding: 0;
+    margin-bottom: 2px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card {
+    border-radius: 0;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-tabs .products-accordion .card.products-card .card-inner {
+    flex-direction: column;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.shopping-btn,
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.shopping-btn {
+    max-width: 86px;
+    margin-right: 12px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.summary-btn,
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.summary-btn {
+    width: initial;
+    padding-left: 0;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .left-cont .btn.confirm-btn,
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .right-cont .btn.confirm-btn {
+    width: 100%;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .summary-modal-body.modal-body .card.products-card.no-border,
+  .modal.bundle-builder-modal .modal-dialog .modal-content .final-step-modal-body.modal-body .card.products-card.no-border {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .btn-groups {
+    margin-bottom: 10px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .update-products-footer .btn-groups .left-cont {
+    margin-bottom: 8px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-header .title {
+    margin-top: 0;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-header.gray-bg {
+    padding-left: 16px;
+  }
+
+  .modal.right-mobile.bundle-builder-modal.fade .modal-dialog .modal-content .modal-body {
+    margin-top: 50px !important;
+    padding: 10px 0 0 !important;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label {
+    font-size: 16px;
+    padding: 10px 10px 10px 32px;
+    line-height: 20px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label:before {
+    left: 10px;
+    font-size: 16px;
+  }
+
+  .modal.bundle-builder-modal .modal-dialog .modal-content .modal-body .update-products-nav .form-check label span {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+}

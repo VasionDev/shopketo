@@ -1,11 +1,9 @@
-import { Component, OnDestroy, OnInit, Pipe } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { takeUntil, switchMap, tap } from 'rxjs/operators';
-import { ProductsUtilityService } from 'src/app/products/services/products-utility.service';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { AppApiService } from 'src/app/shared/services/app-api.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { TrainingDataService } from 'src/app/shared/services/app-training-data.service';
-import { AppUserService } from 'src/app/shared/services/app-user.service';
 
 @Component({
   selector: 'app-training-center',
@@ -21,8 +19,6 @@ export class TrainingCenterComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: AppApiService,
     private dataService: AppDataService,
-    private userService: AppUserService,
-    private productsUtilityService: ProductsUtilityService,
     private trainingDataService: TrainingDataService
   ) {}
 
@@ -59,7 +55,6 @@ export class TrainingCenterComponent implements OnInit, OnDestroy {
     .subscribe((x: [])=> {
       this.trainingData = x;
       this.dataService.setTrainingData(x);
-      // console.log({list: this.trainingData, category: this.categories})
       const categoryData = this.trainingDataService.getMappedTrainingData(this.trainingData)
       this.trainingDataService.updateProgressStatus(categoryData);
     })

@@ -388,7 +388,7 @@
   background-color: #fff;
 }
 
-.drawer-dropdown-menu > li {
+.drawer-dropdown-menu>li {
   width: 100%;
   list-style: none;
 }
@@ -409,7 +409,7 @@
   background-color: transparent;
 }
 
-.drawer-dropdown.open > .drawer-dropdown-menu {
+.drawer-dropdown.open>.drawer-dropdown-menu {
   display: block;
 }
 
@@ -451,4 +451,64 @@
   .drawer-container {
     max-width: 70rem;
   }
+}
+
+
+/*------------Core Web CSS-----------*/
+
+@media (min-width:390px) {
+  .drawer .drawer-nav .sk-cart.sk-cart-new-ui {
+    min-width: 390px;
+    max-width: 390px;
+  }
+}
+
+.drawer-nav .dashboard__side__navigation ul li {
+  color: #131313;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 10px 0 10px 15px;
+  cursor: pointer;
+  letter-spacing: -.025em;
+  border-radius: 12px;
+  list-style: none;
+  margin: 0;
+}
+
+.drawer-nav .dashboard__side__navigation ul li:last-child {
+  border-bottom: none;
+}
+
+.drawer-nav .dashboard__side__navigation ul li i {
+  color: #2152ff;
+  width: 30px;
+}
+
+.drawer-nav .dashboard__side__navigation .help__menu li i {
+  color: #919192;
+}
+
+.drawer-nav .dashboard__side__navigation .learning__center__menu li i {
+  color: #c419df;
+}
+
+.drawer-nav .dashboard__side__navigation .learning__center__menu {
+  border-top: 1px solid rgba(145, 145, 146, .3);
+  border-bottom: 1px solid rgba(145, 145, 146, .3);
+  padding: 8px 0;
+  margin: 0;
+}
+
+.drawer-nav .dashboard__side__navigation {
+  padding: 8px 14px;
+}
+
+.drawer-nav .dashboard__side__navigation .help__menu {
+  padding: 0 0 8px 0;
+  margin: 0;
+}
+
+.drawer-nav .dashboard__side__navigation ul li.active-link,
+.drawer-nav .dashboard__side__navigation ul li:hover {
+  background: rgba(196, 196, 196, .2);
 }

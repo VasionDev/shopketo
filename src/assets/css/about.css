@@ -1,10 +1,6 @@
 .border-gradient-style {
-  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f7))
-      padding-box,
-    -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb))
-      border-box;
-  background: linear-gradient(#f2f2f7) padding-box,
-    linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  background: linear-gradient(#f2f2f7) padding-box, linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f7)) padding-box, -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb)) border-box;
   border-radius: 40px;
   border: 1px solid transparent;
   max-width: -webkit-fit-content;
@@ -16,7 +12,7 @@
 }
 
 .text-gradient-style {
-  background: linear-gradient(225deg, #0ad8e5 0%, #990cdb 100%);
+  background: linear-gradient(225deg, #0AD8E5 0%, #990CDB 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -30,12 +26,14 @@
 }
 
 .make-people-better {
-  padding: 75px 0;
+  /* padding: 80px 0; */
 }
 
 .make-people-better .video-wrap {
   position: relative;
   margin: 80px 0 40px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .make-people-better .video-wrap img {
@@ -122,10 +120,7 @@
 }
 
 .our-story-wraper .container-fluid .our-story-slider .slick-prev.slick-disabled,
-.our-story-wraper
-  .container-fluid
-  .our-story-slider
-  .slick-next.slick-disabled {
+.our-story-wraper .container-fluid .our-story-slider .slick-next.slick-disabled {
   display: none !important;
 }
 
@@ -161,12 +156,7 @@
   margin: 0;
 }
 
-.our-story-wraper
-  .container-fluid
-  .our-story-slider
-  .slick-dots
-  li
-  button:before {
+.our-story-wraper .container-fluid .our-story-slider .slick-dots li button:before {
   font-size: 28px;
 }
 
@@ -191,7 +181,7 @@
 }
 
 .pruvit-mission-wraper .card .pruvit-ceo-info .title {
-  max-width: 480px;
+  max-width: 440px;
   margin-bottom: 30px;
 }
 
@@ -212,7 +202,7 @@
 
 .our-brand-wraper .container-fluid .our-brand-text {
   max-width: 792px;
-  margin: 0 auto 40px;
+  margin: 0 auto 60px;
 }
 
 .our-brand-wraper .container-fluid .our-brand-text h2 {
@@ -225,18 +215,18 @@
 }
 
 .our-brand-wraper .container-fluid .brand-cards-slider {
-  margin-top: -78px;
+  margin-top: -118px;
 }
 
 .our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items {
-  background: linear-gradient(225deg, #0ce594 4.17%, #3546ff 100%);
+  background: linear-gradient(225deg, #0CE594 4.17%, #3546FF 100%);
   -webkit-box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 30px;
   width: 370px;
   height: 200px;
-  margin: 50px 15px;
+  margin: 70px 15px;
   direction: ltr;
 }
 
@@ -244,26 +234,18 @@
   margin-bottom: 20px;
 }
 
-.our-brand-wraper
-  .container-fluid
-  .brand-cards-slider
-  .brand-card-items
-  .details {
+.our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items .details {
   max-width: 200px;
   width: 100%;
 }
 
 .our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items h3,
-.our-brand-wraper
-  .container-fluid
-  .brand-cards-slider
-  .brand-card-items
-  .details {
+.our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items .details {
   color: #ffffff;
 }
 
 .we-are-pruvit-wraper {
-  padding: 70px 0 180px;
+  padding: 70px 0 140px;
 }
 
 .we-are-pruvit-wraper .row .title {
@@ -283,13 +265,10 @@
   margin-bottom: 18px;
 }
 
+
 .dark-theme .border-gradient-style {
-  background: linear-gradient(#000) padding-box,
-    linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
-  background: -webkit-gradient(linear, left top, left bottom, from(#000))
-      padding-box,
-    -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb))
-      border-box;
+  background: linear-gradient(#000) padding-box, linear-gradient(to bottom left, #0ad8e5, #990cdb) border-box;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000)) padding-box, -webkit-gradient(linear, right top, left bottom, from(#0ad8e5), to(#990cdb)) border-box;
 }
 
 .dark-theme .pruvit-mission-wraper .card .pruvit-ceo-info,
@@ -297,14 +276,17 @@
   background-color: #1c1c1e;
 }
 
+
 @media (min-width: 1466px) {
   .our-story-wraper .container-fluid .our-story-slider .slick-next {
     right: 29%;
   }
+
   .our-story-wraper .container-fluid .our-story-slider .slick-prev {
     left: 29%;
   }
 }
+
 
 @media only screen and (max-width: 1200px) {
   .our-story-wraper .container-fluid .our-story-slider .slick-next {
@@ -316,7 +298,9 @@
   }
 }
 
+
 @media (max-width: 767px) {
+
   .make-people-better h1,
   .pruvit-mission-wraper h1,
   .we-are-pruvit-wraper h1 {
@@ -359,11 +343,7 @@
     margin: 0 8px;
   }
 
-  .our-story-wraper
-    .container-fluid
-    .our-story-slider
-    .slider-items
-    .img-fluid {
+  .our-story-wraper .container-fluid .our-story-slider .slider-items .img-fluid {
     height: 260px;
   }
 
@@ -404,10 +384,6 @@
     padding: 10px 0;
   }
 
-  .our-brand-wraper .container-fluid .our-brand-text {
-    margin: 0 auto 20px;
-  }
-
   .our-brand-wraper .container-fluid .our-brand-text h2 {
     margin-top: 25px;
     margin-bottom: 20px;
@@ -420,7 +396,7 @@
   .our-brand-wraper .container-fluid .brand-cards-slider .brand-card-items {
     width: 248px;
     height: 130px;
-    margin: 48px 10px;
+    margin: 68px 10px;
     padding: 20px;
   }
 
@@ -429,7 +405,7 @@
   }
 
   .we-are-pruvit-wraper {
-    padding: 30px 0 80px;
+    padding: 10px 0 80px;
   }
 
   .we-are-pruvit-wraper .row .title {
@@ -441,6 +417,7 @@
   .our-story-wraper .container-fluid .our-story-slider .slick-next {
     right: 4%;
   }
+
   .our-story-wraper .container-fluid .our-story-slider .slick-prev {
     left: 4%;
   }

@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppSeoService } from 'src/app/shared/services/app-seo.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
 declare var $: any;
+declare var vipAosJS: any;
+declare var viLimitedProdSliderJs: any;
 
 @Component({
   selector: 'app-vip',
@@ -15,18 +19,32 @@ export class VipComponent implements OnInit, OnDestroy {
   language = '';
   country = '';
   defaultLanguage = '';
+  generalSettings: any;
+  isLoggedUserExist: boolean = false;
   subscriptions: SubscriptionLike[] = [];
+  tenant = '';
 
   constructor(
     private dataService: AppDataService,
     private utilityService: AppUtilityService,
-    private router: Router
+    private router: Router,
+    private seoService: AppSeoService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
-    this.getDiscountHeight();
+    //this.getDiscountHeight();
     this.getSelectedLanguage();
     this.getSelectedCountry();
+    this.animationLoaded();
+    this.setSeo();
+  }
+
+  animationLoaded() {
+    $(document).ready(() => {
+      viLimitedProdSliderJs();
+      vipAosJS();
+    });
   }
 
   getDiscountHeight() {
@@ -69,6 +87,7 @@ export class VipComponent implements OnInit, OnDestroy {
           return;
         }
 
+        this.generalSettings = data.productsData.general_settings;
         this.defaultLanguage = data.productsData.default_lang;
       })
     );
@@ -80,6 +99,16 @@ export class VipComponent implements OnInit, OnDestroy {
 
   onVipLogin() {
     this.utilityService.navigateToRoute('/category/vip');
+  }
+
+  onSubscribeSavePage() {
+    const routeURL = '/smartship';
+    this.utilityService.navigateToRoute(routeURL);
+  }
+
+  setSeo() {
+    this.seoService.updateTitle('VIP');
+    this.meta.updateTag( { property: 'og:title', content: 'VIP' });
   }
 
   ngOnDestroy() {

@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from '../shared/services/app-data.service';
+import { AppSeoService } from '../shared/services/app-seo.service';
 declare var $: any;
 declare var betterTripsSliderJs: any;
 declare var aosJS: any;
@@ -22,7 +24,9 @@ export class BetterTripsComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: AppDataService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private seoService: AppSeoService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +34,7 @@ export class BetterTripsComponent implements OnInit, OnDestroy {
     this.getSelectedLanguage();
     this.getReferrer();
     this.getSelectedCountry();
-
+    this.setSeo();
     $(document).ready(() => {
       betterTripsSliderJs();
       aosJS();
@@ -74,6 +78,11 @@ export class BetterTripsComponent implements OnInit, OnDestroy {
         this.selectedCountry = countryCode;
       }
     );
+  }
+
+  setSeo() {
+    this.seoService.updateTitle('Better Trips');
+    this.meta.updateTag( { property: 'og:title', content: 'Better Trips' });
   }
 
   ngOnDestroy() {

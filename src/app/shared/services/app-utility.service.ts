@@ -42,7 +42,7 @@ export class AppUtilityService {
   private redirectUrl = '';
   private language = '';
   private country = '';
-  private isStaging: boolean;
+  private isLocalhost: boolean;
   private referrer: any = {};
   private productSettings = {} as ProductSettings;
   private readonly latestCheckoutUrl$ = new BehaviorSubject('');
@@ -56,10 +56,16 @@ export class AppUtilityService {
     private store: Store<AppState>,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.isStaging = environment.isStaging;
+    this.isLocalhost = this.document.location.href.includes('localhost');
     this.checkoutUrl = environment.checkoutDomain;
     this.shareCartUrl = environment.shareCartDomain;
     this.redirectUrl = environment.redirectDomain;
+
+    this.dataService.currentUserWithScopes$.subscribe((user) => {
+      if (user !== null) {
+        this.user = user;
+      }
+    });
 
     this.dataService.currentProductsData$.subscribe((data) => {
       if (
@@ -76,16 +82,21 @@ export class AppUtilityService {
     this.store.select('cartList').subscribe((res) => {
       this.oneTimeCart = res.oneTime ? res.oneTime : [];
       this.everyMonthCart = res.everyMonth ? res.everyMonth : [];
-      const oneTimeHasNoRestriction = this.oneTimeCart.filter((cart: Cart)=> {
-        return cart.hasUserRestriction && cart.hasUserRestriction === true
-      })
+      const oneTimeHasNoRestriction = this.oneTimeCart.filter((cart: Cart) => {
+        return cart.hasUserRestriction && cart.hasUserRestriction === true;
+      });
 
-      const everyMonthHasNoRestriction = this.everyMonthCart.filter((cart: Cart)=> {
-        return cart.hasUserRestriction && cart.hasUserRestriction === true
-      })
-      if(oneTimeHasNoRestriction.length > 0 || everyMonthHasNoRestriction.length > 0) {
+      const everyMonthHasNoRestriction = this.everyMonthCart.filter(
+        (cart: Cart) => {
+          return cart.hasUserRestriction && cart.hasUserRestriction === true;
+        }
+      );
+      if (
+        oneTimeHasNoRestriction.length > 0 ||
+        everyMonthHasNoRestriction.length > 0
+      ) {
         this.hasLockedProduct = true;
-      }else {
+      } else {
         this.hasLockedProduct = false;
       }
 
@@ -119,13 +130,7 @@ export class AppUtilityService {
 
         // this.setProductSkus();
         // this.setProductSkusWithProdID();
-        this.setTinyUrl()
-      }
-    });
-
-    this.dataService.currentUserWithScopes$.subscribe((user) => {
-      if (user !== null) {
-        this.user = user;
+        this.setTinyUrl();
       }
     });
   }
@@ -161,7 +166,11 @@ export class AppUtilityService {
 
     this.oneTimeCart.forEach((element, index) => {
       tempProductSkus +=
-        element.cart.productID + ':' + element.cart.productSku.oneTime + ':' + element.cart.quantity;
+        element.cart.productID +
+        ':' +
+        element.cart.productSku.oneTime +
+        ':' +
+        element.cart.quantity;
       if (this.oneTimeCart.length - 1 !== index) {
         tempProductSkus += ',';
       }
@@ -173,7 +182,11 @@ export class AppUtilityService {
 
     this.everyMonthCart.forEach((element, index) => {
       tempProductSkus +=
-        element.cart.productID + ':' + element.cart.productSku.everyMonth + ':' + element.cart.quantity;
+        element.cart.productID +
+        ':' +
+        element.cart.productSku.everyMonth +
+        ':' +
+        element.cart.quantity;
       if (this.everyMonthCart.length - 1 !== index) {
         tempProductSkus += ',';
       }
@@ -186,9 +199,38 @@ export class AppUtilityService {
     return this.hasLockedProduct;
   }
 
-  setTinyUrl() {
+  getVIParams() {
+    const VIUser = this.userService.validateVIUserSession();
+    if (VIUser !== null) {
+      if (
+        VIUser.hasOwnProperty('viProductId') &&
+        VIUser.viProductId !== ''
+      ) {
+        let viParams = '';
+        if(isEuropeanCountry(this.country))
+          viParams = '&firstName='+VIUser.firstName+'&lastName='+VIUser.lastName+'&email='+VIUser.email+'&offererCode='+VIUser.referrer+'&viProductId='+VIUser.viProductId +'&viCode='+VIUser.viCode;
+        else 
+          viParams = '&firstName='+VIUser.firstName+'&lastName='+VIUser.lastName+'&email='+VIUser.email+'&offererCode='+VIUser.referrer+'&viProductId='+VIUser.viProductId +'&viCode='+VIUser.viCode+'&offerExpiryTime='+VIUser.expiryTime;
 
-    const referrerCode = this.referrer.hasOwnProperty('code')
+        return viParams;
+      }
+    }
+    return '';
+  }
+
+  setTinyUrl(VI?:any) {
+    
+    const isEU = isEuropeanCountry(this.country);
+    let viParams = '';
+    if(VI === undefined) { 
+      viParams = this.getVIParams();
+    } else {
+      viParams = VI ? '&firstName='+VI.firstName+'&lastName='+VI.lastName+'&email='+VI.email+'&phone='+VI.phone+'&offererCode='+VI.offererCode+'&viProductId='+VI.viProductId +'&viCode='+VI.viCode+(!isEU ? '&offerExpiryTime='+VI.offerExpiryTime : '') : '';
+    }
+
+    const referrerCode = this.user
+      ? this.user.mvuser_refCode
+      : this.referrer.hasOwnProperty('code')
       ? this.referrer.code
       : '';
     const gaCode = this.referrer.hasOwnProperty('ga_track_id')
@@ -197,34 +239,40 @@ export class AppUtilityService {
     const fbCode = this.referrer.hasOwnProperty('fb_pixel_id')
       ? this.referrer.fb_pixel_id
       : '';
-    
-    const baseUrl = this.country.toLowerCase() !== 'us' ? this.shareCartUrl.replace('{country}', this.country.toLowerCase()) : this.shareCartUrl.replace('/{country}', '');
-    const rootUrl = baseUrl.replace("{code}", referrerCode);
+
+    const baseUrl =
+      this.country.toLowerCase() !== 'us'
+        ? this.shareCartUrl.replace('{country}', this.country.toLowerCase())
+        : this.shareCartUrl.replace('/{country}', '');
+    const rootUrl = baseUrl.replace('{code}', referrerCode);
     let checkoutUrl = '';
 
-    if(isEuropeanCountry(this.country)) {
+    if (isEU) {
       this.hasLockedProduct = false;
       checkoutUrl =
-      this.checkoutUrl +
-      referrerCode +
-      '?products=' +
-      this.productSkus +
-      '&country=' +
-      this.country.toLowerCase() +
-      '&redirect_url=' +
-      this.redirectUrl +
-      '&language=' +
-      this.language +
-      '&gaCode=' +
-      gaCode +
-      '&fbCode=' +
-      fbCode;
+        this.checkoutUrl +
+        referrerCode +
+        '?products=' +
+        this.productSkus +
+        '&country=' +
+        this.country.toLowerCase() +
+        '&redirect_url=' +
+        this.redirectUrl +
+        '&language=' +
+        this.language +
+        '&gaCode=' +
+        gaCode +
+        '&fbCode=' +
+        fbCode;
+      checkoutUrl = checkoutUrl + viParams;
     } else {
       checkoutUrl =
-      rootUrl + (!environment.isStaging ? '?products=' : '&products=') +
-      this.productSkusWithProdID +
-      '&lang=' +
-      this.language;
+        rootUrl +
+        (!this.isLocalhost ? '?products=' : '&products=') +
+        this.productSkusWithProdID +
+        '&lang=' +
+        this.language;
+      checkoutUrl = checkoutUrl + viParams;
     }
 
     this.latestCheckoutUrl$.next(checkoutUrl);
@@ -233,8 +281,8 @@ export class AppUtilityService {
       .pipe(
         take(1),
         switchMap((latestUrl) => {
-          return this.apiService.getUnicomShortenUrl({originalUrl: latestUrl});
-          // return this.apiService.getTinyUrl(latestUrl);
+          if(environment.clientDomain === 'https://localhost:4200') return this.apiService.getTinyUrl(latestUrl);
+          else return this.apiService.getUnicomShortenUrl({originalUrl: latestUrl});
         })
       )
       .subscribe((tinyUrl) => {
@@ -283,7 +331,7 @@ export class AppUtilityService {
       fbCode;
     } else {
       checkoutUrl =
-      rootUrl + (!environment.isStaging ? '?products=' : '&products=') +
+      rootUrl + (!environment.isLocalhost ? '?products=' : '&products=') +
       this.productSkusWithProdID +
       '&lang=' +
       this.language;
@@ -351,7 +399,7 @@ export class AppUtilityService {
     return tempEveryMonthCart;
   }
 
-  navigateToRoute(routeURL: string, specifiedCountry?: string) {
+  navigateToRoute(routeURL: string, specifiedCountry?: string, specifiedQueryParams={}) {
     let country = this.country;
 
     const referrerCode = this.referrer.hasOwnProperty('code')
@@ -368,29 +416,33 @@ export class AppUtilityService {
         specifiedCountry
       ) {
         if (referrerCode === '') {
-          this.router.navigate([routeURL]);
+          this.router.navigate([routeURL], {
+            queryParams: { ...specifiedQueryParams }
+          });
         } else {
-          if (this.isStaging) {
+          if (this.isLocalhost) {
             this.router.navigate([routeURL], {
-              queryParams: { ref: referrerCode },
+              queryParams: { ref: referrerCode, ...specifiedQueryParams },
             });
           } else {
-            this.router.navigate([routeURL]);
+            this.router.navigate([routeURL], {
+              queryParams: { ...specifiedQueryParams }
+            });
           }
         }
       } else {
         if (referrerCode === '') {
           this.router.navigate([routeURL], {
-            queryParams: { lang: this.language },
+            queryParams: { lang: this.language, ...specifiedQueryParams },
           });
         } else {
-          if (this.isStaging) {
+          if (this.isLocalhost) {
             this.router.navigate([routeURL], {
-              queryParams: { lang: this.language, ref: referrerCode },
+              queryParams: { lang: this.language, ref: referrerCode, ...specifiedQueryParams },
             });
           } else {
             this.router.navigate([routeURL], {
-              queryParams: { lang: this.language },
+              queryParams: { lang: this.language, ...specifiedQueryParams },
             });
           }
         }
@@ -401,29 +453,33 @@ export class AppUtilityService {
         specifiedCountry
       ) {
         if (referrerCode === '') {
-          this.router.navigate([country.toLowerCase() + routeURL]);
+          this.router.navigate([country.toLowerCase() + routeURL], {
+            queryParams: { ...specifiedQueryParams }
+          });
         } else {
-          if (this.isStaging) {
+          if (this.isLocalhost) {
             this.router.navigate([country.toLowerCase() + routeURL], {
-              queryParams: { ref: referrerCode },
+              queryParams: { ref: referrerCode, ...specifiedQueryParams },
             });
           } else {
-            this.router.navigate([country.toLowerCase() + routeURL]);
+            this.router.navigate([country.toLowerCase() + routeURL], {
+              queryParams: { ...specifiedQueryParams }
+            });
           }
         }
       } else {
         if (referrerCode === '') {
           this.router.navigate([country.toLowerCase() + routeURL], {
-            queryParams: { lang: this.language },
+            queryParams: { lang: this.language, ...specifiedQueryParams },
           });
         } else {
-          if (this.isStaging) {
+          if (this.isLocalhost) {
             this.router.navigate([country.toLowerCase() + routeURL], {
-              queryParams: { lang: this.language, ref: referrerCode },
+              queryParams: { lang: this.language, ref: referrerCode, ...specifiedQueryParams },
             });
           } else {
             this.router.navigate([country.toLowerCase() + routeURL], {
-              queryParams: { lang: this.language },
+              queryParams: { lang: this.language, ...specifiedQueryParams },
             });
           }
         }
@@ -672,9 +728,8 @@ export class AppUtilityService {
     component: ComponentType<any>,
     ...args: { key: string; value: any }[]
   ) {
-    const factory = this.resolver.resolveComponentFactory(component);
-    const componentRef = container.createComponent(factory);
-
+    //const factory = this.resolver.resolveComponentFactory(component);
+    const componentRef = container.createComponent(component);
     args.forEach((item) => {
       componentRef.instance[item.key] = item.value;
     });

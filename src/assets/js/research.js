@@ -25,7 +25,14 @@ const researchSliderJS = () => {
 
 const aosJS = () => {
   AOS.init({
-    duration: 1500,
+    duration: 1000,
+    once: true,
+  });
+};
+
+const vipAosJS = () => {
+  AOS.init({
+    duration: 500,
     once: true,
   });
 };

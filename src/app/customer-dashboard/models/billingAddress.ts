@@ -6,6 +6,7 @@ export interface BillingAddress {
   country: string;
   postalCode: string;
   region: string;
+  isValidZip?: boolean;
   attentionOf?: string;
   phoneCountry?: string;
   phoneNumber?: string;

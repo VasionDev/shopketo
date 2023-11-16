@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppApiService } from '../shared/services/app-api.service';
 import { AppDataService } from '../shared/services/app-data.service';
+import { AppSeoService } from '../shared/services/app-seo.service';
+import { AppUtilityService } from '../shared/services/app-utility.service';
 
 @Component({
   selector: 'app-team',
@@ -20,11 +24,16 @@ export class TeamComponent implements OnInit, OnDestroy {
   referrer: any = {};
   modalData: any = null;
   isLoaded = false;
+  allowedCountry = ['US', 'CA'];
 
   constructor(
     private dataService: AppDataService,
     private apiService: AppApiService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private utilityService: AppUtilityService,
+    private router: Router,
+    private seoService: AppSeoService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +41,12 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.getSelectedLanguage();
     this.getReferrer();
     this.getSelectedCountry();
+    this.setRedirectURL();
+    this.setSeo();
+  }
+
+  setRedirectURL() {
+    this.utilityService.setRedirectURL(this.router.url, this.selectedCountry);
   }
 
   getDiscountHeight() {
@@ -66,7 +81,11 @@ export class TeamComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((countryCode: string) => {
         this.selectedCountry = countryCode;
-        this.getSpecialists();
+        if (this.allowedCountry.includes(countryCode)) {
+          this.getSpecialists();
+        } else {
+          this.isCountryAvailable = false;
+        }
       });
   }
 
@@ -78,6 +97,12 @@ export class TeamComponent implements OnInit, OnDestroy {
         this.specialists = res;
         this.isLoaded = true;
       });
+  }
+
+  
+  setSeo() {
+    this.seoService.updateTitle('Meet the team');
+    this.meta.updateTag( { property: 'og:title', content: 'Meet the team' });
   }
 
   ngOnDestroy() {

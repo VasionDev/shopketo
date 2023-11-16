@@ -15,20 +15,19 @@
               </li>
               <span class="breadcrumb-greater-than">&#8250;</span>
               <li>
-                <a class="color-gray" (click)="onClickPromoter()">{{
+                <a *ngIf="tenant !== 'ladyboss'" class="color-gray" (click)="onClickPromoter()">{{
                   "promoter" | translate
                 }}</a>
+                <a *ngIf="tenant === 'ladyboss'" class="color-gray" (click)="onClickPromoter()">Champion</a>
               </li>
             </ul>
-
-            <app-vi-offer></app-vi-offer>
           </div>
 
           <div class="col-sm-12 text-center">
-            <h1 class="jumbo-text-big title">
+            <h1 class="jumbo-text-big title color-black">
               {{ "select-pack" | translate }}
             </h1>
-            <p class="subtitle">
+            <p class="subtitle color-gray">
               {{ "savings-shown-below-are-available-when" | translate }}
             </p>
           </div>
@@ -118,7 +117,7 @@
             </div>
           </div>
         </figure>
-        <div class="row">
+        <div *ngIf="tenant === 'pruvit'" class="row">
           <div class="col text-center">
             <p class="promoter-note-text">
               <strong>{{ "please-note" | translate }}</strong>

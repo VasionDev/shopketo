@@ -8,6 +8,8 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { SubscriptionLike } from 'rxjs';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 
 @Component({
@@ -18,14 +20,18 @@ declare var $: any;
 export class DeliveryOptionsComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
+  tenant: string = '';
   selectedLanguage = '';
   productSettings: any = {};
   subscriptions: SubscriptionLike[] = [];
 
   constructor(
     private dataService: AppDataService,
+    public utilityService: AppUtilityService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
     this.getSelectedLanguage();
@@ -74,6 +80,11 @@ export class DeliveryOptionsComponent
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler() {
     $('.drawer').drawer('close');
+  }
+
+  onClickSmartshipNow() {
+    $('.drawer').drawer('close');
+    this.utilityService.navigateToRoute('/smartship');
   }
 
   ngOnDestroy() {

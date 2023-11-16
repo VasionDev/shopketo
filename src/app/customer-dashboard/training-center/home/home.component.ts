@@ -3,8 +3,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
-import { AppApiService } from 'src/app/shared/services/app-api.service';
+import { takeUntil } from 'rxjs/operators';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { TrainingDataService } from 'src/app/shared/services/app-training-data.service';
 
@@ -16,23 +15,27 @@ import { TrainingDataService } from 'src/app/shared/services/app-training-data.s
 export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  public tenant!: string;
   public facebookId: string = environment.facebookAppId;
   public trainingData: any[] = [];
   public categories: any[] = [];
   public inProgressCategories: any[] = [];
   public completedCategories: any[] = [];
   public notStartedCategories: any[] = [];
+  public isSpinner: boolean = false;
 
   constructor(
     private clipboard: Clipboard,
-    private apiService: AppApiService,
     private dataService: AppDataService,
     private trainingService: TrainingDataService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.tenant = environment.tenant;
+  }
 
   ngOnInit(): void {
+    this.isSpinner = true;
     this.getTrainingCategories();
     window.scrollTo(0, 0);
   }
@@ -46,8 +49,8 @@ export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
     .subscribe((x: any[]) => {
       this.categories = x;
       if(this.categories.length) {
-        // console.log(this.categories)
         this.filterCategoriesWithProgressStatus(this.categories)
+        this.isSpinner = false;
       }
     })
   }
@@ -64,11 +67,21 @@ export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
       if(cat.status === 'on-progress') {
         this.inProgressCategories.push(cat)
       }else if(cat.status === 'completed') {
+        const completedCat = this.getCompletedTime(cat)
+        cat.completedTime = completedCat.time
         this.completedCategories.push(cat)
       }else {
         this.notStartedCategories.push(cat)
       }
       return cat
+    })
+  }
+
+  getCompletedTime(cat: any) {
+    const localStrgCategory = localStorage.getItem('CompletedCategory')
+    const completedCategory = localStrgCategory ? JSON.parse(localStrgCategory) : [];
+    return completedCategory.find((x: any) => {
+      return x.id === cat.catID
     })
   }
 
@@ -113,13 +126,9 @@ export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
     return sharedLink;
   }
 
-  ngOnDestroy(): void {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
-
   onRedo(category: any) {
     if (confirm("Are you sure?")) {
+      this.isSpinner = true;
       const localStrgLesson = localStorage.getItem('Lesson')
       const localStrgIndex = localStorage.getItem('Index')
       const localStrgCategory = localStorage.getItem('CompletedCategory')
@@ -151,15 +160,13 @@ export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed$)
       ).subscribe(
         (res: any) => {
-          // console.log(res)
-          this.trainingService.updateProgressStatus(this.categories)
+          this.trainingService.updateProgressStatus(this.categories);
+          this.isSpinner = false;
         },
         (error => {
           console.log('user save', error)
         }),
-        () => {
-          // console.log('completed')
-        }
+        () => {}
       )
       window.scrollTo(0, 0);
     }
@@ -173,6 +180,11 @@ export class TrainingCenterHomeComponent implements OnInit, OnDestroy {
       };
     });
     return indicies;
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
 }

@@ -6,7 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubscriptionLike } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppSeoService } from 'src/app/shared/services/app-seo.service';
 import { AppUserService } from 'src/app/shared/services/app-user.service';
@@ -21,6 +22,7 @@ import { Product } from '../../models/product.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   selectedLanguage = '';
   selectedCountry = '';
   products: Product[] = [];
@@ -34,9 +36,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   isRedirectionStarted = false;
   isLoggedIn = false;
   accessLevelTitle = '';
-  discountHeight$ = this.dataService.currentDiscountHeight$;
+  discountHeight = 0;
+  discountHeight1$ = this.dataService.currentDiscountHeight$;
   user: any;
-  subscriptions: SubscriptionLike[] = [];
+  tenant = '';
 
   constructor(
     private dataService: AppDataService,
@@ -47,6 +50,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private userService: AppUserService,
     private changeDetectionRef: ChangeDetectorRef
   ) {
+    this.tenant = environment.tenant;
     this.returningUrl = environment.returningDomain;
     this.clientId = environment.clientID;
     this.clientDomain = environment.clientDomain;
@@ -55,25 +59,30 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getDiscountHeight();
     this.getUser();
     this.getSelectedCountry();
   }
 
-  getUser() {
-    this.dataService.currentUserWithScopes$.subscribe((user) => {
-      this.user = user;
+  getDiscountHeight() {
+    this.dataService.currentDiscountHeight$.pipe(takeUntil(this.destroyed$)).subscribe((height: number) => {
+      this.discountHeight = height;
+      this.changeDetectionRef.detectChanges();
+    });
+  }
 
+  getUser() {
+    this.dataService.currentUserWithScopes$.pipe(takeUntil(this.destroyed$)).subscribe((user) => {
+      this.user = user;
       this.getProduct();
     });
   }
 
   getSelectedCountry() {
-    this.subscriptions.push(
-      this.dataService.currentSelectedCountry$.subscribe((country: string) => {
-        this.selectedCountry = country;
-        this.setRedirectURL();
-      })
-    );
+    this.dataService.currentSelectedCountry$.pipe(takeUntil(this.destroyed$)).subscribe((country: string) => {
+      this.selectedCountry = country;
+      this.setRedirectURL();
+    })
   }
 
   setRedirectURL() {
@@ -81,47 +90,46 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    this.subscriptions.push(
-      this.dataService.currentProductsData$.subscribe((data) => {
-        if (
-          data &&
-          Object.keys(data).length === 0 &&
-          data.constructor === Object
-        ) {
-          return;
-        }
+    this.dataService.currentProductsData$.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
+      if (
+        data &&
+        Object.keys(data).length === 0 &&
+        data.constructor === Object
+      ) {
+        return;
+      }
 
-        this.products = data.products;
-        this.getProduct();
-      })
-    );
+      this.products = data.products;
+      this.getProduct();
+    })
   }
 
   getProduct() {
-    this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params) => {
-        this.product = {} as Product;
+    this.activatedRoute.params.pipe(takeUntil(this.destroyed$)).subscribe((params) => {
+      this.product = {} as Product;
 
-        this.products.forEach((product) => {
-          if (product.name === params['id']) {
-            this.product = product;
-            this.accessLevelTitle = Object.values(this.product.accessLevels)
-              .filter((a: { on: boolean; title: string }) => a.on)
-              .map((a) => a.title)
-              .join(', ');
+      this.products.forEach((product) => {
+        if (product.name === params['id']) {
+          this.product = product;
+          this.accessLevelTitle = Object.values(this.product.accessLevels)
+            .filter((a: { on: boolean; title: string }) => a.on)
+            .map((a) => a.title)
+            .join(', ');
 
-            window.scroll(0, 0);
+          window.scroll(0, 0);
 
-            this.checkUserAccess();
+          this.checkUserAccess();
 
-            this.changeDetectionRef.markForCheck();
-          }
-        });
+          this.changeDetectionRef.markForCheck();
+        }
+      });
+      if(!Object.keys(this.product).length) {
+        this.utilityService.navigateToRoute('/');
+      }
 
-        this.setRedirectURL();
-        this.setSeo();
-      })
-    );
+      this.setRedirectURL();
+      this.setSeo();
+    })
   }
 
   checkUserAccess() {
@@ -154,19 +162,16 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     ) {
       this.seoService.updateTitle('Page not found');
 
-      this.subscriptions.push(
-        this.dataService.currentIsSubdomain$.subscribe((status: boolean) => {
-          if (!status) {
-            this.seoService.updateRobots('noindex,follow');
-          }
-        })
-      );
+      this.dataService.currentIsSubdomain$.pipe(takeUntil(this.destroyed$)).subscribe((status: boolean) => {
+        if (!status) {
+          this.seoService.updateRobots('noindex,follow');
+        }
+      });
     }
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((element) => {
-      element.unsubscribe();
-    });
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

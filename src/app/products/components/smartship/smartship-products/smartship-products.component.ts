@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, SubscriptionLike } from 'rxjs';
+import { Observable, ReplaySubject, SubscriptionLike } from 'rxjs';
 import { ProductTagOrCategory } from 'src/app/products/models/product-tag-or-category.model';
 import { Product } from 'src/app/products/models/product.model';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
 import { AppSeoService } from 'src/app/shared/services/app-seo.service';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 declare var tagSliderJS: any;
 declare var $: any;
 
@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./smartship-products.component.css'],
 })
 export class SmartshipProductsComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   selectedLanguage = '';
   selectedCountry = '';
   isLoggedUserExist: boolean = false;
@@ -28,12 +29,30 @@ export class SmartshipProductsComponent implements OnInit, OnDestroy {
   categories$!: Observable<ProductTagOrCategory[]>;
   mostPopularSmartships: Product[] = [];
   subscriptions: SubscriptionLike[] = [];
+  isMobileView: boolean = false;
 
   constructor(
     private dataService: AppDataService,
     private translate: TranslateService,
     private seoService: AppSeoService
-  ) {}
+  ) {
+    this.onMobileCheck();
+  }
+
+  onMobileCheck() {
+    this.dataService.mobileView$
+    .pipe(takeUntil(this.destroyed$))
+    .subscribe(res => {
+      this.isMobileView = res;
+      const isSlickPresent = $('.most-popular').hasClass('slick-initialized');
+      if(isSlickPresent) {
+        $('.most-popular').slick('unslick');
+      }
+      if (this.mostPopularSmartships.length > 2 && !this.isMobileView) {
+        tagSliderJS('most-popular', this.mostPopularSmartships.length);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.getUser();
@@ -114,7 +133,7 @@ export class SmartshipProductsComponent implements OnInit, OnDestroy {
         this.categorySmartshipProducts = this.smartshipProducts;
 
         $(document).ready(() => {
-          if (this.mostPopularSmartships.length > 2) {
+          if (this.mostPopularSmartships.length > 2 && !this.isMobileView) {
             tagSliderJS('most-popular', this.mostPopularSmartships.length);
           }
         });
@@ -202,8 +221,8 @@ export class SmartshipProductsComponent implements OnInit, OnDestroy {
 
     product.variations.forEach((variation) => {
       if (variation.orderType === 'ordertype_2') {
-        if (variation.price < minPrice) {
-          minPrice = variation.price;
+        if (variation.priceObj.everyMonth < minPrice) {
+          minPrice = variation.priceObj.everyMonth;
         }
       }
     });
@@ -218,8 +237,11 @@ export class SmartshipProductsComponent implements OnInit, OnDestroy {
   getOriginalPrice(product: Product) {
     let minPrice = Number.MAX_SAFE_INTEGER;
 
+    const isOrderTypeOneExist = product.variations.some(varEl => varEl.orderType === 'ordertype_1');
+    const checkedOrderType = isOrderTypeOneExist ? 'ordertype_1' : 'ordertype_2';
+
     product.variations.forEach((variation) => {
-      if (variation.orderType === 'ordertype_1') {
+      if (variation.orderType === checkedOrderType) {
         if (variation.price < minPrice) {
           minPrice = variation.price;
         }
@@ -343,6 +365,8 @@ export class SmartshipProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });

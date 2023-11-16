@@ -1,5 +1,6 @@
-import { ProductVariationBase } from 'src/app/products/models/product-variation.model';
+import { ProductVariation, ProductVariationBase } from 'src/app/products/models/product-variation.model';
 import { Offer } from './offer.model';
+import { Product } from 'src/app/products/models/product.model';
 
 export interface Cart {
   country: string;
@@ -11,6 +12,9 @@ export interface Cart {
   isDiscountable?: boolean;
   hasUserRestriction?: boolean;
   cart: {
+    product?: Product;
+    variation?: ProductVariation;
+    categoryId?: number;
     productID: number;
     productName: string;
     productImageUrl: string;
@@ -26,6 +30,7 @@ export interface Cart {
     smartshipDiscountPercent: number;
     isUserCanAccess: boolean;
     discountType: Offer['type'];
+    isOfferProduct?: boolean;
     offerDiscountPrice: number;
     isSmartshipDiscountOn: boolean;
   };

@@ -13,8 +13,10 @@ import { Product } from 'src/app/products/models/product.model';
 import { ProductsFormService } from 'src/app/products/services/products-form.service';
 import { PromoterService } from 'src/app/products/services/promoter.service';
 import { AppDataService } from 'src/app/shared/services/app-data.service';
+import { AppTagManagerService } from 'src/app/shared/services/app-tag-manager.service';
 import { AppUserService } from 'src/app/shared/services/app-user.service';
 import { AppUtilityService } from 'src/app/shared/services/app-utility.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 declare var tooltipJS: any;
 @Component({
@@ -34,6 +36,7 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
   accessLevelTitle = '';
   isEveryoneAccess = true;
   subscriptions: SubscriptionLike[] = [];
+  tenant: string;
 
   constructor(
     private dataService: AppDataService,
@@ -41,10 +44,12 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
     private promoterService: PromoterService,
     private userService: AppUserService,
     private productFormService: ProductsFormService,
-    private changeDetectionRef: ChangeDetectorRef
+    private changeDetectionRef: ChangeDetectorRef,
+    private tagManager: AppTagManagerService
   ) {
+    this.tenant = environment.tenant;
     this.getProducts();
-
+    this.getSelectedCountry();
     $(document).ready(() => {
       tooltipJS();
     });
@@ -56,15 +61,19 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getSelectedLanguage();
-    this.getSelectedCountry();
   }
 
   manageUserAccess() {
-    const { price, discount } = this.productFormService.getProductPrice(
+    const { price, discount, variation } = this.productFormService.getProductPrice(
       this.product.variations
     );
-
-    this.product.finalPrice = this.getProductBestPrice(discount, price);
+    
+    if(this.tenant === 'pruvit') {
+      const finalDiscount = this.getApplicableVipDiscount(discount, variation);
+      this.product.finalPrice = this.getProductBestPrice(finalDiscount, price);
+    }else {
+      this.product.finalPrice = this.getProductBestPrice(discount, price);
+    }
 
     this.isUserCanAccess = this.userService.checkUserAccess(
       this.product.accessLevels,
@@ -84,6 +93,50 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
       isNoAccessSelected || this.product.accessLevels.isEveryone.on;
 
     this.changeDetectionRef.markForCheck();
+  }
+
+  private getApplicableVipDiscount(discount: number, variation: ProductVariation) {
+    const LocalMVUser = sessionStorage.getItem('MVUser');
+    const user = LocalMVUser ? JSON.parse(LocalMVUser) : null;
+    let activeSmartshipExist: boolean = false;
+    if (user) {
+      activeSmartshipExist = user?.mvuser_scopes.includes('smartship');
+    }
+    const localEveryMonthCart = localStorage.getItem('EveryMonth');
+    const everyMonthCart = localEveryMonthCart ? JSON.parse(localEveryMonthCart) : [];
+    const filterEveryMonthCart = everyMonthCart.filter((cart: any) => (
+      cart.country.toLowerCase() === this.selectedCountry.toLowerCase())
+    );
+    
+    if(
+      (
+        variation.skuObj.oneTime !== 'PRU-700-005' && 
+        variation.skuObj.oneTime !== 'PRU-700-006' &&
+        variation.skuObj.oneTime !== 'PRU-KOOZIE-001-ONCE'
+      ) && 
+      this.productSettings.smartshipDiscountOnTodays && 
+      (filterEveryMonthCart.length || activeSmartshipExist) && 
+      Object.keys(variation).length
+    ) {
+
+      let tempDiscount = 0;
+      let isVipPlusExist: boolean = false;
+      if (user) {
+        isVipPlusExist = user?.mvuser_scopes.includes('vipPlus');
+      }
+      const viDiscount = isVipPlusExist ? 25 : 15;
+      tempDiscount = this.staticSmartshipDiscount(variation.priceObj.oneTime, viDiscount);
+      return discount > 0 ? (tempDiscount < discount ? tempDiscount : discount) : tempDiscount;
+    }
+    return discount;
+  }
+
+  private staticSmartshipDiscount(regularPrice: number, discountPercent: number) {
+    if(regularPrice > 0) {
+      const discountAmount = +((regularPrice * discountPercent) / 100).toFixed(2);
+      return regularPrice - discountAmount;
+    }
+    return 0;
   }
 
   getSelectedLanguage() {
@@ -269,9 +322,12 @@ export class ProductCardComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  onClickProductImage(postName: string) {
-    if (postName && !this.isPromoter) {
-      const routeURL = '/product/' + postName;
+  onClickProductImage(product: Product) {
+    if (product && !this.isPromoter) {
+      if(this.tenant === 'pruvit') {
+        this.tagManager.viewItemEvent(product, this.selectedCountry);
+      }
+      const routeURL = '/product/' + product.name;
       this.utilityService.navigateToRoute(routeURL);
     }
   }

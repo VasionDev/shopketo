@@ -1,12 +1,24 @@
-<main class="sk-product" [style.margin-top.px]="discountHeight$ | async">
+<main class="sk-product" [style.margin-top.px]="discountHeight">
   <ng-container
     *ngIf="
       (product | json) !== '{}' && isUserCanAccess && !isRedirectionStarted;
       else checkUser
     "
   >
+    <div
+      *ngIf="product.headerBgImage && product.headerImage"
+      [style.background-image]="'url(' + product.headerBgImage + ')'"
+      [style.margin-top.px]="tenant === 'pruvit' ? -discountHeight : 0"
+      [style.margin-bottom.px]="tenant === 'pruvit' ? discountHeight : 0"
+      class="product-banner-header"
+    >
+      <img
+        *ngIf="product.headerImage"
+        [src]="product.headerImage"
+        class="img-fluid"
+      />
+    </div>
     <app-form [newProduct]="product">
-      <app-vi-offer></app-vi-offer>
     </app-form>
     <app-info [productSlug]="product.name"></app-info>
   </ng-container>
@@ -23,6 +35,7 @@
   <ng-template #isRestricted>
     <app-access-restricted
       [accessLevelTitle]="accessLevelTitle"
+      [accessLevels]="product.accessLevels"
       *ngIf="
         (product | json) !== '{}' &&
           !isUserCanAccess &&
@@ -36,6 +49,7 @@
   <ng-template #noUser>
     <app-special-login
       [accessLevelTitle]="accessLevelTitle"
+      [accessLevels]="product.accessLevels"
       *ngIf="
         (product | json) !== '{}' &&
           !isUserCanAccess &&

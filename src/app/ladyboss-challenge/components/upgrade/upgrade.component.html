@@ -1,0 +1,732 @@
+<div class="challenge-vip-header">
+  <div class="step d-flex align-items-center justify-content-center">
+    <div
+      class="step1"
+      [ngClass]="{ 'challenge-contact-success': isContactSuccess }"
+    >
+      <h4>STEP 1 - COMPLETED</h4>
+      <h3>REGISTRATION</h3>
+    </div>
+    <div class="step2">
+      <h4 class="text-center">
+        <i class="fa-solid fa-award"></i> STEP 2 - VIP
+      </h4>
+      <h3>CONGRATS AND UPGRADE</h3>
+    </div>
+    <div class="step3">
+      <h4>STEP 3 - Finish</h4>
+      <h3>Checkout</h3>
+    </div>
+  </div>
+</div>
+
+<section class="challenge-vip-upgrade">
+  <article class="container-fluid">
+    <figure class="row">
+      <div class="col-12">
+        <div class="title text-center">
+          <img
+            class="img-fluid"
+            src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354143/file/026718632d3f30f7b6994313cedfdd6c.png"
+            alt="LB_logo2_new png"
+            width="200"
+          />
+
+          <div class="alert-bg">
+            <p class="color-white">
+              <img
+                class="img-fluid pr-2"
+                src="https://statics.myclickfunnels.com/image/292201/file/acb5c4dbaa8a9435360d713cda5b0eb0.svg"
+                alt="Stop sign svg"
+                width="35"
+              />WAIT! Don’t Miss Out On This Incredible LadyBoss VIP Offer!
+            </p>
+          </div>
+          <h1>Want To MAXIMIZE Your 21-Day ‘Weight Loss Challenge’ Results?</h1>
+          <p class="color-black watch-text">
+            <i class="fa-solid fa-angles-down"></i> Watch This Quick Message
+            From The LadyBoss Team <i class="fa-solid fa-angles-down"></i>
+          </p>
+        </div>
+        <div class="challenge-video-wrap max-1170">
+          <p class="video-title text-center">
+            <i class="fa-solid fa-volume-high mr-3"></i
+            ><u>&nbsp;Attention:</u> Once You Leave This Page, The Video Below
+            Disappears...
+          </p>
+
+          <div class="video-wrap">
+            <iframe
+              src="https://embed.voomly.com/embed/assets/embed.html?videoId=woXK7d8X1E2VPlNCjwqEvN44EwOBKE9G2VDpFX4RFjqNRbsUL&videoRatio=1.777778&type=v"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+        <button
+          *ngIf="product"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          (click)="onClickAddToCart(product)"
+          class="button vip-challenge-pack-yes button-large button-primary"
+        >
+          <i class="fa-regular fa-square-check mr-3"></i>Yes! I Want The VIP
+          ‘Challenge Pack’!
+        </button>
+        <a
+          routerLink="/challenge/thank-you-no"
+          class="p-small vip-challenge-pack-no"
+          >No thanks, I don’t want to MAXIMIZE my 21 Days with the VIP Challenge
+          Pack</a
+        >
+        <h2 class="color-brand text-center get-title">
+          Here’s EVERYTHING You Get
+        </h2>
+        <h4 class="text-center inside-p">Inside The VIP ‘Challenge Pack’:</h4>
+        <div class="vip-challenge-pack">
+          <div class="img-bg">
+            <img
+              class="img-fluid"
+              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/357238/file/1f4a271467b93965fe2b91861c688171.png"
+              alt="VIP LBC Long-min png"
+              data-image-quality="100"
+              data-lazy-loading="false"
+            />
+          </div>
+          <div class="list border-color">
+            <ul>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>1 box LadyBoss
+                Vanilla Cake LEAN
+              </p>
+
+              <li>
+                Get the protein and vitamins your body needs! An ultra-premium,
+                all-in-one nutritional meal shake powered by science and
+                formulated specifically for women.
+              </li>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>Challenge
+                Playbook (Physical Copy)
+              </p>
+              <li>
+                Get the entire Playbook, right in your hands! Flip through the
+                pages, and follow along with all the recipes and workouts!
+              </li>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>Big Fat Lies
+                Book (Physical Copy)
+              </p>
+              <li>
+                Founder of LadyBoss, Kaelin Poulin, reveals how everything
+                you’ve been told about losing weight is full of LIES (and the
+                TRUTHS that helped her lose 65 lbs without giving up pizza and
+                ice cream.)
+              </li>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>LadyBoss Shaker
+                Cup
+              </p>
+              <li>
+                Great for mixing your LadyBoss LEAN quickly and easily (or when
+                you’re on-the-go!)
+              </li>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>LadyBoss
+                Resistance Bands
+              </p>
+              <li>Includes 4 different strengths + carrying bag!</li>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>LadyBoss
+                Stickers
+              </p>
+              <p>
+                <i class="fa-regular fa-square-caret-right"></i>All packaged in
+                a GORGEOUS custom LadyBoss box
+              </p>
+              <li>(which is PERFECT for doing an "unbox" video!)</li>
+            </ul>
+            <h3 class="norm-price text-center">
+              Normally: <del class="font-bold">$197</del>
+            </h3>
+            <h2 class="text-center today-price">TODAY: JUST $97</h2>
+            <button
+              *ngIf="product"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              (click)="onClickAddToCart(product)"
+              class="button vip-challenge-pack-yes button-large button-primary"
+            >
+              <i class="fa-regular fa-square-check mr-1"></i>Yes! I Want The VIP
+              ‘Challenge Pack’!
+            </button>
+            <a
+              routerLink="/challenge/thank-you-no"
+              class="p-small vip-challenge-pack-no"
+              >No thanks, I don’t want to MAXIMIZE my 21 Days with the VIP
+              Challenge Pack</a
+            >
+            <div class="secure-img text-center">
+              <img
+                class="img-fluid icon-img"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/291115/file/2a718dae2c8ab49cb698caac962800a6.png"
+                alt="guaranteedsafe png"
+                width="308"
+              />
+            </div>
+          </div>
+          <div class="from-desk-coach">
+            <div class="d-flex details">
+              <div class="left-text">
+                <p class="color-black">
+                  <b>From the desk of:</b> Coach Jessica
+                </p>
+                <p class="color-black">COO, LadyBoss</p>
+                <p class="my-4 color-black"><b>Dear LadyBoss,</b></p>
+                <p class="color-black">
+                  After helping over 700,000 LadyBosses over the last 7 years…
+                </p>
+              </div>
+              <div class="right-img">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357117/file/281b94f952b5c39e1bf910a87398673a.png"
+                  alt="21daychallenge_mockup1 png"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <p class="color-black mt-1">
+              We KNOW (not guess) that the <b>21 Day Challenge</b> has the daily
+              coaching, accountability, and ACTION you need to lose weight, love
+              yourself, and start creating a healthy lifestyle…
+            </p>
+            <p class="color-black my-4">
+              And for many LadyBosses, that’s exactly what you want!
+            </p>
+            <p class="color-black my-4">And that’s ENOUGH for you.</p>
+            <p class="color-black">
+              But we also know that a percentage of you who are on a
+              <b>MISSION</b> to take these 21 days, and give yourself
+              <b>EVERY</b> advantage you can…
+            </p>
+            <p class="color-black my-4">
+              And that’s what we want for you, too!
+            </p>
+            <p class="color-black">
+              That’s <b>EXACTLY</b> why we created the VIP ‘Challenge Pack’...
+            </p>
+            <p class="color-black my-4">
+              This Challenge Pack is designed to help give you a powerful ‘edge’
+              when it comes to seeing <b>RESULTS</b> (both during your
+              Challenge, and beyond!)
+            </p>
+            <p class="color-black">
+              We’ve taken some of the most <b>GAME-CHANGING</b> factors needed
+              to gain a successful healthy lifestyle advantage…
+            </p>
+            <button
+              *ngIf="product"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              (click)="onClickAddToCart(product)"
+              class="button vip-challenge-pack-yes button-large button-primary mb-hide"
+            >
+              <i class="fa-regular fa-square-check mr-1"></i>Yes! I Want The VIP
+              ‘Challenge Pack’!
+            </button>
+            <a
+              routerLink="/challenge/thank-you-no"
+              class="p-small vip-challenge-pack-no"
+              >No thanks, I don’t want to MAXIMIZE my 21 Days with the VIP
+              Challenge Pack</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="details-card d-flex align-items-center justify-content-center"
+        >
+          <div class="inner-info text-center">
+            <i class="fas fa-utensils"></i>
+            <p>NUTRITION…</p>
+          </div>
+
+          <div class="inner-info text-center">
+            <i class="fas fa-book"></i>
+            <p>INSIDER KNOWLEDGE…</p>
+          </div>
+
+          <div class="inner-info text-center">
+            <i class="fab fa-firstdraft"></i>
+            <p>SIMPLE STRENGTH-TRAINING TOOLS…</p>
+          </div>
+
+          <div class="inner-info text-center">
+            <i class="far fa-calendar-alt"></i>
+            <p>DAILY INSPIRATION…</p>
+          </div>
+        </div>
+        <p class="text-center color-black packed-all">
+          …and PACKED ALL of them inside our LadyBoss Custom VIP Challenge Pack.
+        </p>
+        <div class="desc-p">
+          <p class="color-black">
+            When you say <b>“yes, upgrade my order”</b> today, we’ll fill your
+            Challenge Pack with the most important ESSENTIALS needed to MAXIMIZE
+            your Challenge…and rush it straight to your doorstep, so you can
+            start using it right away!
+          </p>
+          <p>
+            (And when we say ‘fill your Challenge Pack’’, we mean a
+            <b>STUFFED-TO-THE-BRIM box</b> that will help you make the MOST of
+            your 21 Days (and beyond!)
+          </p>
+        </div>
+        <div class="upgrade-today text-center">
+          <h4>Upgrade Your Order Today,</h4>
+          <p class="color-black">And We’ll Rush You A VIP Challenge Pack!</p>
+        </div>
+        <div class="rec-inside max-width">
+          <div class="header-bg">
+            <h4 class="text-center color-white">
+              Here’s what you’ll receive INSIDE…
+            </h4>
+          </div>
+          <p class="down-arrow text-center">
+            <img
+              class="img-fluid"
+              src="https://statics.myclickfunnels.com/image/357339/file/2967cb18cd9b70bbddfb4beb22b61a7f.svg"
+              alt="Group 4 svg"
+            />
+          </p>
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>LadyBoss LEAN</h4>
+              <span class="color-black">(1 Box)</span>
+              <p class="color-black">
+                We want you to <u>experience</u> how your body can feel when you
+                give it the essential nutrition it needs…
+              </p>
+              <p class="color-black my-4">
+                So we’re giving you an <b>ENTIRE box</b> of LadyBoss LEAN inside
+                your Challenge Pack!
+              </p>
+              <p class="color-black">
+                That’s <b>20 LEAN packets</b>, so you’ll have enough to use
+                every day of the 21 Day Challenge!
+              </p>
+              <p class="color-black my-4">
+                LadyBoss <b>LEAN</b> is a fast way to get the protein and
+                vitamins your body needs! It’s an ultra-premium, all-in-one
+                nutritional meal shake powered by science and formulated
+                specifically for women.
+              </p>
+              <p class="color-black">
+                But beyond that…it tastes AMAZING! (Like, seriously
+                ‘lick-your-shaker-cup-clean’ delicious!)
+              </p>
+              <p class="color-black my-4">
+                You can use your LEAN in the traditional way (to make
+                nutritional meal shakes)...
+              </p>
+            </div>
+            <div class="col-sm-6 col-12 lean-box">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354626/file/9fff4a67e58dec42ab5299f7e428be2c.png"
+                alt="lean_box1-min png"
+                loading="lazy"
+              />
+              <p class="color-black mt-3">
+                <b>OR,</b> have fun mixing it into your meals for a flavor and
+                nutrition boost! We have MANY recipes that use LEAN - like
+                cookies, oatmeal, protein waffles, cookie dough (a group
+                favorite!!), iced coffees, and more!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="challenge-book max-width">
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>Challenge Playbook</h4>
+              <span class="color-black">(Physical Copy)</span>
+              <p class="color-black mt-2">
+                This is your chance to have ALL the details of the 21 Day
+                Challenge - the workouts, the meal plans, the recipes, etc…
+                RIGHT IN YOUR HANDS!
+              </p>
+              <p class="color-black mt-4">
+                With a physical copy of the Playbook, you can:
+              </p>
+              <ul>
+                <li>Flip back and forth through the pages…</li>
+                <li>
+                  Take notes in the margins, and bookmark or highlight your
+                  favorite key spots!
+                </li>
+                <li>
+                  Keep it in your exercise area to follow along with your daily
+                  workout.
+                </li>
+                <li>
+                  Put it on your kitchen counter, flip to a page that has a
+                  yummy-sounding recipe, and make a new meal!
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6 col-12">
+              <p class="book-img">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354729/file/0d0f3bb00635334cacf85ac77194dee5.png"
+                  alt="21-Day-Challenge-Book-min png"
+                  data-style-guide-corner="style2"
+                  loading="lazy"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="challenge-book max-width">
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>Big Fat Lies Book</h4>
+              <span class="color-black">(Physical Copy)</span>
+              <p class="color-black mt-2">
+                Inside this book, Kaelin Poulin, founder of LadyBoss, reveals
+                how everything you’ve been told about weight loss is a big fat
+                lie!
+              </p>
+              <p class="color-black mt-4">
+                In a world of Hollywood headline fads and contradicting diet
+                programs, like:
+              </p>
+              <ul>
+                <li>The ‘Don’t Eat Any Single Gram Of SUGAR’ Diet…</li>
+                <li>The ‘Don’t Eat Any FAT’ Diet…</li>
+                <li>The ‘Eat ONLY Fat’ Diet…</li>
+                <li>The ‘Don’t Eat ANYTHING’ Diet…</li>
+                <li>The ‘Eat ONLY This ONE Food’ Diet…</li>
+                <li>The ‘Eat ONLY Between 2pm-4pm Diet…</li>
+              </ul>
+              <p class="color-black my-4">
+                There’s so many lies (and so much confusion), it’s hard to know
+                what to listen to.
+              </p>
+              <p>
+                (Not to mention the endless promises of "magic pills" and “quick
+                fixes”…)
+              </p>
+              <p class="color-black my-4">
+                That’s exactly why Kaelin wrote Big Fat Lies!
+              </p>
+              <p>
+                Inside the book, Kaelin shares how she cut through the B.S.,
+                lost 65 lbs in 7 months, while still eating pizza and ice
+                cream…and discovered the TRUTHS about losing weight and creating
+                a lasting healthy LIFESTYLE that will TRANSFORM your life.
+              </p>
+            </div>
+            <div class="col-sm-6 col-12">
+              <p class="book-img">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357243/file/0a444adccdc2004a92e5b8a15f7da9a4.png"
+                  alt="BFL Book LBC-min png"
+                  loading="lazy"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="challenge-book max-width">
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>LadyBoss Shaker Cup</h4>
+              <p class="color-black mt-3">
+                This is a GREAT way to quickly make and drink your LadyBoss LEAN
+                on-the-go!
+              </p>
+              <p class="color-black mt-4">
+                Our LadyBoss Shaker Cup is designed with a special agitator to
+                help dissolve the LEAN into a SMOOTH, creamy shake!
+              </p>
+              <ul>
+                <li>No need to dig out the blender…</li>
+                <li>No need to dirty up a ton of dishes…</li>
+              </ul>
+              <p class="color-black mt-4">Just Rip. Pour. And SHAKE.</p>
+            </div>
+            <div class="col-sm-6 col-12">
+              <p class="shaker-cup text-center">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354731/file/db6d34cb4c05485591a7dad11c8ed600.png"
+                  alt="ladyboss_shaker-bottle1-min png"
+                  loading="lazy"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="challenge-book max-width">
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>LadyBoss Resistance Bands</h4>
+              <p class="color-black mt-3">
+                Want to get a FANTASTIC strength-training workout in from the
+                comfort of your own HOME…without any heavy machines or
+                equipment?
+              </p>
+              <p class="color-black mt-4">
+                Our LadyBoss bands come with 4 different levels of resistance +
+                a carry bag so you can:
+              </p>
+              <ul>
+                <li>Adjust the level of difficulty to what you want!</li>
+                <li>Target different muscle groups using different bands!</li>
+                <li>Use them as a stretching &amp; flexibility tool!</li>
+                <li>
+                  Take your bands with you on-the-go (to the gym, to the office,
+                  on vacation, traveling etc…)
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6 col-12">
+              <p class="reg-brands">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354442/file/e95d6254b58cefb69f4f369532608c80.png"
+                  alt="Ladyboss-Bands1-min png"
+                  loading="lazy"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="challenge-book max-width">
+          <div class="row lean-wrap">
+            <div class="col-sm-6 col-12 lean-text">
+              <h4>LadyBoss Stickers</h4>
+              <p class="color-black mt-3">
+                These are PERFECT for adding to the refrigerator, your mirror,
+                your water bottle, your shaker cup, your laptop…or anywhere
+                you’ll see it daily - so you can be inspired and motivated!
+              </p>
+              <p class="color-black mt-4">
+                OR, you can keep some stickers, and give others away to other
+                friends and women who need a dose of love and support, and tell
+                them about the Challenge you’re doing…and maybe they’ll be
+                inspired to join with you!
+              </p>
+            </div>
+            <div class="col-sm-6 col-12">
+              <p class="reg-brands">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/354773/file/6a9a3e1c229fc3b11bacbd67e45f40f8.png"
+                  alt="Ladyboss_stickers1-min png"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="and-title text-center">
+          AND, ALL Of This Will Be Packaged And RUSHED To You Inside A
+        </h4>
+        <h3 class="gorgeous-sutitle text-center">
+          GORGEOUS Custom LadyBoss box!
+        </h3>
+
+        <div class="vip-challenge-pack">
+          <div class="img-bg">
+            <img
+              class="img-fluid"
+              src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/357238/file/1f4a271467b93965fe2b91861c688171.png"
+              alt="VIP LBC Long-min png"
+              data-image-quality="100"
+              data-lazy-loading="false"
+            />
+          </div>
+        </div>
+        <div class="our-vip-card max-width">
+          <h4 class="text-center color-brand">
+            Our VIP 30-Day “DOUBLE” Guarantee!
+          </h4>
+          <div class="inner-des d-flex">
+            <div class="guarnt-logo">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/357249/file/a194208fbcc8ca97339e021ae3389d4c.png"
+                alt="Group png"
+                loading="lazy"
+              />
+            </div>
+            <div class="description">
+              <p class="color-black">
+                <b
+                  >The only way to experience the VIP Challenge Pack is to
+                  upgrade your order, and try it for yourself!</b
+                >
+              </p>
+              <p class="color-black my-4">
+                Here’s how our Double Guarantee works -
+              </p>
+              <p class="color-black">
+                If you don’t love your packed custom LadyBoss box of essentials
+                for a healthy lifestyle…
+              </p>
+              <p class="color-black my-4">
+                Or if it doesn’t help you maximize your 21 Day Challenge, or
+                give you the ‘edge’ you want…
+              </p>
+              <p class="color-black">
+                Simply let us know within 30 days of your purchase, and:
+              </p>
+              <p class="coolor-black my-4">
+                <b>1) We’ll give you your money back, no questions asked! </b>
+              </p>
+              <p class="color-black">
+                <b
+                  >2) You can KEEP everything inside the Challenge Pack (as a
+                  thank you for trying it out!)</b
+                >
+              </p>
+              <p class="color-black my-4">That’s our Double Guarantee!</p>
+              <p class="color-black">
+                Either you get results, and are happy, or you get your money
+                back and
+              </p>
+              <p class="color-black">keep the box anyway.</p>
+              <p class="color-black">Either way, you WIN.</p>
+            </div>
+          </div>
+        </div>
+        <div class="you-upgrade-wrap">
+          <div class="text-center">
+            <h1 class="color-white">WHEN YOU UPGRADE</h1>
+            <h3 class="color-brand">TO VIP RIGHT NOW, YOU’LL GET:</h3>
+          </div>
+
+          <div class="vip-challenge-pack">
+            <div class="img-bg white-bg">
+              <img
+                class="img-fluid"
+                src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=100/https://statics.myclickfunnels.com/image/357238/file/1f4a271467b93965fe2b91861c688171.png"
+                alt="VIP LBC Long-min png"
+                data-image-quality="100"
+                data-lazy-loading="false"
+              />
+            </div>
+            <div class="list">
+              <ul>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>1 box LadyBoss
+                  Vanilla Cake LEAN
+                </p>
+
+                <li>
+                  Get the protein and vitamins your body needs! An
+                  ultra-premium, all-in-one nutritional meal shake powered by
+                  science and formulated specifically for women.
+                </li>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>Challenge
+                  Playbook (Physical Copy)
+                </p>
+                <li>
+                  Get the entire Playbook, right in your hands! Flip through the
+                  pages, and follow along with all the recipes and workouts!
+                </li>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>Big Fat Lies
+                  Book (Physical Copy)
+                </p>
+                <li>
+                  Founder of LadyBoss, Kaelin Poulin, reveals how everything
+                  you’ve been told about losing weight is full of LIES (and the
+                  TRUTHS that helped her lose 65 lbs without giving up pizza and
+                  ice cream.)
+                </li>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>LadyBoss
+                  Shaker Cup
+                </p>
+                <li>
+                  Great for mixing your LadyBoss LEAN quickly and easily (or
+                  when you’re on-the-go!)
+                </li>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>LadyBoss
+                  Resistance Bands
+                </p>
+                <li>Includes 4 different strengths + carrying bag!</li>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>LadyBoss
+                  Stickers
+                </p>
+                <p>
+                  <i class="fa-regular fa-square-caret-right"></i>All packaged
+                  in a GORGEOUS custom LadyBoss box
+                </p>
+                <li>(which is PERFECT for doing an "unbox" video!)</li>
+              </ul>
+              <h3 class="norm-price text-center">
+                Normally: <del class="font-bold">$197</del>
+              </h3>
+              <h2 class="text-center today-price">TODAY: JUST $97</h2>
+              <button
+                *ngIf="product"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                (click)="onClickAddToCart(product)"
+                class="button vip-challenge-pack-yes button-large button-primary"
+              >
+                <i class="fa-regular fa-square-check mr-1"></i>Yes! I Want The
+                VIP ‘Challenge Pack’!
+              </button>
+              <p class="color-black p-small text-center my-3">
+                (You can cancel ANYTIME during the 30 days without any hassle or
+                funny business. Simply email our support team and let them know
+                you want to cancel and we'll part as friends. 🙂)
+              </p>
+              <div class="text-center">
+                <img
+                  class="img-fluid"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://iloveclickfunnels.com/hosted/images/f9/cedb63fd244d1a8bed9946bab47fe2/1622580544ilcf_badge.png"
+                  width="104"
+                />
+              </div>
+              <a
+                routerLink="/challenge/thank-you-no"
+                class="p-small vip-challenge-pack-no"
+                >No thanks, I don’t want to MAXIMIZE my 21 Days with the VIP
+                Challenge Pack</a
+              >
+              <div class="secure-img text-center">
+                <img
+                  class="img-fluid icon-img"
+                  src="https://images.clickfunnels.com/cdn-cgi/image/f=auto,q=80/https://statics.myclickfunnels.com/image/291115/file/2a718dae2c8ab49cb698caac962800a6.png"
+                  alt="guaranteedsafe png"
+                  width="308"
+                />
+                <p class="text-center font-bold mt-3">
+                  These statements have not been evaluated by the Food and Drug
+                  Administration. This product is not intended to diagnose,
+                  treat, cure, or prevent any disease.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </figure>
+  </article>
+</section>

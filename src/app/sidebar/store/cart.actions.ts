@@ -34,3 +34,11 @@ export const DeleteEveryMonth = createAction(
 export const DeleteAllPromotersOneTime = createAction(
   '[Cart] Delete All Promoters One Time'
 );
+
+export const RemoveAllOneTime = createAction(
+  '[Cart] Remove All One Time'
+);
+
+export const RemoveAllEveryMonth = createAction(
+  '[Cart] Remove All Every Month'
+);

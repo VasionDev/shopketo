@@ -187,6 +187,14 @@ export class InfoComponent implements OnDestroy {
 
   tabShowableJS() {
     $(document).ready(() => {
+      if (
+        $('.challenge-popup-modal.free-ch__gift-modal.get-the-free').length > 1
+      ) {
+        const clone = $('#challenge-free-gift-modal').clone();
+        $('.challenge-popup-modal.free-ch__gift-modal.get-the-free').remove();
+        $('body').append(clone);
+      }
+
       $('ul#sk-product__info-list > li button').removeClass('active');
       $('#sk-product__info-details .sk-product__item-info').addClass(
         'display-none'

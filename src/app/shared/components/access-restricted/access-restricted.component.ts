@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppDataService } from '../../services/app-data.service';
 import { AppUserService } from '../../services/app-user.service';
+import { ProductAccess } from '../../models/product-access.model';
 
 @Component({
   selector: 'app-access-restricted',
@@ -10,6 +11,7 @@ import { AppUserService } from '../../services/app-user.service';
 })
 export class AccessRestrictedComponent implements OnInit, OnDestroy {
   @Input() accessLevelTitle = '';
+  @Input() accessLevels!: ProductAccess;
   user: any = {};
   userAvatar = 'assets/images/avatar2.png';
   subscription!: Subscription;

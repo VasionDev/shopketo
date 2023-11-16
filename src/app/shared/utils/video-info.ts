@@ -5,7 +5,10 @@ export function getWistiaVideoId(url: string) {
 }
 
 export function getPruvitTvVideoId(url: string) {
-  return url.includes('pruvit.tv')
+  /*return url.includes('pruvit.tv')
     ? url.substring(url.lastIndexOf('/') + 1)
+    : url;*/
+  return  url.includes('pruvit.tv') 
+    ? url.split('?embed=')[1] 
     : url;
 }
